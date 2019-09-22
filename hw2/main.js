@@ -1,5 +1,3 @@
-console.log('topkek');
-
 const application = document.getElementById('application');
 
 
