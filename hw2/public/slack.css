@@ -1,0 +1,256 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+header#app{
+    background-color: #ffffff;
+    height: 50px ;
+}
+
+.rounded-circle{
+    border: 1px solid #2dc68b;
+    margin-top: 10px;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    object-position: center center;
+    object-fit: fill;
+    box-sizing: border-box;
+}
+.rounded-circle-1{
+    border: 2px solid #2dc68b;
+    margin-top: 10px;
+    border-radius: 50%;
+    height: 280px;
+    width: 280px;
+    object-position: center center;
+    object-fit: fill;
+    box-sizing: border-box;
+}
+#avatar:hover{
+      border: 3px solid #279d6e;
+
+  }
+.logo{
+    object-position: center center;
+    object-fit: fill;
+    height: 50px;
+    width: 80px;
+}
+.container{
+    background-color: #f4fffd;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    height: 90vh;
+}
+.msg-c{
+    background-color: #24b880;
+    text-align: center;
+    margin: 0 0 0 5px;
+    border-radius: 50px;
+    height: 25px;
+    width: 25px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+#chat-menu{
+    height: 30px;
+    background-color: rgba(197, 197, 197, 0.07);
+    box-sizing: border-box;
+    border-top: 1px solid rgba(197, 197, 197, 0.81);
+    border-left: 1px solid rgba(197, 197, 197, 0.81);
+
+}
+#name-row{
+    margin: 145px 0 0 20px;
+    height: 50px;
+    font-family: 'Montserrat',  sans-serif;
+    font-size: 36px;
+    color: #000000;
+    font-weight: 400;
+
+}
+#params{
+    flex-direction: row;
+}
+#nick-ch{
+    margin: 34px 0 0 20px;
+
+}
+#nick-row{
+    margin: 0 0 0 20px;
+    height: 20%;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 24px;
+    color: black;
+    font-weight: 200;
+}
+
+#profile-pic{
+    width: 100%;
+    height: 50%;
+}
+
+#name{
+    margin: 0 0 20px 0;
+    align-self: stretch;
+    justify-content:flex-start;
+    height: 40px;
+}
+
+#msg {
+    box-sizing: border-box;
+    background-color: white;
+    height: 100px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2); /* Параметры тени */
+}
+#msg:hover{
+    box-shadow: 0 0 8px rgba(0,0,0,0.5); /* Параметры тени */
+
+}
+
+#message{
+    justify-content:flex-start;
+    height: 50px;
+}
+
+#profile-pic-ch{
+    margin: 22px 0 0 100px;
+}
+
+.column{
+    margin: 0 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+}
+.header-icon{
+    overflow: hidden;
+    margin: 0 0 0 30px;
+}
+.free-space {
+    width: 1500px;;
+}
+.log-out{
+    flex-direction: row-reverse;
+    margin: 20px 20px 0 0;
+    width: 40%;
+}
+.settings{
+    margin: 0 0 0 60px;
+    flex-direction: column;
+    align-items: stretch;
+}
+.for-msg{
+    width: 80%;
+}
+.for-img{
+    margin: 0 0 0 20px;
+    width: 20%
+}
+.for-msg-1{
+    width: 60%;
+}
+.for-img-1{
+    margin-left:100px;
+    width: 40%;
+}
+.left{
+    width: 40%;
+}
+.right{
+    border-left: 1.5px solid #2dc68b;
+    margin:auto;
+    width: 60%;
+}
+.messg-text{
+    background-color: rgba(207, 232, 223, 0.58);
+    height: 24px;
+    width:80%;
+}
+.messg-c{
+    width:10%;
+}
+
+.field{
+    border-bottom: 1px solid #2dc68b;
+    width: 70%;
+    height: 30px;
+    margin: 0 0 0 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    letter-spacing: -0.2px;
+    color: #000000;
+    font-weight: 100;
+    font-style: normal;
+}
+#sett{
+    margin: 10px 5px 5px 5px;
+    filter: opacity(0.7);
+    height: 20px;
+    width: 20px;
+    object-position: center center;
+    object-fit: fill;
+}
+#loupe{
+    margin: 5px 10px 0 20px;
+    filter: opacity(0.9);
+    height: 20px;
+    width: 20px;
+    object-position: center center;
+    object-fit: fill;
+}
+
+p#person{
+    margin: 10px 0 0 10px;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+p#mess{
+    margin: 0 0 0 10px;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 14px;
+    color: #000000;
+    font-weight: 300;
+}
+p#mess-n{
+    margin: 6px 0 0 0;
+    text-align: center;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 500;
+}
+#change {
+    margin: 0 0 0 5px;
+    flex-direction: row;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 300;
+    text-decoration: none;
+}
+#change:hover{
+    text-decoration: underline;
+}
+
+p#attribute{
+    width: 150px;
+    text-decoration: none;
+    margin: 5px 0 0 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #000000;
+    font-weight: 300;
+}
