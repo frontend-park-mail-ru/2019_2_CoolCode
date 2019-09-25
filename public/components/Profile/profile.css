@@ -66,8 +66,8 @@ header#app{
 
 }
 #name-row{
-    margin: 145px 0 0 20px;
-    height: 50px;
+    margin: 120px 0 0 20px;
+    height: 40%;
     font-family: 'Montserrat',  sans-serif;
     font-size: 36px;
     color: #000000;
@@ -78,7 +78,8 @@ header#app{
     flex-direction: row;
 }
 #nick-ch{
-    margin: 34px 0 0 20px;
+    height: 40%;
+    margin: 0 0 0 20px;
 
 }
 #nick-row{
@@ -91,8 +92,11 @@ header#app{
 }
 
 #profile-pic{
-    width: 100%;
     height: 50%;
+    flex-direction: row;
+}
+#profile-pic-row{
+    height: 60%;
 }
 
 #name{
@@ -119,7 +123,8 @@ header#app{
 }
 
 #profile-pic-ch{
-    margin: 22px 0 0 100px;
+    height: 40%;
+    margin: 48px 0 0 100px;
 }
 
 .column{
@@ -148,16 +153,22 @@ header#app{
     align-items: stretch;
 }
 .for-msg{
+    flex-direction: column;
     width: 80%;
 }
 .for-img{
+    flex-direction: column;
     margin: 0 0 0 20px;
     width: 20%
 }
 .for-msg-1{
+
+    flex-direction: column;
     width: 60%;
 }
 .for-img-1{
+    flex-direction: column;
+
     margin-left:100px;
     width: 40%;
 }

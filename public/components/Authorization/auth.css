@@ -1,4 +1,4 @@
-form {
+.log-in-form{
     padding: 50px;
     position: fixed; top: 50%; left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -61,52 +61,3 @@ form {
     padding: 40px;
 
 }
-.text{
-    padding: 50px;
-    position: fixed; top: 50%; left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-}
-
-.main{
-    margin: 30px;
-    color: midnightblue;
-    text-decoration: none;
-}
-
-
-/*.main:last-child{*/
-/*    float: right;*/
-/*}*/
-body {
-    font: 1em sans-serif;
-}
-.stage {
-    display: flex;
-    height: 230px;
-    width: 100%;
-}
-.box {
-    align-self: flex-end;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    height: 20px;
-    margin: 0 auto 0 auto;
-    transform-origin: bottom;
-    width: 20px;
-
-}
-
-.bounce-2 {
-    animation: bounce-2 30s linear infinite;
-}
-@keyframes bounce-2 {
-    from { transform:rotate(0deg); }
-    to { transform:rotate(-360deg); }
-
-}
-
-
