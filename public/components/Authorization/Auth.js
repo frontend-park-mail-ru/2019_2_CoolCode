@@ -49,7 +49,6 @@ export class Login {
         back.href = '/menu';
         back.textContent = 'Назад';
         back.dataset.section = 'mainPage';
-
         this._parent.appendChild(form);
         this._parent.appendChild(back);
     }
@@ -119,7 +118,11 @@ export class SignUp{
         back.className='back';
         back.href = '/menu';
         back.textContent = 'back';
+<<<<<<< HEAD
         back.dataset.section = 'mainPage';
+=======
+        back.dataset.section = 'menu';
+>>>>>>> dbf80d647ed8b167242d6dee1f0a97f56f85f5f3
 
         this._parent.innerHTML = '';
         this._parent.appendChild(form);
