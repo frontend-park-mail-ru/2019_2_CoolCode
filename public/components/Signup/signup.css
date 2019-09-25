@@ -1,0 +1,67 @@
+.log-in-form{
+    padding: 50px;
+    position: fixed; top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.input_field {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #C4C4C4;
+    width: 100%;
+    margin: 0 0 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.submit-button{
+    padding: 5px 10px 5px 10px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #18A88E;
+    font-style: inherit;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 236px;
+    border-radius: 7px;
+}
+.back{
+    padding: 5px 10px 5px 10px;
+    position: fixed; top: 2%; left: 1%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #18A88E;
+    font-style: inherit;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+
+
+}
+.name{
+    font-weight: 700;
+    font-size: 20px;
+
+    color: #18A88E;
+
+}
+.title {
+    background-color: #18A88E;
+    padding: 40px;
+
+}
+.already{
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 300;
+}

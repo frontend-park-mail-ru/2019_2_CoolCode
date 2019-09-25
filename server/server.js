@@ -75,7 +75,7 @@ app.get('/profile', function (req, res) {
     res.json(users['cooluser@mail.ru']);
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 app.listen(port, function () {
     console.log(`Server listening port ${port}`);

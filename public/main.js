@@ -1,6 +1,7 @@
 import {ProfileComponent} from './components/Profile/Profile.js';
 import {MainPageComponent, Header} from './components/MainPage/MainPage.js';
-import {SignUp, Login} from './components/Authorization/Auth.js';
+import {SignUp} from './components/Signup/Signup.js';
+import {Login} from './components/Login/Login.js';
 import {AjaxCreate} from './components/Ajax/AjaxModule.js';
 
 const application = document.getElementById('application');
