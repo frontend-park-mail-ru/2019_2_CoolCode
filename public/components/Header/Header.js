@@ -1,6 +1,7 @@
-const signupTemplate = require('./signup.pug');
+const headerTemplate = require('./header.pug');
 
-export class SignUp{
+
+export class Header {
     constructor(data = {}, parent = document.body) {
         this._data = data;
         this._parent = parent;
@@ -22,9 +23,9 @@ export class SignUp{
     set parent(parent) {
         this._parent = parent;
     }
-
-    renderSignUp() {
+    renderHeader(loggedIn){
         this._parent.innerHTML = '';
-        this._parent.innerHTML = signupTemplate(this._data)
+        this._data["login"]=loggedIn;
+        this._parent.innerHTML = headerTemplate(this._data)
     }
 }

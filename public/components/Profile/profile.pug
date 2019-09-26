@@ -1,0 +1,37 @@
+extends profilePage
+
+mixin field(pText, fieldText)
+    p.attribute= pText+":"
+    div.field= fieldText
+mixin settings(pText, reference)
+    div.row#params
+        p.attribute= pText+"settings"
+        a.change(href=reference)
+            img#sett(src="images/settings.jpg")
+mixin edit(pText,reference)
+    div.row#pic-ch
+        a.change-1(href=reference)= "edit "+pText
+
+
+block page
+    if chat
+        div chat here
+    else
+        div.row#profile-pic
+            div.column.for-img-1
+                div.row#profile-pic-row
+                    img.rounded-circle-1#avatar(src="images/user.jpg")
+            div.column.for-msg-1
+                div.row#name-row Cool User
+                div.row#nick-row= "@" + nick
+        div.row#edit-row
+            +edit("avatar", "/")
+            +edit("name", "/")
+        div.row#settings-row
+            div.column.settings
+                +field("status", "I'm single")
+                +field("email", email)
+                +field("phone number", phone)
+                +settings("account ", "/")
+                +settings("privacy ", "/")
+

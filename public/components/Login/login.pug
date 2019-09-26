@@ -1,0 +1,11 @@
+block content
+
+    a.back(href='/menu' data-section = 'mainPage') back
+    form(method='POST' action='/login')
+        div.log-in-form
+            h1.name Log In
+            label(for='email')
+            input.input_field(type='text' id='email' placeholder='email' name='email')
+            label(for='password')
+            input.input_field(type='password' id='password' placeholder='password' name='password')
+            button.submit-button(type='submit') Log in

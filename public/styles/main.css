@@ -1,0 +1,9 @@
+@import url('profile.css');
+@import url('signup.css');
+@import url('mainPage.css');
+@import url('head.css');
+
+
+body {
+    font: 1em sans-serif;
+}

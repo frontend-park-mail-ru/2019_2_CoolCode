@@ -37,7 +37,7 @@ header#app{
     width: 80px;
 }
 .container{
-    background-color: #f4fffd;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
@@ -66,8 +66,8 @@ header#app{
 
 }
 #name-row{
-    margin: 120px 0 0 20px;
-    height: 40%;
+    margin: 100px 0 0 20px;
+    height: 100px;
     font-family: 'Montserrat',  sans-serif;
     font-size: 36px;
     color: #000000;
@@ -77,11 +77,7 @@ header#app{
 #params{
     flex-direction: row;
 }
-#nick-ch{
-    height: 40%;
-    margin: 0 0 0 20px;
 
-}
 #nick-row{
     margin: 0 0 0 20px;
     height: 20%;
@@ -92,11 +88,16 @@ header#app{
 }
 
 #profile-pic{
-    height: 50%;
+    height: 300px;
     flex-direction: row;
 }
 #profile-pic-row{
-    height: 60%;
+    height:120px;
+}
+#edit-row{
+    display: flex;
+    justify-content: center;
+    height: 60px;
 }
 
 #name{
@@ -122,9 +123,12 @@ header#app{
     height: 50px;
 }
 
-#profile-pic-ch{
-    height: 40%;
-    margin: 48px 0 0 100px;
+#pic-ch{
+    width:70px;
+    display: flex;
+    justify-content: left;
+    height: 40px;
+    margin: 0 10px 0 10px;
 }
 
 .column{
@@ -134,6 +138,11 @@ header#app{
     width: 100%;
     height: 100%;
 
+}
+.chat-msg{
+    height: 100%;
+    align-items: stretch;
+    justify-content: stretch;
 }
 .header-icon{
     overflow: hidden;
@@ -162,7 +171,8 @@ header#app{
     width: 20%
 }
 .for-msg-1{
-
+    height: 150px;
+    justify-content: center;
     flex-direction: column;
     width: 60%;
 }
@@ -190,9 +200,12 @@ header#app{
 }
 
 .field{
+    display: flex;
+    align-items: flex-end;
+    vertical-align: bottom;
     border-bottom: 1px solid #2dc68b;
     width: 70%;
-    height: 30px;
+    height: 50px;
     margin: 0 0 0 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
@@ -242,8 +255,10 @@ p#mess-n{
     color: #ffffff;
     font-weight: 500;
 }
-#change {
-    margin: 0 0 0 5px;
+.change {
+    display: flex;
+    align-items: flex-end;
+    margin: 15px 0 0 5px;
     flex-direction: row;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
@@ -251,17 +266,29 @@ p#mess-n{
     font-weight: 300;
     text-decoration: none;
 }
-#change:hover{
+.change-1{
+    margin: 0px 0 0 5px;
+    flex-direction: row;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 300;
+    text-decoration: none;
+}
+.change, .change-1:hover{
     text-decoration: underline;
 }
 
-p#attribute{
+.attribute{
+    display: flex;
+    align-items: flex-end;
     width: 150px;
+    height: 40px;
     text-decoration: none;
     margin: 5px 0 0 20px;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     letter-spacing: -0.5px;
-    color: #000000;
+    color: #24b880;
     font-weight: 300;
 }

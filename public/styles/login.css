@@ -18,7 +18,7 @@
     width: 100%;
     margin: 0 0 15px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 18px;
 }
 .submit-button{
     padding: 5px 10px 5px 10px;
@@ -29,7 +29,7 @@
     font-style: inherit;
     color: white;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     margin-left: 236px;
     border-radius: 7px;
 }
@@ -58,10 +58,4 @@
     background-color: #18A88E;
     padding: 40px;
 
-}
-.already{
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
-    color: #000000;
-    font-weight: 300;
 }

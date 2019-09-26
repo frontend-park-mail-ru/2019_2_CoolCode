@@ -8,6 +8,7 @@ const path = require('path');
 const app = express();
 
 app.use(morgan('dev'));
+app.use(express.static(path.resolve(__dirname, '..', 'packedDir')));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(body.json());
 app.use(cookie());
@@ -17,12 +18,51 @@ const users = {
         password: 'password',
         nick: 'ddor',
         phone: 79192345658,
+        chats: [
+            {
+                name: "Alex Spiridonova",
+                number: 10,
+                lastMsg: "WTF?"
+            },
+            {
+                name: "Someone New",
+                number: 3,
+                lastMsg: "HYD?"
+            },
+            {
+                name: "No One",
+                number: 1,
+                lastMsg: "?"
+            }
+        ]
     },
     'cooluser@mail.ru': {
         email: 'cooluser@mail.ru',
         password: 'password',
         nick: 'cooluser',
         phone: 79191218358,
+        chats: [
+            {
+                name: "Alex Spiridonova",
+                number: 10,
+                lastMsg: "WTF?"
+            },
+            {
+                name: "Someone New",
+                number: 3,
+                lastMsg: "HYD?"
+            },
+            {
+                name: "No One",
+                number: 1,
+                lastMsg: "?"
+            },
+            {
+                name: "Bono u2",
+                number: "1",
+                lastMsg: "Come to concert tonight",
+            }
+        ]
     },
 
 };
@@ -75,7 +115,7 @@ app.get('/profile', function (req, res) {
     res.json(users['cooluser@mail.ru']);
 });
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
     console.log(`Server listening port ${port}`);

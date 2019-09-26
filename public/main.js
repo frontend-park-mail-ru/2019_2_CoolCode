@@ -1,13 +1,15 @@
 import {ProfileComponent} from './components/Profile/Profile.js';
-import {MainPageComponent, Header} from './components/MainPage/MainPage.js';
+import {MainPageComponent} from './components/MainPage/MainPage.js';
+import {Header} from './components/Header/Header.js'
 import {SignUp} from './components/Signup/Signup.js';
 import {Login} from './components/Login/Login.js';
-import {AjaxCreate} from './components/Ajax/AjaxModule.js';
+import {AjaxCreate} from './modules/Ajax/AjaxModule.js';
 
 const application = document.getElementById('application');
 AjaxCreate.init();
 const ajaxModule = AjaxModule;
 
+import './styles/main.css'
 
 const functions = {
     mainPage: createMainPage,
@@ -22,7 +24,7 @@ function createMainPage() {
 
     const header = new Header();
     header.parent = application;
-    header.renderHeader();
+    header.renderHeader(false);
 
     const mainPage = new MainPageComponent();
     mainPage.parent = application;
@@ -93,11 +95,6 @@ function createLogin() {
 }
 
 function createProfile() {
-    application.innerHTML = '';
-
-    const header = new Header();
-    header.parent = application;
-    header.renderHeader();
 
     ajaxModule._ajax('GET', '/profile', null, function (status, responseText) {
         let isMe = false;
@@ -108,6 +105,12 @@ function createProfile() {
             isMe = false;
         }
         if (isMe) {
+
+            application.innerHTML = '';
+
+            const header = new Header();
+            header.parent = application;
+            header.renderHeader(true);
             const responseBody = JSON.parse(responseText);
 
             const profile = new ProfileComponent(responseBody, application);

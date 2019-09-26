@@ -4,15 +4,24 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "prestart": "webpack-cli"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "latest",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "body-parser": "latest"
+    "pug": "^2.0.4",
+    "webpack-cli": "^3.3.9"
+  },
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0"
   }
 }

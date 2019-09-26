@@ -1,8 +1,0 @@
-@import url('./components/Profile/profile.css');
-@import url('components/Signup/signup.css');
-@import url('./components/MainPage/mainPage.css');
-
-
-body {
-    font: 1em sans-serif;
-}
