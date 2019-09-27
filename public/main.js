@@ -1,13 +1,17 @@
-import {ProfileComponent} from './components/Profile/Profile.js';
-import {MainPageComponent} from './components/MainPage/MainPage.js';
-import {Header} from './components/Header/Header.js'
-import {SignUp} from './components/Signup/Signup.js';
-import {Login} from './components/Login/Login.js';
-import {AjaxCreate} from './modules/Ajax/AjaxModule.js';
+'use strict'
 
-const application = document.getElementById('application');
-AjaxCreate.init();
-const ajaxModule = AjaxModule;
+import { ProfileComponent } from './components/Profile/Profile.js'
+import { MainPageComponent } from './components/MainPage/MainPage.js'
+import { Header } from './components/Header/Header.js'
+import { SignUp } from './components/Signup/Signup.js'
+import { Login } from './components/Login/Login.js'
+import { AjaxCreate } from './modules/Ajax/AjaxModule.js'
+
+const application = document.getElementById('application')
+AjaxCreate.init()
+const ajaxModule = AjaxModule
+
+const backend = 'http://127.0.0.1:8080'
 
 import './styles/main.css'
 
@@ -16,121 +20,153 @@ const functions = {
     signUp: createSignUp,
     login: createLogin,
     profile: createProfile,
-    logout:createMainPage,
-};
-
-function createMainPage() {
-    application.innerHTML = '';
-
-    const header = new Header();
-    header.parent = application;
-    header.renderHeader(false);
-
-    const mainPage = new MainPageComponent();
-    mainPage.parent = application;
-    mainPage.renderMainPage();
+    logout: createMainPage,
 }
 
+function createMainPage () {
+    application.innerHTML = ''
 
+    const header = new Header()
+    header.parent = application
+    header.renderHeader(false)
 
+    const mainPage = new MainPageComponent()
+    mainPage.parent = application
+    mainPage.renderMainPage()
+}
 
-function createSignUp() {
+function createSignUp () {
 
-    application.innerHTML = '';
+    application.innerHTML = ''
 
-    const signUpComponent = new SignUp();
-    signUpComponent.parent = application;
-    signUpComponent.renderSignUp();
+    const signUpComponent = new SignUp()
+    signUpComponent.parent = application
+    signUpComponent.renderSignUp()
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    const form = application.querySelector('#sign-up-form')
 
-        const email = form.elements['email'].value;
-        const age = parseInt(form.elements['age'].value);
-        const password = form.elements['password'].value;
+    console.dir(form)
 
-        ajaxModule._ajax('POST', '/signup', {email, age, password}, function (status, responseText) {
-            if (status === 201) {
-                createProfile();
-                return;
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        const email = form.elements['email'].value
+        const password = form.elements['password'].value
+
+        fetch(`${backend}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            console.dir(response)
+            if (response.status === 400) {
+                throw new Error(`Такая почта занята !!`)
+            } else if (response.status !== 200) {
+                throw new Error(`Неверный статус: ${response.status}`)
             }
-
-            const {error} = JSON.parse(responseText);
-            alert(error);
+            return response.text()
+        }).then(data => {
+            console.log('Зарегались')
+            // Отправляемся в профиль
+        }).catch(err => {
+            console.error(err)
+            alert(err.message)
         })
-    });
+    })
 
 }
 
-function createLogin() {
-    application.innerHTML = '';
+function createLogin () {
+    application.innerHTML = ''
 
-    const loginComponent = new Login();
-    loginComponent.parent = application;
-    loginComponent.renderLogin();
+    const loginComponent = new Login()
+    loginComponent.parent = application
+    loginComponent.renderLogin()
 
+    const form = application.querySelector('#login-form')
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    console.dir(form)
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
 
-        ajaxModule._ajax(
-            'POST',
-            '/login',
-            {email, password},
-            function (status, response) {
-                if (status === 200) {
-                    createProfile();
-                } else {
-                    const {error} = JSON.parse(response);
-                    alert(error);
-                }
+        const email = form.elements['email'].value
+        const password = form.elements['password'].value
+
+        fetch(`${backend}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            if (response.status !== 200) {
+                throw new Error(
+                    `Пользователь с данной почтой не зарегистрирован: ${response.status}`)
             }
-        )
-
-    });
+            console.dir(response)
+            return response.json()
+        }).then(data => {
+            console.log(data)
+            console.log('Залогинились')
+            // Отправляемся в профиль
+        }).catch(err => {
+            console.error(err)
+            alert(err.message)
+        })
+    })
 
 }
 
-function createProfile() {
+function createProfile () {
 
     ajaxModule._ajax('GET', '/profile', null, function (status, responseText) {
-        let isMe = false;
+        let isMe = false
         if (status === 200) {
-            isMe = true;
+            isMe = true
         }
         if (status === 401) {
-            isMe = false;
+            isMe = false
         }
         if (isMe) {
 
-            application.innerHTML = '';
+            application.innerHTML = ''
 
-            const header = new Header();
-            header.parent = application;
-            header.renderHeader(true);
-            const responseBody = JSON.parse(responseText);
+            const header = new Header()
+            header.parent = application
+            header.renderHeader(true)
+            const responseBody = JSON.parse(responseText)
 
-            const profile = new ProfileComponent(responseBody, application);
-            profile.renderProfile();
+            const profile = new ProfileComponent(responseBody, application)
+            profile.renderProfile()
 
         } else {
-            alert('АХТУНГ нет авторизации');
-            createSignUp();
+            alert('АХТУНГ нет авторизации')
+            createSignUp()
         }
-    });
+    })
 }
 
-
 application.addEventListener('click', function (evt) {
-    const {target} = evt;
+    const { target } = evt
 
     if (target instanceof HTMLAnchorElement) {
-        evt.preventDefault();
-        functions[target.dataset.section]();
+        evt.preventDefault()
+        functions[target.dataset.section]()
     }
-});
+})
 
-createMainPage();
+createMainPage()
