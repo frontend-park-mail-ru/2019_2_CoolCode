@@ -20,19 +20,29 @@ const functions = {
     signUp: createSignUp,
     login: createLogin,
     profile: createProfile,
-    logout: createMainPage,
+    logout: handleLogout,
 }
 
 function createMainPage () {
-    application.innerHTML = ''
+    fetch(`${backend}/users`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        application.innerHTML = ''
 
-    const header = new Header()
-    header.parent = application
-    header.renderHeader(false)
+        const header = new Header()
+        header.parent = application
+        header.renderHeader(response.status === 200)
 
-    const mainPage = new MainPageComponent()
-    mainPage.parent = application
-    mainPage.renderMainPage()
+        const mainPage = new MainPageComponent()
+        mainPage.parent = application
+        mainPage.renderMainPage()
+    }).catch(err => {
+        console.error(err)
+        alert(err.message)
+    })
+
 }
 
 function createSignUp () {
@@ -175,7 +185,7 @@ function handleLogout () {
 }
 
 function createProfile () {
-    fetch(`/profile`, {
+    fetch(`${backend}/users`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
@@ -199,32 +209,6 @@ function createProfile () {
         console.error(err)
         alert(err.message)
     })
-
-    /*    ajaxModule._ajax('GET', '/profile', null, function (status, responseText) {
-        let isMe = false
-        if (status === 200) {
-            isMe = true
-        }
-        if (status === 401) {
-            isMe = false
-        }
-        if (isMe) {
-
-            application.innerHTML = ''
-
-            const header = new Header()
-            header.parent = application
-            header.renderHeader(true)
-            const responseBody = JSON.parse(responseText)
-
-            const profile = new ProfileComponent(responseBody, application)
-            profile.renderProfile()
-
-        } else {
-            alert('АХТУНГ нет авторизации')
-            createSignUp()
-        }
-    })*/
 }
 
 application.addEventListener('click', function (evt) {

@@ -12,7 +12,9 @@ app.use(express.static(path.resolve(__dirname, '..', 'packedDir')));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(body.json());
 app.use(cookie());
-const users = {
+
+
+/*const users = {
     'd.dorofeev@corp.mail.ru': {
         email: 'd.dorofeev@corp.mail.ru',
         password: 'password',
@@ -114,7 +116,7 @@ app.post('/login', function (req, res) {
 
 app.get('/profile', function (req, res) {
     res.json(users['cooluser@mail.ru']);
-});
+});*/
 
 const port = process.env.PORT || 3000;
 

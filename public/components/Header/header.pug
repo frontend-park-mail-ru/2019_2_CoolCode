@@ -7,9 +7,9 @@ div.head
         img.logo(src="images/logo_2.png")
     if login
         +item('log out', '', 'logout', 'logout-link')
+        +item('profile', `/profile`, "profile", "profile-link")
     else
         +item('log in', `/login`, "login", "login-link")
         +item('sign up', `/signup`, "signUp", "signup-link")
-        +item('profile', `/profile`, "profile", "profile-link")
 
 block content
