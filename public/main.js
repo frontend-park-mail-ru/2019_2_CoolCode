@@ -142,7 +142,7 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            handleLogout()
+            //handleLogout()
         }).catch(err => {
             console.error(err)
             alert(err.message)
@@ -152,36 +152,28 @@ function createLogin () {
 }
 
 function handleLogout () {
-    const logoutLink = application.querySelector('#logout-link')
-    console.log(logoutLink)
-
-    logoutLink.addEventListener('click', (e) => {
-        e.preventDefault()
-
-        fetch(`${backend}/logout`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: '',
-            credentials: 'include',
-            mode: 'cors',
-        }).then(response => {
-            console.log(response.status)
-            if (response.status !== 200) {
-                throw new Error(
-                    `Не вышли: ${response.status}`)
-            }
-            return response.text()
-        }).then(data => {
-            console.log(data)
-            createMainPage()
-        }).catch(err => {
-            console.error(err)
-            alert(err.message)
-        })
+    fetch(`${backend}/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: '',
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        console.log(response.status)
+        if (response.status !== 200) {
+            throw new Error(
+                `Не вышли: ${response.status}`)
+        }
+        return response.text()
+    }).then(data => {
+        console.log(data)
+        createMainPage()
+    }).catch(err => {
+        console.error(err)
+        alert(err.message)
     })
-
 }
 
 function createProfile () {
