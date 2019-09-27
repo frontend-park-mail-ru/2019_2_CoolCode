@@ -22,8 +22,8 @@ block page
                 div.row#profile-pic-row
                     img.rounded-circle-1#avatar(src="images/user.jpg")
             div.column.for-msg-1
-                div.row#name-row Cool User
-                div.row#nick-row= "@" + nick
+                div.row#name-row= fullname
+                div.row#nick-row= "@" + username
         div.row#edit-row
             +edit("avatar", "/")
             +edit("name", "/")

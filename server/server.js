@@ -39,7 +39,8 @@ const users = {
     'cooluser@mail.ru': {
         email: 'cooluser@mail.ru',
         password: 'password',
-        nick: 'cooluser',
+        username: 'cooluser',
+        fullname: 'Cool User',
         phone: 79191218358,
         chats: [
             {

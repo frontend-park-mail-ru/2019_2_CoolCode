@@ -1,15 +1,15 @@
-mixin item(title, href, section)
-    a#change(href=href data-section=section)= title
+mixin item(title, href, section, id)
+    a.change(href=href data-section=section id=id)= title
 
 div.head
 
     a(href="/")
         img.logo(src="images/logo_2.png")
     if login
-        +item('log out', '/logout', 'logout')
+        +item('log out', '', 'logout', 'logout-link')
     else
-        +item('log in', `/login`, "login")
-        +item('sign up', `/signup`, "signUp")
-        +item('profile', `/profile`, "profile")
+        +item('log in', `/login`, "login", "login-link")
+        +item('sign up', `/signup`, "signUp", "signup-link")
+        +item('profile', `/profile`, "profile", "profile-link")
 
 block content
