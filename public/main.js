@@ -201,7 +201,8 @@ function createInput (data, field, style) {
         settingInput.id = `status-${field}-editable`
         let temp = settingField.value
         settingField.innerHTML = ''
-        settingInput.value = temp
+        settingInput.value = ""
+        settingInput.placeholder=`${field}`
         settingInput.style.cssText = style
         settingField.appendChild(settingInput)
         settingInput.focus()
@@ -209,6 +210,9 @@ function createInput (data, field, style) {
 
     settingInput.addEventListener('blur', e => {
         console.log(data.id)
+        if (settingInput.value===""){
+            return
+        }
         switch (field) {
             case 'fstatus':
                 data.fstatus = settingInput.value
