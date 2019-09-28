@@ -144,7 +144,14 @@ function createLogin () {
             profile.renderProfile()
 
             createInput(data, 'fstatus',
-                `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+                `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+            createInput(data, 'email',
+                `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+            //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+            createInput(data, 'username',
+                `border: none; outline: none; margin: 0`)
+            createInput(data, 'fullname',
+                `border: none; outline: none; margin: 0`)
 
         }).catch(err => {
             console.error(err)
@@ -199,10 +206,10 @@ function createInput (data, field, style) {
         e.preventDefault()
         settingInput.classList = settingField.classList
         settingInput.id = `status-${field}-editable`
-        let temp = settingField.value
+        let temp = settingField.innerHTML
         settingField.innerHTML = ''
-        settingInput.value = ""
-        settingInput.placeholder=`${field}`
+        settingInput.value = temp
+        settingInput.placeholder = `${field}`
         settingInput.style.cssText = style
         settingField.appendChild(settingInput)
         settingInput.focus()
@@ -210,7 +217,7 @@ function createInput (data, field, style) {
 
     settingInput.addEventListener('blur', e => {
         console.log(data.id)
-        if (settingInput.value!=="") {
+        if (settingInput.value !== '') {
             switch (field) {
                 case 'fstatus':
                     data.fstatus = settingInput.value
