@@ -1,8 +1,8 @@
 extends profilePage
 
-mixin field(pText, fieldText)
+mixin field(pText, fieldText, id)
     p.attribute= pText+":"
-    div.field= fieldText
+    div.field(id=id)= fieldText
 mixin settings(pText, reference)
     div.row#params
         p.attribute= pText+"settings"
@@ -22,16 +22,16 @@ block page
                 div.row#profile-pic-row
                     img.rounded-circle-1#avatar(src="images/user.jpg")
             div.column.for-msg-1
-                div.row#name-row= fullname
-                div.row#nick-row= "@" + username
+                div.row.name-row#fullname-setting= fullname
+                div.row.nick-row#username-setting= username
         div.row#edit-row
             +edit("avatar", "/")
             +edit("name", "/")
         div.row#settings-row
             div.column.settings
-                +field("status", "I'm single")
-                +field("email", email)
-                +field("phone number", phone)
+                +field("status", fstatus, "fstatus-setting")
+                +field("email", email, "email-setting")
+                +field("phone number", phone, "phone-setting")
                 +settings("account ", "/")
                 +settings("privacy ", "/")
 

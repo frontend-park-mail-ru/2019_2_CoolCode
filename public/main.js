@@ -7,13 +7,12 @@ import { SignUp } from './components/Signup/Signup.js'
 import { Login } from './components/Login/Login.js'
 import { AjaxCreate } from './modules/Ajax/AjaxModule.js'
 
+import './styles/main.css'
+
 const application = document.getElementById('application')
 AjaxCreate.init()
-const ajaxModule = AjaxModule
 
 const backend = 'http://95.163.209.195:8080'
-
-import './styles/main.css'
 
 const functions = {
     mainPage: createMainPage,
@@ -38,12 +37,11 @@ function createMainPage () {
         const mainPage = new MainPageComponent()
         mainPage.parent = application
         mainPage.renderMainPage()
-        console.log("Лучший чат на земле!")
+        console.log('Лучший чат на земле!')
     }).catch(err => {
         console.error(err)
         alert(err.message)
     })
-
 
 }
 
@@ -145,37 +143,13 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            //handleLogout()
+            createInput(data, 'fstatus',
+                `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+
         }).catch(err => {
             console.error(err)
             alert(err.message)
         })
-    })
-
-}
-
-function handleLogout () {
-    fetch(`${backend}/logout`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-        body: '',
-        credentials: 'include',
-        mode: 'cors',
-    }).then(response => {
-        console.log(response.status)
-        if (response.status !== 200) {
-            throw new Error(
-                `Не вышли: ${response.status}`)
-        }
-        return response.text()
-    }).then(data => {
-        console.log(data)
-        createMainPage()
-    }).catch(err => {
-        console.error(err)
-        alert(err.message)
     })
 }
 
@@ -200,6 +174,93 @@ function createProfile () {
 
         const profile = new ProfileComponent(data, application)
         profile.renderProfile()
+
+        createInput(data, 'fstatus',
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+        createInput(data, 'email',
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+        //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+        createInput(data, 'username',
+            `border: none; outline: none; margin: 0`)
+        createInput(data, 'fullname',
+            `border: none; outline: none; margin: 0`)
+
+    }).catch(err => {
+        console.error(err)
+        alert(err.message)
+    })
+}
+
+function createInput (data, field, style) {
+    const settingField = application.querySelector(`#${field}-setting`)
+    const settingInput = document.createElement('input')
+
+    settingField.addEventListener('dblclick', (e) => {
+        e.preventDefault()
+        settingInput.classList = settingField.classList
+        settingInput.id = `status-${field}-editable`
+        let temp = settingField.innerHTML
+        settingField.innerHTML = ''
+        settingInput.value = temp
+        settingInput.style.cssText = style
+        settingField.appendChild(settingInput)
+        settingInput.focus()
+    })
+
+    settingInput.addEventListener('blur', e => {
+        console.log(data.id)
+        switch (field) {
+            case 'fstatus':
+                data.fstatus = settingInput.value
+                break
+            case 'phone':
+                data.phone = settingInput.value
+                break
+            case 'email':
+                data.email = settingInput.value
+                break
+            case 'username':
+                data.username = settingInput.value
+                break
+            case 'fullname':
+                data.fullname = settingInput.value
+                break
+        }
+        fetch(`${backend}/users/${data.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(data),
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            console.dir(response)
+        }).catch(err => {
+            console.log(err)
+        })
+    })
+}
+
+function handleLogout () {
+    fetch(`${backend}/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: '',
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        console.log(response.status)
+        if (response.status !== 200) {
+            throw new Error(
+                `Не вышли: ${response.status}`)
+        }
+        return response.text()
+    }).then(data => {
+        console.log(data)
+        createMainPage()
     }).catch(err => {
         console.error(err)
         alert(err.message)
