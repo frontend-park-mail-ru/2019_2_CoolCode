@@ -86,6 +86,7 @@ function createSignUp () {
         }).then(data => {
             console.log('Зарегались')
             // TODO: Отправляемся в профиль
+            createLogin()
         }).catch(err => {
             console.error(err)
             alert(err.message)
