@@ -1,8 +1,8 @@
 extends profilePage
 
-mixin field(pText, fieldText)
+mixin field(pText, fieldText, id)
     p.attribute= pText+":"
-    div.field= fieldText
+    div.field(id=id)= fieldText
 mixin settings(pText, reference)
     div.row#params
         p.attribute= pText+"settings"
@@ -29,9 +29,9 @@ block page
             +edit("name", "/")
         div.row#settings-row
             div.column.settings
-                +field("status", "I'm single")
-                +field("email", email)
-                +field("phone number", phone)
+                +field("status", "I'm single", "status-setting")
+                +field("email", email, "email-setting")
+                +field("phone number", phone, "phone-setting")
                 +settings("account ", "/")
                 +settings("privacy ", "/")
 

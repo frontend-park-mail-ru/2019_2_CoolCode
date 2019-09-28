@@ -142,7 +142,10 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            //handleLogout()
+            application.querySelector('#status-setting').addEventListener('dblclick', () => {
+                e.preventDefault()
+                alert('When routine bites hard')
+            })
         }).catch(err => {
             console.error(err)
             alert(err.message)
