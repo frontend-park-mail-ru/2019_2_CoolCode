@@ -210,39 +210,38 @@ function createInput (data, field, style) {
 
     settingInput.addEventListener('blur', e => {
         console.log(data.id)
-        if (settingInput.value===""){
-            return
+        if (settingInput.value!=="") {
+            switch (field) {
+                case 'fstatus':
+                    data.fstatus = settingInput.value
+                    break
+                case 'phone':
+                    data.phone = settingInput.value
+                    break
+                case 'email':
+                    data.email = settingInput.value
+                    break
+                case 'username':
+                    data.username = settingInput.value
+                    break
+                case 'fullname':
+                    data.fullname = settingInput.value
+                    break
+            }
+            fetch(`${backend}/users/${data.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(data),
+                credentials: 'include',
+                mode: 'cors',
+            }).then(response => {
+                console.dir(response)
+            }).catch(err => {
+                console.log(err)
+            })
         }
-        switch (field) {
-            case 'fstatus':
-                data.fstatus = settingInput.value
-                break
-            case 'phone':
-                data.phone = settingInput.value
-                break
-            case 'email':
-                data.email = settingInput.value
-                break
-            case 'username':
-                data.username = settingInput.value
-                break
-            case 'fullname':
-                data.fullname = settingInput.value
-                break
-        }
-        fetch(`${backend}/users/${data.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(data),
-            credentials: 'include',
-            mode: 'cors',
-        }).then(response => {
-            console.dir(response)
-        }).catch(err => {
-            console.log(err)
-        })
     })
 }
 
