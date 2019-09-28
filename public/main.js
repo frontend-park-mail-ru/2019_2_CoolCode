@@ -142,7 +142,7 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            createInput(data)
+            createInput(data, 'fstatus', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
 
         }).catch(err => {
             console.error(err)
@@ -173,30 +173,51 @@ function createProfile () {
         const profile = new ProfileComponent(data, application)
         profile.renderProfile()
 
-        createInput(data)
+        createInput(data, 'fstatus', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+        createInput(data, 'email', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+        //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+        createInput(data, 'username', `border: none; outline: none; `)
+        createInput(data, 'fullname', `border: none; outline: none; height: 38px; padding: 0 0 0 0;`)
+
     }).catch(err => {
         console.error(err)
         alert(err.message)
     })
 }
 
-function createInput (data) {
-    const statusField = application.querySelector('#status-setting')
-    const statusInput = document.createElement('input')
+function createInput (data, field, style) {
+    const settingField = application.querySelector(`#${field}-setting`)
+    const settingInput = document.createElement('input')
 
-    statusField.addEventListener('dblclick', (e) => {
+    settingField.addEventListener('dblclick', (e) => {
         e.preventDefault()
-        statusInput.classList = statusField.classList
-        statusInput.id = 'status-setting-editable'
-        statusInput.value = statusField.innerHTML
-        statusInput.style.cssText = `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`
-        statusField.parentNode.replaceChild(statusInput, statusField)
-        statusInput.focus()
+        settingInput.classList = settingField.classList
+        settingInput.id = `status-${field}-editable`
+        settingInput.value = settingField.innerHTML
+        settingInput.style.cssText = style
+        settingField.parentNode.replaceChild(settingInput, settingField)
+        settingInput.focus()
     })
 
-    statusInput.addEventListener('blur', e => {
+    settingInput.addEventListener('blur', e => {
         console.log(data.id)
-        data.fstatus = statusInput.value
+        switch (field) {
+            case 'fstatus':
+                data.fstatus = settingInput.value
+                break
+            case 'phone':
+                data.phone = settingInput.value
+                break
+            case 'email':
+                data.email = settingInput.value
+                break
+            case 'username':
+                data.username = settingInput.value
+                break
+            case 'fullname':
+                data.fullname = settingInput.value
+                break
+        }
         fetch(`${backend}/users/${data.id}`, {
             method: 'PUT',
             headers: {

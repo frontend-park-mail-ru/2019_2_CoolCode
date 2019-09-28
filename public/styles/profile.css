@@ -65,7 +65,7 @@ header#app{
     border-left: 1px solid rgba(197, 197, 197, 0.81);
 
 }
-#name-row{
+.name-row{
     margin: 100px 0 0 20px;
     height: 100px;
     font-family: 'Montserrat',  sans-serif;
@@ -78,7 +78,7 @@ header#app{
     flex-direction: row;
 }
 
-#nick-row{
+.nick-row{
     margin: 0 0 0 20px;
     height: 20%;
     font-family: 'Roboto',  sans-serif;

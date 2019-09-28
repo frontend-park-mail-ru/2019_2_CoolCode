@@ -22,14 +22,14 @@ block page
                 div.row#profile-pic-row
                     img.rounded-circle-1#avatar(src="images/user.jpg")
             div.column.for-msg-1
-                div.row#name-row= fullname
-                div.row#nick-row= "@" + username
+                div.row.name-row#fullname-setting= fullname
+                div.row.nick-row#username-setting= username
         div.row#edit-row
             +edit("avatar", "/")
             +edit("name", "/")
         div.row#settings-row
             div.column.settings
-                +field("status", fstatus, "status-setting")
+                +field("status", fstatus, "fstatus-setting")
                 +field("email", email, "email-setting")
                 +field("phone number", phone, "phone-setting")
                 +settings("account ", "/")
