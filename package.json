@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "prestart": "webpack-cli"
+    "prestart": "webpack-cli",
+    "build": "webpack -p",
+    "watch": "webpack --watch"
   },
   "keywords": [],
   "author": "",
