@@ -38,14 +38,12 @@ function createMainPage () {
         const mainPage = new MainPageComponent()
         mainPage.parent = application
         mainPage.renderMainPage()
-        console.log("Лучший чат на земле")
+        console.log("Лучший чат на земле!")
     }).catch(err => {
         console.error(err)
         alert(err.message)
     })
-    const mainPage = new MainPageComponent()
-    mainPage.parent = application
-    mainPage.renderMainPage()
+
 
 }
 
