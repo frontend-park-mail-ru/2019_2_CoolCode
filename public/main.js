@@ -142,16 +142,41 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            application.querySelector('#status-setting').addEventListener('dblclick', () => {
+            const statusField = application.querySelector('#status-setting')
+            const statusInput = document.createElement('input')
+
+            statusField.addEventListener('dblclick', (e) => {
                 e.preventDefault()
-                alert('When routine bites hard')
+                statusInput.classList = statusField.classList
+                statusInput.id = 'status-setting-editable'
+                statusInput.value = statusField.innerHTML
+                statusInput.style.cssText = `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`
+                statusField.parentNode.replaceChild(statusInput, statusField)
+                statusInput.focus()
+            })
+
+            statusInput.addEventListener('blur', (e) => {
+                console.log(data.id)
+                data.fstatus = statusInput.value
+                fetch(`${backend}/users/${data.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                    },
+                    body: JSON.stringify(data),
+                    credentials: 'include',
+                    mode: 'cors',
+                }).then(response => {
+                    console.dir(response)
+                }).catch(err => {
+                    console.log(err)
+                })
             })
         }).catch(err => {
             console.error(err)
             alert(err.message)
         })
     })
-
 }
 
 function handleLogout () {
