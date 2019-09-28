@@ -11,7 +11,7 @@ const application = document.getElementById('application')
 AjaxCreate.init()
 const ajaxModule = AjaxModule
 
-const backend = 'http://127.0.0.1:8080'
+const backend = 'http://95.163.209.195:8080/'
 
 import './styles/main.css'
 
