@@ -67,7 +67,7 @@ header#app{
 }
 .name-row{
     margin: 100px 0 0 20px;
-    height: 100px;
+    height: 46px;
     font-family: 'Montserrat',  sans-serif;
     font-size: 36px;
     color: #000000;
@@ -79,8 +79,8 @@ header#app{
 }
 
 .nick-row{
-    margin: 0 0 0 20px;
-    height: 20%;
+    margin: 30px 0 0 20px;
+    height: 30px;
     font-family: 'Roboto',  sans-serif;
     font-size: 24px;
     color: black;

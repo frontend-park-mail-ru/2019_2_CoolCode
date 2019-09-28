@@ -142,7 +142,8 @@ function createLogin () {
             const profile = new ProfileComponent(data, application)
             profile.renderProfile()
 
-            createInput(data, 'fstatus', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+            createInput(data, 'fstatus',
+                `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
 
         }).catch(err => {
             console.error(err)
@@ -173,11 +174,15 @@ function createProfile () {
         const profile = new ProfileComponent(data, application)
         profile.renderProfile()
 
-        createInput(data, 'fstatus', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
-        createInput(data, 'email', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+        createInput(data, 'fstatus',
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+        createInput(data, 'email',
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
         //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
-        createInput(data, 'username', `border: none; outline: none; `)
-        createInput(data, 'fullname', `border: none; outline: none; height: 38px; padding: 0 0 0 0;`)
+        createInput(data, 'username',
+            `border: none; outline: none; margin: 0`)
+        createInput(data, 'fullname',
+            `border: none; outline: none; margin: 0`)
 
     }).catch(err => {
         console.error(err)
@@ -193,9 +198,11 @@ function createInput (data, field, style) {
         e.preventDefault()
         settingInput.classList = settingField.classList
         settingInput.id = `status-${field}-editable`
-        settingInput.value = settingField.innerHTML
+        let temp = settingField.innerHTML
+        settingField.innerHTML = ''
+        settingInput.value = temp
         settingInput.style.cssText = style
-        settingField.parentNode.replaceChild(settingInput, settingField)
+        settingField.appendChild(settingInput)
         settingInput.focus()
     })
 
