@@ -199,7 +199,7 @@ function createInput (data, field, style) {
         e.preventDefault()
         settingInput.classList = settingField.classList
         settingInput.id = `status-${field}-editable`
-        let temp = settingField.innerHTML
+        let temp = settingField.value
         settingField.innerHTML = ''
         settingInput.value = temp
         settingInput.style.cssText = style
