@@ -46,6 +46,8 @@ function renderProfile (application, user) {
         `border: none; outline: none; margin: 0`);
     createInput(application, user, 'fullname',
         `border: none; outline: none; margin: 0`);
+    createInput(application, user, 'phone',
+        `border: none; outline: none; margin: 0`);
 
     createImageUpload(user.id);
     getUserPhoto(user.id);
