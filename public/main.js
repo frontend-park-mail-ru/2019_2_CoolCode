@@ -12,7 +12,7 @@ import './styles/main.css'
 const application = document.getElementById('application')
 AjaxCreate.init()
 
-const backend = 'http://95.163.209.195:8080'
+const backend = 'http://localhost:3000'
 
 const functions = {
     mainPage: createMainPage,
