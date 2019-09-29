@@ -275,8 +275,13 @@ function createInput(data, field, style) {
         e.preventDefault();
         settingInput.classList = settingField.classList;
         settingInput.id = `status-${field}-editable`;
-        settingInput.value = "";
+
+        if (settingInput.value==""){
         settingInput.placeholder = `${field}`;
+        }else {
+            settingInput.placeholder = settingInput.value;
+        }
+        settingInput.value = "";
         settingInput.style.cssText = style;
         settingField.appendChild(settingInput);
         settingInput.focus()
