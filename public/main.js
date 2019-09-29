@@ -1,18 +1,17 @@
 'use strict';
 
-import { ProfileComponent } from './components/Profile/Profile.js'
-import { MainPageComponent } from './components/MainPage/MainPage.js'
-import { Header } from './components/Header/Header.js'
-import { SignUp } from './components/Signup/Signup.js'
-import { Login } from './components/Login/Login.js'
-import { AjaxCreate } from './modules/Ajax/AjaxModule.js'
+import { ProfileComponent } from './components/Profile/Profile.js';
+import { MainPageComponent } from './components/MainPage/MainPage.js';
+import { Header } from './components/Header/Header.js';
+import { SignUp } from './components/Signup/Signup.js';
+import { Login } from './components/Login/Login.js';
 
-import './styles/main.css'
+import './styles/main.css';
+import settings from './modules/config';
+
+const { backend } = settings;
 
 const application = document.getElementById('application');
-AjaxCreate.init();
-
-const backend = 'http://95.163.209.195:8080';
 
 const functions = {
     mainPage: createMainPage,
@@ -37,11 +36,11 @@ function createMainPage () {
         const mainPage = new MainPageComponent();
         mainPage.parent = application;
         mainPage.renderMainPage();
-        console.log('Лучший чат на земле!')
+        console.log('Лучший чат на земле!');
     }).catch(err => {
         console.error(err);
-        alert(err.message)
-    })
+        alert(err.message);
+    });
 
 }
 
@@ -78,20 +77,19 @@ function createSignUp () {
         }).then(response => {
             console.dir(response);
             if (response.status === 400) {
-                throw new Error(`Такая почта занята !!`)
+                throw new Error(`Такая почта занята !!`);
             } else if (response.status !== 200) {
-                throw new Error(`Неверный статус: ${response.status}`)
+                throw new Error(`Неверный статус: ${response.status}`);
             }
-            return response.text()
+            return response.text();
         }).then(data => {
             console.log('Зарегались');
-            // TODO: Отправляемся в профиль
-            createLogin()
+            renderProfile();
         }).catch(err => {
             console.error(err);
-            alert(err.message)
-        })
-    })
+            alert(err.message);
+        });
+    });
 
 }
 
@@ -126,38 +124,20 @@ function createLogin () {
         }).then(response => {
             if (response.status !== 200) {
                 throw new Error(
-                    `Пользователь с данной почтой не зарегистрирован: ${response.status}`)
+                    `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
             }
             console.dir(response);
-            return response.json()
-        }).then(data => {
-            console.log(data);
+            return response.json();
+        }).then(user => {
+            console.log(user);
             console.log('Залогинились');
 
-            application.innerHTML = '';
-
-            const header = new Header();
-            header.parent = application;
-            header.renderHeader(true);
-
-            const profile = new ProfileComponent(data, application);
-            profile.renderProfile();
-
-            createInput(data, 'fstatus',
-                `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-            createInput(data, 'email',
-                `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-            //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
-            createInput(data, 'username',
-                `border: none; outline: none; margin: 0`);
-            createInput(data, 'fullname',
-                `border: none; outline: none; margin: 0`)
-
+            renderProfile(user);
         }).catch(err => {
             console.error(err);
-            alert(err.message)
-        })
-    })
+            alert(err.message);
+        });
+    });
 }
 
 function createProfile () {
@@ -168,34 +148,38 @@ function createProfile () {
     }).then(response => {
         if (response.status !== 200) {
             throw new Error(
-                `Не зашли: ${response.status}`)
+                `Не зашли: ${response.status}`);
         }
-        return response.json()
-    }).then(data => {
-        console.log(data);
-        application.innerHTML = '';
+        return response.json();
+    }).then(user => {
+        console.log(user);
 
-        const header = new Header();
-        header.parent = application;
-        header.renderHeader(true);
-
-        const profile = new ProfileComponent(data, application);
-        profile.renderProfile();
-
-        createInput(data, 'fstatus',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-        createInput(data, 'email',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-        //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
-        createInput(data, 'username',
-            `border: none; outline: none; margin: 0`);
-        createInput(data, 'fullname',
-            `border: none; outline: none; margin: 0`)
-
+        renderProfile(user);
     }).catch(err => {
         console.error(err);
-        alert(err.message)
-    })
+        alert(err.message);
+    });
+}
+
+function renderProfile (user) {
+    application.innerHTML = '';
+
+    const header = new Header();
+    header.parent = application;
+    header.renderHeader(true);
+
+    const profile = new ProfileComponent(user, application);
+    profile.renderProfile();
+
+    createInput(user, 'fstatus',
+        `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+    createInput(user, 'email',
+        `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+    //createInput(user, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+    createInput(user, 'username',
+        `border: none; outline: none; margin: 0`);
+    createInput(user, 'fullname',
+        `border: none; outline: none; margin: 0`);
 }
 
 function createInput (data, field, style) {
@@ -212,7 +196,7 @@ function createInput (data, field, style) {
         settingInput.placeholder = `${field}`;
         settingInput.style.cssText = style;
         settingField.appendChild(settingInput);
-        settingInput.focus()
+        settingInput.focus();
     });
 
     settingInput.addEventListener('blur', e => {
@@ -233,7 +217,7 @@ function createInput (data, field, style) {
                     break;
                 case 'fullname':
                     data.fullname = settingInput.value;
-                    break
+                    break;
             }
             fetch(`${backend}/users/${data.id}`, {
                 method: 'PUT',
@@ -244,12 +228,12 @@ function createInput (data, field, style) {
                 credentials: 'include',
                 mode: 'cors',
             }).then(response => {
-                console.dir(response)
+                console.dir(response);
             }).catch(err => {
-                console.log(err)
-            })
+                console.log(err);
+            });
         }
-    })
+    });
 }
 
 function handleLogout () {
@@ -265,16 +249,16 @@ function handleLogout () {
         console.log(response.status);
         if (response.status !== 200) {
             throw new Error(
-                `Не вышли: ${response.status}`)
+                `Не вышли: ${response.status}`);
         }
-        return response.text()
+        return response.text();
     }).then(data => {
         console.log(data);
-        createMainPage()
+        createMainPage();
     }).catch(err => {
         console.error(err);
-        alert(err.message)
-    })
+        alert(err.message);
+    });
 }
 
 application.addEventListener('click', function (evt) {
@@ -282,7 +266,7 @@ application.addEventListener('click', function (evt) {
 
     if (target instanceof HTMLAnchorElement) {
         evt.preventDefault();
-        functions[target.dataset.section]()
+        functions[target.dataset.section]();
     }
 });
 
