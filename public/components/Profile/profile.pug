@@ -25,8 +25,7 @@ block page
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
         div.row#edit-row
-            form.avatar-form(method='post' enctype="multipart/form-data" action='/profile')
-                div.column
+            div.column
                     input(type='file', name='imageupload')
                     input(type='submit', name='uploadimage', value='Upload Image')
             +edit("name", "/")
