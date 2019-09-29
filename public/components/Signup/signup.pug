@@ -1,15 +1,15 @@
 block content
 
     a.back(href='/menu' data-section = 'mainPage') back
-    form(method='POST' action='/singup' id='sign-up-form')
+    form.sign-up-form(method='POST' action='/singup' )
         div.log-in-form
             h1.name Sign up
-            label(for='email')
-            input.input_field(type='text' id='email' placeholder='email' name='email')
-            label(for='password')
-            input.input_field(type='password' id='password' placeholder='password' name='password')
-            label(for='fullname')
-            input.input_field(type='text' id='fullname' placeholder='full name' name='fullname')
+
+            input.input_field(type='text'  placeholder='email' name='email')
+
+            input.input_field(type='password'  placeholder='password' name='password')
+
+            input.input_field(type='text'  placeholder='full name' name='fullname')
             button.submit-button(type='submit') Sign up
             p.already Already registered?
             a.already(href='/login' data-section = 'login') Log in

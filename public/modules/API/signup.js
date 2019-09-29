@@ -14,7 +14,7 @@ function createSignUp (application) {
     signUpComponent.parent = application;
     signUpComponent.renderSignUp();
 
-    const form = application.querySelector('#sign-up-form');
+    const form = application.querySelector('.sign-up-form');
     var error = document.createElement('div');
     error.className='error';
     error.style.color = 'red';

@@ -11,7 +11,7 @@ function createLogin (application) {
     loginComponent.parent = application;
     loginComponent.renderLogin();
 
-    const form = application.querySelector('#login-form');
+    const form = application.querySelector('.login-form');
     var error = document.createElement('div');
     form.addEventListener('submit', function (e) {
         e.preventDefault();
