@@ -65,3 +65,10 @@
     color: #000000;
     font-weight: 300;
 }
+
+.error_message{
+    height: 30px;
+    color: #ff6575;
+    text-align: left;
+    font-family: "Roboto", sans-serif;
+}

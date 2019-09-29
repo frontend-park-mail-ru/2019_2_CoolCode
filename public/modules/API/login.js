@@ -11,13 +11,26 @@ function createLogin (application) {
     loginComponent.parent = application;
     loginComponent.renderLogin();
 
-    const form = application.querySelector('#login-form');
-
+    const form = application.querySelector('.login-form');
+    var error = document.createElement('div');
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        const email = form.elements['email'].value;
-        const password = form.elements['password'].value;
-        login(application, email, password);
+        error.innerHTML = '';
+        let email;
+        let password;
+        if(form.elements['email'].value===""||form.elements['password'].value===""){
+            error.className='error';
+            error.style.color = 'red';
+            error.innerHTML = '*cant be blank';
+            form.elements['email'].parentElement.insertBefore(error,form.elements['email']);
+
+        }else{
+            email = form.elements['email'].value;
+            password = form.elements['password'].value;
+            login(application, email, password);
+        }
+
+
     });
 }
 

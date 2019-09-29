@@ -1,13 +1,17 @@
 import settings from '../config';
 
 const { backend } = settings;
-
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 function createInput (application, data, field, style) {
     const settingField = application.querySelector(`#${field}-setting`);
     const settingInput = document.createElement('input');
 
     function createInput (e) {
         e.preventDefault();
+        settingField.innerHTML = '';
         settingInput.classList = settingField.classList;
         settingInput.id = `status-${field}-editable`;
         let temp = settingField.innerHTML;
@@ -33,7 +37,14 @@ function createInput (application, data, field, style) {
                     data.phone = settingInput.value;
                     break;
                 case 'email':
-                    data.email = settingInput.value;
+                    if(!validateEmail(settingInput.value)){
+                        settingField.innerHTML = '';
+
+                        settingField.innerHTML = '<p><span   style="font-size: large; color: red; font-family: Arial; ">*very wrong input</span>';
+                        data.email ='';
+                    }else{
+                        data.email = settingInput.value;
+                    }
                     break;
                 case 'username':
                     data.username = settingInput.value;

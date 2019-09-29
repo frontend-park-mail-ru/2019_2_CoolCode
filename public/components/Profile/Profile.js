@@ -72,6 +72,7 @@ export class ProfileComponent {
             }
         }
 
+
         const img = document.getElementById('avatar');
         const input = document.getElementById('file');
         img.addEventListener('click',function () {
