@@ -1,18 +1,14 @@
 'use strict';
 
-import {ProfileComponent} from './components/Profile/Profile.js'
-import {MainPageComponent} from './components/MainPage/MainPage.js'
-import {Header} from './components/Header/Header.js'
-import {SignUp} from './components/Signup/Signup.js'
-import {Login} from './components/Login/Login.js'
-import {AjaxCreate} from './modules/Ajax/AjaxModule.js'
+import createMainPage from './modules/API/mainpage';
+import createSignUp from './modules/API/signup';
+import { createLogin } from './modules/API/login';
+import { createProfile } from './modules/API/profile';
+import handleLogout from './modules/API/logout';
 
 import './styles/main.css'
 
 const application = document.getElementById('application');
-AjaxCreate.init();
-
-const backend = 'http://95.163.209.195:8080';
 
 const functions = {
     mainPage: createMainPage,
@@ -349,7 +345,7 @@ function handleLogout() {
 }
 
 application.addEventListener('click', function (evt) {
-    const {target} = evt;
+    const { target } = evt;
 
     if (target instanceof HTMLAnchorElement) {
         evt.preventDefault();
