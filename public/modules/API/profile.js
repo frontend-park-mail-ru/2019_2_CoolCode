@@ -76,6 +76,8 @@ function getUserPhoto (id) {
             document.getElementById('avatar').src = base64Flag + imageStr;
         });
 
+    }).catch(err=>{
+        profile.hideLoader();
     });
 }
 
