@@ -1,9 +1,9 @@
 import createMainPage from './mainpage';
 import settings from '../config';
 
-const { backend } = settings;
+const {backend} = settings;
 
-function handleLogout (application) {
+function handleLogout(application) {
     fetch(`${backend}/logout`, {
         method: 'POST',
         headers: {
@@ -13,12 +13,17 @@ function handleLogout (application) {
         credentials: 'include',
         mode: 'cors',
     }).then(response => {
-        console.log(response.status);
-        if (response.status !== 200) {
+        if (response.status === 500) {
             throw new Error(
-                `Not logged out: ${response.status}`);
+                `Серверу плохо:(: ${response.status}`);
         }
-        return response.text();
+        if (response.status === 401) {
+            throw new Error(
+                `Ошибка авторизации: ${response.status}`);
+        }
+        if (response.status === 200) {
+            return response.text();
+        }
     }).then(data => {
         console.log(data);
         createMainPage(application);

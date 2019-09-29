@@ -76,9 +76,16 @@ function login(application, email, password) {
         if (response.status === 400) {
             showError("Wrong email or password");
             throw new Error(
-                `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
+                `Ошибочные данные: ${response.status}`);
         }
-        return response.json();
+        if (response.status === 500) {
+            showError("Server error:(");
+            throw new Error(
+                `Серверу плохо: ${response.status}`);
+        }
+        if (response.status === 200) {
+            return response.json();
+        }
     }).then(user => {
         console.log(`Logged in: ${user.email}`);
 

@@ -26,7 +26,7 @@ function createInput (application, data, field, style) {
 
     settingField.addEventListener('dblclick', createInput);
 
-    settingInput.addEventListener('blur', _ => {
+    settingInput.addEventListener('blur', function (e) {
         console.log(data.id);
         if (settingInput.value !== '') {
             switch (field) {

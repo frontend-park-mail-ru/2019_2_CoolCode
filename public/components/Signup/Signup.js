@@ -24,7 +24,6 @@ export class SignUp{
     }
 
     renderSignUp() {
-        this._parent.innerHTML = '';
         this._parent.innerHTML = signupTemplate(this._data)
     }
 }
