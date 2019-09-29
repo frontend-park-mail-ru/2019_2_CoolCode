@@ -208,7 +208,12 @@ function createProfile() {
         const header = new Header();
         header.parent = application;
         header.renderHeader(true);
-
+        if (data.name === "") {
+            data.name="John Doe"
+        }
+        if (data.username === "") {
+            data.username="Sapiens"
+        }
         const profile = new ProfileComponent(data, application);
         profile.renderProfile();
 
