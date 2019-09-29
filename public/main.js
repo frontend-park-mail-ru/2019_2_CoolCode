@@ -153,6 +153,8 @@ function createLogin() {
             createInput(data, 'fullname',
                 `border: none; outline: none; margin: 0`)
 
+            getUserPhoto(data.id)
+
         }).catch(err => {
             console.error(err);
             alert(err.message)
