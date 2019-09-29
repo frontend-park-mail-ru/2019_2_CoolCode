@@ -70,5 +70,24 @@ export class ProfileComponent {
                 root.appendChild(message)
             }
         }
+
+        const form = document.getElementsByClassName('avatar-form')[0];
+        form.addEventListener("submit", function (evt) {
+            alert('do something')
+            // ajaxModule._ajax(
+            //     'POST',
+            //     '/login',
+            //     {email, password},
+            //     function (status, response) {
+            //         if (status === 200) {
+            //             alert('profile')
+            //         } else {
+            //             const {error} = JSON.parse(response);
+            //             alert(error);
+            //         }
+            //     }
+            // )
+
+        })
     }
 }
