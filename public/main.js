@@ -61,6 +61,8 @@ function createSignUp () {
 
         const email = form.elements['email'].value;
         const password = form.elements['password'].value;
+        const fullname = form.elements['fullname'].value;
+        const username = email.split('@')[0];
 
         fetch(`${backend}/users`, {
             method: 'POST',
@@ -71,6 +73,8 @@ function createSignUp () {
             body: JSON.stringify({
                 email: email,
                 password: password,
+                fullname: fullname,
+                username: username,
             }),
             credentials: 'include',
             mode: 'cors',
@@ -84,7 +88,7 @@ function createSignUp () {
             return response.text();
         }).then(data => {
             console.log('Зарегались');
-            renderProfile();
+            login(email, password)
         }).catch(err => {
             console.error(err);
             alert(err.message);
@@ -110,33 +114,7 @@ function createLogin () {
         const email = form.elements['email'].value;
         const password = form.elements['password'].value;
 
-        fetch(`${backend}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            }),
-            credentials: 'include',
-            mode: 'cors',
-        }).then(response => {
-            if (response.status !== 200) {
-                throw new Error(
-                    `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
-            }
-            console.dir(response);
-            return response.json();
-        }).then(user => {
-            console.log(user);
-            console.log('Залогинились');
-
-            renderProfile(user);
-        }).catch(err => {
-            console.error(err);
-            alert(err.message);
-        });
+        login(email, password)
     });
 }
 
@@ -153,6 +131,36 @@ function createProfile () {
         return response.json();
     }).then(user => {
         console.log(user);
+
+        renderProfile(user);
+    }).catch(err => {
+        console.error(err);
+        alert(err.message);
+    });
+}
+
+function login(email, password){
+    fetch(`${backend}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+        }),
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        if (response.status !== 200) {
+            throw new Error(
+                `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
+        }
+        console.dir(response);
+        return response.json();
+    }).then(user => {
+        console.log(user);
+        console.log('Залогинились');
 
         renderProfile(user);
     }).catch(err => {
