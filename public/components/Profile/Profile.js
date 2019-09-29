@@ -53,14 +53,9 @@ export class ProfileComponent {
         this._parent = parent
     }
 
-    setPhoto(photo){
-        avatar=document.getElementById('avatar');
-
-
-    }
 
     renderProfile () {
-        this.data['chat'] = false;
+        this.data[`chat`] = false;
         this.parent.innerHTML += profileTempl(this._data);
 
         const root = document.getElementsByClassName('chat-msg')[0];
@@ -77,26 +72,6 @@ export class ProfileComponent {
             }
         }
 
-
-
-        //const form = document.getElementsByClassName('avatar-form')[0];
-       // form.addEventListener("submit", function (evt) {
-            //alert('do something')
-            // ajaxModule._ajax(
-            //     'POST',
-            //     '/login',
-            //     {email, password},
-            //     function (status, response) {
-            //         if (status === 200) {
-            //             alert('profile')
-            //         } else {
-            //             const {error} = JSON.parse(response);
-            //             alert(error);
-            //         }
-            //     }
-            // )
-
-      //  })
         const img = document.getElementById('avatar');
         const input = document.getElementById('file');
         img.addEventListener('click',function () {
