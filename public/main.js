@@ -12,7 +12,7 @@ import './styles/main.css'
 const application = document.getElementById('application');
 AjaxCreate.init();
 
-const backend = 'http://95.163.209.195:8080';
+const backend = 'http://localhost:8080';
 
 const functions = {
     mainPage: createMainPage,
@@ -208,12 +208,7 @@ function createProfile() {
         const header = new Header();
         header.parent = application;
         header.renderHeader(true);
-        if (data.name === "") {
-            data.name="John Doe"
-        }
-        if (data.username === "") {
-            data.username="Sapiens"
-        }
+
         const profile = new ProfileComponent(data, application);
         profile.renderProfile();
 
@@ -270,25 +265,27 @@ function createImageUpload(id) {
 function createInput(data, field, style) {
     const settingField = application.querySelector(`#${field}-setting`);
     const settingInput = document.createElement('input');
+    settingInput.cssText = "margin: 0 0 0 20px";
 
     settingField.addEventListener('dblclick', (e) => {
         e.preventDefault();
         settingInput.classList = settingField.classList;
         settingInput.id = `status-${field}-editable`;
-
-        if (settingInput.value==""){
-        settingInput.placeholder = `${field}`;
-        }else {
-            settingInput.placeholder = settingInput.value;
+        if (settingField.value === "") {
+            settingInput.placeholder = `${field}`;
+        } else {
+            settingInput.placeholder = settingField.textContent;
         }
         settingInput.value = "";
         settingInput.style.cssText = style;
-        settingField.appendChild(settingInput);
+        settingField.replaceWith(settingInput);
         settingInput.focus()
     });
 
     settingInput.addEventListener('blur', e => {
         console.log(data.id);
+        settingField.innerHTML = settingInput.value;
+        settingInput.replaceWith(settingField);
         if (settingInput.value !== '') {
             switch (field) {
                 case 'fstatus':
