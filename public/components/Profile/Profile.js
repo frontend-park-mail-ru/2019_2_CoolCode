@@ -106,4 +106,15 @@ export class ProfileComponent {
 
 
     }
+
+    hideLoader(avatar) {
+        document.getElementById("loader").style.display="none";
+        document.getElementById("avatar").style.display="initial";
+    }
+
+    showLoader(){
+        document.getElementById("avatar").style.display="none";
+        document.getElementById("loader").style.display="initial";
+
+    }
 }
