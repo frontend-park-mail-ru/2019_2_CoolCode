@@ -6,7 +6,7 @@ function createInput (application, data, field, style) {
     const settingField = application.querySelector(`#${field}-setting`);
     const settingInput = document.createElement('input');
 
-    settingField.addEventListener('dblclick', (e) => {
+    function createInput (e) {
         e.preventDefault();
         settingInput.classList = settingField.classList;
         settingInput.id = `status-${field}-editable`;
@@ -17,7 +17,10 @@ function createInput (application, data, field, style) {
         settingInput.style.cssText = style;
         settingField.appendChild(settingInput);
         settingInput.focus();
-    });
+        e.target.removeEventListener('dblclick', createInput);
+    }
+
+    settingField.addEventListener('dblclick', createInput);
 
     settingInput.addEventListener('blur', _ => {
         console.log(data.id);
