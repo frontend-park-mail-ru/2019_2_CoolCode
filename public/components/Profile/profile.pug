@@ -25,10 +25,10 @@ block page
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
         div.row#edit-row
-            div.column
-                    input(type='file', name='imageupload')
-                    input(type='submit', name='uploadimage', value='Upload Image')
-            +edit("name", "/")
+            //div.column
+            //        input(type='file', name='imageupload')
+            //        input(type='submit', name='uploadimage', value='Upload Image')
+            //+edit("name", "/")
         div.row#settings-row
             div.column.settings
                 +field("status", fstatus, "fstatus-setting")
