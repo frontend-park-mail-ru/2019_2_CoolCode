@@ -20,13 +20,17 @@ block page
         div.row#profile-pic
             div.column.for-img-1
                 div.row#profile-pic-row
+
                     img.rounded-circle-1#avatar(src="images/user.jpg")
+                    input#file(type='file', style='display: none;')
             div.column.for-msg-1
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
         div.row#edit-row
-            +edit("avatar", "/")
-            +edit("name", "/")
+            //div.column
+            //        input(type='file', name='imageupload')
+            //        input(type='submit', name='uploadimage', value='Upload Image')
+            //+edit("name", "/")
         div.row#settings-row
             div.column.settings
                 +field("status", fstatus, "fstatus-setting")

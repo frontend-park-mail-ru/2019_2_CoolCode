@@ -1,18 +1,22 @@
-'use strict'
+'use strict';
 
-import { ProfileComponent } from './components/Profile/Profile.js'
-import { MainPageComponent } from './components/MainPage/MainPage.js'
-import { Header } from './components/Header/Header.js'
-import { SignUp } from './components/Signup/Signup.js'
-import { Login } from './components/Login/Login.js'
-import { AjaxCreate } from './modules/Ajax/AjaxModule.js'
+import {ProfileComponent} from './components/Profile/Profile.js'
+import {MainPageComponent} from './components/MainPage/MainPage.js'
+import {Header} from './components/Header/Header.js'
+import {SignUp} from './components/Signup/Signup.js'
+import {Login} from './components/Login/Login.js'
+import {AjaxCreate} from './modules/Ajax/AjaxModule.js'
 
 import './styles/main.css'
 
-const application = document.getElementById('application')
-AjaxCreate.init()
+const application = document.getElementById('application');
+AjaxCreate.init();
 
-const backend = 'http://localhost:3000'
+
+const backend = 'http://localhost:8080'
+
+// const backend = 'http://95.163.209.195:8080';
+
 
 const functions = {
     mainPage: createMainPage,
@@ -20,48 +24,48 @@ const functions = {
     login: createLogin,
     profile: createProfile,
     logout: handleLogout,
-}
+};
 
-function createMainPage () {
+function createMainPage() {
     fetch(`${backend}/users`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
     }).then(response => {
-        application.innerHTML = ''
+        application.innerHTML = '';
 
-        const header = new Header()
-        header.parent = application
-        header.renderHeader(response.status === 200)
+        const header = new Header();
+        header.parent = application;
+        header.renderHeader(response.status === 200);
 
-        const mainPage = new MainPageComponent()
-        mainPage.parent = application
-        mainPage.renderMainPage()
+        const mainPage = new MainPageComponent();
+        mainPage.parent = application;
+        mainPage.renderMainPage();
         console.log('Лучший чат на земле!')
     }).catch(err => {
-        console.error(err)
+        console.error(err);
         alert(err.message)
     })
 
 }
 
-function createSignUp () {
+function createSignUp() {
 
-    application.innerHTML = ''
+    application.innerHTML = '';
 
-    const signUpComponent = new SignUp()
-    signUpComponent.parent = application
-    signUpComponent.renderSignUp()
+    const signUpComponent = new SignUp();
+    signUpComponent.parent = application;
+    signUpComponent.renderSignUp();
 
-    const form = application.querySelector('#sign-up-form')
+    const form = application.querySelector('#sign-up-form');
 
-    console.dir(form)
+    console.dir(form);
 
     form.addEventListener('submit', function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const email = form.elements['email'].value
-        const password = form.elements['password'].value
+        const email = form.elements['email'].value;
+        const password = form.elements['password'].value;
 
         fetch(`${backend}/users`, {
             method: 'POST',
@@ -76,7 +80,7 @@ function createSignUp () {
             credentials: 'include',
             mode: 'cors',
         }).then(response => {
-            console.dir(response)
+            console.dir(response);
             if (response.status === 400) {
                 throw new Error(`Такая почта занята !!`)
             } else if (response.status !== 200) {
@@ -84,33 +88,33 @@ function createSignUp () {
             }
             return response.text()
         }).then(data => {
-            console.log('Зарегались')
+            console.log('Зарегались');
             // TODO: Отправляемся в профиль
             createLogin()
         }).catch(err => {
-            console.error(err)
+            console.error(err);
             alert(err.message)
         })
     })
 
 }
 
-function createLogin () {
-    application.innerHTML = ''
+function createLogin() {
+    application.innerHTML = '';
 
-    const loginComponent = new Login()
-    loginComponent.parent = application
-    loginComponent.renderLogin()
+    const loginComponent = new Login();
+    loginComponent.parent = application;
+    loginComponent.renderLogin();
 
-    const form = application.querySelector('#login-form')
+    const form = application.querySelector('#login-form');
 
-    console.dir(form)
+    console.dir(form);
 
     form.addEventListener('submit', function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const email = form.elements['email'].value
-        const password = form.elements['password'].value
+        const email = form.elements['email'].value;
+        const password = form.elements['password'].value;
 
         fetch(`${backend}/login`, {
             method: 'POST',
@@ -128,32 +132,71 @@ function createLogin () {
                 throw new Error(
                     `Пользователь с данной почтой не зарегистрирован: ${response.status}`)
             }
-            console.dir(response)
+            console.dir(response);
             return response.json()
         }).then(data => {
-            console.log(data)
-            console.log('Залогинились')
+            console.log(data);
+            console.log('Залогинились');
 
-            application.innerHTML = ''
+            application.innerHTML = '';
 
-            const header = new Header()
-            header.parent = application
-            header.renderHeader(true)
+            const header = new Header();
+            header.parent = application;
+            header.renderHeader(true);
 
-            const profile = new ProfileComponent(data, application)
-            profile.renderProfile()
+            const profile = new ProfileComponent(data, application);
+            profile.renderProfile();
 
             createInput(data, 'fstatus',
-                `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+                `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+            createInput(data, 'email',
+                `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+            //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+            createInput(data, 'username',
+                `border: none; outline: none; margin: 0`);
+            createInput(data, 'fullname',
+                `border: none; outline: none; margin: 0`)
+
+            getUserPhoto(data.id)
 
         }).catch(err => {
-            console.error(err)
+            console.error(err);
             alert(err.message)
         })
     })
 }
 
-function createProfile () {
+function getUserPhoto(id) {
+    console.log(` Getting user ${id} photo`);
+    fetch(`${backend}/photos/${id}`, {
+        method: "GET",
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        response.arrayBuffer().then((buffer) => {
+            if (response.status !== 200) {
+                throw new Error(
+                    `Не зашли: ${response.status}`)
+            }
+            let base64Flag = 'data:image/jpeg;base64,';
+            let imageStr = arrayBufferToBase64(buffer);
+
+            document.getElementById('avatar').src = base64Flag + imageStr;
+        });
+
+    })
+}
+
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    let bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+
+    return window.btoa(binary);
+}
+
+function createProfile() {
     fetch(`${backend}/users`, {
         method: 'GET',
         credentials: 'include',
@@ -165,84 +208,126 @@ function createProfile () {
         }
         return response.json()
     }).then(data => {
-        console.log(data)
-        application.innerHTML = ''
+        console.log(data);
+        application.innerHTML = '';
 
-        const header = new Header()
-        header.parent = application
-        header.renderHeader(true)
+        const header = new Header();
+        header.parent = application;
+        header.renderHeader(true);
 
-        const profile = new ProfileComponent(data, application)
-        profile.renderProfile()
+        const profile = new ProfileComponent(data, application);
+        profile.renderProfile();
 
         createInput(data, 'fstatus',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
         createInput(data, 'email',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`)
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
         //createInput(data, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
         createInput(data, 'username',
-            `border: none; outline: none; margin: 0`)
+            `border: none; outline: none; margin: 0`);
         createInput(data, 'fullname',
-            `border: none; outline: none; margin: 0`)
+            `border: none; outline: none; margin: 0`);
+        createImageUpload(data.id);
+        getUserPhoto(data.id)
 
     }).catch(err => {
-        console.error(err)
+        console.error(err);
         alert(err.message)
     })
 }
 
-function createInput (data, field, style) {
-    const settingField = application.querySelector(`#${field}-setting`)
-    const settingInput = document.createElement('input')
+function createImageUpload(id) {
+    const imageInput = document.getElementById('file');
+    console.log("image upload created");
+    const formData = new FormData();
 
-    settingField.addEventListener('dblclick', (e) => {
-        e.preventDefault()
-        settingInput.classList = settingField.classList
-        settingInput.id = `status-${field}-editable`
-        let temp = settingField.innerHTML
-        settingField.innerHTML = ''
-        settingInput.value = temp
-        settingInput.style.cssText = style
-        settingField.appendChild(settingInput)
-        settingInput.focus()
-    })
+    formData.append('file', imageInput.files[0]);
 
-    settingInput.addEventListener('blur', e => {
-        console.log(data.id)
-        switch (field) {
-            case 'fstatus':
-                data.fstatus = settingInput.value
-                break
-            case 'phone':
-                data.phone = settingInput.value
-                break
-            case 'email':
-                data.email = settingInput.value
-                break
-            case 'username':
-                data.username = settingInput.value
-                break
-            case 'fullname':
-                data.fullname = settingInput.value
-                break
-        }
-        fetch(`${backend}/users/${data.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(data),
+
+    const options = {
+        method: 'POST',
+        body: formData,
+    };
+    imageInput.addEventListener('change', function () {
+        let formData = new FormData();
+        formData.append("file", imageInput.files[0]);
+        console.log("image upload", imageInput.files[0]);
+        fetch(`${backend}/photos`, {
+            method: 'POST',
+            body: formData,
             credentials: 'include',
             mode: 'cors',
         }).then(response => {
-            console.dir(response)
-        }).catch(err => {
-            console.log(err)
+            if (response.status !== 200) {
+                console.log("Error while upload image");
+            }
+            getUserPhoto(id)
+
+
         })
     })
 }
 
-function handleLogout () {
+function createInput(data, field, style) {
+    const settingField = application.querySelector(`#${field}-setting`);
+    const settingInput = document.createElement('input');
+    settingInput.cssText = "margin: 0 0 0 20px";
+
+    settingField.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        settingInput.classList = settingField.classList;
+        settingInput.id = `status-${field}-editable`;
+        if (settingField.value === "") {
+            settingInput.placeholder = `${field}`;
+        } else {
+            settingInput.placeholder = settingField.textContent;
+        }
+        settingInput.value = "";
+        settingInput.style.cssText = style;
+        settingField.replaceWith(settingInput);
+        settingInput.focus()
+    });
+
+    settingInput.addEventListener('blur', e => {
+        console.log(data.id);
+        settingField.innerHTML = settingInput.value;
+        settingInput.replaceWith(settingField);
+        if (settingInput.value !== '') {
+            switch (field) {
+                case 'fstatus':
+                    data.fstatus = settingInput.value;
+                    break;
+                case 'phone':
+                    data.phone = settingInput.value;
+                    break;
+                case 'email':
+                    data.email = settingInput.value;
+                    break;
+                case 'username':
+                    data.username = settingInput.value;
+                    break;
+                case 'fullname':
+                    data.fullname = settingInput.value;
+                    break
+            }
+            fetch(`${backend}/users/${data.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(data),
+                credentials: 'include',
+                mode: 'cors',
+            }).then(response => {
+                console.dir(response)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    })
+}
+
+function handleLogout() {
     fetch(`${backend}/logout`, {
         method: 'POST',
         headers: {
@@ -252,28 +337,28 @@ function handleLogout () {
         credentials: 'include',
         mode: 'cors',
     }).then(response => {
-        console.log(response.status)
+        console.log(response.status);
         if (response.status !== 200) {
             throw new Error(
                 `Не вышли: ${response.status}`)
         }
         return response.text()
     }).then(data => {
-        console.log(data)
+        console.log(data);
         createMainPage()
     }).catch(err => {
-        console.error(err)
+        console.error(err);
         alert(err.message)
     })
 }
 
 application.addEventListener('click', function (evt) {
-    const { target } = evt
+    const {target} = evt;
 
     if (target instanceof HTMLAnchorElement) {
-        evt.preventDefault()
+        evt.preventDefault();
         functions[target.dataset.section]()
     }
-})
+});
 
-createMainPage()
+createMainPage();
