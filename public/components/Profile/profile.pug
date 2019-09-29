@@ -27,8 +27,8 @@ block page
         div.row#edit-row
             form.avatar-form(method='post' enctype="multipart/form-data" action='/profile')
                 div.column
-                    label.label-f(for="file") choose file
-                    input.custom-file-input(type="file" name="file")
+
+                    input(type='file', name='imageupload')
                     input(type='submit', name='uploadimage', value='Upload Image')
             +edit("name", "/")
         div.row#settings-row
