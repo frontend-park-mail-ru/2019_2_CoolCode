@@ -18,6 +18,14 @@ function createSignUp (application) {
     var error = document.createElement('div');
     error.className='error';
     error.style.color = 'red';
+
+    const emailField = application.querySelector('#email');
+    const errorMessage = application.querySelector('.error_message');
+    emailField.addEventListener('click', _ => {
+        emailField.style.borderColor = 'C4C4C4';
+        errorMessage.innerHTML = '';
+    });
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         error.innerHTML = '';
@@ -72,6 +80,37 @@ function createSignUp (application) {
                 console.error(err);
             });
         }
+        fetch(`${backend}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                fullname: fullname,
+                username: username,
+            }),
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            console.dir(response);
+            if (response.status === 400) {
+                errorMessage.innerHTML = 'Sorry, this email is already registered';
+                emailField.style.borderColor = '#ff6575';
+                throw new Error(`Такая почта занята !!`);
+            }
+            if (response.status !== 200) {
+                //alert(`Неверный статус: ${response.status}`);
+                throw new Error(`Неверный статус: ${response.status}`);
+            }
+            return response.text();
+        }).then(data => {
+            console.log(`Signed up: ${email}`);
+            login(application, email, password);
+        }).catch(err => {
+            console.error(err);
+        });
     });
 
 }

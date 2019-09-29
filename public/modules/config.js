@@ -1,6 +1,5 @@
 const settings = {
-    backend: 'http://localhost:8080',
+    backend: 'http://95.163.209.195:8080',
 };
-//validate.textContent
 
 export default settings;
