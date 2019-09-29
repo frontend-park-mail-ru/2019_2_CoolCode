@@ -275,9 +275,7 @@ function createInput(data, field, style) {
         e.preventDefault();
         settingInput.classList = settingField.classList;
         settingInput.id = `status-${field}-editable`;
-        let temp = settingField.innerHTML;
-        settingField.innerHTML = '';
-        settingInput.value = temp;
+        settingInput.value = "";
         settingInput.placeholder = `${field}`;
         settingInput.style.cssText = style;
         settingField.appendChild(settingInput);
