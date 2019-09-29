@@ -5,6 +5,7 @@ import settings from '../config';
 import createInput from './forms';
 
 const { backend } = settings;
+let profile;
 
 function createProfile (application) {
     fetch(`${backend}/users`, {
@@ -32,7 +33,7 @@ function renderProfile (application, user) {
     header.parent = application;
     header.renderHeader(true);
 
-    const profile = new ProfileComponent(user, application);
+    profile = new ProfileComponent(user, application);
     profile.renderProfile();
 
     createInput(application, user, 'fstatus',
@@ -45,12 +46,17 @@ function renderProfile (application, user) {
         `border: none; outline: none; margin: 0`);
     createInput(application, user, 'fullname',
         `border: none; outline: none; margin: 0`);
+    createInput(application, user, 'phone',
+        `border: none; outline: none; margin: 0`);
 
     createImageUpload(user.id);
     getUserPhoto(user.id);
 }
 
+
+
 function getUserPhoto (id) {
+    profile.showLoader();
     console.log(` Getting user ${id} photo`);
     fetch(`${backend}/photos/${id}`, {
         method: 'GET',
@@ -58,16 +64,20 @@ function getUserPhoto (id) {
         mode: 'cors',
     }).then(response => {
         response.arrayBuffer().then((buffer) => {
+            profile.hideLoader();
             if (response.status !== 200) {
                 throw new Error(
                     `Не зашли: ${response.status}`);
             }
+
             let base64Flag = 'data:image/jpeg;base64,';
             let imageStr = arrayBufferToBase64(buffer);
 
             document.getElementById('avatar').src = base64Flag + imageStr;
         });
 
+    }).catch(err=>{
+        profile.hideLoader();
     });
 }
 
@@ -100,7 +110,7 @@ function createImageUpload (id) {
             if (response.status !== 200) {
                 console.log('Error while upload image');
             }
-            getUserPhoto(id);
+            getUserPhoto(id,);
 
         });
     });
