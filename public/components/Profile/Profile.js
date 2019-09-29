@@ -97,12 +97,12 @@ export class ProfileComponent {
             // )
       //  })
 
-        var validate = document.querySelector('#settings-row #email-setting ');
-        console.log(validate.textContent);
-        validate.addEventListener('click',function () {
-            validate.click()
-
-        });
+        // var validate = document.querySelector('#settings-row #email-setting ');
+        // console.log(validate.textContent);
+        // validate.addEventListener('click',function () {
+        //     validate.click()
+        //     console.log('AAAA')
+        // });
         const img = document.getElementById('avatar');
         const input = document.getElementById('file');
         img.addEventListener('click',function () {
