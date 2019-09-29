@@ -13,14 +13,10 @@ function createLogin (application) {
 
     const form = application.querySelector('#login-form');
 
-    console.dir(form);
-
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const email = form.elements['email'].value;
         const password = form.elements['password'].value;
-
         login(application, email, password);
     });
 }
@@ -39,19 +35,18 @@ function login (application, email, password) {
         mode: 'cors',
     }).then(response => {
         if (response.status !== 200) {
+            alert(
+                `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
             throw new Error(
                 `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
         }
-        console.dir(response);
         return response.json();
     }).then(user => {
-        console.log(user);
-        console.log('Залогинились');
+        console.log(`Logged in: ${user.email}`);
 
         renderProfile(application, user);
     }).catch(err => {
         console.error(err);
-        alert(err.message);
     });
 }
 

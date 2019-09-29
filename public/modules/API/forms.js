@@ -19,7 +19,7 @@ function createInput (application, data, field, style) {
         settingInput.focus();
     });
 
-    settingInput.addEventListener('blur', e => {
+    settingInput.addEventListener('blur', _ => {
         console.log(data.id);
         if (settingInput.value !== '') {
             switch (field) {
@@ -56,4 +56,4 @@ function createInput (application, data, field, style) {
     });
 }
 
-export default createInput
+export default createInput;

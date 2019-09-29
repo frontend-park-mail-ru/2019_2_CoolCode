@@ -1,5 +1,5 @@
 import { SignUp } from '../../components/Signup/Signup';
-import {login} from './login';
+import { login } from './login';
 import settings from '../config';
 
 const { backend } = settings;
@@ -13,8 +13,6 @@ function createSignUp (application) {
 
     const form = application.querySelector('#sign-up-form');
 
-    console.dir(form);
-
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -27,7 +25,6 @@ function createSignUp (application) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-                'Accept': 'application/json',
             },
             body: JSON.stringify({
                 email: email,
@@ -40,17 +37,19 @@ function createSignUp (application) {
         }).then(response => {
             console.dir(response);
             if (response.status === 400) {
+                alert(`Такая почта занята !!`);
                 throw new Error(`Такая почта занята !!`);
-            } else if (response.status !== 200) {
+            }
+            if (response.status !== 200) {
+                alert(`Неверный статус: ${response.status}`);
                 throw new Error(`Неверный статус: ${response.status}`);
             }
             return response.text();
         }).then(data => {
-            console.log('Зарегались');
+            console.log(`Signed up: ${email}`);
             login(application, email, password);
         }).catch(err => {
             console.error(err);
-            alert(err.message);
         });
     });
 

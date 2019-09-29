@@ -19,10 +19,8 @@ function createMainPage (application) {
         const mainPage = new MainPageComponent();
         mainPage.parent = application;
         mainPage.renderMainPage();
-        console.log('Лучший чат на земле!');
     }).catch(err => {
         console.error(err);
-        alert(err.message);
     });
 }
 

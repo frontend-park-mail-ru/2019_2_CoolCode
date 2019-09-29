@@ -14,16 +14,14 @@ function createProfile (application) {
     }).then(response => {
         if (response.status !== 200) {
             throw new Error(
-                `Не зашли: ${response.status}`);
+                `Not logged in: ${response.status}`);
         }
         return response.json();
     }).then(user => {
         console.log(user);
-
         renderProfile(application, user);
     }).catch(err => {
         console.error(err);
-        alert(err.message);
     });
 }
 
@@ -41,11 +39,12 @@ function renderProfile (application, user) {
         `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
     createInput(application, user, 'email',
         `border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-    //createInput(application, user, 'phone', `border-top: none; border-left: none; border-right: none; outline: none; height: 30px; margin-top: 20px;`)
+    /*    createInput(application, user, 'phone',
+            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);*/
     createInput(application, user, 'username',
         `border: none; outline: none; margin: 0`);
     createInput(application, user, 'fullname',
         `border: none; outline: none; margin: 0`);
 }
 
-export {createProfile, renderProfile}
+export { createProfile, renderProfile };

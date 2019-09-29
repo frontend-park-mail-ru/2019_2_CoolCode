@@ -16,7 +16,7 @@ function handleLogout (application) {
         console.log(response.status);
         if (response.status !== 200) {
             throw new Error(
-                `Не вышли: ${response.status}`);
+                `Not logged out: ${response.status}`);
         }
         return response.text();
     }).then(data => {
@@ -24,8 +24,7 @@ function handleLogout (application) {
         createMainPage(application);
     }).catch(err => {
         console.error(err);
-        alert(err.message);
     });
 }
 
-export default handleLogout
+export default handleLogout;
