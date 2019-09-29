@@ -198,6 +198,12 @@ function createProfile () {
     })
 }
 
+function createImageUpload() {
+    const imageInput = application.querySelector(`input[type="file"]`);
+    imageInput.addEventListener('change',function () {
+        console.log("image uploaded")
+    })
+}
 function createInput (data, field, style) {
     const settingField = application.querySelector(`#${field}-setting`);
     const settingInput = document.createElement('input');

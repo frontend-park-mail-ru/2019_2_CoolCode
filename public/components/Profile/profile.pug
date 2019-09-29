@@ -27,7 +27,6 @@ block page
         div.row#edit-row
             form.avatar-form(method='post' enctype="multipart/form-data" action='/profile')
                 div.column
-
                     input(type='file', name='imageupload')
                     input(type='submit', name='uploadimage', value='Upload Image')
             +edit("name", "/")
