@@ -53,6 +53,12 @@ export class ProfileComponent {
         this._parent = parent
     }
 
+    setPhoto(photo){
+        avatar=document.getElementById('avatar');
+
+
+    }
+
     renderProfile () {
         this.data['chat'] = false;
         this.parent.innerHTML += profileTempl(this._data);
@@ -71,9 +77,11 @@ export class ProfileComponent {
             }
         }
 
-        const form = document.getElementsByClassName('avatar-form')[0];
-        form.addEventListener("submit", function (evt) {
-            alert('do something')
+
+
+        //const form = document.getElementsByClassName('avatar-form')[0];
+       // form.addEventListener("submit", function (evt) {
+            //alert('do something')
             // ajaxModule._ajax(
             //     'POST',
             //     '/login',
@@ -88,6 +96,14 @@ export class ProfileComponent {
             //     }
             // )
 
+      //  })
+        const img = document.getElementById('avatar');
+        const input = document.getElementById('file');
+        img.addEventListener('click',function () {
+            input.click()
+
         })
+
+
     }
 }

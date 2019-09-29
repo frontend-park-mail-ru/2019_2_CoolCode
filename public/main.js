@@ -1,18 +1,18 @@
 'use strict';
 
-import { ProfileComponent } from './components/Profile/Profile.js'
-import { MainPageComponent } from './components/MainPage/MainPage.js'
-import { Header } from './components/Header/Header.js'
-import { SignUp } from './components/Signup/Signup.js'
-import { Login } from './components/Login/Login.js'
-import { AjaxCreate } from './modules/Ajax/AjaxModule.js'
+import {ProfileComponent} from './components/Profile/Profile.js'
+import {MainPageComponent} from './components/MainPage/MainPage.js'
+import {Header} from './components/Header/Header.js'
+import {SignUp} from './components/Signup/Signup.js'
+import {Login} from './components/Login/Login.js'
+import {AjaxCreate} from './modules/Ajax/AjaxModule.js'
 
 import './styles/main.css'
 
 const application = document.getElementById('application');
 AjaxCreate.init();
 
-const backend = 'http://95.163.209.195:8080';
+const backend = 'http://127.0.0.1:8080';
 
 const functions = {
     mainPage: createMainPage,
@@ -22,7 +22,7 @@ const functions = {
     logout: handleLogout,
 };
 
-function createMainPage () {
+function createMainPage() {
     fetch(`${backend}/users`, {
         method: 'GET',
         credentials: 'include',
@@ -45,7 +45,7 @@ function createMainPage () {
 
 }
 
-function createSignUp () {
+function createSignUp() {
 
     application.innerHTML = '';
 
@@ -95,7 +95,7 @@ function createSignUp () {
 
 }
 
-function createLogin () {
+function createLogin() {
     application.innerHTML = '';
 
     const loginComponent = new Login();
@@ -160,7 +160,37 @@ function createLogin () {
     })
 }
 
-function createProfile () {
+function getUserPhoto(id) {
+    console.log(` Getting user ${id} photo`);
+    fetch(`${backend}/photos/${id}`, {
+        method: "GET",
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        response.arrayBuffer().then((buffer) => {
+            if (response.status !== 200) {
+                throw new Error(
+                    `Не зашли: ${response.status}`)
+            }
+            let base64Flag = 'data:image/jpeg;base64,';
+            let imageStr = arrayBufferToBase64(buffer);
+
+            document.getElementById('avatar').src = base64Flag + imageStr;
+        });
+
+    })
+}
+
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    let bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+
+    return window.btoa(binary);
+}
+
+function createProfile() {
     fetch(`${backend}/users`, {
         method: 'GET',
         credentials: 'include',
@@ -190,7 +220,9 @@ function createProfile () {
         createInput(data, 'username',
             `border: none; outline: none; margin: 0`);
         createInput(data, 'fullname',
-            `border: none; outline: none; margin: 0`)
+            `border: none; outline: none; margin: 0`);
+        createImageUpload(data.id);
+        getUserPhoto(data.id)
 
     }).catch(err => {
         console.error(err);
@@ -198,13 +230,39 @@ function createProfile () {
     })
 }
 
-function createImageUpload() {
-    const imageInput = application.querySelector(`input[type="file"]`);
-    imageInput.addEventListener('change',function () {
-        console.log("image uploaded")
+function createImageUpload(id) {
+    const imageInput = document.getElementById('file');
+    console.log("image upload created");
+    const formData = new FormData();
+
+    formData.append('file', imageInput.files[0]);
+
+
+    const options = {
+        method: 'POST',
+        body: formData,
+    };
+    imageInput.addEventListener('change', function () {
+        let formData = new FormData();
+        formData.append("file", imageInput.files[0]);
+        console.log("image upload", imageInput.files[0]);
+        fetch(`${backend}/photos`, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            if (response.status !== 200) {
+                console.log("Error while upload image");
+            }
+            getUserPhoto(id)
+
+
+        })
     })
 }
-function createInput (data, field, style) {
+
+function createInput(data, field, style) {
     const settingField = application.querySelector(`#${field}-setting`);
     const settingInput = document.createElement('input');
 
@@ -258,7 +316,7 @@ function createInput (data, field, style) {
     })
 }
 
-function handleLogout () {
+function handleLogout() {
     fetch(`${backend}/logout`, {
         method: 'POST',
         headers: {
@@ -284,7 +342,7 @@ function handleLogout () {
 }
 
 application.addEventListener('click', function (evt) {
-    const { target } = evt;
+    const {target} = evt;
 
     if (target instanceof HTMLAnchorElement) {
         evt.preventDefault();
