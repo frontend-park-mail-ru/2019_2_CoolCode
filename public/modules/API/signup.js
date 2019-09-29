@@ -12,6 +12,12 @@ function createSignUp (application) {
     signUpComponent.renderSignUp();
 
     const form = application.querySelector('#sign-up-form');
+    const emailField = application.querySelector('#email');
+    const errorMessage = application.querySelector('.error_message');
+    emailField.addEventListener('click', _ => {
+        emailField.style.borderColor = 'C4C4C4';
+        errorMessage.innerHTML = '';
+    });
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -37,11 +43,12 @@ function createSignUp (application) {
         }).then(response => {
             console.dir(response);
             if (response.status === 400) {
-                alert(`Такая почта занята !!`);
+                errorMessage.innerHTML = 'Sorry, this email is already registered';
+                emailField.style.borderColor = '#ff6575';
                 throw new Error(`Такая почта занята !!`);
             }
             if (response.status !== 200) {
-                alert(`Неверный статус: ${response.status}`);
+                //alert(`Неверный статус: ${response.status}`);
                 throw new Error(`Неверный статус: ${response.status}`);
             }
             return response.text();
