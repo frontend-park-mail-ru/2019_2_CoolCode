@@ -28,3 +28,4 @@ export class Login {
         this._parent.innerHTML = loginTemplate(this._data)
     }
 }
+

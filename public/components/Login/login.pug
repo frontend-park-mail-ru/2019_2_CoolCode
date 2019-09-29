@@ -5,7 +5,8 @@ block content
         div.log-in-form
             h1.name Log In
 
-            input.input_field(type='text'  placeholder='email' name='email')
+            input.input_field(type='text' id="email"  placeholder='email' name='email')
 
-            input.input_field(type='password'  placeholder='password' name='password')
+            input.input_field(type='password' id="password" placeholder='password' name='password')
+            div.error_message
             button.submit-button(type='submit') Log in

@@ -1,10 +1,15 @@
-import { Login } from '../../components/Login/Login';
+import {Login} from '../../components/Login/Login';
 import settings from '../config';
-import { renderProfile } from './profile';
+import {renderProfile} from './profile';
 
-const { backend } = settings;
+const {backend} = settings;
 
-function createLogin (application) {
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function createLogin(application) {
     application.innerHTML = '';
 
     const loginComponent = new Login();
@@ -12,29 +17,50 @@ function createLogin (application) {
     loginComponent.renderLogin();
 
     const form = application.querySelector('.login-form');
-    var error = document.createElement('div');
+    const errorMessage = application.querySelector('.error_message');
+    const emailField = document.querySelector('#email');
+    const passwordField = document.querySelector('#password');
+
+    emailField.addEventListener('click', _ => {
+        emailField.style.borderColor = 'C4C4C4';
+        errorMessage.innerHTML = '';
+    });
+
+    passwordField.addEventListener('click', _ => {
+        passwordField.style.borderColor = 'C4C4C4';
+        errorMessage.innerHTML = '';
+    });
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        error.innerHTML = '';
         let email;
         let password;
-        if(form.elements['email'].value===""||form.elements['password'].value===""){
-            error.className='error';
-            error.style.color = 'red';
-            error.innerHTML = '*cant be blank';
-            form.elements['email'].parentElement.insertBefore(error,form.elements['email']);
+        let correct = true;
 
-        }else{
-            email = form.elements['email'].value;
-            password = form.elements['password'].value;
-            login(application, email, password);
+        email = form.elements['email'].value;
+        password = form.elements['password'].value;
+
+        if (form.elements['password'].value === '') {
+            showError('Please, input password:(');
+            passwordField.style.borderColor = '#ff6575';
+            correct = false
         }
+        if (!validateEmail(form.elements['email'].value)) {
+            showError('Please, input correct email:(');
+            emailField.style.borderColor = '#ff6575';
+            correct = false
+        }
+        if (!correct) {
+            return
+        }
+        login(application, email, password);
 
 
     });
 }
 
-function login (application, email, password) {
+function login(application, email, password) {
+
     fetch(`${backend}/login`, {
         method: 'POST',
         headers: {
@@ -47,9 +73,8 @@ function login (application, email, password) {
         credentials: 'include',
         mode: 'cors',
     }).then(response => {
-        if (response.status !== 200) {
-            alert(
-                `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
+        if (response.status === 400) {
+            showError("Wrong email or password");
             throw new Error(
                 `Пользователь с данной почтой не зарегистрирован: ${response.status}`);
         }
@@ -63,4 +88,10 @@ function login (application, email, password) {
     });
 }
 
-export { createLogin, login };
+function showError(text) {
+    const emailField = application.querySelector('#email');
+    const errorMessage = application.querySelector('.error_message');
+    errorMessage.innerHTML = text;
+}
+
+export {createLogin, login};
