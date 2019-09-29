@@ -64,11 +64,12 @@ function getUserPhoto (id) {
         mode: 'cors',
     }).then(response => {
         response.arrayBuffer().then((buffer) => {
+            profile.hideLoader();
             if (response.status !== 200) {
                 throw new Error(
                     `Не зашли: ${response.status}`);
             }
-            profile.hideLoader();
+
             let base64Flag = 'data:image/jpeg;base64,';
             let imageStr = arrayBufferToBase64(buffer);
 
