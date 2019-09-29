@@ -4,12 +4,12 @@ mixin field(pText, fieldText, id)
     p.attribute= pText+":"
     div.field(id=id)= fieldText
 mixin settings(pText, reference)
-    div.row#params
+    div.row.params
         p.attribute= pText+"settings"
         a.change(href=reference)
-            img#sett(src="images/settings.jpg")
+            img.sett(src="images/settings.jpg")
 mixin edit(pText,reference)
-    div.row#pic-ch
+    div.row.pic-ch
         a.change-1(href=reference)= "edit "+pText
 
 
@@ -17,21 +17,21 @@ block page
     if chat
         div chat here
     else
-        div.row#profile-pic
+        div.row.profile-pic
             div.column.for-img-1
-                div.row#profile-pic-row
+                div.row.profile-pic-row
                     div.loader#loader
                     img.rounded-circle-1#avatar(src="images/user.jpg")
                     input#file(type='file', style='display: none;')
             div.column.for-msg-1
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
-        div.row#edit-row
+        div.row.edit-row
             //div.column
             //        input(type='file', name='imageupload')
             //        input(type='submit', name='uploadimage', value='Upload Image')
             //+edit("name", "/")
-        div.row#settings-row
+        div.row
             div.column.settings
                 +field("status", fstatus, "fstatus-setting")
                 +field("email", email, "email-setting")
