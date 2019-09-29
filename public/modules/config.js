@@ -1,5 +1,5 @@
 const settings = {
-    backend: 'http://127.0.0.1:8080',
+    backend: 'http://95.163.209.195:8080',
 };
 
 export default settings;

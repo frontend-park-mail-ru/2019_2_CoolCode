@@ -45,6 +45,65 @@ function renderProfile (application, user) {
         `border: none; outline: none; margin: 0`);
     createInput(application, user, 'fullname',
         `border: none; outline: none; margin: 0`);
+
+    createImageUpload(user.id);
+    getUserPhoto(user.id);
+}
+
+function getUserPhoto (id) {
+    console.log(` Getting user ${id} photo`);
+    fetch(`${backend}/photos/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+    }).then(response => {
+        response.arrayBuffer().then((buffer) => {
+            if (response.status !== 200) {
+                throw new Error(
+                    `Не зашли: ${response.status}`);
+            }
+            let base64Flag = 'data:image/jpeg;base64,';
+            let imageStr = arrayBufferToBase64(buffer);
+
+            document.getElementById('avatar').src = base64Flag + imageStr;
+        });
+
+    });
+}
+
+function arrayBufferToBase64 (buffer) {
+    let binary = '';
+    let bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+
+    return window.btoa(binary);
+}
+
+function createImageUpload (id) {
+    const imageInput = document.getElementById('file');
+    console.log('image upload created');
+    const formData = new FormData();
+
+    formData.append('file', imageInput.files[0]);
+
+    imageInput.addEventListener('change', function () {
+        let formData = new FormData();
+        formData.append('file', imageInput.files[0]);
+        console.log('image upload', imageInput.files[0]);
+        fetch(`${backend}/photos`, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include',
+            mode: 'cors',
+        }).then(response => {
+            if (response.status !== 200) {
+                console.log('Error while upload image');
+            }
+            getUserPhoto(id);
+
+        });
+    });
 }
 
 export { createProfile, renderProfile };
