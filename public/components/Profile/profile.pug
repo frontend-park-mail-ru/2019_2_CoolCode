@@ -25,11 +25,11 @@ block page
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
         div.row#edit-row
-            form.avatar-form(method='GET' enctype="multipart/form-data" action='/profile')
+            form.avatar-form(method='post' enctype="multipart/form-data" action='/profile')
                 div.column
                     label.label-f(for="file") choose file
                     input.custom-file-input(type="file" name="file")
-                    button.save-sett-1(type="submit") save settings
+                    input(type='submit', name='uploadimage', value='Upload Image')
             +edit("name", "/")
         div.row#settings-row
             div.column.settings
