@@ -6,25 +6,25 @@ import { createLogin } from './modules/API/login';
 import { createProfile } from './modules/API/profile';
 import handleLogout from './modules/API/logout';
 
-import './styles/main.css'
+import './styles/main.css';
 
 const application = document.getElementById('application');
 
 const functions = {
-    mainPage: createMainPage,
-    signUp: createSignUp,
-    login: createLogin,
-    profile: createProfile,
-    logout: handleLogout,
+	mainPage: createMainPage,
+	signUp: createSignUp,
+	login: createLogin,
+	profile: createProfile,
+	logout: handleLogout,
 };
 
 application.addEventListener('click', function (evt) {
-    const { target } = evt;
+	const { target } = evt;
 
-    if (target instanceof HTMLAnchorElement) {
-        evt.preventDefault();
-        functions[target.dataset.section](application)
-    }
+	if (target instanceof HTMLAnchorElement) {
+		evt.preventDefault();
+		functions[target.dataset.section](application);
+	}
 });
 
 createMainPage(application);
