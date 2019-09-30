@@ -13,10 +13,11 @@ module.exports = {
 
     module:{
         rules:  [
-        //     {
-        //     test: /\.js$/,
-        //     loader: "babel?presets[]=es2015"
-        // },
+              {
+                    test: /\.(js)$/,
+                    exclude: /node_modules/,
+                    use: ["eslint-loader"]
+              },
             {
                 test: /\.pug$/,
                 loader: "pug-loader"
