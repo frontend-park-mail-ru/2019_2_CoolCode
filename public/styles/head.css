@@ -1,0 +1,22 @@
+.change {
+    flex-direction: row;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: #000000;
+    font-weight: 300;
+    text-decoration: none;
+    float: right;
+}
+.change:first-child{
+    float: left;
+    padding-left: 5px;
+}
+.change:hover{
+    text-decoration: underline;
+
+
+}
+a.change{
+    margin-top: 18px;
+    margin-right: 10px;
+}

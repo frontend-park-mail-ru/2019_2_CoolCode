@@ -1,0 +1,36 @@
+{
+  "name": "CoolSlack",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "prestart": "webpack-cli",
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.5.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-loader": "^3.0.2",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "engines": {
+    "node": "12.x"
+  }
+}
