@@ -169,13 +169,13 @@ header{
     margin: 0 0 0 20px;
     width: 20%
 }
-.for-msg-1{
+.for-profile-sett{
     height: 150px;
     justify-content: center;
     flex-direction: column;
     width: 60%;
 }
-.for-img-1{
+.for-img-profile{
     flex-direction: column;
 
     margin-left:100px;
@@ -266,16 +266,7 @@ p.mess-n{
     font-weight: 300;
     text-decoration: none;
 }
-.change-1{
-    margin: 0px 0 0 5px;
-    flex-direction: row;
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    color: #000000;
-    font-weight: 300;
-    text-decoration: none;
-}
-.change, .change-1:hover{
+.change:hover{
     text-decoration: underline;
 }
 

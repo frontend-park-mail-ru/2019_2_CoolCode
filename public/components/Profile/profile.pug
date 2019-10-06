@@ -8,9 +8,7 @@ mixin settings(pText, reference)
         p.attribute= pText+"settings"
         a.change(href=reference)
             img.sett(src="images/settings.jpg")
-mixin edit(pText,reference)
-    div.row.pic-ch
-        a.change-1(href=reference)= "edit "+pText
+
 
 
 block page
@@ -18,12 +16,12 @@ block page
         div chat here
     else
         div.row.profile-pic
-            div.column.for-img-1
+            div.column.for-img-profile
                 div.row.profile-pic-row
                     div.loader#loader
                     img.rounded-circle-1#avatar(src="images/user.jpg")
                     input#file(type='file', style='display: none;')
-            div.column.for-msg-1
+            div.column.for-profile-sett
                 div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
         div.row
