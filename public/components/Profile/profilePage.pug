@@ -4,8 +4,14 @@ div.container
     div.row
         div.column.left
             div.row.chat-menu
-                div.column.search
-                    img.loupe(src="images/loupe_2.png")
+                div.dropdown
+                    button.mainmenubtn  create
+                    div.dropdown-child
+                        a(href='/menu' data-section = 'mainPage') room
+                        a(href='/menu' data-section = 'mainPage')  chat
+                form.form-search(action="/search/" target="_blank" class="form-search")
+                    input.search-input(type="search" name="text" required placeholder="search")
+                    input.search-input-lupa(type="submit" value="🔍")
             div.column.chat-msg
                 block messages
         div.column.right

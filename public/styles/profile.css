@@ -63,7 +63,6 @@ header{
     box-sizing: border-box;
     border-top: 1px solid rgba(197, 197, 197, 0.81);
     border-left: 1px solid rgba(197, 197, 197, 0.81);
-
 }
 .name-row{
     margin: 100px 0 0 20px;
@@ -223,11 +222,12 @@ header{
     object-fit: fill;
 }
 .loupe{
-    margin: 5px 10px 0 20px;
+    padding-top: 2px;
+    padding-left: 2px;
     filter: opacity(0.9);
     height: 20px;
     width: 20px;
-    object-position: center center;
+    object-position: center;
     object-fit: fill;
 }
 
@@ -307,3 +307,45 @@ p.mess-n{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+.mainmenubtn {
+    background-color: #18A88E;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child {
+    display: none;
+    min-width: auto;
+}
+.dropdown-child a {
+    color: #18A88E;
+    padding: 20px 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+.dropdown:hover .dropdown-child {
+    display: block;
+}
+.search-input{
+    background: darkgray;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    padding-left: 6px;
+    all: unset;
+    height: 100%;
+}
+.search-input-lupa{
+    height: 106%;
+
+}
+
+
