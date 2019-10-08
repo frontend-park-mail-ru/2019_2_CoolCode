@@ -1,7 +1,7 @@
 module.exports = {
-  'env': {
-    'es6': true,
-  },
+    'env': {
+        'es6': true,
+    },
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
@@ -9,7 +9,8 @@ module.exports = {
         "ecmaFeatures": {
             "jsx": true,
             "modules": true,
-            "experimentalObjectRestSpread": true
+            "experimentalObjectRestSpread": true,
+            "allowImportExportEverywhere": true
         }
     },
 
@@ -22,6 +23,6 @@ module.exports = {
       "space-before-blocks" : ["error", "always"],
       "indent" : ["error", "tab"],
       "space-infix-ops" : ["error"],
-     "no-unused-vars" : ["error"]
+     "no-unused-vars" : ["warn"]
   },
 };

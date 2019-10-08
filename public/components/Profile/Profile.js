@@ -54,12 +54,12 @@ export class ProfileComponent {
 
 	hideLoader() {
 		document.getElementById("loader").style.display = "none";
-		document.getElementById("avatar").style.display = "initial";
+		document.getElementById("avatar").style.display = "block";
 	}
 
 	showLoader() {
 		document.getElementById("avatar").style.display = "none";
-		document.getElementById("loader").style.display = "initial";
+		document.getElementById("loader").style.display = "block";
 
 	}
 }

@@ -28,7 +28,7 @@ function createProfile (application) {
 		});
 }
 
-function renderProfile (application, user) {
+async function renderProfile (application, user) {
 	application.innerHTML = '';
 
 	const header = new Header();
@@ -37,7 +37,7 @@ function renderProfile (application, user) {
 
 	profile = new ProfileComponent(user, application);
 	profile.renderProfile();
-
+	await getUserPhoto(user.id);
 	createInput(application, user, 'fstatus',
 		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
 	createInput(application, user, 'email',
@@ -52,42 +52,48 @@ function renderProfile (application, user) {
 		`border: none; outline: none; margin: 0`);
 
 	createImageUpload(user.id);
-	getUserPhoto(user.id);
+
 }
 
-function getUserPhoto (id) {
+async function getUserPhoto (id) {
 	profile.showLoader();
 	console.log(` Getting user ${id} photo`);
-	fetch(`${backend}/photos/${id}`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
-		response.arrayBuffer().then((buffer) => {
-			profile.hideLoader();
-			if (response.status !== 200) {
-				throw new Error(
-					`Не зашли: ${response.status}`);
-			}
-
-			let base64Flag = 'data:image/jpeg;base64,';
-			let imageStr = arrayBufferToBase64(buffer);
-
-			document.getElementById('avatar').src = base64Flag + imageStr;
+	try{
+		let response = await fetch(`${backend}/photos/${id}`, {
+			method: 'GET',
+			credentials: 'include',
+			mode: 'cors',
 		});
 
-	})
-		.catch(()=>{
-			profile.hideLoader();
-		});
+		let buffer = await response.arrayBuffer();
+
+		if (response.status !== 200) {
+			throw new Error(
+				`Не зашли: ${response.status}`);
+		}
+
+		let base64Flag = 'data:image/jpeg;base64,';
+		let imageStr = await arrayBufferToBase64(buffer);
+
+		document.getElementById('avatar').src = base64Flag + imageStr;
+		profile.hideLoader();
+	} catch (e) {
+		//profile.hideLoader();
+		console.log(e);
+		
+	}
+}
+
+function getPhoto(binary, res) {
+	res.forEach((b) => binary += String.fromCharCode(b));
+	return binary;
 }
 
 function arrayBufferToBase64 (buffer) {
 	let binary = '';
 	let bytes = [].slice.call(new Uint8Array(buffer));
 
-	bytes.forEach((b) => binary += String.fromCharCode(b));
-
+	binary = getPhoto(binary, bytes);
 	return window.btoa(binary);
 }
 
