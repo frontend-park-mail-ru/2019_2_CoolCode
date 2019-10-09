@@ -37,7 +37,7 @@ function renderProfile (application, user) {
 
 	profile = new ProfileComponent(user, application);
 	profile.renderProfile();
-
+	getUserPhoto(user.id);
 	createInput(application, user, 'fstatus',
 		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
 	createInput(application, user, 'email',
@@ -52,43 +52,33 @@ function renderProfile (application, user) {
 		`border: none; outline: none; margin: 0`);
 
 	createImageUpload(user.id);
-	getUserPhoto(user.id);
 }
 
-function getUserPhoto (id) {
+async function getUserPhoto (id) {
 	profile.showLoader();
 	console.log(` Getting user ${id} photo`);
-	fetch(`${backend}/photos/${id}`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
-		response.arrayBuffer().then((buffer) => {
-			profile.hideLoader();
-			if (response.status !== 200) {
-				throw new Error(
-					`Не зашли: ${response.status}`);
-			}
-
-			let base64Flag = 'data:image/jpeg;base64,';
-			let imageStr = arrayBufferToBase64(buffer);
-
-			document.getElementById('avatar').src = base64Flag + imageStr;
+	try{
+		let response = await fetch(`${backend}/photos/${id}`, {
+			method: 'GET',
+			credentials: 'include',
+			mode: 'cors',
 		});
-
-	})
-		.catch(()=>{
+		if (response.status !== 200) {
+			throw new Error(
+				`Не зашли: ${response.status}`);
+		}
+		let buffer = await response.blob();
+		let reader = new FileReader();
+		reader.readAsDataURL(buffer);
+		reader.onload = function() {
 			profile.hideLoader();
-		});
-}
+			document.getElementById('avatar').src = reader.result;
+		};
 
-function arrayBufferToBase64 (buffer) {
-	let binary = '';
-	let bytes = [].slice.call(new Uint8Array(buffer));
-
-	bytes.forEach((b) => binary += String.fromCharCode(b));
-
-	return window.btoa(binary);
+	} catch (e) {
+		profile.hideLoader();
+		console.log(e);
+	}
 }
 
 function createImageUpload (id) {
