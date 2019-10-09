@@ -34,6 +34,36 @@ async function renderProfile (application, user) {
 	const header = new Header();
 	header.parent = application;
 	header.renderHeader(true);
+	user.chats = [
+		{
+			name: "Alex Spiridonova",
+			number: 10,
+			lastMsg: "WTF?"
+		},
+		{
+			name: "Someone New",
+			number: 3,
+			lastMsg: "HYD?"
+		},
+		{
+			name: "No One",
+			number: 1,
+			lastMsg: "?"
+		},
+		{
+			name: "Bono u2",
+			number: "1",
+			lastMsg: "Come to concert tonight",
+		}
+	];
+
+	user.wrkspaces = [
+		{
+			title: "CoolCode",
+			channels: ["important-stuff", "some-weird-stuff", "Information", "Vasya Romanov"],
+			members: ["AS", "Vasya Romanov", "Bono", "U"],
+		}
+	];
 
 	profile = new ProfileComponent(user, application);
 	profile.renderProfile();
@@ -64,37 +94,22 @@ async function getUserPhoto (id) {
 			credentials: 'include',
 			mode: 'cors',
 		});
-
-		let buffer = await response.arrayBuffer();
-
 		if (response.status !== 200) {
 			throw new Error(
 				`Не зашли: ${response.status}`);
 		}
+		let buffer = await response.blob();
+		let reader = new FileReader();
+		reader.readAsDataURL(buffer);
+		reader.onload = function() {
+			profile.hideLoader();
+			document.getElementById('avatar').src = reader.result;
+		};
 
-		let base64Flag = 'data:image/jpeg;base64,';
-		let imageStr = await arrayBufferToBase64(buffer);
-
-		document.getElementById('avatar').src = base64Flag + imageStr;
-		profile.hideLoader();
 	} catch (e) {
-		//profile.hideLoader();
+		profile.hideLoader();
 		console.log(e);
-		
 	}
-}
-
-function getPhoto(binary, res) {
-	res.forEach((b) => binary += String.fromCharCode(b));
-	return binary;
-}
-
-function arrayBufferToBase64 (buffer) {
-	let binary = '';
-	let bytes = [].slice.call(new Uint8Array(buffer));
-
-	binary = getPhoto(binary, bytes);
-	return window.btoa(binary);
 }
 
 function createImageUpload (id) {

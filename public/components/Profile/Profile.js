@@ -1,4 +1,5 @@
 import {Message} from "./Message";
+import {WrkSpace} from "./WrkSpace";
 
 const profileTempl = require('./profile.pug');
 
@@ -33,13 +34,24 @@ export class ProfileComponent {
 		const root = document.getElementsByClassName('chat-msg')[0];
 
 		if (this._data.chats) {
-		    this.data.chats.forEach(() => {
+		    this.data.chats.forEach((mes) => {
 				const mess = new Message();
-				mess.data = this._data.chats[i];
+				mess.data = mes;
 				const message = document.createElement('div');
 				message.className = 'row msg';
 				message.innerHTML = mess.renderMsg();
 				root.appendChild(message);
+			});
+		}
+
+		if (this._data.wrkspaces) {
+			this.data.wrkspaces.forEach((wsp) => {
+				const wrkSpace = new WrkSpace();
+				wrkSpace.data = wsp;
+				const wSpace = document.createElement('div');
+				wSpace.className = 'row msg';
+				wSpace.innerHTML = wrkSpace.renderWSpace();
+				root.appendChild(wSpace);
 			});
 		}
 

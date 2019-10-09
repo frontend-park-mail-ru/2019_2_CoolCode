@@ -118,7 +118,7 @@ header{
 
 }
 
-#message{
+.message{
     justify-content:flex-start;
     height: 50px;
 }
@@ -231,6 +231,13 @@ header{
     object-fit: fill;
 }
 
+p.wrkspace-info{
+    margin: 0 0 0 10px;
+    height: 20px;
+    color: #2dc68b;
+    font-family: 'Roboto',  sans-serif;
+}
+
 p.person{
     margin: 10px 0 0 10px;
     font-family: 'Roboto',  sans-serif;
@@ -292,6 +299,11 @@ p.mess-n{
     height: 120px;
     margin-top: 10px;
     animation: spin 2s linear infinite;
+}
+
+.wrkspace-info-column {
+    display: inline-block;
+    height: 50px;
 }
 
 @keyframes spin {
