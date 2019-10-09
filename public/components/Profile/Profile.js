@@ -29,7 +29,7 @@ export class ProfileComponent {
 
 	renderProfile() {
 		this.data[`chat`] = false;
-		this.parent.innerHTML += `${profileTempl(this._data)}`;
+		this.parent.innerHTML += profileTempl(this._data);
 
 		const root = document.getElementsByClassName('chat-msg')[0];
 
@@ -48,10 +48,8 @@ export class ProfileComponent {
 			this.data.wrkspaces.forEach((wsp) => {
 				const wrkSpace = new WrkSpace();
 				wrkSpace.data = wsp;
-				const wSpace = document.createElement('div');
-				wSpace.className = 'row msg';
-				wSpace.innerHTML = wrkSpace.renderWSpace();
-				root.appendChild(wSpace);
+				const w = wrkSpace.renderWSpace();
+				root.appendChild(w);
 			});
 		}
 

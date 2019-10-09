@@ -4,6 +4,8 @@ import { ProfileComponent } from '../../components/Profile/Profile';
 import settings from '../config';
 import createInput from './forms';
 
+import openWrkSpaceInfo from './wrkspaceInteraction';
+
 const { backend } = settings;
 let profile;
 
@@ -82,6 +84,7 @@ async function renderProfile (application, user) {
 		`border: none; outline: none; margin: 0`);
 
 	createImageUpload(user.id);
+	openWrkSpaceInfo();
 
 }
 
