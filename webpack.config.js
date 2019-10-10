@@ -14,9 +14,13 @@ module.exports = {
 		rules:  [
 			{
 				test: /\.(js)$/,
-				exclude: /node_modules/,
+				exclude: [/node_modules/, /worker/],
 				use: ["eslint-loader"],
 
+			},
+			{
+				test: /\.worker\.js$/,
+				use: { loader: 'worker-loader', options: { inline: true , fallback: false, publicPath: '/workers/' } }
 			},
 
 			{

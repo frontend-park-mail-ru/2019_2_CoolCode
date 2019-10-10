@@ -6,6 +6,8 @@ import createInput from './forms';
 
 import openWrkSpaceInfo from './wrkspaceInteraction';
 
+import MyWorker from '../../workers/profile.worker';
+
 const { backend } = settings;
 let profile;
 
@@ -62,7 +64,42 @@ async function renderProfile (application, user) {
 	user.wrkspaces = [
 		{
 			title: "CoolCode",
-			channels: ["important-stuff", "some-weird-stuff", "Information", "Vasya Romanov"],
+			channels: [{
+				title: "important-stuff",
+				members: 4,
+				messages: null,
+				muted: true,
+				starred: true,
+				public: false,
+				private: false,
+			},
+			{
+				title: "some-weird-stuff",
+				members: 3,
+				messages: 5,
+				muted: true,
+				starred: false,
+				public: false,
+				private: false,
+			},
+			{
+				title: "Information",
+				members: null,
+				messages: 1,
+				muted: false,
+				starred: false,
+				public: true,
+				private: false,
+			},
+			{
+				title: "Vasya Romanov",
+				members: null,
+				messages: null,
+				muted: true,
+				starred: false,
+				public: false,
+				private: true,
+			}],
 			members: ["AS", "Vasya Romanov", "Bono", "U"],
 		}
 	];
@@ -102,13 +139,13 @@ async function getUserPhoto (id) {
 				`Не зашли: ${response.status}`);
 		}
 		let buffer = await response.blob();
-		let reader = new FileReader();
-		reader.readAsDataURL(buffer);
-		reader.onload = function() {
-			profile.hideLoader();
-			document.getElementById('avatar').src = reader.result;
-		};
+		let worker = new MyWorker();
+		worker.postMessage(buffer);
 
+		 worker.onmessage = function(result) {
+		 	profile.hideLoader();
+		 	document.getElementById('avatar').src = result.data;
+		};
 	} catch (e) {
 		profile.hideLoader();
 		console.log(e);

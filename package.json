@@ -20,7 +20,10 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "eslint": "^6.5.0",
     "eslint-config-google": "^0.14.0",
@@ -28,7 +31,8 @@
     "pug-loader": "^2.4.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "worker-loader": "^2.0.0"
   },
   "engines": {
     "node": "12.x"

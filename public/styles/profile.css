@@ -27,7 +27,7 @@ header{
     box-sizing: border-box;
 }
 #avatar:hover{
-      border: 3px solid #279d6e;
+      border: 3px solid #2dc68b;
 
   }
 .logo{
@@ -44,13 +44,33 @@ header{
     height: 90vh;
 }
 .msg-count{
-    background-color: #24b880;
+    display: inline-block;
+    background-color: #2dc68b;
     text-align: center;
-    margin: 0 0 0 5px;
+    margin: 5px 0 0 5px;
     border-radius: 50px;
     height: 25px;
     width: 25px;
 }
+.msg-count-wspace{
+    display: inline-block;
+    background-color: #2dc68b;
+    text-align: center;
+    margin: 5px 0 0 5px;
+    border-radius: 50px;
+    height: 20px;
+    width: 20px;
+}
+.msg-count-wspace:hover{
+    margin: 0 0 0 5px;
+    background-color: #1d916b;
+}
+
+.msg-count:hover{
+    margin: 0 0 5px 5px;
+    background-color: #1d916b;
+}
+
 .row {
     display: flex;
     flex-direction: row;
@@ -130,17 +150,17 @@ header{
     background: #fff;
     overflow: hidden;
 
-    transition: all .5s ease-in-out;
-    height: 0;
+    transition: max-height .5s ease-in-out;
+    max-height: 0;
     color: transparent;
 }
 
 .clicked {
-    height: 200px;
+    max-height: 500px;
 }
 
 
-.msg:hover{
+.msg:hover, .wrkspace-outer:hover, .wrkspace:hover{
     box-shadow: 0 0 8px rgba(0,0,0,0.5); /* Параметры тени */
 
 }
@@ -223,6 +243,9 @@ header{
     width:80%;
 }
 .messg-count{
+    margin: 0 20px 0 0;
+    margin-left: auto;
+    justify-self: flex-end;
     width:10%;
 }
 
@@ -258,8 +281,31 @@ header{
     object-fit: fill;
 }
 
+.icon{
+    margin: 0 5px 0 5px;
+    filter: opacity(0.9);
+    height: 20px;
+    width: 20px;
+    object-position: center center;
+    object-fit: fill;
+}
+
+.starred{
+    color: #2dc68b;
+}
+
+
+
 p.wrkspace-info{
+    display: inline-block;
     margin: 0 0 0 10px;
+    height: 20px;
+    color: #2dc68b;
+    font-family: 'Roboto',  sans-serif;
+}
+p.wrkspace-info-channel{
+    align-self: center;
+    display: inline-block;
     height: 20px;
     color: #2dc68b;
     font-family: 'Roboto',  sans-serif;
@@ -282,13 +328,29 @@ p.mess{
     font-weight: 300;
 }
 p.mess-n{
-    margin: 6px 0 0 0;
+    margin: 5px 0 0 0;
+    height: inherit;
+    width: inherit;
+    display: inline-block;
     text-align: center;
     font-family: 'Roboto',  sans-serif;
     font-size: 12px;
     color: #ffffff;
     font-weight: 500;
 }
+
+p.mess-n-workspace{
+    margin: 3px 2px 0 0;
+    height: inherit;
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
 .change {
     display: flex;
     align-items: flex-end;
@@ -314,13 +376,13 @@ p.mess-n{
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     letter-spacing: -0.5px;
-    color: #24b880;
+    color: #2dc68b;
     font-weight: 300;
 }
 
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #24b880; /* Blue */
+    border-top: 16px solid #2dc68b; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -329,26 +391,33 @@ p.mess-n{
 }
 
 .wrkspace-info-column {
-    display: inline-block;
-    height: 50px;
-}
-
-.wrkspace-chat {
-    display:inline-block;
-    width: 100%;
-    height: 30px;
-    border-bottom: 1px solid #2dc68b;
-    margin: 0 0 0 40px;
     flex-direction: column;
 }
 
+.wrkspace-chat {
+    display:inline-flex;
+    justify-content: stretch;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #2dc68b;
+    margin: 0 20px 0 40px;
+    flex-direction: row;
+}
+
 .wrkspace-chat-text{
+    width: 170px;
     display:inline-block;
-    margin: 15px 0 0 20px;
+    margin: 10px 5px 0 20px;
     color: #475C53;
     font-family: 'Roboto',  sans-serif;
     font-size: 14px;
 
+}
+.icons{
+    align-self: center;
+    display:inline-block;
+    width: 100px;
+    flex-direction: row;
 }
 
 @keyframes spin {
