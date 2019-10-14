@@ -24,7 +24,7 @@ function handleLogout(application) {
 		if (response.status === 200) {
 			return response.text();
 		}
-		if (response.status!==200){
+		if (response.status !== 200) {
 			throw new Error(
 				`Ошибка выхода: ${response.status}`);
 		}
