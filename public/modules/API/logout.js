@@ -5,7 +5,7 @@ const {backend} = settings;
 
 function handleLogout(application) {
 	fetch(`${backend}/logout`, {
-		method: 'POST',
+		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},

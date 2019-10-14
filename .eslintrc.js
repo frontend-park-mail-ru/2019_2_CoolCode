@@ -14,14 +14,14 @@ module.exports = {
     },
 
   'rules': {
-      "semi" : ["error"],
-      "block-spacing" : ["error"],
-      "newline-per-chained-call" : ["error"],
-      "no-multiple-empty-lines" : ["error", { "max": 1, "maxEOF": 1 }],
-      "no-multi-spaces" : ["error"],
-      "space-before-blocks" : ["error", "always"],
-      "indent" : ["error", "tab"],
-      "space-infix-ops" : ["error"],
-     "no-unused-vars" : ["error"]
+      "semi" : ["warn"],
+      "block-spacing" : ["warn"],
+      "newline-per-chained-call" : ["warn"],
+      "no-multiple-empty-lines" : ["warn", { "max": 1, "maxEOF": 1 }],
+      "no-multi-spaces" : ["warn"],
+      "space-before-blocks" : ["warn", "always"],
+      "indent" : ["warn", "tab"],
+      "space-infix-ops" : ["warn"],
+     "no-unused-vars" : ["warn"]
   },
 };

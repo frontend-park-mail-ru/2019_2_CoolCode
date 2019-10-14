@@ -1,5 +1,4 @@
 block content
-
 div.container
     div.row
         div.column.left
@@ -9,10 +8,13 @@ div.container
                     div.dropdown-child
                         a(href='/menu' data-section = 'mainPage') room
                         a(href='/menu' data-section = 'mainPage')  chat
-                form.form-search(action="/search/" target="_blank" class="form-search")
-                    input.search-input(type="search" name="text" required placeholder="search")
-                    input.search-input-lupa(type="submit" value="🔍")
+                form.search(method="GET" action=`/users/`  )
+                    input.search-input(type="search" name="name" required placeholder="search")
+                    input.search-input-lupa(type="submit" value="🔍" data-section='search')
             div.column.chat-msg
-                block messages
+                if search
+                    block search
+                else
+                    block messages
         div.column.right
             block page

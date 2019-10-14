@@ -1,5 +1,4 @@
 extends profilePage
-
 mixin field(pText, fieldText, id)
     p.attribute= pText+":"
     div.field(id=id)= fieldText
@@ -15,6 +14,8 @@ block page
     if chat
         div chat here
     else
+        if search
+            block search
         div.row.profile-pic
             div.column.for-img-profile
                 div.row.profile-pic-row
