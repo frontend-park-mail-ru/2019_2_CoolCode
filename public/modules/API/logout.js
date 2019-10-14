@@ -5,7 +5,7 @@ const {backend} = settings;
 
 function handleLogout(application) {
 	fetch(`${backend}/logout`, {
-		method: 'POST',
+		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8',
 		},
@@ -23,6 +23,10 @@ function handleLogout(application) {
 		}
 		if (response.status === 200) {
 			return response.text();
+		}
+		if (response.status!==200){
+			throw new Error(
+				`Ошибка выхода: ${response.status}`);
 		}
 	})
 		.then(data => {
