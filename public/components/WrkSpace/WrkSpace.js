@@ -1,30 +1,10 @@
+import BaseComponent from "../baseComponent";
+
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
 
-export class WrkSpace {
-	constructor(data, parent) {
-		this._data = data;
-		this._parent = parent;
-
-	}
-
-	get data() {
-		return this._data;
-	}
-
-	set data(dataToSet) {
-		this._data = {...dataToSet};
-	}
-
-	get parent() {
-		return this._parent;
-	}
-
-	set parent(parent) {
-		this._parent = parent;
-	}
-
-	renderWSpace() {
+class WrkSpaceComponent extends BaseComponent {
+	render() {
 		const wSpace = document.createElement('div');
 		wSpace.className = 'row wrkspace-outer';
 		wSpace.innerHTML = wrkSpaceTempl(this._data);
@@ -41,3 +21,5 @@ export class WrkSpace {
 		return wSpace;
 	}
 }
+
+export default WrkSpaceComponent;

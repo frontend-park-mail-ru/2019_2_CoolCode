@@ -1,8 +1,6 @@
-import {Login} from '../../components/Login/Login';
 import settings from '../config';
-import {renderProfile} from './profile';
-
 const {backend} = settings;
+import {bus, router} from '../../main';
 
 function validateEmail(email) {
 	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -10,11 +8,6 @@ function validateEmail(email) {
 }
 
 function createLogin(application) {
-	application.innerHTML = '';
-
-	const loginComponent = new Login();
-	loginComponent.parent = application;
-	loginComponent.renderLogin();
 
 	const form = application.querySelector('.login-form');
 	const errorMessage = application.querySelector('.error_message');
@@ -53,6 +46,7 @@ function createLogin(application) {
 		if (!correct) {
 			return;
 		}
+		//bus.on('fetchUser', createProfile);
 		login(application, email, password);
 
 	});
@@ -88,8 +82,8 @@ function login(application, email, password) {
 	})
 		.then(user => {
 			console.log(`Logged in: ${user.email}`);
-
-			renderProfile(application, user);
+			bus.emit('getUser', user);
+			router.go('/profile');
 		})
 		.catch(err => {
 			console.error(err);
@@ -97,7 +91,6 @@ function login(application, email, password) {
 }
 
 function showError(text) {
-	//const emailField = application.querySelector('#email');
 	const errorMessage = application.querySelector('.error_message');
 	errorMessage.innerHTML = text;
 }

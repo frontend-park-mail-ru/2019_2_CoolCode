@@ -1,4 +1,3 @@
-import {SignUp} from '../../components/Signup/Signup';
 import {login} from './login';
 import settings from '../config';
 
@@ -10,12 +9,6 @@ function validateEmail(email) {
 }
 
 function createSignUp(application) {
-	application.innerHTML = '';
-
-	const signUpComponent = new SignUp();
-	signUpComponent.parent = application;
-	signUpComponent.renderSignUp();
-
 	const form = application.querySelector('.sign-up-form');
 	var error = document.createElement('div');
 	error.className = 'error';
@@ -96,6 +89,7 @@ function createSignUp(application) {
 			.then(() => {
 				console.log(`Signed up: ${email}`);
 				login(application, email, password);
+
 			})
 			.catch(err => {
 				console.error(err);
@@ -105,7 +99,6 @@ function createSignUp(application) {
 }
 
 function showError(text) {
-	//const emailField = application.querySelector('#email');
 	const errorMessage = application.querySelector('.error_message');
 	errorMessage.innerHTML = text;
 }

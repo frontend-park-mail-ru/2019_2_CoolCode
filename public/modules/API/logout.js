@@ -1,9 +1,7 @@
-import createMainPage from './mainpage';
 import settings from '../config';
-
 const {backend} = settings;
-
-function handleLogout(application) {
+import {bus, router} from '../../main';
+function handleLogout() {
 	fetch(`${backend}/logout`, {
 		method: 'POST',
 		headers: {
@@ -27,7 +25,8 @@ function handleLogout(application) {
 	})
 		.then(data => {
 			console.log(data);
-			createMainPage(application);
+			bus.emit('userLoggedIn', false);
+			router.go('/');
 		})
 		.catch(err => {
 			console.error(err);

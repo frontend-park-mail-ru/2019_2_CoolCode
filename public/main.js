@@ -1,30 +1,23 @@
 'use strict';
 
-import createMainPage from './modules/API/mainpage';
-import createSignUp from './modules/API/signup';
-import { createLogin } from './modules/API/login';
-import { createProfile } from './modules/API/profile';
-import handleLogout from './modules/API/logout';
+import Router from './scripts/Router';
+import Bus from './scripts/Bus';
 
 import './styles/main.css';
+import loginView from "./views/loginView";
+import mainPageView from "./views/mainPageView";
+import signUpView from "./views/signUpView";
+import profileView from "./views/profileView";
+import logoutView from "./views/logOutView";
 
+export const bus = new Bus();
 const application = document.getElementById('application');
+export const router = new Router(application);
 
-const functions = {
-	mainPage: createMainPage,
-	signUp: createSignUp,
-	login: createLogin,
-	profile: createProfile,
-	logout: handleLogout,
-};
+router.register('/', mainPageView);
+router.register('/profile', profileView);
+router.register('/login', loginView);
+router.register('/signup', signUpView);
+router.register('/logout', logoutView);
 
-application.addEventListener('click', function (evt) {
-	const { target } = evt;
-
-	if (target instanceof HTMLAnchorElement) {
-		evt.preventDefault();
-		functions[target.dataset.section](application);
-	}
-});
-
-createMainPage(application);
+router.start();

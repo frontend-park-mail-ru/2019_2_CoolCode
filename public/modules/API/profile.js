@@ -1,6 +1,3 @@
-import { Header } from '../../components/Header/Header';
-import { ProfileComponent } from '../../components/Profile/Profile';
-
 import settings from '../config';
 import createInput from './forms';
 
@@ -9,36 +6,10 @@ import openWrkSpaceInfo from './wrkspaceInteraction';
 import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
-let profile;
+import {bus, router} from '../../main';
 
-function createProfile (application) {
-	fetch(`${backend}/users`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
-		if (response.status !== 200) {
-			throw new Error(
-				`Not logged in: ${response.status}`);
-		}
-		return response.json();
-	})
-		.then(user => {
-			console.log(user);
-			renderProfile(application, user);
-		})
-		.catch(err => {
-			console.error(err);
-		});
-}
-
-async function renderProfile (application, user) {
-	application.innerHTML = '';
-
-	const header = new Header();
-	header.parent = application;
-	header.renderHeader(true);
-	user.chats = [
+function assignSomeData (data) {
+	data["chats"] = [
 		{
 			name: "Alex Spiridonova",
 			number: 10,
@@ -61,7 +32,7 @@ async function renderProfile (application, user) {
 		}
 	];
 
-	user.wrkspaces = [
+	data["wrkspaces"] = [
 		{
 			title: "CoolCode",
 			channels: [{
@@ -104,29 +75,46 @@ async function renderProfile (application, user) {
 		}
 	];
 
-	profile = new ProfileComponent(user, application);
-	profile.renderProfile();
-	await getUserPhoto(user.id);
+}
+
+async function createProfile () {
+	try {
+		let response = await fetch(`${backend}/users`, {
+			method: 'GET',
+			credentials: 'include',
+			mode: 'cors',
+		});
+		if (response.status !== 200) {
+			throw new Error(
+				`Not logged in: ${response.status}`);
+		}
+		let user = await response.json();
+
+		console.log(user);
+		bus.emit('getUser', user);
+		router.go('/profile');
+	}
+	catch (error) {
+		console.error(error);
+	}
+}
+
+async function createInputs (application, user) {
 	createInput(application, user, 'fstatus',
 		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
 	createInput(application, user, 'email',
 		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-	/*    createInput(application, user, 'phone',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);*/
 	createInput(application, user, 'username',
 		`border: none; outline: none; margin: 0`);
 	createInput(application, user, 'fullname',
 		`border: none; outline: none; margin: 0`);
 	createInput(application, user, 'phone',
 		`border: none; outline: none; margin: 0`);
-
 	createImageUpload(user.id);
 	openWrkSpaceInfo();
-
 }
 
 async function getUserPhoto (id) {
-	profile.showLoader();
 	console.log(` Getting user ${id} photo`);
 	try{
 		let response = await fetch(`${backend}/photos/${id}`, {
@@ -143,12 +131,11 @@ async function getUserPhoto (id) {
 		worker.postMessage(buffer);
 
 		 worker.onmessage = function(result) {
-		 	profile.hideLoader();
 		 	document.getElementById('avatar').src = result.data;
+			bus.emit('hideLoader' );
 		};
-	} catch (e) {
-		profile.hideLoader();
-		console.log(e);
+	} catch (error) {
+		console.log(error);
 	}
 }
 
@@ -172,10 +159,10 @@ function createImageUpload (id) {
 			if (response.status !== 200) {
 				console.log('Error while upload image');
 			}
-			getUserPhoto(id,);
+			getUserPhoto(id);
 
 		});
 	});
 }
 
-export { createProfile, renderProfile };
+export { createProfile, createInputs, getUserPhoto, assignSomeData};
