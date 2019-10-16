@@ -1,5 +1,6 @@
 import {login} from './login';
-import settings from '../config';
+import {settings} from '../config';
+import {bus, FetchModule, router} from "../../main";
 
 const {backend} = settings;
 
@@ -8,7 +9,7 @@ function validateEmail(email) {
 	return re.test(email);
 }
 
-function createSignUp(application) {
+function createSignUp(application) { //TODO: make beautiful function
 	const form = application.querySelector('.sign-up-form');
 	var error = document.createElement('div');
 	error.className = 'error';
@@ -32,7 +33,7 @@ function createSignUp(application) {
 		fullnameField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
-	form.addEventListener('submit', function (e) {
+	form.addEventListener('submit', async function (e) {
 		e.preventDefault();
 		error.innerHTML = '';
 		let email, username;
@@ -61,21 +62,15 @@ function createSignUp(application) {
 		password = form.elements['password'].value;
 		fullname = form.elements['fullname'].value;
 		username = email.split('@')[0];
-		fetch(`${backend}/users`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8',
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password,
-				fullname: fullname,
-				username: username,
-			}),
-			credentials: 'include',
-			mode: 'cors',
-		}).then(response => {
-			console.dir(response);
+		try {
+			let response = await FetchModule._doPost({path: '/users',
+				data: {
+					email: email,
+					password: password,
+					fullname: fullname,
+					username: username,
+				},
+				contentType : 'application/json;charset=utf-8'});
 			if (response.status === 400) {
 				showError('Sorry, this email is already registered');
 				emailField.style.borderColor = '#ff6575';
@@ -84,16 +79,10 @@ function createSignUp(application) {
 			if (response.status !== 200) {
 				throw new Error(`Неверный статус: ${response.status}`);
 			}
-			return response.text();
-		})
-			.then(() => {
-				console.log(`Signed up: ${email}`);
-				login(application, email, password);
-
-			})
-			.catch(err => {
-				console.error(err);
-			});
+			login(email, password);
+		} catch (error) {
+			console.error(error);
+		}
 	});
 
 }

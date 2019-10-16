@@ -1,6 +1,6 @@
-import settings from '../config';
+import {settings} from '../config';
 const {backend} = settings;
-import {bus, router} from '../../main';
+import {bus, FetchModule, router} from '../../main';
 
 function validateEmail(email) {
 	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -47,25 +47,17 @@ function createLogin(application) {
 			return;
 		}
 		//bus.on('fetchUser', createProfile);
-		login(application, email, password);
+		login(email, password);
 
 	});
 }
 
-function login(application, email, password) {
-
-	fetch(`${backend}/login`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json;charset=utf-8',
-		},
-		body: JSON.stringify({
-			email: email,
-			password: password,
-		}),
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
+async function login(email, password) {
+	try {
+		let response = await FetchModule._doPost({path: '/login',
+			data: {email: email,
+				password: password},
+			contentType : 'application/json;charset=utf-8'});
 		if (response.status === 400) {
 			showError("Wrong email or password");
 			throw new Error(
@@ -77,17 +69,14 @@ function login(application, email, password) {
 				`Серверу плохо: ${response.status}`);
 		}
 		if (response.status === 200) {
-			return response.json();
-		}
-	})
-		.then(user => {
+			let user = await response.json();
 			console.log(`Logged in: ${user.email}`);
 			bus.emit('getUser', user);
 			router.go('/profile');
-		})
-		.catch(err => {
-			console.error(err);
-		});
+		}
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 function showError(text) {

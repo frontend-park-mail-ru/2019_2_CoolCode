@@ -1,16 +1,10 @@
-import settings from '../config';
-const {backend} = settings;
-import {bus, router} from '../../main';
-function handleLogout() {
-	fetch(`${backend}/logout`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json;charset=utf-8',
-		},
-		body: '',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
+import {bus, FetchModule, router} from '../../main';
+
+async function handleLogout() {
+	try {
+		let response = await FetchModule._doPost({path: '/logout',
+			data: '',
+			contentType : 'application/json;charset=utf-8'});
 		if (response.status === 500) {
 			throw new Error(
 				`Серверу плохо:(: ${response.status}`);
@@ -20,17 +14,14 @@ function handleLogout() {
 				`Ошибка авторизации: ${response.status}`);
 		}
 		if (response.status === 200) {
-			return response.text();
-		}
-	})
-		.then(data => {
+			let data = await response.text();
 			console.log(data);
 			bus.emit('userLoggedIn', false);
 			router.go('/');
-		})
-		.catch(err => {
-			console.error(err);
-		});
+		}
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export default handleLogout;

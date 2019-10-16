@@ -1,4 +1,4 @@
-import settings from '../config';
+import {settings} from '../config';
 import createInput from './forms';
 
 import openWrkSpaceInfo from './wrkspaceInteraction';
@@ -6,7 +6,8 @@ import openWrkSpaceInfo from './wrkspaceInteraction';
 import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
-import {bus, router} from '../../main';
+import {bus, FetchModule, router} from '../../main';
+import {login} from "./login";
 
 function assignSomeData (data) {
 	data["chats"] = [
@@ -79,11 +80,7 @@ function assignSomeData (data) {
 
 async function createProfile () {
 	try {
-		let response = await fetch(`${backend}/users`, {
-			method: 'GET',
-			credentials: 'include',
-			mode: 'cors',
-		});
+		let response = await FetchModule._doGet({path: '/users'});
 		if (response.status !== 200) {
 			throw new Error(
 				`Not logged in: ${response.status}`);
@@ -93,13 +90,12 @@ async function createProfile () {
 		console.log(user);
 		bus.emit('getUser', user);
 		router.go('/profile');
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 	}
 }
 
-async function createInputs (application, user) {
+function createInputs (application, user) {
 	createInput(application, user, 'fstatus',
 		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
 	createInput(application, user, 'email',
@@ -114,14 +110,10 @@ async function createInputs (application, user) {
 	openWrkSpaceInfo();
 }
 
-async function getUserPhoto (id) {
+async function getUserPhoto(id) {
 	console.log(` Getting user ${id} photo`);
-	try{
-		let response = await fetch(`${backend}/photos/${id}`, {
-			method: 'GET',
-			credentials: 'include',
-			mode: 'cors',
-		});
+	try {
+		let response = await FetchModule._doGet({path: `/photos/${id}`});
 		if (response.status !== 200) {
 			throw new Error(
 				`Не зашли: ${response.status}`);
@@ -130,39 +122,37 @@ async function getUserPhoto (id) {
 		let worker = new MyWorker();
 		worker.postMessage(buffer);
 
-		 worker.onmessage = function(result) {
-		 	document.getElementById('avatar').src = result.data;
-			bus.emit('hideLoader' );
+		worker.onmessage = function(result) {
+			document.getElementById('avatar').src = result.data;
+			bus.emit('hideLoader');
 		};
 	} catch (error) {
-		console.log(error);
+		console.error(error);
+	}
+}
+
+async function imageUploading(params = {id:null, fileInput:null}) {
+	let formData = new FormData();
+	formData.append('file', params.fileInput.files[0]);
+	console.log('image upload', params.fileInput.files[0]);
+	try {
+		let response = await FetchModule._doPost({path: '/photos',
+			data: formData, contentType:'multipart/form-data'});
+		if (response.status === 200) {
+			await getUserPhoto(params.id);
+		} else {
+			throw new Error(
+				'Error while upload image');
+		}
+	} catch (error) {
+		console.error(error);
 	}
 }
 
 function createImageUpload (id) {
 	const imageInput = document.getElementById('file');
 	console.log('image upload created');
-	const formData = new FormData();
-
-	formData.append('file', imageInput.files[0]);
-
-	imageInput.addEventListener('change', function () {
-		let formData = new FormData();
-		formData.append('file', imageInput.files[0]);
-		console.log('image upload', imageInput.files[0]);
-		fetch(`${backend}/photos`, {
-			method: 'POST',
-			body: formData,
-			credentials: 'include',
-			mode: 'cors',
-		}).then(response => {
-			if (response.status !== 200) {
-				console.log('Error while upload image');
-			}
-			getUserPhoto(id);
-
-		});
-	});
+	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
 export { createProfile, createInputs, getUserPhoto, assignSomeData};

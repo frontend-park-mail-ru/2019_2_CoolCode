@@ -1,15 +1,9 @@
-import settings from '../config';
-const { backend } = settings;
 
-import {bus, router} from '../../main';
+import {bus, router, FetchModule} from '../../main';
 
 async function createMainPage () {
 	try {
-		let response = await fetch(`${backend}/users`, {
-			method: 'GET',
-			credentials: 'include',
-			mode: 'cors',
-		});
+		let response = await FetchModule._doGet({path: '/users'});
 		bus.emit('userLoggedIn', response.status === 200);
 		router.go('/');
 

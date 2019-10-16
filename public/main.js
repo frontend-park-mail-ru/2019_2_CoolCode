@@ -2,6 +2,9 @@
 
 import Router from './scripts/Router';
 import Bus from './scripts/Bus';
+import Fetch from "./modules/API/fetch";
+import {settings, responseStatuses} from './modules/config';
+const {backend} = settings;
 
 import './styles/main.css';
 import loginView from "./views/loginView";
@@ -10,9 +13,11 @@ import signUpView from "./views/signUpView";
 import profileView from "./views/profileView";
 import logoutView from "./views/logOutView";
 
-export const bus = new Bus();
+const bus = new Bus();
 const application = document.getElementById('application');
-export const router = new Router(application);
+const router = new Router(application);
+const FetchModule = new Fetch();
+FetchModule.setUrl(backend);
 
 router.register('/', mainPageView);
 router.register('/profile', profileView);
@@ -21,3 +26,5 @@ router.register('/signup', signUpView);
 router.register('/logout', logoutView);
 
 router.start();
+
+export {bus, router, FetchModule};
