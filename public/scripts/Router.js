@@ -37,7 +37,6 @@ class Router {
 	}
 
 	start() {
-
 		this._application.addEventListener('click', function (event) {
 			const { target } = event;
 			if (!(target instanceof HTMLAnchorElement)) {

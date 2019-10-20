@@ -1,5 +1,3 @@
-extends profilePage
-
 mixin field(pText, fieldText, id)
     p.attribute= pText+":"
     div.field(id=id)= fieldText
@@ -19,7 +17,7 @@ block page
             div.column.for-img-profile
                 div.row.profile-pic-row
                     div.loader#loader
-                    img.rounded-circle-1#avatar(src="images/user.jpg")
+                    img.user-profile-pic#avatar(src="images/user.jpg")
                     input#file(type='file', style='display: none;')
             div.column.for-profile-sett
                 div.row.name-row#fullname-setting= fullname

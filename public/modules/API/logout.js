@@ -1,8 +1,7 @@
 import {bus, FetchModule, router} from '../../main';
-
 async function handleLogout() {
 	try {
-		let response = await FetchModule._doPost({path: '/logout',
+		let response = await FetchModule._doDelete({path: '/logout',
 			data: '',
 			contentType : 'application/json;charset=utf-8'});
 		if (response.status === 500) {
@@ -16,7 +15,7 @@ async function handleLogout() {
 		if (response.status === 200) {
 			let data = await response.text();
 			console.log(data);
-			bus.emit('userLoggedIn', false);
+			bus.emit('loggedInUser', false);
 			router.go('/');
 		}
 	} catch (error) {

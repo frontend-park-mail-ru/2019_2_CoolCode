@@ -2,38 +2,43 @@ import {settings} from '../config';
 import createInput from './forms';
 
 import openWrkSpaceInfo from './wrkspaceInteraction';
-
 import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
 import {bus, FetchModule, router} from '../../main';
-import {login} from "./login";
+import {data} from "../../main";
 
-function assignSomeData (data) {
-	data["chats"] = [
+function assignSomeData () {
+	const chats = [
 		{
-			name: "Alex Spiridonova",
+			name: "Al W",
+			members : [10],
 			number: 10,
 			lastMsg: "WTF?"
 		},
 		{
 			name: "Someone New",
+			members : [11],
 			number: 3,
 			lastMsg: "HYD?"
 		},
 		{
 			name: "No One",
+			members : [12],
 			number: 1,
 			lastMsg: "?"
 		},
 		{
 			name: "Bono u2",
+			members : [13],
 			number: "1",
 			lastMsg: "Come to concert tonight",
 		}
 	];
+	if (data.userChats === undefined) data.setChats(chats);
+	else data.addChats(chats);
 
-	data["wrkspaces"] = [
+	data.setWrkSpaces( [
 		{
 			title: "CoolCode",
 			channels: [{
@@ -73,12 +78,12 @@ function assignSomeData (data) {
 				private: true,
 			}],
 			members: ["AS", "Vasya Romanov", "Bono", "U"],
-		}
-	];
+		}]
+	);
 
 }
 
-async function createProfile () {
+async function checkLogin () {
 	try {
 		let response = await FetchModule._doGet({path: '/users'});
 		if (response.status !== 200) {
@@ -88,11 +93,20 @@ async function createProfile () {
 		let user = await response.json();
 
 		console.log(user);
-		bus.emit('getUser', user);
-		router.go('/profile');
+		bus.emit('addUser1', user);
 	} catch (error) {
 		console.error(error);
 	}
+}
+
+async function createProfile() {
+	await checkLogin();
+	router.go('/profile');
+}
+
+async function createChatPage() {
+	await checkLogin();
+	router.go('/chat');
 }
 
 function createInputs (application, user) {
@@ -108,6 +122,27 @@ function createInputs (application, user) {
 		`border: none; outline: none; margin: 0`);
 	createImageUpload(user.id);
 	openWrkSpaceInfo();
+};
+
+async function getProfilePhoto(id) {
+	console.log(` Getting user ${id} photo`);
+	try {
+		let response = await FetchModule._doGet({path: `/photos/${id}`});
+		if (response.status !== 200) {
+			throw new Error(
+				`Не зашли: ${response.status}`);
+		}
+		let buffer = await response.blob();
+		let worker = new MyWorker();
+		worker.postMessage(buffer);
+
+		worker.onmessage = function(result) {
+			document.getElementById('avatar').src = result.data;
+			bus.emit('hideLoader');
+		};
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 async function getUserPhoto(id) {
@@ -123,8 +158,8 @@ async function getUserPhoto(id) {
 		worker.postMessage(buffer);
 
 		worker.onmessage = function(result) {
-			document.getElementById('avatar').src = result.data;
-			bus.emit('hideLoader');
+			let person = document.getElementById(id.toString());
+			person.querySelector('#user-search').src = result.data;
 		};
 	} catch (error) {
 		console.error(error);
@@ -155,4 +190,4 @@ function createImageUpload (id) {
 	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
-export { createProfile, createInputs, getUserPhoto, assignSomeData};
+export { createProfile, createChatPage, createInputs, getUserPhoto, getProfilePhoto, assignSomeData};

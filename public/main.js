@@ -12,19 +12,27 @@ import mainPageView from "./views/mainPageView";
 import signUpView from "./views/signUpView";
 import profileView from "./views/profileView";
 import logoutView from "./views/logOutView";
+import searchView from "./views/searchView";
+import Data from "./entities/Data";
+import createEvents from "./scripts/Events";
+import chatView from "./views/chatView";
 
 const bus = new Bus();
 const application = document.getElementById('application');
 const router = new Router(application);
 const FetchModule = new Fetch();
 FetchModule.setUrl(backend);
+const data = new Data();
 
+createEvents();
 router.register('/', mainPageView);
 router.register('/profile', profileView);
 router.register('/login', loginView);
 router.register('/signup', signUpView);
 router.register('/logout', logoutView);
+router.register('/search', searchView);
+router.register('/chat', chatView);
 
 router.start();
 
-export {bus, router, FetchModule};
+export {bus, data, router, FetchModule};

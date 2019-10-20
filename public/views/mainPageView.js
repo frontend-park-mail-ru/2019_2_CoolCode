@@ -2,21 +2,27 @@ import BaseView from './baseView';
 import createMainPage from "../modules/API/mainpage";
 const bodyTemplate = require('../components/MainPage/body.pug');
 const headerTemplate = require('../components/Header/header.pug');
+import {data} from '../main';
 
 class mainPageView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
+		super ({user:{}, loggedIn: null}, parent);
 		this._bus.on('fetchUsers', createMainPage);
-		this._bus.on('userLoggedIn', this.userStatus.bind(this));
 	};
-	userStatus(loggedIn) {
-		this._data["login"] = loggedIn;
+	setUserStatus() {
+		console.log(data.loggedIn);
+		this._data.loggedIn = data.loggedIn;
 
 	}
 	show() {
-		if (!("login" in this._data))
+		this.setUserStatus();
+		if (this._data.loggedIn === null || this._data.loggedIn == undefined) {
 			this._bus.emit('fetchUsers', this._parent);
-		else this.render();
+			this.setUserStatus();
+		}
+		else {
+			this.render();
+		}
 	}
 	render() {
 		this._parent.innerHTML = '';

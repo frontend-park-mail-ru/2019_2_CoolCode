@@ -2,6 +2,7 @@ module.exports = {
     'env': {
         'es6': true,
     },
+    "plugins": [ "babel" ],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
@@ -10,7 +11,8 @@ module.exports = {
             "jsx": true,
             "modules": true,
             "experimentalObjectRestSpread": true,
-            "allowImportExportEverywhere": true
+            "allowImportExportEverywhere": true,
+            "classes":true,
         }
     },
 

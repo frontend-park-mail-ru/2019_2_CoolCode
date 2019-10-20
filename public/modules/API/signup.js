@@ -61,7 +61,7 @@ function createSignUp(application) { //TODO: make beautiful function
 		email = form.elements['email'].value;
 		password = form.elements['password'].value;
 		fullname = form.elements['fullname'].value;
-		username = email.split('@')[0];
+		username = email;
 		try {
 			let response = await FetchModule._doPost({path: '/users',
 				data: {

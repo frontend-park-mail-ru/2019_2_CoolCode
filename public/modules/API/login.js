@@ -1,6 +1,7 @@
 import {settings} from '../config';
 const {backend} = settings;
 import {bus, FetchModule, router} from '../../main';
+import {data} from "../../main";
 
 function validateEmail(email) {
 	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -71,7 +72,7 @@ async function login(email, password) {
 		if (response.status === 200) {
 			let user = await response.json();
 			console.log(`Logged in: ${user.email}`);
-			bus.emit('getUser', user);
+			bus.emit('addUser', user);
 			router.go('/profile');
 		}
 	} catch (error) {

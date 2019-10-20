@@ -1,12 +1,11 @@
-block content
-
-div.container
-    div.row
-        div.column.left
-            div.row.chat-menu
-                div.column.search
-                    img.loupe(src="images/loupe_2.png")
-            div.column.chat-msg
-                block messages
-        div.column.right
-            block page
+block left column
+    div.row.chat-menu
+        div.dropdown
+            button.mainmenubtn  create
+            div.dropdown-child
+                a(href='/menu' data-section = 'mainPage') room
+                a(href='/menu' data-section = 'mainPage')  chat
+        form#search
+            input#search-input(type="search" name="name" required placeholder="search")
+            input#search-input-lupa(type="submit" value="🔍" data-section='search')
+    div.column.chat-msg

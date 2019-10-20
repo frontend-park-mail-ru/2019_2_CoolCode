@@ -6,7 +6,7 @@ header{
     height: 50px ;
 }
 
-.rounded-circle{
+.messages-pic {
     border: 1px solid #2dc68b;
     margin-top: 10px;
     border-radius: 50%;
@@ -16,12 +16,22 @@ header{
     object-fit: fill;
     box-sizing: border-box;
 }
-.rounded-circle-1{
+.user-profile-pic {
     border: 2px solid #2dc68b;
     margin-top: 10px;
     border-radius: 50%;
     height: 200px;
     width: 200px;
+    object-position: center center;
+    object-fit: fill;
+    box-sizing: border-box;
+}
+.user-search-pic {
+    border: 2px solid #2dc68b;
+    margin-top: 20px;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
     object-position: center center;
     object-fit: fill;
     box-sizing: border-box;
@@ -83,7 +93,6 @@ header{
     box-sizing: border-box;
     border-top: 1px solid rgba(197, 197, 197, 0.81);
     border-left: 1px solid rgba(197, 197, 197, 0.81);
-
 }
 .name-row{
     margin: 100px 0 0 20px;
@@ -133,6 +142,12 @@ header{
     height: 100px;
     box-shadow: 0 0 8px rgba(0,0,0,0.2); /* Параметры тени */
 }
+.user {
+    box-sizing: border-box;
+    background-color: white;
+    height: 100px;
+    border-bottom: 1px solid #2dc68b;
+}
 .wrkspace {
 
     box-sizing: border-box;
@@ -160,7 +175,7 @@ header{
 }
 
 
-.msg:hover, .wrkspace-outer:hover, .wrkspace:hover{
+.msg:hover, .wrkspace-outer:hover{
     box-shadow: 0 0 8px rgba(0,0,0,0.5); /* Параметры тени */
 
 }
@@ -273,11 +288,12 @@ header{
     object-fit: fill;
 }
 .loupe{
-    margin: 5px 10px 0 20px;
+    padding-top: 2px;
+    padding-left: 2px;
     filter: opacity(0.9);
     height: 20px;
     width: 20px;
-    object-position: center center;
+    object-position: center;
     object-fit: fill;
 }
 
@@ -319,6 +335,17 @@ p.person{
     word-spacing: -1px;
     color: #000000;
     font-weight: 400;
+}
+
+p.person-search{
+    object-position: center;
+    margin: 40px 0 0 40px;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 26px;
+    letter-spacing: 0px;
+    word-spacing: 1px;
+    color: #000000;
+    font-weight: 300;
 }
 p.mess{
     margin: 5px 0 0 10px;
@@ -424,3 +451,46 @@ p.mess-n-workspace{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+.mainmenubtn {
+    background-color: #18A88E;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child {
+    background-color: #FFFFFF;
+    display: none;
+    min-width: auto;
+}
+.dropdown-child a {
+    color: #18A88E;
+    padding: 20px 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+.dropdown:hover .dropdown-child {
+    display: block;
+}
+#search-input{
+    background: darkgray;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    padding-left: 6px;
+    all: unset;
+    height: 100%;
+}
+#search-input-lupa{
+    height: 106%;
+
+}
+
+

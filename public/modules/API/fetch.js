@@ -1,6 +1,3 @@
-import FetchError from "./fetchError";
-import {responseStatuses} from '../config';
-
 class Fetch {
 
 	constructor() {
@@ -48,6 +45,9 @@ class Fetch {
 	}
 	async _doPut(params = {}) {
 		return this._fetch({...params, method : "PUT"});
+	}
+	async _doDelete(params = {}) {
+		return this._fetch({...params, method : "DELETE"});
 	}
 
 }

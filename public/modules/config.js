@@ -1,3 +1,4 @@
+
 const settings = {
 	backend: 'http://localhost:8080',
 };
@@ -9,7 +10,6 @@ const responseStatuses = {
 	403 : "Forbidden",
 	404 : "Not Found",
 	500 : "Internal Server Error",
-
 };
 
 export {settings, responseStatuses};
