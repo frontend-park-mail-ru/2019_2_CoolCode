@@ -1,18 +1,9 @@
-import createMainPage from './mainpage';
-import settings from '../config';
-
-const {backend} = settings;
-
-function handleLogout(application) {
-	fetch(`${backend}/logout`, {
-		method: 'DELETE',
-		headers: {
-			'Content-Type': 'application/json;charset=utf-8',
-		},
-		body: '',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
+import {bus, FetchModule, router} from '../../main';
+async function handleLogout() {
+	try {
+		let response = await FetchModule._doDelete({path: '/logout',
+			data: '',
+			contentType : 'application/json;charset=utf-8'});
 		if (response.status === 500) {
 			throw new Error(
 				`Серверу плохо:(: ${response.status}`);
@@ -22,20 +13,14 @@ function handleLogout(application) {
 				`Ошибка авторизации: ${response.status}`);
 		}
 		if (response.status === 200) {
-			return response.text();
-		}
-		if (response.status !== 200) {
-			throw new Error(
-				`Ошибка выхода: ${response.status}`);
-		}
-	})
-		.then(data => {
+			let data = await response.text();
 			console.log(data);
-			createMainPage(application);
-		})
-		.catch(err => {
-			console.error(err);
-		});
+			bus.emit('loggedInUser', false);
+			router.go('/');
+		}
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export default handleLogout;

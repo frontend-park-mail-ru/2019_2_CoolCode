@@ -1,28 +1,15 @@
-import { Header } from '../../components/Header/Header';
-import { MainPageComponent } from '../../components/MainPage/MainPage';
-import settings from '../config';
+import {data, bus, router, FetchModule} from '../../main';
 
-const { backend } = settings;
+async function createMainPage () {
+	try {
+		let response = await FetchModule._doGet({path: '/users'});
+		bus.emit('loggedInUser', response.status === 200);
+		//data.loggedInUser(response.status === 200);
+		router.go('/');
 
-function createMainPage (application) {
-	fetch(`${backend}/users`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
-		application.innerHTML = '';
-
-		const header = new Header();
-		header.parent = application;
-		header.renderHeader(response.status === 200);
-
-		const mainPage = new MainPageComponent();
-		mainPage.parent = application;
-		mainPage.renderMainPage();
-	})
-		.catch(err => {
-			console.error(err);
-		});
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export default createMainPage;

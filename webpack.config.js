@@ -4,7 +4,8 @@ const path = require('path');
 module.exports = {
 	context: __dirname + "/public",
 	mode: "development",
-	entry: './main',
+
+	entry: ['babel-polyfill', './main'],
 	output:{
 		path: path.resolve(__dirname ,'packedDir'),
 		filename: '[name].js'
@@ -13,10 +14,31 @@ module.exports = {
 	module:{
 		rules:  [
 			{
-				test: /\.(js)$/,
-				exclude: /node_modules/,
-				use: ["eslint-loader"]
+				test: /\.m?js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env'],
+						plugins: [
+							[
+								"@babel/plugin-proposal-class-properties"
+							]
+						]
+					}
+				}
 			},
+			{
+				test: /\.(js)$/,
+				exclude: [/node_modules/, /worker/],
+				use: ["eslint-loader"],
+
+			},
+			{
+				test: /\.worker\.js$/,
+				use: { loader: 'worker-loader', options: { inline: true , fallback: false, publicPath: '/workers/' } }
+			},
+
 			{
 				test: /\.pug$/,
 				loader: "pug-loader"

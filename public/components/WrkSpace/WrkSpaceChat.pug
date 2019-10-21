@@ -1,0 +1,17 @@
+div.row.wrkspace-chat
+    p.wrkspace-chat-text= "#"+ channel.title
+    div.row.icons
+        if channel.private
+            img.icon(src="images/lock.jpg")
+        if channel.public
+            img.icon(src="images/post.png")
+        if channel.starred
+            img.icon.starred(src="images/star.png")
+        if channel.muted
+            img.icon(src="images/muted.png")
+    if channel.members != null
+        p.wrkspace-info-channel= channel.members + " members"
+    if channel.messages != null
+        div.messg-count
+            div.msg-count-wspace
+                p.mess-n-workspace= channel.messages

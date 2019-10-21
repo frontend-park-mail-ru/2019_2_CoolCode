@@ -1,30 +1,38 @@
 'use strict';
 
-import createMainPage from './modules/API/mainpage';
-import createSignUp from './modules/API/signup';
-import { createLogin } from './modules/API/login';
-import { createProfile } from './modules/API/profile';
-import handleLogout from './modules/API/logout';
+import Router from './scripts/Router';
+import Bus from './scripts/Bus';
+import Fetch from "./modules/API/fetch";
+import {settings, responseStatuses} from './modules/config';
+const {backend} = settings;
 
 import './styles/main.css';
+import loginView from "./views/loginView";
+import mainPageView from "./views/mainPageView";
+import signUpView from "./views/signUpView";
+import profileView from "./views/profileView";
+import logoutView from "./views/logOutView";
+import searchView from "./views/searchView";
+import Data from "./entities/Data";
+import createEvents from "./scripts/Events";
+import chatView from "./views/chatView";
 
+const bus = new Bus();
 const application = document.getElementById('application');
+const router = new Router(application);
+const FetchModule = new Fetch();
+FetchModule.setUrl(backend);
+const data = new Data();
 
-const functions = {
-	mainPage: createMainPage,
-	signUp: createSignUp,
-	login: createLogin,
-	profile: createProfile,
-	logout: handleLogout,
-};
+createEvents();
+router.register('/', mainPageView);
+router.register('/profile', profileView);
+router.register('/login', loginView);
+router.register('/signup', signUpView);
+router.register('/logout', logoutView);
+router.register('/search', searchView);
+router.register('/chat', chatView);
 
-application.addEventListener('click', function (evt) {
-	const { target } = evt;
+router.start();
 
-	if (target instanceof HTMLAnchorElement) {
-		evt.preventDefault();
-		functions[target.dataset.section](application);
-	}
-});
-
-createMainPage(application);
+export {bus, data, router, FetchModule};

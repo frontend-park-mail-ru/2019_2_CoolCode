@@ -1,12 +1,9 @@
-const signupTemplate = require('./signup.pug');
-
-export class SignUp {
-	constructor(data = {}, parent = document.body) {
+class BaseComponent {
+	constructor(data, parent) {
 		this._data = data;
 		this._parent = parent;
 
 	}
-
 	get data() {
 		return this._data;
 	}
@@ -23,7 +20,8 @@ export class SignUp {
 		this._parent = parent;
 	}
 
-	renderSignUp() {
-		this._parent.innerHTML = signupTemplate(this._data);
+	render() {
 	}
 }
+
+export default BaseComponent;

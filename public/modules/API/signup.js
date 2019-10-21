@@ -1,6 +1,6 @@
-import {SignUp} from '../../components/Signup/Signup';
 import {login} from './login';
-import settings from '../config';
+import {settings} from '../config';
+import {bus, FetchModule, router} from "../../main";
 
 const {backend} = settings;
 
@@ -9,13 +9,7 @@ function validateEmail(email) {
 	return re.test(email);
 }
 
-function createSignUp(application) {
-	application.innerHTML = '';
-
-	const signUpComponent = new SignUp();
-	signUpComponent.parent = application;
-	signUpComponent.renderSignUp();
-
+function createSignUp(application) { //TODO: make beautiful function
 	const form = application.querySelector('.sign-up-form');
 	var error = document.createElement('div');
 	error.className = 'error';
@@ -23,7 +17,7 @@ function createSignUp(application) {
 
 	const emailField = application.querySelector('#email');
 	const passwordField = application.querySelector('#password');
-	const fullnameField = application.querySelector('#fullname');
+	const usernameField = application.querySelector('#username');
 	const errorMessage = application.querySelector('.error_message');
 	emailField.addEventListener('click', () => {
 		emailField.style.borderColor = 'C4C4C4';
@@ -35,11 +29,11 @@ function createSignUp(application) {
 		errorMessage.innerHTML = '';
 	});
 
-	fullnameField.addEventListener('click', () => {
-		fullnameField.style.borderColor = 'C4C4C4';
+	usernameField.addEventListener('click', () => {
+		usernameField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
-	form.addEventListener('submit', function (e) {
+	form.addEventListener('submit', async function (e) {
 		e.preventDefault();
 		error.innerHTML = '';
 		let email, username;
@@ -50,9 +44,9 @@ function createSignUp(application) {
 			passwordField.style.borderColor = '#ff6575';
 			correct = false;
 		}
-		if (form.elements['fullname'].value === '') {
-			showError('Please, input name:(');
-			fullnameField.style.borderColor = '#ff6575';
+		if (form.elements['username'].value === '') {
+			showError('Please, input username:(');
+			usernameField.style.borderColor = '#ff6575';
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
@@ -66,23 +60,17 @@ function createSignUp(application) {
 
 		email = form.elements['email'].value;
 		password = form.elements['password'].value;
-		fullname = form.elements['fullname'].value;
-		username = email.split('@')[0];
-		fetch(`${backend}/users`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8',
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password,
-				fullname: fullname,
-				username: username,
-			}),
-			credentials: 'include',
-			mode: 'cors',
-		}).then(response => {
-			console.dir(response);
+		username = form.elements['username'].value;
+		fullname = 'CoolSlack User';
+		try {
+			let response = await FetchModule._doPost({path: '/users',
+				data: {
+					email: email,
+					password: password,
+					fullname: fullname,
+					username: username,
+				},
+				contentType : 'application/json;charset=utf-8'});
 			if (response.status === 400) {
 				showError('Sorry, this email is already registered');
 				emailField.style.borderColor = '#ff6575';
@@ -91,21 +79,15 @@ function createSignUp(application) {
 			if (response.status !== 200) {
 				throw new Error(`Неверный статус: ${response.status}`);
 			}
-			return response.text();
-		})
-			.then(() => {
-				console.log(`Signed up: ${email}`);
-				login(application, email, password);
-			})
-			.catch(err => {
-				console.error(err);
-			});
+			login(email, password);
+		} catch (error) {
+			console.error(error);
+		}
 	});
 
 }
 
 function showError(text) {
-	//const emailField = application.querySelector('#email');
 	const errorMessage = application.querySelector('.error_message');
 	errorMessage.innerHTML = text;
 }
