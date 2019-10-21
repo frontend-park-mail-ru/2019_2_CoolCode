@@ -9,6 +9,7 @@ import {createChatPage, assignSomeData, getUserPhoto} from "../modules/API/profi
 import searchInteraction from "../modules/API/searchInteraction";
 
 import {data} from "../main";
+import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 
 class chatView extends BaseView {
 
@@ -35,7 +36,7 @@ class chatView extends BaseView {
     drawAll() {
     	this.render();
     	searchInteraction();
-
+    	openWrkSpaceInfo();
     }
 
     setUser() {

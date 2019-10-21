@@ -16,6 +16,7 @@ import {
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data} from "../main";
+import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 
 class profileView extends BaseView {
 
@@ -52,6 +53,7 @@ class profileView extends BaseView {
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
 		searchInteraction();
+		openWrkSpaceInfo();
 	}
 
 	setUser() {
@@ -95,8 +97,13 @@ class profileView extends BaseView {
 				mess.data = mes;
 				const message = document.createElement('div');
 				message.className = 'row msg';
+				var id;
+				if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
+				else message.id = mes["Members"][0];
+				message.id = "chat-" + id;
 				message.innerHTML = mess.render();
 				contentListRoot.appendChild(message);
+				getUserPhoto(id,"chat", ".messages-pic");
 			});
 		}
 

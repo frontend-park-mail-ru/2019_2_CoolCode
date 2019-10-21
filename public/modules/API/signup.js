@@ -17,7 +17,7 @@ function createSignUp(application) { //TODO: make beautiful function
 
 	const emailField = application.querySelector('#email');
 	const passwordField = application.querySelector('#password');
-	const fullnameField = application.querySelector('#fullname');
+	const usernameField = application.querySelector('#username');
 	const errorMessage = application.querySelector('.error_message');
 	emailField.addEventListener('click', () => {
 		emailField.style.borderColor = 'C4C4C4';
@@ -29,8 +29,8 @@ function createSignUp(application) { //TODO: make beautiful function
 		errorMessage.innerHTML = '';
 	});
 
-	fullnameField.addEventListener('click', () => {
-		fullnameField.style.borderColor = 'C4C4C4';
+	usernameField.addEventListener('click', () => {
+		usernameField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
 	form.addEventListener('submit', async function (e) {
@@ -44,9 +44,9 @@ function createSignUp(application) { //TODO: make beautiful function
 			passwordField.style.borderColor = '#ff6575';
 			correct = false;
 		}
-		if (form.elements['fullname'].value === '') {
-			showError('Please, input name:(');
-			fullnameField.style.borderColor = '#ff6575';
+		if (form.elements['username'].value === '') {
+			showError('Please, input username:(');
+			usernameField.style.borderColor = '#ff6575';
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
@@ -60,8 +60,8 @@ function createSignUp(application) { //TODO: make beautiful function
 
 		email = form.elements['email'].value;
 		password = form.elements['password'].value;
-		fullname = form.elements['fullname'].value;
-		username = email;
+		username = form.elements['username'].value;
+		fullname = 'CoolSlack User';
 		try {
 			let response = await FetchModule._doPost({path: '/users',
 				data: {

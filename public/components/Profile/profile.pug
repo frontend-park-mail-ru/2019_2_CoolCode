@@ -20,8 +20,8 @@ block page
                     img.user-profile-pic#avatar(src="images/user.jpg")
                     input#file(type='file', style='display: none;')
             div.column.for-profile-sett
-                div.row.name-row#fullname-setting= fullname
                 div.row.nick-row#username-setting= username
+                div.row.name-row#fullname-setting= fullname
         div.row
             div.column.settings
                 +field("status", fstatus, "fstatus-setting")

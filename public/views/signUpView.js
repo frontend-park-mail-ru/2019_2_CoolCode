@@ -1,5 +1,7 @@
 import BaseView from './baseView';
 import createSignUp from "../modules/API/signup";
+import {router, data} from "../main";
+import Data from "../entities/Data";
 const signupTemplate = require('../components/Signup/signup.pug');
 
 class signUpView extends BaseView {
@@ -8,6 +10,10 @@ class signUpView extends BaseView {
 		this._bus.on('signUp', createSignUp);
 	};
 	show() {
+		if (data.loggedIn) {
+			data.clear();
+			router.go('/logout');
+		}
 		this.render();
 		this._bus.emit('signUp', this._parent);
 

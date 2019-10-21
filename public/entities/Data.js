@@ -1,6 +1,6 @@
 class Data {
 
-	constructor(loggedIn, user , userChats = [], userWrkSpaces ) {
+	constructor(loggedIn, user , userChats = [], userWrkSpaces = []) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -13,6 +13,13 @@ class Data {
 		Data.__instance = this;
 	}
 
+	clear() {
+		this.user = undefined;
+		this.userChats = [];
+		this.userWrkSpaces = [];
+		this.loggedIn = undefined;
+	}
+
 	loggedInUser(value) {
 		this.loggedIn = value;
 	}
@@ -23,37 +30,21 @@ class Data {
 	    this.loggedIn = true;
 	}
 
-	addChat(value) {
-	    this.userChats.push(value);
-	}
-
-	addChats(value) {
-		console.log("CHATS");
-		console.log(value);
-		this.userChats.push(...value);
-		console.log(this.userChats);
-	}
-
-	addWrkSpace(value) {
-		this.userWrkSpaces.push(value);
-	}
-
 	setChats(value) {
 		if (value !== null) this.userChats = value;
 	}
 
 	setWrkSpaces(value) {
-	    this.userWrkSpaces = value;
+		if (value !== null) this.userWrkSpaces = value;
 	}
 
 	getUser() {
-		console.log(this.user);
+		console.log('returning' + this.user);
 		return this.user;
 	}
 
 	addLastSearchUsers(value) {
 		this.lastSearchUsers = value;
-		console.log('search' + value);
 	}
 
 	returnLastSearchUsers() {
@@ -62,7 +53,6 @@ class Data {
 
 	getChatUsers() {
 		const ids = [];
-		console.log(this.userChats);
 		this.userChats.forEach((chat) => {
 			console.log(chat);
 			if (chat["Members"][0] == this.user.id) {

@@ -2,7 +2,6 @@ import {bus, FetchModule, router, data} from "../../main";
 import {getChats} from "./profile";
 
 async function createChat(id) {
-	console.log(id);
 	try {
 		let response = await FetchModule._doPost({path: '/chats', data: {
 			user_id:parseFloat(id),

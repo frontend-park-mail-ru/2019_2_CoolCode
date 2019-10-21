@@ -1,5 +1,8 @@
 import BaseView from './baseView';
 import {createLogin} from "../modules/API/login";
+import Data from "../entities/Data";
+import {router, data} from "../main";
+
 const loginTemplate = require('../components/Login/login.pug');
 
 class loginView extends BaseView {
@@ -8,6 +11,10 @@ class loginView extends BaseView {
 		this._bus.on('login', createLogin);
 	};
 	show() {
+		if (data.loggedIn) {
+			data.clear();
+			router.go('/logout');
+		}
 		this.render();
 		this._bus.emit('login', this._parent);
 

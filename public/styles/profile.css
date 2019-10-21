@@ -94,7 +94,7 @@ header{
     border-top: 1px solid rgba(197, 197, 197, 0.81);
     border-left: 1px solid rgba(197, 197, 197, 0.81);
 }
-.name-row{
+.nick-row{
     margin: 100px 0 0 20px;
     height: 46px;
     font-family: 'Montserrat',  sans-serif;
@@ -107,7 +107,7 @@ header{
     flex-direction: row;
 }
 
-.nick-row{
+.name-row{
     margin: 30px 0 0 20px;
     height: 30px;
     font-family: 'Roboto',  sans-serif;
@@ -339,11 +339,22 @@ p.person{
 
 p.person-search{
     object-position: center;
-    margin: 40px 0 0 40px;
+    margin: 20px 0 0 40px;
     font-family: 'Roboto',  sans-serif;
     font-size: 26px;
     letter-spacing: 0px;
     word-spacing: 1px;
+    color: #000000;
+    font-weight: 400;
+}
+
+p.person-search-username{
+    object-position: center;
+    margin: 15px 0 0 40px;
+    font-family: 'Roboto',  sans-serif;
+    font-size: 20px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
     color: #000000;
     font-weight: 300;
 }
@@ -413,6 +424,17 @@ p.mess-n-workspace{
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    margin-top: 10px;
+    animation: spin 2s linear infinite;
+}
+
+
+.loader-small {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #2dc68b; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     margin-top: 10px;
     animation: spin 2s linear infinite;
 }

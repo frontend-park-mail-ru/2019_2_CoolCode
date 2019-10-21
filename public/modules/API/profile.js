@@ -1,4 +1,4 @@
-import {settings} from '../config';
+import {responseStatuses, settings} from '../config';
 import createInput from './forms';
 
 import openWrkSpaceInfo from './wrkspaceInteraction';
@@ -10,35 +10,6 @@ import {data} from "../../main";
 
 async function assignSomeData() {
 	await getChats(data.user.id);
-	const chats = [
-		{
-			name: "Al W",
-			members: [10],
-			number: 10,
-			lastMsg: "WTF?"
-		},
-		{
-			name: "Someone New",
-			members: [11],
-			number: 3,
-			lastMsg: "HYD?"
-		},
-		{
-			name: "No One",
-			members: [12],
-			number: 1,
-			lastMsg: "?"
-		},
-		{
-			name: "Bono u2",
-			members: [13],
-			number: "1",
-			lastMsg: "Come to concert tonight",
-		}
-	];
-	//if (data.userChats === undefined) data.setChats(chats);
-	// else data.addChats(chats);
-
 	data.setWrkSpaces([
 		{
 			title: "CoolCode",
@@ -81,10 +52,6 @@ async function assignSomeData() {
 			members: ["AS", "Vasya Romanov", "Bono", "U"],
 		}]
 	);
-	console.log("DATA");
-	console.log(data.userWrkSpaces);
-	console.log(data.userChats);
-
 }
 
 async function checkLogin () {
@@ -127,7 +94,7 @@ function createInputs (application, user) {
 	createInput(application, user, 'phone',
 		`border: none; outline: none; margin: 0`);
 	createImageUpload(user.id);
-	openWrkSpaceInfo();
+
 };
 
 async function getChats(id) {
@@ -151,9 +118,11 @@ async function getProfilePhoto(id) {
 	console.log(` Getting user ${id} photo`);
 	try {
 		let response = await FetchModule._doGet({path: `/photos/${id}`});
-		if (response.status !== 200) {
-			throw new Error(
-				`Не зашли: ${response.status}`);
+		if (response.status == 401) {
+			throw new Error(responseStatuses["401"]);
+		}
+		if (response.status == 500) {
+			document.getElementById('avatar').src = 'images/sasha.jpeg';
 		}
 		let buffer = await response.blob();
 		let worker = new MyWorker();
@@ -169,6 +138,7 @@ async function getProfilePhoto(id) {
 }
 
 async function getUserPhoto(id, parentId, photoClass) {
+	showLoaderSmall(id, parentId, photoClass);
 	console.log(` Getting user ${id} photo`);
 	try {
 		let response = await FetchModule._doGet({path: `/photos/${id}`});
@@ -183,6 +153,7 @@ async function getUserPhoto(id, parentId, photoClass) {
 		worker.onmessage = function(result) {
 			let person = document.getElementById(parentId + '-' + id.toString());
 			person.querySelector(photoClass).src = result.data;
+			hideLoaderSmall(id, parentId, photoClass);
 		};
 	} catch (error) {
 		console.error(error);
@@ -218,10 +189,23 @@ function hideLoader() {
 	document.getElementById("avatar").style.display = "block";
 }
 
+function hideLoaderSmall(id, parentId, classSelector) {
+	let person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".loader-small").style.display = "none";
+	person.querySelector(classSelector).style.display = "block";
+}
+
 function showLoader() {
 	document.getElementById("avatar").style.display = "none";
 	document.getElementById("loader").style.display = "block";
 
 }
 
-export { createProfile, createChatPage, createInputs, getUserPhoto, getProfilePhoto, assignSomeData, getChats, showLoader, hideLoader};
+function showLoaderSmall(id, parentId, classSelector) {
+	let person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".loader-small").style.display = "block";
+	person.querySelector(classSelector).style.display = "none";
+}
+
+export { createProfile, createChatPage, createInputs, getUserPhoto, getProfilePhoto, assignSomeData,
+	getChats, showLoader, hideLoader};
