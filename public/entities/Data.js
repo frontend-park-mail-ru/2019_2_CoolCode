@@ -1,6 +1,6 @@
 class Data {
 
-	constructor(loggedIn, user , userChats , userWrkSpaces ) {
+	constructor(loggedIn, user , userChats = [], userWrkSpaces ) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -28,7 +28,10 @@ class Data {
 	}
 
 	addChats(value) {
-		this.userChats.concat(value);
+		console.log("CHATS");
+		console.log(value);
+		this.userChats.push(...value);
+		console.log(this.userChats);
 	}
 
 	addWrkSpace(value) {
@@ -36,7 +39,7 @@ class Data {
 	}
 
 	setChats(value) {
-	    this.userChats = value;
+		if (value !== null) this.userChats = value;
 	}
 
 	setWrkSpaces(value) {
@@ -59,8 +62,14 @@ class Data {
 
 	getChatUsers() {
 		const ids = [];
+		console.log(this.userChats);
 		this.userChats.forEach((chat) => {
-			ids.push(chat.members[0]);
+			console.log(chat);
+			if (chat["Members"][0] == this.user.id) {
+				ids.push(chat["Members"][1]);
+			} else {
+				ids.push(chat["Members"][0]);
+			};
 		});
 		return ids;
 	}

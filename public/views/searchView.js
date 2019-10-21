@@ -49,10 +49,10 @@ class searchView extends BaseView {
 				userComponent.data = user;
 				const userBlock = document.createElement('div');
 				userBlock.className = 'row user';
-				userBlock.id = user.id;
+				userBlock.id = "search-" + user.id;
 				userBlock.innerHTML = userComponent.render();
 				contentListRoot.appendChild(userBlock);
-				getUserPhoto(user.id);
+				getUserPhoto(user.id, 'search', '.user-search-pic');
 			});
 		}
 

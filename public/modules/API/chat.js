@@ -1,6 +1,8 @@
 import {bus, FetchModule, router, data} from "../../main";
+import {getChats} from "./profile";
 
-async function createChat(id, username) {
+async function createChat(id) {
+	console.log(id);
 	try {
 		let response = await FetchModule._doPost({path: '/chats', data: {
 			user_id:parseFloat(id),
@@ -10,10 +12,7 @@ async function createChat(id, username) {
 			throw new Error(
 				`Didn't create chat: ${response.status}`);
 		}
-		data.addChat({name: username,
-			members : [parseFloat(id)],
-			number: 0,
-			lastMsg: "",});
+		await getChats(data.user.id);
 		router.go('/chat');
 	} catch (error) {
 		console.error(error);
@@ -26,10 +25,10 @@ function foundUsersClick() {
 		person.addEventListener("click", function (event) {
 			event.preventDefault();
 			let ids = data.getChatUsers();
-			console.log(ids.includes(parseFloat(person.id)));
-			if (!(ids.includes(parseFloat(person.id)))) {
-				let name = person.querySelector(".person-search");
-				createChat(person.id, name.innerHTML);
+			let id = person.id[person.id.length - 1];
+			console.log(ids.includes(parseFloat(id)));
+			if (!(ids.includes(parseFloat(id)))) {
+				createChat(id);
 			}
 			else{
 				router.go('/profile');

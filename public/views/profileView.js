@@ -5,9 +5,17 @@ const headerTemplate = require('../components/Header/header.pug');
 const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 const profileTemplateRight = require('../components/Profile/profile.pug');
-import {createProfile, getUserPhoto, createInputs, assignSomeData, getProfilePhoto} from "../modules/API/profile";
+import {
+	createProfile,
+	getUserPhoto,
+	createInputs,
+	assignSomeData,
+	getProfilePhoto,
+	showLoader,
+	hideLoader
+} from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
-import {data} from "../main";
+import {bus, data} from "../main";
 
 class profileView extends BaseView {
 
@@ -22,9 +30,9 @@ class profileView extends BaseView {
 		this._bus.on('fetchUser', createProfile);
 		this._bus.on('fetchAvatar', getProfilePhoto);
 		this._bus.on('createInputs', createInputs);
-		this._bus.on('assignData', assignSomeData);
 		this._bus.on('setUser', this.setUser.bind(this));
 		this._bus.on('setContent', this.setContent.bind(this));
+		this._bus.on('showLoader', showLoader);
 	}
 
 	deleteEvents() {
@@ -32,7 +40,6 @@ class profileView extends BaseView {
 		this._bus.off('fetchUser', createProfile);
 		this._bus.off('fetchAvatar', getProfilePhoto);
 		this._bus.off('createInputs', createInputs);
-		this._bus.off('assignData', assignSomeData);
 		this._bus.off('setUser', this.setUser.bind(this));
 		this._bus.off('setContent', this.setContent.bind(this));
 	}
@@ -40,8 +47,7 @@ class profileView extends BaseView {
 	drawAll() {
 
 		this.render();
-		this.showLoader();
-		this._bus.on('hideLoader', this.hideLoader);
+		this._bus.on('hideLoader', hideLoader);
 		this._bus.emit('fetchAvatar', this._data.user.id);
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
@@ -49,6 +55,7 @@ class profileView extends BaseView {
 	}
 
 	setUser() {
+		console.log("USER " + data.getUser());
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.loggedIn;
 	}
@@ -57,31 +64,21 @@ class profileView extends BaseView {
 
 		this._data.chats = data.userChats;
 		this._data.wrkspaces = data.userWrkSpaces;
+		console.log(this._data.userChats);
 	}
 
 	show() {
 		this.createEvents();
-		console.log(this._data.loggedIn);
-		this._bus.emit('assignData');
-		this._bus.emit('setUser');
-		this._bus.emit('setContent');
-		if (this._data.user === undefined || this._data.user === {}) { //TODO:пофиксить баг
+		if (data.user !== undefined) {
+			this._bus.emit('setUser');
+			this._bus.emit('setContent');
+		}
+		if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
 			this._bus.emit('fetchUser', this._parent);
 		} else {
 			this._bus.emit('drawProfilePage');
 		}
 		this.deleteEvents();
-	}
-
-	hideLoader() {
-		document.getElementById("loader").style.display = "none";
-		document.getElementById("avatar").style.display = "block";
-	}
-
-	showLoader() {
-		document.getElementById("avatar").style.display = "none";
-		document.getElementById("loader").style.display = "block";
-
 	}
 
 	drawBasics() {

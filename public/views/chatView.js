@@ -5,7 +5,7 @@ const headerTemplate = require('../components/Header/header.pug');
 const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 const profileTemplateRight = require('../components/Profile/profile.pug');
-import {createChatPage, assignSomeData} from "../modules/API/profile";
+import {createChatPage, assignSomeData, getUserPhoto} from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 
 import {data} from "../main";
@@ -21,7 +21,6 @@ class chatView extends BaseView {
     createEvents() {
     	this._bus.on('drawChatPage', this.drawAll.bind(this));
     	this._bus.on('fetchUser', createChatPage);
-    	this._bus.on('assignData', assignSomeData);
     	this._bus.on('setUser', this.setUser.bind(this));
     	this._bus.on('setContent', this.setContent.bind(this));
     }
@@ -29,7 +28,6 @@ class chatView extends BaseView {
     deleteEvents() {
     	this._bus.off('drawChatPage', this.drawAll.bind(this));
     	this._bus.off('fetchUser', createChatPage);
-    	this._bus.off('assignData', assignSomeData);
     	this._bus.off('setUser', this.setUser.bind(this));
     	this._bus.off('setContent', this.setContent.bind(this));
     }
@@ -54,10 +52,11 @@ class chatView extends BaseView {
     show() {
     	this.createEvents();
     	console.log(this._data.loggedIn);
-    	this._bus.emit('assignData');
-    	this._bus.emit('setUser');
-    	this._bus.emit('setContent');
-    	if (this._data.user === {} || this._data.user === undefined) { //TODO:пофиксить баг
+    	if (data.user !== undefined) {
+    		this._bus.emit('setUser');
+    		this._bus.emit('setContent');
+    	}
+    	if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
     		this._bus.emit('fetchUser', this._parent);
     	} else {
     		this._bus.emit('drawChatPage');
@@ -75,12 +74,18 @@ class chatView extends BaseView {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chats) {
     		this._data.chats.forEach((mes) => {
+    		    console.log(mes);
     			const mess = new MessageComponent();
     			mess.data = mes;
     			const message = document.createElement('div');
     			message.className = 'row msg';
+    			var id;
+    			if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
+    			else message.id = mes["Members"][0];
+    			message.id = "chat-" + id;
     			message.innerHTML = mess.render();
     			contentListRoot.appendChild(message);
+    			getUserPhoto(id,"chat", ".messages-pic");
     		});
     	}
 
