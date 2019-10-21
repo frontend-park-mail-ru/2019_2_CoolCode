@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
 	context: __dirname + "/public",
 	mode: "development",
+
 	entry: ['babel-polyfill', './main'],
 	output:{
 		path: path.resolve(__dirname ,'packedDir'),
