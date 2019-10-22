@@ -15,7 +15,7 @@ import {
 	hideLoader
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
-import {bus, data} from "../main";
+import {bus, data, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 
 class profileView extends BaseView {
@@ -27,29 +27,24 @@ class profileView extends BaseView {
 	};
 
 	createEvents() {
-		this._bus.on('drawProfilePage', this.drawAll.bind(this));
 		this._bus.on('fetchUser', createProfile);
 		this._bus.on('fetchAvatar', getProfilePhoto);
 		this._bus.on('createInputs', createInputs);
-		this._bus.on('setUser', this.setUser.bind(this));
-		this._bus.on('setContent', this.setContent.bind(this));
 		this._bus.on('showLoader', showLoader);
 	}
 
 	deleteEvents() {
-		this._bus.off('drawProfilePage', this.drawAll.bind(this));
+		console.log('DELETED');
 		this._bus.off('fetchUser', createProfile);
 		this._bus.off('fetchAvatar', getProfilePhoto);
 		this._bus.off('createInputs', createInputs);
-		this._bus.off('setUser', this.setUser.bind(this));
-		this._bus.off('setContent', this.setContent.bind(this));
 	}
 
 	drawAll() {
 
 		this.render();
 		this._bus.on('hideLoader', hideLoader);
-		this._bus.emit('fetchAvatar', this._data.user.id);
+		getProfilePhoto(this._data.user.id).then();
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
 		searchInteraction();
@@ -57,7 +52,6 @@ class profileView extends BaseView {
 	}
 
 	setUser() {
-		console.log("USER " + data.getUser());
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.loggedIn;
 	}
@@ -66,21 +60,24 @@ class profileView extends BaseView {
 
 		this._data.chats = data.userChats;
 		this._data.wrkspaces = data.userWrkSpaces;
-		console.log(this._data.userChats);
+		console.log(data.userChats);
 	}
 
 	show() {
 		this.createEvents();
-		if (data.user !== undefined) {
-			this._bus.emit('setUser');
-			this._bus.emit('setContent');
-		}
-		if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
-			this._bus.emit('fetchUser', this._parent);
-		} else {
-			this._bus.emit('drawProfilePage');
-		}
-		this.deleteEvents();
+		//if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
+		createProfile(this._parent).then(() => {
+			this.setUser();
+			this.setContent();
+			this.drawAll();
+			this.deleteEvents();
+		});
+		console.log('CREATED PROFILE');
+		//} else {
+		//	this.drawAll();
+		//	this.deleteEvents();
+		//	}
+
 	}
 
 	drawBasics() {

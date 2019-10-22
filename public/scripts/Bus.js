@@ -18,10 +18,14 @@ class Bus {
 	};
 
 	off(eventName, callback) {
-		this._handlers[eventName] = this._handlers[eventName]
-			.filter(function (listener) {
-				return listener !== callback;
-			});
+		let handlers = this._handlers && this._handlers[eventName];
+		if (!handlers) return;
+
+		for (let i = 0; i < handlers.length; i++) {
+			if (handlers[i] === callback) {
+				handlers.splice(i--, 1);
+			}
+		}
 	};
 
 	emit (eventName, ...data) {

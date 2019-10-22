@@ -12,7 +12,7 @@ async function createChat(id) {
 				`Didn't create chat: ${response.status}`);
 		}
 		await getChats(data.user.id);
-		router.go('/chat');
+
 	} catch (error) {
 		console.error(error);
 	}
@@ -27,7 +27,7 @@ function foundUsersClick() {
 			let id = person.id[person.id.length - 1];
 			console.log(ids.includes(parseFloat(id)));
 			if (!(ids.includes(parseFloat(id)))) {
-				createChat(id);
+				createChat(id).then(() => router.go('/chat'));
 			}
 			else{
 				router.go('/profile');

@@ -12,14 +12,6 @@ class searchView extends BaseView {
 
 	constructor (data, parent) {
 		super({user:{}, users:[]}, parent);
-		this.createEvents();
-	}
-
-	createEvents() {
-		this._bus.on('setUser', this.setUser.bind(this));
-		this._bus.on('setUsers', this.setUsers.bind(this));
-		this._bus.on('setUsersClick', foundUsersClick);
-
 	}
 
 	setUser() {
@@ -32,11 +24,10 @@ class searchView extends BaseView {
 	}
 
 	show() {
-		this._bus.emit('setUser');
-		this._bus.emit('setUsers');
+		this.setUser();
+		this.setUsers();
 		this.render();
-		this._bus.emit('setUsersClick');
-
+		foundUsersClick();
 	}
 	render() {
 

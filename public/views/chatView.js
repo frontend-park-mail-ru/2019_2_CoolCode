@@ -19,20 +19,6 @@ class chatView extends BaseView {
     	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
     };
 
-    createEvents() {
-    	this._bus.on('drawChatPage', this.drawAll.bind(this));
-    	this._bus.on('fetchUser', createChatPage);
-    	this._bus.on('setUser', this.setUser.bind(this));
-    	this._bus.on('setContent', this.setContent.bind(this));
-    }
-
-    deleteEvents() {
-    	this._bus.off('drawChatPage', this.drawAll.bind(this));
-    	this._bus.off('fetchUser', createChatPage);
-    	this._bus.off('setUser', this.setUser.bind(this));
-    	this._bus.off('setContent', this.setContent.bind(this));
-    }
-
     drawAll() {
     	this.render();
     	searchInteraction();
@@ -51,18 +37,16 @@ class chatView extends BaseView {
     }
 
     show() {
-    	this.createEvents();
     	console.log(this._data.loggedIn);
     	if (data.user !== undefined) {
-    		this._bus.emit('setUser');
-    		this._bus.emit('setContent');
+    		this.setUser();
+    		this.setContent();
     	}
     	if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
-    		this._bus.emit('fetchUser', this._parent);
+    		createChatPage(this._parent);
     	} else {
-    		this._bus.emit('drawChatPage');
+    		this.drawAll();
     	}
-    	this.deleteEvents();
     }
 
     drawBasics() {

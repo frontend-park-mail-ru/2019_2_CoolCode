@@ -52,6 +52,7 @@ async function assignSomeData() {
 			members: ["AS", "Vasya Romanov", "Bono", "U"],
 		}]
 	);
+
 }
 
 async function checkLogin () {
@@ -73,13 +74,13 @@ async function checkLogin () {
 async function createProfile() {
 	await checkLogin();
 	await assignSomeData();
-	router.go('/profile');
+	console.log('going to profile');
+
 }
 
 async function createChatPage() {
 	await checkLogin();
-	await assignSomeData();
-	router.go('/chat');
+	assignSomeData().then(() => router.go('/chat'));
 }
 
 function createInputs (application, user) {
