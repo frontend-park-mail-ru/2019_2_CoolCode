@@ -4262,7 +4262,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction openWrkSpaceInfo() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"responseStatuses\", function() { return responseStatuses; });\nvar settings = {\n  backend: 'http://localhost:8080'\n};\nvar responseStatuses = {\n  200: \"OK\",\n  304: \"Not Modified\",\n  400: \"Bad Request\",\n  401: \"Unauthorized\",\n  403: \"Forbidden\",\n  404: \"Not Found\",\n  500: \"Internal Server Error\"\n};\n\n\n//# sourceURL=webpack:///./modules/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"responseStatuses\", function() { return responseStatuses; });\nvar settings = {\n  backend: 'http://95.163.209.195:8080'\n};\nvar responseStatuses = {\n  200: \"OK\",\n  304: \"Not Modified\",\n  400: \"Bad Request\",\n  401: \"Unauthorized\",\n  403: \"Forbidden\",\n  404: \"Not Found\",\n  500: \"Internal Server Error\"\n};\n\n\n//# sourceURL=webpack:///./modules/config.js?");
 
 /***/ }),
 
