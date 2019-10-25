@@ -5,7 +5,8 @@ const headerTemplate = require('../components/Header/header.pug');
 const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 const profileTemplateRight = require('../components/Profile/profile.pug');
-import {createChatPage, assignSomeData, getUserPhoto} from "../modules/API/profile";
+const chatTemplate = require('../components/Chat/chat.pug');
+import {createChatPage, assignSomeData, getUserPhoto, getProfilePhoto as src} from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 
 import {data} from "../main";
@@ -85,7 +86,10 @@ class chatView extends BaseView {
     }
 
     drawRightColumn() {
-    	this._parent.querySelector('.column.right').innerHTML = " draw chat ::: ))) ";
+    	let name = this._parent.querySelector('.person').textContent;
+    	let photo  =this._parent.querySelector('.messages-pic').getAttribute("src");
+    	console.log(photo);
+    	this._parent.querySelector('.column.right').innerHTML = chatTemplate({photo:photo, name:name});
     }
 
     render() {

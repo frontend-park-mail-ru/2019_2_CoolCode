@@ -1,0 +1,20 @@
+html
+    head
+        style
+            include ../../styles/chat.css
+    body
+        div.head_chat
+            img.avatar(src='/' + photo)
+            div.name_usr #{name}
+            div.time last seen..
+
+        div.important
+        div.field_msg
+            div.column-left
+                include ./msgLeft
+            div.column-right
+                include ./msgRight
+        div.input_msg
+            form.send
+                input.text_msg( placeholder="Input message..")
+                input.btn(type="submit" value=" ▷")
