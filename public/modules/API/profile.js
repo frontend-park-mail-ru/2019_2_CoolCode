@@ -192,7 +192,7 @@ function hideLoader() {
 
 function hideLoaderSmall(id, parentId, classSelector) {
 	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".loader-small").style.display = "none";
+	person.querySelector(".bem-chat-block__image-column__loader").style.display = "none";
 	person.querySelector(classSelector).style.display = "block";
 }
 
@@ -204,7 +204,7 @@ function showLoader() {
 
 function showLoaderSmall(id, parentId, classSelector) {
 	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".loader-small").style.display = "block";
+	person.querySelector(".bem-chat-block__image-column__loader").style.display = "block";
 	person.querySelector(classSelector).style.display = "none";
 }
 

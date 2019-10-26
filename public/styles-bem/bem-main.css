@@ -6,6 +6,8 @@
 @import url('bemProfilePageBlocks/bemSearchMenu/bem-search-menu.css');
 @import url('bemProfilePageBlocks/bemAllChats/bem-all-chats.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemChatBlock/bem-chat-block.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bem-wrkspace-block.css');
 
 :root{
     --global-green-color: #2dc68b;

@@ -1,5 +1,5 @@
 .bem-search-menu {
-    flex: 0 0 5vh; /*experimenting with viewporsts*/
+    flex: 0 0 5vh; /*experimenting with viewports*/
 
     display: flex;
     flex-direction: row;

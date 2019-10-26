@@ -17,6 +17,6 @@
     color: #000000;
 }
 
-.bem-header-refs__ref_style :hover {
+.bem-header-refs__ref_style:hover {
     text-decoration: underline;
 }
