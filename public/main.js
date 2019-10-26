@@ -7,6 +7,8 @@ import {settings, responseStatuses} from './modules/config';
 const {backend} = settings;
 
 import './styles/main.css';
+import './styles-bem/bem-main.css';
+
 import loginView from "./views/loginView";
 import mainPageView from "./views/mainPageView";
 import signUpView from "./views/signUpView";

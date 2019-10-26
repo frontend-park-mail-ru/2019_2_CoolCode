@@ -20,7 +20,7 @@ import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 
 class profileView extends BaseView {
 
-	contentListRootSelector = '.chat-msg-scroll';
+	contentListRootSelector = '.bem-all-chats-window';
 
 	constructor (data, parent) {
 		super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
@@ -86,7 +86,7 @@ class profileView extends BaseView {
 	}
 
 	drawLeftColumn() {
-		this._parent.querySelector('.column.left').innerHTML += profileTemplateLeft(this._data.user);
+		this._parent.querySelector('.bem-column_left').innerHTML += profileTemplateLeft(this._data.user);
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		if (this._data.chats) {
 			this._data.chats.forEach((mes) => {
@@ -115,7 +115,7 @@ class profileView extends BaseView {
 	}
 
 	drawRightColumn() {
-		this._parent.querySelector('.column.right').innerHTML += profileTemplateRight(this._data.user);
+		this._parent.querySelector('.bem-column_right').innerHTML += profileTemplateRight(this._data.user);
 	}
 
 	createClickablePic() {

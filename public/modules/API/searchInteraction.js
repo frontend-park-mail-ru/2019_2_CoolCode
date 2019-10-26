@@ -23,10 +23,10 @@ async function findUser(query) {
 }
 
 function searchInteraction() {
-	let searchForm = document.querySelectorAll("#search")[0];
+	let searchForm = document.querySelector('.bem-search-menu__form');
 	searchForm.addEventListener("submit", function (event) {
 		event.preventDefault();
-		let searchInput = document.querySelectorAll("#search-input")[0];
+		let searchInput = document.querySelector('.bem-search-menu__form__input');
 		let searchInputValue = searchInput.value;
 		findUser(searchInputValue);
 

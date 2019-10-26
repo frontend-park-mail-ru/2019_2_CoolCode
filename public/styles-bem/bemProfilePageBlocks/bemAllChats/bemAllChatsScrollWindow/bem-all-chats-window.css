@@ -1,0 +1,24 @@
+.bem-all-chats-window{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+
+
+    overflow-y: scroll; /*make it scroll window*/
+    overflow-x: hidden;
+}
+
+/*styling scrollable window block*/
+.bem-all-chats-window_style{
+
+}
+
+.bem-all-chats-window_style::-webkit-scrollbar{
+    width: 7px;
+    background-color: #FFFFFF;
+}
+.bem-all-chats-window_style::-webkit-scrollbar-thumb {
+    background-color: var(--global-green-color);
+    -webkit-box-shadow: inset 0 0 6px #475C53;
+}

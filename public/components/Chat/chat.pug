@@ -1,10 +1,13 @@
 block page
-    div.head-chat-head_chat
-        img.head-chat-avatar(src='/' + photo)
-        div.head-chat-name_usr #{name}
-        div.head-chat-time last seen..
-    div.head-chat-important
     div.row.chat-container
+        div.row.head-chat-head_chat
+            div.head-chat-avatar-container
+                img.head-chat-avatar(src='/' + photo)
+            div.column.head-chat-info
+                div.head-chat-name_usr #{name}
+                div.head-chat-time last seen..
+        div.row.head-chat-important
+            p.important-message some text
         div.chat-scroll
             div.head-chat-column-left
                 include ./msgLeft

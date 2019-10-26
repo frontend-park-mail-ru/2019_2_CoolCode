@@ -1,0 +1,10 @@
+.bem-primary-container{
+    display: flex;
+    flex-wrap: nowrap; /*so everything in one line*/
+    align-items: stretch;
+    height: 95vh; /*bem-header is 5vh*/
+}
+
+.bem-primary-container_style{
+    background-color: #FFFFFF;
+}

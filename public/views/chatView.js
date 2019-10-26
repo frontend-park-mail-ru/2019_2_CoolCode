@@ -15,31 +15,31 @@ import chatInput from "../modules/API/chatInteraction";
 
 class chatView extends BaseView {
 
-    contentListRootSelector = '.chat-msg-scroll';
+	contentListRootSelector = '.bem-all-chats-window';
 
-    constructor (data, parent) {
+	constructor (data, parent) {
     	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
-    };
+	};
 
-    drawAll() {
+	drawAll() {
     	this.render();
     	searchInteraction();
     	openWrkSpaceInfo();
     	chatInput();
-    }
+	}
 
-    setUser() {
+	setUser() {
     	this._data.user = data.getUser();
     	this._data.loggedIn = data.loggedIn;
-    }
+	}
 
-    setContent() {
+	setContent() {
 
     	this._data.chats = data.userChats;
     	this._data.wrkspaces = data.userWrkSpaces;
-    }
+	}
 
-    show() {
+	show() {
     	console.log(this._data.loggedIn);
     	if (data.user !== undefined) {
     		this.setUser();
@@ -50,15 +50,15 @@ class chatView extends BaseView {
     	} else {
     		this.drawAll();
     	}
-    }
+	}
 
-    drawBasics() {
+	drawBasics() {
     	this._parent.innerHTML = headerTemplate(this._data);
     	this._parent.innerHTML += containerTemplate(this._data);
-    }
+	}
 
-    drawLeftColumn() {
-    	this._parent.querySelector('.column.left').innerHTML += profileTemplateLeft(this._data.user);
+	drawLeftColumn() {
+    	this._parent.querySelector('.bem-column_left').innerHTML += profileTemplateLeft(this._data.user);
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chats) {
     		this._data.chats.forEach((mes) => {
@@ -85,23 +85,23 @@ class chatView extends BaseView {
     			contentListRoot.appendChild(w);
     		});
     	}
-    }
+	}
 
-    drawRightColumn() {
+	drawRightColumn() {
     	//this._parent.querySelector('.column.right').innerHTML += chatTemplateRight(this._data.user);
 
     	let name = this._parent.querySelector('.person').textContent;
-    	let photo  =this._parent.querySelector('.messages-pic').getAttribute("src");
+    	let photo = this._parent.querySelector('.messages-pic').getAttribute("src");
     	console.log(photo);
-    	this._parent.querySelector('.column.right').innerHTML = chatTemplate({photo:photo, name:name});
+    	this._parent.querySelector('.bem-column_right').innerHTML = chatTemplate({photo:photo, name:name});
 
-    }
+	}
 
-    render() {
+	render() {
     	this.drawBasics();
     	this.drawLeftColumn();
     	this.drawRightColumn();
-    }
+	}
 
 }
 

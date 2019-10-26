@@ -1,0 +1,72 @@
+.bem-search-menu {
+    flex: 0 0 5vh; /*experimenting with viewporsts*/
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: space-between;
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+.bem-search-menu_outline {
+    border-top: 1px solid var(--global-grey-color);
+    border-bottom: 1px solid var(--global-grey-color);
+}
+
+/* create-wrkspace-button element*/
+
+.bem-search-menu__button {
+    flex: 0 10 60px; /*fixed width*/
+    height: 80%;
+
+    margin: 5px 5px 5px 5px;
+}
+
+.bem-search-menu__button_style {
+    background-color: var(--global-green-color);
+    font-family: var(--global-font-family-Roboto);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* form element*/
+
+.bem-search-menu__form{
+    flex: 10 0 0; /*width not specified, max growing*/
+    height: 80%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin: 5px 10px 5px 10px;
+}
+
+/* input element in form*/
+.bem-search-menu__form__input{
+    flex: 10 0 100px; /*fixed width , max growing*/
+
+}
+
+.bem-search-menu__form__input_style{
+    background-color: var(--global-grey-color);
+    font-family: var(--global-font-family-Roboto);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+
+}
+/* submit-button element in form*/
+.bem-search-menu__form__button{
+    flex: 0 10 60px; /*fixed width*/
+
+}
+
+.bem-search-menu__form__button_style{
+    background-color: #FFFFFF;
+    border: none;
+}

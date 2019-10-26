@@ -48,11 +48,12 @@
 }
 
 .icon-chat:hover{
-    filter: grayscale(50%) saturate(500%);
+    filter: invert(0.7) brightness(200%) saturate(10%);
     border-radius: 20px;
     border: 0.5px solid #FFFFFF;
 
 }
+
 
 .icon-chat{
     margin: 5px 5px 5px 5px;
