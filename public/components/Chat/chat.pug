@@ -1,7 +1,15 @@
 block page
+    div.head-chat-head_chat
+        img.head-chat-avatar(src='/' + photo)
+        div.head-chat-name_usr #{name}
+        div.head-chat-time last seen..
+    div.head-chat-important
     div.row.chat-container
         div.chat-scroll
-            div.row.message-chat
+            div.head-chat-column-left
+                include ./msgLeft
+            div.head-chat-column-right
+                include ./msgRight
         div.row.input-container
             div.icon-chat-container
                 img.icon-chat(src="images/add.png")
