@@ -10,23 +10,20 @@ mixin settings(pText, reference)
 
 
 block page
-    if chat
-        div chat here
-    else
-        div.row.profile-pic
-            div.column.for-img-profile
-                div.row.profile-pic-row
-                    div.loader#loader
-                    img.user-profile-pic#avatar(src="images/user.jpg")
-                    input#file(type='file', style='display: none;')
-            div.column.for-profile-sett
-                div.row.nick-row#username-setting= username
-                div.row.name-row#fullname-setting= fullname
-        div.row
-            div.column.settings
-                +field("status", fstatus, "fstatus-setting")
-                +field("email", email, "email-setting")
-                +field("phone", phone, "phone-setting")
-                +settings("account ", "/")
-                +settings("privacy ", "/")
+    div.row.profile-pic
+        div.column.for-img-profile
+            div.row.profile-pic-row
+                div.loader#loader
+                img.user-profile-pic#avatar(src="images/user.jpg")
+                input#file(type='file', style='display: none;')
+        div.column.for-profile-sett
+            div.row.nick-row#username-setting= username
+            div.row.name-row#fullname-setting= fullname
+    div.row
+        div.column.settings
+            +field("status", fstatus, "fstatus-setting")
+            +field("email", email, "email-setting")
+            +field("phone", phone, "phone-setting")
+            +settings("account ", "/")
+            +settings("privacy ", "/")
 

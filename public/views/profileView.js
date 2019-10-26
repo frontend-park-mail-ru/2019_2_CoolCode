@@ -20,7 +20,7 @@ import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 
 class profileView extends BaseView {
 
-	contentListRootSelector = '.chat-msg';
+	contentListRootSelector = '.chat-msg-scroll';
 
 	constructor (data, parent) {
 		super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
@@ -44,7 +44,7 @@ class profileView extends BaseView {
 
 		this.render();
 		this._bus.on('hideLoader', hideLoader);
-		getProfilePhoto(this._data.user.id).then();
+		getProfilePhoto(this._data.user.id);
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
 		searchInteraction();

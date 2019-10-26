@@ -4,16 +4,17 @@ import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
 const headerTemplate = require('../components/Header/header.pug');
 const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
-const profileTemplateRight = require('../components/Profile/profile.pug');
+const chatTemplateRight = require('../components/Chat/chat.pug');
 import {createChatPage, assignSomeData, getUserPhoto} from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 
 import {data} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
+import chatInput from "../modules/API/chatInteraction";
 
 class chatView extends BaseView {
 
-    contentListRootSelector = '.chat-msg';
+    contentListRootSelector = '.chat-msg-scroll';
 
     constructor (data, parent) {
     	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
@@ -23,6 +24,7 @@ class chatView extends BaseView {
     	this.render();
     	searchInteraction();
     	openWrkSpaceInfo();
+    	chatInput();
     }
 
     setUser() {
@@ -85,7 +87,7 @@ class chatView extends BaseView {
     }
 
     drawRightColumn() {
-    	this._parent.querySelector('.column.right').innerHTML = " draw chat ::: ))) ";
+    	this._parent.querySelector('.column.right').innerHTML += chatTemplateRight(this._data.user);
     }
 
     render() {

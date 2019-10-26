@@ -202,9 +202,21 @@ header{
 
 }
 .chat-msg{
-    height: 100%;
     align-items: stretch;
     justify-content: stretch;
+}
+.chat-msg-scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100px;
+}
+.chat-msg-scroll::-webkit-scrollbar{
+    width: 7px;
+    background-color: #FFFFFF;
+}
+.chat-msg-scroll::-webkit-scrollbar-thumb {
+    background-color: #2dc68b;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 .header-icon{
     overflow: hidden;
@@ -253,9 +265,10 @@ header{
     width: 60%;
 }
 .messg-text{
-    background-color: rgba(207, 232, 223, 0.58);
+    background-color:#C4C4C4;
     height: 24px;
     width:80%;
+    border-radius: 20px;
 }
 .messg-count{
     margin: 0 20px 0 0;

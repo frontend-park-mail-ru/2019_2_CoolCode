@@ -8,7 +8,7 @@ import {getUserPhoto} from "../modules/API/profile";
 
 class searchView extends BaseView {
 
-	contentListRootSelector = '.chat-msg';
+	contentListRootSelector = '.chat-msg-scroll';
 
 	constructor (data, parent) {
 		super({user:{}, users:[]}, parent);
