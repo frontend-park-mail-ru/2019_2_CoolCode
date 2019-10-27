@@ -10,9 +10,9 @@ import {
 	getUserPhoto,
 	createInputs,
 	assignSomeData,
-	getProfilePhoto,
+	Photo,
 	showLoader,
-	hideLoader
+	hideLoader, setPicture, getProfilePhoto
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data, router} from "../main";
@@ -27,24 +27,20 @@ class profileView extends BaseView {
 	};
 
 	createEvents() {
-		this._bus.on('fetchUser', createProfile);
-		this._bus.on('fetchAvatar', getProfilePhoto);
+		bus.on('AAA', setPicture);
 		this._bus.on('createInputs', createInputs);
 		this._bus.on('showLoader', showLoader);
 	}
 
 	deleteEvents() {
 		console.log('DELETED');
-		this._bus.off('fetchUser', createProfile);
-		this._bus.off('fetchAvatar', getProfilePhoto);
 		this._bus.off('createInputs', createInputs);
 	}
 
 	drawAll() {
-
 		this.render();
+		this._bus.emit('showLoader');
 		this._bus.on('hideLoader', hideLoader);
-		getProfilePhoto(this._data.user.id);
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
 		searchInteraction();
@@ -67,6 +63,7 @@ class profileView extends BaseView {
 		this.createEvents();
 		//if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
 		createProfile(this._parent).then(() => {
+			getProfilePhoto(data.user.id).then();
 			this.setUser();
 			this.setContent();
 			this.drawAll();
@@ -100,7 +97,7 @@ class profileView extends BaseView {
 				message.id = "chat-" + id;
 				message.innerHTML = mess.render();
 				contentListRoot.appendChild(message);
-				getUserPhoto(id,"chat", ".bem-chat-block__image-column__image");
+				getUserPhoto(id,"chat", ".bem-chat-block__image-row__image");
 			});
 		}
 

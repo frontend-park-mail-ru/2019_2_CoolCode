@@ -1,11 +1,7 @@
-div.bem-wrkspace-block__visible-row.bem-wrkspace-block__visible-row_style
-    div.bem-wrkspace-block__visible-row__image-column
-        img.bem-wrkspace-block__visible-row__image-column__image.bem-wrkspace-block__visible-row__image-column__image_style(src='images/abkhazia.jpg')
-    div.column.for-msg
-        div.row.name
-            p.person= title
-        div.row.message
-            div.column.wrkspace-info-column
-                p.wrkspace-info= members.length + " members"
-                p.wrkspace-info= channels.length + " channels"
+div.bem-wrkspace-visible.bem-wrkspace-visible_style
+    div.bem-wrkspace-visible__image-row
+        img.bem-wrkspace-visible__image-row__image.bem-wrkspace-visible__image-row__image_style(src='images/abkhazia.jpg')
+    div.bem-wrkspace-visible__info-column
+        div.bem-wrkspace-visible__info-column__name-row.bem-wrkspace-visible__info-column__name-row_style= title
+        div.bem-wrkspace-visible__info-column__chann-row.bem-wrkspace-visible__info-column__chann-row_style= channels.length + " channels"
 

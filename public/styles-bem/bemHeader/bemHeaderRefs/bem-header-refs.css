@@ -1,6 +1,6 @@
 .bem-header-refs {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 /*link element*/
 

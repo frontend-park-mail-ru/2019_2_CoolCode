@@ -14,11 +14,14 @@ class Bus {
 		if (!this._handlers[eventName]) {
 			this._handlers[eventName] = [];
 		}
+		if (this._handlers[eventName].includes(callback)) return;
 		this._handlers[eventName].push(callback);
 	};
 
 	off(eventName, callback) {
+
 		let handlers = this._handlers && this._handlers[eventName];
+
 		if (!handlers) return;
 
 		for (let i = 0; i < handlers.length; i++) {
@@ -29,9 +32,9 @@ class Bus {
 	};
 
 	emit (eventName, ...data) {
-		if (!this._handlers || !this._handlers[eventName]) {
-			return;
-		}
+		let handlers = this._handlers && this._handlers[eventName];
+
+		if (!handlers) return;
 
 		this._handlers[eventName].forEach(handler => handler.apply(this, data));
 	};

@@ -6,10 +6,16 @@ const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 
 const chatTemplate = require('../components/Chat/chat.pug');
-import {createChatPage, assignSomeData, getUserPhoto, getProfilePhoto as src} from "../modules/API/profile";
+import {
+	createChatPage,
+	assignSomeData,
+	getUserPhoto,
+	getProfilePhoto as src,
+	createProfile, setPicture
+} from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 
-import {data} from "../main";
+import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
 
@@ -18,7 +24,7 @@ class chatView extends BaseView {
 	contentListRootSelector = '.bem-all-chats-window';
 
 	constructor (data, parent) {
-    	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
+    	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null, chatUser:{}, chatUserPhoto: '../images/abkhazia.jpg'}, parent);
 	};
 
 	drawAll() {
@@ -33,6 +39,11 @@ class chatView extends BaseView {
     	this._data.loggedIn = data.loggedIn;
 	}
 
+	setChatUser() {
+		this._data.chatUser = data.getCurrentChatUser();
+		bus.on('AAA', setPicture);
+	}
+
 	setContent() {
 
     	this._data.chats = data.userChats;
@@ -40,16 +51,17 @@ class chatView extends BaseView {
 	}
 
 	show() {
-    	console.log(this._data.loggedIn);
-    	if (data.user !== undefined) {
-    		this.setUser();
-    		this.setContent();
-    	}
-    	if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
-    		createChatPage(this._parent);
-    	} else {
-    		this.drawAll();
-    	}
+		if (!data.getCurrentChatUser()) router.go('/profile');
+		else {
+			createChatPage(this._parent).then(() => {
+				this.setUser();
+				this.setChatUser();
+				this.setContent();
+				this.drawAll();
+			});
+			console.log('CREATED CHAT PAGE');
+		}
+
 	}
 
 	drawBasics() {
@@ -73,7 +85,7 @@ class chatView extends BaseView {
     			message.id = "chat-" + id;
     			message.innerHTML = mess.render();
     			contentListRoot.appendChild(message);
-    			getUserPhoto(id,"chat", ".bem-chat-block__image-column__image");
+    			getUserPhoto(id,"chat", ".bem-chat-block__image-row__image");
     		});
     	}
 
@@ -88,12 +100,7 @@ class chatView extends BaseView {
 	}
 
 	drawRightColumn() {
-    	//this._parent.querySelector('.column.right').innerHTML += chatTemplateRight(this._data.user);
-
-    	let name = this._parent.querySelector('.person').textContent;
-    	let photo = this._parent.querySelector('.messages-pic').getAttribute("src");
-    	console.log(photo);
-    	this._parent.querySelector('.bem-column_right').innerHTML = chatTemplate({photo:photo, name:name});
+    	this._parent.querySelector('.bem-column_right').innerHTML += chatTemplate(this._data);
 
 	}
 

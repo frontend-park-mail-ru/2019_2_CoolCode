@@ -1,5 +1,5 @@
 import {bus, FetchModule, router, data} from "../../main";
-import {getChats} from "./profile";
+import {getChats, getUserInfo, saveUserPhoto} from "./profile";
 
 async function createChat(id) {
 	try {
@@ -12,6 +12,11 @@ async function createChat(id) {
 				`Didn't create chat: ${response.status}`);
 		}
 		await getChats(data.user.id);
+		getUserInfo(id).then((user) => {
+			console.log('USER ' + user);
+			data.setCurrentChatUser(user);
+		});
+		await saveUserPhoto(id);
 
 	} catch (error) {
 		console.error(error);

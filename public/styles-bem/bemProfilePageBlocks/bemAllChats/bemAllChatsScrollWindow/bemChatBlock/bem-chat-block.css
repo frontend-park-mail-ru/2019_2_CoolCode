@@ -20,56 +20,50 @@
 
 /*image-column element*/
 
-.bem-chat-block__image-column {
+.bem-chat-block__image-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     width: 20%;
     height: 100%;
 
-    margin: 0 0 0 10px;
+    margin: 5px 0 0 0;
 }
 
 /*image-column elements*/
 
-.bem-chat-block__image-column__loader {
-    width: 80%;
-    height: 80%;
+.bem-chat-block__image-row__loader {
+    width: 8vh; /*experimenting with viewports*/
+    height: 8vh;
 
     animation: spin 2s linear infinite;
 }
 
-.bem-chat-block__image-column__loader_style {
+.bem-chat-block__image-row__loader_style {
     border: 5px solid #f3f3f3;
     border-top: 5px solid var(--global-green-color);
     border-radius: 50%;
 }
 
 
-.bem-chat-block__image-column__image {
-    width: 80%;
-    height: 80%;
+.bem-chat-block__image-row__image {
+    width: 8vh; /*experimenting with viewports*/
+    height: 8vh;
 
     object-position: center center;
     object-fit: fill;
     box-sizing: border-box;
 }
 
-.bem-chat-block__image-column__image_style {
+.bem-chat-block__image-row__image_style {
     border: 1px solid var(--global-green-color);
     border-radius: 50%;
 }
 
-.bem-chat-block__image-column__image_style:hover {
+.bem-chat-block__image-row__image_style:hover {
     border: 2px solid var(--global-green-color);
 }
 
-/*spin function*/
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 /*message-column element*/
 

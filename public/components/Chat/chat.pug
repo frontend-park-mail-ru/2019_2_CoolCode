@@ -2,9 +2,9 @@ block page
     div.row.chat-container
         div.row.head-chat-head_chat
             div.head-chat-avatar-container
-                img.head-chat-avatar(src='/' + photo)
+                img.head-chat-avatar(src='/' + chatUserPhoto)
             div.column.head-chat-info
-                div.head-chat-name_usr #{name}
+                div.head-chat-name_usr #{chatUser.username}
                 div.head-chat-time last seen..
         div.row.head-chat-important
             p.important-message some text

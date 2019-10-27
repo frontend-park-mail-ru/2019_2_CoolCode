@@ -80,7 +80,7 @@ async function createProfile() {
 
 async function createChatPage() {
 	await checkLogin();
-	assignSomeData().then(() => router.go('/chat'));
+	await assignSomeData();
 }
 
 function createInputs (application, user) {
@@ -114,15 +114,30 @@ async function getChats(id) {
 	}
 }
 
+async function getUserInfo(id) {
+	console.log(` Getting user ${id} info`);
+	try {
+		let response = await FetchModule._doGet({path: `/users/${id}`});
+		if (response.status !== 200) {
+			throw new Error(
+				`Не зашли: ${response.status}`);
+		}
+		let user = await response.json();
+		console.log(user);
+		return user;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 async function getProfilePhoto(id) {
-	bus.emit('showLoader');
 	console.log(` Getting user ${id} photo`);
 	try {
 		let response = await FetchModule._doGet({path: `/photos/${id}`});
-		if (response.status == 401) {
+		if (response.status === 401) {
 			throw new Error(responseStatuses["401"]);
 		}
-		if (response.status == 500) {
+		if (response.status === 500) {
 			document.getElementById('avatar').src = 'images/sasha.jpeg';
 		}
 		let buffer = await response.blob();
@@ -130,8 +145,30 @@ async function getProfilePhoto(id) {
 		worker.postMessage(buffer);
 
 		worker.onmessage = function(result) {
-			document.getElementById('avatar').src = result.data;
+			data.setUserPhoto(result.data);
+			bus.emit('AAA', '#avatar',data.getUserPhoto());
 			bus.emit('hideLoader');
+		};
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function saveUserPhoto(id) {
+	console.log(` Getting user ${id} photo`);
+	try {
+		let response = await FetchModule._doGet({path: `/photos/${id}`});
+		if (response.status !== 200) {
+			throw new Error(
+				`Не зашли: ${response.status}`);
+		}
+		let buffer = await response.blob();
+		let worker = new MyWorker();
+		worker.postMessage(buffer);
+
+		worker.onmessage = function(result) {
+			data.setCurrentChatUserPhoto(result.data);
+			bus.emit('AAA', '.head-chat-avatar', data.getCurrentChatUserPhoto());
 		};
 	} catch (error) {
 		console.error(error);
@@ -192,7 +229,7 @@ function hideLoader() {
 
 function hideLoaderSmall(id, parentId, classSelector) {
 	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".bem-chat-block__image-column__loader").style.display = "none";
+	person.querySelector(".bem-chat-block__image-row__loader").style.display = "none";
 	person.querySelector(classSelector).style.display = "block";
 }
 
@@ -204,9 +241,16 @@ function showLoader() {
 
 function showLoaderSmall(id, parentId, classSelector) {
 	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".bem-chat-block__image-column__loader").style.display = "block";
+	person.querySelector(".bem-chat-block__image-row__loader").style.display = "block";
 	person.querySelector(classSelector).style.display = "none";
 }
 
+function setPicture(selector, photo) {
+	let avatarElement = document.querySelector(selector);
+	if (avatarElement) {
+		avatarElement.src = photo;
+	}
+}
+
 export { createProfile, createChatPage, createInputs, getUserPhoto, getProfilePhoto, assignSomeData,
-	getChats, showLoader, hideLoader};
+	getChats, showLoader, hideLoader, getUserInfo, saveUserPhoto, setPicture};

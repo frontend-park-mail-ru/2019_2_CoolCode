@@ -1,10 +1,13 @@
 class Data {
 
-	constructor(loggedIn, user , userChats = [], userWrkSpaces = []) {
+	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [], currentChatUser, currentChatUserPhoto) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
 		this.user = user;
+		this.userPhoto = userPhoto;
+		this.currentChatUser = currentChatUser;
+		this.currentChatUserPhoto = currentChatUserPhoto;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
 		this.userWrkSpaces = userWrkSpaces;
@@ -14,6 +17,7 @@ class Data {
 	}
 
 	clear() {
+		this.currentChatUser = undefined;
 		this.user = undefined;
 		this.userChats = [];
 		this.userWrkSpaces = [];
@@ -28,6 +32,31 @@ class Data {
 	    this.user = value;
 	    console.log(value);
 	    this.loggedIn = true;
+	}
+
+	setCurrentChatUser(value) {
+		this.currentChatUser = value;
+		console.log('chatUser ' + value);
+	}
+
+	getCurrentChatUser() {
+		return this.currentChatUser;
+	}
+
+	setCurrentChatUserPhoto(value) {
+		this.currentChatUserPhoto = value;
+	}
+
+	getCurrentChatUserPhoto() {
+		return this.currentChatUserPhoto;
+	}
+
+	setUserPhoto(value) {
+		this.userPhoto = value;
+	}
+
+	getUserPhoto() {
+		return this.userPhoto;
 	}
 
 	setChats(value) {

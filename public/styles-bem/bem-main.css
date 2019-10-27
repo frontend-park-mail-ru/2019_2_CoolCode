@@ -8,10 +8,22 @@
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemChatBlock/bem-chat-block.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bem-wrkspace-block.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css');
+
 
 :root{
     --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;
+    --global-darkgrey-color: #6D6D6D;
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
+}
+
+/*spin function*/
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
