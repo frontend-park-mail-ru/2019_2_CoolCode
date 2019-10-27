@@ -29,9 +29,10 @@ function foundUsersClick() {
 		person.addEventListener("click", function (event) {
 			event.preventDefault();
 			let ids = data.getChatUsers();
-			let id = person.id[person.id.length - 1];
+			let id = person.id.split('-')[1];
 			console.log(ids.includes(parseFloat(id)));
 			if (!(ids.includes(parseFloat(id)))) {
+				console.log('!!!' + id);
 				createChat(id).then(() => router.go('/chat'));
 			}
 			else{
