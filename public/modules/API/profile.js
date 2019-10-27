@@ -138,7 +138,7 @@ async function getProfilePhoto(id) {
 			throw new Error(responseStatuses["401"]);
 		}
 		if (response.status === 500) {
-			document.getElementById('avatar').src = 'images/sasha.jpeg';
+			document.querySelector('.bem-profile-header__image-row__image').src = 'images/sasha.jpeg';
 		}
 		let buffer = await response.blob();
 		let worker = new MyWorker();
@@ -146,7 +146,7 @@ async function getProfilePhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setUserPhoto(result.data);
-			bus.emit('AAA', '#avatar',data.getUserPhoto());
+			bus.emit('AAA', '.bem-profile-header__image-row__image',data.getUserPhoto());
 			bus.emit('hideLoader');
 		};
 	} catch (error) {
@@ -217,14 +217,14 @@ async function imageUploading(params = {id:null, fileInput:null}) {
 }
 
 function createImageUpload (id) {
-	const imageInput = document.getElementById('file');
+	const imageInput = document.querySelector('.bem-profile-header__image-row__input');
 	console.log('image upload created');
 	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
 function hideLoader() {
-	document.getElementById("loader").style.display = "none";
-	document.getElementById("avatar").style.display = "block";
+	document.querySelector('.bem-profile-header__image-row__loader').style.display = 'none';
+	document.querySelector(".bem-profile-header__image-row__image").style.display = 'block';
 }
 
 function hideLoaderSmall(id, parentId, classSelector) {
@@ -234,9 +234,8 @@ function hideLoaderSmall(id, parentId, classSelector) {
 }
 
 function showLoader() {
-	document.getElementById("avatar").style.display = "none";
-	document.getElementById("loader").style.display = "block";
-
+	document.querySelector('.bem-profile-header__image-row__loader').style.display = 'block';
+	document.querySelector(".bem-profile-header__image-row__image").style.display = 'none';
 }
 
 function showLoaderSmall(id, parentId, classSelector) {

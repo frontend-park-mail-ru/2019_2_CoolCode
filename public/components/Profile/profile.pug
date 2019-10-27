@@ -10,15 +10,14 @@ mixin settings(pText, reference)
 
 
 block page
-    div.row.profile-pic
-        div.column.for-img-profile
-            div.row.profile-pic-row
-                div.loader#loader
-                img.user-profile-pic#avatar(src="images/user.jpg")
-                input#file(type='file', style='display: none;')
-        div.column.for-profile-sett
-            div.row.nick-row#username-setting= username
-            div.row.name-row#fullname-setting= fullname
+    div.bem-profile-header
+        div.bem-profile-header__image-row
+            div.bem-profile-header__image-row__loader.bem-profile-header__image-row__loader_style
+            img.bem-profile-header__image-row__image.bem-profile-header__image-row__image_style(src="images/user.jpg")
+            input.bem-profile-header__image-row__input(type='file')
+        div.bem-profile-header__username-column
+            div.bem-profile-header__username-column__username.bem-profile-header__username-column__username_style#username-setting= username
+            div.bem-profile-header__username-column__fullname.bem-profile-header__username-column__fullname_style#fullname-setting= fullname
     div.row
         div.column.settings
             +field("status", fstatus, "fstatus-setting")

@@ -1,0 +1,33 @@
+.bem-profile-info {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/*field element*/
+
+.bem-profile-info__field {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 80%;
+}
+
+/*name element in field*/
+
+.bem-profile-info__field__name {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 80%;
+}
+
+.bem-profile-info__field__name_style {
+    color: var(--global-green-color);
+    font-family: var(--global-font-family-Roboto);
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    font-weight: 300;
+}
+

@@ -40,7 +40,7 @@
 }
 
 .bem-chat-block__image-row__loader_style {
-    border: 5px solid #f3f3f3;
+    border: 5px solid var(--global-loader-grey-color);
     border-top: 5px solid var(--global-green-color);
     border-radius: 50%;
 }

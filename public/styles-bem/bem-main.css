@@ -11,12 +11,14 @@
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css');
+@import url('bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css');
 
 
 :root{
     --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;
     --global-darkgrey-color: #6D6D6D;
+    --global-loader-grey-color: #F3F3F3 ;
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
 }

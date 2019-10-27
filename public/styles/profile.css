@@ -36,10 +36,7 @@ header{
     object-fit: fill;
     box-sizing: border-box;
 }
-#avatar:hover{
-      border: 3px solid #2dc68b;
 
-  }
 .logo{
     object-position: center center;
     object-fit: fill;

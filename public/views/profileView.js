@@ -125,8 +125,8 @@ class profileView extends BaseView {
 	}
 
 	createClickablePic() {
-		const img = document.getElementById('avatar');
-		const input = document.getElementById('file');
+		const img = document.querySelector('.bem-profile-header__image-row__image');
+		const input = document.querySelector('.bem-profile-header__image-row__input');
 		img.addEventListener('click', function () {
 			input.click();
 		});

@@ -22,14 +22,15 @@ function createWebsocketConn(chatId, userId) {
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
+		console.log('opened webSocket connection');
 		fetchUserInfo(userId).then(() => router.go('/chat'));
 	};
 
 	websocketConn.onclose = (event) => {
 		if (event.wasClean) {
-			console.log(`websocket was closed with code : ${event.code}, cause : ${event.reason}`);
+			console.log(`webSocket was closed with code : ${event.code}, cause : ${event.reason}`);
 		} else {
-			console.log(`error occurred, websocket was closed with code : ${event.code}`);
+			console.log(`error occurred, webSocket was closed with code : ${event.code}`);
 		}
 	};
 
