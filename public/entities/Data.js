@@ -1,6 +1,6 @@
 class Data {
 
-	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [], currentChatUser, currentChatUserPhoto) {
+	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [], currentChatUser, currentChatUserPhoto, webSocketConns = []) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -12,6 +12,7 @@ class Data {
 		this.userChats = userChats;
 		this.userWrkSpaces = userWrkSpaces;
 		this.lastSearchUsers = [];
+		this.webSocketConns = webSocketConns;
 
 		Data.__instance = this;
 	}
@@ -22,6 +23,14 @@ class Data {
 		this.userChats = [];
 		this.userWrkSpaces = [];
 		this.loggedIn = undefined;
+	}
+
+	addWebSocketConn(userId, conn) {
+		this.webSocketConns[userId] = conn;
+	}
+
+	removeWebSocketConn(userId) {
+		this.webSocketConns[userId] = null;
 	}
 
 	loggedInUser(value) {
@@ -78,6 +87,21 @@ class Data {
 
 	returnLastSearchUsers() {
 		return this.lastSearchUsers;
+	}
+
+	getChatUsersWChatIDs() {
+		const ids = [];
+		this.userChats.forEach((chat) => {
+			console.log(chat);
+			if (chat["Members"][0] == this.user.id) {
+				ids.push({userId: chat["Members"][1],
+					chatId : chat.ID});
+			} else {
+				ids.push({userId: chat["Members"][0],
+					chatId : chat.ID});
+			};
+		});
+		return ids;
 	}
 
 	getChatUsers() {

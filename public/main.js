@@ -23,7 +23,7 @@ const bus = new Bus();
 const application = document.getElementById('application');
 const router = new Router(application);
 const FetchModule = new Fetch();
-FetchModule.setUrl(backend);
+FetchModule.setUrl(`http://${backend}`);
 const data = new Data();
 
 createEvents();

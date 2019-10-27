@@ -17,6 +17,7 @@ import {
 import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
+import {chooseChat} from "../modules/API/websocketCreation";
 
 class profileView extends BaseView {
 
@@ -43,6 +44,7 @@ class profileView extends BaseView {
 		this._bus.on('hideLoader', hideLoader);
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
+		this.setWebSocketsInteraction();
 		searchInteraction();
 		openWrkSpaceInfo();
 	}
@@ -59,9 +61,16 @@ class profileView extends BaseView {
 		console.log(data.userChats);
 	}
 
+	setWebSocketsInteraction() {
+		let chatUsersWChatID = data.getChatUsersWChatIDs();
+
+		chatUsersWChatID.forEach((chat) => {
+			chooseChat(chat.chatId, chat.userId);
+		});
+	}
+
 	show() {
 		this.createEvents();
-		//if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
 		createProfile(this._parent).then(() => {
 			getProfilePhoto(data.user.id).then();
 			this.setUser();

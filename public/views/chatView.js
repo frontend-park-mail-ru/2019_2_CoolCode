@@ -18,6 +18,7 @@ import searchInteraction from "../modules/API/searchInteraction";
 import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
+import {chooseChat} from "../modules/API/websocketCreation";
 
 class chatView extends BaseView {
 
@@ -32,6 +33,7 @@ class chatView extends BaseView {
     	searchInteraction();
     	openWrkSpaceInfo();
     	chatInput();
+		this.setWebSocketsInteraction();
 	}
 
 	setUser() {
@@ -48,6 +50,14 @@ class chatView extends BaseView {
 
     	this._data.chats = data.userChats;
     	this._data.wrkspaces = data.userWrkSpaces;
+	}
+
+	setWebSocketsInteraction() {
+		let chatUsersWChatID = data.getChatUsersWChatIDs();
+
+		chatUsersWChatID.forEach((chat) => {
+			chooseChat(chat.chatId, chat.userId);
+		});
 	}
 
 	show() {
@@ -80,7 +90,7 @@ class chatView extends BaseView {
     			const message = document.createElement('div');
     			message.className = 'bem-chat-block bem-chat-block_style';
     			var id;
-    			if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
+    			if (mes["Members"][0] === data.user.id) id = mes["Members"][1];
     			else message.id = mes["Members"][0];
     			message.id = "chat-" + id;
     			message.innerHTML = mess.render();
