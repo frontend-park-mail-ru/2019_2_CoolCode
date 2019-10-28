@@ -2,7 +2,6 @@
 @import url('bemHeader/bemHeaderRefs/bem-header-refs.css');
 @import url('bemPrimaryContainer/bem-primary-container.css');
 @import url('bemPrimaryContainer/bemColumn/bem-column.css');
-@import url('bemPrimaryContainer/bemRow/bem-row.css');
 @import url('bemProfilePageBlocks/bemSearchMenu/bem-search-menu.css');
 @import url('bemProfilePageBlocks/bemAllChats/bem-all-chats.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css');
