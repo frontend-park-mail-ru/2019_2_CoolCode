@@ -79,6 +79,7 @@ class profileView extends BaseView {
 			this.deleteEvents();
 		});
 		console.log('CREATED PROFILE');
+
 		//} else {
 		//	this.drawAll();
 		//	this.deleteEvents();
