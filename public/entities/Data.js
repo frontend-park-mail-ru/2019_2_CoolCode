@@ -23,6 +23,16 @@ class Data {
 		this.userChats = [];
 		this.userWrkSpaces = [];
 		this.loggedIn = undefined;
+
+		this.user = undefined;
+		this.userPhoto = undefined;
+		this.currentChatUser = undefined;
+		this.currentChatUserPhoto = undefined;
+		this.loggedIn = undefined;
+		this.userChats = [];
+		this.userWrkSpaces = [];
+		this.lastSearchUsers = [];
+		this.webSocketConns = [];
 	}
 
 	addWebSocketConn(userId, conn) {
