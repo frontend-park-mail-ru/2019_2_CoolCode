@@ -93,7 +93,7 @@ class Data {
 		const ids = [];
 		this.userChats.forEach((chat) => {
 			console.log(chat);
-			if (chat["Members"][0] == this.user.id) {
+			if (chat["Members"][0] === this.user.id) {
 				ids.push({userId: chat["Members"][1],
 					chatId : chat.ID});
 			} else {
@@ -104,11 +104,27 @@ class Data {
 		return ids;
 	}
 
+	getChatIdByChatUserId(userId) {
+		let chatId = null;
+		this.userChats.forEach((chat) => {
+			let otherId;
+			if (chat["Members"][0] === this.user.id) {
+				otherId = chat["Members"][1];
+			} else {
+				otherId = chat["Members"][0];
+			}
+			if (otherId === userId) {
+				chatId = chat.ID;
+			}
+		});
+		return chatId;
+	}
+
 	getChatUsers() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
 			console.log(chat);
-			if (chat["Members"][0] == this.user.id) {
+			if (chat["Members"][0] === this.user.id) {
 				ids.push(chat["Members"][1]);
 			} else {
 				ids.push(chat["Members"][0]);

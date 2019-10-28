@@ -12,6 +12,8 @@
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css');
 @import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css');
 @import url('bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css');
+@import url('bemProfilePageBlocks/bemProfileInfo/bem-profile-info.css');
+@import url('bemSearchPageBlocks/bemUserFoundBlock/bem-user-found.css');
 
 
 :root{

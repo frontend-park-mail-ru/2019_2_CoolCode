@@ -2,7 +2,7 @@ import BaseView from "./baseView";
 import {foundUsersClick} from "../modules/API/chat";
 import MessageComponent from "../components/Message/Message";
 import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-import {data} from "../main";
+import {data, router} from "../main";
 import UserComponent from "../components/User/User";
 import {getUserPhoto} from "../modules/API/profile";
 
@@ -23,10 +23,13 @@ class searchView extends BaseView {
 	}
 
 	show() {
-		this.setUser();
-		this.setUsers();
-		this.render();
-		foundUsersClick();
+		if (!data.loggedIn) router.go('/profile');
+		else {
+			this.setUser();
+			this.setUsers();
+			this.render();
+			foundUsersClick();
+		}
 	}
 	render() {
 
@@ -38,11 +41,11 @@ class searchView extends BaseView {
 				const userComponent = new UserComponent();
 				userComponent.data = user;
 				const userBlock = document.createElement('div');
-				userBlock.className = 'row user';
+				userBlock.className = 'bem-user-found bem-user-found_style';
 				userBlock.id = "search-" + user.id;
 				userBlock.innerHTML = userComponent.render();
 				contentListRoot.appendChild(userBlock);
-				getUserPhoto(user.id, 'search', '.user-search-pic');
+				getUserPhoto(user.id, 'search', '.bem-chat-block__image-row__image');
 			});
 		}
 

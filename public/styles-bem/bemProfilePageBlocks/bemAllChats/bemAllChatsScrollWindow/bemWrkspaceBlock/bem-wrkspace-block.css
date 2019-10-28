@@ -13,6 +13,6 @@
 }
 
 .bem-wrkspace-block_style:hover {
-    box-shadow: 0 0 8px #475C53;
-
+    border: 1px solid var(--global-darkgrey-color);
+    box-shadow: 0 0 8px var(--global-darkgrey-color);
 }

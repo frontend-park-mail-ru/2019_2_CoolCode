@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: center;
     width: 100%;
     height: 10vh; /*experimenting with viewports*/
 
@@ -14,17 +15,17 @@
 }
 
 .bem-wrkspace-visible_style:hover {
-    box-shadow: 0 0 8px #475C53;
+    box-shadow: 0 0 8px var(--global-grey-color);
 }
 
 
 /*image-column element*/
 
 .bem-wrkspace-visible__image-row {
+    flex: 0 0 30%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 20%;
     height: 100%;
 
     margin: 5px 0 0 0px;
@@ -53,10 +54,10 @@
 /*message-column element*/
 
 .bem-wrkspace-visible__info-column {
+    flex: 0 0 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 80%;
     height: 100%;
 }
 

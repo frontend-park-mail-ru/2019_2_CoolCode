@@ -41,4 +41,4 @@ function createWebsocketConn(chatId, userId) {
 
 }
 
-export {chooseChat};
+export {chooseChat, createWebsocketConn};
