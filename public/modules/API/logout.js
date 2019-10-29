@@ -1,4 +1,4 @@
-import {bus, FetchModule, router} from '../../main';
+import {bus, FetchModule, router, data} from '../../main';
 async function handleLogout() {
 	try {
 		let response = await FetchModule._doDelete({path: '/logout',
@@ -13,9 +13,10 @@ async function handleLogout() {
 				`Ошибка авторизации: ${response.status}`);
 		}
 		if (response.status === 200) {
-			let data = await response.text();
-			console.log(data);
+			let responseAnswer = await response.text();
+			console.log(responseAnswer);
 			bus.emit('loggedInUser', false);
+			data.clear();
 			router.go('/');
 		}
 	} catch (error) {

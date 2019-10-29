@@ -1,9 +1,9 @@
 .bem-profile-header {
-    flex: 0 0 30%;
+    flex: 0 0 40%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 
 }

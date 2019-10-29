@@ -85,15 +85,15 @@ async function createChatPage() {
 
 function createInputs (application, user) {
 	createInput(application, user, 'fstatus',
-		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+		'border: none; outline: none; align-self: flex-start;');
 	createInput(application, user, 'email',
-		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
+		'border: none; outline: none; align-self: flex-start;');
 	createInput(application, user, 'username',
-		`border: none; outline: none; margin: 0`);
+		'border: none; outline: none; align-self: flex-start;');
 	createInput(application, user, 'fullname',
-		`border: none; outline: none; margin: 0`);
+		'`border: none; outline: none; align-self: flex-start;');
 	createInput(application, user, 'phone',
-		`border: none; outline: none; margin: 0`);
+		'border: none; outline: none; align-self: flex-start;');
 	createImageUpload(user.id);
 
 };

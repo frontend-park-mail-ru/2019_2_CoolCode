@@ -102,7 +102,7 @@ class profileView extends BaseView {
 				message.className = 'bem-chat-block bem-chat-block_style';
 				var id;
 				if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
-				else message.id = mes["Members"][0];
+				else id = mes["Members"][0];
 				message.id = "chat-" + id;
 				message.innerHTML = mess.render();
 				contentListRoot.appendChild(message);
