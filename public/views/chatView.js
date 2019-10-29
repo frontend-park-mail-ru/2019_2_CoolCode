@@ -14,6 +14,7 @@ import {
 	createProfile, setPicture
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
+import {messages} from "../modules/API/chat";
 
 import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
@@ -111,7 +112,7 @@ class chatView extends BaseView {
 
 	drawRightColumn() {
     	this._parent.querySelector('.bem-column_right').innerHTML += chatTemplate(this._data);
-
+		messages();
 	}
 
 	render() {

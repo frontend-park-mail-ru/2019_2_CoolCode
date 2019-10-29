@@ -99,6 +99,7 @@ body{
     width: auto;
     max-width: 50%;
     min-height: 30px;
+    margin-bottom: 15px;
 }
 .head-chat-msgLeft {
     background: #2dc68b;

@@ -7,15 +7,13 @@ block page
                 div.head-chat-name_usr #{chatUser.username}
                 div.head-chat-time last seen..
         div.row.head-chat-important
-            p.important-message some text
+
         div.chat-scroll
-            div.head-chat-column-left
-                include ./msgLeft
-            div.head-chat-column-right
-                include ./msgRight
-        div.row.input-container
+            include ./msgLeft
+            include ./msgRight
+        form.row.input-container
             div.icon-chat-container
                 img.icon-chat(src="images/add.png")
-            textarea.message-text-input
+            textarea.message-text-input(placeholder="chat here..")
             div.icon-chat-container
-                img.icon-chat(src="images/send.png")
+                img.icon-chat( src="images/send.png")

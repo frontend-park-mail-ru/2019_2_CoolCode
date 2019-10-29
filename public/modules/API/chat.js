@@ -1,6 +1,9 @@
 import {bus, FetchModule, router, data} from "../../main";
 import {getChats, getUserInfo, saveUserPhoto} from "./profile";
 import {createWebsocketConn} from "./websocketCreation";
+import sendRight from "./sendMessege";
+const rightMsg = require('../../components/Chat/msgRight.pug');
+
 
 async function createChat(id) {
 	try {
@@ -51,4 +54,15 @@ function foundUsersClick() {
 	});
 }
 
-export {foundUsersClick};
+function messages() {
+	let send = document.getElementsByClassName("icon-chat-container")[1];
+	send.addEventListener("click", function (event) {
+		event.preventDefault();
+		let text = document.getElementsByClassName("message-text-input")[0].value;
+		sendRight(text,data.user.id);
+		document.querySelector('.bem-column_right').innerHTML += rightMsg({text:text});
+	});
+
+}
+
+export {foundUsersClick, messages};
