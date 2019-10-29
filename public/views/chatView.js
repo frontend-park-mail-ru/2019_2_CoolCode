@@ -112,7 +112,7 @@ class chatView extends BaseView {
 
 	drawRightColumn() {
     	this._parent.querySelector('.bem-column_right').innerHTML += chatTemplate(this._data);
-		messages();
+		messages(this._data.chatUser.id);
 	}
 
 	render() {

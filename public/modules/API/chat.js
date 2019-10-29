@@ -54,12 +54,12 @@ function foundUsersClick() {
 	});
 }
 
-function messages() {
+function messages(id) {
 	let send = document.getElementsByClassName("icon-chat-container")[1];
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
 		let text = document.getElementsByClassName("message-text-input")[0].value;
-		sendRight(text,data.user.id);
+		sendRight(text,id);
 		document.querySelector('.bem-column_right').innerHTML += rightMsg({text:text});
 	});
 
