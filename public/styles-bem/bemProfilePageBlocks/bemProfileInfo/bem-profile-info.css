@@ -8,12 +8,13 @@
 /*field element*/
 
 .bem-profile-info__field {
-    flex: 0 0 20%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-self: center;
     justify-content:center;
     width: 80%;
+    height: 20%;
 }
 
 /*name element in field*/

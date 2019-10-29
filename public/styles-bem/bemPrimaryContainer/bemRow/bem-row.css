@@ -1,7 +1,0 @@
-.bem-row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /*so everything in one line*/
-    width: 100%;
-    height: 100%;
-}

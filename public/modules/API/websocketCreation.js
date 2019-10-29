@@ -4,10 +4,10 @@ import {getUserInfo, saveUserPhoto} from "./profile";
 const {backend} = settings;
 
 async function fetchUserInfo(chatId) {
-	getUserInfo(chatId).then((user) => {
+	await getUserInfo(chatId).then((user) => {
 		data.setCurrentChatUser(user);
 	});
-	await saveUserPhoto(chatId);
+	saveUserPhoto(chatId);
 }
 
 function chooseChat(chatId, userId) {
@@ -18,6 +18,7 @@ function chooseChat(chatId, userId) {
 }
 
 function createWebsocketConn(chatId, userId) {
+	if (data.checkWebsocketConn(chatId)) return;
 	let websocketConn = new WebSocket(`ws://${backend}/chats/${chatId}/notifications`);
 	data.addWebSocketConn(chatId, websocketConn);
 

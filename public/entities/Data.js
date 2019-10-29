@@ -35,8 +35,16 @@ class Data {
 		this.webSocketConns = [];
 	}
 
-	addWebSocketConn(userId, conn) {
-		this.webSocketConns[userId] = conn;
+	addWebSocketConn(chatId, conn) {
+		this.webSocketConns[chatId] = { chatId: chatId, connection : conn};
+	}
+
+	 checkWebsocketConn(chatId) {
+		let contains = false;
+		this.webSocketConns.forEach((conn) => {
+			if (conn.chatId === chatId) contains = true;
+		});
+		return contains;
 	}
 
 	removeWebSocketConn(userId) {

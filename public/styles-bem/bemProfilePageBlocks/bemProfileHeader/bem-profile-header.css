@@ -25,6 +25,9 @@
     width: 24vh; /*experimenting with viewports*/
     height: 24vh;
 
+    max-height: 100%;
+    max-width: 100%;
+
     object-position: center center;
     object-fit: fill;
     box-sizing: border-box;
@@ -44,6 +47,9 @@
 .bem-profile-header__image-row__loader {
     width: 20vh; /*experimenting with viewports*/
     height: 20vh;
+
+    max-height: 100%;
+    max-width: 100%;
 
     animation: spin 2s linear infinite;
 }
