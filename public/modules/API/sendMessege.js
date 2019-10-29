@@ -24,6 +24,7 @@ async function sendRight(text, id){
                 `Серверу плохо: ${response.status}`);
         }
         if (response.status === 200) {
+            console.log("send ok");
         }
     }catch (error) {
         console.error(error);

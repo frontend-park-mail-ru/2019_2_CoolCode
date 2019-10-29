@@ -59,7 +59,7 @@ function messages(id) {
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
 		let text = document.getElementsByClassName("message-text-input")[0].value;
-		sendRight(text,id);
+		sendRight(text,data.getChatIdByChatUserId(id));
 		document.querySelector('.bem-column_right').innerHTML += rightMsg({text:text});
 	});
 
