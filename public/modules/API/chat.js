@@ -56,11 +56,13 @@ function foundUsersClick() {
 
 function messages(id) {
 	let send = document.getElementsByClassName("icon-chat-container")[1];
+	console.log("ASDFG", send);
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
 		let text = document.getElementsByClassName("message-text-input")[0].value;
 		sendRight(text,data.getChatIdByChatUserId(id));
-		document.querySelector('.bem-column_right').innerHTML += rightMsg({text:text});
+		document.getElementsByClassName("message-text-input")[0].value='';
+		document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
 	});
 
 }

@@ -69,6 +69,7 @@ class chatView extends BaseView {
 				this.setChatUser();
 				this.setContent();
 				this.drawAll();
+				messages(this._data.chatUser.id);
 			});
 			console.log('CREATED CHAT PAGE');
 		}
@@ -112,7 +113,6 @@ class chatView extends BaseView {
 
 	drawRightColumn() {
     	this._parent.querySelector('.bem-column_right').innerHTML += chatTemplate(this._data);
-		messages(this._data.chatUser.id);
 	}
 
 	render() {

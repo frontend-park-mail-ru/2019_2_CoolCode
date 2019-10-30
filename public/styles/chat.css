@@ -12,6 +12,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     flex: 20 0 500px;
+    margin: 5px;
 }
 .chat-scroll::-webkit-scrollbar{
     width: 7px;

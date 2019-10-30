@@ -1,3 +1,5 @@
+import {messages} from "./chat";
+
 function growInput (element) {
 	element.style.height = 'inherit';
 	element.style.height = element.scrollHeight;
