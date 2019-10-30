@@ -20,6 +20,7 @@ import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
 import {chooseChat} from "../modules/API/websocketCreation";
+import loadAllMessages from "../modules/API/loadMessages";
 
 class chatView extends BaseView {
 
@@ -70,6 +71,9 @@ class chatView extends BaseView {
 				this.setContent();
 				this.drawAll();
 				messages(this._data.chatUser.id);
+
+				loadAllMessages(this._data.chatUser.id, data.user.id);
+
 			});
 			console.log('CREATED CHAT PAGE');
 		}

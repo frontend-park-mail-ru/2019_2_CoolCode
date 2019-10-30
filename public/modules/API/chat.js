@@ -21,7 +21,6 @@ async function createChat(id) {
 		// 	data.setCurrentChatUser(user);
 		// });
 		// await saveUserPhoto(id);
-
 	} catch (error) {
 		console.error(error);
 	}
@@ -44,6 +43,7 @@ function foundUsersClick() {
 						router.go('/');
 					} else {
 						createWebsocketConn(chatId, id);
+						console.log("UUUUU");
 					}
 				});
 			}
@@ -56,7 +56,7 @@ function foundUsersClick() {
 
 function messages(id) {
 	let send = document.getElementsByClassName("icon-chat-container")[1];
-	console.log("ASDFG", send);
+	console.log("send right msg", send);
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
 		let text = document.getElementsByClassName("message-text-input")[0].value;
@@ -64,7 +64,17 @@ function messages(id) {
 		document.getElementsByClassName("message-text-input")[0].value='';
 		document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
 	});
-
 }
 
-export {foundUsersClick, messages};
+function drawMessages(msgs, idUser) {
+	console.log("drawMessages", msgs.Messages);
+	for(var i = 0; i < msgs.Messages.length; i++){
+		if(msgs.Messages[i].author_id==idUser){
+			document.querySelector('.chat-scroll').innerHTML += rightMsg({text:msgs.Messages[i].text});
+		}else {
+			document.querySelector('.chat-scroll').innerHTML += leftMsg({text:msgs.Messages[i].text});
+		}
+	}
+}
+
+export {foundUsersClick, messages, drawMessages};
