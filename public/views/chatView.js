@@ -34,7 +34,7 @@ class chatView extends BaseView {
     	this.render();
     	searchInteraction();
     	openWrkSpaceInfo();
-    	chatInput();
+    	chatInput(this._data.chatUser.id);
 		this.setWebSocketsInteraction();
 	}
 

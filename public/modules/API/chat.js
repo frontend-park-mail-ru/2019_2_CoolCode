@@ -3,6 +3,7 @@ import {getChats, getUserInfo, saveUserPhoto} from "./profile";
 import {createWebsocketConn} from "./websocketCreation";
 import sendRight from "./sendMessege";
 const rightMsg = require('../../components/Chat/msgRight.pug');
+const leftMsg = require('../../components/Chat/msgLeft.pug');
 
 
 async function createChat(id) {
