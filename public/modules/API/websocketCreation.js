@@ -34,7 +34,8 @@ function createWebsocketConn(chatId) {
 	};
 
 	websocketConn.onmessage = (event) => {
-		renderNewMessage(event.data);
+	    console.log('message recieved');
+		renderNewMessage(JSON.parse(event.data));
 	};
 
 	websocketConn.onclose = (event) => {

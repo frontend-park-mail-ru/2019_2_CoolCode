@@ -72,15 +72,20 @@ function messages(userId) {
 }
 
 function renderNewMessage(message) {
-	if (message.author_id === data.getCurrentChatUser()) {
-		let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
-		msgWindow.innerHTML += leftMsg({text: message.text, time: 'add time field'});
-		msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
-	} else {
-		let messageWindow = document.querySelector('.bem-all-chats-window'); //TODO: render whole template, but only if messages have date!!!
-		let messageBlock = messageWindow.querySelector(`#chat-${message.author_id}`);
-		let lastMessage = messageBlock.querySelector('.bem-chat-block__message-column__message-row__last-message');
-		lastMessage.innerHTML = message.lastMsg;
+	if (message.event_type === 1) {
+		let mesgBody = message.body;
+		if (mesgBody.author_id === data.getUser()) {
+			console.log(`my message sent: ${mesgBody.text}`);
+		} else if (mesgBody.author_id === data.getCurrentChatUserId()) {
+			let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
+			msgWindow.innerHTML += leftMsg({text: mesgBody.text, time: 'add time field'});
+			msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
+		} else {
+			let messageWindow = document.querySelector('.bem-all-chats-window'); //TODO: render whole template, but only if messages have date!!!
+			let messageBlock = messageWindow.querySelector(`#chat-${mesgBody.author_id}`);
+			let lastMessage = messageBlock.querySelector('.bem-chat-block__message-column__message-row__last-message');
+			lastMessage.innerHTML = mesgBody.lastMsg;
+		}
 	}
 }
 

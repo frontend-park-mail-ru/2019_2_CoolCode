@@ -1,6 +1,7 @@
 
 const settings = {
-	backend: '95.163.209.195:8080',
+	//backend: '95.163.209.195:8080',
+	backend: '192.168.1.69:8080',
 	//backend: 'localhost:8080'
 };
 const responseStatuses = {

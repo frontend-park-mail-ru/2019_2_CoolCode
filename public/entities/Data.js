@@ -83,6 +83,10 @@ class Data {
 		return this.currentChatUser;
 	}
 
+	getCurrentChatUserId() {
+		return this.currentChatUser.id;
+	}
+
 	setCurrentChatUserPhoto(value) {
 		this.currentChatUserPhoto = value;
 	}

@@ -77,7 +77,7 @@ async function openWebSocketConnections() {
 		let chatUsersWChatID = data.getChatUsersWChatIDs();
 
 		chatUsersWChatID.forEach((chat) => {
-			createWebsocketConn(chat.chatId, chat.userId);
+			createWebsocketConn(chat.chatId);
 		});
 
 		data.setSocketConnection(true);
