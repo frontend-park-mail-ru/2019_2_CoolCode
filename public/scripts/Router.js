@@ -19,19 +19,20 @@ class Router {
 		};
 	};
 
-	go(path) {
-		this.open(path);
+	go(path, identity) {
+		this.open(path, identity);
 	}
 
-	open(path) {
+	open(path, identity) {
 		const currentPath = this._paths[path];
+		//if (identity) path = `${path}${identity}`;
 		if (window.location.pathname !== path) {
 			window.history.pushState(
-				null,
+				{'id':identity},
 				'',
-				path
+				path,
 			);
-		}
+		};
 		currentPath.viewObject.show();
 
 	}

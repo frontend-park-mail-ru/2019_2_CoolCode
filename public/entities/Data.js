@@ -1,6 +1,7 @@
 class Data {
 
-	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [], currentChatUser, currentChatUserPhoto, webSocketConns = []) {
+	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [], currentChatUser, currentChatUserPhoto, webSocketConns = [],
+		socketConnection = false, currentChatMessages = []) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -13,6 +14,8 @@ class Data {
 		this.userWrkSpaces = userWrkSpaces;
 		this.lastSearchUsers = [];
 		this.webSocketConns = webSocketConns;
+		this.socketConnectionOn = socketConnection;
+		this.currentChatMessages = currentChatMessages;
 
 		Data.__instance = this;
 	}
@@ -33,6 +36,16 @@ class Data {
 		this.userWrkSpaces = [];
 		this.lastSearchUsers = [];
 		this.webSocketConns = [];
+		this.socketConnectionOn = false;
+		this.currentChatMessages = [];
+	}
+
+	setCurentChatMessages(value) {
+		this.currentChatMessages = value;
+	}
+
+	getCurrentChatMessages() {
+		return this.currentChatMessages;
 	}
 
 	addWebSocketConn(chatId, conn) {
@@ -97,6 +110,14 @@ class Data {
 	getUser() {
 		console.log('returning' + this.user);
 		return this.user;
+	}
+
+	setSocketConnection(val) {
+		this.socketConnectionOn = val;
+	}
+
+	getSocketConnection() {
+		return this.socketConnectionOn;
 	}
 
 	addLastSearchUsers(value) {

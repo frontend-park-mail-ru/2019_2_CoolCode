@@ -5,8 +5,7 @@ function growInput (element) {
 	element.style.height = element.scrollHeight;
 }
 function chatInput() {
-	let textContainer = document.querySelector('.input-container');
-	let input = textContainer.querySelector('.message-text-input');
+	let input = document.querySelector('.bem-chat-column-input__text');
 	input.addEventListener('input', growInput.bind(null, input));
 }
 

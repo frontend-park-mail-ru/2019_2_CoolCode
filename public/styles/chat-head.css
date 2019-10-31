@@ -92,8 +92,20 @@
 body{
     margin: 0;
 }
+
+.msgRight-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+.msgLeft-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
 .head-chat-msgRight{
-    float: right;
     background: #C4C4C4;
     border-radius: 15px;
     width: auto;

@@ -40,11 +40,11 @@ class profileView extends BaseView {
 
 	drawAll() {
 		this.render();
-		this._bus.emit('showLoader');
+		this._bus.emit('showLoader', '.bem-profile-header__image-row');
 		this._bus.on('hideLoader', hideLoader);
 		this._bus.emit('createInputs', this._parent, this._data.user);
 		this.createClickablePic();
-		this.setWebSocketsInteraction();
+		this.setChatClickInteraction();
 		searchInteraction();
 		openWrkSpaceInfo();
 	}
@@ -61,7 +61,7 @@ class profileView extends BaseView {
 		console.log(data.userChats);
 	}
 
-	setWebSocketsInteraction() {
+	setChatClickInteraction() {
 		let chatUsersWChatID = data.getChatUsersWChatIDs();
 
 		chatUsersWChatID.forEach((chat) => {

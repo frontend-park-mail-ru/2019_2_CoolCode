@@ -13,8 +13,12 @@
 @import url('bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css');
 @import url('bemProfilePageBlocks/bemProfileInfo/bem-profile-info.css');
 @import url('bemSearchPageBlocks/bemUserFoundBlock/bem-user-found.css');
-
-
+@import url('bemChatPageBlocks/bemChatColumn/bem-chat-column.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnHeader/bem-chat-column-header.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bem-chat-column-msgwindow.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnInputBlock/bem-chat-column-input.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bemChatColumnMsg/bem-chat-column-msg.css');
 :root{
     --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;

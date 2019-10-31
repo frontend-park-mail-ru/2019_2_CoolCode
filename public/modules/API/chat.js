@@ -1,9 +1,9 @@
 import {bus, FetchModule, router, data} from "../../main";
 import {getChats, getUserInfo, saveUserPhoto} from "./profile";
-import {createWebsocketConn} from "./websocketCreation";
-import sendRight from "./sendMessege";
+import {createWebsocketConn, fetchUserInfo} from "./websocketCreation";
+import sendRight from "./sendMessage";
 const rightMsg = require('../../components/Chat/msgRight.pug');
-
+const leftMsg = require('../../components/Chat/msgLeft.pug');
 
 async function createChat(id) {
 	try {
@@ -43,7 +43,8 @@ function foundUsersClick() {
 						console.log('error finding chatId');
 						router.go('/');
 					} else {
-						createWebsocketConn(chatId, id);
+						createWebsocketConn(chatId);
+						fetchUserInfo(id, chatId).then(() => router.go('/chat', chatId));
 					}
 				});
 			}
@@ -54,17 +55,33 @@ function foundUsersClick() {
 	});
 }
 
-function messages(id) {
-	let send = document.getElementsByClassName("icon-chat-container")[1];
-	console.log("ASDFG", send);
+function messages(userId) {
+	let send = document.getElementsByClassName("bem-chat-column-input__icon-container__icon")[1];
+	console.log("send right msg", send);
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
-		let text = document.getElementsByClassName("message-text-input")[0].value;
-		sendRight(text,data.getChatIdByChatUserId(id));
-		document.getElementsByClassName("message-text-input")[0].value='';
-		document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
+		let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
+		let text = document.getElementsByClassName('bem-chat-column-input__text')[0].value;
+		sendRight(text,data.getChatIdByChatUserId(userId));
+		document.getElementsByClassName('bem-chat-column-input__text')[0].value = '';
+		let today = new Date();
+		let time = today.getHours() + ":" + today.getMinutes();
+		msgWindow.innerHTML += rightMsg({text:text, time:time});
+		msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
 	});
-
 }
 
-export {foundUsersClick, messages};
+function renderNewMessage(message) {
+	if (message.author_id === data.getCurrentChatUser()) {
+		let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
+		msgWindow.innerHTML += leftMsg({text: message.text, time: 'add time field'});
+		msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
+	} else {
+		let messageWindow = document.querySelector('.bem-all-chats-window'); //TODO: render whole template, but only if messages have date!!!
+		let messageBlock = messageWindow.querySelector(`#chat-${message.author_id}`);
+		let lastMessage = messageBlock.querySelector('.bem-chat-block__message-column__message-row__last-message');
+		lastMessage.innerHTML = message.lastMsg;
+	}
+}
+
+export {foundUsersClick, messages, renderNewMessage};

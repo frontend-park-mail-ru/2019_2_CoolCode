@@ -7,6 +7,7 @@ import MyWorker from '../../workers/profile.worker';
 const { backend } = settings;
 import {bus, FetchModule, router} from '../../main';
 import {data} from "../../main";
+import {chooseChat, createWebsocketConn} from "./websocketCreation";
 
 async function assignSomeData() {
 	await getChats(data.user.id);
@@ -71,16 +72,30 @@ async function checkLogin () {
 	}
 }
 
+async function openWebSocketConnections() {
+	if (data.getSocketConnection() === false) {
+		let chatUsersWChatID = data.getChatUsersWChatIDs();
+
+		chatUsersWChatID.forEach((chat) => {
+			createWebsocketConn(chat.chatId, chat.userId);
+		});
+
+		data.setSocketConnection(true);
+	}
+}
+
 async function createProfile() {
 	await checkLogin();
 	await assignSomeData();
-	console.log('going to profile');
+	await openWebSocketConnections();
 
 }
 
 async function createChatPage() {
 	await checkLogin();
 	await assignSomeData();
+	await openWebSocketConnections();
+
 }
 
 function createInputs (application, user) {
@@ -104,7 +119,7 @@ async function getChats(id) {
 		let response = await FetchModule._doGet({path: `/users/${id}/chats`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Не зашли: ${response.status}`);
+				`Couldn't fetch user chats: ${response.status}`);
 		}
 		let chats = await response.json();
 		data.setChats(chats);
@@ -120,7 +135,7 @@ async function getUserInfo(id) {
 		let response = await FetchModule._doGet({path: `/users/${id}`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Не зашли: ${response.status}`);
+				`Couldn't fetch user info: ${response.status}`);
 		}
 		let user = await response.json();
 		console.log(user);
@@ -147,7 +162,7 @@ async function getProfilePhoto(id) {
 		worker.onmessage = function(result) {
 			data.setUserPhoto(result.data);
 			bus.emit('AAA', '.bem-profile-header__image-row__image',data.getUserPhoto());
-			bus.emit('hideLoader');
+			bus.emit('hideLoader', '.bem-profile-header__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -160,7 +175,7 @@ async function saveUserPhoto(id) {
 		let response = await FetchModule._doGet({path: `/photos/${id}`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Не зашли: ${response.status}`);
+				`Couldn't fetch chat user photo: ${response.status}`);
 		}
 		let buffer = await response.blob();
 		let worker = new MyWorker();
@@ -168,7 +183,8 @@ async function saveUserPhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setCurrentChatUserPhoto(result.data);
-			bus.emit('AAA', '.head-chat-avatar', data.getCurrentChatUserPhoto());
+			bus.emit('AAA', '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('hideLoader', '.bem-chat-column-header__info-row__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -182,7 +198,7 @@ async function getUserPhoto(id, parentId, photoClass) {
 		let response = await FetchModule._doGet({path: `/photos/${id}`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Не зашли: ${response.status}`);
+				`Couldn't fetch user photo: ${response.status}`);
 		}
 		let buffer = await response.blob();
 		let worker = new MyWorker();
@@ -222,9 +238,9 @@ function createImageUpload (id) {
 	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
-function hideLoader() {
-	document.querySelector('.bem-profile-header__image-row__loader').style.display = 'none';
-	document.querySelector(".bem-profile-header__image-row__image").style.display = 'block';
+function hideLoader(selector) {
+	document.querySelector(`${selector}__loader`).style.display = 'none';
+	document.querySelector(`${selector}__image`).style.display = 'block';
 }
 
 function hideLoaderSmall(id, parentId, classSelector) {
@@ -233,9 +249,9 @@ function hideLoaderSmall(id, parentId, classSelector) {
 	person.querySelector(classSelector).style.display = "block";
 }
 
-function showLoader() {
-	document.querySelector('.bem-profile-header__image-row__loader').style.display = 'block';
-	document.querySelector(".bem-profile-header__image-row__image").style.display = 'none';
+function showLoader(selector) {
+	document.querySelector(`${selector}__loader`).style.display = 'block';
+	document.querySelector(`${selector}__image`).style.display = 'none';
 }
 
 function showLoaderSmall(id, parentId, classSelector) {
