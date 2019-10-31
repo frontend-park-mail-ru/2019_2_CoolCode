@@ -61,9 +61,13 @@ function messages(id) {
 	send.addEventListener("click", function (event) {
 		event.preventDefault();
 		let text = document.getElementsByClassName("message-text-input")[0].value;
-		sendRight(text,data.getChatIdByChatUserId(id));
-		document.getElementsByClassName("message-text-input")[0].value='';
-		document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
+		if(text!=""){
+			console.log(text);
+			sendRight(text,data.getChatIdByChatUserId(id));
+			document.getElementsByClassName("message-text-input")[0].value='';
+			document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
+		}
+
 	});
 }
 

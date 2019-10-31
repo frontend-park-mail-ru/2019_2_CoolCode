@@ -16,9 +16,12 @@ function chatInput(id) {
 		if (key === 13) {
 			event.preventDefault();
 			let text = document.getElementsByClassName("message-text-input")[0].value;
-			sendRight(text,data.getChatIdByChatUserId(id));
-			document.getElementsByClassName("message-text-input")[0].value='';
-			document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
+			if(text!=""){
+				sendRight(text,data.getChatIdByChatUserId(id));
+				document.getElementsByClassName("message-text-input")[0].value='';
+				document.querySelector('.chat-scroll').innerHTML += rightMsg({text:text});
+			}
+
 		}
 	});
 }
