@@ -222,6 +222,7 @@ async function imageUploading(params = {id:null, fileInput:null}) {
 		let response = await FetchModule._doPost({path: '/photos',
 			data: formData, contentType:'multipart/form-data'});
 		if (response.status === 200) {
+			bus.emit('showLoader', '.bem-profile-header__image-row');
 			await getProfilePhoto(params.id);
 		} else {
 			throw new Error(

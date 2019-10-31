@@ -116,6 +116,11 @@ class Data {
 		return this.user;
 	}
 
+	getUserId() {
+		console.log('returning' + this.user);
+		return this.user.id;
+	}
+
 	setSocketConnection(val) {
 		this.socketConnectionOn = val;
 	}
