@@ -3,7 +3,7 @@ mixin item(title, href, section, id)
 
 div.bem-header
     a.bem-header__logo(href='/')
-        img.bem-header__logo__image(src='images/logo_2.png')
+        img.bem-header__logo__image(src='../images/logo_2.png')
     div.bem-header-refs
         if loggedIn
             +item('log out', '/logout', 'logout')

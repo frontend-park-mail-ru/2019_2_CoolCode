@@ -10,10 +10,10 @@ const rightMsg = require('../components/Chat/msgRight.pug');
 const leftMsg = require('../components/Chat/msgLeft.pug');
 import {
 	createChatPage,
-	assignSomeData,
+	redundantWrkSpace,
 	getUserPhoto,
 	getProfilePhoto as src,
-	createProfile, setPicture, saveUserPhoto, showLoader, hideLoader
+	createProfile, setPicture, saveUserPhoto, showLoader, hideLoader, fetchViewInfo
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 import {messages} from "../modules/API/chat";
@@ -21,7 +21,7 @@ import {messages} from "../modules/API/chat";
 import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
-import {chooseChat} from "../modules/API/websocketCreation";
+import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
 
 class chatView extends BaseView {
 
@@ -70,19 +70,27 @@ class chatView extends BaseView {
 		});
 	}
 
-	show() {
-		if (!data.getCurrentChatUser()) router.go('/profile');
-		else {
-			createChatPage(this._parent).then(() => {
-				this.setUser();
-				this.setChatUser();
-				this.setContent();
-				this.drawAll();
-				this._bus.on('showLoader', showLoader);
-				messages(this._data.chatUser.id);
-			});
-			console.log('CREATED CHAT PAGE');
-		}
+	setData() {
+		this._bus.on('showLoader', showLoader);
+		this.setUser();
+		this.setChatUser();
+		this.setContent();
+		this.drawAll();
+		messages(this._data.chatUser.id);
+	}
+
+	show(args) {
+		fetchViewInfo(this._parent).then(() => {
+			if (!data.getCurrentChatUser()) {
+				let chatUser = data.getChatUserIdByChatId(args.id);
+				fetchUserInfo(chatUser, args.id).then(()=> {
+					this.setData();
+				});
+			} else {
+				this.setData();
+			}
+		});
+		console.log('CREATED CHAT PAGE');
 
 	}
 

@@ -10,13 +10,8 @@ class BaseView {
 	render() {
 	    this._parent.innerText = "NOTHING TO RENDER";
 	}
-	activate() {
-	    this._active = true;
-	    render();
-	}
-	deactivate() {
-	    this._active = false;
-	    this._parent.innerHTML = "";
+	show(args) {
+
 	}
 
 	get data() {

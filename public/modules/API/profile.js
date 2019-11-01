@@ -9,8 +9,7 @@ import {bus, FetchModule, router} from '../../main';
 import {data} from "../../main";
 import {chooseChat, createWebsocketConn} from "./websocketCreation";
 
-async function assignSomeData() {
-	await getChats(data.user.id);
+function redundantWrkSpace() {
 	data.setWrkSpaces([
 		{
 			title: "CoolCode",
@@ -84,18 +83,11 @@ async function openWebSocketConnections() {
 	}
 }
 
-async function createProfile() {
+async function fetchViewInfo() {
 	await checkLogin();
-	await assignSomeData();
+	redundantWrkSpace();
+	await getChats(data.user.id);
 	await openWebSocketConnections();
-
-}
-
-async function createChatPage() {
-	await checkLogin();
-	await assignSomeData();
-	await openWebSocketConnections();
-
 }
 
 function createInputs (application, user) {
@@ -268,5 +260,5 @@ function setPicture(selector, photo) {
 	}
 }
 
-export { createProfile, createChatPage, createInputs, getUserPhoto, getProfilePhoto, assignSomeData,
+export {fetchViewInfo, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
 	getChats, showLoader, hideLoader, getUserInfo, saveUserPhoto, setPicture};

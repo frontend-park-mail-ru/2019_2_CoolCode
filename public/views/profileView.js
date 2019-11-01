@@ -9,10 +9,10 @@ import {
 	createProfile,
 	getUserPhoto,
 	createInputs,
-	assignSomeData,
+	redundantWrkSpace,
 	Photo,
 	showLoader,
-	hideLoader, setPicture, getProfilePhoto
+	hideLoader, setPicture, getProfilePhoto, fetchViewInfo
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data, router} from "../main";
@@ -71,7 +71,7 @@ class profileView extends BaseView {
 
 	show() {
 		this.createEvents();
-		createProfile(this._parent).then(() => {
+		fetchViewInfo(this._parent).then(() => {
 			getProfilePhoto(data.user.id).then();
 			this.setUser();
 			this.setContent();

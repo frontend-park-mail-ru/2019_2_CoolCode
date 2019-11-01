@@ -168,6 +168,20 @@ class Data {
 		return chatId;
 	}
 
+	getChatUserIdByChatId(chatId) {
+		let userId = null;
+		this.userChats.forEach((chat) => {
+			if (chatId === chat.ID) {
+				if (chat["Members"][0] === this.user.id) {
+					userId = chat["Members"][1];
+				} else {
+					userId = chat["Members"][0];
+				}
+			}
+		});
+		return chatId;
+	}
+
 	getChatUsers() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
