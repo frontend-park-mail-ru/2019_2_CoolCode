@@ -19,6 +19,7 @@
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bem-chat-column-msgwindow.css');
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnInputBlock/bem-chat-column-input.css');
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bemChatColumnMsg/bem-chat-column-msg.css');
+@import url('bemWsForm/bem-Ws-Form.css');
 :root{
     --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;

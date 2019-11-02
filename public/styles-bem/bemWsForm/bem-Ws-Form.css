@@ -1,0 +1,45 @@
+.bem-Ws-Form{
+    padding: 40px 25px 40px 25px;
+    position: fixed; top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: #FFFFFF;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.bem-Ws-Form_input-field {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #C4C4C4;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-size: 18px;
+    text-align: center;
+}
+.bem-Ws-Form_submit-button{
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+
+    background: #18A88E;
+    font-style: inherit;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+.bem-Ws-Form_name{
+    font-weight: 700;
+    font-size: 20px;
+    color: #18A88E;
+    margin-bottom: 20px;
+}

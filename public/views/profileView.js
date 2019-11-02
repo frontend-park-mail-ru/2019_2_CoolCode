@@ -18,6 +18,7 @@ import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import {chooseChat} from "../modules/API/websocketCreation";
+import wsBTM from "./wrkspacebtmView";
 
 class profileView extends BaseView {
 
@@ -47,6 +48,7 @@ class profileView extends BaseView {
 		this.setChatClickInteraction();
 		searchInteraction();
 		openWrkSpaceInfo();
+		wsBTM();
 	}
 
 	setUser() {
