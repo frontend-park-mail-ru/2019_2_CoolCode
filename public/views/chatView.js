@@ -38,7 +38,7 @@ class chatView extends BaseView {
 		saveUserPhoto(this._data.chatUser.id);
     	searchInteraction();
     	openWrkSpaceInfo();
-    	chatInput();
+    	chatInput(this._data.chatUser.id);
 		this.setChatCLickInteraction();
 	}
 
@@ -91,7 +91,6 @@ class chatView extends BaseView {
 			}
 		});
 		console.log('CREATED CHAT PAGE');
-
 	}
 
 	drawBasics() {

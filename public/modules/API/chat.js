@@ -21,7 +21,6 @@ async function createChat(id) {
 		// 	data.setCurrentChatUser(user);
 		// });
 		// await saveUserPhoto(id);
-
 	} catch (error) {
 		console.error(error);
 	}
@@ -45,6 +44,7 @@ function foundUsersClick() {
 					} else {
 						createWebsocketConn(chatId);
 						fetchUserInfo(id, chatId).then(() => router.go('/chat', chatId));
+
 					}
 				});
 			}
@@ -54,7 +54,6 @@ function foundUsersClick() {
 		});
 	});
 }
-
 function messages(userId) {
 	let send = document.getElementsByClassName("bem-chat-column-input__icon-container__icon")[1];
 	console.log("send right msg", send);
@@ -62,11 +61,14 @@ function messages(userId) {
 		event.preventDefault();
 		let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
 		let text = document.getElementsByClassName('bem-chat-column-input__text')[0].value;
-		sendRight(text,data.getChatIdByChatUserId(userId));
-		document.getElementsByClassName('bem-chat-column-input__text')[0].value = '';
-		let today = new Date();
-		let time = today.getHours() + ":" + today.getMinutes();
-		msgWindow.innerHTML += rightMsg({text:text, time:time});
+		if(text !== "") {
+			console.log(text);
+			sendRight(text,data.getChatIdByChatUserId(userId));
+			document.getElementsByClassName('bem-chat-column-input__text')[0].value = '';
+			let today = new Date();
+			let time = today.getHours() + ":" + today.getMinutes();
+			msgWindow.innerHTML += rightMsg({text:text, time:time});
+		}
 		msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
 	});
 }
@@ -90,3 +92,4 @@ function renderNewMessage(message) {
 }
 
 export {foundUsersClick, messages, renderNewMessage};
+
