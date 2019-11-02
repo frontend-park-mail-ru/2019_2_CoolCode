@@ -28,6 +28,7 @@
 .bem-search-menu__button_style {
     background-color: var(--global-green-color);
     font-family: var(--global-font-family-Roboto);
+    font-size: 10px;
     color: #FFFFFF;
     border: none;
     border-radius: 20px;
