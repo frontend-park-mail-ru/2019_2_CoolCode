@@ -1,7 +1,7 @@
 .bem-wrkspace-form {
     position: fixed; /*make it centered and overlay*/
     top: 50vh; /*experimenting with viewports*/
-    left: 35vh;
+    left: 35vw;
     align-self: center;
     display: flex;
     flex-direction: column;
