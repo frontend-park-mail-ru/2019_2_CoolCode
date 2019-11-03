@@ -19,6 +19,10 @@ class Router {
 		};
 	};
 
+	return() {
+		window.history.back();
+	}
+
 	go(path, identity) {
 		this.open(path, identity);
 	}

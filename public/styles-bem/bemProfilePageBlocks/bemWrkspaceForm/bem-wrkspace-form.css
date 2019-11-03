@@ -14,7 +14,6 @@
 .bem-wrkspace-form_style {
     background: #FFFFFF;
     -webkit-backface-visibility: hidden;
-    box-shadow: 5px 5px 5px 5px var(--global-grey-color);
 }
 
 /*form element*/
@@ -40,7 +39,7 @@
     padding: 0 0 5px 0;
     height:auto;
     max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
-    width: 80%;
+    width: 70%;
 }
 
 .bem-wrkspace-form__form__input-field_style {
@@ -68,7 +67,6 @@
 }
 
 .bem-wrkspace-form__form__submit-button_style {
-    text-transform: uppercase;
     outline: 0;
     font-family: var(--global-font-family-Roboto);
     background-color: var(--global-green-color);
@@ -101,11 +99,11 @@
 
 .bem-wrkspace-form__form__error-field {
     align-self:center;
-    width: 90%;
+    width: 70%;
     height: auto;
     max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
 }
-.bem-input-block__error-field_style {
+.bem-wrkspace-form__form__error-field_style {
     color: var(--global-error-color);
     font-size: 18px;
     font-family: var(--global-font-family-Montserrat);

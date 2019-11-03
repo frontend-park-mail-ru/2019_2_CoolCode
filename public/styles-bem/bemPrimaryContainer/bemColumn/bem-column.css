@@ -13,7 +13,11 @@
 }
 
 /* outline modifier */
-.bem-column_left-outlined{
+.bem-column_right-outlined {
     border-left: 1.5px solid var(--global-green-color);
 }
 
+/* outline modifier */
+.bem-column_left-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}

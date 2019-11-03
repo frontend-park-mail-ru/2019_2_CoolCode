@@ -3,7 +3,7 @@ import {data, router} from "../main";
 import {foundUsersClick} from "../modules/API/chat";
 import UserComponent from "../components/User/User";
 import {getUserPhoto} from "../modules/API/profile";
-import {workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
+import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
 
 const wsForm = require('../components/WrkSpace/wsForm.pug');
 
@@ -26,6 +26,7 @@ class wrkspaceFormView extends BaseView {
 			this.setUser();
 			this.render();
 			workspaceFormInteration();
+			overlayInteration();
 		}
 	}
 	render() {

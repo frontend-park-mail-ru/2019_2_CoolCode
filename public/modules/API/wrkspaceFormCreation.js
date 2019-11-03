@@ -17,13 +17,27 @@ async function createWrkspace(name) {
 	}
 }
 
+function overlayInteration() {
+	let overlay = document.querySelector('.bem-overlay');
+	overlay.addEventListener('click', (event) => {
+		event.preventDefault();
+		router.return();
+	});
+}
+
 function workspaceFormInteration() {
 	let wrspaceForm = document.querySelector('.bem-wrkspace-form__form');
 	wrspaceForm.addEventListener('submit', (event) => {
 		event.preventDefault();
 		let inputField = wrspaceForm.querySelector('.bem-wrkspace-form__form__input-field');
 		let channelName = inputField.value;
-		createWrkspace(channelName).then(() => router.go('/profile'));
+		if (channelName) {
+			createWrkspace(channelName).then(() => router.go('/profile'));
+		} else {
+			inputField.className += " bem-wrkspace-form__form__input-field_error";
+			let errorField = document.querySelector('.bem-wrkspace-form__form__error-field');
+			errorField.innerText = "please, input name";
+		}
 	});
 }
 
@@ -36,4 +50,4 @@ function wsBTM() {
 	);
 }
 
-export {wsBTM, workspaceFormInteration};
+export {wsBTM, workspaceFormInteration, overlayInteration};

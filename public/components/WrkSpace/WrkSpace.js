@@ -9,14 +9,16 @@ class WrkSpaceComponent extends BaseComponent {
 		wSpace.className = 'bem-wrkspace-block bem-wrkspace-block_style';
 		wSpace.innerHTML = wrkSpaceTempl(this._data);
 
-		 const wspaceChannels = document.createElement('div');
-		 wspaceChannels.className = "bem-wrkspace-expandable bem-wrkspace-expandable_style";
-		 this.data.channels.forEach((ch)=>{
-			wspaceChannels.innerHTML += wrkSpaceChatTempl({
-				channel:ch,
+		if (this._data.Channels !== null) {
+			const wspaceChannels = document.createElement('div');
+			wspaceChannels.className = "bem-wrkspace-expandable bem-wrkspace-expandable_style";
+			this._data.Channels.forEach((ch) => {
+				wspaceChannels.innerHTML += wrkSpaceChatTempl({
+					channel: ch,
+				});
 			});
-		});
-		wSpace.appendChild(wspaceChannels);
+			wSpace.appendChild(wspaceChannels);
+		}
 
 		return wSpace;
 	}

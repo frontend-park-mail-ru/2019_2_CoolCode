@@ -12,8 +12,8 @@ import {chooseChat, createWebsocketConn} from "./websocketCreation";
 function redundantWrkSpace() {
 	data.setWrkSpaces([
 		{
-			title: "CoolCode",
-			channels: [{
+			Name: "CoolCode",
+			Channels: [{
 				title: "important-stuff",
 				members: 4,
 				messages: null,
@@ -49,7 +49,7 @@ function redundantWrkSpace() {
 				public: false,
 				private: true,
 			}],
-			members: ["AS", "Vasya Romanov", "Bono", "U"],
+			Members: ["AS", "Vasya Romanov", "Bono", "U"],
 		}]
 	);
 

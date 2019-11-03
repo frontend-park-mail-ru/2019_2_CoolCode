@@ -22,15 +22,18 @@ async function findUser(query) {
 	}
 }
 
+function searchEvent(event) {
+	event.preventDefault();
+	let searchInput = document.querySelector('.bem-search-menu__form__input');
+	let searchInputValue = searchInput.value;
+	findUser(searchInputValue);
+}
+
 function searchInteraction() {
 	let searchForm = document.querySelector('.bem-search-menu__form');
-	searchForm.addEventListener("submit", function (event) {
-		event.preventDefault();
-		let searchInput = document.querySelector('.bem-search-menu__form__input');
-		let searchInputValue = searchInput.value;
-		findUser(searchInputValue);
-
-	});
+	searchForm.addEventListener("submit", searchEvent);
+	let searchFormButton = searchForm.querySelector('.bem-search-menu__form__button');
+	searchFormButton.addEventListener('click', searchEvent);
 
 }
 
