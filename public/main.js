@@ -6,7 +6,6 @@ import Fetch from "./modules/API/fetch";
 import {settings, responseStatuses} from './modules/config';
 const {backend} = settings;
 
-import './styles/main.css';
 import './styles-bem/bem-main.css';
 
 import loginView from "./views/loginView";
@@ -21,7 +20,11 @@ import chatView from "./views/chatView";
 
 const bus = new Bus();
 const application = document.getElementById('application');
-const router = new Router(application);
+
+const baseBlock = document.createElement('div');
+baseBlock.className = 'bem-main';
+application.appendChild(baseBlock);
+const router = new Router(baseBlock);
 const FetchModule = new Fetch();
 FetchModule.setUrl(`http://${backend}`);
 const data = new Data();

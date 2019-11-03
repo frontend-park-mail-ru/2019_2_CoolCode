@@ -25,7 +25,7 @@ class profileView extends BaseView {
 	contentListRootSelector = '.bem-all-chats-window';
 
 	constructor (data, parent) {
-		super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
+		super ({viewType: "profile", user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
 	};
 
 	createEvents() {
@@ -91,7 +91,7 @@ class profileView extends BaseView {
 
 	drawBasics() {
 		this._parent.innerHTML = headerTemplate(this._data);
-		this._parent.innerHTML += containerTemplate(this._data);
+		this._parent.innerHTML += containerTemplate({profile: true});
 	}
 
 	drawLeftColumn() {

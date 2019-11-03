@@ -5,6 +5,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 10px 10px 10px 10px;
+    align-self: center;
     width: 90%;
     height: unset;
     max-height: 80%;

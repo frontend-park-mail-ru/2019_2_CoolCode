@@ -1,6 +1,7 @@
 block content
 div.bem-primary-container.bem-primary-container_style
-    div.bem-column.bem-column_left
-        block left column
-    div.bem-column.bem-column_right.bem-column_left-outlined
-        block page
+    if viewType !== "login" && viewType !== "signUp" && viewType !== "mainPage"
+        div.bem-column.bem-column_left
+            block left column
+        div.bem-column.bem-column_right.bem-column_left-outlined
+            block page

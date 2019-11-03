@@ -28,7 +28,7 @@ class chatView extends BaseView {
 	contentListRootSelector = '.bem-all-chats-window';
 
 	constructor (data, parent) {
-    	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null, chatUser:{}, importantMessage: {}, chatUserPhoto: '../images/abkhazia.jpg', chatMessages: []}, parent);
+    	super ({viewType: "chat", user:{}, wrkSpaces:[], chats: [], loggedIn: null, chatUser:{}, importantMessage: {}, chatUserPhoto: '../images/abkhazia.jpg', chatMessages: []}, parent);
 	};
 
 	drawAll() {
@@ -95,7 +95,7 @@ class chatView extends BaseView {
 
 	drawBasics() {
     	this._parent.innerHTML = headerTemplate(this._data);
-    	this._parent.innerHTML += containerTemplate(this._data);
+    	this._parent.innerHTML += containerTemplate({profile: true});
 	}
 
 	drawLeftColumn() {

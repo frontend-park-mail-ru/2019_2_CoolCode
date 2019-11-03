@@ -3,7 +3,7 @@ import handleLogout from "../modules/API/logout";
 
 class logoutView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
+		super ({viewType: "logout", user:{}, loggedIn: null}, parent);
 		this._bus.on('logout', handleLogout);
 	};
 	show() {

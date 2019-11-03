@@ -15,7 +15,7 @@ async function createChat(id) {
 			throw new Error(
 				`Didn't create chat: ${response.status}`);
 		}
-		await getChats(data.user.id, 0);
+		await getChats(data.user.id);
 		// getUserInfo(id).then((user) => {
 		// 	console.log('USER ' + user);
 		// 	data.setCurrentChatUser(user);

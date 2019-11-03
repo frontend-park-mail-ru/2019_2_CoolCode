@@ -3,11 +3,13 @@ import {createLogin} from "../modules/API/login";
 import Data from "../entities/Data";
 import {router, data} from "../main";
 
-const loginTemplate = require('../components/Login/login.pug');
+const loginTemplate = require('../components/Register/register.pug');
+const containerTemplate = require('../components/Container/container.pug');
+const headerTemplate = require('../components/Header/header.pug');
 
 class loginView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
+		super ({viewType: "login", user:{}, loggedIn: null}, parent);
 		this._bus.on('login', createLogin);
 	};
 	show() {
@@ -19,8 +21,13 @@ class loginView extends BaseView {
 		this._bus.emit('login', this._parent);
 
 	}
+	drawBasics() {
+		this._parent.innerHTML = headerTemplate(this._data);
+		this._parent.innerHTML += containerTemplate(this._data);
+	}
 	render() {
-		this._parent.innerHTML = loginTemplate(this._data);
+		this.drawBasics();
+		this._parent.querySelector('.bem-primary-container').innerHTML += loginTemplate(this._data);
 	}
 }
 

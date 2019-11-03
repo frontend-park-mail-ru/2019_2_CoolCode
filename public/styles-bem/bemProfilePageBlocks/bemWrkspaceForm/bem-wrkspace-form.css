@@ -1,0 +1,111 @@
+.bem-wrkspace-form {
+    position: fixed; /*make it centered and overlay*/
+    top: 50vh; /*experimenting with viewports*/
+    left: 35vh;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20vh; /*experimenting with viewports*/
+    width: 40vh;
+    z-index: 11; /*make it overlay*/
+}
+
+.bem-wrkspace-form_style {
+    background: #FFFFFF;
+    -webkit-backface-visibility: hidden;
+    box-shadow: 5px 5px 5px 5px var(--global-grey-color);
+}
+
+/*form element*/
+
+.bem-wrkspace-form__form {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+
+/*input element in form*/
+
+.bem-wrkspace-form__form__input-field {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 0 0 5px 0;
+    height:auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+    width: 80%;
+}
+
+.bem-wrkspace-form__form__input-field_style {
+    outline: none;
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    border: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--global-grey-color);
+}
+
+.bem-wrkspace-form__form__input-field_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+/*submit-button element in form*/
+
+.bem-wrkspace-form__form__submit-button {
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 20%;
+}
+
+.bem-wrkspace-form__form__submit-button_style {
+    text-transform: uppercase;
+    outline: 0;
+    font-family: var(--global-font-family-Roboto);
+    background-color: var(--global-green-color);
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+/*name element in form*/
+
+.bem-wrkspace-form__form__name {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 90%;
+}
+
+.bem-wrkspace-form__form__name_style {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--global-green-color);
+}
+
+/*error element in form*/
+
+.bem-wrkspace-form__form__error-field {
+    align-self:center;
+    width: 90%;
+    height: auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+}
+.bem-input-block__error-field_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
+}

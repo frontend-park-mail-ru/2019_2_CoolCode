@@ -1,0 +1,41 @@
+- var ref ;
+- var mainTitle ;
+- var question ;
+
+
+mixin input(name)
+    label.bem-input-block_label(for=name)
+    if name === 'password'
+        input.bem-input-block_input-field.bem-input-block_input-field_style(type=name id=name placeholder=name name=name)
+    else
+        input.bem-input-block_input-field.bem-input-block_input-field_style(type='text' id=name placeholder=name name=name)
+
+
+
+if viewType === "signUp"
+    - var ref = '/signup';
+    - var mainTitle = 'sign up';
+    -var question = 'Already registered?'
+if viewType === "login"
+    - var ref  = '/login';
+    - var mainTitle = 'login';
+    -var question = 'Not registered?'
+
+block content
+    div.bem-register-form.bem-register-form_style
+        form.bem-register-form__form(method='POST' action=ref)
+            div.bem-register-form__form__name-field.bem-register-form__form__name-field_style=mainTitle
+            div.bem-input-block
+                +input('email')
+                +input('password')
+                if viewType === "signUp"
+                    +input('username')
+                div.bem-input-block_error-field.bem-input-block_error-field_style
+            button.bem-register-form__form__button.bem-register-form__form__button_style(type='submit')=mainTitle
+            div.bem-register-form__form__login-ref
+                if viewType === "signUp"
+                    p.bem-register-form__form__login-ref__text.bem-register-form__form__login-ref__text_style=question
+                    a.bem-header-refs__ref_style(href='/login' data-section = 'login') log in
+                if viewType === "login"
+                    p.bem-register-form__form__login-ref__text.bem-register-form__form__login-ref__text_style=question
+                    a.bem-header-refs__ref_style(href='/signup' data-section = 'signup') sign up

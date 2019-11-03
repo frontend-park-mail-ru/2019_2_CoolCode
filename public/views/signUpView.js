@@ -2,11 +2,13 @@ import BaseView from './baseView';
 import createSignUp from "../modules/API/signup";
 import {router, data} from "../main";
 import Data from "../entities/Data";
-const signupTemplate = require('../components/Signup/signup.pug');
+const signupTemplate = require('../components/Register/register.pug');
+const containerTemplate = require('../components/Container/container.pug');
+const headerTemplate = require('../components/Header/header.pug');
 
 class signUpView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
+		super ({viewType: "signUp", user:{}, loggedIn: null}, parent);
 		this._bus.on('signUp', createSignUp);
 	};
 	show() {
@@ -18,8 +20,13 @@ class signUpView extends BaseView {
 		this._bus.emit('signUp', this._parent);
 
 	}
+	drawBasics() {
+		this._parent.innerHTML = headerTemplate(this._data);
+		this._parent.innerHTML += containerTemplate(this._data);
+	}
 	render() {
-		this._parent.innerHTML = signupTemplate(this._data);
+		this.drawBasics();
+		this._parent.querySelector('.bem-primary-container').innerHTML += signupTemplate(this._data);
 	}
 }
 

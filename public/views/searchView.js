@@ -10,7 +10,7 @@ class searchView extends BaseView {
 
 	contentListRootSelector = '.bem-all-chats-window';
 	constructor (data, parent) {
-		super({user:{}, users:[]}, parent);
+		super({viewType: "search", user:{}, users:[]}, parent);
 	}
 
 	setUser() {

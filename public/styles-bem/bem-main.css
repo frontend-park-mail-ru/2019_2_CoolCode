@@ -19,12 +19,23 @@
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bem-chat-column-msgwindow.css');
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnInputBlock/bem-chat-column-input.css');
 @import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bemChatColumnMsg/bem-chat-column-msg.css');
-@import url('bemWsForm/bem-Ws-Form.css');
+@import url('bemRegisterBlocks/bem-register-form.css');
+@import url('bemRegisterBlocks/bemInputBlock/bem-input-block.css');
+@import url('bemMainPage/bem-main-page.css');
+@import url('bemProfilePageBlocks/bemWrkspaceForm/bem-wrkspace-form.css');
+@import url('bemProfilePageBlocks/bemOverlay/bem-overlay.css');
+
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
 :root{
     --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;
     --global-darkgrey-color: #6D6D6D;
+    --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
+    --global-overlay-color: rgba(0,0,0,0.5);
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
 }
@@ -34,4 +45,17 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/*bounce function*/
+
+@keyframes bounce {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(-360deg); }
+}
+
+.bem-main{
+    width: 100%;
+    height: 100%;
+    position: relative;
 }

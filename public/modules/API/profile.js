@@ -86,7 +86,7 @@ async function openWebSocketConnections() {
 async function fetchViewInfo() {
 	await checkLogin();
 	redundantWrkSpace();
-	await getChats(data.user.id, 0);
+	await getChats(data.user.id);
 	await openWebSocketConnections();
 }
 
@@ -105,7 +105,7 @@ function createInputs (application, user) {
 
 };
 
-async function getChats(id, type) {
+async function getChats(id) {
 	console.log(` Getting user ${id} chats`);
 	try {
 		let response = await FetchModule._doGet({path: `/users/${id}/chats`});
@@ -114,17 +114,8 @@ async function getChats(id, type) {
 				`Couldn't fetch user chats: ${response.status}`);
 		}
 		let chats = await response.json();
-		switch (type) {
-		case 0:
-			data.setChats(chats['Chats']);
-			break;
-		case 1:
-			data.setWrkSpaces(chats['Workspaces']);
-			break;
-		default:
-			throw new Error(`Wrong param type ${type}`);
-		}
-
+		data.setChats(chats['Chats']);
+		data.setWrkSpaces(chats['Workspaces']);
 		console.log(chats);
 	} catch (error) {
 		console.error(error);

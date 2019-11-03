@@ -1,12 +1,13 @@
 import BaseView from './baseView';
 import createMainPage from "../modules/API/mainpage";
 const bodyTemplate = require('../components/MainPage/body.pug');
+const containerTemplate = require('../components/Container/container.pug');
 const headerTemplate = require('../components/Header/header.pug');
 import {data} from '../main';
 
 class mainPageView extends BaseView {
 	constructor (data, parent) {
-		super ({user:{}, loggedIn: null}, parent);
+		super ({viewType: "mainPage", user:{}, loggedIn: null}, parent);
 		this._bus.on('fetchUsers', createMainPage);
 	};
 	setUserStatus() {
@@ -23,10 +24,13 @@ class mainPageView extends BaseView {
 			this.render();
 		}
 	}
-	render() {
-		this._parent.innerHTML = '';
+	drawBasics() {
 		this._parent.innerHTML = headerTemplate(this._data);
-		this._parent.innerHTML += bodyTemplate(this._data);
+		this._parent.innerHTML += containerTemplate(this._data);
+	}
+	render() {
+		this.drawBasics();
+		this._parent.querySelector('.bem-primary-container').innerHTML += bodyTemplate(this._data);
 	}
 }
 

@@ -10,18 +10,16 @@ function validateEmail(email) {
 
 function createLogin(application) {
 
-	const form = application.querySelector('.login-form');
-	const errorMessage = application.querySelector('.error_message');
+	const form = application.querySelector('.bem-register-form__form');
+	const errorMessage = application.querySelector('.bem-input-block_error-field');
 	const emailField = document.querySelector('#email');
 	const passwordField = document.querySelector('#password');
 
 	emailField.addEventListener('click', () => {
-		emailField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
 
 	passwordField.addEventListener('click', () => {
-		passwordField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
 
@@ -36,12 +34,12 @@ function createLogin(application) {
 
 		if (form.elements['password'].value === '') {
 			showError('Please, input password:(');
-			passwordField.style.borderColor = '#ff6575';
+			passwordField.className += " bem-input-block_input-field_error";
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
 			showError('Please, input correct email:(');
-			emailField.style.borderColor = '#ff6575';
+			emailField.className += " bem-input-block_input-field_error";
 			correct = false;
 		}
 		if (!correct) {
@@ -82,7 +80,7 @@ async function login(email, password) {
 }
 
 function showError(text) {
-	const errorMessage = application.querySelector('.error_message');
+	const errorMessage = application.querySelector('.bem-input-block_error-field');
 	errorMessage.innerHTML = text;
 }
 

@@ -4,12 +4,13 @@ mixin item(title, href, section, id)
 div.bem-header
     a.bem-header__logo(href='/')
         img.bem-header__logo__image(src='../images/logo_2.png')
-    div.bem-header-refs
-        if loggedIn
-            +item('log out', '/logout', 'logout')
-            +item('profile', '/profile', 'profile')
-        else
-            +item('log in', '/login', 'login')
-            +item('sign up', '/signup', 'signUp')
+    if viewType !== 'signUp' && viewType !== 'login'
+        div.bem-header-refs
+            if loggedIn
+                +item('log out', '/logout', 'logout')
+                +item('profile', '/profile', 'profile')
+            else
+                +item('log in', '/login', 'login')
+                +item('sign up', '/signup', 'signUp')
 
 block content
