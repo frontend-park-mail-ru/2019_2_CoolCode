@@ -1,6 +1,6 @@
 .bem-wrkspace-form {
     position: fixed; /*make it centered and overlay*/
-    top: 50vh; /*experimenting with viewports*/
+    top: 40vh; /*experimenting with viewports*/
     left: 35vw;
     align-self: center;
     display: flex;
@@ -93,6 +93,7 @@
 .bem-wrkspace-form__form__name_style {
     font-weight: 700;
     font-size: 20px;
+    font-style: var(--global-font-family-Roboto);
     color: var(--global-green-color);
 }
 

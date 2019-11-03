@@ -22,6 +22,7 @@ import {data, bus, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
 import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
+import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 
 class chatView extends BaseView {
 
@@ -38,6 +39,7 @@ class chatView extends BaseView {
 		saveUserPhoto(this._data.chatUser.id);
     	searchInteraction();
     	openWrkSpaceInfo();
+		wsBTM();
     	chatInput(this._data.chatUser.id);
 		this.setChatCLickInteraction();
 	}

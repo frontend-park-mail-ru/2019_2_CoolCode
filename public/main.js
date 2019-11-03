@@ -17,10 +17,10 @@ import searchView from "./views/searchView";
 import Data from "./entities/Data";
 import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
+import wrkspaceFormView from "./views/wrkspaceFormView";
 
 const bus = new Bus();
 const application = document.getElementById('application');
-
 const baseBlock = document.createElement('div');
 baseBlock.className = 'bem-main';
 application.appendChild(baseBlock);
@@ -37,6 +37,7 @@ router.register('/signup', signUpView);
 router.register('/logout', logoutView);
 router.register('/search', searchView);
 router.register('/chat', chatView);
+router.register('/wrkspaceForm', wrkspaceFormView);
 
 router.start();
 

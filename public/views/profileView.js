@@ -18,7 +18,7 @@ import searchInteraction from "../modules/API/searchInteraction";
 import {bus, data, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import {chooseChat} from "../modules/API/websocketCreation";
-import wsBTM from "./wrkspacebtmView";
+import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 
 class profileView extends BaseView {
 
@@ -61,6 +61,7 @@ class profileView extends BaseView {
 		this._data.chats = data.userChats;
 		this._data.wrkspaces = data.userWrkSpaces;
 		console.log(data.userChats);
+		console.log(data.userWrkSpaces);
 	}
 
 	setChatClickInteraction() {

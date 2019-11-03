@@ -28,17 +28,19 @@
     justify-content: center;
     align-self: center;
 
-
 }
 
 .bem-main-page__figures__image-container__image {
 
     height: 2vh; /*experimenting with viewports*/
     width: 2vh;
+
     transform-origin: bottom;
     animation-duration: 2s;
     animation-iteration-count: infinite;
-    animation: bounce-2 30s linear infinite;
+    animation: bounce 30s linear infinite;
+
+
 }
 
 /*title element*/

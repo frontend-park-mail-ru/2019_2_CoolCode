@@ -4,17 +4,19 @@ import MessageComponent from "../components/Message/Message";
 import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
 import {data, router} from "../main";
 import UserComponent from "../components/User/User";
+import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import {getUserPhoto} from "../modules/API/profile";
 
 class searchView extends BaseView {
 
 	contentListRootSelector = '.bem-all-chats-window';
 	constructor (data, parent) {
-		super({viewType: "search", user:{}, users:[]}, parent);
+		super({viewType: "search", user:{}, users:[], loggedIn: null}, parent);
 	}
 
 	setUser() {
 		this._data.user = data.user;
+		this._data.loggedIn = true;
 	}
 
 	setUsers() {
@@ -29,6 +31,7 @@ class searchView extends BaseView {
 			this.setUsers();
 			this.render();
 			foundUsersClick();
+			wsBTM();
 		}
 	}
 	render() {
