@@ -30,11 +30,12 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 :root{
-    --global-green-color: #ffffff;
+    --global-green-color: #2dc68b;
     --global-grey-color: #C4C4C4;
     --global-darkgrey-color: #6D6D6D;
     --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
+    --global-white-color: #ffffff;
     --global-overlay-color: rgba(0,0,0,0.5);
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;

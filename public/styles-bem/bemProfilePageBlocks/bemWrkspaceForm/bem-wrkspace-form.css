@@ -62,6 +62,7 @@
     flex-direction: row;
     justify-content: center;
     text-align: center;
+    border: none;
     align-self: center;
     width: 20%;
 }
@@ -69,8 +70,8 @@
 .bem-wrkspace-form__form__submit-button_style {
     outline: 0;
     font-family: var(--global-font-family-Roboto);
-    background-color: var(--global-green-color);
-    color: #FFFFFF;
+    background-color: var(--global-white-color);
+    color: var(--global-green-color);;
     font-weight: 500;
     font-size: 16px;
     border-radius: 4px;
