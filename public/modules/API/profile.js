@@ -10,7 +10,7 @@ import {data} from "../../main";
 import {chooseChat, createWebsocketConn} from "./websocketCreation";
 
 function redundantWrkSpace() {
-	data.setWrkSpaces([
+	data.setUserWrkSpaces([
 		{
 			Name: "CoolCode",
 			Channels: [{
@@ -65,7 +65,7 @@ async function checkLogin () {
 		let user = await response.json();
 
 		console.log(user);
-		bus.emit('addUser1', user);
+		bus.emit('addUser', null, user);
 	} catch (error) {
 		console.error(error);
 	}
@@ -114,8 +114,8 @@ async function getChats(id) {
 				`Couldn't fetch user chats: ${response.status}`);
 		}
 		let chats = await response.json();
-		data.setChats(chats['Chats']);
-		data.setWrkSpaces(chats['Workspaces']);
+		data.setUserChats(chats['Chats']);
+		data.setUserWrkSpaces(chats['Workspaces']);
 		console.log(chats);
 	} catch (error) {
 		console.error(error);
@@ -154,8 +154,8 @@ async function getProfilePhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setUserPhoto(result.data);
-			bus.emit('AAA', '.bem-profile-header__image-row__image',data.getUserPhoto());
-			bus.emit('hideLoader', '.bem-profile-header__image-row');
+			bus.emit('AAA', null, '.bem-profile-header__image-row__image',data.getUserPhoto());
+			bus.emit('hideLoader', null, '.bem-profile-header__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -176,8 +176,8 @@ async function saveUserPhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setCurrentChatUserPhoto(result.data);
-			bus.emit('AAA', '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
-			bus.emit('hideLoader', '.bem-chat-column-header__info-row__image-row');
+			bus.emit('AAA', null, '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('hideLoader', null, '.bem-chat-column-header__info-row__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -215,7 +215,7 @@ async function imageUploading(params = {id:null, fileInput:null}) {
 		let response = await FetchModule._doPost({path: '/photos',
 			data: formData, contentType:'multipart/form-data'});
 		if (response.status === 200) {
-			bus.emit('showLoader', '.bem-profile-header__image-row');
+			bus.emit('showLoader', null, '.bem-profile-header__image-row');
 			await getProfilePhoto(params.id);
 		} else {
 			throw new Error(

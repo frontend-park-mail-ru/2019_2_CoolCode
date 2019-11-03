@@ -71,7 +71,7 @@ async function login(email, password) {
 			let user = await response.json();
 			console.log(`Logged in: ${user.email}`);
 			//bus.emit('addUser', user);
-			data.loggedInUser(true);
+			data.setLoggedIn(true);
 			router.go('/profile');
 		}
 	} catch (error) {

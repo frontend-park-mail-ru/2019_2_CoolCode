@@ -14,7 +14,7 @@ async function findUser(query) {
 		if (response.status === 200) {
 			let data = await response.json();
 			console.log(data['users']);
-			bus.emit('addSearchResults', data['users']);
+			bus.emit('setLastSearchUsers', null, data['users']);
 			router.go('/search', query);
 		}
 	} catch (error) {

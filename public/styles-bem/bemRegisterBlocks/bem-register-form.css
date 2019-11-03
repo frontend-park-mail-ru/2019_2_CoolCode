@@ -35,7 +35,7 @@
 }
 
 .bem-register-form__form__name-field_style {
-    font-style: var(--global-font-family-Montserrat);
+    font-family: var(--global-font-family-Montserrat);
     font-weight: 500;
     font-size: 28px;
     color: var(--global-green-color);
