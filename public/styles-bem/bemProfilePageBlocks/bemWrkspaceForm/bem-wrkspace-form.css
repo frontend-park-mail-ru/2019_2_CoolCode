@@ -73,7 +73,8 @@
     color: #FFFFFF;
     font-weight: 500;
     font-size: 16px;
-    border-radius: 7px;
+    border-radius: 4px;
+    padding: 4px;
 }
 
 /*name element in form*/
