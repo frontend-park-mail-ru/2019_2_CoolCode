@@ -64,8 +64,8 @@
     font-family: var(--global-font-family-Roboto);
     border: none;
     outline: none;
-    border-radius: 10px;
-
+    border-radius: 6px;
+    padding: 5px;
 }
 
 .bem-search-menu__form__input_style::-webkit-search-cancel-button{
