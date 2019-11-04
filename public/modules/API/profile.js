@@ -63,8 +63,6 @@ async function checkLogin () {
 				`Not logged in: ${response.status}`);
 		}
 		let user = await response.json();
-
-		console.log(user);
 		bus.emit('addUser', null, user);
 	} catch (error) {
 		console.error(error);
@@ -83,8 +81,7 @@ async function openWebSocketConnections() {
 	}
 }
 
-async function fetchViewInfo() {
-	await checkLogin();
+async function creatingChats() {
 	redundantWrkSpace();
 	await getChats(data.user.id);
 	await openWebSocketConnections();
@@ -154,7 +151,7 @@ async function getProfilePhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setUserPhoto(result.data);
-			bus.emit('AAA', null, '.bem-profile-header__image-row__image',data.getUserPhoto());
+			bus.emit('setPicture', null, '.bem-profile-header__image-row__image',data.getUserPhoto());
 			bus.emit('hideLoader', null, '.bem-profile-header__image-row');
 		};
 	} catch (error) {
@@ -176,7 +173,7 @@ async function saveUserPhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setCurrentChatUserPhoto(result.data);
-			bus.emit('AAA', null, '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('setPicture', null, '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
 			bus.emit('hideLoader', null, '.bem-chat-column-header__info-row__image-row');
 		};
 	} catch (error) {
@@ -261,5 +258,5 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {fetchViewInfo, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
-	getChats, showLoader, hideLoader, getUserInfo, saveUserPhoto, setPicture};
+export {creatingChats, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
+	getChats, showLoader, hideLoader, getUserInfo, saveUserPhoto, setPicture, checkLogin};

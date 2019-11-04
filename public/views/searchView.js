@@ -1,57 +1,32 @@
 import BaseView from "./baseView";
-import {foundUsersClick} from "../modules/API/chat";
-import MessageComponent from "../components/Message/Message";
-import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-import {data, router} from "../main";
-import UserComponent from "../components/User/User";
+import {createChatHndlr} from "../handlers/searchViewHandlers";
+import {data, bus, router, componentsStorage} from "../main";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
-import {getUserPhoto} from "../modules/API/profile";
 
 class searchView extends BaseView {
 
-	contentListRootSelector = '.bem-all-chats-window';
 	constructor (data, parent) {
-		super({viewType: "search", user:{}, users:[], loggedIn: null}, parent);
+		super({viewType: "search", user:{}, searchUsers:[], loggedIn: null}, parent);
 	}
 
-	setUser() {
-		this._data.user = data.user;
-		this._data.loggedIn = true;
-	}
-
-	setUsers() {
-		this._data.users = data.lastSearchUsers;
-		console.log(data.lastSearchUsers);
+	setContent() {
+		this._data.user = data.getUser();
+		this._data.loggedIn = data.getLoggedIn();
+		this._data.searchUsers = data.getLastSearchUsers();
 	}
 
 	show() {
-		if (!data.loggedIn) router.go('/profile');
+		if (!data.getLoggedIn()) router.go('/'); /*checking if reloading page*/
 		else {
-			this.setUser();
-			this.setUsers();
+			this.setContent();
 			this.render();
-			foundUsersClick();
+			createChatHndlr();
 			wsBTM();
 		}
 	}
 	render() {
-
-		const contentListRoot = document.querySelector(this.contentListRootSelector);
-		contentListRoot.innerHTML = "";
-		if (this._data.users) {
-			console.log(this._data.users);
-			this._data.users.forEach((user) => {
-				const userComponent = new UserComponent();
-				userComponent.data = user;
-				const userBlock = document.createElement('div');
-				userBlock.className = 'bem-user-found bem-user-found_style';
-				userBlock.id = "search-" + user.id;
-				userBlock.innerHTML = userComponent.render();
-				contentListRoot.appendChild(userBlock);
-				getUserPhoto(user.id, 'search', '.bem-chat-block__image-row__image');
-			});
-		}
-
+		let leftColumn = componentsStorage.getLeftColumn();
+		leftColumn.renderSearchContent(this._data.searchUsers);
 	}
 
 }

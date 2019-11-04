@@ -1,39 +1,36 @@
 import BaseView from "./baseView";
-import {data, router} from "../main";
-import {foundUsersClick} from "../modules/API/chat";
-import UserComponent from "../components/User/User";
-import {getUserPhoto} from "../modules/API/profile";
+import {data, bus, router} from "../main";
 import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
+import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
 
-const wsForm = require('../components/WrkSpace/wsForm.pug');
+const wsForm = require('../components/WrkspaceForm/wsForm.pug');
 
 class wrkspaceFormView extends BaseView {
 
 	contentListRootSelector = '.bem-header';
 
 	constructor (data, parent) {
-		super({viewType: "wrkspaceForm", user:{}, users:[], loggedIn: null}, parent);
+		super({viewType: "wrkspaceForm", user:{}, loggedIn: null}, parent);
 	}
 
-	setUser() {
-		this._data.user = data.user;
-		this._data.loggedIn = true;
+	setContent() {
+		this._data.user = data.getUser();
+		this._data.loggedIn = data.getLoggedIn();
 	}
 
 	show() {
-		if (!data.loggedIn) router.go('/profile');
+		if (!data.getLoggedIn()) router.go('/profile');
 		else {
-			this.setUser();
+			this.setContent();
 			this.render();
 			workspaceFormInteration();
 			overlayInteration();
 		}
 	}
 	render() {
-
+		let wsForm = new WorkSpaceComponent(this._data, this._parent);
 		const contentListRoot = document.querySelector(this.contentListRootSelector);
-		contentListRoot.insertAdjacentHTML("beforebegin", wsForm());
-
+		contentListRoot.insertAdjacentHTML("beforebegin", wsForm.render());
 	}
 
 }

@@ -4,13 +4,15 @@ class BaseView {
 	constructor (data = {}, parent = document.body) {
 		this._data = data;
 	    this._parent = parent;
-	    this._active = false;
-	    this._bus = new Bus();
 	};
 	render() {
 	    this._parent.innerText = "NOTHING TO RENDER";
 	}
 	show(args) {
+
+	}
+
+	setContent() {
 
 	}
 
@@ -30,8 +32,5 @@ class BaseView {
 		this._parent = parent;
 	}
 
-	get active() {
-	    return this._active;
-	}
 }
 export default BaseView;

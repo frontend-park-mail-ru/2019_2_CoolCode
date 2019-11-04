@@ -19,9 +19,11 @@ import Data from "./entities/Data";
 import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
+import ComponentsStorage from "./entities/ComponentsStorage";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
+const componentsStorage = new ComponentsStorage();
 const application = document.getElementById('application');
 const baseBlock = document.createElement('div');
 baseBlock.className = 'bem-main';
@@ -43,4 +45,4 @@ router.register('/wrkspaceForm', wrkspaceFormView);
 
 router.start();
 
-export {bus, data, router, promiseMaker, FetchModule};
+export {bus, data, router, promiseMaker, componentsStorage, FetchModule};

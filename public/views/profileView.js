@@ -1,49 +1,27 @@
 import BaseView from './baseView';
-import MessageComponent from "../components/Message/Message";
-import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-const headerTemplate = require('../components/Header/header.pug');
-const containerTemplate = require('../components/Container/container.pug');
-const profileTemplateLeft = require('../components/Profile/profilePage.pug');
-const profileTemplateRight = require('../components/Profile/profile.pug');
+const profileTemplateRight = require('../components/Profile/profilePage.pug');
 import {
-	createProfile,
-	getUserPhoto,
 	createInputs,
-	redundantWrkSpace,
-	Photo,
 	showLoader,
-	hideLoader, setPicture, getProfilePhoto, fetchViewInfo
+	hideLoader, setPicture, getProfilePhoto, creatingChats
 } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
-import {bus, data, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import {chooseChat} from "../modules/API/websocketCreation";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
+import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import ProfilePageComponent from "../components/Profile/profilePageComponent";
 
 class profileView extends BaseView {
-
-	contentListRootSelector = '.bem-all-chats-window';
-
 	constructor (data, parent) {
 		super ({viewType: "profile", user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
 	};
 
-	createEvents() {
-		bus.on('AAA', setPicture);
-		this._bus.on('createInputs', createInputs);
-		this._bus.on('showLoader', showLoader);
-	}
-
-	deleteEvents() {
-		console.log('DELETED');
-		this._bus.off('createInputs', createInputs);
-	}
-
-	drawAll() {
-		this.render();
-		this._bus.emit('showLoader', null, '.bem-profile-header__image-row');
-		this._bus.on('hideLoader', hideLoader);
-		this._bus.emit('createInputs', null, this._parent, this._data.user);
+	setEvents() {
+		bus.emit('showLoader', null, '.bem-profile-header__image-row');
+		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
 		this.setChatClickInteraction();
 		searchInteraction();
@@ -51,17 +29,19 @@ class profileView extends BaseView {
 		wsBTM();
 	}
 
-	setUser() {
-		this._data.user = data.getUser();
-		this._data.loggedIn = data.loggedIn;
+	createClickablePic() {
+		const img = document.querySelector('.bem-profile-header__image-row__image');
+		const input = document.querySelector('.bem-profile-header__image-row__input');
+		img.addEventListener('click', function () {
+			input.click();
+		});
 	}
 
 	setContent() {
-
-		this._data.chats = data.userChats;
-		this._data.wrkspaces = data.userWrkSpaces;
-		console.log(data.userChats);
-		console.log(data.userWrkSpaces);
+		this._data.user = data.getUser();
+		this._data.loggedIn = data.getLoggedIn();
+		this._data.chats = data.getUserChats();
+		this._data.wrkspaces = data.getUserWrkSpaces();
 	}
 
 	setChatClickInteraction() {
@@ -73,67 +53,40 @@ class profileView extends BaseView {
 	}
 
 	show() {
-		this.createEvents();
-		fetchViewInfo(this._parent).then(() => {
-			getProfilePhoto(data.user.id).then();
-			this.setUser();
-			this.setContent();
-			this.drawAll();
-			this.deleteEvents();
-		});
-		console.log('CREATED PROFILE');
-
-		//} else {
-		//	this.drawAll();
-		//	this.deleteEvents();
-		//	}
-
+		if (this._data.user.id) {
+			this.render();
+			this.setEvents();
+		} else {
+			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+				if (!data.getLoggedIn()) router.go('/');
+				else {
+					creatingChats(this._parent).then(() => {
+						getProfilePhoto(data.user.id);
+						this.setContent();
+						this.render();
+						this.setEvents();
+					});
+				}
+			});
+		}
+		console.log('show: profile');
 	}
 
 	drawBasics() {
-		this._parent.innerHTML = headerTemplate(this._data);
-		this._parent.innerHTML += containerTemplate({profile: true});
+		let basics = new BasicsComponent(this._data, this._parent);
+		this._parent.innerHTML = basics.render();
 	}
 
 	drawLeftColumn() {
-		this._parent.querySelector('.bem-column_left').innerHTML += profileTemplateLeft(this._data.user);
-		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-		if (this._data.chats) {
-			this._data.chats.forEach((mes) => {
-				const mess = new MessageComponent();
-				mess.data = mes;
-				const message = document.createElement('div');
-				message.className = 'bem-chat-block bem-chat-block_style';
-				var id;
-				if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
-				else id = mes["Members"][0];
-				message.id = "chat-" + id;
-				message.innerHTML = mess.render();
-				contentListRoot.appendChild(message);
-				getUserPhoto(id,"chat", ".bem-chat-block__image-row__image");
-			});
-		}
-
-		if (this._data.wrkspaces) {
-			this._data.wrkspaces.forEach((wsp) => {
-				const wrkSpace = new WrkSpaceComponent();
-				wrkSpace.data = wsp;
-				const w = wrkSpace.render();
-				contentListRoot.appendChild(w);
-			});
-		}
+		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-column_left').innerHTML = leftColumn.render();
+		leftColumn.renderChatsContent();
+		componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		this._parent.querySelector('.bem-column_right').innerHTML += profileTemplateRight(this._data.user);
-	}
-
-	createClickablePic() {
-		const img = document.querySelector('.bem-profile-header__image-row__image');
-		const input = document.querySelector('.bem-profile-header__image-row__input');
-		img.addEventListener('click', function () {
-			input.click();
-		});
+		let rightColumn = new ProfilePageComponent(this._data.user, this._parent);
+		this._parent.querySelector('.bem-column_right').innerHTML += rightColumn.render();
 	}
 
 	render() {

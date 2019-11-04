@@ -1,67 +1,45 @@
 import BaseView from './baseView';
-import MessageComponent from "../components/Message/Message";
-import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-const headerTemplate = require('../components/Header/header.pug');
-const containerTemplate = require('../components/Container/container.pug');
-const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 
-const chatTemplate = require('../components/Chat/chat.pug');
-const rightMsg = require('../components/Chat/msgRight.pug');
-const leftMsg = require('../components/Chat/msgLeft.pug');
-import {
-	createChatPage,
-	redundantWrkSpace,
-	getUserPhoto,
-	getProfilePhoto as src,
-	createProfile, setPicture, saveUserPhoto, showLoader, hideLoader, fetchViewInfo
-} from "../modules/API/profile";
+import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
 import searchInteraction from "../modules/API/searchInteraction";
 import {messages} from "../modules/API/chat";
 
-import {data, bus, router} from "../main";
+import {data, bus, router, promiseMaker, componentsStorage} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
 import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
+import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import ChatComponent from "../components/Chat/ChatComponent";
+import BasicsComponent from "../components/Basics/basicsComponent";
 
 class chatView extends BaseView {
 
-	contentListRootSelector = '.bem-all-chats-window';
-
 	constructor (data, parent) {
-    	super ({viewType: "chat", user:{}, wrkSpaces:[], chats: [], loggedIn: null, chatUser:{}, importantMessage: {}, chatUserPhoto: '../images/abkhazia.jpg', chatMessages: []}, parent);
+    	super ({viewType: "chat", user:{}, loggedIn: null,
+			wrkSpaces:[], chats: [],
+			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
 	};
 
-	drawAll() {
-    	this.render();
-		this._bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
-		this._bus.on('hideLoader', hideLoader);
+	setEvents() {
+		bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
     	searchInteraction();
     	openWrkSpaceInfo();
 		wsBTM();
     	chatInput(this._data.chatUser.id);
 		this.setChatCLickInteraction();
-	}
-
-	setUser() {
-    	this._data.user = data.getUser();
-    	this._data.loggedIn = data.loggedIn;
-	}
-
-	setChatUser() {
-		this._data.chatUser = data.getCurrentChatUser();
-		bus.on('AAA', setPicture);
+		messages(this._data.chatUser.id);
 	}
 
 	setContent() {
-
-    	this._data.chats = data.userChats;
-    	this._data.wrkspaces = data.userWrkSpaces;
+    	this._data.user = data.getUser();
+    	this._data.loggedIn = data.getLoggedIn();
+		this._data.chatUser = data.getCurrentChatUser();
+		this._data.chats = data.getUserChats();
+		this._data.wrkspaces = data.getUserWrkSpaces();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
-		console.log(this._data.chatMessages);
-		console.log(this._data.chats);
 	}
 
 	setChatCLickInteraction() {
@@ -72,79 +50,51 @@ class chatView extends BaseView {
 		});
 	}
 
-	setData() {
-		this._bus.on('showLoader', showLoader);
-		this.setUser();
-		this.setChatUser();
-		this.setContent();
-		this.drawAll();
-		messages(this._data.chatUser.id);
+	findUser(chatId) {
+		let chatUser = data.getChatUserIdByChatId(chatId);
+		if (chatUser) {
+			fetchUserInfo(chatUser, chatId).then(() => {
+				this.setContent();
+				this.render();
+				this.setEvents();
+			});
+		} else {
+			router.go('/profile');
+		}
 	}
 
 	show(args) {
-		fetchViewInfo(this._parent).then(() => {
-			if (!data.getCurrentChatUser()) {
-				let chatUser = data.getChatUserIdByChatId(args.id);
-				fetchUserInfo(chatUser, args.id).then(()=> {
-					this.setData();
+		if (this._data.chatUser.id) {
+			this.findUser(args.id);
+		} else {
+			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+				if (!data.getLoggedIn()) router.go('/');
+				creatingChats(this._parent).then(() => {
+					this.findUser(args.id);
 				});
-			} else {
-				this.setData();
-			}
-		});
-		console.log('CREATED CHAT PAGE');
+			});
+		}
+
+		console.log('show: chat page');
 	}
 
 	drawBasics() {
-    	this._parent.innerHTML = headerTemplate(this._data);
-    	this._parent.innerHTML += containerTemplate({profile: true});
+		let basics = new BasicsComponent(this._data, this._parent);
+    	this._parent.innerHTML = basics.render();
 	}
 
 	drawLeftColumn() {
-    	this._parent.querySelector('.bem-column_left').innerHTML += profileTemplateLeft(this._data.user);
-    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	if (this._data.chats) {
-    		this._data.chats.forEach((mes) => {
-    		    console.log(mes);
-    			const mess = new MessageComponent();
-    			mess.data = mes;
-    			const message = document.createElement('div');
-    			message.className = 'bem-chat-block bem-chat-block_style';
-    			var id;
-    			if (mes["Members"][0] === data.user.id) id = mes["Members"][1];
-    			else id = mes["Members"][0];
-    			message.id = "chat-" + id;
-    			message.innerHTML = mess.render();
-    			contentListRoot.appendChild(message);
-    			getUserPhoto(id,"chat", ".bem-chat-block__image-row__image");
-    		});
-    	}
+		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
+    	this._parent.querySelector('.bem-column_left').innerHTML += leftColumn.render();
+    	leftColumn.renderChatsContent();
+		componentsStorage.setLeftColumn(leftColumn);
 
-    	if (this._data.wrkspaces) {
-    		this._data.wrkspaces.forEach((wsp) => {
-    			const wrkSpace = new WrkSpaceComponent();
-    			wrkSpace.data = wsp;
-    			const w = wrkSpace.render();
-    			contentListRoot.appendChild(w);
-    		});
-    	}
 	}
 
 	drawRightColumn() {
-    	this._parent.querySelector('.bem-column_right').innerHTML += chatTemplate(this._data);
-    	let msgWindow = document.querySelector('.bem-chat-column-msgwindow');
-		if (this._data.chatMessages) {
-			this._data.chatMessages.forEach((mes) => {
-				if (mes.author_id === this._data.user.id) {
-					msgWindow.innerHTML += rightMsg({text: mes.text, time: 'ADD TIME FIELD!'});
-				} else {
-					msgWindow.innerHTML += leftMsg({text: mes.text, time: 'ADD TIME FIELD!'});
-				}
-
-			});
-		}
-		msgWindow.scrollTop = msgWindow.scrollHeight - msgWindow.clientHeight;
-
+		let chatBlock = new ChatComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-column_right').innerHTML += chatBlock.render();
+		chatBlock.renderContent();
 	}
 
 	render() {

@@ -1,36 +1,32 @@
 import BaseView from './baseView';
-import createMainPage from "../modules/API/mainpage";
-const bodyTemplate = require('../components/MainPage/body.pug');
-const containerTemplate = require('../components/Container/container.pug');
-const headerTemplate = require('../components/Header/header.pug');
-import {data} from '../main';
+import {data, bus, router, promiseMaker} from "../main";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import MainPageComponent from "../components/MainPage/mainPageComponent";
 
 class mainPageView extends BaseView {
 	constructor (data, parent) {
-		super ({viewType: "mainPage", user:{}, loggedIn: null}, parent);
-		this._bus.on('fetchUsers', createMainPage);
+		super ({viewType: "mainPage", loggedIn: null}, parent);
 	};
-	setUserStatus() {
-		console.log(data.loggedIn);
-		this._data.loggedIn = data.loggedIn;
+
+	setContent() {
+		this._data.loggedIn = data.getLoggedIn();
+	}
+
+	show() {
+		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+			this.setContent();
+			this.render();
+		});
 
 	}
-	show() {
-		this.setUserStatus();
-		if (this._data.loggedIn === null || this._data.loggedIn == undefined) {
-			this._bus.emit('fetchUsers', null, this._parent);
-		}
-		else {
-			this.render();
-		}
-	}
 	drawBasics() {
-		this._parent.innerHTML = headerTemplate(this._data);
-		this._parent.innerHTML += containerTemplate(this._data);
+		let basics = new BasicsComponent(this._data, this._parent);
+		this._parent.innerHTML = basics.render();
 	}
 	render() {
 		this.drawBasics();
-		this._parent.querySelector('.bem-primary-container').innerHTML += bodyTemplate(this._data);
+		let mainPage = new MainPageComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-primary-container').innerHTML += mainPage.render();
 	}
 }
 

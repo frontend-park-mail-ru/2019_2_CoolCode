@@ -26,34 +26,6 @@ async function createChat(id) {
 	}
 }
 
-function foundUsersClick() {
-	let persons = document.querySelectorAll(".bem-user-found");
-	persons.forEach((person)=> {
-		person.addEventListener("click", function (event) {
-			event.preventDefault();
-			let ids = data.getChatUsers();
-			let id = parseFloat(person.id.split('-')[1]);
-			console.log(ids.includes(id));
-			if (!(ids.includes(id))) {
-				console.log('!!!' + id);
-				createChat(id).then(() => {
-					let chatId = data.getChatIdByChatUserId(id);
-					if (!chatId) {
-						console.log('error finding chatId');
-						router.go('/');
-					} else {
-						createWebsocketConn(chatId);
-						fetchUserInfo(id, chatId).then(() => router.go('/chat', chatId));
-
-					}
-				});
-			}
-			else{
-				router.go('/profile');
-			}
-		});
-	});
-}
 function messages(userId) {
 	let send = document.getElementsByClassName("bem-chat-column-input__icon-container__icon")[1];
 	console.log("send right msg", send);
@@ -91,5 +63,5 @@ function renderNewMessage(message) {
 	}
 }
 
-export {foundUsersClick, messages, renderNewMessage};
+export {createChat, messages, renderNewMessage};
 

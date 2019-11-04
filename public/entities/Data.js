@@ -212,7 +212,7 @@ class Data {
 		return userId;
 	}
 
-	getChatUsers() {
+	getChatUsersIds() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
 			console.log(chat);
