@@ -34,7 +34,7 @@ class chatView extends BaseView {
 
 	drawAll() {
     	this.render();
-		this._bus.emit('showLoader', '.bem-chat-column-header__info-row__image-row');
+		this._bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
 		this._bus.on('hideLoader', hideLoader);
 		saveUserPhoto(this._data.chatUser.id);
     	searchInteraction();

@@ -17,7 +17,7 @@ class signUpView extends BaseView {
 			router.go('/logout');
 		}
 		this.render();
-		this._bus.emit('signUp', this._parent);
+		this._bus.emit('signUp', null, this._parent);
 
 	}
 	drawBasics() {

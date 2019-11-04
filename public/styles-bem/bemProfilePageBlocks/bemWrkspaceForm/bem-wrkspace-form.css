@@ -93,7 +93,7 @@
 .bem-wrkspace-form__form__name_style {
     font-weight: 700;
     font-size: 20px;
-    font-style: var(--global-font-family-Roboto);
+    font-family: var(--global-font-family-Montserrat);
     color: var(--global-green-color);
 }
 

@@ -41,9 +41,9 @@ class profileView extends BaseView {
 
 	drawAll() {
 		this.render();
-		this._bus.emit('showLoader', '.bem-profile-header__image-row');
+		this._bus.emit('showLoader', null, '.bem-profile-header__image-row');
 		this._bus.on('hideLoader', hideLoader);
-		this._bus.emit('createInputs', this._parent, this._data.user);
+		this._bus.emit('createInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
 		this.setChatClickInteraction();
 		searchInteraction();

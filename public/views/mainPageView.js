@@ -18,7 +18,7 @@ class mainPageView extends BaseView {
 	show() {
 		this.setUserStatus();
 		if (this._data.loggedIn === null || this._data.loggedIn == undefined) {
-			this._bus.emit('fetchUsers', this._parent);
+			this._bus.emit('fetchUsers', null, this._parent);
 		}
 		else {
 			this.render();

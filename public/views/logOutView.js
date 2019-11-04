@@ -7,7 +7,7 @@ class logoutView extends BaseView {
 		this._bus.on('logout', handleLogout);
 	};
 	show() {
-		this._bus.emit('logout', this._parent);
+		this._bus.emit('logout', null, this._parent);
 
 	}
 	render() {

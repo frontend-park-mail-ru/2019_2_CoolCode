@@ -6,13 +6,10 @@ import {loadAllMessages} from "./loadAllMessages";
 const {backend} = settings;
 
 async function fetchUserInfo(userId, chatId) {
-	await getUserInfo(userId).then((user) => {
-		data.setCurrentChatUser(user);
-	});
-	await loadAllMessages(chatId).then((val) => {
-		data.setCurentChatMessages(val);
-	});
-	//saveUserPhoto(userId);
+	let user = await getUserInfo(userId);
+	data.setCurrentChatUser(user);
+	let value = await loadAllMessages(chatId);
+	data.setCurrentChatMessages(value);
 }
 
 function chooseChat(chatId, userId) {

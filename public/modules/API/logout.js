@@ -15,7 +15,7 @@ async function handleLogout() {
 		if (response.status === 200) {
 			let responseAnswer = await response.text();
 			console.log(responseAnswer);
-			bus.emit('loggedInUser', false);
+			bus.emit('setLoggedIn', null, false);
 			data.clear();
 			router.go('/');
 		}

@@ -31,12 +31,15 @@ class Bus {
 		}
 	};
 
-	emit (eventName, ...data) {
+	emit (eventName, resolve, ...data) {
 		let handlers = this._handlers && this._handlers[eventName];
 
 		if (!handlers) return;
-
-		this._handlers[eventName].forEach(handler => handler.apply(this, data));
+		if (resolve) {
+			this._handlers[eventName].forEach(handler => resolve(handler.apply(this, data)));
+		} else {
+			this._handlers[eventName].forEach(handler => handler.apply(this, data));
+		}
 	};
 
 }
