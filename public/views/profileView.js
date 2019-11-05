@@ -5,6 +5,7 @@ const headerTemplate = require('../components/Header/header.pug');
 const containerTemplate = require('../components/Container/container.pug');
 const profileTemplateLeft = require('../components/Profile/profilePage.pug');
 const profileTemplateRight = require('../components/Profile/profile.pug');
+
 import {
 	createProfile,
 	getUserPhoto,
@@ -19,6 +20,7 @@ import {bus, data, router} from "../main";
 import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import {chooseChat} from "../modules/API/websocketCreation";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
+import createChannels from "./channelsView";
 
 class profileView extends BaseView {
 
@@ -122,6 +124,8 @@ class profileView extends BaseView {
 				contentListRoot.appendChild(w);
 			});
 		}
+		createChannels();
+		console.log("AAA ", data.userWrkSpaces);
 	}
 
 	drawRightColumn() {

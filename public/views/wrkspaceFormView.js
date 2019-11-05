@@ -6,6 +6,7 @@ import {getUserPhoto} from "../modules/API/profile";
 import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
 
 const wsForm = require('../components/WrkSpace/wsForm.pug');
+const channelForm = require('../components/WrkSpace/Channels/creationForm.pug');
 
 class wrkspaceFormView extends BaseView {
 
@@ -27,13 +28,12 @@ class wrkspaceFormView extends BaseView {
 			this.render();
 			workspaceFormInteration();
 			overlayInteration();
+
 		}
 	}
 	render() {
-
 		const contentListRoot = document.querySelector(this.contentListRootSelector);
 		contentListRoot.insertAdjacentHTML("beforebegin", wsForm());
-
 	}
 
 }

@@ -2,6 +2,7 @@ import BaseComponent from "../baseComponent";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
+const channelForm = require('./Channels/creationForm.pug');
 
 class WrkSpaceComponent extends BaseComponent {
 	render() {
