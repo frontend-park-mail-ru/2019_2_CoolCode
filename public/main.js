@@ -4,7 +4,7 @@ import Router from './scripts/Router';
 import Bus from './scripts/Bus';
 import PromiseMaker from './scripts/PromiseMaker';
 import Fetch from "./modules/fetch";
-import {settings, responseStatuses} from './modules/config';
+import {settings, responseStatuses} from './constants/config';
 const {backend} = settings;
 
 import './styles-bem/bem-main.css';
@@ -41,7 +41,7 @@ router.register('/signup', signUpView);
 router.register('/logout', logoutView);
 router.register('/search', searchView);
 router.register('/chat', chatView);
-router.register('/wrkspaceForm', wrkspaceFormView);
+router.register('/createWrkSpace', wrkspaceFormView);
 
 router.start();
 

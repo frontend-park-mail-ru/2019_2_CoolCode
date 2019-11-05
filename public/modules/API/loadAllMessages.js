@@ -1,19 +1,21 @@
-import {FetchModule} from "../../main";
+import {data, bus, FetchModule} from "../../main";
+import {responseStatuses} from "../../constants/config";
 
-async function loadAllMessages(chatId) {
+async function getCurrentChatMessages(chatId) {
 	try {
+		console.log(`Getting current chat  ${chatId} messages`);
 		let response = await FetchModule._doGet({
 			path: `/chats/${chatId}/messages`,
 		});
 		if (response.status !== 200) {
 			throw new Error(
-				`Couldn't fetch messages: ${response.status}`);
+				`Couldn't fetch messages: ${responseStatuses[response.status]}`);
 		}
 		let data = await response.json();
-		return data['Messages'];
+		bus.emit('setChatMessages', null, data['Messages']);
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-export {loadAllMessages};
+export {getCurrentChatMessages};

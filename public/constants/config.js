@@ -14,4 +14,8 @@ const responseStatuses = {
 	500 : "Internal Server Error",
 };
 
-export {settings, responseStatuses};
+const keys = {
+	"ENTER": 13,
+};
+
+export {settings, responseStatuses, keys};

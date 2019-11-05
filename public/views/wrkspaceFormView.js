@@ -1,7 +1,7 @@
 import BaseView from "./baseView";
 import {data, bus, router} from "../main";
-import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
 import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
+import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/wrkSpaceFormHandlers";
 
 const wsForm = require('../components/WrkspaceForm/wsForm.pug');
 
@@ -23,8 +23,8 @@ class wrkspaceFormView extends BaseView {
 		else {
 			this.setContent();
 			this.render();
-			workspaceFormInteration();
-			overlayInteration();
+			createWrkSpaceCreateSubmitHndlr();
+			createOverlayHndlr();
 		}
 	}
 	render() {

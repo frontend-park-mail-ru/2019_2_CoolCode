@@ -9,6 +9,13 @@ const chatsColumnTemplate = require('./chatsColumn.pug');
 class ChatsColumnComponent extends BaseComponent {
 
     contentListRootSelector = '.bem-all-chats-window';
+
+    renderNewMessage(message) { //TODO: переделать когда на бэке появится дата
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	let messageBlock = contentListRoot.querySelector(`#chat-${message.author_id}`);
+    	let lastMessage = messageBlock.querySelector('.bem-chat-block__message-column__message-row__last-message');
+    	lastMessage.innerHTML = message.text;
+    }
     renderSearchContent(searchUsers) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	contentListRoot.innerHTML = "";

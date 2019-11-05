@@ -1,5 +1,5 @@
 import {login} from './login';
-import {settings} from '../config';
+import {settings} from '../../constants/config';
 import {bus, FetchModule, router} from "../../main";
 
 const {backend} = settings;

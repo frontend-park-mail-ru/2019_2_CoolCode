@@ -1,4 +1,4 @@
-import {settings} from '../config';
+import {settings} from '../../constants/config';
 const {backend} = settings;
 import {bus, FetchModule, router} from '../../main';
 import {data} from "../../main";

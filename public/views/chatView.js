@@ -1,17 +1,14 @@
 import BaseView from './baseView';
 
 import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
-import searchInteraction from "../modules/API/searchInteraction";
-import {messages} from "../modules/API/chat";
-
+import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 import {data, bus, router, promiseMaker, componentsStorage} from "../main";
-import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
-import chatInput from "../modules/API/chatInteraction";
 import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
-import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
+import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
+import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
 
 class chatView extends BaseView {
 
@@ -24,12 +21,12 @@ class chatView extends BaseView {
 	setEvents() {
 		bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
-    	searchInteraction();
-    	openWrkSpaceInfo();
-		wsBTM();
-    	chatInput(this._data.chatUser.id);
-		this.setChatCLickInteraction();
-		messages(this._data.chatUser.id);
+    	createSearchInputHndlr();
+		createWrkspaceBlockExpandHndlr();
+		createWorkspaceButtonHndlr();
+		createMessageInputHndlr();
+		createChatBlockHndlr();
+		createSendMessageBtnHndlr();
 	}
 
 	setContent() {
@@ -40,14 +37,6 @@ class chatView extends BaseView {
 		this._data.wrkspaces = data.getUserWrkSpaces();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
-	}
-
-	setChatCLickInteraction() {
-		let chatUsersWChatID = data.getChatUsersWChatIDs();
-
-		chatUsersWChatID.forEach((chat) => {
-			chooseChat(chat.chatId, chat.userId);
-		});
 	}
 
 	findUser(chatId) {
@@ -95,6 +84,8 @@ class chatView extends BaseView {
 		let chatBlock = new ChatComponent(this._data, this._parent);
 		this._parent.querySelector('.bem-column_right').innerHTML += chatBlock.render();
 		chatBlock.renderContent();
+		componentsStorage.setChatBlock(chatBlock);
+
 	}
 
 	render() {

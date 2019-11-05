@@ -112,6 +112,9 @@
     padding: 5px 0 0 5px;
 }
 .bem-chat-block__message-column__message-row__last-message_style {
+    text-overflow: ellipsis; /* crop text with dots*/
+    overflow: hidden;
+    white-space: nowrap;
     border-radius: 20px;
     background-color:var(--global-grey-color);
     text-align-all: justify; /*CHECK THIS*/

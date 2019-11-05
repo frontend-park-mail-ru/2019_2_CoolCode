@@ -21,11 +21,11 @@ function foundUserClickEvent(params = {personId:null}) {
 	}
 }
 
-function createChatHndlr() {
+function createUserBlockHndlr() {
 	let persons = document.querySelectorAll(".bem-user-found");
 	persons.forEach((person)=> {
 		person.addEventListener('click', foundUserClickEvent.bind(null, {personId:person.id}));
 	});
 }
 
-export {createChatHndlr};
+export {createUserBlockHndlr};

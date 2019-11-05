@@ -5,14 +5,12 @@ import {
 	showLoader,
 	hideLoader, setPicture, getProfilePhoto, creatingChats
 } from "../modules/API/profile";
-import searchInteraction from "../modules/API/searchInteraction";
+import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
-import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
-import {chooseChat} from "../modules/API/websocketCreation";
-import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
+import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -23,10 +21,10 @@ class profileView extends BaseView {
 		bus.emit('showLoader', null, '.bem-profile-header__image-row');
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
-		this.setChatClickInteraction();
-		searchInteraction();
-		openWrkSpaceInfo();
-		wsBTM();
+		createChatBlockHndlr();
+		createSearchInputHndlr();
+		createWrkspaceBlockExpandHndlr();
+		createWorkspaceButtonHndlr();
 	}
 
 	createClickablePic() {
@@ -42,14 +40,6 @@ class profileView extends BaseView {
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.chats = data.getUserChats();
 		this._data.wrkspaces = data.getUserWrkSpaces();
-	}
-
-	setChatClickInteraction() {
-		let chatUsersWChatID = data.getChatUsersWChatIDs();
-
-		chatUsersWChatID.forEach((chat) => {
-			chooseChat(chat.chatId, chat.userId);
-		});
 	}
 
 	show() {

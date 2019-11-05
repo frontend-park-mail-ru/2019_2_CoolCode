@@ -1,17 +1,20 @@
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import ChatComponent from "../components/Chat/ChatComponent";
 
 class ComponentsStorage {
-	constructor(leftColumn = null) {
+	constructor(leftColumn = null, chatBlock = null) {
 		if (ComponentsStorage.__instance) {
 			return ComponentsStorage.__instance;
 		}
 
 		this.leftColumn = leftColumn;
+		this.chatBlock = chatBlock;
 
 		ComponentsStorage.__instance = this;
 	}
 	clear() {
 		this.leftColumn = null;
+		this.chatBlock = null;
 	}
 	setLeftColumn(leftColumn) {
 		try {
@@ -28,6 +31,23 @@ class ComponentsStorage {
 
 	getLeftColumn() {
 		return this.leftColumn;
+	}
+
+	setChatBlock(chatBlock) {
+		try {
+			if (chatBlock instanceof ChatComponent) {
+				this.chatBlock = chatBlock;
+			} else{
+				throw new Error('Can\'t set chatBlock component');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
+	getChatBlock() {
+		return this.chatBlock;
 	}
 }
 

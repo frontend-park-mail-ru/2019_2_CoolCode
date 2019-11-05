@@ -1,24 +1,17 @@
-import {settings, responseStatuses} from '../../modules/config';
-import {data, FetchModule, router} from "../../main";
+import {settings, responseStatuses} from '../../constants/config';
+import {componentsStorage, data, FetchModule, router} from "../../main";
 import {getChats, getUserInfo, saveUserPhoto} from "./profile";
-import {renderNewMessage} from "./chat";
-import {loadAllMessages} from "./loadAllMessages";
+import {renderNewMessage} from "../../backendDataFetchers/creationChat";
+import {getCurrentChatMessages} from "./loadAllMessages";
+import {webSocketOnMessage} from "../../handlers/webSocketHandlers";
 const {backend} = settings;
 
 async function fetchUserInfo(userId, chatId) {
 	let user = await getUserInfo(userId);
 	data.setCurrentChatUser(user);
-	let value = await loadAllMessages(chatId);
-	data.setCurrentChatMessages(value);
-}
+	data.setCurrentChatId(chatId);
+	await getCurrentChatMessages(chatId);
 
-function chooseChat(chatId, userId) {
-	let messageWindow = document.querySelector('.bem-all-chats-window');
-	let messageBlock = messageWindow.querySelector(`#chat-${userId}`);
-
-	messageBlock.addEventListener('click', () => {
-		fetchUserInfo(userId, chatId).then(() => router.go('/chat', chatId));
-	});
 }
 
 function createWebsocketConn(chatId) {
@@ -30,10 +23,7 @@ function createWebsocketConn(chatId) {
 		console.log('opened webSocket connection');
 	};
 
-	websocketConn.onmessage = (event) => {
-	    console.log('message recieved');
-		renderNewMessage(JSON.parse(event.data));
-	};
+	websocketConn.onmessage = (event) => webSocketOnMessage(event);
 
 	websocketConn.onclose = (event) => {
 		if (event.wasClean) {
@@ -50,4 +40,4 @@ function createWebsocketConn(chatId) {
 
 }
 
-export {chooseChat, createWebsocketConn, fetchUserInfo};
+export {createWebsocketConn, fetchUserInfo};

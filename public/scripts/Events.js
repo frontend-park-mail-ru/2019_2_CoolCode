@@ -1,6 +1,14 @@
 import {bus, data} from "../main";
-import {createInputs, getUserPhoto, hideLoader, setPicture, showLoader, checkLogin} from "../modules/API/profile";
-import {createChat} from "../modules/API/chat";
+import {
+	createInputs,
+	getUserPhoto,
+	hideLoader,
+	setPicture,
+	showLoader,
+	checkLogin,
+	getChats
+} from "../modules/API/profile";
+import {createChat} from "../backendDataFetchers/creationChat";
 import {createWebsocketConn, fetchUserInfo} from "../modules/API/websocketCreation";
 function createEvents() {
 
@@ -31,6 +39,7 @@ function createEvents() {
 	bus.on('createWebsocketConn', createWebsocketConn);
 
 	bus.on('fetchUserInfo', fetchUserInfo);
+	bus.on('getChats', getChats);
 
 }
 

@@ -1,7 +1,5 @@
-import {responseStatuses, settings} from '../config';
+import {responseStatuses, settings} from '../../constants/config';
 import createInput from './forms';
-
-import openWrkSpaceInfo from './wrkspaceInteraction';
 import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
