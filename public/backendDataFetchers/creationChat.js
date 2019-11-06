@@ -31,8 +31,8 @@ async function createWrkspace(name) { /*creating new wrkspace and fetching all c
 			throw new Error(
 				`Didn't create wrkspace: ${responseStatuses[response.status]}`);
 		}
-		debugger;
-		promiseMaker.createPromise('getChats', data.getUserId()).then(() =>{ debugger; });
+		await promiseMaker.createPromise('getChats', data.getUserId());
+		console.log('HHH');
 	} catch (error) {
 		console.error(error);
 	}

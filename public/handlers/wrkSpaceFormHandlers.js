@@ -9,10 +9,11 @@ function drawWrkspaceFormError(inputField) {
 }
 
 function createWrkSpaceEvent() {
+	event.preventDefault();
 	let inputField = document.querySelector('.bem-wrkspace-form__form__input-field');
 	let channelName = inputField.value;
 	if (channelName) {
-		createWrkspace(channelName);
+		createWrkspace(channelName).then(() => router.go('/profile'));
 	} else {
 		drawWrkspaceFormError(inputField);
 	}
@@ -29,6 +30,7 @@ function createOverlayHndlr() {
 }
 
 function createChannelEvent(params = {wrkSpaceId:null}) {
+	event.preventDefault();
 	let inputField = document.querySelector('.bem-wrkspace-form__form__input-field');
 	let channelName = inputField.value;
 	if (channelName) {
@@ -41,7 +43,7 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 
 function createChannelCreateSubmitHndlr(wrkSpaceId) {
 	let channelForm = document.querySelector('.bem-wrkspace-form__form');
-	channelForm.addEventListener('submit', createChannelEvent.bind(null, {wrkSpaceId:wrkSpaceId}));
+	channelForm.addEventListener('submit', createChannelEvent.bind(event, {wrkSpaceId:wrkSpaceId}));
 }
 
 export {createWrkSpaceCreateSubmitHndlr, createOverlayHndlr, createChannelCreateSubmitHndlr};

@@ -49,6 +49,7 @@ class profileView extends BaseView {
 
 	show() {
 		if (this._data.user.id) {
+			this.setContent();
 			this.render();
 			this.setEvents();
 		} else {
