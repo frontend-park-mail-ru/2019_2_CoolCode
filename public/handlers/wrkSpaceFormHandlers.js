@@ -1,5 +1,5 @@
 import {router} from "../main";
-import {createWrkspace} from "../modules/API/wrkspaceFormCreation";
+import {createWrkspace} from "../backendDataFetchers/creationChat";
 
 function drawWrkspaceFormError(inputField) {
 	inputField.className += " bem-wrkspace-form__form__input-field_error";

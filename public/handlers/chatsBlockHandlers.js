@@ -9,7 +9,7 @@ function createWrkspaceBlockExpandHndlr() {
 	});
 }
 
-async function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null}) {
+function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null}) {
 	if (!params.wrkspaceBlockSmall.classList.contains('bem-wrkspace-expandable_clicked')) params.wrkspaceBlockSmall.className += ' bem-wrkspace-expandable_clicked';
 	else params.wrkspaceBlockSmall.classList.remove('bem-wrkspace-expandable_clicked');
 }

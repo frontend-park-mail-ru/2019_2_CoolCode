@@ -7,8 +7,7 @@ import {webSocketOnMessage} from "../../handlers/webSocketHandlers";
 const {backend} = settings;
 
 async function fetchUserInfo(userId, chatId) {
-	let user = await getUserInfo(userId);
-	data.setCurrentChatUser(user);
+	await getUserInfo(userId);
 	data.setCurrentChatId(chatId);
 	await getCurrentChatMessages(chatId);
 

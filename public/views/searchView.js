@@ -1,7 +1,6 @@
 import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "../main";
-import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import {createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 
 class searchView extends BaseView {

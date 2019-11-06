@@ -101,17 +101,16 @@ function createInputs (application, user) {
 };
 
 async function getChats(id) {
-	console.log(` Getting user ${id} chats`);
+	console.log(` Getting user ${id} chats and wrkspaces`);
 	try {
 		let response = await FetchModule._doGet({path: `/users/${id}/chats`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Couldn't fetch user chats: ${response.status}`);
+				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
 		}
 		let chats = await response.json();
 		data.setUserChats(chats['Chats']);
 		data.setUserWrkSpaces(chats['Workspaces']);
-		console.log(chats);
 	} catch (error) {
 		console.error(error);
 	}
@@ -123,11 +122,10 @@ async function getUserInfo(id) {
 		let response = await FetchModule._doGet({path: `/users/${id}`});
 		if (response.status !== 200) {
 			throw new Error(
-				`Couldn't fetch user info: ${response.status}`);
+				`Couldn't fetch user info: ${responseStatuses[response.status]}`);
 		}
 		let user = await response.json();
-		console.log(user);
-		return user;
+		data.setCurrentChatUser(user);
 	} catch (error) {
 		console.error(error);
 	}
