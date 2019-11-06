@@ -20,6 +20,7 @@ import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
+import channelFormView from "./views/channelFormView";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
@@ -42,6 +43,7 @@ router.register('/logout', logoutView);
 router.register('/search', searchView);
 router.register('/chat', chatView);
 router.register('/wrkspaceForm', wrkspaceFormView);
+router.register('/channelForm', channelFormView);
 
 router.start();
 

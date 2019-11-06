@@ -12,6 +12,7 @@ import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
+import {createChannels} from "../modules/API/channelCreation";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -26,6 +27,7 @@ class profileView extends BaseView {
 		searchInteraction();
 		openWrkSpaceInfo();
 		wsBTM();
+		createChannels();
 	}
 
 	createClickablePic() {

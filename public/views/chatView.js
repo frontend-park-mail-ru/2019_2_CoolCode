@@ -12,6 +12,7 @@ import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
+import {createChannels} from "../modules/API/channelCreation";
 
 class chatView extends BaseView {
 
@@ -27,6 +28,7 @@ class chatView extends BaseView {
     	searchInteraction();
     	openWrkSpaceInfo();
 		wsBTM();
+		createChannels();
     	chatInput(this._data.chatUser.id);
 		this.setChatCLickInteraction();
 		messages(this._data.chatUser.id);

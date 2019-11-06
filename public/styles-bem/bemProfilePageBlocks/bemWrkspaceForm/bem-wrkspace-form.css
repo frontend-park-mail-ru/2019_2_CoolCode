@@ -76,6 +76,7 @@
     font-size: 16px;
     border-radius: 4px;
     padding: 4px;
+    border: 1px solid var(--global-green-color);
 }
 
 /*name element in form*/

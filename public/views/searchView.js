@@ -2,6 +2,7 @@ import BaseView from "./baseView";
 import {createChatHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "../main";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
+import {createChannels} from "../modules/API/channelCreation";
 
 class searchView extends BaseView {
 
@@ -21,6 +22,7 @@ class searchView extends BaseView {
 			this.setContent();
 			this.render();
 			createChatHndlr();
+			createChannels();
 			wsBTM();
 		}
 	}

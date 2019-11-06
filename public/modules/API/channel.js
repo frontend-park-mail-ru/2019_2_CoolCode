@@ -11,8 +11,7 @@ async function createChannel(name, id) {
 			throw new Error(
 				`Didn't create chat: ${response.status}`);
 		}
-		console.log("POST OK");
-		console.log("AAA ", data.userWrkSpaces);
+		await getChats(data.user.id);
 	} catch (error) {
 		console.error(error);
 	}
