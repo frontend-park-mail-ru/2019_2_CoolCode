@@ -123,9 +123,10 @@ class profileView extends BaseView {
 				const w = wrkSpace.render();
 				contentListRoot.appendChild(w);
 			});
+			console.log("AAA ", data.userWrkSpaces);
+			createChannels();
 		}
-		createChannels();
-		console.log("AAA ", data.userWrkSpaces);
+
 	}
 
 	drawRightColumn() {

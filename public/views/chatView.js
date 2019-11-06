@@ -23,6 +23,7 @@ import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
 import chatInput from "../modules/API/chatInteraction";
 import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
 import {wsBTM} from "../modules/API/wrkspaceFormCreation";
+import createChannels from "./channelsView";
 
 class chatView extends BaseView {
 
@@ -128,6 +129,7 @@ class chatView extends BaseView {
     			contentListRoot.appendChild(w);
     		});
     	}
+
 	}
 
 	drawRightColumn() {

@@ -1,4 +1,6 @@
 import BaseComponent from "../baseComponent";
+import {data} from "../../main";
+import createChannels from "../../views/channelsView";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
