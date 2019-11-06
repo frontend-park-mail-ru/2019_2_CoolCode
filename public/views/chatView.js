@@ -13,7 +13,6 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 
-
 class chatView extends BaseView {
 
 	constructor (data, parent) {

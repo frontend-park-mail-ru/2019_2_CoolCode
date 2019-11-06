@@ -13,7 +13,6 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
 
-
 class profileView extends BaseView {
 	constructor (data, parent) {
 		super ({viewType: "profile", user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);

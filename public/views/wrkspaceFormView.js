@@ -3,8 +3,6 @@ import {data, bus, router} from "../main";
 import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
 import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
 
-
-
 class wrkspaceFormView extends BaseView {
 
 	contentListRootSelector = '.bem-header';

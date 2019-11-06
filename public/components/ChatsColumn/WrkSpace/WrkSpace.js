@@ -1,4 +1,4 @@
-import BaseComponent from "../baseComponent";
+import BaseComponent from "../../baseComponent";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');

@@ -45,7 +45,7 @@ class ChatsColumnComponent extends BaseComponent {
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
     			contentListRoot.appendChild(wrkSpace.render());
     		});
-			createChannels();
+    		createChannels();
     	}
     }
 

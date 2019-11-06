@@ -2,7 +2,7 @@ import profileView from "./profileView";
 import createChannel from "../modules/API/channel";
 import {router} from "../../public/main.js";
 import {data} from "../../public/main";
-const channelForm = require('../components/WrkSpace/Channels/creationForm.pug');
+const channelForm = require('../components/ChatsColumn/WrkSpace/Channels/creationForm.pug');
 
 function createChannels() {
 	let blocks = document.querySelectorAll(".bem-wrkspace-block");
