@@ -43,9 +43,7 @@ router.register('/logout', logoutView);
 router.register('/search', searchView);
 router.register('/chat', chatView);
 router.register('/createWrkSpace', wrkspaceFormView);
-
-router.register('/channelForm', channelFormView);
-
+router.register('/createChannel', channelFormView);
 
 router.start();
 

@@ -12,7 +12,6 @@ import ProfilePageComponent from "../components/Profile/profilePageComponent";
 import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
 import {createChannels} from "../modules/API/channelCreation";
 
-
 class profileView extends BaseView {
 	constructor (data, parent) {
 		super ({viewType: "profile", user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);

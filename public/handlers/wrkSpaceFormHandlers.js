@@ -1,5 +1,6 @@
 import {router} from "../main";
 import {createWrkspace} from "../backendDataFetchers/creationChat";
+import createChannel from "../modules/API/channel";
 
 function drawWrkspaceFormError(inputField) {
 	inputField.className += " bem-wrkspace-form__form__input-field_error";
@@ -27,4 +28,20 @@ function createOverlayHndlr() {
 	overlay.addEventListener('click', () => router.return());
 }
 
-export {createWrkSpaceCreateSubmitHndlr, createOverlayHndlr};
+function createChannelEvent(params = {wrkSpaceId:null}) {
+	let inputField = document.querySelector('.bem-wrkspace-form__form__input-field');
+	let channelName = inputField.value;
+	if (channelName) {
+		createChannel(channelName, params.wrkSpaceId).then(() => router.go('/profile'));
+	} else {
+		drawWrkspaceFormError(inputField);
+
+	}
+}
+
+function createChannelCreateSubmitHndlr(wrkSpaceId) {
+	let channelForm = document.querySelector('.bem-wrkspace-form__form');
+	channelForm.addEventListener('submit', createChannelEvent.bind(null, {wrkSpaceId:wrkSpaceId}));
+}
+
+export {createWrkSpaceCreateSubmitHndlr, createOverlayHndlr, createChannelCreateSubmitHndlr};

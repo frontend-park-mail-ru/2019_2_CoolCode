@@ -1,9 +1,8 @@
 import BaseView from "./baseView";
 import {data, bus, router} from "../main";
-import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
-import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
 import {createChannelInteraction} from "../modules/API/channelCreation";
 import ChannelFormComponent from "../components/ChannelForm/channelFormComponent";
+import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/wrkSpaceFormHandlers";
 
 class channelFormView extends BaseView {
 
@@ -23,8 +22,8 @@ class channelFormView extends BaseView {
     	else {
     		this.setContent();
     		this.render();
-    		createChannelInteraction(args.id);
-    		overlayInteration();
+    		createChannelCreateSubmitHndlr(args.id);
+    		createOverlayHndlr();
     	}
     }
     render() {

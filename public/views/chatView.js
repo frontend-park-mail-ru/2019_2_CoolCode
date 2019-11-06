@@ -11,7 +11,6 @@ import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/ch
 import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
 import {createChannels} from "../modules/API/channelCreation";
 
-
 class chatView extends BaseView {
 
 	constructor (data, parent) {
