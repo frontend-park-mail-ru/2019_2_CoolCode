@@ -4,8 +4,11 @@ div.bem-wrkspace-visible.bem-wrkspace-visible_style
     div.bem-wrkspace-visible__info-column
         div.bem-wrkspace-visible__info-column__name-row.bem-wrkspace-visible__info-column__name-row_style= Name
         div.bem-wrkspace-visible__info-column__chann-row
-            div.bem-wrkspace-visible__info-column__chann-row__channels.bem-wrkspace-visible__info-column__chann-row__channels_style=  ' channels'
+            if Channels === null
+                div.bem-wrkspace-visible__info-column__chann-row__channels.bem-wrkspace-visible__info-column__chann-row__channels_style=  ''
+            else
+                div.bem-wrkspace-visible__info-column__chann-row__channels.bem-wrkspace-visible__info-column__chann-row__channels_style=  Channels.length +' channels'
             div.bem-wrkspace-visible__info-column__chann-row__add-channel-button
-                img.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon_style(src="../images/add.png" title="add chanel")
+                img.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon_style(src="../images/add.png" title="add channel")
 
 

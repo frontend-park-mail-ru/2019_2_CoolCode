@@ -1,7 +1,7 @@
 import BaseView from "./baseView";
 import {data, bus, router} from "../main";
-import ChannelFormComponent from "../components/ChannelForm/channelFormComponent";
-import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/wrkSpaceFormHandlers";
+import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/creationFormHandlers";
+import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 
 class channelFormView extends BaseView {
 
@@ -25,8 +25,9 @@ class channelFormView extends BaseView {
     		createOverlayHndlr();
     	}
     }
+
     render() {
-    	let channelForm = new ChannelFormComponent(this._data, this._parent);
+    	let channelForm = new CreationFormComponent(this._data, this._parent);
     	const contentListRoot = document.querySelector(this.contentListRootSelector);
     	contentListRoot.insertAdjacentHTML("beforebegin", channelForm.render());
     }

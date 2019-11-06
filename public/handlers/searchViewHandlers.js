@@ -11,7 +11,7 @@ function foundUserClickEvent(params = {personId:null}) {
 				router.go('/');
 			} else {
 				bus.emit('createWebsocketConn', null, chatId);
-				promiseMaker.createPromise('fetchUserInfo', id, chatId).then(() => router.go('/chat', chatId));
+				promiseMaker.createPromise('getCurrentChatInfo', id, chatId).then(() => router.go('/chat', chatId));
 			}
 		});
 	}

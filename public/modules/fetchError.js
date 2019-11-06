@@ -1,4 +1,4 @@
-import {settings, responseStatuses} from "../../constants/config";
+import {settings, responseStatuses} from "../constants/config";
 class FetchError extends Error {
 	constructor(response) {
 		super();

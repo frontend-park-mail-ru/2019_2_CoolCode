@@ -3,7 +3,7 @@ import BaseView from './baseView';
 import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
 import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 import {data, bus, router, promiseMaker, componentsStorage} from "../main";
-import {chooseChat, fetchUserInfo} from "../modules/API/websocketCreation";
+import {chooseChat, fetchUserInfo} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
@@ -47,7 +47,7 @@ class chatView extends BaseView {
 	findUser(chatId) {
 		let chatUser = data.getChatUserIdByChatId(chatId);
 		if (chatUser) {
-			fetchUserInfo(chatUser, chatId).then(() => {
+			promiseMaker.createPromise('getCurrentChatInfo',chatUser, chatId).then(() => {
 				this.setContent();
 				this.render();
 				this.setEvents();

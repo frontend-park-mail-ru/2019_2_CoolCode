@@ -6,10 +6,10 @@ import {
 	setPicture,
 	showLoader,
 	checkLogin,
-	getChats
 } from "../modules/API/profile";
-import {createChat} from "../backendDataFetchers/creationChat";
-import {createWebsocketConn, fetchUserInfo} from "../modules/API/websocketCreation";
+import {createChat} from "../backendDataFetchers/creationEntities";
+import {createWebsocketConn} from "../backendDataFetchers/websockets";
+import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettionInfo";
 function createEvents() {
 
 	/*setting data*/
@@ -21,9 +21,12 @@ function createEvents() {
 	bus.on('setUserPhoto', data.setUserPhoto.bind(data));
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
 	bus.on('setCurrentChatUserPhoto', data.setCurrentChatUserPhoto.bind(data));
+	bus.on('setCurrentChatId', data.setCurrentChatId.bind(data));
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
+
+	bus.on('clearData', data.clear);
 
 	/*fetching functions*/
 	bus.on('checkLogin', checkLogin);
@@ -38,7 +41,7 @@ function createEvents() {
 	bus.on('createChat', createChat);
 	bus.on('createWebsocketConn', createWebsocketConn);
 
-	bus.on('fetchUserInfo', fetchUserInfo);
+	bus.on('getCurrentChatInfo', getCurrentChatInfo);
 	bus.on('getChats', getChats);
 
 }

@@ -1,4 +1,4 @@
-import sendRight from "../modules/API/sendMessage";
+import sendingMessage from "../backendDataFetchers/sendingMessage";
 import {componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 
@@ -26,7 +26,7 @@ function sendMessageEvent() {
 	let text = chatBlock.getMessageInputData();
 	if (text !== '') {
 		console.log(`new message : ${text}`);
-		sendRight(text, data.getCurrentChatId());
+		sendingMessage(text, data.getCurrentChatId());
 		chatBlock.setMessageInputData('');
 		let today = new Date();
 		let time = today.getHours() + ":" + today.getMinutes();

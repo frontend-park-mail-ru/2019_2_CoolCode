@@ -48,6 +48,7 @@ class ChatsColumnComponent extends BaseComponent {
 
     	if (this._data.wrkspaces) {
     		this._data.wrkspaces.forEach((wsp) => {
+    			console.log(wsp);
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
     			contentListRoot.appendChild(wrkSpace.render());
     		});

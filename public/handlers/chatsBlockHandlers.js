@@ -1,11 +1,11 @@
-import {data, router} from "../main";
-import {fetchUserInfo} from "../modules/API/websocketCreation";
+import {data, promiseMaker, router} from "../main";
 
 function createWrkspaceBlockExpandHndlr() {
 	let wrkspaceBlocksOuter = document.querySelectorAll('.bem-wrkspace-block');
 	wrkspaceBlocksOuter.forEach((wrkspaceBlockOuter)=> {
 		const wrkspaceBlockSmall = wrkspaceBlockOuter.querySelector('.bem-wrkspace-expandable');
-		wrkspaceBlockOuter.addEventListener('click', wrkspaceBlockClickExpandEvent.bind(null, {wrkspaceBlockSmall: wrkspaceBlockSmall}));
+		const wrkspaceBlockVisible = wrkspaceBlockOuter.querySelector('.bem-wrkspace-visible');
+		wrkspaceBlockVisible.addEventListener('click', wrkspaceBlockClickExpandEvent.bind(null, {wrkspaceBlockSmall: wrkspaceBlockSmall}));
 	});
 }
 
@@ -24,7 +24,7 @@ function createChatBlockHndlr() {
 }
 
 async function chatBlockClickEvent(params = {userId:null, chatId:null}) {
-	await fetchUserInfo(params.userId, params.chatId);
+	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
 	router.go('/chat', params.chatId);
 }
 

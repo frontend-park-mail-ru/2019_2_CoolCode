@@ -3,9 +3,10 @@ import createInput from './forms';
 import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
-import {bus, FetchModule, router} from '../../main';
+import {bus, FetchModule, promiseMaker, router} from '../../main';
 import {data} from "../../main";
-import {chooseChat, createWebsocketConn} from "./websocketCreation";
+import {chooseChat, createWebsocketConn} from "../../backendDataFetchers/websockets";
+import {getChats} from "../../backendDataFetchers/gettionInfo";
 
 function redundantWrkSpace() {
 	data.setUserWrkSpaces([
@@ -70,18 +71,16 @@ async function checkLogin () {
 async function openWebSocketConnections() {
 	if (data.getSocketConnection() === false) {
 		let chatUsersWChatID = data.getChatUsersWChatIDs();
-
 		chatUsersWChatID.forEach((chat) => {
-			createWebsocketConn(chat.chatId);
+			bus.emit('createWebsocketConn', null, chat.chatId);
 		});
-
-		data.setSocketConnection(true);
+		bus.emit('setSocketConnection', null, true);
 	}
 }
 
 async function creatingChats() {
 	redundantWrkSpace();
-	await getChats(data.user.id);
+	await promiseMaker.createPromise('getChats', data.getUserId());
 	await openWebSocketConnections();
 }
 
@@ -99,37 +98,6 @@ function createInputs (application, user) {
 	createImageUpload(user.id);
 
 };
-
-async function getChats(id) {
-	console.log(` Getting user ${id} chats and wrkspaces`);
-	try {
-		let response = await FetchModule._doGet({path: `/users/${id}/chats`});
-		if (response.status !== 200) {
-			throw new Error(
-				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
-		}
-		let chats = await response.json();
-		data.setUserChats(chats['Chats']);
-		data.setUserWrkSpaces(chats['Workspaces']);
-	} catch (error) {
-		console.error(error);
-	}
-}
-
-async function getUserInfo(id) {
-	console.log(` Getting user ${id} info`);
-	try {
-		let response = await FetchModule._doGet({path: `/users/${id}`});
-		if (response.status !== 200) {
-			throw new Error(
-				`Couldn't fetch user info: ${responseStatuses[response.status]}`);
-		}
-		let user = await response.json();
-		data.setCurrentChatUser(user);
-	} catch (error) {
-		console.error(error);
-	}
-}
 
 async function getProfilePhoto(id) {
 	console.log(` Getting user ${id} photo`);
@@ -255,4 +223,4 @@ function setPicture(selector, photo) {
 }
 
 export {creatingChats, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
-	getChats, showLoader, hideLoader, getUserInfo, saveUserPhoto, setPicture, checkLogin};
+	showLoader, hideLoader, saveUserPhoto, setPicture, checkLogin};

@@ -1,4 +1,4 @@
-import findUser from "../modules/API/searchInteraction";
+import findUser from "../backendDataFetchers/findUser";
 import {router} from "../main";
 
 function searchEvent() {

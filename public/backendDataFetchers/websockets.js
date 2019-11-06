@@ -1,17 +1,8 @@
-import {settings, responseStatuses} from '../../constants/config';
-import {componentsStorage, data, FetchModule, router} from "../../main";
-import {getChats, getUserInfo, saveUserPhoto} from "./profile";
-import {renderNewMessage} from "../../backendDataFetchers/creationChat";
-import {getCurrentChatMessages} from "./loadAllMessages";
-import {webSocketOnMessage} from "../../handlers/webSocketHandlers";
+import {settings} from '../constants/config';
+import {bus, data} from "../main";
+import {getCurrentChatMessages, getUserInfo} from "./gettionInfo";
+import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 const {backend} = settings;
-
-async function fetchUserInfo(userId, chatId) {
-	await getUserInfo(userId);
-	data.setCurrentChatId(chatId);
-	await getCurrentChatMessages(chatId);
-
-}
 
 function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) return;
@@ -39,4 +30,4 @@ function createWebsocketConn(chatId) {
 
 }
 
-export {createWebsocketConn, fetchUserInfo};
+export {createWebsocketConn};

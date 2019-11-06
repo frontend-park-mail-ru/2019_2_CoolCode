@@ -8,12 +8,12 @@ class PromiseMaker {
 		PromiseMaker.__instance = this;
 	}
 
-	createPromise(name, args) {
+	createPromise(name, ...args) {
 		let res = null;
 		let stuff = new Promise((resolve, reject) => {
 			res = resolve;
 		});
-		bus.emit(name, res, args); //TODO: ret rid of dependency
+		bus.emit(name, res, ...args); //TODO: ret rid of dependency
 		return stuff;
 	}
 }

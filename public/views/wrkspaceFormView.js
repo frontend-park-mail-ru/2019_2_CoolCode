@@ -1,7 +1,7 @@
 import BaseView from "./baseView";
 import {data, bus, router} from "../main";
-import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
-import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/wrkSpaceFormHandlers";
+import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/creationFormHandlers";
+import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 
 class wrkspaceFormView extends BaseView {
 
@@ -26,7 +26,7 @@ class wrkspaceFormView extends BaseView {
 		}
 	}
 	render() {
-		let wsForm = new WorkSpaceComponent(this._data, this._parent);
+		let wsForm = new CreationFormComponent(this._data, this._parent);
 		const contentListRoot = document.querySelector(this.contentListRootSelector);
 		contentListRoot.insertAdjacentHTML("beforebegin", wsForm.render());
 	}

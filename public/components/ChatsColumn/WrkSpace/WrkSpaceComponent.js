@@ -3,7 +3,6 @@ import {data} from "../../../main";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
-const channelForm = require('../../ChannelForm/channelForm.pug');
 
 class WrkSpaceComponent extends BaseComponent {
 	render() {

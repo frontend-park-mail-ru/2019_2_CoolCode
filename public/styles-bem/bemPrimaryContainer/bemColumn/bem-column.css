@@ -6,10 +6,12 @@
 
 /* left and right column modifiers - standart layout*/
 .bem-column_left{
-   flex: 0 0 40%;
+   flex: 0 0 auto;
+    width: 40%;
 }
 .bem-column_right{
-    flex: 0 0 60%;
+    flex: 0 0 auto;
+    width: 60%;
 }
 
 /* outline modifier */

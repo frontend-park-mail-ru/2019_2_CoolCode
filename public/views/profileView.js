@@ -22,6 +22,7 @@ class profileView extends BaseView {
 
 	setEvents() {
 		bus.emit('showLoader', null, '.bem-profile-header__image-row');
+		getProfilePhoto(data.getUserId());
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
 		createChatBlockHndlr();
@@ -57,7 +58,6 @@ class profileView extends BaseView {
 				if (!data.getLoggedIn()) router.go('/');
 				else {
 					creatingChats(this._parent).then(() => {
-						getProfilePhoto(data.user.id);
 						this.setContent();
 						this.render();
 						this.setEvents();
