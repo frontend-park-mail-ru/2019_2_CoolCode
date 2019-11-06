@@ -28,4 +28,14 @@ async function chatBlockClickEvent(params = {userId:null, chatId:null}) {
 	router.go('/chat', params.chatId);
 }
 
-export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr};
+function createWrkspaceBlockHndlr() {
+	let wrkspaceBlocksOuter = document.querySelectorAll('.bem-wrkspace-block');
+	wrkspaceBlocksOuter.forEach((wrkspaceBlockOuter)=> {
+		let wrkSpaceId = parseFloat(wrkspaceBlockOuter.id.split('-')[1]);
+		let visibleBlock = wrkspaceBlockOuter.querySelector('.bem-wrkspace-visible');
+		let createButton = visibleBlock.querySelector(".bem-wrkspace-visible__info-column__chann-row__add-channel-button");
+		createButton.addEventListener('click', () => router.go('/createChannel', wrkSpaceId));
+	});
+}
+
+export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr};

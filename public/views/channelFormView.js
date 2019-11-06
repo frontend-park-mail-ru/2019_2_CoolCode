@@ -1,6 +1,5 @@
 import BaseView from "./baseView";
 import {data, bus, router} from "../main";
-import {createChannelInteraction} from "../modules/API/channelCreation";
 import ChannelFormComponent from "../components/ChannelForm/channelFormComponent";
 import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/wrkSpaceFormHandlers";
 

@@ -31,6 +31,7 @@ class Fetch {
 	    this.setInit(method, data, contentType);
 	    try {
 			let response = await fetch(this._url + path, this._init);
+			//console.log(response.headers['X-CSRF-Token']);
 			return response;
 		} catch (error) {
 	        return error;

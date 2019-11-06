@@ -8,8 +8,11 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
-import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
-import {createChannels} from "../modules/API/channelCreation";
+import {
+	createChatBlockHndlr,
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
+} from "../handlers/chatsBlockHandlers";
 
 class chatView extends BaseView {
 
@@ -28,7 +31,7 @@ class chatView extends BaseView {
 		createMessageInputHndlr();
 		createChatBlockHndlr();
 		createSendMessageBtnHndlr();
-		createChannels();
+		createWrkspaceBlockHndlr();
 	}
 
 	setContent() {

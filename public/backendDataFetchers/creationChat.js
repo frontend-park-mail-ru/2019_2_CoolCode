@@ -21,6 +21,7 @@ async function createChat(id) { /*creating new chat and fetching all chats info*
 }
 
 async function createWrkspace(name) { /*creating new wrkspace and fetching all chats info*/
+	console.log(`Creating wrkspace with name: ${name}`);
 	try {
 		let response = await FetchModule._doPost({path: '/workspaces', data: {
 			name: name,
@@ -30,7 +31,8 @@ async function createWrkspace(name) { /*creating new wrkspace and fetching all c
 			throw new Error(
 				`Didn't create wrkspace: ${responseStatuses[response.status]}`);
 		}
-		await promiseMaker.createPromise('getChats', data.getUserId());
+		debugger;
+		promiseMaker.createPromise('getChats', data.getUserId()).then(() =>{ debugger; });
 	} catch (error) {
 		console.error(error);
 	}

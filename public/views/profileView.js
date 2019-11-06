@@ -9,8 +9,11 @@ import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
-import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
-import {createChannels} from "../modules/API/channelCreation";
+import {
+	createChatBlockHndlr,
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
+} from "../handlers/chatsBlockHandlers";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -25,7 +28,7 @@ class profileView extends BaseView {
 		createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
-		createChannels();
+		createWrkspaceBlockHndlr();
 
 	}
 

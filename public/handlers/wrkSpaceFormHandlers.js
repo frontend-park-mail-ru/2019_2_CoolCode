@@ -12,7 +12,7 @@ function createWrkSpaceEvent() {
 	let inputField = document.querySelector('.bem-wrkspace-form__form__input-field');
 	let channelName = inputField.value;
 	if (channelName) {
-		createWrkspace(channelName).then(() => router.go('/profile'));
+		createWrkspace(channelName);
 	} else {
 		drawWrkspaceFormError(inputField);
 	}
