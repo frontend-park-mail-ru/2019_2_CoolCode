@@ -1,12 +1,15 @@
 import BaseComponent from "../../baseComponent";
+import {data} from "../../../main";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
+const channelForm = require('../../ChannelForm/channelForm.pug');
 
 class WrkSpaceComponent extends BaseComponent {
 	render() {
 		const wSpace = document.createElement('div');
 		wSpace.className = 'bem-wrkspace-block bem-wrkspace-block_style';
+		wSpace.id = "wrkspace-" + this._data.ID;
 		wSpace.innerHTML = wrkSpaceTempl(this._data);
 
 		if (this._data.Channels !== null) {
@@ -15,6 +18,7 @@ class WrkSpaceComponent extends BaseComponent {
 			this._data.Channels.forEach((ch) => {
 				wspaceChannels.innerHTML += wrkSpaceChatTempl({
 					channel: ch,
+					name: ch.Name,
 				});
 			});
 			wSpace.appendChild(wspaceChannels);

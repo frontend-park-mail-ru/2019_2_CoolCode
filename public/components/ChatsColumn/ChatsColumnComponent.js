@@ -1,9 +1,10 @@
 import BaseComponent from "../baseComponent";
 import {data, bus, router} from "../../main";
 import MessageComponent from "./Message/MessageComponent";
-import WrkSpaceComponent from "./WrkSpace/WrkSpace";
+import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
 import UserComponent from "./User/UserComponent";
 import {getUserPhoto} from "../../modules/API/profile";
+import createChannels from "../../modules/API/channelCreation";
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
 class ChatsColumnComponent extends BaseComponent {

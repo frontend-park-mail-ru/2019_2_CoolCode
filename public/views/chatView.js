@@ -9,6 +9,8 @@ import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
 import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
+import {createChannels} from "../modules/API/channelCreation";
+
 
 class chatView extends BaseView {
 
@@ -27,6 +29,7 @@ class chatView extends BaseView {
 		createMessageInputHndlr();
 		createChatBlockHndlr();
 		createSendMessageBtnHndlr();
+		createChannels();
 	}
 
 	setContent() {
@@ -77,7 +80,6 @@ class chatView extends BaseView {
     	this._parent.querySelector('.bem-column_left').innerHTML += leftColumn.render();
     	leftColumn.renderChatsContent();
 		componentsStorage.setLeftColumn(leftColumn);
-
 	}
 
 	drawRightColumn() {

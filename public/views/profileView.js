@@ -1,5 +1,4 @@
 import BaseView from './baseView';
-const profileTemplateRight = require('../components/Profile/profilePage.pug');
 import {
 	createInputs,
 	showLoader,
@@ -11,6 +10,8 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
 import {createChatBlockHndlr, createWrkspaceBlockExpandHndlr} from "../handlers/chatsBlockHandlers";
+import {createChannels} from "../modules/API/channelCreation";
+
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -25,6 +26,8 @@ class profileView extends BaseView {
 		createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
+		createChannels();
+
 	}
 
 	createClickablePic() {

@@ -3,8 +3,6 @@ import {data, bus, router} from "../main";
 import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
 import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/wrkSpaceFormHandlers";
 
-const wsForm = require('../components/WrkspaceForm/wsForm.pug');
-
 class wrkspaceFormView extends BaseView {
 
 	contentListRootSelector = '.bem-header';

@@ -50,17 +50,19 @@
     justify-content: center;
     text-align: center;
     align-self: center;
+    border: none;
     width: 20%;
 }
 
 .bem-register-form__form__button_style {
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
-    background: var(--global-green-color);
-    color: #FFFFFF;
+    background: var(--global-white-color);
+    color: var(--global-green-color);
     font-weight: 500;
     font-size: 16px;
     border-radius: 7px;
+    border: 1px solid var(--global-green-color);
 }
 
 .bem-register-form__form__button_style:focus {

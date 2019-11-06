@@ -2,6 +2,7 @@ import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "../main";
 import {createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+import {createChannels} from "../modules/API/channelCreation";
 
 class searchView extends BaseView {
 
@@ -22,6 +23,7 @@ class searchView extends BaseView {
 			this.render();
 			createUserBlockHndlr();
 			createWorkspaceButtonHndlr();
+			createChannels();
 		}
 	}
 	render() {
