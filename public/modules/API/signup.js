@@ -70,8 +70,9 @@ function createSignUp(application) { //TODO: make beautiful function
 				},
 				contentType : 'application/json;charset=utf-8'});
 			if (response.status === 400) {
-				showError('Sorry, this email is already registered');
+				showError('Sorry, email or username is already registered:(');
 				emailField.className += " bem-input-block_input-field_error";
+				usernameField.className += " bem-input-block_input-field_error";
 				throw new Error('This email is already taken, try another one');
 			}
 			if (response.status !== 200) {
