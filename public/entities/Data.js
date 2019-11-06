@@ -211,6 +211,14 @@ class Data {
 		this.createLogMessage('get', 'userId by chatId', userId);
 		return userId;
 	}
+	getWrksID(wsName) {
+		for (let ws of this.userWrkSpaces) {
+			if (ws[Name] == wsName) {
+				return ws[ID];
+			}
+		}
+		return null;
+	}
 
 	getChatUsers() {
 		const ids = [];

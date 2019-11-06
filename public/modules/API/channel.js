@@ -12,6 +12,7 @@ async function createChannel(name, id) {
 				`Didn't create chat: ${response.status}`);
 		}
 		console.log("POST OK");
+		console.log("AAA ", data.userWrkSpaces);
 	} catch (error) {
 		console.error(error);
 	}
