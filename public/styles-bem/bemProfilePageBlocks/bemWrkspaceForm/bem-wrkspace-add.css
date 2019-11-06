@@ -1,0 +1,13 @@
+.bem-wrkspace-add__icon{
+    width: 20px;
+    margin-left: auto;
+    margin-right: 13px;
+}
+
+.bem-wrkspace-add__icon_style:hover{
+    filter: invert(0.7) brightness(200%) saturate(10%);
+    border-radius: 20px;
+
+}
+
+

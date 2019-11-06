@@ -4,6 +4,7 @@ import MessageComponent from "./Message/MessageComponent";
 import WrkSpaceComponent from "./WrkSpace/WrkSpace";
 import UserComponent from "./User/UserComponent";
 import {getUserPhoto} from "../../modules/API/profile";
+import createChannels from "../../views/channelsView";
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
 class ChatsColumnComponent extends BaseComponent {
@@ -44,6 +45,7 @@ class ChatsColumnComponent extends BaseComponent {
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
     			contentListRoot.appendChild(wrkSpace.render());
     		});
+			createChannels();
     	}
     }
 

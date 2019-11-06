@@ -13,6 +13,7 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 
+
 class chatView extends BaseView {
 
 	constructor (data, parent) {
@@ -88,7 +89,6 @@ class chatView extends BaseView {
     	this._parent.querySelector('.bem-column_left').innerHTML += leftColumn.render();
     	leftColumn.renderChatsContent();
 		componentsStorage.setLeftColumn(leftColumn);
-
 	}
 
 	drawRightColumn() {

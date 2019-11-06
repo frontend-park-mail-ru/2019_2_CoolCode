@@ -1,7 +1,8 @@
-import BaseComponent from "../../baseComponent";
+import BaseComponent from "../baseComponent";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
+const channelForm = require('./Channels/creationForm.pug');
 
 class WrkSpaceComponent extends BaseComponent {
 	render() {
@@ -15,6 +16,7 @@ class WrkSpaceComponent extends BaseComponent {
 			this._data.Channels.forEach((ch) => {
 				wspaceChannels.innerHTML += wrkSpaceChatTempl({
 					channel: ch,
+					name: ch.Name,
 				});
 			});
 			wSpace.appendChild(wspaceChannels);

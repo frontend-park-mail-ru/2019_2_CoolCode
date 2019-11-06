@@ -3,7 +3,7 @@ import {data, bus, router} from "../main";
 import {overlayInteration, workspaceFormInteration} from "../modules/API/wrkspaceFormCreation";
 import WorkSpaceComponent from "../components/WrkspaceForm/wsFormComponent";
 
-const wsForm = require('../components/WrkspaceForm/wsForm.pug');
+
 
 class wrkspaceFormView extends BaseView {
 
@@ -25,6 +25,7 @@ class wrkspaceFormView extends BaseView {
 			this.render();
 			workspaceFormInteration();
 			overlayInteration();
+
 		}
 	}
 	render() {

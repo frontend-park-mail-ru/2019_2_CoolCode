@@ -22,6 +22,7 @@
 @import url('bemRegisterBlocks/bem-register-form.css');
 @import url('bemRegisterBlocks/bemInputBlock/bem-input-block.css');
 @import url('bemMainPage/bem-main-page.css');
+@import url('bemProfilePageBlocks/bemWrkspaceForm/bem-wrkspace-add.css');
 @import url('bemProfilePageBlocks/bemWrkspaceForm/bem-wrkspace-form.css');
 @import url('bemProfilePageBlocks/bemOverlay/bem-overlay.css');
 
@@ -35,6 +36,7 @@
     --global-darkgrey-color: #6D6D6D;
     --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
+    --global-white-color: #ffffff;
     --global-overlay-color: rgba(0,0,0,0.5);
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;

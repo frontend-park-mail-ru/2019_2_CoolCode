@@ -1,5 +1,4 @@
 import BaseView from './baseView';
-const profileTemplateRight = require('../components/Profile/profilePage.pug');
 import {
 	createInputs,
 	showLoader,
@@ -13,6 +12,7 @@ import {wsBTM} from "../modules/API/wrkspaceFormCreation";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/Profile/profilePageComponent";
+
 
 class profileView extends BaseView {
 	constructor (data, parent) {
