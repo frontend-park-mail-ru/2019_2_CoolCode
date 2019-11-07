@@ -1,25 +1,11 @@
 const CACHE = 'offline-fallback-v1';
 let urlsToCache = [
-	// '/components/Basics/Container/container.pug',
-	// '/components/Basics/Header/header.pug',
-	// '/components/basicsComponent.js',
-	// '/components/MainPage/mainPage.pug',
-	// '/components/MainPage/mainPageComponent.js',
-	// '/scripts/Router.js',
-	// '/views/mainPageView.js',
-	// '/main.js',
-	'/styles-bem/bem-main.css',
+	'/styles-bem/PrimaryContainer/bem-primary-container.css',
+	'/styles-bem/MainPage/bem-main-page.css',
+	'/styles-bem/Header/bem-header.css',
 	'/Fallback/fallback.html',
 	'/images/logo_2.png'
 ];
-
-// const FALLBACK =
-//     '<div>\n' +
-//     '    <div>App Title</div>\n' +
-//     '    <div>you are offline</div>\n' +
-//     '    <img src="images/abkhazia.jpg" alt="img"/>\n' +
-//     '</div>';
-
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -38,15 +24,33 @@ self.addEventListener('fetch', function(event) {
 		.catch(() => useFallback()));
 });
 
-function networkOrCache(request) {
-	return fetch(request)
-		.then((response) => response.ok ? response : fromCache(request))
-		.catch(() => fromCache(request));
+async function networkOrCache(request) {
+	try{
+		let response = await fetch(request);
+			console.log(request.url);
+			console.log(request.url.toString().startsWith('http://fonts.googleapis.com/css'));
+			// if (request.url.toString().startsWith('http://fonts.googleapis.com/css')) {
+			// 	console.log(request.url);
+			// 	const cache = await caches.open(CACHE);
+			// 	const cacheResponse = await cache.match(request);
+			// 	if (cacheResponse) {
+			// 		return cacheResponse;
+			// 	}
+			// 	const css = await response.text();
+			// 	const patched = css.replace(/}/g, "font-display: swap; }");
+			// 	const newResponse = new Response(patched, {headers: {
+			// 			"Content-Type": "text/css",
+			// 		}});
+			// 	await cache.put(request, newResponse.clone());
+			// 	return newResponse;
+			// }
+			return response;
+	} catch (error) {
+		return await fromCache(request);
+	}
 }
 
 function useFallback() {
-	// let reader = new FileReader();
-	// let text = reader.readAsText(fallback);
 	return Promise.resolve( caches.match('/Fallback/fallback.html'));
 }
 

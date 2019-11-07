@@ -42,7 +42,7 @@ module.exports = {
 			},
 			{
 				test: /\.worker\.js$/,
-				use: { loader: 'worker-loader',  }
+				use: { loader: 'worker-loader', options: { inline: true , fallback: false, publicPath: '/workers/' } }
 			},
 
 			{
@@ -55,20 +55,10 @@ module.exports = {
 				use: ['style-loader', 'css-loader'],
 			},
 			{
-				test: /\.html$/,
-				use: [{
-					loader: 'html-loader',
-					options: {
-						minimize: true
-					},
-				}]
-			},
-			{
 				test:  /\.(png|svg|jpe?g|gif)$/,
 				loader: 'file-loader',
 
-			},
-		]
+			}]
 	}
 
 };
