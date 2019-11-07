@@ -9,14 +9,20 @@ let urlsToCache = [
     '/views/mainPageView.js',
     '/main.js'
 ];
+let fallback = new File(["fallback"], "Fallback/fallback.html", );
+const FALLBACK =
+    '<div>\n' +
+    '    <div>App Title</div>\n' +
+    '    <div>you are offline</div>\n' +
+    '    <img src="images/abkhazia.jpg" alt="img"/>\n' +
+    '</div>';
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
             .open(CACHE)
             .then((cache) => cache.addAll(urlsToCache)
-            .then(() => self.skipWaiting())
-    );
+            .then(() => self.skipWaiting())))
 });
 
 
@@ -36,9 +42,9 @@ function networkOrCache(request) {
 }
 
 function useFallback() {
-    var reader = new FileReader();
-    reader.readAsText('../Fallbac')
-    return Promise.resolve(new Response(fallback.html, { headers: {
+     let reader = new FileReader();
+     let text = reader.readAsText(fallback);
+    return Promise.resolve(new Response(text, { headers: {
             'Content-Type': 'text/html; charset=utf-8'
         }}));
 }

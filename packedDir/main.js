@@ -4729,7 +4729,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction ownKeys(object, enum
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"serviceWorkerRegister\", function() { return serviceWorkerRegister; });\nfunction serviceWorkerRegister() {\n  if ('serviceWorker' in navigator) {\n    window.addEventListener('load', function () {\n      navigator.serviceWorker.register('./workers/serviceWorker.js').then(function (registration) {\n        // Registration was successful\n        console.log('ServiceWorker registration successful with scope: ', registration.scope);\n      }, function (err) {\n        // registration failed :(\n        console.log('ServiceWorker registration failed: ', err);\n      });\n    });\n  }\n}\n\n\n\n//# sourceURL=webpack:///./public/modules/serviceWorkerRegister.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"serviceWorkerRegister\", function() { return serviceWorkerRegister; });\nfunction serviceWorkerRegister() {\n  if ('serviceWorker' in navigator) {\n    window.addEventListener('load', function () {\n      navigator.serviceWorker.register('/serviceWorker.js', {\n        scope: '/'\n      }).then(function (registration) {\n        console.log('ServiceWorker registration successful with scope: ', registration.scope);\n      }, function (err) {\n        console.log('ServiceWorker registration failed: ', err);\n      });\n    });\n  }\n}\n\n\n\n//# sourceURL=webpack:///./public/modules/serviceWorkerRegister.js?");
 
 /***/ }),
 
