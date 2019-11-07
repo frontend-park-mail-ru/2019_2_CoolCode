@@ -1,0 +1,13 @@
+div.bem-wrkspace-chann.bem-wrkspace-chann_style
+    div.bem-wrkspace-chann__name.bem-wrkspace-chann__name_style= "#"+ name
+    div.bem-wrkspace-chann__icons-row
+        if channel.private
+            img.bem-wrkspace-chann__icons-row__icon.bem-wrkspace-chann__icons-row__icon_style(src="images/lock.jpg")
+        if channel.public
+            img.bem-wrkspace-chann__icons-row__icon.bem-wrkspace-chann__icons-row__icon_style(src="images/post.png")
+        if channel.starred
+            img.bem-wrkspace-chann__icons-row__icon.bem-wrkspace-chann__icons-row__icon_style.bem-wrkspace-chann__icons-row__icon_green(src="images/star.png")
+        if channel.muted
+            img.bem-wrkspace-chann__icons-row__icon.bem-wrkspace-chann__icons-row__icon_style(src="images/muted.png")
+    if channel.messages != null
+        div.bem-wrkspace-chann__messages-counter.bem-wrkspace-chann__messages-counter_style= channel.messages

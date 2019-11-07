@@ -1,0 +1,22 @@
+.bem-header-refs {
+    display: flex;
+    flex-direction: row-reverse;
+}
+/*link element*/
+
+.bem-header-refs__ref {
+    float: right;
+    margin: 15px 5px 0 5px;
+
+}
+.bem-header-refs__ref_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 15px;
+    font-weight: 300;
+    text-decoration: none;
+    color: #000000;
+}
+
+.bem-header-refs__ref_style:hover {
+    text-decoration: underline;
+}

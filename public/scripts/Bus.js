@@ -14,22 +14,32 @@ class Bus {
 		if (!this._handlers[eventName]) {
 			this._handlers[eventName] = [];
 		}
+		if (this._handlers[eventName].includes(callback)) return;
 		this._handlers[eventName].push(callback);
 	};
 
 	off(eventName, callback) {
-		this._handlers[eventName] = this._handlers[eventName]
-			.filter(function (listener) {
-				return listener !== callback;
-			});
+
+		let handlers = this._handlers && this._handlers[eventName];
+
+		if (!handlers) return;
+
+		for (let i = 0; i < handlers.length; i++) {
+			if (handlers[i] === callback) {
+				handlers.splice(i--, 1);
+			}
+		}
 	};
 
-	emit (eventName, ...data) {
-		if (!this._handlers || !this._handlers[eventName]) {
-			return;
-		}
+	emit (eventName, resolve, ...data) {
+		let handlers = this._handlers && this._handlers[eventName];
 
-		this._handlers[eventName].forEach(handler => handler.apply(this, data));
+		if (!handlers) return;
+		if (resolve) {
+			this._handlers[eventName].forEach(handler => resolve(handler.apply(this, data)));
+		} else {
+			this._handlers[eventName].forEach(handler => handler.apply(this, data));
+		}
 	};
 
 }

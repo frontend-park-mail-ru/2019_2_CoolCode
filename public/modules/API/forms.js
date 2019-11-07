@@ -1,4 +1,4 @@
-import {settings} from '../config';
+import {settings} from '../../constants/config';
 import {FetchModule} from "../../main";
 import {getUserPhoto} from "./profile";
 

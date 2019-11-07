@@ -1,0 +1,25 @@
+.bem-column{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* left and right column modifiers - standart layout*/
+.bem-column_left{
+   flex: 0 0 auto;
+    width: 40%;
+}
+.bem-column_right{
+    flex: 0 0 auto;
+    width: 60%;
+}
+
+/* outline modifier */
+.bem-column_right-outlined {
+    border-left: 1.5px solid var(--global-green-color);
+}
+
+/* outline modifier */
+.bem-column_left-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}

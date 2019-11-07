@@ -1,0 +1,63 @@
+.bem-user-found {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: space-evenly;
+    width: 100%;
+    height: 10vh; /*experimenting with viewports*/
+
+    box-sizing: border-box;
+}
+
+.bem-user-found_style {
+    border-bottom: 1px solid var(--global-green-color);
+}
+
+.bem-user-found_style:hover {
+    border: 1px solid var(--global-green-color);
+    box-shadow: 0 0 8px var(--global-green-color);
+
+}
+
+/*message-column element*/
+
+.bem-user-found__message-column {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/*message-column elements*/
+
+.bem-user-found__message-column__fullname-row {
+    flex: 0 0 30%;
+    width: 90%;
+    align-self: center;
+}
+
+.bem-user-found__message-column__fullname-row_style {
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.bem-user-found__message-column__username-row {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    width: 90%;
+}
+
+.bem-user-found__message-column__username-row_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 20px;
+    color: #000000;
+    font-weight: 300;
+}

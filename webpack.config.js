@@ -2,13 +2,19 @@
 const path = require('path');
 
 module.exports = {
-	context: __dirname + "/public",
+	context: __dirname ,
 	mode: "development",
-
-	entry: ['babel-polyfill', './main'],
+	entry: ['babel-polyfill', './public/main.js'],
 	output:{
 		path: path.resolve(__dirname ,'packedDir'),
-		filename: '[name].js'
+		filename: '\main.js',
+		publicPath: './',
+	},
+	devServer : {
+		historyApiFallback: true,
+		rewrites: [
+			{ from: /\//, to: '/index.html'}
+		]
 	},
 
 	module:{

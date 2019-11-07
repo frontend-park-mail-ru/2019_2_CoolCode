@@ -16,15 +16,15 @@ module.exports = {
         }
     },
 
-  'rules': {
-      "semi" : ["error"],
-      "block-spacing" : ["error"],
-      "newline-per-chained-call" : ["error"],
-      "no-multiple-empty-lines" : ["error", { "max": 1, "maxEOF": 1 }],
-      "no-multi-spaces" : ["error"],
-      "space-before-blocks" : ["error", "always"],
-      "indent" : ["error", "tab"],
-      "space-infix-ops" : ["error"],
-     "no-unused-vars" : ["warn"]
-  },
+    'rules': {
+        "semi" : ["error"],
+        "block-spacing" : ["error"],
+        "newline-per-chained-call" : ["error"],
+        "no-multiple-empty-lines" : ["error", { "max": 1, "maxEOF": 1 }],
+        "no-multi-spaces" : ["error"],
+        "space-before-blocks" : ["error", "always"],
+        "indent" : ["error", "tab"],
+        "space-infix-ops" : ["error"],
+        "no-unused-vars" : ["warn"]
+    },
 };

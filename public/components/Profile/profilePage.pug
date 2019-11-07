@@ -1,11 +1,28 @@
-block left column
-    div.row.chat-menu
-        div.dropdown
-            button.mainmenubtn  create
-            div.dropdown-child
-                a(href='/menu' data-section = 'mainPage') room
-                a(href='/menu' data-section = 'mainPage')  chat
-        form#search
-            input#search-input(type="search" name="name" required placeholder="search")
-            input#search-input-lupa(type="submit" value="🔍" data-section='search')
-    div.column.chat-msg
+mixin field(pText, fieldText, id)
+    div.bem-profile-info__field
+        div.bem-profile-info__field__name.bem-profile-info__field__name_style= pText+':'
+        div.bem-profile-info__field__info.bem-profile-info__field__info_style(id=id)= fieldText
+mixin settings(pText, reference)
+    div.bem-profile-info__settings
+        div.bem-profile-info__settings__name.bem-profile-info__settings__name_style= pText+'settings'
+        a.bem-profile-info__settings__ref(href=reference)
+            img.bem-profile-info__settings__ref__image.bem-profile-info__settings__ref__image_style(src='images/settings.jpg')
+
+
+
+block page
+    div.bem-profile-header
+        div.bem-profile-header__image-row
+            div.bem-profile-header__image-row__loader.bem-profile-header__image-row__loader_style
+            img.bem-profile-header__image-row__image.bem-profile-header__image-row__image_style(src='images/user.jpg')
+            input.bem-profile-header__image-row__input(type='file')
+        div.bem-profile-header__username-column
+            div.bem-profile-header__username-column__username.bem-profile-header__username-column__username_style#username-setting= username
+            div.bem-profile-header__username-column__fullname.bem-profile-header__username-column__fullname_style#fullname-setting= fullname
+    div.bem-profile-info
+        +field('status', fstatus, 'fstatus-setting')
+        +field('email', email, 'email-setting')
+        +field('phone', phone, 'phone-setting')
+        +settings('privacy ', '/')
+
+

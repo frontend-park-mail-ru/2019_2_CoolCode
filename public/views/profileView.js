@@ -1,132 +1,88 @@
 import BaseView from './baseView';
-import MessageComponent from "../components/Message/Message";
-import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-const headerTemplate = require('../components/Header/header.pug');
-const containerTemplate = require('../components/Container/container.pug');
-const profileTemplateLeft = require('../components/Profile/profilePage.pug');
-const profileTemplateRight = require('../components/Profile/profile.pug');
 import {
-	createProfile,
-	getUserPhoto,
 	createInputs,
-	assignSomeData,
-	getProfilePhoto,
 	showLoader,
-	hideLoader
+	hideLoader, setPicture, getProfilePhoto, creatingChats
 } from "../modules/API/profile";
-import searchInteraction from "../modules/API/searchInteraction";
-import {bus, data} from "../main";
-import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
+import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import ProfilePageComponent from "../components/Profile/profilePageComponent";
+import {
+	createChatBlockHndlr,
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
+} from "../handlers/chatsBlockHandlers";
 
 class profileView extends BaseView {
-
-	contentListRootSelector = '.chat-msg';
-
 	constructor (data, parent) {
-		super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
+		super ({viewType: "profile", user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
 	};
 
-	createEvents() {
-		this._bus.on('drawProfilePage', this.drawAll.bind(this));
-		this._bus.on('fetchUser', createProfile);
-		this._bus.on('fetchAvatar', getProfilePhoto);
-		this._bus.on('createInputs', createInputs);
-		this._bus.on('setUser', this.setUser.bind(this));
-		this._bus.on('setContent', this.setContent.bind(this));
-		this._bus.on('showLoader', showLoader);
-	}
-
-	deleteEvents() {
-		this._bus.off('drawProfilePage', this.drawAll.bind(this));
-		this._bus.off('fetchUser', createProfile);
-		this._bus.off('fetchAvatar', getProfilePhoto);
-		this._bus.off('createInputs', createInputs);
-		this._bus.off('setUser', this.setUser.bind(this));
-		this._bus.off('setContent', this.setContent.bind(this));
-	}
-
-	drawAll() {
-
-		this.render();
-		this._bus.on('hideLoader', hideLoader);
-		this._bus.emit('fetchAvatar', this._data.user.id);
-		this._bus.emit('createInputs', this._parent, this._data.user);
+	setEvents() {
+		bus.emit('showLoader', null, '.bem-profile-header__image-row');
+		getProfilePhoto(data.getUserId());
+		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
-		searchInteraction();
-		openWrkSpaceInfo();
-	}
+		createChatBlockHndlr();
+		createSearchInputHndlr();
+		createWrkspaceBlockExpandHndlr();
+		createWorkspaceButtonHndlr();
+		createWrkspaceBlockHndlr();
 
-	setUser() {
-		console.log("USER " + data.getUser());
-		this._data.user = data.getUser();
-		this._data.loggedIn = data.loggedIn;
-	}
-
-	setContent() {
-
-		this._data.chats = data.userChats;
-		this._data.wrkspaces = data.userWrkSpaces;
-		console.log(this._data.userChats);
-	}
-
-	show() {
-		this.createEvents();
-		if (data.user !== undefined) {
-			this._bus.emit('setUser');
-			this._bus.emit('setContent');
-		}
-		if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
-			this._bus.emit('fetchUser', this._parent);
-		} else {
-			this._bus.emit('drawProfilePage');
-		}
-		this.deleteEvents();
-	}
-
-	drawBasics() {
-		this._parent.innerHTML = headerTemplate(this._data);
-		this._parent.innerHTML += containerTemplate(this._data);
-	}
-
-	drawLeftColumn() {
-		this._parent.querySelector('.column.left').innerHTML += profileTemplateLeft(this._data.user);
-		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-		if (this._data.chats) {
-			this._data.chats.forEach((mes) => {
-				const mess = new MessageComponent();
-				mess.data = mes;
-				const message = document.createElement('div');
-				message.className = 'row msg';
-				var id;
-				if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
-				else message.id = mes["Members"][0];
-				message.id = "chat-" + id;
-				message.innerHTML = mess.render();
-				contentListRoot.appendChild(message);
-				getUserPhoto(id,"chat", ".messages-pic");
-			});
-		}
-
-		if (this._data.wrkspaces) {
-			this._data.wrkspaces.forEach((wsp) => {
-				const wrkSpace = new WrkSpaceComponent();
-				wrkSpace.data = wsp;
-				const w = wrkSpace.render();
-				contentListRoot.appendChild(w);
-			});
-		}
-	}
-
-	drawRightColumn() {
-		this._parent.querySelector('.column.right').innerHTML += profileTemplateRight(this._data.user);
 	}
 
 	createClickablePic() {
-		const img = document.getElementById('avatar');
-		const input = document.getElementById('file');
+		const img = document.querySelector('.bem-profile-header__image-row__image');
+		const input = document.querySelector('.bem-profile-header__image-row__input');
 		img.addEventListener('click', function () {
 			input.click();
 		});
+	}
+
+	setContent() {
+		this._data.user = data.getUser();
+		this._data.loggedIn = data.getLoggedIn();
+		this._data.chats = data.getUserChats();
+		this._data.wrkspaces = data.getUserWrkSpaces();
+	}
+
+	show() {
+		if (this._data.user.id) {
+			this.setContent();
+			this.render();
+			this.setEvents();
+		} else {
+			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+				if (!data.getLoggedIn()) router.go('/');
+				else {
+					creatingChats(this._parent).then(() => {
+						this.setContent();
+						this.render();
+						this.setEvents();
+					});
+				}
+			});
+		}
+		console.log('show: profile');
+	}
+
+	drawBasics() {
+		let basics = new BasicsComponent(this._data, this._parent);
+		this._parent.innerHTML = basics.render();
+	}
+
+	drawLeftColumn() {
+		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-column_left').innerHTML = leftColumn.render();
+		leftColumn.renderChatsContent();
+		componentsStorage.setLeftColumn(leftColumn);
+	}
+
+	drawRightColumn() {
+		let rightColumn = new ProfilePageComponent(this._data.user, this._parent);
+		this._parent.querySelector('.bem-column_right').innerHTML += rightColumn.render();
 	}
 
 	render() {

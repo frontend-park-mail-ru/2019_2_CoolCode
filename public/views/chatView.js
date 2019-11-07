@@ -1,114 +1,102 @@
 import BaseView from './baseView';
-import MessageComponent from "../components/Message/Message";
-import WrkSpaceComponent from "../components/WrkSpace/WrkSpace";
-const headerTemplate = require('../components/Header/header.pug');
-const containerTemplate = require('../components/Container/container.pug');
-const profileTemplateLeft = require('../components/Profile/profilePage.pug');
-const profileTemplateRight = require('../components/Profile/profile.pug');
-import {createChatPage, assignSomeData, getUserPhoto} from "../modules/API/profile";
-import searchInteraction from "../modules/API/searchInteraction";
 
-import {data} from "../main";
-import openWrkSpaceInfo from "../modules/API/wrkspaceInteraction";
+import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
+import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+import {data, bus, router, promiseMaker, componentsStorage} from "../main";
+import {chooseChat, fetchUserInfo} from "../backendDataFetchers/websockets";
+import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import ChatComponent from "../components/Chat/ChatComponent";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
+import {
+	createChatBlockHndlr,
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
+} from "../handlers/chatsBlockHandlers";
 
 class chatView extends BaseView {
 
-    contentListRootSelector = '.chat-msg';
+	constructor (data, parent) {
+    	super ({viewType: "chat", user:{}, loggedIn: null,
+			wrkSpaces:[], chats: [],
+			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
+	};
 
-    constructor (data, parent) {
-    	super ({user:{}, wrkSpaces:[], chats: [], loggedIn: null}, parent);
-    };
+	setEvents() {
+		bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
+		saveUserPhoto(this._data.chatUser.id);
+    	createSearchInputHndlr();
+		createWrkspaceBlockExpandHndlr();
+		createWorkspaceButtonHndlr();
+		createMessageInputHndlr();
+		createChatBlockHndlr();
+		createSendMessageBtnHndlr();
+		createWrkspaceBlockHndlr();
+	}
 
-    createEvents() {
-    	this._bus.on('drawChatPage', this.drawAll.bind(this));
-    	this._bus.on('fetchUser', createChatPage);
-    	this._bus.on('setUser', this.setUser.bind(this));
-    	this._bus.on('setContent', this.setContent.bind(this));
-    }
-
-    deleteEvents() {
-    	this._bus.off('drawChatPage', this.drawAll.bind(this));
-    	this._bus.off('fetchUser', createChatPage);
-    	this._bus.off('setUser', this.setUser.bind(this));
-    	this._bus.off('setContent', this.setContent.bind(this));
-    }
-
-    drawAll() {
-    	this.render();
-    	searchInteraction();
-    	openWrkSpaceInfo();
-    }
-
-    setUser() {
+	setContent() {
     	this._data.user = data.getUser();
-    	this._data.loggedIn = data.loggedIn;
-    }
+    	this._data.loggedIn = data.getLoggedIn();
+		this._data.chatUser = data.getCurrentChatUser();
+		this._data.chats = data.getUserChats();
+		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.importantMessage = {text: 'hello'};
+		this._data.chatMessages = data.getCurrentChatMessages();
+	}
 
-    setContent() {
+	findUser(chatId) {
+		let chatUser = data.getChatUserIdByChatId(chatId);
+		if (chatUser) {
+			promiseMaker.createPromise('getCurrentChatInfo',chatUser, chatId).then(() => {
+				this.setContent();
+				this.render();
+				this.setEvents();
+			});
+		} else {
+			router.go('/profile');
+		}
+	}
 
-    	this._data.chats = data.userChats;
-    	this._data.wrkspaces = data.userWrkSpaces;
-    }
+	show(args) {
+		if (this._data.chatUser.id) {
+			this.findUser(args.id);
+		} else {
+			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+				if (!data.getLoggedIn()) router.go('/');
+				creatingChats(this._parent).then(() => {
+					this.findUser(args.id);
+				});
+			});
+		}
 
-    show() {
-    	this.createEvents();
-    	console.log(this._data.loggedIn);
-    	if (data.user !== undefined) {
-    		this._bus.emit('setUser');
-    		this._bus.emit('setContent');
-    	}
-    	if (JSON.stringify(this._data.user) === '{}' || this._data.user === undefined) { //TODO:пофиксить баг
-    		this._bus.emit('fetchUser', this._parent);
-    	} else {
-    		this._bus.emit('drawChatPage');
-    	}
-    	this.deleteEvents();
-    }
+		console.log('show: chat page');
+	}
 
-    drawBasics() {
-    	this._parent.innerHTML = headerTemplate(this._data);
-    	this._parent.innerHTML += containerTemplate(this._data);
-    }
+	drawBasics() {
+		let basics = new BasicsComponent(this._data, this._parent);
+    	this._parent.innerHTML = basics.render();
+	}
 
-    drawLeftColumn() {
-    	this._parent.querySelector('.column.left').innerHTML += profileTemplateLeft(this._data.user);
-    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	if (this._data.chats) {
-    		this._data.chats.forEach((mes) => {
-    		    console.log(mes);
-    			const mess = new MessageComponent();
-    			mess.data = mes;
-    			const message = document.createElement('div');
-    			message.className = 'row msg';
-    			var id;
-    			if (mes["Members"][0] == data.user.id) id = mes["Members"][1];
-    			else message.id = mes["Members"][0];
-    			message.id = "chat-" + id;
-    			message.innerHTML = mess.render();
-    			contentListRoot.appendChild(message);
-    			getUserPhoto(id,"chat", ".messages-pic");
-    		});
-    	}
+	drawLeftColumn() {
+		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
+    	this._parent.querySelector('.bem-column_left').innerHTML += leftColumn.render();
+    	leftColumn.renderChatsContent();
+		componentsStorage.setLeftColumn(leftColumn);
+	}
 
-    	if (this._data.wrkspaces) {
-    		this._data.wrkspaces.forEach((wsp) => {
-    			const wrkSpace = new WrkSpaceComponent();
-    			wrkSpace.data = wsp;
-    			const w = wrkSpace.render();
-    			contentListRoot.appendChild(w);
-    		});
-    	}
-    }
+	drawRightColumn() {
+		let chatBlock = new ChatComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-column_right').innerHTML += chatBlock.render();
+		chatBlock.renderContent();
+		componentsStorage.setChatBlock(chatBlock);
 
-    drawRightColumn() {
-    	this._parent.querySelector('.column.right').innerHTML = " draw chat ::: ))) ";
-    }
+	}
 
-    render() {
+	render() {
     	this.drawBasics();
     	this.drawLeftColumn();
     	this.drawRightColumn();
-    }
+	}
 
 }
 

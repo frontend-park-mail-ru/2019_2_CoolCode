@@ -13,27 +13,55 @@ class Router {
 
 	register(path, view) {
 		this._paths[path] = {
-			viewClassName : view,
+			viewClassName : view.name,
 			viewObject: new view({}, this._application),
 			parent : this._application,
 		};
 	};
 
-	go(path) {
-		this.open(path);
+	return() {
+		window.history.back();
 	}
 
-	open(path) {
+	go(path, identity) {
+		this.open(path, identity);
+	}
+
+	open(path, identity) {
+		console.log(path);
 		const currentPath = this._paths[path];
+		console.log(currentPath.viewClassName);
+		if (identity) {
+			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
+			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
+			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
+		}
 		if (window.location.pathname !== path) {
 			window.history.pushState(
-				null,
+				{'id':identity},
 				'',
-				path
+				path,
 			);
-		}
-		currentPath.viewObject.show();
+		};
+		currentPath.viewObject.show({id: identity});
 
+	}
+
+	parsePath(path) {
+		if (this._paths[path]) {
+			return path;
+		}
+		let pathArgs = path.split('/');
+		pathArgs[1] = `/${pathArgs[1]}`;
+		if (pathArgs.length === 2) {
+			let pathRegExp = /\?=/;
+			if (pathRegExp.test(pathArgs[1])) {
+				pathArgs[1].split('?=');
+			}
+			return pathArgs[1];
+		} else {
+			return pathArgs.slice(1, 3);
+		}
 	}
 
 	start() {
@@ -54,11 +82,23 @@ class Router {
 
 		window.onpopstate = function () {
 			const currentPath = window.location.pathname;
-			this.open(currentPath);
+			let pathArgs = this.parsePath(currentPath);
+			console.log(typeof(pathArgs) === 'string');
+			if (typeof(pathArgs) === 'string') {
+				this.open(pathArgs);
+			} else {
+				this.open(pathArgs[0], pathArgs[1]);
+			}
 		}.bind(this);
 
 		const currentPath = window.location.pathname;
-		this.open(currentPath);
+		let pathArgs = this.parsePath(currentPath);
+		console.log(typeof(pathArgs) === 'string');
+		if (typeof(pathArgs) === 'string') {
+			this.open(pathArgs);
+		} else {
+			this.open(pathArgs[0], pathArgs[1]);
+		}
 	};
 
 }

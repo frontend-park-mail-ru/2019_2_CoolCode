@@ -1,0 +1,61 @@
+@import url('bemHeader/bem-header.css');
+@import url('bemHeader/bemHeaderRefs/bem-header-refs.css');
+@import url('bemPrimaryContainer/bem-primary-container.css');
+@import url('bemPrimaryContainer/bemColumn/bem-column.css');
+@import url('bemProfilePageBlocks/bemSearchMenu/bem-search-menu.css');
+@import url('bemProfilePageBlocks/bemAllChats/bem-all-chats.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemChatBlock/bem-chat-block.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bem-wrkspace-block.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css');
+@import url('bemProfilePageBlocks/bemAllChats/bemAllChatsScrollWindow/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css');
+@import url('bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css');
+@import url('bemProfilePageBlocks/bemProfileInfo/bem-profile-info.css');
+@import url('bemSearchPageBlocks/bemUserFoundBlock/bem-user-found.css');
+@import url('bemChatPageBlocks/bemChatColumn/bem-chat-column.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnHeader/bem-chat-column-header.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bem-chat-column-msgwindow.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnInputBlock/bem-chat-column-input.css');
+@import url('bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bemChatColumnMsgWindow/bemChatColumnMsg/bem-chat-column-msg.css');
+@import url('bemRegisterBlocks/bem-register-form.css');
+@import url('bemRegisterBlocks/bemInputBlock/bem-input-block.css');
+@import url('bemMainPage/bem-main-page.css');
+@import url('bemProfilePageBlocks/bemWrkspaceForm/bem-wrkspace-form.css');
+@import url('bemProfilePageBlocks/bemOverlay/bem-overlay.css');
+
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+:root{
+    --global-green-color: #2dc68b;
+    --global-grey-color: #C4C4C4;
+    --global-darkgrey-color: #6D6D6D;
+    --global-error-color: #FF4E4E;
+    --global-loader-grey-color: #F3F3F3 ;
+    --global-white-color: #ffffff;
+    --global-overlay-color: rgba(0,0,0,0.5);
+    --global-font-family-Roboto: 'Roboto', sans-serif;
+    --global-font-family-Montserrat: 'Montserrat',  sans-serif;
+}
+
+/*spin function*/
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*bounce function*/
+
+@keyframes bounce {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(-360deg); }
+}
+
+.bem-main{
+    width: 100%;
+    height: 100%;
+}

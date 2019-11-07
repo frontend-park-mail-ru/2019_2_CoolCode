@@ -2,11 +2,13 @@
 
 import Router from './scripts/Router';
 import Bus from './scripts/Bus';
-import Fetch from "./modules/API/fetch";
-import {settings, responseStatuses} from './modules/config';
+import PromiseMaker from './scripts/PromiseMaker';
+import Fetch from "./modules/fetch";
+import {settings, responseStatuses} from './constants/config';
 const {backend} = settings;
 
-import './styles/main.css';
+import './styles-bem/bem-main.css';
+
 import loginView from "./views/loginView";
 import mainPageView from "./views/mainPageView";
 import signUpView from "./views/signUpView";
@@ -16,12 +18,20 @@ import searchView from "./views/searchView";
 import Data from "./entities/Data";
 import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
+import wrkspaceFormView from "./views/wrkspaceFormView";
+import ComponentsStorage from "./entities/ComponentsStorage";
+import channelFormView from "./views/channelFormView";
 
 const bus = new Bus();
+const promiseMaker = new PromiseMaker();
+const componentsStorage = new ComponentsStorage();
 const application = document.getElementById('application');
-const router = new Router(application);
+const baseBlock = document.createElement('div');
+baseBlock.className = 'bem-main';
+application.appendChild(baseBlock);
+const router = new Router(baseBlock);
 const FetchModule = new Fetch();
-FetchModule.setUrl(backend);
+FetchModule.setUrl(`http://${backend}`);
 const data = new Data();
 
 createEvents();
@@ -32,7 +42,9 @@ router.register('/signup', signUpView);
 router.register('/logout', logoutView);
 router.register('/search', searchView);
 router.register('/chat', chatView);
+router.register('/createWrkSpace', wrkspaceFormView);
+router.register('/createChannel', channelFormView);
 
 router.start();
 
-export {bus, data, router, FetchModule};
+export {bus, data, router, promiseMaker, componentsStorage, FetchModule};

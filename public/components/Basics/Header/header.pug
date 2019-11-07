@@ -1,0 +1,16 @@
+mixin item(title, href, section, id)
+    a.bem-header-refs__ref.bem-header-refs__ref_style(href=href data-section=section )= title
+
+div.bem-header
+    a.bem-header__logo(href='/')
+        img.bem-header__logo__image(src='../images/logo_2.png')
+    if viewType !== 'signUp' && viewType !== 'login'
+        div.bem-header-refs
+            if loggedIn
+                +item('log out', '/logout', 'logout')
+                +item('profile', '/profile', 'profile')
+            else
+                +item('log in', '/login', 'login')
+                +item('sign up', '/signup', 'signUp')
+
+block content

@@ -1,13 +1,14 @@
 import BaseView from './baseView';
-import handleLogout from "../modules/API/logout";
+import handleLogout from "../backendDataFetchers/logout";
+import {data, bus, router} from "../main";
 
 class logoutView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
-		this._bus.on('logout', handleLogout);
+		super ({viewType: "logout", user:{}, loggedIn: null}, parent);
+		bus.on('logout', handleLogout);
 	};
 	show() {
-		this._bus.emit('logout', this._parent);
+		bus.emit('logout', null, this._parent);
 
 	}
 	render() {

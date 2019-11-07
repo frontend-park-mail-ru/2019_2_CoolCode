@@ -1,0 +1,63 @@
+.bem-main-page {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+
+}
+
+/*figures element*/
+
+.bem-main-page__figures {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+
+}
+
+/* image element in figures */
+
+.bem-main-page__figures__image-container {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+
+}
+
+.bem-main-page__figures__image-container__image {
+
+    height: 2vh; /*experimenting with viewports*/
+    width: 2vh;
+
+    transform-origin: bottom;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation: bounce 30s linear infinite;
+
+
+}
+
+/*title element*/
+
+.bem-main-page__title {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.bem-main-page__title_style {
+    font-family: var(--global-font-family-Roboto);
+    text-transform: uppercase;
+    font-weight: 400;
+}

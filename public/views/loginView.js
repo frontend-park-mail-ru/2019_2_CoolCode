@@ -1,26 +1,30 @@
 import BaseView from './baseView';
 import {createLogin} from "../modules/API/login";
-import Data from "../entities/Data";
-import {router, data} from "../main";
-
-const loginTemplate = require('../components/Login/login.pug');
+import {router, data, promiseMaker, bus} from "../main";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import RegisterComponent from "../components/Register/registerComponent";
 
 class loginView extends BaseView {
 	constructor (data, parent) {
-		super (data, parent);
-		this._bus.on('login', createLogin);
+		super ({viewType: "login", user:{}, loggedIn: null}, parent);
+		bus.on('login', createLogin);
 	};
+
 	show() {
-		if (data.loggedIn) {
-			data.clear();
-			router.go('/logout');
-		}
 		this.render();
-		this._bus.emit('login', this._parent);
+
+		promiseMaker.createPromise('login', this._parent).then(() => console.log('BUSSSS'));
+		console.log('HI');
 
 	}
+	drawBasics() {
+		let basics = new BasicsComponent(this._data, this._parent);
+		this._parent.innerHTML = basics.render();
+	}
 	render() {
-		this._parent.innerHTML = loginTemplate(this._data);
+		this.drawBasics();
+		let login = new RegisterComponent(this._data, this._parent);
+		this._parent.querySelector('.bem-primary-container').innerHTML += login.render();
 	}
 }
 
