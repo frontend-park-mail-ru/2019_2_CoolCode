@@ -62,6 +62,7 @@ async function checkLogin () {
 				`Not logged in: ${response.status}`);
 		}
 		let user = await response.json();
+		console.log(user);
 		bus.emit('addUser', null, user);
 	} catch (error) {
 		console.error(error);
