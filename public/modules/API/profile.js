@@ -72,7 +72,6 @@ async function checkLogin () {
 				`Could't check logged in status : ${response.status}`
 			);
 		}
-
 	} catch (error) {
 		console.error(error);
 	}

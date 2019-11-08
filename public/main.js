@@ -21,6 +21,7 @@ import chatView from "./views/chatView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
+import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
@@ -34,6 +35,7 @@ const FetchModule = new Fetch();
 FetchModule.setUrl(`http://${backend}`);
 const data = new Data();
 
+serviceWorkerRegister();
 createEvents();
 router.register(ROUTER.mainPage, mainPageView);
 router.register(ROUTER.profile, profileView);
