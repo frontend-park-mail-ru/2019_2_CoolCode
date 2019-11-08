@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    flex-direction: row;
+   justify-content: space-between;
+    margin: 0 5px 0 5px;
+    height: 5vh; /*primary-container is 93vh*/
+}
+
+/*logo component*/
+
+.header__logo {
+    float: right;
+
+}
+
+.header__logo__image {
+    object-position: center center;
+    object-fit: fill;
+    height: 50px;
+    width: 80px;
+}

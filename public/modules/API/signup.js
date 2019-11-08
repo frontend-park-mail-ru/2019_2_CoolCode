@@ -1,6 +1,6 @@
-import {SignUp} from '../../components/Signup/Signup';
 import {login} from './login';
-import settings from '../config';
+import {API, settings} from '../../constants/config';
+import {bus, FetchModule, router} from "../../main";
 
 const {backend} = settings;
 
@@ -9,55 +9,47 @@ function validateEmail(email) {
 	return re.test(email);
 }
 
-function createSignUp(application) {
-	application.innerHTML = '';
-
-	const signUpComponent = new SignUp();
-	signUpComponent.parent = application;
-	signUpComponent.renderSignUp();
-
-	const form = application.querySelector('.sign-up-form');
+function createSignUp(application) { //TODO: make beautiful function
+	const form = application.querySelector('.register-form__form');
 	var error = document.createElement('div');
 	error.className = 'error';
 	error.style.color = 'red';
 
 	const emailField = application.querySelector('#email');
 	const passwordField = application.querySelector('#password');
-	const fullnameField = application.querySelector('#fullname');
-	const errorMessage = application.querySelector('.error_message');
+	const usernameField = application.querySelector('#username');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	emailField.addEventListener('click', () => {
-		emailField.style.borderColor = 'C4C4C4';
 		errorMessage.innerHTML = '';
 	});
 
 	passwordField.addEventListener('click', () => {
-		passwordField.style.borderColor = 'C4C4C4';
+
 		errorMessage.innerHTML = '';
 	});
 
-	fullnameField.addEventListener('click', () => {
-		fullnameField.style.borderColor = 'C4C4C4';
+	usernameField.addEventListener('click', () => {
 		errorMessage.innerHTML = '';
 	});
-	form.addEventListener('submit', function (e) {
+	form.addEventListener('submit', async function (e) {
 		e.preventDefault();
 		error.innerHTML = '';
 		let email, username;
 		let password, fullname;
 		let correct = true;
 		if (form.elements['password'].value === '') {
-			showError('Please, input password:(');
-			passwordField.style.borderColor = '#ff6575';
+			showError('Please, input password ');
+			passwordField.className += " input-block_input-field_error";
 			correct = false;
 		}
-		if (form.elements['fullname'].value === '') {
-			showError('Please, input name:(');
-			fullnameField.style.borderColor = '#ff6575';
+		if (form.elements['username'].value === '') {
+			showError('Please, input username');
+			usernameField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
-			showError('Please, input correct email:(');
-			emailField.style.borderColor = '#ff6575';
+			showError('Please, input correct email');
+			emailField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!correct) {
@@ -66,47 +58,36 @@ function createSignUp(application) {
 
 		email = form.elements['email'].value;
 		password = form.elements['password'].value;
-		fullname = form.elements['fullname'].value;
-		username = email.split('@')[0];
-		fetch(`${backend}/users`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8',
-			},
-			body: JSON.stringify({
-				email: email,
-				password: password,
-				fullname: fullname,
-				username: username,
-			}),
-			credentials: 'include',
-			mode: 'cors',
-		}).then(response => {
-			console.dir(response);
+		username = form.elements['username'].value;
+		fullname = 'CoolSlack User';
+		try {
+			let response = await FetchModule._doPost({path: API.auth,
+				data: {
+					email: email,
+					password: password,
+					fullname: fullname,
+					username: username,
+				},
+				contentType : 'application/json;charset=utf-8'});
 			if (response.status === 400) {
-				showError('Sorry, this email is already registered');
-				emailField.style.borderColor = '#ff6575';
-				throw new Error(`Такая почта занята !!`);
+				showError('Sorry, email or username is already registered:(');
+				emailField.className += " input-block_input-field_error";
+				usernameField.className += " input-block_input-field_error";
+				throw new Error('This email is already taken, try another one');
 			}
 			if (response.status !== 200) {
 				throw new Error(`Неверный статус: ${response.status}`);
 			}
-			return response.text();
-		})
-			.then(() => {
-				console.log(`Signed up: ${email}`);
-				login(application, email, password);
-			})
-			.catch(err => {
-				console.error(err);
-			});
+			login(email, password);
+		} catch (error) {
+			console.error(error);
+		}
 	});
 
 }
 
 function showError(text) {
-	//const emailField = application.querySelector('#email');
-	const errorMessage = application.querySelector('.error_message');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	errorMessage.innerHTML = text;
 }
 

@@ -1,0 +1,14 @@
+.primary-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: center;
+    width: 100%;
+    height: 93vh; /*header is 5vh*/
+}
+
+.primary-container_style{
+    background-color: #FFFFFF;
+}
+
+

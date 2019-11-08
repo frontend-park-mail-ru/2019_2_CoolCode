@@ -1,120 +1,244 @@
-import { Header } from '../../components/Header/Header';
-import { ProfileComponent } from '../../components/Profile/Profile';
-
-import settings from '../config';
+import {API, responseStatuses, settings} from '../../constants/config';
 import createInput from './forms';
+import MyWorker from '../../workers/profile.worker';
 
 const { backend } = settings;
-let profile;
+import {bus, FetchModule, promiseMaker, router} from '../../main';
+import {data} from "../../main";
+import {chooseChat, createWebsocketConn} from "../../backendDataFetchers/websockets";
+import {getChats} from "../../backendDataFetchers/gettionInfo";
 
-function createProfile (application) {
-	fetch(`${backend}/users`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
+function redundantWrkSpace() {
+	data.setUserWrkSpaces([
+		{
+			Name: "CoolCode",
+			Channels: [{
+				title: "important-stuff",
+				members: 4,
+				messages: null,
+				muted: true,
+				starred: true,
+				public: false,
+				private: false,
+			},
+			{
+				title: "some-weird-stuff",
+				members: 3,
+				messages: 5,
+				muted: true,
+				starred: false,
+				public: false,
+				private: false,
+			},
+			{
+				title: "Information",
+				members: null,
+				messages: 1,
+				muted: false,
+				starred: false,
+				public: true,
+				private: false,
+			},
+			{
+				title: "Vasya Romanov",
+				members: null,
+				messages: null,
+				muted: true,
+				starred: false,
+				public: false,
+				private: true,
+			}],
+			Members: ["AS", "Vasya Romanov", "Bono", "U"],
+		}]
+	);
+
+}
+
+async function checkLogin () {
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.auth}
+		);
+		switch (response.status) {
+		case 401:
+			bus.emit('setLoggedIn', null, false);
+			break;
+		case 200:
+			const user = await response.json();
+			bus.emit('setUser', null, user);
+			break;
+		default:
+			throw new Error(
+				`Could't check logged in status : ${response.status}`
+			);
+		}
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function openWebSocketConnections() {
+	if (data.getSocketConnection() === false) {
+		const chatUsersWChatID = data.getChatUsersWChatIDs();
+		chatUsersWChatID.forEach((chat) => {
+			bus.emit('createWebsocketConn', null, chat.chatId);
+		});
+		bus.emit('setSocketConnection', null, true);
+	}
+}
+
+async function creatingChats() {
+	redundantWrkSpace();
+	await promiseMaker.createPromise('getChats', data.getUserId());
+	await openWebSocketConnections();
+}
+
+function createInputs (application, user) {
+	createInput(application, user, 'fstatus',
+		'border: none; outline: none; align-self: flex-start;');
+	createInput(application, user, 'email',
+		'border: none; outline: none; align-self: flex-start;');
+	createInput(application, user, 'username',
+		'border: none; outline: none; align-self: flex-start;');
+	createInput(application, user, 'fullname',
+		'`border: none; outline: none; align-self: flex-start;');
+	createInput(application, user, 'phone',
+		'border: none; outline: none; align-self: flex-start;');
+	createImageUpload(user.id);
+
+};
+
+async function getProfilePhoto(id) {
+	console.log(` Getting user ${id} photo`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
+		if (response.status === 401) {
+			throw new Error(responseStatuses["401"]);
+		}
+		if (response.status === 500) {
+			document.querySelector('.profile-header__image-row__image').src = 'images/sasha.jpeg';
+		}
+		const buffer = await response.blob();
+		const worker = new MyWorker();
+		worker.postMessage(buffer);
+
+		worker.onmessage = function(result) {
+			data.setUserPhoto(result.data);
+			bus.emit('setPicture', null, '.profile-header__image-row__image',data.getUserPhoto());
+			bus.emit('hideLoader', null, '.profile-header__image-row');
+		};
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function saveUserPhoto(id) {
+	console.log(` Getting user ${id} photo`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
 		if (response.status !== 200) {
 			throw new Error(
-				`Not logged in: ${response.status}`);
+				`Couldn't fetch chat user photo: ${response.status}`);
 		}
-		return response.json();
-	})
-		.then(user => {
-			console.log(user);
-			renderProfile(application, user);
-		})
-		.catch(err => {
-			console.error(err);
-		});
+		const buffer = await response.blob();
+		const worker = new MyWorker();
+		worker.postMessage(buffer);
+
+		worker.onmessage = function(result) {
+			data.setCurrentChatUserPhoto(result.data);
+			bus.emit('setPicture', null, '.chat-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('hideLoader', null, '.chat-header__info-row__image-row');
+		};
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-function renderProfile (application, user) {
-	application.innerHTML = '';
-
-	const header = new Header();
-	header.parent = application;
-	header.renderHeader(true);
-
-	profile = new ProfileComponent(user, application);
-	profile.renderProfile();
-
-	createInput(application, user, 'fstatus',
-		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-	createInput(application, user, 'email',
-		`border: none; outline: none; padding: 0; height: 30px; margin: 0`);
-	/*    createInput(application, user, 'phone',
-            `border: none; outline: none; padding: 0; height: 30px; margin: 0`);*/
-	createInput(application, user, 'username',
-		`border: none; outline: none; margin: 0`);
-	createInput(application, user, 'fullname',
-		`border: none; outline: none; margin: 0`);
-	createInput(application, user, 'phone',
-		`border: none; outline: none; margin: 0`);
-
-	createImageUpload(user.id);
-	getUserPhoto(user.id);
-}
-
-function getUserPhoto (id) {
-	profile.showLoader();
+async function getUserPhoto(id, parentId, photoClass) {
+	showLoaderSmall(id, parentId, photoClass);
 	console.log(` Getting user ${id} photo`);
-	fetch(`${backend}/photos/${id}`, {
-		method: 'GET',
-		credentials: 'include',
-		mode: 'cors',
-	}).then(response => {
-		response.arrayBuffer().then((buffer) => {
-			profile.hideLoader();
-			if (response.status !== 200) {
-				throw new Error(
-					`Не зашли: ${response.status}`);
-			}
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch user photo: ${response.status}`);
+		}
+		const buffer = await response.blob();
+		const worker = new MyWorker();
+		worker.postMessage(buffer);
 
-			let base64Flag = 'data:image/jpeg;base64,';
-			let imageStr = arrayBufferToBase64(buffer);
-
-			document.getElementById('avatar').src = base64Flag + imageStr;
-		});
-
-	})
-		.catch(()=>{
-			profile.hideLoader();
-		});
+		worker.onmessage = function(result) {
+			const person = document.getElementById(`${parentId}-${id.toString()}`);
+			person.querySelector(photoClass).src = result.data;
+			hideLoaderSmall(id, parentId, photoClass);
+		};
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-function arrayBufferToBase64 (buffer) {
-	let binary = '';
-	let bytes = [].slice.call(new Uint8Array(buffer));
-
-	bytes.forEach((b) => binary += String.fromCharCode(b));
-
-	return window.btoa(binary);
+async function imageUploading(params = {id:null, fileInput:null}) {
+	const formData = new FormData();
+	formData.append('file', params.fileInput.files[0]);
+	console.log('image upload', params.fileInput.files[0]);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.postPhoto,
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			bus.emit('showLoader', null, '.profile-header__image-row');
+			await getProfilePhoto(params.id);
+		} else {
+			throw new Error(
+				'Error while upload image');
+		}
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 function createImageUpload (id) {
-	const imageInput = document.getElementById('file');
+	const imageInput = document.querySelector('.profile-header__image-row__input');
 	console.log('image upload created');
-	const formData = new FormData();
-
-	formData.append('file', imageInput.files[0]);
-
-	imageInput.addEventListener('change', function () {
-		let formData = new FormData();
-		formData.append('file', imageInput.files[0]);
-		console.log('image upload', imageInput.files[0]);
-		fetch(`${backend}/photos`, {
-			method: 'POST',
-			body: formData,
-			credentials: 'include',
-			mode: 'cors',
-		}).then(response => {
-			if (response.status !== 200) {
-				console.log('Error while upload image');
-			}
-			getUserPhoto(id,);
-
-		});
-	});
+	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
-export { createProfile, renderProfile };
+function hideLoader(selector) {
+	document.querySelector(`${selector}__loader`).style.display = 'none';
+	document.querySelector(`${selector}__image`).style.display = 'block';
+}
+
+function hideLoaderSmall(id, parentId, classSelector) {
+	const person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".chat-block__image-row__loader").style.display = "none";
+	person.querySelector(classSelector).style.display = "block";
+}
+
+function showLoader(selector) {
+	document.querySelector(`${selector}__loader`).style.display = 'block';
+	document.querySelector(`${selector}__image`).style.display = 'none';
+}
+
+function showLoaderSmall(id, parentId, classSelector) {
+	const person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".chat-block__image-row__loader").style.display = "block";
+	person.querySelector(classSelector).style.display = "none";
+}
+
+function setPicture(selector, photo) {
+	const avatarElement = document.querySelector(selector);
+	if (avatarElement) {
+		avatarElement.src = photo;
+	}
+}
+
+export {creatingChats, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
+	showLoader, hideLoader, saveUserPhoto, setPicture, checkLogin};

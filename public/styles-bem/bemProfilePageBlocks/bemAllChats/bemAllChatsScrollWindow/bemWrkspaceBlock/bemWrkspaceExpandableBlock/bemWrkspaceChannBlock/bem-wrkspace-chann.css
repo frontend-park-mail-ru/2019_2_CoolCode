@@ -1,0 +1,90 @@
+.wrkspace-chann {
+    align-self: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: stretch;
+    width: 90%;
+    height: 3vh; /*experimenting with viewports*/
+
+    margin: 0 5px 0 0;
+    display:inline-flex;
+
+}
+
+.wrkspace-chann_style {
+    border-bottom: 1px solid var(--global-green-color);
+}
+.wrkspace-chat {
+    display:inline-flex;
+
+}
+
+/*chann-name element*/
+
+.wrkspace-chann__name {
+    flex: 0 0 35%;
+
+    margin: 10px 5px 0 10px;
+
+}
+
+.wrkspace-chann__name_style{
+    color: var(--global-darkgrey-color);
+    font-family: var(--global-font-family-Roboto);
+    font-size: 14px;
+}
+
+/*icons-row element*/
+
+.wrkspace-chann__icons-row {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+
+}
+
+/*icon element in icons-row*/
+.wrkspace-chann__icons-row__icon{
+    height: 2.5vh; /*experimenting with viewports*/
+    width: 2.5vh;
+    object-position: center center;
+    object-fit: fill;
+
+    margin: 5px 5px 0 5px;
+}
+
+.wrkspace-chann__icons-row__icon_style{
+    filter: opacity(0.9);
+}
+
+.wrkspace-chann__icons-row__icon_green{
+    color: var(--global-green-color);
+}
+
+/*messages-counter element*/
+
+.wrkspace-chann__messages-counter {
+    flex: 0 0 3%;
+    align-self: center;
+    height: 60%;
+    padding: 3px 0 0 0;
+}
+
+.wrkspace-chann__messages-counter_style {
+    background-color:var(--global-green-color);
+    text-align: center;
+    border-radius: 50px;
+    font-family: var(--global-font-family-Roboto);
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.wrkspace-chann__messages-counter:hover {
+    margin: 0 0 5px 0;
+}
+
+.wrkspace-chann__messages-counter_style:hover {
+    background-color: #1d916b;
+}

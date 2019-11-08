@@ -1,0 +1,21 @@
+.msgwindow {
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px 10px 10px 10px;
+    align-self: center;
+    width: 90%;
+    height: unset;
+    max-height: 80%;
+}
+
+.msgwindow::-webkit-scrollbar {
+    width: 7px;
+    background-color: #FFFFFF;
+}
+.msgwindow::-webkit-scrollbar-thumb {
+    background-color: var(--global-green-color);
+    -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}

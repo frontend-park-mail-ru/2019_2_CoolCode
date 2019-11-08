@@ -1,0 +1,67 @@
+.input-block {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    align-self: center;
+}
+/*label element*/
+
+.input-block_label {
+    height: 0;
+}
+
+
+/*input element*/
+
+.input-block_input-field {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 0 0 5px 0;
+    height:auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+    width: 90%;
+
+}
+
+.input-block_input-field_style {
+    outline: none;
+    border: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--global-grey-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    color: var(--global-darkgrey-color);
+}
+
+.input-block_input-field_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+.input-block_input-field_style:focus-within {
+    color: #000000;
+    border-bottom: 1px solid var(--global-green-color);
+}
+
+/*text element in input*/
+
+.input-block_input-field__text {
+    align-self: flex-end;
+}
+
+/*error element*/
+
+.input-block_error-field {
+    align-self:center;
+    width: 90%;
+    height: auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+}
+.input-block_error-field_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
+}

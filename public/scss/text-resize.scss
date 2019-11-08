@@ -1,0 +1,73 @@
+$html-font-size-lg: 16px;
+$html-font-size-md: 15px;
+$html-font-size-sm: 14px;
+$html-font-size-xs: 13px;
+
+
+.login_text {
+  font-size: $html-font-size-lg;
+
+  @media (max-width: 1024px) {
+    font-size: $html-font-size-md;
+  }
+
+  @media (max-width: 640px) {
+    font-size: $html-font-size-sm;
+  }
+
+  @media (max-width: 480px) {
+    font-size: $html-font-size-xs;
+  }
+
+}
+
+.login_text_1 {
+  @media screen and (min-width: 320px) {
+      font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+  @media screen and (min-width: 1000px) {
+      font-size: 22px;
+  }
+
+  @media screen and (min-height: 120px) {
+    font-size: calc(16px + 6 * ((100vh - 320px) / 680));
+  }
+  @media screen and (min-height: 800px) {
+    font-size: 22px;
+  }
+
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function calcFluidFontSize($f-min, $f-max, $w-min, $w-max, $units: px) {
+  $f-min: strip-unit($f-min);
+  $f-max: strip-unit($f-max);
+  $w-min: strip-unit($w-min);
+  $w-max: strip-unit($w-max);
+
+  $k: ($f-max - $f-min)/($w-max - $w-min);
+  $b: $f-min - $k * $w-min;
+
+  $b: $b + $units;
+
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+
+.fluid-font-size {
+  font-size: calcFluidFontSize(16px, 24px, 480px, 1280px, 8px);
+}
+
+.fluid-font-size_1 {
+  font-size: calcFluidFontSize(8px, 12px, 240px, 640px, 2px);
+}
+
+.fluid-font-size_2 {
+  font-size: calcFluidFontSize(8px, 12px, 240px, 640px, 8px);
+}

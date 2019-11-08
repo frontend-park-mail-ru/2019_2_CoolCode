@@ -1,0 +1,134 @@
+.wrkspace-visible{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: center;
+    width: 100%;
+    height: 10vh; /*experimenting with viewports*/
+
+    box-sizing: border-box;
+}
+
+.wrkspace-visible_style {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px var(--global-grey-color);
+}
+
+.wrkspace-visible_style:hover {
+    box-shadow: 0 0 8px var(--global-grey-color);
+}
+
+
+/*image-column element*/
+
+.wrkspace-visible__image-row {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+
+    margin: 5px 0 0 0px;
+}
+
+/*image-column elements*/
+
+.wrkspace-visible__image-row__image {
+    width: 8vh; /*experimenting with viewports*/
+    height: 8vh;
+
+    object-position: center center;
+    object-fit: fill;
+    box-sizing: border-box;
+}
+
+.wrkspace-visible__image-row__image_style {
+    border: 1px solid var(--global-green-color);
+    border-radius: 50%;
+}
+
+.wrkspace-visible__image-row__image_style:hover {
+    border: 2px solid var(--global-green-color);
+}
+
+/*message-column element*/
+
+.wrkspace-visible__info-column {
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/*message-column elements*/
+
+.wrkspace-visible__info-column__name-row {
+    width: 90%;
+    height: 30%;
+    align-self: center;
+}
+
+.wrkspace-visible__info-column__name-row_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.wrkspace-visible__info-column__chann-row {
+    align-self: center;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    height: 40%;
+    padding: 5px 0 0 0;
+}
+
+
+/*channels element in chann-row*/
+
+.wrkspace-visible__info-column__chann-row__channels {
+    align-self: center;
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align-all: justify; /*CHECK THIS*/
+}
+
+.wrkspace-visible__info-column__chann-row__channels_style {
+    font-size: 18px;
+    color: var(--global-green-color);
+    font-weight: 400;
+    font-family: var(--global-font-family-Roboto);
+}
+
+/*add-channel-button element in chann row*/
+
+.wrkspace-visible__info-column__chann-row__add-channel-button {
+    align-self: center;
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/*icon element in add-channel-button*/
+
+.wrkspace-visible__info-column__chann-row__add-channel-button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 3vh; /*experimenting with viewports*/
+}
+.wrkspace-visible__info-column__chann-row__add-channel-button__icon_style {
+    filter: opacity(0.9);
+}

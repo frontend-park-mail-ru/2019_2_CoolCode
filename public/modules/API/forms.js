@@ -1,11 +1,11 @@
-import settings from '../config';
+import {API, settings} from '../../constants/config';
+import {FetchModule} from "../../main";
+import {getUserPhoto} from "./profile";
+import {validateEmail} from "./login";
 
-const { backend } = settings;
-function validateEmail(email) {
-	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(email);
-}
-function createInput (application, data, field, style) {
+//const { backend } = settings;
+
+function createInput (application, data, field, style) { //TODO: make it beautiful function
 	const settingField = application.querySelector(`#${field}-setting`);
 	const settingInput = document.createElement('input');
 
@@ -26,7 +26,7 @@ function createInput (application, data, field, style) {
 
 	settingField.addEventListener('dblclick', createInput);
 
-	settingInput.addEventListener('blur', function () {
+	settingInput.addEventListener('blur', async function () {
 		console.log(data.id);
 		if (settingInput.value !== '') {
 			switch (field) {
@@ -53,20 +53,19 @@ function createInput (application, data, field, style) {
 				data.fullname = settingInput.value;
 				break;
 			}
-			fetch(`${backend}/users/${data.id}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8',
-				},
-				body: JSON.stringify(data),
-				credentials: 'include',
-				mode: 'cors',
-			}).then(response => {
-				console.dir(response);
-			})
-				.catch(err => {
-					console.log(err);
-				});
+			try {
+				let response = await FetchModule._doPut(
+					{path: API.userInfo(data.id),
+						data: data,
+						contentType:'application/json;charset=utf-8'}
+				);
+				if (response.status === 200) {
+					let resolve = await response.text(); //TODO: change response from server
+					console.log(resolve);
+				}
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	});
 }
