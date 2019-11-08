@@ -1,12 +1,10 @@
 import {API, settings} from '../../constants/config';
 import {FetchModule} from "../../main";
 import {getUserPhoto} from "./profile";
+import {validateEmail} from "./login";
 
 //const { backend } = settings;
-function validateEmail(email) {
-	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(email);
-}
+
 function createInput (application, data, field, style) { //TODO: make it beautiful function
 	const settingField = application.querySelector(`#${field}-setting`);
 	const settingInput = document.createElement('input');

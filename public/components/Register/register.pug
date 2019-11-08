@@ -17,20 +17,20 @@ if viewType === "login"
     -var question = 'Not registered?'
 
 block content
-    div.register-form.register-form_style
-        form.register-form__form(method='POST' action=ref)
-            div.register-form__form__name-field.register-form__form__name-field_style=mainTitle
+    form.register-form__form(method='POST' action=ref)
+        div.register-form.register-form_style
+            div.register-form__form__name-field.register-form__form__name-field_style.fluid-font-size_2=mainTitle
             div.input-block
                 +input('email')
                 +input('password')
                 if viewType === "signUp"
                     +input('username')
                 div.input-block_error-field.input-block_error-field_style
-            button.register-form__form__button.register-form__form__button_style(type='submit')=mainTitle
+            button.register-form__form__button.register-form__form__button_style.fluid-font-size_1(type='submit')=mainTitle
             div.register-form__form__login-ref
                 if viewType === "signUp"
-                    p.register-form__form__login-ref__text.register-form__form__login-ref__text_style=question
+                    p.register-form__form__login-ref__text.register-form__form__login-ref__text_style.fluid-font-size_1=question
                     a.header-refs__ref_style(href='/login' data-section = 'login') log in
                 if viewType === "login"
-                    p.register-form__form__login-ref__text.register-form__form__login-ref__text_style=question
+                    p.register-form__form__login-ref__text.register-form__form__login-ref__text_style.fluid-font-size_1=question
                     a.header-refs__ref_style(href='/signup' data-section = 'signup') sign up

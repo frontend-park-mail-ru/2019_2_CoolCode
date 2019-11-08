@@ -15,7 +15,7 @@ function createEvents() {
 
 	/*setting data*/
 
-	bus.on('addUser', data.setUser.bind(data));
+	bus.on('setUser', data.setUser.bind(data));
 	bus.on('setLoggedIn', data.setLoggedIn.bind(data));
 	bus.on('setLastSearchUsers', data.setLastSearchUsers.bind(data));
 	bus.on('setChatMessages', data.setCurrentChatMessages.bind(data));

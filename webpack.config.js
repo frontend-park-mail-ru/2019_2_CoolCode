@@ -51,6 +51,19 @@ module.exports = {
 
 			},
 			{
+				test: /\.s[ac]ss$/i,
+				use: [
+					'style-loader',
+					'css-loader',
+					{
+						loader: 'sass-loader',
+						options: {
+							webpackImporter: false,
+						},
+					},
+				],
+			},
+			{
 				test: /\.css$/i,
 				use: ['style-loader', 'css-loader'],
 			},

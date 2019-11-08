@@ -1,4 +1,4 @@
-.chat-column-msg {
+.chat-msg {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -6,16 +6,16 @@
     margin: 2px 0 2px 0;
 }
 
-.chat-column-msg_left {
+.chat-msg_left {
     justify-content: flex-start;
 }
 
-.chat-column-msg_right {
+.chat-msg_right {
     justify-content: flex-end;
 }
 
 /* text element */
-.chat-column-msg__text {
+.chat-msg__text {
     max-width: 50%;
     min-height: 2vh; /*experimenting with viewports*/
     width: auto;
@@ -23,7 +23,7 @@
     text-align: right;
     padding: 5px 5px 5px 5px;
 }
-.chat-column-msg__text_style {
+.chat-msg__text_style {
     word-wrap: break-word;
     border-radius: 15px;
     font-weight: 300;
@@ -32,17 +32,17 @@
     color: #000000;
 }
 
-.chat-column-msg__text_style-left {
+.chat-msg__text_style-left {
     background: var(--global-grey-color);
 
 }
 
-.chat-column-msg__text_style-right {
+.chat-msg__text_style-right {
     background: var(--global-green-color);
 }
 
 /* text element */
-.chat-column-msg__time {
+.chat-msg__time {
     max-width: 50%;
     min-height: 1vh; /*experimenting with viewports*/
     width: auto;
@@ -50,17 +50,17 @@
     align-self: flex-end;
     padding: 5px 5px 5px 5px;
 }
-.chat-column-msg__time_style {
+.chat-msg__time_style {
     font-size: 12px;
     font-style: italic;
     font-family: var(--global-font-family-Montserrat);
     color: #000000;
 }
 
-.chat-column-msg__time_style-left {
+.chat-msg__time_style-left {
     color: var(--global-green-color);
 }
-.chat-column-msg__time_style-right {
+.chat-msg__time_style-right {
     color: #000000;
 
 }

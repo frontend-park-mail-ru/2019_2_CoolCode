@@ -65,7 +65,7 @@ async function checkLogin () {
 			break;
 		case 200:
 			const user = await response.json();
-			bus.emit('addUser', null, user);
+			bus.emit('setUser', null, user);
 			break;
 		default:
 			throw new Error(
@@ -150,8 +150,8 @@ async function saveUserPhoto(id) {
 
 		worker.onmessage = function(result) {
 			data.setCurrentChatUserPhoto(result.data);
-			bus.emit('setPicture', null, '.chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
-			bus.emit('hideLoader', null, '.chat-column-header__info-row__image-row');
+			bus.emit('setPicture', null, '.chat-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('hideLoader', null, '.chat-header__info-row__image-row');
 		};
 	} catch (error) {
 		console.error(error);

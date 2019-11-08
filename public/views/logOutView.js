@@ -7,7 +7,6 @@ class logoutView extends BaseView {
 		super ({viewType: "logout", user:{}, loggedIn: null}, parent);
 	};
 	show() {
-		debugger;
 		bus.emit('logout', null, this._parent);
 
 	}

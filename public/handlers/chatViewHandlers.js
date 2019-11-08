@@ -3,12 +3,12 @@ import {componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 
 function createSendMessageBtnHndlr() {
-	const sendBtn = document.querySelectorAll(".chat-column-input__icon-container__icon")[1];
+	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[1];
 	sendBtn.addEventListener('click', sendMessageEvent);
 }
 
 function createMessageInputHndlr() {
-	const messageInput = document.querySelector(".chat-column-input__text");
+	const messageInput = document.querySelector(".input__text");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
 			sendMessageEvent();
@@ -19,6 +19,7 @@ function createMessageInputHndlr() {
 }
 
 function growInput(element) {
+	element.style.height = element.style.minHeight;
 	element.style.height = element.scrollHeight;
 }
 

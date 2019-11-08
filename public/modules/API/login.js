@@ -1,11 +1,10 @@
-import {API, settings} from '../../constants/config';
+import {API, emailValidation, settings} from '../../constants/config';
 const {backend} = settings;
-import {bus, FetchModule, router} from '../../main';
+import {bus, FetchModule, promiseMaker, router} from '../../main';
 import {data} from "../../main";
 
 function validateEmail(email) {
-	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(email);
+	return emailValidation.test(email);
 }
 
 function createLogin(application) {
@@ -70,10 +69,9 @@ async function login(email, password) {
 				`Серверу плохо: ${response.status}`);
 		}
 		if (response.status === 200) {
-			let user = await response.json();
+			const user = await response.json();
 			console.log(`Logged in: ${user.email}`);
-			//bus.emit('addUser', user);
-			data.setLoggedIn(true);
+			await promiseMaker.createPromise('setUser', user);
 			router.go('/profile');
 		}
 	} catch (error) {
@@ -86,4 +84,4 @@ function showError(text) {
 	errorMessage.innerHTML = text;
 }
 
-export {createLogin, login};
+export {createLogin, login, validateEmail};
