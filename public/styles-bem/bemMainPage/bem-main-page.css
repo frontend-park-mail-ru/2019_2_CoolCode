@@ -1,4 +1,4 @@
-.bem-main-page {
+.main-page {
     flex: 0 0 100%;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
 
 /*figures element*/
 
-.bem-main-page__figures {
+.main-page__figures {
     flex: 0 0 40%;
     display: flex;
     flex-direction: row;
@@ -21,7 +21,7 @@
 
 /* image element in figures */
 
-.bem-main-page__figures__image-container {
+.main-page__figures__image-container {
     flex: 0 0 30%;
     display: flex;
     flex-direction: row;
@@ -30,7 +30,7 @@
 
 }
 
-.bem-main-page__figures__image-container__image {
+.main-page__figures__image-container__image {
 
     height: 2vh; /*experimenting with viewports*/
     width: 2vh;
@@ -45,7 +45,7 @@
 
 /*title element*/
 
-.bem-main-page__title {
+.main-page__title {
     flex: 0 0 40%;
     display: flex;
     flex-direction: row;
@@ -56,7 +56,7 @@
 
 }
 
-.bem-main-page__title_style {
+.main-page__title_style {
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
     font-weight: 400;

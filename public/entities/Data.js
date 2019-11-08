@@ -91,7 +91,7 @@ class Data {
 	}
 
 	getUserChats() {
-		this.createLogMessage('get', 'userChats', this.userChats);
+		this.createLogMessage('get', 'userChats', 'some chats');
 		return this.userChats;
 	}
 
@@ -101,7 +101,7 @@ class Data {
 	}
 
 	getUserWrkSpaces() {
-		this.createLogMessage('get', 'userWrkSpaces', this.userWrkSpaces);
+		this.createLogMessage('get', 'userWrkSpaces', 'some wrkspaces');
 		return this.userWrkSpaces;
 	}
 
@@ -235,7 +235,6 @@ class Data {
 	getChatUsersIds() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
-			console.log(chat);
 			if (chat["Members"][0] == this.user.id) {
 				ids.push(chat["Members"][1]);
 			} else {

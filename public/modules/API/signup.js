@@ -1,5 +1,5 @@
 import {login} from './login';
-import {settings} from '../../constants/config';
+import {API, settings} from '../../constants/config';
 import {bus, FetchModule, router} from "../../main";
 
 const {backend} = settings;
@@ -10,7 +10,7 @@ function validateEmail(email) {
 }
 
 function createSignUp(application) { //TODO: make beautiful function
-	const form = application.querySelector('.bem-register-form__form');
+	const form = application.querySelector('.register-form__form');
 	var error = document.createElement('div');
 	error.className = 'error';
 	error.style.color = 'red';
@@ -18,7 +18,7 @@ function createSignUp(application) { //TODO: make beautiful function
 	const emailField = application.querySelector('#email');
 	const passwordField = application.querySelector('#password');
 	const usernameField = application.querySelector('#username');
-	const errorMessage = application.querySelector('.bem-input-block_error-field');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	emailField.addEventListener('click', () => {
 		errorMessage.innerHTML = '';
 	});
@@ -39,17 +39,17 @@ function createSignUp(application) { //TODO: make beautiful function
 		let correct = true;
 		if (form.elements['password'].value === '') {
 			showError('Please, input password ');
-			passwordField.className += " bem-input-block_input-field_error";
+			passwordField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (form.elements['username'].value === '') {
 			showError('Please, input username');
-			usernameField.className += " bem-input-block_input-field_error";
+			usernameField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
 			showError('Please, input correct email');
-			emailField.className += " bem-input-block_input-field_error";
+			emailField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!correct) {
@@ -61,7 +61,7 @@ function createSignUp(application) { //TODO: make beautiful function
 		username = form.elements['username'].value;
 		fullname = 'CoolSlack User';
 		try {
-			let response = await FetchModule._doPost({path: '/users',
+			let response = await FetchModule._doPost({path: API.auth,
 				data: {
 					email: email,
 					password: password,
@@ -71,8 +71,8 @@ function createSignUp(application) { //TODO: make beautiful function
 				contentType : 'application/json;charset=utf-8'});
 			if (response.status === 400) {
 				showError('Sorry, email or username is already registered:(');
-				emailField.className += " bem-input-block_input-field_error";
-				usernameField.className += " bem-input-block_input-field_error";
+				emailField.className += " input-block_input-field_error";
+				usernameField.className += " input-block_input-field_error";
 				throw new Error('This email is already taken, try another one');
 			}
 			if (response.status !== 200) {
@@ -87,7 +87,7 @@ function createSignUp(application) { //TODO: make beautiful function
 }
 
 function showError(text) {
-	const errorMessage = application.querySelector('.bem-input-block_error-field');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	errorMessage.innerHTML = text;
 }
 

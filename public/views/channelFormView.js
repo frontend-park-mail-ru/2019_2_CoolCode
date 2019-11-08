@@ -5,7 +5,7 @@ import CreationFormComponent from "../components/CreationForm/creationFormCompon
 
 class channelFormView extends BaseView {
 
-    contentListRootSelector = '.bem-header';
+    contentListRootSelector = '.header';
 
     constructor (data, parent) {
     	super({viewType: "channelForm", user:{}, loggedIn: null}, parent);

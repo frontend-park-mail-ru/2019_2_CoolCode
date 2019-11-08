@@ -24,7 +24,7 @@ class loginView extends BaseView {
 	render() {
 		this.drawBasics();
 		let login = new RegisterComponent(this._data, this._parent);
-		this._parent.querySelector('.bem-primary-container').innerHTML += login.render();
+		this._parent.querySelector('.primary-container').innerHTML += login.render();
 	}
 }
 

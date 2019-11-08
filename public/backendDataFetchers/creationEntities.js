@@ -1,10 +1,10 @@
 import {FetchModule, data, promiseMaker} from "../main";
-import {responseStatuses} from "../constants/config";
+import {API, responseStatuses} from "../constants/config";
 
 async function createChat(id) { /*creating new chat and fetching all chats info*/
 	console.log(`Creating chat with user: ${id}`);
 	try {
-		let response = await FetchModule._doPost({path: '/chats', data: {
+		const response = await FetchModule._doPost({path: API.chats, data: {
 			user_id:parseFloat(id),
 		},
 		contentType : 'application/json;charset=utf-8'});
@@ -22,7 +22,7 @@ async function createChat(id) { /*creating new chat and fetching all chats info*
 async function createWrkspace(name) { /*creating new wrkspace and fetching all chats info*/
 	console.log(`Creating wrkspace with name: ${name}`);
 	try {
-		let response = await FetchModule._doPost({path: '/workspaces', data: {
+		const response = await FetchModule._doPost({path: API.createWrkSpace, data: {
 			name: name,
 		},
 		contentType : 'application/json;charset=utf-8'});
@@ -39,7 +39,7 @@ async function createWrkspace(name) { /*creating new wrkspace and fetching all c
 async function createChannel(name, id) { /*creating new channel and fetching all chats info*/
 	console.log(`Creating channel in wrkspace: ${id}`);
 	try {
-		let response = await FetchModule._doPost({path: `/workspaces/${id}/channels`, data: {
+		const response = await FetchModule._doPost({path: API.createChannel(id), data: {
 			name: name,
 		},
 		contentType : 'application/json;charset=utf-8'});

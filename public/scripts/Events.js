@@ -10,6 +10,7 @@ import {
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
 import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettionInfo";
+import handleLogout from "../backendDataFetchers/logout";
 function createEvents() {
 
 	/*setting data*/
@@ -26,7 +27,8 @@ function createEvents() {
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 
-	bus.on('clearData', data.clear);
+	bus.on('clearData', data.clear.bind(data));
+	bus.on('logout', handleLogout);
 
 	/*fetching functions*/
 	bus.on('checkLogin', checkLogin);

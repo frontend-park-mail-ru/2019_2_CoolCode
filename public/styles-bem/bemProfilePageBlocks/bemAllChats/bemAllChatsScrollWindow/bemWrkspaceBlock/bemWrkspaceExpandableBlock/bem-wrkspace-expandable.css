@@ -1,4 +1,4 @@
-.bem-wrkspace-expandable{
+.wrkspace-expandable{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -12,11 +12,11 @@
 
 }
 
-.bem-wrkspace-expandable_style {
+.wrkspace-expandable_style {
     background: #FFFFFF;
     border-top: 1px solid var(--global-green-color);
 }
 
-.bem-wrkspace-expandable_clicked {
+.wrkspace-expandable_clicked {
     max-height: 50vh; /*just big height for transition*/
 }

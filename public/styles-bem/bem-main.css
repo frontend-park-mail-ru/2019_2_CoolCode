@@ -30,13 +30,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 :root{
-    --global-green-color: #2dc68b;
+    --global-green-color: #2DC68B;
     --global-grey-color: #C4C4C4;
     --global-darkgrey-color: #6D6D6D;
     --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
-    --global-white-color: #ffffff;
-    --global-overlay-color: rgba(0,0,0,0.5);
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
 }
@@ -55,7 +53,7 @@
     to { transform:rotate(-360deg); }
 }
 
-.bem-main{
+.main{
     width: 100%;
     height: 100%;
 }

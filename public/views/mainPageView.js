@@ -26,7 +26,7 @@ class mainPageView extends BaseView {
 	render() {
 		this.drawBasics();
 		let mainPage = new MainPageComponent(this._data, this._parent);
-		this._parent.querySelector('.bem-primary-container').innerHTML += mainPage.render();
+		this._parent.querySelector('.primary-container').innerHTML += mainPage.render();
 	}
 }
 

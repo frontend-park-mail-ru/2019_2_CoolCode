@@ -21,7 +21,7 @@ class profileView extends BaseView {
 	};
 
 	setEvents() {
-		bus.emit('showLoader', null, '.bem-profile-header__image-row');
+		bus.emit('showLoader', null, '.profile-header__image-row');
 		getProfilePhoto(data.getUserId());
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
@@ -34,8 +34,8 @@ class profileView extends BaseView {
 	}
 
 	createClickablePic() {
-		const img = document.querySelector('.bem-profile-header__image-row__image');
-		const input = document.querySelector('.bem-profile-header__image-row__input');
+		const img = document.querySelector('.profile-header__image-row__image');
+		const input = document.querySelector('.profile-header__image-row__input');
 		img.addEventListener('click', function () {
 			input.click();
 		});
@@ -75,14 +75,14 @@ class profileView extends BaseView {
 
 	drawLeftColumn() {
 		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.bem-column_left').innerHTML = leftColumn.render();
+		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
 		leftColumn.renderChatsContent();
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
 		let rightColumn = new ProfilePageComponent(this._data.user, this._parent);
-		this._parent.querySelector('.bem-column_right').innerHTML += rightColumn.render();
+		this._parent.querySelector('.column_right').innerHTML += rightColumn.render();
 	}
 
 	render() {

@@ -1,4 +1,4 @@
-.bem-chat-column-msgwindow {
+.chat-column-msgwindow {
     flex: 0 0 auto;
     flex-direction: column;
     justify-content: flex-end;
@@ -11,11 +11,11 @@
     max-height: 80%;
 }
 
-.bem-chat-column-msgwindow::-webkit-scrollbar {
+.chat-column-msgwindow::-webkit-scrollbar {
     width: 7px;
     background-color: #FFFFFF;
 }
-.bem-chat-column-msgwindow::-webkit-scrollbar-thumb {
+.chat-column-msgwindow::-webkit-scrollbar-thumb {
     background-color: var(--global-green-color);
     -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
 }

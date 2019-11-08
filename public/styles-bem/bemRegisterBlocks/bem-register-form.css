@@ -1,4 +1,4 @@
-.bem-register-form {
+.register-form {
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -7,13 +7,13 @@
     width: 45vh;
 }
 
-.bem-register-form_style {
+.register-form_style {
     box-shadow: 5px 5px 5px 5px var(--global-darkgrey-color);
 }
 
 /*form element*/
 
-.bem-register-form__form {
+.register-form__form {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
 
 /*name element in form*/
 
-.bem-register-form__form__name-field {
+.register-form__form__name-field {
     flex: 0 0 20%;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     width: 100%;
 }
 
-.bem-register-form__form__name-field_style {
+.register-form__form__name-field_style {
     font-family: var(--global-font-family-Montserrat);
     font-weight: 500;
     font-size: 28px;
@@ -43,7 +43,7 @@
 
 /*button element in form*/
 
-.bem-register-form__form__button {
+.register-form__form__button {
     flex: 0 0 5%;
     display: flex;
     flex-direction: row;
@@ -54,10 +54,10 @@
     width: 20%;
 }
 
-.bem-register-form__form__button_style {
+.register-form__form__button_style {
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
-    background: var(--global-white-color);
+    background: #FFFFFF;
     color: var(--global-green-color);
     font-weight: 500;
     font-size: 16px;
@@ -65,13 +65,13 @@
     border: 1px solid var(--global-green-color);
 }
 
-.bem-register-form__form__button_style:focus {
+.register-form__form__button_style:focus {
     outline: none;
 }
 
 /*login-reference element in form*/
 
-.bem-register-form__form__login-ref {
+.register-form__form__login-ref {
     flex: 0 0 15%;
     display: flex;
     flex-direction: column;
@@ -81,11 +81,11 @@
     width: 100%;
 }
 
-.bem-register-form__form__login-ref__text {
+.register-form__form__login-ref__text {
     margin: 0 0 0 0;
 }
 
-.bem-register-form__form__login-ref__text_style {
+.register-form__form__login-ref__text_style {
     font-family: var(--global-font-family-Roboto);
     font-size: 15px;
     color: #000000;

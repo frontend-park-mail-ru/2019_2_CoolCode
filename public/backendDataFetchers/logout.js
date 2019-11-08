@@ -1,10 +1,12 @@
 import {bus, FetchModule, router, data, promiseMaker} from '../main';
-import {responseStatuses} from "../constants/config";
+import {API, responseStatuses} from "../constants/config";
 async function handleLogout() {
 	try {
-		let response = await FetchModule._doDelete({path: '/logout',
-			data: '',
-			contentType : 'application/json;charset=utf-8'});
+		const response = await FetchModule._doDelete(
+			{path: API.logout,
+				data: '',
+				contentType : 'application/json;charset=utf-8'}
+		);
 		if (response.status !== 200) {
 			`Error while logout: ${responseStatuses[response.status]}`;
 		}

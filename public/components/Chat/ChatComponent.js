@@ -5,14 +5,14 @@ const leftMsg = require('./msgLeft.pug');
 
 class ChatComponent extends BaseComponent {
 
-    contentListRootSelector = '.bem-chat-column-msgwindow';
+    contentListRootSelector = '.chat-column-msgwindow';
 
     getMessageInputData() {
-    	return this._parent.querySelector('.bem-chat-column-input__text').value;
+    	return this._parent.querySelector('.chat-column-input__text').value;
     }
 
     setMessageInputData(messageData) {
-    	this._parent.querySelector('.bem-chat-column-input__text').value = '';
+    	this._parent.querySelector('.chat-column-input__text').value = '';
     }
 
     renderOutgoingMessage(messageData) {

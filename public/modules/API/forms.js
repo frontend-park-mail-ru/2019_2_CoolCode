@@ -1,8 +1,8 @@
-import {settings} from '../../constants/config';
+import {API, settings} from '../../constants/config';
 import {FetchModule} from "../../main";
 import {getUserPhoto} from "./profile";
 
-const { backend } = settings;
+//const { backend } = settings;
 function validateEmail(email) {
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
@@ -56,9 +56,11 @@ function createInput (application, data, field, style) { //TODO: make it beautif
 				break;
 			}
 			try {
-				let response = await FetchModule._doPut({path: `/users/${data.id}`,
-					data: data,
-					contentType:'application/json;charset=utf-8'});
+				let response = await FetchModule._doPut(
+					{path: API.userInfo(data.id),
+						data: data,
+						contentType:'application/json;charset=utf-8'}
+				);
 				if (response.status === 200) {
 					let resolve = await response.text(); //TODO: change response from server
 					console.log(resolve);

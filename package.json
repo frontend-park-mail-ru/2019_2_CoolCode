@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "body-parser": "latest",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
@@ -22,6 +21,7 @@
     "pug": "^2.0.4"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/core": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
     "babel-core": "^6.26.3",

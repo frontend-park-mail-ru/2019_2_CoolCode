@@ -5,7 +5,7 @@ import CreationFormComponent from "../components/CreationForm/creationFormCompon
 
 class wrkspaceFormView extends BaseView {
 
-	contentListRootSelector = '.bem-header';
+	contentListRootSelector = '.header';
 
 	constructor (data, parent) {
 		super({viewType: "wrkspaceForm", user:{}, loggedIn: null}, parent);
