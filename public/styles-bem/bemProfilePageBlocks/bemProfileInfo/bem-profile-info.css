@@ -54,6 +54,58 @@
     font-weight: 100;
 }
 
+.profile-info__field__info_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+.profile-info__field__info_hidden {
+    display: none;
+}
+
+/*input element in field*/
+
+.profile-info__field__input {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 80%;
+}
+
+.profile-info__field__input_style {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--global-green-color);
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 24px;
+    letter-spacing: -0.2px;
+    color: #000000;
+    font-weight: 100;
+}
+
+.profile-info__field__input_hidden {
+    display: none;
+}
+
+
+/*error element*/
+
+.profile-info__error {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 64%; /* 80% from 80%*/
+    height: auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+}
+.profile-info__error_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
+}
+
+
 /*settings element*/
 
 .profile-info__settings {

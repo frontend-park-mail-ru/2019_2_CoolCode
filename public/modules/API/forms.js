@@ -1,11 +1,14 @@
 import {API, settings} from '../../constants/config';
-import {FetchModule} from "../../main";
+import {bus, FetchModule} from "../../main";
 import {getUserPhoto} from "./profile";
 import {validateEmail} from "./login";
-
-//const { backend } = settings;
+import {setUserInfo} from "../../backendDataFetchers/setUserInfo";
 
 function createInput (application, data, field, style) { //TODO: make it beautiful function
+
+	const phoneBlock = document.querySelector('#phone-setting');
+	const emailBlock = document.querySelector('#email-setting');
+
 	const settingField = application.querySelector(`#${field}-setting`);
 	const settingInput = document.createElement('input');
 
@@ -28,45 +31,7 @@ function createInput (application, data, field, style) { //TODO: make it beautif
 
 	settingInput.addEventListener('blur', async function () {
 		console.log(data.id);
-		if (settingInput.value !== '') {
-			switch (field) {
-			case 'fstatus':
-				data.fstatus = settingInput.value;
-				break;
-			case 'phone':
-				data.phone = settingInput.value;
-				break;
-			case 'email':
-				if(!validateEmail(settingInput.value)) {
-					settingField.innerHTML = '';
 
-					settingField.innerHTML = '<p><span   style="font-size: large; color: red; font-family: Arial; ">*very wrong input</span>';
-					data.email = '';
-				}else{
-					data.email = settingInput.value;
-				}
-				break;
-			case 'username':
-				data.username = settingInput.value;
-				break;
-			case 'fullname':
-				data.fullname = settingInput.value;
-				break;
-			}
-			try {
-				let response = await FetchModule._doPut(
-					{path: API.userInfo(data.id),
-						data: data,
-						contentType:'application/json;charset=utf-8'}
-				);
-				if (response.status === 200) {
-					let resolve = await response.text(); //TODO: change response from server
-					console.log(resolve);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		}
 	});
 }
 

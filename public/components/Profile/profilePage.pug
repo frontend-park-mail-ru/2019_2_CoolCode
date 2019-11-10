@@ -1,13 +1,8 @@
 mixin field(pText, fieldText, id)
-    div.profile-info__field
+    div.profile-info__field(id=id)
         div.profile-info__field__name.profile-info__field__name_style= pText+':'
-        div.profile-info__field__info.profile-info__field__info_style(id=id)= fieldText
-mixin settings(pText, reference)
-    div.profile-info__settings
-        div.profile-info__settings__name.profile-info__settings__name_style= pText+'settings'
-        a.profile-info__settings__ref(href=reference)
-            img.profile-info__settings__ref__image.profile-info__settings__ref__image_style(src='images/settings.jpg')
-
+        div.profile-info__field__info.profile-info__field__info_style= fieldText
+        input.profile-info__field__input.profile-info__field__input_style.profile-info__field__input_hidden
 
 
 block page
@@ -17,12 +12,21 @@ block page
             img.profile-header__image-row__image.profile-header__image-row__image_style(src='images/user.jpg')
             input.profile-header__image-row__input(type='file')
         div.profile-header__username-column
-            div.profile-header__username-column__username.profile-header__username-column__username_style#username-setting= username
-            div.profile-header__username-column__fullname.profile-header__username-column__fullname_style#fullname-setting= fullname
+            div.profile-header__username-column__username#username-setting
+                div.profile-header__username-column__username__text.profile-header__username-column__username__text_style= username
+                input.profile-header__username-column__username__input.profile-header__username-column__username__input_style.profile-header__username-column__username__input_hidden
+            div.profile-header__username-column__fullname#fullname-setting
+                div.profile-header__username-column__fullname__text.profile-header__username-column__fullname__text_style= fullname
+                input.profile-header__username-column__fullname__input.profile-header__username-column__fullname__input_style.profile-header__username-column__fullname__input_hidden
+            div.profile-header__username-column__error.profile-header__username-column__error_style
     div.profile-info
         +field('status', fstatus, 'fstatus-setting')
         +field('email', email, 'email-setting')
         +field('phone', phone, 'phone-setting')
-        +settings('privacy ', '/')
+        div.profile-info__error.profile-info__error_style
+        div.profile-info__settings
+            div.profile-info__settings__name.profile-info__settings__name_style 'privacy settings'
+            a.profile-info__settings__ref(href='/')
+                img.profile-info__settings__ref__image.profile-info__settings__ref__image_style(src='images/settings.jpg')
 
 

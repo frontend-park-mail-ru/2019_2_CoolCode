@@ -2,6 +2,7 @@ import {API, emailValidation, settings} from '../../constants/config';
 const {backend} = settings;
 import {bus, FetchModule, promiseMaker, router} from '../../main';
 import {data} from "../../main";
+import {showError} from "../../handlers/errorHandlers";
 
 function validateEmail(email) {
 	return emailValidation.test(email);
@@ -32,12 +33,12 @@ function createLogin(application) {
 		password = form.elements['password'].value;
 
 		if (form.elements['password'].value === '') {
-			showError('Please, input password:(');
+			showError('.input-block_error-field', 'Please, input password:(');
 			passwordField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
-			showError('Please, input correct email:(');
+			showError('.input-block_error-field', 'Please, input correct email:(');
 			emailField.className += " input-block_input-field_error";
 			correct = false;
 		}
@@ -70,18 +71,13 @@ async function login(email, password) {
 		}
 		if (response.status === 200) {
 			const user = await response.json();
-			console.log(`Logged in: ${user.email}`);
+			console.log(`Logged in: ${user}`);
 			await promiseMaker.createPromise('setUser', user);
 			router.go('/profile');
 		}
 	} catch (error) {
 		console.error(error);
 	}
-}
-
-function showError(text) {
-	const errorMessage = application.querySelector('.input-block_error-field');
-	errorMessage.innerHTML = text;
 }
 
 export {createLogin, login, validateEmail};

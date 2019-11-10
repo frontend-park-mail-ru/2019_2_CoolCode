@@ -77,29 +77,123 @@
 
 .profile-header__username-column__username {
     flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-self: flex-start;
     width: 100%;
 }
 
-.profile-header__username-column__username_style {
+.profile-header__username-column__username__text {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-header__username-column__username__text_style {
     font-family: var(--global-font-family-Montserrat);
     font-size: 36px;
     color: #000000;
     font-weight: 400;
 }
 
+.profile-header__username-column__username__text_hidden {
+    display: none;
+}
+
+.profile-header__username-column__username__text_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+.profile-header__username-column__username__input {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-header__username-column__username__input_style {
+    outline: none;
+    border: none;
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 36px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.profile-header__username-column__username__input_hidden {
+    display: none;
+}
 /* fullname element in username-column*/
 
 .profile-header__username-column__fullname {
     flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-self: flex-start;
     width: 100%;
 }
 
-.profile-header__username-column__fullname_style {
+.profile-header__username-column__fullname__text {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-header__username-column__fullname__text_style {
     font-family: var(--global-font-family-Roboto);
     font-size: 24px;
     color: #000000;
     font-weight: 200;
+}
+
+
+.profile-header__username-column__fullname__text_hidden {
+    display: none;
+}
+
+.profile-header__username-column__fullname__text_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+.profile-header__username-column__fullname__input {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.profile-header__username-column__fullname__input_style {
+    outline: none;
+    border: none;
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 36px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.profile-header__username-column__fullname__input_hidden {
+    display: none;
+}
+
+/* error element in username-column*/
+
+.profile-header__username-column__error {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 100%;
+    height: auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+}
+
+.profile-header__username-column__error_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
 }
 

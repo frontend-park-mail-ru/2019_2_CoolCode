@@ -1,5 +1,5 @@
 import {bus, data} from "../main";
-import {getCurrentChatMessages, getUserInfo} from "./gettionInfo";
+import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
 import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
 const {backend} = settings;

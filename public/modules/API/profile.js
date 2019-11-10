@@ -6,7 +6,7 @@ const { backend } = settings;
 import {bus, FetchModule, promiseMaker, router} from '../../main';
 import {data} from "../../main";
 import {chooseChat, createWebsocketConn} from "../../backendDataFetchers/websockets";
-import {getChats} from "../../backendDataFetchers/gettionInfo";
+import {getChats} from "../../backendDataFetchers/gettingInfo";
 
 function redundantWrkSpace() {
 	data.setUserWrkSpaces([
@@ -92,21 +92,6 @@ async function creatingChats() {
 	await promiseMaker.createPromise('getChats', data.getUserId());
 	await openWebSocketConnections();
 }
-
-function createInputs (application, user) {
-	createInput(application, user, 'fstatus',
-		'border: none; outline: none; align-self: flex-start;');
-	createInput(application, user, 'email',
-		'border: none; outline: none; align-self: flex-start;');
-	createInput(application, user, 'username',
-		'border: none; outline: none; align-self: flex-start;');
-	createInput(application, user, 'fullname',
-		'`border: none; outline: none; align-self: flex-start;');
-	createInput(application, user, 'phone',
-		'border: none; outline: none; align-self: flex-start;');
-	createImageUpload(user.id);
-
-};
 
 async function getProfilePhoto(id) {
 	console.log(` Getting user ${id} photo`);
@@ -240,5 +225,5 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {creatingChats, createInputs, getUserPhoto, getProfilePhoto, redundantWrkSpace,
-	showLoader, hideLoader, saveUserPhoto, setPicture, checkLogin};
+export {creatingChats, getUserPhoto, getProfilePhoto, redundantWrkSpace,
+	showLoader, hideLoader, saveUserPhoto, setPicture, checkLogin, createImageUpload};

@@ -1,6 +1,5 @@
 import {bus, data} from "../main";
 import {
-	createInputs,
 	getUserPhoto,
 	hideLoader,
 	setPicture,
@@ -9,8 +8,10 @@ import {
 } from "../modules/API/profile";
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
-import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettionInfo";
+import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettingInfo";
 import handleLogout from "../backendDataFetchers/logout";
+import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
+import {createProfileInputs} from "../handlers/profileBlockHandlers";
 function createEvents() {
 
 	/*setting data*/
@@ -28,23 +29,27 @@ function createEvents() {
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
-	bus.on('logout', handleLogout);
 
 	/*fetching functions*/
 	bus.on('checkLogin', checkLogin);
+	bus.on('createChat', createChat);
+	bus.on('createWebsocketConn', createWebsocketConn);
+	bus.on('logout', handleLogout);
 
+	bus.on('getCurrentChatInfo', getCurrentChatInfo);
+	bus.on('getChats', getChats);
+	/**/
 	bus.on('getUserPhoto', getUserPhoto);
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);
 	bus.on('setPicture', setPicture);
 
-	bus.on('createProfileInputs', createInputs);
+	bus.on('createProfileInputs', createProfileInputs);
 
-	bus.on('createChat', createChat);
-	bus.on('createWebsocketConn', createWebsocketConn);
-
-	bus.on('getCurrentChatInfo', getCurrentChatInfo);
-	bus.on('getChats', getChats);
+	bus.on('addErrorStyle', addErrorStyle);
+	bus.on('showError', showError);
+	bus.on('removeErrorStyle', removeErrorStyle);
+	bus.on('hideError', hideError);
 
 }
 
