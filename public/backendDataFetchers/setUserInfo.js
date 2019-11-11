@@ -1,4 +1,4 @@
-import {bus, FetchModule} from "../main";
+import {bus, FetchModule, promiseMaker, data} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function setUserInfo(user) {
@@ -15,7 +15,7 @@ async function setUserInfo(user) {
 				'This email or phone number is already taken' //TODO: server should check email and phone
 			);
 		case 200:
-			bus.emit('setUser', null, user);
+			await promiseMaker.createPromise('setUser', user);
 			return null;
 		default:
 			return new Error(
@@ -27,4 +27,25 @@ async function setUserInfo(user) {
 	}
 }
 
-export {setUserInfo};
+async function setUserPhoto(formData) {
+	console.log(` Setting user ${data.user.id} info`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.postPhoto,
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			return true;
+		} else {
+			throw new Error(
+				`Error while upload image : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {setUserInfo, setUserPhoto};

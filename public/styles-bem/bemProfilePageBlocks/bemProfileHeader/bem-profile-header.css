@@ -86,8 +86,8 @@
 
 .profile-header__username-column__username__text {
     flex: 0 0 auto;
-    align-self: flex-start;
-    height: 100%;
+    align-self: center;
+    height: 50%;
     width: 100%;
 }
 
@@ -108,8 +108,8 @@
 
 .profile-header__username-column__username__input {
     flex: 0 0 auto;
-    align-self: flex-start;
-    height: 100%;
+    align-self: center;
+    height: 50%;
     width: 100%;
 }
 
@@ -138,8 +138,8 @@
 
 .profile-header__username-column__fullname__text {
     flex: 0 0 auto;
-    align-self: flex-start;
-    height: 100%;
+    align-self: center;
+    height: 50%;
     width: 100%;
 }
 
@@ -161,18 +161,18 @@
 
 .profile-header__username-column__fullname__input {
     flex: 0 0 auto;
-    align-self: flex-start;
-    height: 100%;
+    align-self: center;
+    height: 50%;
     width: 100%;
 }
 
 .profile-header__username-column__fullname__input_style {
     outline: none;
     border: none;
-    font-family: var(--global-font-family-Montserrat);
-    font-size: 36px;
+    font-family: var(--global-font-family-Roboto);
+    font-size: 24px;
     color: #000000;
-    font-weight: 400;
+    font-weight: 200;
 }
 
 .profile-header__username-column__fullname__input_hidden {

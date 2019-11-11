@@ -1,17 +1,14 @@
 import {bus, data} from "../main";
-import {
-	getUserPhoto,
-	hideLoader,
-	setPicture,
-	showLoader,
-	checkLogin,
-} from "../modules/API/profile";
+
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
 import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettingInfo";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
+import {createRegisterForm} from "../handlers/registerFormHandlers";
+import {checkLogin} from "../backendDataFetchers/auth";
+import {getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 function createEvents() {
 
 	/*setting data*/
@@ -45,6 +42,7 @@ function createEvents() {
 	bus.on('setPicture', setPicture);
 
 	bus.on('createProfileInputs', createProfileInputs);
+	bus.on('createRegisterForm', createRegisterForm);
 
 	bus.on('addErrorStyle', addErrorStyle);
 	bus.on('showError', showError);

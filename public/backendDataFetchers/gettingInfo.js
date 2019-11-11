@@ -1,6 +1,23 @@
 import {bus, data, FetchModule} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
+async function getPhoto(id) {
+	console.log(` Getting user ${id} photo`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch user photo: ${response.status}`);
+		}
+		return await response.blob();
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
 async function getCurrentChatMessages(chatId) {
 	console.log(`Getting current chat: ${chatId} messages`);
 	try {
@@ -60,4 +77,4 @@ async function getCurrentChatInfo(userId, chatId) {
 	await getCurrentChatMessages(chatId);
 }
 
-export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo};
+export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto};

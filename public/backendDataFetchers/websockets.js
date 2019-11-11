@@ -1,4 +1,4 @@
-import {bus, data} from "../main";
+import {bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
 import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
@@ -32,4 +32,19 @@ function createWebsocketConn(chatId) {
 
 }
 
-export {createWebsocketConn};
+async function openWebSocketConnections() {
+	if (data.getSocketConnection() === false) {
+		const chatUsersWChatID = data.getChatUsersWChatIDs();
+		chatUsersWChatID.forEach((chat) => {
+			bus.emit('createWebsocketConn', null, chat.chatId);
+		});
+		bus.emit('setSocketConnection', null, true);
+	}
+}
+
+async function creatingChats() {
+	await promiseMaker.createPromise('getChats', data.getUserId());
+	await openWebSocketConnections();
+}
+
+export {createWebsocketConn, openWebSocketConnections, creatingChats};

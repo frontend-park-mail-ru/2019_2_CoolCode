@@ -1,9 +1,5 @@
 import BaseView from './baseView';
-import {
-	createInputs,
-	showLoader,
-	hideLoader, setPicture, getProfilePhoto, creatingChats
-} from "../modules/API/profile";
+
 import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
@@ -14,6 +10,8 @@ import {
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
+import {getProfilePhoto} from "../handlers/photosHandlers";
+import {creatingChats} from "../backendDataFetchers/websockets";
 
 class profileView extends BaseView {
 	constructor (data, parent) {

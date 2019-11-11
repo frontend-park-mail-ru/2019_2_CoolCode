@@ -17,8 +17,8 @@ if viewType === "login"
     -var question = 'Not registered?'
 
 block content
-    form.register-form__form(method='POST' action=ref)
-        div.register-form.register-form_style
+    form.register-form.register-form_style(method='POST' action=ref)
+        div.register-form__form
             div.register-form__form__name-field.register-form__form__name-field_style.fluid-font-size_2=mainTitle
             div.input-block
                 +input('email')

@@ -1,9 +1,8 @@
 import BaseView from './baseView';
 
-import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
 import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
 import {data, bus, router, promiseMaker, componentsStorage} from "../main";
-import {chooseChat, fetchUserInfo} from "../backendDataFetchers/websockets";
+import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/Chat/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
@@ -13,6 +12,7 @@ import {
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
+import {saveUserPhoto} from "../handlers/photosHandlers";
 
 class chatView extends BaseView {
 

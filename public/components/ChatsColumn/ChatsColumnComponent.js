@@ -3,7 +3,6 @@ import {data, bus, router} from "../../main";
 import MessageComponent from "./Message/MessageComponent";
 import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
 import UserComponent from "./User/UserComponent";
-import {getUserPhoto} from "../../modules/API/profile";
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
 class ChatsColumnComponent extends BaseComponent {

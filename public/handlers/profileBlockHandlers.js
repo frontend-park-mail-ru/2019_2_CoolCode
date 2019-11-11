@@ -1,39 +1,48 @@
-import createInput from "../modules/API/forms";
-import {createChannel} from "../backendDataFetchers/creationEntities";
-import {bus, data, router} from "../main";
-import {validateEmail} from "../modules/API/login";
-import {setUserInfo} from "../backendDataFetchers/setUserInfo";
-import {createImageUpload} from "../modules/API/profile";
+import {bus, data, FetchModule, router} from "../main";
+import {setUserInfo, setUserPhoto} from "../backendDataFetchers/setUserInfo";
+import Validation from "../modules/validation";
+import {API} from "../constants/config";
+import {getProfilePhoto} from "./photosHandlers";
+
+const validation = new Validation();
+
+function emitError(block, errorSelector, textSelector, errorMessage) {
+	bus.emit('showError', null, `.${errorSelector}`,
+		errorMessage);
+
+	bus.emit('addErrorStyle', null, block.querySelector(`.${textSelector}`),
+		`${textSelector}_error`);
+}
 
 async function setProfileField(value, field, block, textSelector, errorSelector) {
 	if (field === 'email') {
-		if (!validateEmail(value)) {
-			bus.emit('showError', null, `.${errorSelector}`,
-				'Please, input correct email');
-
-			bus.emit('addErrorStyle', null, block.querySelector(`.${textSelector}`),
-				`${textSelector}_error`);
+		if (!validation.validateEmail(value)) {
+			emitError(block, errorSelector, textSelector, 'Please, input correct email');
 			return null;
 		}
 	}
-	if (value !== '') {
-		const user = data.user;
-		user[field] = value;
-		const result = await setUserInfo(user);
-		if (result) {
-			bus.emit('showError', null, `.${errorSelector}`,
-				'Please, input correct email');
-
-			bus.emit('addErrorStyle', null, block.querySelector(`.${textSelector}`),
-				`${textSelector}_error`);
+	if (field === 'phone') {
+		if (!validation.validatePhone(value)) {
+			emitError(block, errorSelector, textSelector, 'Please, input correct phone number');
 			return null;
-		} else {
-			bus.emit('hideError', null, `.${errorSelector}`);
-			bus.emit('removeErrorStyle', null, block.querySelector(`.${textSelector}`),
-				`${textSelector}_error`);
-			data.user[field] = value;
-			return value;
 		}
+	}
+	if (value === '') {
+		emitError(block, errorSelector, textSelector, 'Please, input some info');
+		return null;
+	}
+	const user = data.user;
+	user[field] = value;
+	const result = await setUserInfo(user);
+	if (result) {
+		emitError(block, errorSelector, textSelector, result.message);
+		return null;
+	} else {
+		bus.emit('hideError', null, `.${errorSelector}`);
+		bus.emit('removeErrorStyle', null, block.querySelector(`.${textSelector}`),
+			`${textSelector}_error`);
+		data.user[field] = value;
+		return value;
 	}
 }
 
@@ -107,6 +116,21 @@ function createProfileInputs() {
 	createBlurInputHndlr(fullnameBlock, 'profile-header__username-column__fullname__text',
 		'profile-header__username-column__fullname__input', 'profile-header__username-column__error');
 	createImageUpload(data.getUserId());
+}
+
+async function imageUploading(params = {id:null, fileInput:null}) {
+	const formData = new FormData();
+	formData.append('file', params.fileInput.files[0]);
+	const result = await setUserPhoto(formData);
+	if (result) {
+		bus.emit('showLoader', null, '.profile-header__image-row');
+		getProfilePhoto(params.id);
+	}
+}
+
+function createImageUpload (id) {
+	const imageInput = document.querySelector('.profile-header__image-row__input');
+	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
 
 export {createProfileInputs};
