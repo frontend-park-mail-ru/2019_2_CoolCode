@@ -47,22 +47,16 @@ class profileView extends BaseView {
 	}
 
 	show() {
-		if (this._data.user.id) {
-			this.setContent();
-			this.render();
-			this.setEvents();
-		} else {
-			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-				if (!data.getLoggedIn()) router.go('/');
-				else {
-					creatingChats(this._parent).then(() => {
-						this.setContent();
-						this.render();
-						this.setEvents();
-					});
-				}
-			});
-		}
+		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+			if (!data.getLoggedIn()) router.go('/');
+			else {
+				creatingChats(this._parent).then(() => {
+					this.setContent();
+					this.render();
+					this.setEvents();
+				});
+			}
+		});
 		console.log('show: profile');
 	}
 

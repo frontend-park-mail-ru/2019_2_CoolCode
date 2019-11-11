@@ -5,7 +5,6 @@ import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
 import UserComponent from "./User/UserComponent";
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
-import './components/bem-main.css';
 import './bemAllChats/bem-all-chats.css';
 import './bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css';
 import './Message/bemChatBlock/bem-chat-block.css';

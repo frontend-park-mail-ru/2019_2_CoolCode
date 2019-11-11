@@ -1,6 +1,10 @@
 import BaseComponent from "../baseComponent";
 const ProfilePageTemplate = require('./profilePage.pug');
 
+import './bemProfilePageBlocks/bemSearchMenu/bem-search-menu.css';
+import './bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css';
+import './bemProfilePageBlocks/bemProfileInfo/bem-profile-info.css';
+
 class ProfilePageComponent extends BaseComponent {
 
 	render() {
