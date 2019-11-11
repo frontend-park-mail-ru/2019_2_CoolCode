@@ -1,6 +1,6 @@
 import BaseComponent from "../baseComponent";
 const headerTemplate = require('./Header/header.pug');
-const containerTemplate = require('./Container/container.pug');
+const containerTemplate = require('./PrimaryContainer/container.pug');
 
 class BasicsComponent extends BaseComponent {
 

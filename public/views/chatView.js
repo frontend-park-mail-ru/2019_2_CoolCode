@@ -4,7 +4,7 @@ import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/se
 import {data, bus, router, promiseMaker, componentsStorage} from "../main";
 import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
-import ChatComponent from "../components/Chat/ChatComponent";
+import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
 import {

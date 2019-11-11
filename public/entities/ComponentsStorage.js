@@ -1,5 +1,5 @@
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
-import ChatComponent from "../components/Chat/ChatComponent";
+import ChatComponent from "../components/ChatBlock/ChatComponent";
 
 class ComponentsStorage {
 	constructor(leftColumn = null, chatBlock = null) {

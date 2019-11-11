@@ -1,7 +1,7 @@
 import BaseView from './baseView';
 import {router, data, promiseMaker, bus} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import RegisterComponent from "../components/Register/registerComponent";
+import RegisterComponent from "../components/RegisterBlock/registerComponent";
 
 class loginView extends BaseView {
 	constructor (data, parent) {

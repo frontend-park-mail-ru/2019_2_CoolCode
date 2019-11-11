@@ -4,7 +4,7 @@ import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/se
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import ProfilePageComponent from "../components/Profile/profilePageComponent";
+import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
 import {
 	createChatBlockHndlr,
 	createWrkspaceBlockExpandHndlr,

@@ -7,7 +7,7 @@ import Fetch from "./modules/fetch";
 import {settings, responseStatuses, ROUTER} from './constants/config';
 const {backend} = settings;
 
-import './styles-bem/bem-main.css';
+import './components/bem-main.css';
 import './scss/text-resize.scss';
 
 import loginView from "./views/loginView";
