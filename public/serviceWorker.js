@@ -1,8 +1,8 @@
 const CACHE = 'offline-fallback-v1';
 let urlsToCache = [
-	'/styles-bem/bemPrimaryContainer/bem-primary-container.css',
-	'/styles-bem/bemMainPage/bem-main-page.css',
-	'/styles-bem/bemHeader/bem-chat-header.css',
+	'/components/Basics/PrimaryContainer/bemPrimaryContainer/bem-primary-container.css',
+	'/components/MainPage/bemMainPage/bem-main-page.css',
+	'/components/Basics/Header/bemHeader/bem-chat-header.css',
 	'/fallback/fallback.html',
 	'/images/logo_2.png'
 ];
