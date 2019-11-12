@@ -1,4 +1,4 @@
-.bem-user-found {
+.user-found {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -9,11 +9,11 @@
     box-sizing: border-box;
 }
 
-.bem-user-found_style {
+.user-found_style {
     border-bottom: 1px solid var(--global-green-color);
 }
 
-.bem-user-found_style:hover {
+.user-found_style:hover {
     border: 1px solid var(--global-green-color);
     box-shadow: 0 0 8px var(--global-green-color);
 
@@ -21,7 +21,7 @@
 
 /*message-column element*/
 
-.bem-user-found__message-column {
+.user-found__message-column {
     flex: 0 0 60%;
     display: flex;
     flex-direction: column;
@@ -31,13 +31,13 @@
 
 /*message-column elements*/
 
-.bem-user-found__message-column__fullname-row {
+.user-found__message-column__fullname-row {
     flex: 0 0 30%;
     width: 90%;
     align-self: center;
 }
 
-.bem-user-found__message-column__fullname-row_style {
+.user-found__message-column__fullname-row_style {
     font-family: var(--global-font-family-Montserrat);
     font-size: 20px;
     letter-spacing: -0.2px;
@@ -46,7 +46,7 @@
     font-weight: 400;
 }
 
-.bem-user-found__message-column__username-row {
+.user-found__message-column__username-row {
     flex: 0 0 40%;
     display: flex;
     flex-direction: row;
@@ -55,7 +55,7 @@
     width: 90%;
 }
 
-.bem-user-found__message-column__username-row_style {
+.user-found__message-column__username-row_style {
     font-family: var(--global-font-family-Roboto);
     font-size: 20px;
     color: #000000;

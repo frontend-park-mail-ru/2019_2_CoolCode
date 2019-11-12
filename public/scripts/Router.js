@@ -28,9 +28,7 @@ class Router {
 	}
 
 	open(path, identity) {
-		console.log(path);
 		const currentPath = this._paths[path];
-		console.log(currentPath.viewClassName);
 		if (identity) {
 			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
@@ -73,9 +71,9 @@ class Router {
 
 			event.preventDefault();
 			const link = event.target;
-			console.log({
-				pathname: link.pathname
-			});
+			// console.log({
+			// 	pathname: link.pathname
+			// });
 
 			this.open(link.pathname);
 		}.bind(this));
@@ -83,7 +81,6 @@ class Router {
 		window.onpopstate = function () {
 			const currentPath = window.location.pathname;
 			let pathArgs = this.parsePath(currentPath);
-			console.log(typeof(pathArgs) === 'string');
 			if (typeof(pathArgs) === 'string') {
 				this.open(pathArgs);
 			} else {
@@ -93,7 +90,6 @@ class Router {
 
 		const currentPath = window.location.pathname;
 		let pathArgs = this.parsePath(currentPath);
-		console.log(typeof(pathArgs) === 'string');
 		if (typeof(pathArgs) === 'string') {
 			this.open(pathArgs);
 		} else {

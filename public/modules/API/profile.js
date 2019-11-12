@@ -1,4 +1,4 @@
-import {responseStatuses, settings} from '../../constants/config';
+import {API, responseStatuses, settings} from '../../constants/config';
 import createInput from './forms';
 import MyWorker from '../../workers/profile.worker';
 
@@ -56,14 +56,22 @@ function redundantWrkSpace() {
 
 async function checkLogin () {
 	try {
-		let response = await FetchModule._doGet({path: '/users'});
-		if (response.status !== 200) {
+		const response = await FetchModule._doGet(
+			{path: API.auth}
+		);
+		switch (response.status) {
+		case 401:
+			bus.emit('setLoggedIn', null, false);
+			break;
+		case 200:
+			const user = await response.json();
+			bus.emit('setUser', null, user);
+			break;
+		default:
 			throw new Error(
-				`Not logged in: ${response.status}`);
+				`Could't check logged in status : ${response.status}`
+			);
 		}
-		let user = await response.json();
-		console.log(user);
-		bus.emit('addUser', null, user);
 	} catch (error) {
 		console.error(error);
 	}
@@ -71,7 +79,7 @@ async function checkLogin () {
 
 async function openWebSocketConnections() {
 	if (data.getSocketConnection() === false) {
-		let chatUsersWChatID = data.getChatUsersWChatIDs();
+		const chatUsersWChatID = data.getChatUsersWChatIDs();
 		chatUsersWChatID.forEach((chat) => {
 			bus.emit('createWebsocketConn', null, chat.chatId);
 		});
@@ -103,21 +111,23 @@ function createInputs (application, user) {
 async function getProfilePhoto(id) {
 	console.log(` Getting user ${id} photo`);
 	try {
-		let response = await FetchModule._doGet({path: `/photos/${id}`});
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
 		if (response.status === 401) {
 			throw new Error(responseStatuses["401"]);
 		}
 		if (response.status === 500) {
-			document.querySelector('.bem-profile-header__image-row__image').src = 'images/sasha.jpeg';
+			document.querySelector('.profile-header__image-row__image').src = 'images/sasha.jpeg';
 		}
-		let buffer = await response.blob();
-		let worker = new MyWorker();
+		const buffer = await response.blob();
+		const worker = new MyWorker();
 		worker.postMessage(buffer);
 
 		worker.onmessage = function(result) {
 			data.setUserPhoto(result.data);
-			bus.emit('setPicture', null, '.bem-profile-header__image-row__image',data.getUserPhoto());
-			bus.emit('hideLoader', null, '.bem-profile-header__image-row');
+			bus.emit('setPicture', null, '.profile-header__image-row__image',data.getUserPhoto());
+			bus.emit('hideLoader', null, '.profile-header__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -127,19 +137,21 @@ async function getProfilePhoto(id) {
 async function saveUserPhoto(id) {
 	console.log(` Getting user ${id} photo`);
 	try {
-		let response = await FetchModule._doGet({path: `/photos/${id}`});
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch chat user photo: ${response.status}`);
 		}
-		let buffer = await response.blob();
-		let worker = new MyWorker();
+		const buffer = await response.blob();
+		const worker = new MyWorker();
 		worker.postMessage(buffer);
 
 		worker.onmessage = function(result) {
 			data.setCurrentChatUserPhoto(result.data);
-			bus.emit('setPicture', null, '.bem-chat-column-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
-			bus.emit('hideLoader', null, '.bem-chat-column-header__info-row__image-row');
+			bus.emit('setPicture', null, '.chat-header__info-row__image-row__image', data.getCurrentChatUserPhoto());
+			bus.emit('hideLoader', null, '.chat-header__info-row__image-row');
 		};
 	} catch (error) {
 		console.error(error);
@@ -150,17 +162,19 @@ async function getUserPhoto(id, parentId, photoClass) {
 	showLoaderSmall(id, parentId, photoClass);
 	console.log(` Getting user ${id} photo`);
 	try {
-		let response = await FetchModule._doGet({path: `/photos/${id}`});
+		const response = await FetchModule._doGet(
+			{path: API.getPhoto(id)}
+		);
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch user photo: ${response.status}`);
 		}
-		let buffer = await response.blob();
-		let worker = new MyWorker();
+		const buffer = await response.blob();
+		const worker = new MyWorker();
 		worker.postMessage(buffer);
 
 		worker.onmessage = function(result) {
-			let person = document.getElementById(parentId + '-' + id.toString());
+			const person = document.getElementById(`${parentId}-${id.toString()}`);
 			person.querySelector(photoClass).src = result.data;
 			hideLoaderSmall(id, parentId, photoClass);
 		};
@@ -170,14 +184,17 @@ async function getUserPhoto(id, parentId, photoClass) {
 }
 
 async function imageUploading(params = {id:null, fileInput:null}) {
-	let formData = new FormData();
+	const formData = new FormData();
 	formData.append('file', params.fileInput.files[0]);
 	console.log('image upload', params.fileInput.files[0]);
 	try {
-		let response = await FetchModule._doPost({path: '/photos',
-			data: formData, contentType:'multipart/form-data'});
+		const response = await FetchModule._doPost(
+			{path: API.postPhoto,
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
 		if (response.status === 200) {
-			bus.emit('showLoader', null, '.bem-profile-header__image-row');
+			bus.emit('showLoader', null, '.profile-header__image-row');
 			await getProfilePhoto(params.id);
 		} else {
 			throw new Error(
@@ -189,7 +206,7 @@ async function imageUploading(params = {id:null, fileInput:null}) {
 }
 
 function createImageUpload (id) {
-	const imageInput = document.querySelector('.bem-profile-header__image-row__input');
+	const imageInput = document.querySelector('.profile-header__image-row__input');
 	console.log('image upload created');
 	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
 }
@@ -200,8 +217,8 @@ function hideLoader(selector) {
 }
 
 function hideLoaderSmall(id, parentId, classSelector) {
-	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".bem-chat-block__image-row__loader").style.display = "none";
+	const person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".chat-block__image-row__loader").style.display = "none";
 	person.querySelector(classSelector).style.display = "block";
 }
 
@@ -211,13 +228,13 @@ function showLoader(selector) {
 }
 
 function showLoaderSmall(id, parentId, classSelector) {
-	let person = document.getElementById(parentId + '-' + id.toString());
-	person.querySelector(".bem-chat-block__image-row__loader").style.display = "block";
+	const person = document.getElementById(parentId + '-' + id.toString());
+	person.querySelector(".chat-block__image-row__loader").style.display = "block";
 	person.querySelector(classSelector).style.display = "none";
 }
 
 function setPicture(selector, photo) {
-	let avatarElement = document.querySelector(selector);
+	const avatarElement = document.querySelector(selector);
 	if (avatarElement) {
 		avatarElement.src = photo;
 	}

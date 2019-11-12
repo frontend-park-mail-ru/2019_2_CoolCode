@@ -1,4 +1,4 @@
-.bem-input-block {
+.input-block {
     flex: 0 0 40%;
     display: flex;
     flex-direction: column;
@@ -8,14 +8,14 @@
 }
 /*label element*/
 
-.bem-input-block_label {
+.input-block_label {
     height: 0;
 }
 
 
 /*input element*/
 
-.bem-input-block_input-field {
+.input-block_input-field {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
 
 }
 
-.bem-input-block_input-field_style {
+.input-block_input-field_style {
     outline: none;
     border: 1px solid #FFFFFF;
     border-bottom: 1px solid var(--global-grey-color);
@@ -37,30 +37,30 @@
     color: var(--global-darkgrey-color);
 }
 
-.bem-input-block_input-field_error {
+.input-block_input-field_error {
     border-bottom: 1px solid var(--global-error-color);
 }
 
-.bem-input-block_input-field_style:focus-within {
+.input-block_input-field_style:focus-within {
     color: #000000;
     border-bottom: 1px solid var(--global-green-color);
 }
 
 /*text element in input*/
 
-.bem-input-block_input-field__text {
+.input-block_input-field__text {
     align-self: flex-end;
 }
 
 /*error element*/
 
-.bem-input-block_error-field {
+.input-block_error-field {
     align-self:center;
     width: 90%;
     height: auto;
     max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
 }
-.bem-input-block_error-field_style {
+.input-block_error-field_style {
     color: var(--global-error-color);
     font-size: 18px;
     font-family: var(--global-font-family-Montserrat);

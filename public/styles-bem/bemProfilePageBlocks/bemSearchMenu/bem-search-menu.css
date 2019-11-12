@@ -1,4 +1,4 @@
-.bem-search-menu {
+.search-menu {
     flex: 0 0 auto;
 
     display: flex;
@@ -11,14 +11,14 @@
     box-sizing: border-box;
 }
 
-.bem-search-menu_outline {
+.search-menu_outline {
     border-top: 1px solid var(--global-grey-color);
     border-bottom: 1px solid var(--global-grey-color);
 }
 
 /* create-wrkspace-button element*/
 
-.bem-search-menu__button {
+.search-menu__button {
     flex: 0 10 auto;
     align-self: center;
     height: 60%;
@@ -27,7 +27,7 @@
     margin: 5px 5px 5px 5px;
 }
 
-.bem-search-menu__button_style {
+.search-menu__button_style {
     outline: none;
     background-color: #FFFFFF;
     font-size: 28px;
@@ -39,7 +39,7 @@
 
 /* form element*/
 
-.bem-search-menu__form{
+.search-menu__form{
     flex: 10 0 0; /*width not specified, max growing*/
     height: 80%;
 
@@ -51,14 +51,14 @@
 }
 
 /* input element in form*/
-.bem-search-menu__form__input{
+.search-menu__form__input{
     flex: 10 0 auto; /*max growing*/
     align-self: center;
     width: 20vw; /*fixed width*/
     height: 60%;
 }
 
-.bem-search-menu__form__input_style{
+.search-menu__form__input_style{
     background-color: var(--global-grey-color);
     font-family: var(--global-font-family-Roboto);
     border: none;
@@ -66,11 +66,11 @@
     border-radius: 10px;
 }
 
-.bem-search-menu__form__input_style::-webkit-search-cancel-button{
+.search-menu__form__input_style::-webkit-search-cancel-button{
     visibility: hidden; /*hide red cross in input*/
 }
 /* submit-button element in form*/
-.bem-search-menu__form__button {
+.search-menu__form__button {
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
@@ -80,7 +80,7 @@
 
 }
 
-.bem-search-menu__form__button_style {
+.search-menu__form__button_style {
     outline: none;
     background-color: #FFFFFF;
     border: none;
@@ -89,7 +89,7 @@
 
 /*icon element in submit-button*/
 
-.bem-search-menu__form__button__icon {
+.search-menu__form__button__icon {
     object-fit: scale-down;
     object-position: top;
     align-self: center;
@@ -97,10 +97,10 @@
     max-height:40%;
     height: 3vh; /*experimenting with viewports*/
 }
-.bem-search-menu__form__button__icon_style {
+.search-menu__form__button__icon_style {
     filter: opacity(0.9);
 }
-.bem-search-menu__form__button__icon_style:hover{
+.search-menu__form__button__icon_style:hover{
     filter: invert(0.7) brightness(200%) saturate(10%);
     border-radius: 20px;
 }

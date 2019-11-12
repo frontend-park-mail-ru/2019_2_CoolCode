@@ -8,12 +8,12 @@ const chatsColumnTemplate = require('./chatsColumn.pug');
 
 class ChatsColumnComponent extends BaseComponent {
 
-    contentListRootSelector = '.bem-all-chats-window';
+    contentListRootSelector = '.all-chats-window';
 
     renderNewMessage(message) { //TODO: переделать когда на бэке появится дата
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	let messageBlock = contentListRoot.querySelector(`#chat-${message.author_id}`);
-    	let lastMessage = messageBlock.querySelector('.bem-chat-block__message-column__message-row__last-message');
+    	const messageBlock = contentListRoot.querySelector(`#chat-${message.author_id}`);
+    	const lastMessage = messageBlock.querySelector('.chat-block__message-column__message-row__last-message');
     	lastMessage.innerHTML = message.text;
     }
     renderSearchContent(searchUsers) {
@@ -24,7 +24,7 @@ class ChatsColumnComponent extends BaseComponent {
     		searchUsers.forEach((user) => {
     			const userComponent = new UserComponent(user, contentListRoot);
     			const userBlock = document.createElement('div');
-    			userBlock.className = 'bem-user-found bem-user-found_style';
+    			userBlock.className = 'user-found user-found_style';
     			userBlock.id = "search-" + user.id;
     			userBlock.innerHTML = userComponent.render();
     			contentListRoot.appendChild(userBlock);
@@ -41,14 +41,13 @@ class ChatsColumnComponent extends BaseComponent {
     		this._data.chats.forEach((chat) => {
     			const message = new MessageComponent(chat, contentListRoot);
     			contentListRoot.appendChild(message.render());
-    			let id = data.getChatUserIdByChatId(chat.ID);
+    			const id = data.getChatUserIdByChatId(chat.ID);
     			bus.emit('getUserPhoto', null, id ,"chat", message.getPhotoBlock());
     		});
     	}
 
     	if (this._data.wrkspaces) {
     		this._data.wrkspaces.forEach((wsp) => {
-    			console.log(wsp);
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
     			contentListRoot.appendChild(wrkSpace.render());
     		});

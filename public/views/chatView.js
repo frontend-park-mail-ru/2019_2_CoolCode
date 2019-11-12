@@ -23,7 +23,7 @@ class chatView extends BaseView {
 	};
 
 	setEvents() {
-		bus.emit('showLoader', null, '.bem-chat-column-header__info-row__image-row');
+		bus.emit('showLoader', null, '.chat-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
     	createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
@@ -79,14 +79,14 @@ class chatView extends BaseView {
 
 	drawLeftColumn() {
 		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
-    	this._parent.querySelector('.bem-column_left').innerHTML += leftColumn.render();
+    	this._parent.querySelector('.column_left').innerHTML += leftColumn.render();
     	leftColumn.renderChatsContent();
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
 		let chatBlock = new ChatComponent(this._data, this._parent);
-		this._parent.querySelector('.bem-column_right').innerHTML += chatBlock.render();
+		this._parent.querySelector('.column_right').innerHTML += chatBlock.render();
 		chatBlock.renderContent();
 		componentsStorage.setChatBlock(chatBlock);
 

@@ -1,17 +1,16 @@
-import {settings} from '../../constants/config';
+import {API, emailValidation, settings} from '../../constants/config';
 const {backend} = settings;
-import {bus, FetchModule, router} from '../../main';
+import {bus, FetchModule, promiseMaker, router} from '../../main';
 import {data} from "../../main";
 
 function validateEmail(email) {
-	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(email);
+	return emailValidation.test(email);
 }
 
 function createLogin(application) {
 
-	const form = application.querySelector('.bem-register-form__form');
-	const errorMessage = application.querySelector('.bem-input-block_error-field');
+	const form = application.querySelector('.register-form__form');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	const emailField = document.querySelector('#email');
 	const passwordField = document.querySelector('#password');
 
@@ -34,12 +33,12 @@ function createLogin(application) {
 
 		if (form.elements['password'].value === '') {
 			showError('Please, input password:(');
-			passwordField.className += " bem-input-block_input-field_error";
+			passwordField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!validateEmail(form.elements['email'].value)) {
 			showError('Please, input correct email:(');
-			emailField.className += " bem-input-block_input-field_error";
+			emailField.className += " input-block_input-field_error";
 			correct = false;
 		}
 		if (!correct) {
@@ -53,10 +52,12 @@ function createLogin(application) {
 
 async function login(email, password) {
 	try {
-		let response = await FetchModule._doPost({path: '/login',
-			data: {email: email,
-				password: password},
-			contentType : 'application/json;charset=utf-8'});
+		let response = await FetchModule._doPost(
+			{path: API.login,
+				data: 	{email: email,
+					password: password},
+				contentType : 'application/json;charset=utf-8'}
+		);
 		if (response.status === 400) {
 			showError("Wrong email or password");
 			throw new Error(
@@ -68,10 +69,9 @@ async function login(email, password) {
 				`Серверу плохо: ${response.status}`);
 		}
 		if (response.status === 200) {
-			let user = await response.json();
+			const user = await response.json();
 			console.log(`Logged in: ${user.email}`);
-			//bus.emit('addUser', user);
-			data.setLoggedIn(true);
+			await promiseMaker.createPromise('setUser', user);
 			router.go('/profile');
 		}
 	} catch (error) {
@@ -80,8 +80,8 @@ async function login(email, password) {
 }
 
 function showError(text) {
-	const errorMessage = application.querySelector('.bem-input-block_error-field');
+	const errorMessage = application.querySelector('.input-block_error-field');
 	errorMessage.innerHTML = text;
 }
 
-export {createLogin, login};
+export {createLogin, login, validateEmail};

@@ -1,4 +1,4 @@
-.bem-all-chats-window{
+.all-chats-window{
     flex-direction: column;
     justify-content: flex-start;
     padding: 5px 0 0 0;
@@ -9,15 +9,15 @@
 }
 
 /*styling scrollable window block*/
-.bem-all-chats-window_style{
+.all-chats-window_style{
 
 }
 
-.bem-all-chats-window_style::-webkit-scrollbar{
+.all-chats-window_style::-webkit-scrollbar{
     width: 7px;
     background-color: #FFFFFF;
 }
-.bem-all-chats-window_style::-webkit-scrollbar-thumb {
+.all-chats-window_style::-webkit-scrollbar-thumb {
     background-color: var(--global-green-color);
     -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
 }

@@ -5,9 +5,7 @@ const containerTemplate = require('./Container/container.pug');
 class BasicsComponent extends BaseComponent {
 
 	render() {
-		let basics = headerTemplate(this._data);
-		basics += containerTemplate(this._data);
-		return basics;
+		return `${headerTemplate(this._data)}${containerTemplate(this._data)}`;
 	}
 }
 

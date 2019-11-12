@@ -1,4 +1,4 @@
-.bem-wrkspace-block{
+.wrkspace-block{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -7,12 +7,12 @@
     box-sizing: border-box;
 }
 
-.bem-wrkspace-block_style {
+.wrkspace-block_style {
     background-color: #FFFFFF;
     box-shadow: 0 0 8px var(--global-grey-color);
 }
 
-.bem-wrkspace-block_style:hover {
+.wrkspace-block_style:hover {
     border: 1px solid var(--global-darkgrey-color);
     box-shadow: 0 0 8px var(--global-darkgrey-color);
 }

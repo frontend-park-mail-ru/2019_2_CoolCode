@@ -24,7 +24,7 @@ class signUpView extends BaseView {
 	render() {
 		this.drawBasics();
 		let signup = new RegisterComponent(this._data, this._parent);
-		this._parent.querySelector('.bem-primary-container').innerHTML += signup.render();
+		this._parent.querySelector('.primary-container').innerHTML += signup.render();
 	}
 }
 

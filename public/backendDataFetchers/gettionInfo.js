@@ -1,17 +1,17 @@
 import {bus, data, FetchModule} from "../main";
-import {responseStatuses} from "../constants/config";
+import {API, responseStatuses} from "../constants/config";
 
 async function getCurrentChatMessages(chatId) {
 	console.log(`Getting current chat: ${chatId} messages`);
 	try {
-		let response = await FetchModule._doGet({
-			path: `/chats/${chatId}/messages`,
+		const response = await FetchModule._doGet({
+			path: API.currentChatMessages(chatId),
 		});
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch messages: ${responseStatuses[response.status]}`);
 		}
-		let data = await response.json();
+		const data = await response.json();
 		bus.emit('setChatMessages', null, data['Messages']);
 	} catch (error) {
 		console.error(error);
@@ -21,7 +21,9 @@ async function getCurrentChatMessages(chatId) {
 async function getChats(id) {
 	console.log(` Getting user ${id} chats and wrkspaces`);
 	try {
-		let response = await FetchModule._doGet({path: `/users/${id}/chats`});
+		let response = await FetchModule._doGet(
+			{path: API.getUserChats(id)}
+		);
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
@@ -38,12 +40,14 @@ async function getChats(id) {
 async function getUserInfo(id) {
 	console.log(` Getting user ${id} info`);
 	try {
-		let response = await FetchModule._doGet({path: `/users/${id}`});
+		const response = await FetchModule._doGet(
+			{path: API.userInfo(id)}
+		);
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch user info: ${responseStatuses[response.status]}`);
 		}
-		let user = await response.json();
+		const user = await response.json();
 		bus.emit('setCurrentChatUser', null, user);
 	} catch (error) {
 		console.error(error);

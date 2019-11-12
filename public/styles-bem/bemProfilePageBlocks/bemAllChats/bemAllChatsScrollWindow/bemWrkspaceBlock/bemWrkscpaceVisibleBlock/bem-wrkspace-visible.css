@@ -1,4 +1,4 @@
-.bem-wrkspace-visible{
+.wrkspace-visible{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -9,19 +9,19 @@
     box-sizing: border-box;
 }
 
-.bem-wrkspace-visible_style {
+.wrkspace-visible_style {
     background-color: #FFFFFF;
     box-shadow: 0 0 8px var(--global-grey-color);
 }
 
-.bem-wrkspace-visible_style:hover {
+.wrkspace-visible_style:hover {
     box-shadow: 0 0 8px var(--global-grey-color);
 }
 
 
 /*image-column element*/
 
-.bem-wrkspace-visible__image-row {
+.wrkspace-visible__image-row {
     flex: 0 0 30%;
     display: flex;
     flex-direction: row;
@@ -33,7 +33,7 @@
 
 /*image-column elements*/
 
-.bem-wrkspace-visible__image-row__image {
+.wrkspace-visible__image-row__image {
     width: 8vh; /*experimenting with viewports*/
     height: 8vh;
 
@@ -42,18 +42,18 @@
     box-sizing: border-box;
 }
 
-.bem-wrkspace-visible__image-row__image_style {
+.wrkspace-visible__image-row__image_style {
     border: 1px solid var(--global-green-color);
     border-radius: 50%;
 }
 
-.bem-wrkspace-visible__image-row__image_style:hover {
+.wrkspace-visible__image-row__image_style:hover {
     border: 2px solid var(--global-green-color);
 }
 
 /*message-column element*/
 
-.bem-wrkspace-visible__info-column {
+.wrkspace-visible__info-column {
     flex: 0 0 70%;
     display: flex;
     flex-direction: column;
@@ -63,13 +63,13 @@
 
 /*message-column elements*/
 
-.bem-wrkspace-visible__info-column__name-row {
+.wrkspace-visible__info-column__name-row {
     width: 90%;
     height: 30%;
     align-self: center;
 }
 
-.bem-wrkspace-visible__info-column__name-row_style {
+.wrkspace-visible__info-column__name-row_style {
     font-family: var(--global-font-family-Roboto);
     font-size: 20px;
     letter-spacing: -0.2px;
@@ -78,7 +78,7 @@
     font-weight: 400;
 }
 
-.bem-wrkspace-visible__info-column__chann-row {
+.wrkspace-visible__info-column__chann-row {
     align-self: center;
     flex: 0 0 auto;
     display: flex;
@@ -92,7 +92,7 @@
 
 /*channels element in chann-row*/
 
-.bem-wrkspace-visible__info-column__chann-row__channels {
+.wrkspace-visible__info-column__chann-row__channels {
     align-self: center;
     flex: 0 0 70%;
     display: flex;
@@ -102,7 +102,7 @@
     text-align-all: justify; /*CHECK THIS*/
 }
 
-.bem-wrkspace-visible__info-column__chann-row__channels_style {
+.wrkspace-visible__info-column__chann-row__channels_style {
     font-size: 18px;
     color: var(--global-green-color);
     font-weight: 400;
@@ -111,7 +111,7 @@
 
 /*add-channel-button element in chann row*/
 
-.bem-wrkspace-visible__info-column__chann-row__add-channel-button {
+.wrkspace-visible__info-column__chann-row__add-channel-button {
     align-self: center;
     flex: 0 0 30%;
     display: flex;
@@ -122,13 +122,13 @@
 
 /*icon element in add-channel-button*/
 
-.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon {
+.wrkspace-visible__info-column__chann-row__add-channel-button__icon {
     object-fit: scale-down;
     object-position: top;
     max-width:80%;
     max-height:80%;
     height: 3vh; /*experimenting with viewports*/
 }
-.bem-wrkspace-visible__info-column__chann-row__add-channel-button__icon_style {
+.wrkspace-visible__info-column__chann-row__add-channel-button__icon_style {
     filter: opacity(0.9);
 }

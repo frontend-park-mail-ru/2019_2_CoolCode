@@ -4,7 +4,7 @@ const userTempl = require('./User.pug');
 
 class UserComponent extends BaseComponent {
 
-	photoBlock = '.bem-chat-block__image-row__image';
+	photoBlock = '.chat-block__image-row__image';
 
 	getPhotoBlock() {
 		return this.photoBlock;
