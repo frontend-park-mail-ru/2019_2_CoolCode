@@ -13,6 +13,7 @@ async function checkLogin () {
 		case 200:
 			const user = await response.json();
 			bus.emit('setUser', null, user);
+			bus.emit('setLSUser', null, user);
 			break;
 		default:
 			throw new Error(

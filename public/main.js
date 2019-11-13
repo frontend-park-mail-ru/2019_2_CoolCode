@@ -23,10 +23,13 @@ import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
+import LocalStorage from "./entities/LocalStorage";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
 const componentsStorage = new ComponentsStorage();
+const appLocalStorage = new LocalStorage();
+
 const application = document.getElementById('application');
 const baseBlock = document.createElement('div');
 baseBlock.className = 'main';
@@ -50,4 +53,4 @@ router.register(ROUTER.createChannel, channelFormView);
 
 router.start();
 
-export {bus, data, router, promiseMaker, componentsStorage, FetchModule};
+export {bus, data, router, promiseMaker, componentsStorage, appLocalStorage, FetchModule};

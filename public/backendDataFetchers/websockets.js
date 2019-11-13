@@ -1,4 +1,4 @@
-import {bus, data, promiseMaker} from "../main";
+import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
 import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
@@ -35,16 +35,30 @@ function createWebsocketConn(chatId) {
 async function openWebSocketConnections() {
 	if (data.getSocketConnection() === false) {
 		const chatUsersWChatID = data.getChatUsersWChatIDs();
-		chatUsersWChatID.forEach((chat) => {
-			bus.emit('createWebsocketConn', null, chat.chatId);
-		});
-		bus.emit('setSocketConnection', null, true);
+		for (const chat of chatUsersWChatID) {
+			await promiseMaker.createPromise('createWebsocketConn', chat.chatId);
+		}
+		await promiseMaker.createPromise('setSocketConnection', true);
 	}
 }
 
+async function storeMessages() {
+	const chats = data.getUserChats();
+	for (const chat of chats) {
+		await getCurrentChatMessages(chat.ID).then( () =>
+			appLocalStorage.setChatMessages(data.getCurrentChatMessages(), chat.ID)
+		);
+	}
+
+}
+
 async function creatingChats() {
+	bus.emit('setUserChats', null, appLocalStorage.getItem('chats'));
 	await promiseMaker.createPromise('getChats', data.getUserId());
+
+	await storeMessages();
 	await openWebSocketConnections();
+
 }
 
 export {createWebsocketConn, openWebSocketConnections, creatingChats};

@@ -1,10 +1,6 @@
-const CACHE = 'offline-fallback-v1';
+const CACHE = 'chat-cache';
 let urlsToCache = [
-	'/components/Basics/PrimaryContainer/bemPrimaryContainer/bem-primary-container.css',
-	'/components/MainPage/bemMainPage/bem-main-page.css',
-	'/components/Basics/Header/bemHeader/bem-chat-header.css',
 	'/fallback/fallback.html',
-	'/images/logo_2.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -26,9 +22,18 @@ self.addEventListener('fetch', function(event) {
 
 async function networkOrCache(request) {
 	try{
+		console.log(request.url);
 		const response = await fetch(request);
+		if (request.url.toString().startsWith('http://localhost:3000/main.js')){
+			//console.log(request.url);
+			const newResponse = new Response('http://localhost:3000/main.js', {headers: {
+							"Content-Type": "text/javascript",
+					 		}});
+			await cache.put(request, newResponse.clone());
+			return newResponse;
+		}
 		//console.log(request.url);
-		//console.log(request.url.toString().startsWith('http://fonts.googleapis.com/css'));
+		//console.log(request.url.toString().startsWith('http://fonts.googleapis.com/cs'));
 		// if (request.url.toString().startsWith('http://fonts.googleapis.com/css')) {
 		// 	console.log(request.url);
 		// 	const cache = await caches.open(CACHE);
@@ -51,7 +56,12 @@ async function networkOrCache(request) {
 }
 
 function useFallback() {
-	return Promise.resolve( caches.match('/fallback/fallback.html'));
+	// caches.open(CACHE).then((cache) =>
+	// 		fetch('../public/main.js').then((response) =>
+	// 			cache.put('../public/main.js', response)
+	// 		)
+	// 	);
+	return Promise.resolve( caches.match('/fallback/fallback.html'	));
 }
 
 function fromCache(request) {

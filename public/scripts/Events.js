@@ -1,4 +1,4 @@
-import {bus, data} from "../main";
+import {appLocalStorage, bus, data} from "../main";
 
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
@@ -48,6 +48,10 @@ function createEvents() {
 	bus.on('showError', showError);
 	bus.on('removeErrorStyle', removeErrorStyle);
 	bus.on('hideError', hideError);
+
+	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
+	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));
+	bus.on('clearStorage', appLocalStorage.clear.bind(appLocalStorage));
 
 }
 

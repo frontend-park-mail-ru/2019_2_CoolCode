@@ -1,4 +1,4 @@
-import {bus, data, FetchModule} from "../main";
+import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function getPhoto(id) {
@@ -46,8 +46,9 @@ async function getChats(id) {
 				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
 		}
 		let chats = await response.json();
-		bus.emit('setUserChats', null, chats['Chats']);
-		bus.emit('setUserWrkSpaces', null, chats['Workspaces']);
+		await promiseMaker.createPromise('setUserChats', chats['Chats']);
+		await promiseMaker.createPromise('setUserWrkSpaces', chats['Workspaces']);
+		bus.emit('setLSChats', null);
 
 	} catch (error) {
 		console.error(error);
@@ -74,6 +75,7 @@ async function getUserInfo(id) {
 async function getCurrentChatInfo(userId, chatId) {
 	await getUserInfo(userId);
 	bus.emit('setCurrentChatId', null, chatId);
+	bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chatId));
 	await getCurrentChatMessages(chatId);
 }
 

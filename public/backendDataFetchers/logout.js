@@ -11,6 +11,7 @@ async function handleLogout() {
 			`Error while logout: ${responseStatuses[response.status]}`;
 		}
 		await promiseMaker.createPromise('clearData');
+		await promiseMaker.createPromise('clearStorage');
 		router.go('/');
 	} catch (error) {
 		console.error(error);
