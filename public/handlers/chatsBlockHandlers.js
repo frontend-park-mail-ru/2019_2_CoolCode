@@ -13,8 +13,15 @@ function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null}) {
 	if (params.wrkspaceBlockSmall !== null) {
 		if (!params.wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
 			params.wrkspaceBlockSmall.className += ' wrkspace-expandable_clicked';
+			const strelochka = document.querySelector(".wrkspace-visible__info-column__chann-row__btn");
+			strelochka.textContent = "⌃";
 		}
-		else params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
+		else {
+			params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
+			const strelochka = document.querySelector(".wrkspace-visible__info-column__chann-row__btn");
+			strelochka.textContent = "⌄";
+		}
+
 	}
 }
 

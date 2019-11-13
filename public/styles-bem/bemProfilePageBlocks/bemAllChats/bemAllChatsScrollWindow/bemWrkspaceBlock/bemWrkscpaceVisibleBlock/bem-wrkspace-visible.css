@@ -2,10 +2,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
-    justify-content: center;
     width: 100%;
-    height: 10vh; /*experimenting with viewports*/
-
+    height: 7vh; /*experimenting with viewports*/
+    padding-left: 5px;
     box-sizing: border-box;
 }
 
@@ -22,7 +21,7 @@
 /*image-column element*/
 
 .wrkspace-visible__image-row {
-    flex: 0 0 30%;
+    flex: 0 0 3%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -34,8 +33,8 @@
 /*image-column elements*/
 
 .wrkspace-visible__image-row__image {
-    width: 8vh; /*experimenting with viewports*/
-    height: 8vh;
+    width: 5vh; /*experimenting with viewports*/
+    height: 5vh;
 
     object-position: center center;
     object-fit: fill;
@@ -88,13 +87,16 @@
     height: 40%;
     padding: 5px 0 0 0;
 }
+.wrkspace-visible__info-column__chann-row__btn{
+
+}
 
 
 /*channels element in chann-row*/
 
 .wrkspace-visible__info-column__chann-row__channels {
     align-self: center;
-    flex: 0 0 70%;
+    flex: 0 0 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,7 +115,7 @@
 
 .wrkspace-visible__info-column__chann-row__add-channel-button {
     align-self: center;
-    flex: 0 0 30%;
+    flex: 0 0 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;

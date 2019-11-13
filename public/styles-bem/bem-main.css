@@ -31,7 +31,7 @@
 
 :root{
     --global-green-color: #2DC68B;
-    --global-grey-color: #C4C4C4;
+    --global-grey-color: rgba(182,182,182,0.39);
     --global-darkgrey-color: #6D6D6D;
     --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
