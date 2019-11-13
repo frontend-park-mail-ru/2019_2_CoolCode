@@ -42,10 +42,12 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
     		this._data.chatMessages.forEach((message) => {
-    			if (message.author_id === this._data.user.id) {
-    				contentListRoot.innerHTML += rightMsg({text: message.text, time: 'ADD TIME FIELD!'});
-    			} else {
-    				contentListRoot.innerHTML += leftMsg({text: message.text, time: 'ADD TIME FIELD!'});
+    			if (message) {
+    				if (message.author_id === this._data.user.id) {
+    					contentListRoot.innerHTML += rightMsg({text: message.text, time: 'ADD TIME FIELD!'});
+    				} else {
+    					contentListRoot.innerHTML += leftMsg({text: message.text, time: 'ADD TIME FIELD!'});
+    				}
     			}
 
     		});

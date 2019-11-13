@@ -6,7 +6,7 @@ block page
                     div.chat-header__info-row__image-row__loader.chat-header__info-row__image-row__loader_style
                     img.chat-header__info-row__image-row__image.chat-header__info-row__image-row__image_style(src='/' + chatUserPhoto)
                 div.chat-header__info-row__info-column
-                    div.chat-header__info-row__info-column__name-row.chat-header__info-row__info-column__name-row_style #{chatUser.username}
+                    div.chat-header__info-row__info-column__name-row.chat-header__info-row__info-column__name-row_style #{currentChat.Name}
                     div.chat-header__info-row__info-column__status-row.chat-header__info-row__info-column__status-row_style last seen..
             if Object.keys(importantMessage).length !== 0
                 div.chat-header__pinned-message.chat-header__pinned-message_style

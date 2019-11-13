@@ -45,9 +45,8 @@ async function openWebSocketConnections() {
 async function storeMessages() {
 	const chats = data.getUserChats();
 	for (const chat of chats) {
-		await getCurrentChatMessages(chat.ID).then( () =>
-			appLocalStorage.setChatMessages(data.getCurrentChatMessages(), chat.ID)
-		);
+		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.ID));
+		await getCurrentChatMessages(chat.ID);
 	}
 
 }

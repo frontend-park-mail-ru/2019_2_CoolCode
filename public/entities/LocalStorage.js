@@ -40,11 +40,10 @@ class LocalStorage {
 
 	selectMessages(messages) {
 		let storedMessages = [];
-		const messagesLatest = messages.reverse();
-		for (let i = 0; i < 10; i++) {
-			storedMessages[10 - i] = messagesLatest[i];
+		for (let i = 0, j = messages.length - 1; i < 10; i++, j--) {
+			storedMessages[i] = messages[j];
 		}
-		return storedMessages;
+		return storedMessages.reverse();
 	}
 
 	setChatMessages(messages, chatId) {
@@ -58,7 +57,11 @@ class LocalStorage {
 
 	getChatMessages(chatId) {
 		const chatsMessages = this.getItem('chatsMessages');
-		return chatsMessages[chatId];
+		if (chatsMessages && chatId < chatsMessages.length) {
+			return chatsMessages[chatId];
+		} else {
+			return [];
+		}
 	}
 
 }

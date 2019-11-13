@@ -1,7 +1,7 @@
 class Data {
 
-	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [],
-		currentChatId, currentChatUser, currentChatUserPhoto, currentChatMessages = [],
+	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
+		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
 		lastSearchUsers = [],
 		webSocketConns = [], socketConnection = false) {
 		if (Data.__instance) {
@@ -15,6 +15,7 @@ class Data {
 		this.userPhoto = userPhoto;
 
 		this.currentChatId = currentChatId;
+		this.currentChat = currentChat;
 		this.currentChatUser = currentChatUser;
 		this.currentChatUserPhoto = currentChatUserPhoto;
 		this.currentChatMessages = currentChatMessages;
@@ -36,6 +37,7 @@ class Data {
 		this.userPhoto = undefined;
 
 		this.currentChatId = undefined;
+		this.currentChat = undefined;
 		this.currentChatUser = undefined;
 		this.currentChatUserPhoto = undefined;
 		this.currentChatMessages = [];
@@ -114,11 +116,30 @@ class Data {
 	setCurrentChatId(currentChatId) {
 		this.currentChatId = currentChatId;
 		this.createLogMessage('set', 'currentChatId', currentChatId);
+		this.setCurrentChat(currentChatId);
 	}
 
 	getCurrentChatId() {
 		this.createLogMessage('get', 'currentChatId', this.currentChatId);
 		return this.currentChatId;
+	}
+
+	setCurrentChat(currentChatId) {
+		for (let chat of this.userChats) {
+			if (chat.ID == currentChatId) {
+				console.log(chat.ID);
+				console.log(currentChatId);
+				this.currentChat = chat;
+				console.log(this.currentChat.ID);
+				break;
+			}
+		}
+		this.createLogMessage('set', 'currentChat', this.currentChat);
+	}
+
+	getCurrentChat() {
+		this.createLogMessage('get', 'currentChat', this.currentChat);
+		return this.currentChat;
 	}
 
 	setCurrentChatUser(currentChatUser) {

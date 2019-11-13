@@ -30,6 +30,7 @@ async function getCurrentChatMessages(chatId) {
 		}
 		const data = await response.json();
 		bus.emit('setChatMessages', null, data['Messages']);
+		appLocalStorage.setChatMessages(data['Messages'], chatId);
 	} catch (error) {
 		console.error(error);
 	}
@@ -74,9 +75,10 @@ async function getUserInfo(id) {
 
 async function getCurrentChatInfo(userId, chatId) {
 	await getUserInfo(userId);
-	bus.emit('setCurrentChatId', null, chatId);
 	bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chatId));
+	console.log(data.getCurrentChatMessages());
 	await getCurrentChatMessages(chatId);
+	bus.emit('setCurrentChatId', null, chatId);
 }
 
 export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto};

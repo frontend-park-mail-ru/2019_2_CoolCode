@@ -18,7 +18,7 @@ class chatView extends BaseView {
 
 	constructor (data, parent) {
     	super ({viewType: "chat", user:{}, loggedIn: null,
-			wrkSpaces:[], chats: [],
+			wrkSpaces:[], chats: [], currentChat: {},
 			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
 	};
 
@@ -40,6 +40,7 @@ class chatView extends BaseView {
 		this._data.chatUser = data.getCurrentChatUser();
 		this._data.chats = data.getUserChats();
 		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
 	}
@@ -58,16 +59,16 @@ class chatView extends BaseView {
 	}
 
 	show(args) {
-		if (this._data.chatUser.id) {
-			this.findUser(args.id);
-		} else {
-			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-				if (!data.getLoggedIn()) router.go('/');
-				creatingChats(this._parent).then(() => {
-					this.findUser(args.id);
-				});
+		// if (this._data.chatUser.id) {
+		// 	this.findUser(args.id);
+		// } else {
+		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+			if (!data.getLoggedIn()) router.go('/');
+			creatingChats(this._parent).then(() => {
+				this.findUser(args.id);
 			});
-		}
+		});
+		//}
 
 		console.log('show: chat page');
 	}
