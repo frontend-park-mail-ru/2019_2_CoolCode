@@ -27,7 +27,6 @@ import channelFormView from "./views/channelFormView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 import LocalStorage from "./entities/LocalStorage";
 
-
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
 const componentsStorage = new ComponentsStorage();
