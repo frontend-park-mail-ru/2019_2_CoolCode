@@ -7,7 +7,7 @@
 /* left and right column modifiers - standart layout*/
 .column_left{
    flex: 0 0 auto;
-    width: 40%;
+    width: 30%;
 }
 .column_right{
     flex: 0 0 auto;

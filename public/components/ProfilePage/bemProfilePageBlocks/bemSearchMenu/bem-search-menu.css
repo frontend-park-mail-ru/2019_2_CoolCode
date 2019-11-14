@@ -21,20 +21,19 @@
 .search-menu__button {
     flex: 0 10 auto;
     align-self: center;
-    height: 60%;
-    width: 6vw; /*fixed width*/
-
+    padding: 5px;
     margin: 5px 5px 5px 5px;
 }
 
 .search-menu__button_style {
     outline: none;
     background-color: #FFFFFF;
-    font-size: 28px;
+    font-size: 15px;
     color: #000000;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+
 }
 
 /* form element*/
@@ -60,6 +59,9 @@
 
 .search-menu__form__input_style{
     background-color: var(--global-grey-color);
+    background-image: url("../../../images/search.png");
+    background-position: right 5px;
+    background-repeat: no-repeat;
     font-family: var(--global-font-family-Roboto);
     border: none;
     outline: none;

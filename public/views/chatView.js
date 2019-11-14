@@ -27,11 +27,11 @@ class chatView extends BaseView {
 		saveUserPhoto(this._data.chatUser.id);
     	createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
-		createWorkspaceButtonHndlr();
 		createMessageInputHndlr();
 		createChatBlockHndlr();
 		createSendMessageBtnHndlr();
 		createWrkspaceBlockHndlr();
+		createWorkspaceButtonHndlr();
 	}
 
 	setContent() {
