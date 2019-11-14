@@ -13,7 +13,7 @@ const {connection} = settings;
 const CACHE = 'chat-cache';
 let urlsToCache = [
 	'images/abkhazia.jpg',
-	'images/add.png',
+	'images/add_1.png',
 	'images/info.png',
 	'images/lock.png',
 	'images/logo_2.png',

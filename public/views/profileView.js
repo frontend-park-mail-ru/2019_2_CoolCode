@@ -1,12 +1,12 @@
 import BaseView from './baseView';
 
-import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
 import {
-	createChatBlockHndlr,
+	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
@@ -24,11 +24,10 @@ class profileView extends BaseView {
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
 		createChatBlockHndlr();
-		createSearchInputHndlr();
+		//createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
-
 	}
 
 	createClickablePic() {

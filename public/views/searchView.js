@@ -1,8 +1,7 @@
 import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "../main";
-import {createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
-import {createWrkspaceBlockHndlr} from "../handlers/chatsBlockHandlers";
+import {createWorkspaceButtonHndlr, createWrkspaceBlockHndlr} from "../handlers/chatsBlockHandlers";
 
 class searchView extends BaseView {
 

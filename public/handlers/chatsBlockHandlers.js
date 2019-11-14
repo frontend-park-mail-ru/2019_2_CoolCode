@@ -5,20 +5,20 @@ function createWrkspaceBlockExpandHndlr() {
 	wrkspaceBlocksOuter.forEach((wrkspaceBlockOuter)=> {
 		const wrkspaceBlockSmall = wrkspaceBlockOuter.querySelector('.wrkspace-expandable');
 		const wrkspaceBlockVisible = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
-		wrkspaceBlockVisible.addEventListener('click', wrkspaceBlockClickExpandEvent.bind(null, {wrkspaceBlockSmall: wrkspaceBlockSmall},wrkspaceBlockVisible));
+		wrkspaceBlockVisible.addEventListener('click', wrkspaceBlockClickExpandEvent.bind(null, {wrkspaceBlockSmall: wrkspaceBlockSmall, wrkspaceBlockVisible:wrkspaceBlockVisible}));
 	});
 }
 
-function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null},wrkspaceBlockVisible) {
+function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspaceBlockVisible : null}) {
 	if (params.wrkspaceBlockSmall !== null) {
 		if (!params.wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
 			params.wrkspaceBlockSmall.className += ' wrkspace-expandable_clicked';
-			const strelochka = wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
+			const strelochka = params.wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
 			strelochka.textContent = "⌃";
 		}
 		else {
 			params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
-			const strelochka = wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
+			const strelochka = params.wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
 			strelochka.textContent = "⌄";
 		}
 
@@ -49,4 +49,12 @@ function createWrkspaceBlockHndlr() {
 	});
 }
 
-export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr};
+function createWorkspaceButtonHndlr() {
+	const wrkSpaceButton = document.querySelector(".wrkspaces-block__header__button__icon");
+	wrkSpaceButton.addEventListener('click', ()=>{
+		router.go('/createWrkSpace');
+	}
+	);
+}
+
+export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr, createWorkspaceButtonHndlr};

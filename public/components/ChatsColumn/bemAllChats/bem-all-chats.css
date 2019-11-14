@@ -5,17 +5,3 @@
     width: 100%;
     height: 86vh; /*experimenting with viewports*/
 }
-.all-chats-users-wrks{
-    background-color: #c9ffd4;
-    padding-bottom: 5px;
-}
-.all-chats-users-chats{
-    background-color: #1d916b;
-    padding-bottom: 5px;
-}
-.all-chats-users-chats__text{
-    color: white;
-    margin: 0;
-    padding: 5px;
-    border-bottom: 1px solid white;
-}

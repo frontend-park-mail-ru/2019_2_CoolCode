@@ -1,6 +1,6 @@
 import BaseView from './baseView';
 
-import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {data, bus, router, promiseMaker, componentsStorage, appLocalStorage} from "../main";
 import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
@@ -8,7 +8,7 @@ import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
 import {
-	createChatBlockHndlr,
+	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
@@ -25,7 +25,7 @@ class chatView extends BaseView {
 	setEvents() {
 		bus.emit('showLoader', null, '.chat-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
-    	createSearchInputHndlr();
+    	//createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createMessageInputHndlr();
 		createChatBlockHndlr();

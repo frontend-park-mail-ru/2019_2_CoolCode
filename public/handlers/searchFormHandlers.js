@@ -15,12 +15,4 @@ function createSearchInputHndlr() {
 	searchFormButton.addEventListener('click', searchEvent);
 }
 
-function createWorkspaceButtonHndlr() {
-	const wrkSpaceButton = document.querySelector(".search-menu__button");
-	wrkSpaceButton.addEventListener('click', ()=>{
-		router.go('/createWrkSpace');
-	}
-	);
-}
-
-export {createSearchInputHndlr, createWorkspaceButtonHndlr};
+export {createSearchInputHndlr};

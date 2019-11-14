@@ -59,7 +59,6 @@
 
 .search-menu__form__input_style{
     background-color: var(--global-grey-color);
-    background-image: url("../../../images/search.png");
     background-position: right 5px;
     background-repeat: no-repeat;
     font-family: var(--global-font-family-Roboto);
