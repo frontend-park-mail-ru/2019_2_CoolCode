@@ -127,10 +127,7 @@ class Data {
 	setCurrentChat(currentChatId) {
 		for (let chat of this.userChats) {
 			if (chat.ID == currentChatId) {
-				console.log(chat.ID);
-				console.log(currentChatId);
 				this.currentChat = chat;
-				console.log(this.currentChat.ID);
 				break;
 			}
 		}

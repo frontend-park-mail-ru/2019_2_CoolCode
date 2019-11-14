@@ -2,13 +2,15 @@ import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
 import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
+import sendingMessage from "./sendingMessage";
 const {backend} = settings;
+const {backendPort} = settings;
 
 function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}/chats/${chatId}/notifications`);
+	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -42,6 +44,20 @@ async function openWebSocketConnections() {
 	}
 }
 
+async function sendNotSentMessages() {
+	const notSentMessages = appLocalStorage.getNotSentMessages();
+	if (notSentMessages) {
+		for (let i = 0; i < notSentMessages.length; i++) {
+			if (notSentMessages[i]) {
+				for (const message of notSentMessages[i]) {
+					await promiseMaker.createPromise('sendMessage', message, i);
+				}
+			}
+		}
+
+	}
+}
+
 async function storeMessages() {
 	const chats = data.getUserChats();
 	for (const chat of chats) {
@@ -52,9 +68,9 @@ async function storeMessages() {
 }
 
 async function creatingChats() {
-	bus.emit('setUserChats', null, appLocalStorage.getItem('chats'));
+	await promiseMaker.createPromise('setUserChats', appLocalStorage.getItem('chats'));
 	await promiseMaker.createPromise('getChats', data.getUserId());
-
+	await sendNotSentMessages();
 	await storeMessages();
 	await openWebSocketConnections();
 

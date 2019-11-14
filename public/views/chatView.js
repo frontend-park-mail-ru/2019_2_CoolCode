@@ -1,7 +1,7 @@
 import BaseView from './baseView';
 
 import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
-import {data, bus, router, promiseMaker, componentsStorage} from "../main";
+import {data, bus, router, promiseMaker, componentsStorage, appLocalStorage} from "../main";
 import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/ChatBlock/ChatComponent";
@@ -59,17 +59,12 @@ class chatView extends BaseView {
 	}
 
 	show(args) {
-		// if (this._data.chatUser.id) {
-		// 	this.findUser(args.id);
-		// } else {
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (!data.getLoggedIn()) router.go('/');
 			creatingChats(this._parent).then(() => {
 				this.findUser(args.id);
 			});
 		});
-		//}
-
 		console.log('show: chat page');
 	}
 

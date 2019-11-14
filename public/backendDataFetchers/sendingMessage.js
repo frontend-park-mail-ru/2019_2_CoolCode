@@ -1,5 +1,9 @@
-import {API, responseStatuses} from '../constants/config';
-import {FetchModule} from '../main';
+import {API, responseStatuses, settings} from '../constants/config';
+import {appLocalStorage, FetchModule, bus} from '../main';
+
+const {frontend} = settings;
+const {frontendPort} = settings;
+const {connection} = settings;
 
 async function sendingMessage(text, id) {
 	console.log(`Sending message in chat: ${id} with text: ${text}`);
@@ -14,6 +18,9 @@ async function sendingMessage(text, id) {
 
 		if (response.status !== 200) {
 			throw new Error (`Haven't sent message: ${text} cause: ${responseStatuses[response.status]}`);
+		}
+		if (response.url.toString().startsWith(`${connection}://${frontend}${frontendPort}`)) {
+			bus.emit('setNotSentMessage', text, id);
 		}
 		console.log(`Message sent : ${text}`);
 	}catch (error) {

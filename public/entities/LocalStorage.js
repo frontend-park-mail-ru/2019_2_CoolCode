@@ -64,6 +64,29 @@ class LocalStorage {
 		}
 	}
 
+	setNotSentMessage(message, chatId) {
+		let notSentMessages = [];
+		if (this.getItem('notSentMessages')) {
+			notSentMessages = this.getItem('notSentMessages');
+		}
+		if (!notSentMessages[chatId]) {
+			notSentMessages[chatId] = [];
+		}
+		notSentMessages[chatId].push(message);
+		this.setItem('notSentMessages', notSentMessages);
+
+	}
+
+	getNotSentMessages() {
+		const notSentMessages = this.getItem('notSentMessages');
+		this.setItem('notSentMessages', []);
+		if (notSentMessages) {
+			return notSentMessages;
+		} else {
+			return null;
+		}
+	}
+
 }
 
 export default LocalStorage;

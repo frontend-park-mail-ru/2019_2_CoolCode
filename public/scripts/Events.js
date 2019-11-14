@@ -9,6 +9,7 @@ import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
 import {getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import sendingMessage from "../backendDataFetchers/sendingMessage";
 function createEvents() {
 
 	/*setting data*/
@@ -35,6 +36,7 @@ function createEvents() {
 
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
 	bus.on('getChats', getChats);
+	bus.on('sendMessage', sendingMessage);
 	/**/
 	bus.on('getUserPhoto', getUserPhoto);
 	bus.on('hideLoader', hideLoader);
@@ -52,6 +54,7 @@ function createEvents() {
 	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
 	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));
 	bus.on('clearStorage', appLocalStorage.clear.bind(appLocalStorage));
+	bus.on('setNotSentMessage', appLocalStorage.setNotSentMessage.bind(appLocalStorage));
 
 }
 
