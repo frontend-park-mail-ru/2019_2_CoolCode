@@ -121,6 +121,9 @@
     justify-content: center;
     height: 100%;
 }
+.wrkspace-visible__info-column__chann-row__add-text{
+    font-size: 10px;
+}
 
 /*icon element in add-channel-button*/
 
