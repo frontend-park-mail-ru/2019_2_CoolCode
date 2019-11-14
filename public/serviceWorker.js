@@ -53,7 +53,7 @@ self.addEventListener('fetch', function(event) {
 async function networkOrCache(request) {
 	try{
 		const response = await fetch(request);
-		if (request.url.toString().startsWith('http://fonts.googleapis.com/')) {
+		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
 			return response;
 		}
 		if (response.ok) {
@@ -65,7 +65,7 @@ async function networkOrCache(request) {
 		     return cache.match("/images/abkhazia.jpg");
 		}
 	} catch (error) {
-		if (request.url.toString().startsWith('http://fonts.googleapis.com/')) {
+		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
 			return response;
 		}
 		if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {

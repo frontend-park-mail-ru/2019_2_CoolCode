@@ -41,7 +41,7 @@ const FetchModule = new Fetch();
 FetchModule.setUrl(`${connection}://${backend}${backendPort}`);
 const data = new Data();
 
-//serviceWorkerRegister();
+serviceWorkerRegister();
 createEvents();
 router.register(ROUTER.mainPage, mainPageView);
 router.register(ROUTER.profile, profileView);
