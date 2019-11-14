@@ -57,8 +57,9 @@
 
 
 .input__text_style {
+    font-size: 16px;
     font-family: var(--global-font-family-Montserrat);
-    color: var(--global-darkgrey-color);
+    color: #000000;
     outline: none;
     border: none;
     resize: none;

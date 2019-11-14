@@ -44,9 +44,9 @@ class ChatComponent extends BaseComponent {
     		this._data.chatMessages.forEach((message) => {
     			if (message) {
     				if (message.author_id === this._data.user.id) {
-    					contentListRoot.innerHTML += rightMsg({text: message.text, time: 'ADD TIME FIELD!'});
+    					contentListRoot.innerHTML += rightMsg({text: message.text, time: 'time'});
     				} else {
-    					contentListRoot.innerHTML += leftMsg({text: message.text, time: 'ADD TIME FIELD!'});
+    					contentListRoot.innerHTML += leftMsg({text: message.text, time: 'time'});
     				}
     			}
 

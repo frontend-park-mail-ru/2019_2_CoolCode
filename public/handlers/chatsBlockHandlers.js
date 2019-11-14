@@ -13,13 +13,17 @@ function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspac
 	if (params.wrkspaceBlockSmall !== null) {
 		if (!params.wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
 			params.wrkspaceBlockSmall.className += ' wrkspace-expandable_clicked';
-			const strelochka = params.wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
-			strelochka.textContent = "⌃";
+			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
+			arrowDown.classList.remove('wrkspace-visible__chann-row__arrow_hidden');
+			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
+			arrowUp.className += ' wrkspace-visible__chann-row__arrow_hidden';
 		}
 		else {
 			params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
-			const strelochka = params.wrkspaceBlockVisible.querySelector(".wrkspace-visible__info-column__chann-row__btn");
-			strelochka.textContent = "⌄";
+			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
+			arrowDown.className += ' wrkspace-visible__chann-row__arrow_hidden';
+			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
+			arrowUp.classList.remove('wrkspace-visible__chann-row__arrow_hidden');
 		}
 
 	}
@@ -44,7 +48,7 @@ function createWrkspaceBlockHndlr() {
 	wrkspaceBlocksOuter.forEach((wrkspaceBlockOuter)=> {
 		const wrkSpaceId = parseFloat(wrkspaceBlockOuter.id.split('-')[1]);
 		const visibleBlock = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
-		const createButton = visibleBlock.querySelector(".wrkspace-visible__info-column__chann-row__add-channel-button");
+		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button");
 		createButton.addEventListener('click', () => router.go('/createChannel', wrkSpaceId));
 	});
 }

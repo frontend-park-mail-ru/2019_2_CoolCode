@@ -1,15 +1,17 @@
 div.wrkspace-visible.wrkspace-visible_style
-    div.wrkspace-visible__image-row
-        img.wrkspace-visible__image-row__image.wrkspace-visible__image-row__image_style(src='../images/abkhazia.jpg')
-    div.wrkspace-visible__info-column
-        div.wrkspace-visible__info-column__name-row.wrkspace-visible__info-column__name-row_style= Name
-        div.wrkspace-visible__info-column__chann-row
-            if Channels === null
-                div.wrkspace-visible__info-column__chann-row__channels.wrkspace-visible__info-column__chann-row__channels_style=  ''
-            else
-                div.wrkspace-visible__info-column__chann-row__channels.wrkspace-visible__info-column__chann-row__channels_style=  Channels.length +' channels'
-                btn.wrkspace-visible__info-column__chann-row__btn ⌄
-            div.wrkspace-visible__info-column__chann-row__add-channel-button
-                img.wrkspace-visible__info-column__chann-row__add-channel-button__icon.wrkspace-visible__info-column__chann-row__add-channel-button__icon_style(src="../images/add_1.png" title="add channel")
+        div.wrkspace-visible__name-row
+            div.wrkspace-visible__image-row
+                img.wrkspace-visible__image-row__image.wrkspace-visible__image-row__image_style(src='../images/abkhazia.jpg')
+            div.wrkspace-visible__name-row__text.wrkspace-visible__name-row__text_style= Name
+        div.wrkspace-visible__chann-row
+            div.wrkspace-visible__chann-row__channels.wrkspace-visible__chann-row__channels_style CHANNELS
+            div.wrkspace-visible__chann-row__add-channel-button
+                img.wrkspace-visible__chann-row__add-channel-button__icon.wrkspace-visible__chann-row__add-channel-button__icon_style(src="../images/add_1.png" title="add channel")
+            if Channels !== null
+                div.wrkspace-visible__chann-row__arrow
+                    img.wrkspace-visible__chann-row__arrow__icon-up.wrkspace-visible__chann-row__arrow_style(src="../images/arr_up.png")
+                    img.wrkspace-visible__chann-row__arrow__icon-down.wrkspace-visible__chann-row__arrow_style.wrkspace-visible__chann-row__arrow_hidden(src="../images/arr_down.png")
+                div.wrkspace-visible__chann-row__number.wrkspace-visible__chann-row__number_style= Channels.length
+
 
 

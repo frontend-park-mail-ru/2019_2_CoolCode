@@ -1,9 +1,9 @@
 .wrkspace-visible{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /*so everything in one line*/
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
-    height: 7vh; /*experimenting with viewports*/
+    height: 8vh; /*experimenting with viewports*/
     padding-left: 5px;
     box-sizing: border-box;
 }
@@ -17,24 +17,51 @@
     box-shadow: 0 0 8px var(--global-grey-color);
 }
 
+.wrkspace-visible__name-row {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: flex-start;
+    align-self: center;
+    width: 95%;
+    height: 50%;
+}
+
+.wrkspace-visible__name-row__text {
+    flex: 0 0 80%;
+    height: 50%;
+    align-self: center;
+    padding: 0 0 0 10px;
+}
+
+.wrkspace-visible__name-row__text_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+
 
 /*image-column element*/
 
 .wrkspace-visible__image-row {
-    flex: 0 0 3%;
+    flex: 0 0 10%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     height: 100%;
 
-    margin: 5px 0 0 0px;
+    margin: 5px 0 0 0;
 }
 
 /*image-column elements*/
 
 .wrkspace-visible__image-row__image {
-    width: 5vh; /*experimenting with viewports*/
-    height: 5vh;
+    width: 4vh; /*experimenting with viewports*/
+    height: 4vh;
 
     object-position: center center;
     object-fit: fill;
@@ -50,53 +77,24 @@
     border: 2px solid var(--global-green-color);
 }
 
-/*message-column element*/
 
-.wrkspace-visible__info-column {
-    flex: 0 0 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-}
-
-/*message-column elements*/
-
-.wrkspace-visible__info-column__name-row {
-    width: 90%;
-    height: 30%;
-    align-self: center;
-}
-
-.wrkspace-visible__info-column__name-row_style {
-    font-family: var(--global-font-family-Roboto);
-    font-size: 20px;
-    letter-spacing: -0.2px;
-    word-spacing: -1px;
-    color: #000000;
-    font-weight: 400;
-}
-
-.wrkspace-visible__info-column__chann-row {
+.wrkspace-visible__chann-row {
     align-self: center;
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 90%;
+    justify-content: flex-start;
+    width: 95%;
     height: 40%;
     padding: 5px 0 0 0;
-}
-.wrkspace-visible__info-column__chann-row__btn{
-
 }
 
 
 /*channels element in chann-row*/
 
-.wrkspace-visible__info-column__chann-row__channels {
+.wrkspace-visible__chann-row__channels {
     align-self: center;
-    flex: 0 0 90%;
+    flex: 0 0 15%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,36 +102,92 @@
     text-align-all: justify; /*CHECK THIS*/
 }
 
-.wrkspace-visible__info-column__chann-row__channels_style {
-    font-size: 18px;
-    color: var(--global-green-color);
-    font-weight: 400;
+.wrkspace-visible__chann-row__channels_style {
     font-family: var(--global-font-family-Roboto);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+/*number element in chann-row*/
+.wrkspace-visible__chann-row__number {
+    align-self: center;
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align-all: justify; /*CHECK THIS*/
+
 }
 
-/*add-channel-button element in chann row*/
+.wrkspace-visible__chann-row__number_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+    /*add-channel-button element in chann row*/
 
-.wrkspace-visible__info-column__chann-row__add-channel-button {
+.wrkspace-visible__chann-row__add-channel-button {
     align-self: center;
-    flex: 0 0 90%;
+    flex: 0 0 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
 }
-.wrkspace-visible__info-column__chann-row__add-text{
-    font-size: 10px;
-}
 
 /*icon element in add-channel-button*/
 
-.wrkspace-visible__info-column__chann-row__add-channel-button__icon {
+.wrkspace-visible__chann-row__add-channel-button__icon {
     object-fit: scale-down;
     object-position: top;
     max-width:80%;
     max-height:80%;
-    height: 3vh; /*experimenting with viewports*/
+    height: 2vh; /*experimenting with viewports*/
 }
-.wrkspace-visible__info-column__chann-row__add-channel-button__icon_style {
+.wrkspace-visible__chann-row__add-channel-button__icon_style {
     filter: opacity(0.9);
+}
+
+/*arrow element in chann row*/
+
+.wrkspace-visible__chann-row__arrow {
+    align-self: center;
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;}
+
+
+/*icon element in arrow*/
+
+.wrkspace-visible__chann-row__arrow__icon-up {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+
+.wrkspace-visible__chann-row__arrow__icon-down {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+
+.wrkspace-visible__chann-row__arrow_hidden {
+    display: none;
+}
+
+
+.wrkspace-visible__chann-row__arrow_style {
+    filter: opacity(0.7);
 }

@@ -25,7 +25,7 @@ class chatView extends BaseView {
 	setEvents() {
 		bus.emit('showLoader', null, '.chat-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
-    	//createSearchInputHndlr();
+    	createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createMessageInputHndlr();
 		createChatBlockHndlr();

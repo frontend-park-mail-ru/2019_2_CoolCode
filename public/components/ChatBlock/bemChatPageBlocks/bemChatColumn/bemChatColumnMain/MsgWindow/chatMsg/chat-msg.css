@@ -16,6 +16,7 @@
 
 /* text element */
 .chat-msg__text {
+    position: relative;
     max-width: 50%;
     min-height: 2vh; /*experimenting with viewports*/
     width: auto;
@@ -23,6 +24,7 @@
     text-align: right;
     padding: 5px 5px 5px 5px;
 }
+
 .chat-msg__text_style {
     word-wrap: break-word;
     border-radius: 15px;
@@ -37,11 +39,31 @@
 
 }
 
+.chat-msg__text_style-left:before {
+    content: "";
+    position: absolute;
+    border-right: 0vh solid var(--global-grey-color);
+    border-left:1vh solid transparent;
+    border-top: 2vh solid var(--global-grey-color);
+    border-bottom: 1vh solid transparent;
+    left: -0.5vh;
+}
+
 .chat-msg__text_style-right {
     background: var(--global-green-color);
 }
+.chat-msg__text_style-right:before {
+    content: "";
+    position: absolute;
+    border-left: 0vh solid var(--global-green-color);
+    border-right:1vh solid transparent;
+    border-top: 2vh solid var(--global-green-color);
+    border-bottom: 1vh solid transparent;
+    right: -0.5vh;
+}
 
-/* text element */
+
+/* time element */
 .chat-msg__time {
     max-width: 50%;
     min-height: 1vh; /*experimenting with viewports*/

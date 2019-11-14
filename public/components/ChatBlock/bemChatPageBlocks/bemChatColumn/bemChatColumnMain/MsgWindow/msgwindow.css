@@ -6,7 +6,7 @@
     overflow-x: hidden;
     padding: 10px 10px 10px 10px;
     align-self: center;
-    width: 90%;
+    width: 75%;
     height: unset;
     max-height: 80%;
 }
@@ -16,6 +16,7 @@
     background-color: #FFFFFF;
 }
 .msgwindow::-webkit-scrollbar-thumb {
+    border-radius: 5px;
     background-color: var(--global-green-color);
     -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
 }

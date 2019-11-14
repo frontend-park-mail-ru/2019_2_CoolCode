@@ -1,10 +1,8 @@
 import BaseComponent from "../baseComponent";
 import {data, bus, router} from "../../main";
-import MessageComponent from "./Message/MessageComponent";
-import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
+import ChatsBlockComponent from "./ChatsBlock/ChatsBlockComponent";
+import WrkSpacesBlockComponent from "./WrkSpacesBlock/WrkSpacesBlockComponent";
 import UserComponent from "./User/UserComponent";
-import {createWorkspaceButtonHndlr} from "../../handlers/searchFormHandlers";
-import {createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr} from "../../handlers/chatsBlockHandlers";
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
 import './bemAllChats/bem-all-chats.css';
@@ -15,8 +13,7 @@ import './WrkSpace/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visibl
 import './WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css';
 import './WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css';
 import './User/bemUserFoundBlock/bem-user-found.css';
-import ChatsBlockComponent from "./ChatsBlock/ChatsBlockComponent";
-import WrkSpacesBlockComponent from "./WrkSpacesBlock/WrkSpacesBlockComponent";
+import './bemSearchMenu/bem-search-menu.css';
 
 class ChatsColumnComponent extends BaseComponent {
 

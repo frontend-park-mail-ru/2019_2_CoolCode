@@ -21,8 +21,6 @@ class searchView extends BaseView {
 			this.setContent();
 			this.render();
 			createUserBlockHndlr();
-			createWorkspaceButtonHndlr();
-			createWrkspaceBlockHndlr();
 		}
 	}
 	render() {

@@ -1,5 +1,5 @@
 const settings = {
-	connection : 'https',
+	connection : 'http',
 	backendPort : ':8080',
 	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
@@ -14,6 +14,9 @@ const CACHE = 'chat-cache';
 let urlsToCache = [
 	'images/abkhazia.jpg',
 	'images/add_1.png',
+	'images/add.png',
+	'images/arr_up.png',
+	'images/arr_down.png',
 	'images/info.png',
 	'images/lock.png',
 	'images/logo_2.png',

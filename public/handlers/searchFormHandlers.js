@@ -3,7 +3,7 @@ import {router} from "../main";
 
 function searchEvent() {
 	event.preventDefault();
-	const searchInput = document.querySelector('.search-menu__form__input');
+	const searchInput = document.querySelector('.search-menu__form__input-container__input');
 	const searchInputValue = searchInput.value;
 	findUser(searchInputValue);
 }

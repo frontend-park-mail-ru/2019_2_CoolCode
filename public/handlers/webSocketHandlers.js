@@ -7,7 +7,7 @@ function webSocketOnMessage(event) {
 		const messageContent = message.body;
 		switch (messageContent.author_id) {
 		case data.getCurrentChatUserId():
-			messageContent.time = "ADD time!!!";
+			messageContent.time = "time";
 			const chatBlock = componentsStorage.getChatBlock();
 			chatBlock.renderCurrentChatIncomingMessage(messageContent);
 			break;

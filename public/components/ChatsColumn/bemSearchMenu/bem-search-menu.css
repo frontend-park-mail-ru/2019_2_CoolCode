@@ -16,26 +16,6 @@
     border-bottom: 1px solid var(--global-grey-color);
 }
 
-/* create-wrkspace-button element*/
-
-.search-menu__button {
-    flex: 0 10 auto;
-    align-self: center;
-    padding: 5px;
-    margin: 5px 5px 5px 5px;
-}
-
-.search-menu__button_style {
-    outline: none;
-    background-color: #FFFFFF;
-    font-size: 15px;
-    color: #000000;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-
-}
-
 /* form element*/
 
 .search-menu__form{
@@ -50,14 +30,17 @@
 }
 
 /* input element in form*/
-.search-menu__form__input{
+.search-menu__form__input-container{
     flex: 10 0 auto; /*max growing*/
     align-self: center;
-    width: 20vw; /*fixed width*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     height: 60%;
+    width: 100%;
 }
 
-.search-menu__form__input_style{
+.search-menu__form__input-container_style{
     background-color: var(--global-grey-color);
     background-position: right 5px;
     background-repeat: no-repeat;
@@ -67,23 +50,43 @@
     border-radius: 10px;
 }
 
-.search-menu__form__input_style::-webkit-search-cancel-button{
+/* input element in input-container*/
+.search-menu__form__input-container__input {
+    flex: 10 0 auto; /*max growing*/
+    align-self: center;
+    width: 80%; /*fixed width*/
+    height: 60%;
+    padding: 0 0 0 10px;
+}
+
+.search-menu__form__input-container__input_style {
+    background-color: var(--global-grey-color);
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    font-family: var(--global-font-family-Roboto);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+.search-menu__form__input-container__input_style ::-webkit-search-cancel-button{
     visibility: hidden; /*hide red cross in input*/
 }
+
+
 /* submit-button element in form*/
 .search-menu__form__button {
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 6vw;
+    width: 10%;
     height: 100%;
 
 }
 
 .search-menu__form__button_style {
     outline: none;
-    background-color: #FFFFFF;
     border: none;
 }
 

@@ -24,7 +24,7 @@ class profileView extends BaseView {
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
 		createChatBlockHndlr();
-		//createSearchInputHndlr();
+		createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();

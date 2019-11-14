@@ -35,8 +35,8 @@
 
 .chats-block__header__text_style {
     font-family: var(--global-font-family-Roboto);
-    font-size: 16px;
-    letter-spacing: 0.2px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     word-spacing: -1px;
     color: #000000;
     font-weight: 300;
