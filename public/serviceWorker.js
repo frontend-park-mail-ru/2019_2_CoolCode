@@ -1,5 +1,5 @@
 const settings = {
-	connection : 'http',
+	connection : 'https',
 	backendPort : ':8080',
 	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
