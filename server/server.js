@@ -20,7 +20,7 @@ app.use(express.static(rootImg));
 app.use(fallback('index.html', { root: root }));
 app.use(fallback('index.html', { root: rootImg }));
 
-app.use('*', proxy('https://boiling-chamber-90136.herokuapp.com/', {
+app.use('/', proxy('https://boiling-chamber-90136.herokuapp.com/', {
 	proxyReqPathResolver: function (req) {
 		return req.originalUrl;
 	}
