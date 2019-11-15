@@ -38,7 +38,7 @@
     font-family: var(--global-font-family-Montserrat);
     font-weight: 500;
     font-size: 28px;
-    color: var(--global-green-color);
+    color: var(--global-green-color-1);
 }
 
 /*button element in form*/
@@ -58,11 +58,11 @@
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
     background: #FFFFFF;
-    color: var(--global-green-color);
+    color: var(--global-green-color-1);
     font-weight: 500;
     font-size: 16px;
     border-radius: 7px;
-    border: 1px solid var(--global-green-color);
+    border: 1px solid var(--global-green-color-1);
 }
 
 .register-form__form__button_style:focus {

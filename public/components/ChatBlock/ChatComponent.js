@@ -6,13 +6,15 @@ const leftMsg = require('./msgLeft.pug');
 import './bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
 import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MsgWindow/msgwindow.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/InputBlock/input.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MsgWindow/chatMsg/chat-msg.css';
+import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
+import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
+import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/chatMsg/chat-msg.css';
+import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
+import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
 
 class ChatComponent extends BaseComponent {
 
-    contentListRootSelector = '.msgwindow';
+    contentListRootSelector = '.msgwindow-container__msgwindow';
 
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;

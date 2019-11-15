@@ -20,8 +20,8 @@
 }
 
 .chat-header__info-row_style {
-    border-bottom: 1px solid var(--global-green-color);
-    border-top: 1px solid var(--global-green-color);
+    border-bottom: 1.5px solid var(--global-grey-color);
+    border-top: 1px solid var(--global-grey-color)
 
 }
 
@@ -50,7 +50,7 @@
 
 .chat-header__info-row__image-row__loader_style {
     border: 5px solid var(--global-loader-grey-color);
-    border-top: 5px solid var(--global-green-color);
+    border-top: 5px solid var(--global-green-color-1);
     border-radius: 50%;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .chat-header__pinned-message_style {
-    border-bottom: 1px solid var(--global-green-color);
+    border-bottom: 1.5px solid var(--global-grey-color);
 }
 
 /*content element in pinned-message*/

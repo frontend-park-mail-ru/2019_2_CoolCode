@@ -28,7 +28,7 @@
 }
 
 .profile-info__field__name_style {
-    color: var(--global-green-color);
+    color: var(--global-green-color-1);
     font-family: var(--global-font-family-Roboto);
     font-size: 20px;
     letter-spacing: -0.5px;
@@ -46,7 +46,7 @@
 }
 
 .profile-info__field__info_style {
-    border-bottom: 1px solid var(--global-green-color);
+    border-bottom: 1px solid var(--global-green-color-1);
     font-family: var(--global-font-family-Montserrat);
     font-size: 24px;
     letter-spacing: -0.2px;
@@ -75,7 +75,7 @@
 .profile-info__field__input_style {
     outline: none;
     border: none;
-    border-bottom: 1px solid var(--global-green-color);
+    border-bottom: 1px solid var(--global-green-color-1);
     font-family: var(--global-font-family-Montserrat);
     font-size: 24px;
     letter-spacing: -0.2px;
@@ -129,7 +129,7 @@
 }
 
 .profile-info__settings__name_style {
-    color: var(--global-green-color);
+    color: var(--global-green-color-1);
     font-family: var(--global-font-family-Roboto);
     font-size: 20px;
     letter-spacing: -0.5px;

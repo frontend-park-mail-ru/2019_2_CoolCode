@@ -1,0 +1,47 @@
+.msgwindow-container {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    height: 85%;
+    width: 100%;
+}
+
+.msgwindow-container__style {
+    border-radius: 10px;
+    background-color: var(--global-msgwindow-container-color);
+}
+
+
+.msgwindow-container__msgwindow {
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px 10px 10px 10px;
+    align-self: center;
+    width: 95%;
+    height: unset;
+    max-height: 95%;
+}
+
+.msgwindow-container__msgwindow_style {
+    background-color: transparent;
+}
+
+.msgwindow-container__msgwindow::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+.msgwindow-container__msgwindow::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.msgwindow-container__msgwindow:hover::-webkit-scrollbar-thumb {
+    background-color: var( --global-scrollbar-color);
+    -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
+}

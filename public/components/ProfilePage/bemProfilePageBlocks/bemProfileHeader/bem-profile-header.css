@@ -50,7 +50,7 @@
 
 .profile-header__image-row__loader_style {
     border: 16px solid var(--global-loader-grey-color);
-    border-top: 16px solid var(--global-green-color);
+    border-top: 16px solid var(--global-green-color-1);
     border-radius: 50%;
 }
 

@@ -22,6 +22,7 @@
     width: auto;
     height: auto;
     text-align: right;
+    margin: 0 10px 0 0;
     padding: 5px 5px 5px 5px;
 }
 
@@ -50,14 +51,14 @@
 }
 
 .chat-msg__text_style-right {
-    background: var(--global-green-color);
+    background: var(--global-green-color-1);
 }
 .chat-msg__text_style-right:before {
     content: "";
     position: absolute;
-    border-left: 0vh solid var(--global-green-color);
+    border-left: 0vh solid var(--global-green-color-1);
     border-right:1vh solid transparent;
-    border-top: 2vh solid var(--global-green-color);
+    border-top: 2vh solid var(--global-green-color-1);
     border-bottom: 1vh solid transparent;
     right: -0.5vh;
 }
@@ -80,7 +81,7 @@
 }
 
 .chat-msg__time_style-left {
-    color: var(--global-green-color);
+    color: var(--global-green-color-1);
 }
 .chat-msg__time_style-right {
     color: #000000;
