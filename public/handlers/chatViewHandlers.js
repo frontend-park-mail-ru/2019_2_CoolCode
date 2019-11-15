@@ -10,15 +10,18 @@ function deleteOpenSettingsEvents() {
 	});
 }
 
+function createHiddenSettingsMessageBlock() {
+	createOpenSettingsMessageHndlr();
+	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
+	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+}
+
 function createVisibleSettingsMessageBlock(event) {
 	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
 	if (event.type == 'click') {
 		if (event.currentTarget.classList.contains('mouseover')) {
 			event.currentTarget.classList.remove('mouseover');
 			deleteOpenSettingsEvents();
-		} else {
-			settingsMessageBlock.classList += ' message-sett-block__content_hidden';
-			createOpenSettingsMessageHandlr();
 		}
 	}
 	if (event.type == 'mouseover') {
@@ -32,7 +35,12 @@ function createVisibleSettingsMessageBlock(event) {
 
 }
 
-function createOpenSettingsMessageHandlr() {
+function createCloseSettingsMessageHndlr() {
+	const closeSettingsMessageBtn = document.querySelector('.message-sett-block__content__button');
+	closeSettingsMessageBtn.addEventListener('click', createHiddenSettingsMessageBlock);
+}
+
+function createOpenSettingsMessageHndlr() {
 	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
 	settingsMessageBtns.forEach((settingsMessageBtn) => {
 		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
@@ -75,4 +83,4 @@ function sendMessageEvent() {
 	}
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHandlr};
+export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr};
