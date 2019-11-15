@@ -9,7 +9,7 @@ const responseStatuses = {
 };
 
 const settings = {
-	connection : 'https',
+	connection : 'http',
 	frontendPort : ':3000',
 	backendPort : ':8080',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
