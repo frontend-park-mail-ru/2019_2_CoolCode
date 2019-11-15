@@ -12,7 +12,7 @@ const settings = {
 	connection : 'http',
 	frontendPort : ':3000',
 	backendPort : ':8080',
-	frontend: 'boiling-chamber-90136.herokuapp.com',
+	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
 	//backend: '192.168.1.69:8080',

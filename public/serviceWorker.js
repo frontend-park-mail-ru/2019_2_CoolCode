@@ -17,6 +17,7 @@ let urlsToCache = [
 	'images/add.png',
 	'images/arr_up.png',
 	'images/arr_down.png',
+	'images/dots.png',
 	'images/info.png',
 	'images/lock.png',
 	'images/logo_2.png',

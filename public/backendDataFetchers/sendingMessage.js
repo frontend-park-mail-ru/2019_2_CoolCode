@@ -19,7 +19,7 @@ async function sendingMessage(text, id) {
 		if (response.status !== 200) {
 			throw new Error (`Haven't sent message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
-		if (response.url.toString().startsWith(`${connection}://${frontend}`)) {
+		if (response.url.toString().startsWith(`${frontend}`)) {
 			bus.emit('setNotSentMessage', text, id);
 		}
 		console.log(`Message sent : ${text}`);
