@@ -7,7 +7,16 @@ const morgan = require('morgan');
 const path = require('path');
 const proxy = require('express-http-proxy');
 const fallback = require('express-history-api-fallback');
+
+
 const app = express();
+
+
+app.use('/', proxy('https://boiling-chamber-90136.herokuapp.com/', {
+	proxyReqPathResolver: function (req) {
+		return req.originalUrl;
+	}
+}));
 
 app.use(morgan('dev'));
 app.use(body.json());
@@ -20,11 +29,6 @@ app.use(express.static(rootImg));
 app.use(fallback('index.html', { root: root }));
 app.use(fallback('index.html', { root: rootImg }));
 
-app.use('/', proxy('https://boiling-chamber-90136.herokuapp.com/', {
-	proxyReqPathResolver: function (req) {
-		return req.originalUrl;
-	}
-}));
 
 const port = process.env.PORT || 3000;
 
