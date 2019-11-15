@@ -2,7 +2,7 @@ import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
 import {webSocketOnMessage} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
-import sendingMessage from "./sendingMessage";
+import sendingMessage from "./messagesInteraction";
 const {backend} = settings;
 const {backendPort} = settings;
 

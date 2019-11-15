@@ -5,7 +5,7 @@ const {frontend} = settings;
 const {frontendPort} = settings;
 const {connection} = settings;
 
-async function sendingMessage(text, id) {
+async function messagesInteraction(text, id) {
 	console.log(`Sending message in chat: ${id} with text: ${text}`);
 	try {
 		const response = await FetchModule._doPost({
@@ -28,4 +28,20 @@ async function sendingMessage(text, id) {
 	}
 }
 
-export default sendingMessage;
+async function deletingMessage(id) {
+	console.log(`Deleting message : ${id} `);
+	try {
+		const response = await FetchModule._doDelete({
+			path: API.messageInteraction(id),
+		});
+
+		if (response.status !== 200) {
+			throw new Error (`Haven't delete message: ${id} cause: ${responseStatuses[response.status]}`);
+		}
+		console.log(`Message deleted : ${id}`);
+	}catch (error) {
+		console.error(error);
+	}
+}
+
+export {messagesInteraction, deletingMessage};

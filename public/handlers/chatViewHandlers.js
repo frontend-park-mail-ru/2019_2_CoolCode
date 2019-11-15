@@ -1,6 +1,21 @@
-import sendingMessage from "../backendDataFetchers/sendingMessage";
-import {componentsStorage, data} from "../main";
+import{messagesInteraction, deletingMessage} from "../backendDataFetchers/messagesInteraction";
+import {componentsStorage, data, bus} from "../main";
 import {keys} from "../constants/config";
+
+function deleteMessageEvent() {
+	const messageId = data.getChosenMessageId();
+	deletingMessage(messageId);
+	const chatBlock = componentsStorage.getChatBlock();
+	chatBlock.deleteMessage(messageId);
+	componentsStorage.setChatBlock(chatBlock);
+	bus.emit('deleteChosenMessageId', null);
+}
+
+function createDeleteMessageBlockHndlr() {
+	const messageSettingsBlock = document.querySelector('.message-sett-block__content');
+	const deleteMessageBlock = messageSettingsBlock.querySelector('#delete');
+	deleteMessageBlock.addEventListener('click', deleteMessageEvent);
+}
 
 function deleteOpenSettingsEvents() {
 	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
@@ -14,6 +29,7 @@ function createHiddenSettingsMessageBlock() {
 	createOpenSettingsMessageHndlr();
 	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
 	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	bus.emit('deleteChosenMessageId', null);
 }
 
 function createVisibleSettingsMessageBlock(event) {
@@ -23,6 +39,8 @@ function createVisibleSettingsMessageBlock(event) {
 			event.currentTarget.classList.remove('mouseover');
 			deleteOpenSettingsEvents();
 		}
+		const messageId = parseFloat(event.currentTarget.parentNode.id.split('-')[1]);
+		bus.emit('setChosenMessageId', null, messageId);
 	}
 	if (event.type == 'mouseover') {
 		event.currentTarget.classList.add('mouseover');
@@ -41,8 +59,9 @@ function createCloseSettingsMessageHndlr() {
 }
 
 function createOpenSettingsMessageHndlr() {
-	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
-	settingsMessageBtns.forEach((settingsMessageBtn) => {
+	const userMessages = document.querySelectorAll('.chat-msg_right');
+	userMessages.forEach((userMessage) => {
+		const settingsMessageBtn = userMessage.querySelector('.chat-msg__icon-container');
 		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
@@ -75,12 +94,13 @@ function sendMessageEvent() {
 	const text = chatBlock.getMessageInputData();
 	if (text !== '') {
 		console.log(`new message : ${text}`);
-		sendingMessage(text, data.getCurrentChatId());
+		messagesInteraction(text, data.getCurrentChatId());
 		chatBlock.setMessageInputData('');
 		const today = new Date();
 		const time = `${today.getHours()} : ${today.getMinutes()}`;
 		chatBlock.renderOutgoingMessage({text: text, time: time});
 	}
+	componentsStorage.setChatBlock(chatBlock);
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr};
+export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr};

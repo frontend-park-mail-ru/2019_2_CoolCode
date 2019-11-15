@@ -70,16 +70,20 @@
     align-self: center;
 }
 
-.message-sett-block__content__button_style {
-    font-family: var(--global-font-family-Roboto);
-    font-size: 12px;
-    font-weight: 300;
-    color: #000000;
+.message-sett-block__content__button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:90%;
+    max-height:90%;
+    height: 1.5vh; /*experimenting with viewports*/
 }
 
-.message-sett-block__content__button_style:hover {
+.message-sett-block__content__button__icon_style {
+    filter: opacity(0.6);
+}
+
+.message-sett-block__content__button__icon_style:hover {
     cursor: pointer;
-    text-decoration: underline;
 }
 
 

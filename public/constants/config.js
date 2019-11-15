@@ -24,6 +24,9 @@ const keys = {
 };
 
 const API = {
+	messageInteraction : (id) => {
+		return `/messages/${id}`;
+	},
 	createChat: '/chats',
 	createChannel : (id) => {
 		return `/workspaces/${id}/channels`;

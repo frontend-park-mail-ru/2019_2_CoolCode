@@ -3,7 +3,8 @@ class Data {
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
 		lastSearchUsers = [],
-		webSocketConns = [], socketConnection = false) {
+		webSocketConns = [], socketConnection = false,
+		chosenMessageId) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -25,6 +26,8 @@ class Data {
 		this.webSocketConns = webSocketConns;
 		this.socketConnectionOn = socketConnection;
 
+		this.chosenMessageId = chosenMessageId;
+
 		Data.__instance = this;
 	}
 
@@ -45,6 +48,8 @@ class Data {
 		this.lastSearchUsers = [];
 		this.webSocketConns = [];
 		this.socketConnectionOn = false;
+
+		this.chosenMessageId = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -266,6 +271,22 @@ class Data {
 			};
 		});
 		return ids;
+	}
+
+	setChosenMessageId(chosenMessageId) {
+		this.chosenMessageId = chosenMessageId;
+		this.createLogMessage('set', 'chosenMessageId', chosenMessageId);
+	}
+
+	getChosenMessageId() {
+		this.createLogMessage('get', 'chosenMessageId', this.chosenMessageId);
+		return this.chosenMessageId;
+	}
+
+	deleteChosenMessageId() {
+		this.chosenMessageId = undefined;
+		this.createLogMessage('set', 'chosenMessageId', undefined);
+
 	}
 }
 

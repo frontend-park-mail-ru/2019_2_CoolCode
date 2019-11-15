@@ -1,7 +1,7 @@
 import BaseComponent from "../baseComponent";
 const chatTemplate = require('./chat.pug');
-const rightMsg = require('./msgRight.pug');
-const leftMsg = require('./msgLeft.pug');
+const rightMsg = require('./Message/msgRight.pug');
+const leftMsg = require('./Message/msgLeft.pug');
 
 import './bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
 import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
@@ -11,6 +11,7 @@ import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlo
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/chatMsg/chat-msg.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
+import ChatMessageComponent from "./Message/ChatMessageComponent";
 
 class ChatComponent extends BaseComponent {
 
@@ -36,6 +37,12 @@ class ChatComponent extends BaseComponent {
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
+    deleteMessage(messageId) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const message = contentListRoot.querySelector(`#message-${messageId}`);
+    	message.remove();
+    }
+
     renderIncomingMessage(messageData) {
 
     }
@@ -44,14 +51,8 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
     		this._data.chatMessages.forEach((message) => {
-    			if (message) {
-    				if (message.author_id === this._data.user.id) {
-    					contentListRoot.innerHTML += rightMsg({text: message.text, time: 'time'});
-    				} else {
-    					contentListRoot.innerHTML += leftMsg({text: message.text, time: 'time'});
-    				}
-    			}
-
+    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user}, contentListRoot);
+    			contentListRoot.innerHTML += messageComponent.render();
     		});
     	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;

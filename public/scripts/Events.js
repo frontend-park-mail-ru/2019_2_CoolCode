@@ -9,7 +9,7 @@ import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
 import {getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
-import sendingMessage from "../backendDataFetchers/sendingMessage";
+import sendingMessage from "../backendDataFetchers/messagesInteraction";
 function createEvents() {
 
 	/*setting data*/
@@ -25,6 +25,8 @@ function createEvents() {
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
+	bus.on('setChosenMessageId', data.setChosenMessageId.bind(data));
+	bus.on('deleteChosenMessageId', data.deleteChosenMessageId.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 
