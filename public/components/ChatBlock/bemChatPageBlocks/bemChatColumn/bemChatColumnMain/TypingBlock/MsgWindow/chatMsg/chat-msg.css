@@ -3,7 +3,7 @@
     flex-direction: row;
     width: 100%;
     height: auto;
-    margin: 2px 0 2px 0;
+    margin: 5px 0 5px 0;
 }
 
 .chat-msg_left {
@@ -22,7 +22,7 @@
     width: auto;
     height: auto;
     text-align: right;
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 5px;
     padding: 5px 5px 5px 5px;
 }
 
@@ -66,7 +66,7 @@
 
 /* time element */
 .chat-msg__time {
-    max-width: 50%;
+    max-width: 25%;
     min-height: 1vh; /*experimenting with viewports*/
     width: auto;
     height: auto;
@@ -86,4 +86,36 @@
 .chat-msg__time_style-right {
     color: #000000;
 
+}
+
+/*icon-container element*/
+
+.chat-msg__icon-container {
+    display: block;
+    max-width: 25%;
+    min-height: 2vh; /*experimenting with viewports*/
+    width: auto;
+    height: auto;
+    align-self: flex-end;
+    padding: 0 0 2px 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*icon element in icon-container*/
+
+.chat-msg__icon-container__icon {
+    object-fit: scale-down;
+    object-position: bottom;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+
+.chat-msg__icon-container__icon_style {
+    filter: opacity(0.3);
+}
+
+.chat-msg__icon-container__icon_style:hover {
+    filter: opacity(0.9);
 }

@@ -76,7 +76,7 @@
 /*message-column element*/
 
 .chat-block__message-column {
-    flex: 0 0 90%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

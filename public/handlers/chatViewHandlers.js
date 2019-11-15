@@ -2,6 +2,45 @@ import sendingMessage from "../backendDataFetchers/sendingMessage";
 import {componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 
+function deleteOpenSettingsEvents() {
+	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
+	settingsMessageBtns.forEach((settingsMessageBtn) => {
+		settingsMessageBtn.removeEventListener('mouseover', createVisibleSettingsMessageBlock);
+		settingsMessageBtn.removeEventListener('mouseout', createVisibleSettingsMessageBlock);
+	});
+}
+
+function createVisibleSettingsMessageBlock(event) {
+	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
+	if (event.type == 'click') {
+		if (event.currentTarget.classList.contains('mouseover')) {
+			event.currentTarget.classList.remove('mouseover');
+			deleteOpenSettingsEvents();
+		} else {
+			settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+			createOpenSettingsMessageHandlr();
+		}
+	}
+	if (event.type == 'mouseover') {
+		event.currentTarget.classList.add('mouseover');
+		settingsMessageBlock.classList.remove('message-sett-block__content_hidden');
+	}
+	if (event.type == 'mouseout') {
+		event.currentTarget.classList.remove('mouseover');
+		settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	}
+
+}
+
+function createOpenSettingsMessageHandlr() {
+	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
+	settingsMessageBtns.forEach((settingsMessageBtn) => {
+		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
+		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
+		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
+	});
+}
+
 function createSendMessageBtnHndlr() {
 	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[1];
 	sendBtn.addEventListener('click', sendMessageEvent);
@@ -36,4 +75,4 @@ function sendMessageEvent() {
 	}
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr};
+export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHandlr};

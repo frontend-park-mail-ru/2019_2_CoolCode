@@ -6,7 +6,11 @@ import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/w
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
+import {
+	createMessageInputHndlr,
+	createOpenSettingsMessageHandlr,
+	createSendMessageBtnHndlr
+} from "../handlers/chatViewHandlers";
 import {
 	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
@@ -32,6 +36,7 @@ class chatView extends BaseView {
 		createSendMessageBtnHndlr();
 		createWrkspaceBlockHndlr();
 		createWorkspaceButtonHndlr();
+		createOpenSettingsMessageHandlr();
 	}
 
 	setContent() {
