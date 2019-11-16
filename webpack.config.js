@@ -11,6 +11,15 @@ module.exports = {
 		publicPath: './',
 	},
 	devServer : {
+		port: 3000,
+		proxy:{
+			'**': {
+				target: 'https://95.163.209.195:8080',
+				secure: false,
+				changeOrigin: true,
+				logLevel: 'debug',
+			},
+		},
 		historyApiFallback: true,
 		rewrites: [
 			{ from: /\//, to: '/index.html'}
