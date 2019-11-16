@@ -20,7 +20,11 @@ var rootImg = path.resolve(__dirname, '..', 'public');
 app.use(express.static(root));
 app.use(express.static(rootImg));
 
-app.use('*', proxy('http://boiling-chamber-90136.herokuapp.com/', {
+app.use('*', proxy('https://boiling-chamber-90136.herokuapp.com/', {
+	proxyReqOptDecorator: reqOpts => {
+		console.log(reqOpts);
+		return reqOpts;
+	},
 	proxyReqPathResolver: function (req) {
 		console.log(req.protocol);
 		console.log('!' + req.url);
