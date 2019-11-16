@@ -5,7 +5,7 @@ const body = require('body-parser');
 const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
-const proxy = require('http-proxy-middleware');
+const proxy = require('express-http-proxy');
 const fallback = require('express-history-api-fallback');
 
 
@@ -20,16 +20,17 @@ var rootImg = path.resolve(__dirname, '..', 'public');
 app.use(express.static(root));
 app.use(express.static(rootImg));
 
-app.use(
-	'**',
-	proxy({
-		target: 'http://localhost:3000',
-		//secure: false,
-		//changeOrigin: true,
-		logLevel: 'debug', })
-);
+app.use('/api', proxy('http://95.163.209.195:8080', {
+	proxyReqPathResolver: (req) => {
+		console.log(req.url);
+		return `${req.url}`;
+	}
+}));
 
-// app.use('*', proxy('http://boiling-chamber-90136.herokuapp.com/', {
+
+
+
+// app.use('/users', proxy('https://95.163.209.195:8080', {
 // 	proxyReqOptDecorator: reqOpts => {
 // 		console.log(reqOpts);
 // 		return reqOpts;
@@ -43,6 +44,7 @@ app.use(
 // }));
 app.use(fallback('index.html', { root: root }));
 app.use(fallback('index.html', { root: rootImg }));
+
 
 
 

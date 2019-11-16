@@ -12,7 +12,7 @@ const settings = {
 	connection : 'http',
 	frontendPort : ':3000',
 	backendPort : ':8080',
-	frontend: 'https://boiling-chamber-90136.herokuapp.com',
+	frontend: 'localhost',
 	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
 	//backend: '192.168.1.69:8080',
@@ -24,30 +24,30 @@ const keys = {
 };
 
 const API = {
-	createChat: '/chats',
+	createChat: 'api/chats',
 	createChannel : (id) => {
-		return `/workspaces/${id}/channels`;
+		return `api/workspaces/${id}/channels`;
 	},
-	createWrkSpace: '/workspaces',
+	createWrkSpace: 'api/workspaces',
 	findUser : (query) => {
-		return `/users/${query}`;
+		return `api/users/${query}`;
 	},
 	currentChatMessages : (chatId) => {
-		return `/chats/${chatId}/messages`;
+		return `api/chats/${chatId}/messages`;
 	},
 	getUserChats : (id) => {
-		return `/users/${id}/chats`;
+		return `api/users/${id}/chats`;
 	},
 	userInfo: (id) => {
-		return `/users/${id}`;
+		return `api/users/${id}`;
 	},
-	logout: '/logout',
-	login: '/login',
-	auth: '/users',
+	logout: 'api/logout',
+	login: 'api/login',
+	auth: 'api/users',
 	getPhoto : (id) => {
-		return `/photos/${id}`;
+		return `api/photos/${id}`;
 	},
-	postPhoto : '/photos',
+	postPhoto : 'api/photos',
 
 };
 

@@ -7,6 +7,8 @@ import Fetch from "./modules/fetch";
 import {settings, responseStatuses, ROUTER} from './constants/config';
 const {backend} = settings;
 const {backendPort} = settings;
+const {frontend} = settings;
+const {frontendPort} = settings;
 const {connection} = settings;
 
 import './components/bem-main.css';
@@ -38,7 +40,7 @@ baseBlock.className = 'main';
 application.appendChild(baseBlock);
 const router = new Router(baseBlock);
 const FetchModule = new Fetch();
-FetchModule.setUrl(`${connection}://${backend}${backendPort}`);
+FetchModule.setUrl(`/`);
 const data = new Data();
 
 //serviceWorkerRegister();
