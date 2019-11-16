@@ -5,7 +5,7 @@ const body = require('body-parser');
 const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const path = require('path');
-var proxy = require('http-proxy-middleware');
+const proxy = require('http-proxy-middleware');
 const fallback = require('express-history-api-fallback');
 
 
