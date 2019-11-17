@@ -27,6 +27,14 @@ app.use('/api', proxy('http://95.163.209.195:8080', {
 	}
 }));
 
+app.use('/ws', proxy('ws://95.163.209.195:8080', {
+	proxyReqPathResolver: (req) => {
+		console.log(req.url);
+		return `${req.url}`;
+	}
+}));
+
+
 
 
 

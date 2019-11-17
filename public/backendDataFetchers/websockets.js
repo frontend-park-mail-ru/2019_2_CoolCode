@@ -10,7 +10,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
+	const websocketConn = new WebSocket(`wss://localhost:3000/ws/chats/${chatId}/notifications`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
