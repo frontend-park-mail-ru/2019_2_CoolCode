@@ -23,7 +23,9 @@
     "express-http-proxy": "^1.6.0",
     "morgan": "^1.9.1",
     "pug": "^2.0.4",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "http-proxy": "latest",
+    "http-proxy": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",
