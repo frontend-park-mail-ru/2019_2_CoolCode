@@ -72,7 +72,6 @@ app.all("/api/*", function(req, res) {
 app.use(fallback('index.html', { root: root }));
 app.use(fallback('index.html', { root: rootImg }));
 
-
 var server = require('http').createServer(app);
 server.on('upgrade', function (req, socket, head) {
     //console.log(req.url);
