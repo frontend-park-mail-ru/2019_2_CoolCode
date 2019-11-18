@@ -1,4 +1,4 @@
-import{messagesInteraction, deletingMessage} from "../backendDataFetchers/messagesInteraction";
+import {sendingMessage, deletingMessage, editingMessage} from "../backendDataFetchers/messagesInteraction";
 import {componentsStorage, data, bus} from "../main";
 import {keys} from "../constants/config";
 
@@ -9,6 +9,8 @@ function deleteMessageEvent() {
 	chatBlock.deleteMessage(messageId);
 	componentsStorage.setChatBlock(chatBlock);
 	bus.emit('deleteChosenMessageId', null);
+	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
+	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
 }
 
 function createDeleteMessageBlockHndlr() {
@@ -17,11 +19,13 @@ function createDeleteMessageBlockHndlr() {
 	deleteMessageBlock.addEventListener('click', deleteMessageEvent);
 }
 
-
-function editMessageEvent() {
-
+async function editMessageEvent() {
+	const messageId = data.getChosenMessageId();
+	const messageText = data.getChosenMessageText();
+	const chatBlock = componentsStorage.getChatBlock();
+	chatBlock.setMessageInputData(messageText);
+	componentsStorage.setChatBlock(chatBlock);
 }
-
 
 function createEditMessageBlockHndlr() {
 	const messageSettingsBlock = document.querySelector('.message-sett-block__content');
@@ -51,8 +55,11 @@ function createVisibleSettingsMessageBlock(event) {
 			event.currentTarget.classList.remove('mouseover');
 			deleteOpenSettingsEvents();
 		}
-		const messageId = parseFloat(event.currentTarget.parentNode.id.split('-')[1]);
+		const messageBlock = event.currentTarget.parentNode;
+		const messageId = parseFloat(messageBlock.id.split('-')[1]);
+		const messageText = messageBlock.querySelector(".chat-msg__text").innerText;
 		bus.emit('setChosenMessageId', null, messageId);
+		bus.emit('setChosenMessageText', null, messageText);
 	}
 	if (event.type == 'mouseover') {
 		event.currentTarget.classList.add('mouseover');
@@ -89,7 +96,13 @@ function createMessageInputHndlr() {
 	const messageInput = document.querySelector(".input__text");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
-			sendMessageEvent();
+			event.preventDefault();
+			console.log(data.getChosenMessageId());
+			if (data.getChosenMessageId()) {
+				sendEditedMessageEvent();
+			} else {
+				sendMessageEvent();
+			}
 		}
 	});
 	messageInput.addEventListener('input', growInput.bind(null, messageInput));
@@ -108,17 +121,50 @@ async function sendMessageEvent() {
 		console.log(`new message : ${text}`);
 		chatBlock.setMessageInputData('');
 		const today = new Date();
-		const time = `${today.getHours()} : ${today.getMinutes()}`;
+		const date = `${today.getDate()}.${today.getMonth()} ${today.getHours()}:${today.getMinutes()}`;
+		const time = `${today.getHours()}:${today.getMinutes()}`;
 		try {
-			const messageId = await messagesInteraction(text, data.getCurrentChatId());
-			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, time: time});
+			const messageId = await sendingMessage(text, time, data.getCurrentChatId());
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: time});
 
 		} catch (error) {
-			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, time: time});
+			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: time});
 		}
 
 	}
 	componentsStorage.setChatBlock(chatBlock);
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock};
+async function sendEditedMessageEvent() {
+	const chatBlock = componentsStorage.getChatBlock();
+	const text = chatBlock.getMessageInputData();
+	if (text !== '') {
+		console.log(`edited message : ${text}`);
+		chatBlock.setMessageInputData('');
+		const today = new Date();
+		const date = `${today.getDate()}.${today.getMonth()} ${today.getHours()}:${today.getMinutes()}`;
+		const time = `${today.getHours()}:${today.getMinutes()}`;
+		try {
+			const messageId = await editingMessage(text, time, data.getChosenMessageId());
+			chatBlock.renderEditedMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: time});
+			debugger;
+
+		} catch (error) {
+			const messageText = data.getChosenMessageText();
+			chatBlock.setMessageInputData(messageText);
+		}
+	} else {
+		const messageText = data.getChosenMessageText();
+		chatBlock.setMessageInputData(messageText);
+	}
+	debugger;
+	bus.emit('deleteChosenMessageId', null);
+	bus.emit('deleteChosenMessageText', null);
+	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
+	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	componentsStorage.setChatBlock(chatBlock);
+}
+
+export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+	createEditMessageBlockHndlr
+};

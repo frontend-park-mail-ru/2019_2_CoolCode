@@ -8,7 +8,7 @@ import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/chatMsg/chat-msg.css';
+import './Message/chatMsg/chat-msg.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
 import ChatMessageComponent from "./Message/ChatMessageComponent";
@@ -21,35 +21,52 @@ class ChatComponent extends BaseComponent {
     	return this._parent.querySelector('.input__text').value;
     }
 
-    setMessageInputData(messageData) {
-    	this._parent.querySelector('.input__text').value = '';
+    setMessageInputData(inputData) {
+    	this._parent.querySelector('.input__text').value = inputData;
     }
 
     renderErrorOutgoingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: true}, contentListRoot);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: true, deleted:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
     renderOutgoingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false}, contentListRoot);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
     renderCurrentChatIncomingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false}, contentListRoot);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
+    renderEditedMessage(messageData) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const message = contentListRoot.querySelector(`#message-${messageData.id}`);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:true, edited:true}, contentListRoot);
+    	message.insertAdjacentElement( 'beforebegin', messageComponent.render());
+    	message.remove();
     }
 
     deleteMessage(messageId) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const message = contentListRoot.querySelector(`#message-${messageId}`);
     	message.remove();
+    }
+
+    deleteOldMessage(messageData) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:true, edited:false}, contentListRoot);
+    	const message = contentListRoot.querySelector(`#message-${messageData.id}`);
+    	message.insertAdjacentElement( 'beforebegin', messageComponent.render());
+    	message.remove();
+
     }
 
     renderIncomingMessage(messageData) {
@@ -60,7 +77,7 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
     		this._data.chatMessages.forEach((message) => {
-    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user, error: false}, contentListRoot);
+    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user, error: false, deleted:false}, contentListRoot);
     			contentListRoot.appendChild(messageComponent.render());
     		});
     	}

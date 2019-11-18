@@ -1,4 +1,4 @@
-import {componentsStorage, data} from "../main";
+import {bus, componentsStorage, data} from "../main";
 
 function webSocketOnMessage(event) {
 	console.log('new message from webSocket');
@@ -8,7 +8,6 @@ function webSocketOnMessage(event) {
 	case 1:
 		switch (messageContent.author_id) {
 		case data.getCurrentChatUserId():
-			messageContent.time = "time";
 			const chatBlock = componentsStorage.getChatBlock();
 			chatBlock.renderCurrentChatIncomingMessage(messageContent);
 			break;
@@ -20,11 +19,12 @@ function webSocketOnMessage(event) {
 			leftColumn.renderNewMessage(messageContent);
 		}
 		break;
-	case 3:
+	case 2:
 		switch (messageContent.author_id) {
 		case data.getCurrentChatUserId():
 			const chatBlock = componentsStorage.getChatBlock();
-			chatBlock.deleteMessage(messageContent.id);
+			chatBlock.deleteOldMessage(messageContent);
+			componentsStorage.setChatBlock(chatBlock);
 			break;
 		case data.getUserId():
 			console.log(`my message deleted: ${messageContent.text}`);

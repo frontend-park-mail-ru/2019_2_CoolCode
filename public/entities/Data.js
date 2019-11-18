@@ -4,7 +4,7 @@ class Data {
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
 		lastSearchUsers = [],
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId) {
+		chosenMessageId, chosenMessageText) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -27,6 +27,7 @@ class Data {
 		this.socketConnectionOn = socketConnection;
 
 		this.chosenMessageId = chosenMessageId;
+		this.chosenMessageText = chosenMessageText;
 
 		Data.__instance = this;
 	}
@@ -50,6 +51,7 @@ class Data {
 		this.socketConnectionOn = false;
 
 		this.chosenMessageId = undefined;
+		this.chosenMessageText = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -286,6 +288,22 @@ class Data {
 	deleteChosenMessageId() {
 		this.chosenMessageId = undefined;
 		this.createLogMessage('set', 'chosenMessageId', undefined);
+
+	}
+
+	setChosenMessageText(chosenMessageText) {
+		this.chosenMessageText = chosenMessageText;
+		this.createLogMessage('set', 'chosenMessageText', chosenMessageText);
+	}
+
+	getChosenMessageText() {
+		this.createLogMessage('get', 'chosenMessageText', this.chosenMessageText);
+		return this.chosenMessageText;
+	}
+
+	deleteChosenMessageText() {
+		this.chosenMessageText = undefined;
+		this.createLogMessage('set', 'chosenMessageText', undefined);
 
 	}
 }

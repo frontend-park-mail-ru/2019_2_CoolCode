@@ -5,7 +5,30 @@ const {frontend} = settings;
 const {frontendPort} = settings;
 const {connection} = settings;
 
-async function messagesInteraction(text, id) {
+async function editingMessage(text, time, id) {
+	console.log(`Editing message : ${id}`);
+	try {
+		const response = await FetchModule._doPut({
+			path: API.messageInteraction(id),
+			data: {
+				text: text,
+			},
+			contentType: 'application/json;charset=utf-8'
+		});
+
+		if (response.status !== 200) {
+			throw new Error (`Haven't edited message: ${text} cause: ${responseStatuses[response.status]}`);
+		}
+		const message = await response.json();
+		console.log(`Message edited : ${message.id}`);
+		return message.id;
+	}catch (error) {
+		console.error(error);
+		throw error;
+	}
+}
+
+async function sendingMessage(text, time, id) {
 	console.log(`Sending message in chat: ${id} with text: ${text}`);
 	try {
 		const response = await FetchModule._doPost({
@@ -47,4 +70,4 @@ async function deletingMessage(id) {
 	}
 }
 
-export {messagesInteraction, deletingMessage};
+export {sendingMessage, deletingMessage, editingMessage};
