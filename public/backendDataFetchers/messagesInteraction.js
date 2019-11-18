@@ -22,9 +22,12 @@ async function messagesInteraction(text, id) {
 		if (response.url.toString().startsWith(`${frontend}`)) {
 			bus.emit('setNotSentMessage', text, id);
 		}
-		console.log(`Message sent : ${text}`);
+		const message = await response.json();
+		console.log(`Message sent : ${message.id}`);
+		return message.id;
 	}catch (error) {
 		console.error(error);
+		throw error;
 	}
 }
 

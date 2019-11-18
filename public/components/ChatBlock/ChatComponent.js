@@ -25,15 +25,24 @@ class ChatComponent extends BaseComponent {
     	this._parent.querySelector('.input__text').value = '';
     }
 
+    renderErrorOutgoingMessage(messageData) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: true}, contentListRoot);
+    	contentListRoot.appendChild(messageComponent.render());
+    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
     renderOutgoingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	contentListRoot.innerHTML += rightMsg({text: messageData.text, time: messageData.time});
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false}, contentListRoot);
+    	contentListRoot.appendChild(messageComponent.render());
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
     renderCurrentChatIncomingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	contentListRoot.innerHTML += leftMsg({text: messageData.text, time: messageData.time});
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false}, contentListRoot);
+    	contentListRoot.appendChild(messageComponent.render());
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
@@ -51,8 +60,8 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
     		this._data.chatMessages.forEach((message) => {
-    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user}, contentListRoot);
-    			contentListRoot.innerHTML += messageComponent.render();
+    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user, error: false}, contentListRoot);
+    			contentListRoot.appendChild(messageComponent.render());
     		});
     	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;

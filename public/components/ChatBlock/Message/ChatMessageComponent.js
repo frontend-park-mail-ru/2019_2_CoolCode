@@ -1,29 +1,51 @@
 import BaseComponent from "../../baseComponent";
 import ChatComponent from "../ChatComponent";
 import {data} from "../../../main";
+import {createVisibleSettingsMessageBlock} from "../../../handlers/chatViewHandlers";
 
 const rightMsg = require('./msgRight.pug');
 const leftMsg = require('./msgLeft.pug');
 
 class ChatMessageComponent extends BaseComponent {
 
-	renderLeft() {
-		return leftMsg({text: this._data.message.text, id: `message-${this._data.message.id}`, time: 'time'});
+	messageElement;
 
+	createMessage() {
+		this.messageElement = document.createElement('div');
+		this.messageElement.className = 'chat-msg';
+		this.messageElement.id = `message-${this._data.message.id}`;
+	}
+
+	renderLeft() {
+		this.messageElement.classList += ' chat-msg_left';
+		this.messageElement.innerHTML = leftMsg({text: this._data.message.text, time: 'time'});
+	}
+
+	createHandlerRight() {
+		const settingsMessageBtn = this.messageElement.querySelector('.chat-msg__icon-container');
+		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
+		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
+		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
 	}
 
 	renderRight() {
-		return rightMsg({text: this._data.message.text, id: `message-${this._data.message.id}`, time: 'time'});
-
+		this.messageElement.classList += ' chat-msg_right';
+		this.messageElement.innerHTML = rightMsg({text: this._data.message.text, time: 'time'});
 	}
 
 	render() {
 		if (this._data.message) {
+			this.createMessage();
 			if (this._data.message.author_id === this._data.user.id) {
-				return this.renderRight();
+				this.renderRight();
+				if (this._data.error) {
+					this.messageElement.querySelector('.chat-msg__text').classList += ' chat-msg__text_style-error';
+				}
+				this.createHandlerRight();
 			} else {
-				return this.renderLeft();
+				this.renderLeft();
 			}
+			return this.messageElement;
 		}
 	}
 

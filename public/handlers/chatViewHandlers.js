@@ -17,6 +17,18 @@ function createDeleteMessageBlockHndlr() {
 	deleteMessageBlock.addEventListener('click', deleteMessageEvent);
 }
 
+
+function editMessageEvent() {
+
+}
+
+
+function createEditMessageBlockHndlr() {
+	const messageSettingsBlock = document.querySelector('.message-sett-block__content');
+	const editMessageBlock = messageSettingsBlock.querySelector('#edit');
+	editMessageBlock.addEventListener('click', editMessageEvent);
+}
+
 function deleteOpenSettingsEvents() {
 	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
 	settingsMessageBtns.forEach((settingsMessageBtn) => {
@@ -89,18 +101,24 @@ function growInput(element) {
 	element.style.height = element.scrollHeight;
 }
 
-function sendMessageEvent() {
+async function sendMessageEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
 	const text = chatBlock.getMessageInputData();
 	if (text !== '') {
 		console.log(`new message : ${text}`);
-		messagesInteraction(text, data.getCurrentChatId());
 		chatBlock.setMessageInputData('');
 		const today = new Date();
 		const time = `${today.getHours()} : ${today.getMinutes()}`;
-		chatBlock.renderOutgoingMessage({text: text, time: time});
+		try {
+			const messageId = await messagesInteraction(text, data.getCurrentChatId());
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, time: time});
+
+		} catch (error) {
+			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, time: time});
+		}
+
 	}
 	componentsStorage.setChatBlock(chatBlock);
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr};
+export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock};

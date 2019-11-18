@@ -63,7 +63,15 @@
     right: -0.5vh;
 }
 
+.chat-msg__text_style-error {
+    background: var(--global-error-color);
+}
 
+.chat-msg__text_style-error:before {
+    border-left: 0vh solid var(--global-error-color);
+    border-top: 2vh solid var(--global-error-color);
+
+}
 /* time element */
 .chat-msg__time {
     max-width: 25%;
