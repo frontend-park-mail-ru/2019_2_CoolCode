@@ -32,7 +32,21 @@ function webSocketOnMessage(event) {
 		default:
 			console.log(`user: ${messageContent.author_id} deleted message`);
 		}
-
+		break;
+	case 3:
+		switch (messageContent.author_id) {
+		case data.getCurrentChatUserId():
+			const chatBlock = componentsStorage.getChatBlock();
+			chatBlock.renderEditedMessage(messageContent);
+			componentsStorage.setChatBlock(chatBlock);
+			break;
+		case data.getUserId():
+			console.log(`my message edited: ${messageContent.text}`);
+			break;
+		default:
+			console.log(`user: ${messageContent.author_id} edited message`);
+		}
+		break;
 	}
 
 }

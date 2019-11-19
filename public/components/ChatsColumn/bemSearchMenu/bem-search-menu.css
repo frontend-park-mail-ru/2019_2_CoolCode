@@ -41,7 +41,7 @@
 }
 
 .search-menu__form__input-container_style{
-    background-color: var(--global-grey-color);
+    background-color: var(--global-search-input-color);
     background-position: right 5px;
     background-repeat: no-repeat;
     font-family: var(--global-font-family-Roboto);
@@ -60,7 +60,7 @@
 }
 
 .search-menu__form__input-container__input_style {
-    background-color: var(--global-grey-color);
+    background-color: transparent;
     background-position: right 5px;
     background-repeat: no-repeat;
     font-family: var(--global-font-family-Roboto);

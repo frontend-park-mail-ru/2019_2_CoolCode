@@ -1,6 +1,7 @@
 import {sendingMessage, deletingMessage, editingMessage} from "../backendDataFetchers/messagesInteraction";
 import {componentsStorage, data, bus} from "../main";
 import {keys} from "../constants/config";
+import currentDate from "../modules/currentDate";
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -32,7 +33,7 @@ function createEditMessageBlockHndlr() {
 }
 
 function deleteOpenSettingsEvents() {
-	const settingsMessageBtns = document.querySelectorAll('.chat-msg__icon-container');
+	const settingsMessageBtns = document.querySelectorAll('.primary-row__icon-container');
 	settingsMessageBtns.forEach((settingsMessageBtn) => {
 		settingsMessageBtn.removeEventListener('mouseover', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.removeEventListener('mouseout', createVisibleSettingsMessageBlock);
@@ -54,9 +55,9 @@ function createVisibleSettingsMessageBlock(event) {
 			event.currentTarget.classList.remove('mouseover');
 			deleteOpenSettingsEvents();
 		}
-		const messageBlock = event.currentTarget.parentNode;
+		const messageBlock = event.currentTarget.parentNode.parentNode.parentNode;
 		const messageId = parseFloat(messageBlock.id.split('-')[1]);
-		const messageText = messageBlock.querySelector(".chat-msg__text").innerText;
+		const messageText = messageBlock.querySelector(".primary-row__text").innerText;
 		bus.emit('setChosenMessageId', null, messageId);
 		bus.emit('setChosenMessageText', null, messageText);
 	}
@@ -79,29 +80,32 @@ function createCloseSettingsMessageHndlr() {
 function createOpenSettingsMessageHndlr() {
 	const userMessages = document.querySelectorAll('.chat-msg_right');
 	userMessages.forEach((userMessage) => {
-		const settingsMessageBtn = userMessage.querySelector('.chat-msg__icon-container');
+		const settingsMessageBtn = userMessage.querySelector('.primary-row__icon-container');
 		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
 	});
 }
 
+function chooseSendMessageEvent() {
+	event.preventDefault();
+	if (data.getChosenMessageId()) {
+		sendEditedMessageEvent();
+	} else {
+		sendMessageEvent();
+	}
+}
+
 function createSendMessageBtnHndlr() {
 	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[1];
-	sendBtn.addEventListener('click', sendMessageEvent);
+	sendBtn.addEventListener('click', chooseSendMessageEvent);
 }
 
 function createMessageInputHndlr() {
 	const messageInput = document.querySelector(".input__text");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
-			event.preventDefault();
-			console.log(data.getChosenMessageId());
-			if (data.getChosenMessageId()) {
-				sendEditedMessageEvent();
-			} else {
-				sendMessageEvent();
-			}
+			chooseSendMessageEvent(event);
 		}
 	});
 	messageInput.addEventListener('input', growInput.bind(null, messageInput));
@@ -119,15 +123,13 @@ async function sendMessageEvent() {
 	if (text !== '') {
 		console.log(`new message : ${text}`);
 		chatBlock.setMessageInputData('');
-		const today = new Date();
-		const date = `${today.getDate()}.${today.getMonth()}.${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`;
-		const time = `${today.getHours()}:${today.getMinutes()}`;
+		const date = new currentDate();
 		try {
-			const messageId = await sendingMessage(text, date, data.getCurrentChatId());
-			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: time});
+			const messageId = await sendingMessage(text, date.getDate(), data.getCurrentChatId());
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
 
 		} catch (error) {
-			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: time});
+			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});
 		}
 
 	}
@@ -140,12 +142,10 @@ async function sendEditedMessageEvent() {
 	if (text !== '') {
 		console.log(`edited message : ${text}`);
 		chatBlock.setMessageInputData('');
-		const today = new Date();
-		const date = `${today.getDate()}.${today.getMonth()}.${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`;
-		const time = `${today.getHours()}:${today.getMinutes()}`;
+		const date = new currentDate();
 		try {
-			await editingMessage(text, date, data.getChosenMessageId());
-			chatBlock.renderEditedMessage({id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: time});
+			await editingMessage(text, date.getDate(), data.getChosenMessageId());
+			chatBlock.renderEditedMessage({id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: date.getDate()});
 		} catch (error) {
 			const messageText = data.getChosenMessageText();
 			chatBlock.setMessageInputData(messageText);

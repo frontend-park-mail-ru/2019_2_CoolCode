@@ -5,6 +5,10 @@ const rightMsg = require('./msgRight.pug');
 const leftMsg = require('./msgLeft.pug');
 const deletedMsg = require('./msgDeleted.pug');
 
+import './chatMsg/chat-msg.css';
+import './chatMsg/primaryRow/primary-row.css';
+import './chatMsg/secondaryRow/secondary-row.css';
+
 class ChatMessageComponent extends BaseComponent {
 
 	messageElement;
@@ -16,7 +20,7 @@ class ChatMessageComponent extends BaseComponent {
 	}
 
 	createHandlerRight() {
-		const settingsMessageBtn = this.messageElement.querySelector('.chat-msg__icon-container');
+		const settingsMessageBtn = this.messageElement.querySelector('.primary-row__icon-container');
 		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
@@ -44,6 +48,7 @@ class ChatMessageComponent extends BaseComponent {
 
 	render() {
 		if (this._data.message) {
+			this._data.message.message_time = this._data.message.message_time.split(' ')[1];
 			this.createMessage();
 			if (this._data.deleted) {
 				if (this._data.message.author_id === this._data.user.id) {
@@ -55,11 +60,15 @@ class ChatMessageComponent extends BaseComponent {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRight();
 					if (this._data.error) {
-						this.messageElement.querySelector('.chat-msg__text').classList += ' chat-msg__text_error';
+						this.messageElement.querySelector('.primary-row__text').classList += ' primary-row__text_error';
 					}
 					this.createHandlerRight();
+
 				} else {
 					this.renderLeft();
+				}
+				if (this._data.edited) {
+					this.messageElement.querySelector('.secondary-row__edited').innerText = 'edited';
 				}
 			}
 			return this.messageElement;

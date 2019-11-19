@@ -8,10 +8,10 @@ const chatsColumnTemplate = require('./chatsColumn.pug');
 import './bemAllChats/bem-all-chats.css';
 import './bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css';
 import './Message/bemChatBlock/bem-chat-block.css';
-import './WrkSpace/bemWrkspaceBlock/bem-wrkspace-block.css';
-import './WrkSpace/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css';
-import './WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css';
-import './WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css';
+import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bem-wrkspace-block.css';
+import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css';
+import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css';
+import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css';
 import './User/bemUserFoundBlock/bem-user-found.css';
 import './bemSearchMenu/bem-search-menu.css';
 

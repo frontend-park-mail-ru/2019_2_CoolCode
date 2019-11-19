@@ -1,0 +1,39 @@
+.secondary-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+
+.secondary-row_left {
+    justify-content: flex-start;
+}
+
+.secondary-row_right {
+    justify-content: flex-end;
+}
+
+/*edited element*/
+
+.secondary-row__edited {
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: right;
+    margin: 2px 5px 0 5px;
+}
+
+.secondary-row__edited_style {
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14px;
+    font-family: var(--global-font-family-Roboto);
+    color: var(--global-darkgrey-color);
+}
+
+
+/*like element*/
+
+.secondary-row__like {
+
+}

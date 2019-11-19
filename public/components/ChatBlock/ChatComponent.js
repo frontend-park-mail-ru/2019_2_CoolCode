@@ -8,7 +8,6 @@ import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
-import './Message/chatMsg/chat-msg.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
 import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
 import ChatMessageComponent from "./Message/ChatMessageComponent";
@@ -52,6 +51,8 @@ class ChatComponent extends BaseComponent {
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:true}, contentListRoot);
     	message.insertAdjacentElement( 'beforebegin', messageComponent.render());
     	message.remove();
+    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+
     }
 
     deleteMessage(messageId) {

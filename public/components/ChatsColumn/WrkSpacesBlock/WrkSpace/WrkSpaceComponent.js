@@ -1,5 +1,5 @@
-import BaseComponent from "../../baseComponent";
-import {data} from "../../../main";
+import BaseComponent from "../../../baseComponent";
+import {data} from "../../../../main";
 
 const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');

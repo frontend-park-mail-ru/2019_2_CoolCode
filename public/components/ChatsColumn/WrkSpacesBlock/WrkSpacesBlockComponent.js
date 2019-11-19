@@ -1,7 +1,7 @@
 import BaseComponent from "../../baseComponent";
 import {data, bus, router} from "../../../main";
 import MessageComponent from "../Message/MessageComponent";
-import WrkSpaceComponent from "../WrkSpace/WrkSpaceComponent";
+import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
 const WrkSpacesBlockTemplate = require('./wrkspacesBlock.pug');
 
 import './bemWrkspacesBlock/bem-wrkspaces-block.css';
