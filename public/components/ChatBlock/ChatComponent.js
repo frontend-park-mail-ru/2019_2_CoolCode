@@ -87,7 +87,6 @@ class ChatComponent extends BaseComponent {
 
     render() {
     	return chatTemplate(this._data);
-
     }
 }
 

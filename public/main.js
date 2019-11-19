@@ -26,6 +26,7 @@ import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 import LocalStorage from "./entities/LocalStorage";
+import wrkspaceView from "./views/wrkspaceView";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
@@ -52,6 +53,7 @@ router.register(ROUTER.search, searchView);
 router.register(ROUTER.chat, chatView);
 router.register(ROUTER.createWrkSpace, wrkspaceFormView);
 router.register(ROUTER.createChannel, channelFormView);
+router.register(ROUTER.wrkspacePage, wrkspaceView);
 
 if (appLocalStorage.getUser()) {
 	bus.emit('setUser', null, appLocalStorage.getUser());

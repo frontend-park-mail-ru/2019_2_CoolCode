@@ -32,6 +32,7 @@ class Router {
 		if (identity) {
 			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
+			if (currentPath.viewClassName === 'wrkspaceView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
 		}
 		if (window.location.pathname !== path) {

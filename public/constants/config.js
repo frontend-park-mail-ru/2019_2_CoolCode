@@ -64,6 +64,7 @@ const ROUTER = {
  	chat : '/chat',
  	createWrkSpace: '/createWrkSpace',
 	createChannel : '/createChannel',
+	wrkspacePage : '/wrkspace',
 };
 
 export {settings, responseStatuses, keys, API, ROUTER};

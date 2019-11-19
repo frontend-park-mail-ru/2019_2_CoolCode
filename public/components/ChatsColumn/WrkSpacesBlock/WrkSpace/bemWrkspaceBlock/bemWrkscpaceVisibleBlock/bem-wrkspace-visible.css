@@ -29,7 +29,8 @@
 }
 
 .wrkspace-visible__name-row__text {
-    flex: 0 0 80%;
+    flex: 0 0 auto;
+    max-width: 80%;
     height: 50%;
     align-self: center;
     padding: 0 0 0 10px;
@@ -45,7 +46,7 @@
 }
 
 
-/*add-channel-button element in chann row*/
+/*info-button element in name row*/
 
 .wrkspace-visible__name-row__info-button {
     align-self: center;
@@ -61,12 +62,12 @@
 .wrkspace-visible__name-row__info-button__icon {
     object-fit: scale-down;
     object-position: top;
-    max-width:80%;
-    max-height:80%;
-    height: 2vh; /*experimenting with viewports*/
+    max-width:100%;
+    max-height:100%;
+    height: 3vh; /*experimenting with viewports*/
 }
 .wrkspace-visible__name-row__info-button__icon_style {
-    filter: opacity(0.9);
+    filter: opacity(0.5);
 }
 
 

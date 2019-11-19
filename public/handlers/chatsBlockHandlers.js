@@ -61,4 +61,14 @@ function createWorkspaceButtonHndlr() {
 	);
 }
 
+function createWrkspaceInfoButtonHndlr() {
+	const messageWindow = document.querySelector('.all-chats-window');
+
+}
+
+async function wrkspaceInfoButtonClickEvent(params = {userId:null, chatId:null}) {
+	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
+	router.go('/wrkspace', params.chatId);
+}
+
 export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr, createWorkspaceButtonHndlr};
