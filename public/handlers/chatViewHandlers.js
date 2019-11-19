@@ -8,9 +8,7 @@ function deleteMessageEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
 	chatBlock.deleteMessage(messageId);
 	componentsStorage.setChatBlock(chatBlock);
-	bus.emit('deleteChosenMessageId', null);
-	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
-	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	createHiddenSettingsMessageBlock();
 }
 
 function createDeleteMessageBlockHndlr() {
@@ -46,6 +44,7 @@ function createHiddenSettingsMessageBlock() {
 	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
 	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
 	bus.emit('deleteChosenMessageId', null);
+	bus.emit('deleteChosenMessageText', null);
 }
 
 function createVisibleSettingsMessageBlock(event) {
@@ -121,10 +120,10 @@ async function sendMessageEvent() {
 		console.log(`new message : ${text}`);
 		chatBlock.setMessageInputData('');
 		const today = new Date();
-		const date = `${today.getDate()}.${today.getMonth()} ${today.getHours()}:${today.getMinutes()}`;
+		const date = `${today.getDate()}.${today.getMonth()}.${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`;
 		const time = `${today.getHours()}:${today.getMinutes()}`;
 		try {
-			const messageId = await sendingMessage(text, time, data.getCurrentChatId());
+			const messageId = await sendingMessage(text, date, data.getCurrentChatId());
 			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: time});
 
 		} catch (error) {
@@ -142,13 +141,11 @@ async function sendEditedMessageEvent() {
 		console.log(`edited message : ${text}`);
 		chatBlock.setMessageInputData('');
 		const today = new Date();
-		const date = `${today.getDate()}.${today.getMonth()} ${today.getHours()}:${today.getMinutes()}`;
+		const date = `${today.getDate()}.${today.getMonth()}.${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`;
 		const time = `${today.getHours()}:${today.getMinutes()}`;
 		try {
-			const messageId = await editingMessage(text, time, data.getChosenMessageId());
-			chatBlock.renderEditedMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: time});
-			debugger;
-
+			await editingMessage(text, date, data.getChosenMessageId());
+			chatBlock.renderEditedMessage({id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: time});
 		} catch (error) {
 			const messageText = data.getChosenMessageText();
 			chatBlock.setMessageInputData(messageText);
@@ -157,11 +154,7 @@ async function sendEditedMessageEvent() {
 		const messageText = data.getChosenMessageText();
 		chatBlock.setMessageInputData(messageText);
 	}
-	debugger;
-	bus.emit('deleteChosenMessageId', null);
-	bus.emit('deleteChosenMessageText', null);
-	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
-	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	createHiddenSettingsMessageBlock();
 	componentsStorage.setChatBlock(chatBlock);
 }
 

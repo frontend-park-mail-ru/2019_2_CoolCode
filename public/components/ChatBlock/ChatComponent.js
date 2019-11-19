@@ -49,7 +49,7 @@ class ChatComponent extends BaseComponent {
     renderEditedMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const message = contentListRoot.querySelector(`#message-${messageData.id}`);
-    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:true, edited:true}, contentListRoot);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:true}, contentListRoot);
     	message.insertAdjacentElement( 'beforebegin', messageComponent.render());
     	message.remove();
     }

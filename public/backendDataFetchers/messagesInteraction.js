@@ -12,6 +12,7 @@ async function editingMessage(text, time, id) {
 			path: API.messageInteraction(id),
 			data: {
 				text: text,
+				message_time : time,
 			},
 			contentType: 'application/json;charset=utf-8'
 		});
@@ -19,9 +20,9 @@ async function editingMessage(text, time, id) {
 		if (response.status !== 200) {
 			throw new Error (`Haven't edited message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
-		const message = await response.json();
-		console.log(`Message edited : ${message.id}`);
-		return message.id;
+		// const message = await response.json();
+		// console.log(`Message edited : ${message.id}`);
+		// return message.id;
 	}catch (error) {
 		console.error(error);
 		throw error;
@@ -35,6 +36,7 @@ async function sendingMessage(text, time, id) {
 			path: API.currentChatMessages(id),
 			data: {
 				text: text,
+				message_time : time,
 			},
 			contentType: 'application/json;charset=utf-8'
 		});
