@@ -1,0 +1,76 @@
+.channelHeaderMenuItems__info {
+    position: fixed; /*make it centered and overlay*/
+    top: 20vh; /*experimenting with viewports*/
+    left: 70vw;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20vh; /*experimenting with viewports*/
+    width: 40vh;
+    border-radius: 5px;
+    z-index: 11; /*make it overlay*/
+    padding: 5px;
+}
+.channelHeaderMenuItems__info_style {
+    background: var(--global-dropdown-color);
+    -webkit-backface-visibility: hidden;
+}
+
+.channelHeaderMenuItems__info_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10; /*make it overlay*/
+}
+
+/*.channelHeaderMenuItems__info_overlay_style {*/
+/*    background-color: #000000;*/
+/*    opacity: 0.5;*/
+/*}*/
+
+.channelHeaderMenuItems__info__text{
+    padding: 5px;
+    margin: 5px 10px;
+}
+.channelHeaderMenuItems__info_style__text{
+    font-family: var(--global-font-family-Montserrat);
+}
+
+.channel-form__form__input-field {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 0 0 5px 0;
+    height:auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+    width: 70%;
+}
+.channel-form__form__input-field_style{
+    outline: none;
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    padding: 5px;
+}
+.channel-form__form__name {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 90%;
+}
+
+.channel-form__form__name_style {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: var(--global-font-family-Montserrat);
+    color: white;
+}

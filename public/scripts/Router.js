@@ -33,6 +33,7 @@ class Router {
 			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
+			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
 		}
 		if (window.location.pathname !== path) {
 			window.history.pushState(

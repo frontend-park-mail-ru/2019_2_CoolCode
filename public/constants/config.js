@@ -38,6 +38,9 @@ const API = {
 	currentChatMessages : (chatId) => {
 		return `/chats/${chatId}/messages`;
 	},
+	currentChannelMessages : (chanId) => {
+		return `/channels/${chanId}`;
+	},
 	getUserChats : (id) => {
 		return `/users/${id}/chats`;
 	},

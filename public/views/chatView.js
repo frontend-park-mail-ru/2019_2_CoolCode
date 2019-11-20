@@ -18,6 +18,7 @@ import {
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {saveUserPhoto} from "../handlers/photosHandlers";
+import {channelView, menuHandlers} from "../handlers/channelViewHandlers";
 
 class chatView extends BaseView {
 
@@ -40,6 +41,7 @@ class chatView extends BaseView {
 		createOpenSettingsMessageHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
+		channelView();
 	}
 
 	setContent() {

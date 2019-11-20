@@ -18,6 +18,7 @@ class WrkSpaceComponent extends BaseComponent {
 				wspaceChannels.innerHTML += wrkSpaceChatTempl({
 					channel: ch,
 					name: ch.Name,
+					id: `channel-${ch.ID}`
 				});
 			});
 			wSpace.appendChild(wspaceChannels);

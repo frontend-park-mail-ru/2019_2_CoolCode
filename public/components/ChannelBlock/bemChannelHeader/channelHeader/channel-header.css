@@ -1,0 +1,212 @@
+.channel-header {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/*info-row element*/
+
+.channel-header__info-row {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: flex-start;
+    height: 80%;
+    width: 100%;
+
+}
+
+.channel-header__info-row_style {
+    border-bottom: 1.5px solid var(--global-grey-color);
+    border-top: 1px solid var(--global-grey-color)
+
+}
+
+
+/*image-column element in info-row*/
+
+.channel-header__info-row__image-row {
+    flex: 0 0 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+
+    margin: 0 10px 0 10px;
+}
+
+
+/*info-column element*/
+
+.channel-header__info-row__info-column {
+    flex: 0 0 88%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+}
+/*info-column elements*/
+
+.channel-header__info-row__info-column__name-row {
+    flex: 0 0 40%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+.channel-header__info-row__info-column__name-row_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.channel-header__info-row__info-column__name-row_style:hover, .chat-header__info-row__info-column__name-row_style:focus{
+    color:var(--global-darkgrey-color);
+    font-weight: bolder;
+    font-style: inherit;
+    text-shadow: 1px 1px 1px #1d916b; //TODO: create color
+}
+
+.channel-header__info-row__info-column__status-row {
+    flex: 0 0 40%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: center;
+}
+
+.channel-header__info-row__info-column__status-row_style {
+    font-family: var(--global-font-family-Roboto);
+    color: var(--global-nicegrey-color);
+    font-size: 19px;
+}
+
+
+
+
+/*pinned-element element*/
+
+.channel-header__pinned-message {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: flex-start;
+}
+
+.channel-header__pinned-message_style {
+    border-bottom: 1.5px solid var(--global-grey-color);
+}
+
+/*content element in pinned-message*/
+
+.channel-header__pinned-message__content  {
+    align-self: center;
+    padding: 0 0 0 10px;
+}
+
+.channel-header__pinned-message__content_style {
+    font-family: var(--global-font-family-Roboto);
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+    word-spacing: 1px;
+    color: var(--global-darkgrey-color);
+    font-weight: 400;
+}
+
+/*icon element in pinned-message*/
+.channel-header__pinned-message__icon {
+    flex: 0 0 auto;
+    height: 2.5vh; /*experimenting with viewports*/
+    width: 2.5vh;
+    object-position: center center;
+    object-fit: fill;
+
+    margin: 5px 5px 5px 5px;
+}
+
+.channel-header__pinned-message__icon_style {
+    filter: opacity(0.6);
+}
+
+
+
+
+/*drop-down settings*/
+
+
+.channel-header__info-row__dropdown__dropbtn {
+    padding: 10px;
+    cursor: pointer;
+    width: 20px;
+    margin-bottom: 5px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.channel-header__info-row__dropdown {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 10%;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.channel-header__info-row__btnblock{
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.channel-header__info-row__dropdown__dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--global-dropdown-color);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 5px;
+}
+
+/* Links inside the dropdown */
+.channel-header__info-row__dropdown__dropdown-content p {
+    color: black    ;
+    padding: 6px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 4px 4px;
+    border-radius: 5px;
+    font-family: var(--global-font-family-Montserrat);
+
+}
+
+/* Change color of dropdown links on hover */
+.channel-header__info-row__dropdown__dropdown-content p:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.channel-header__info-row__dropdown:hover .channel-header__info-row__dropdown__dropdown-content {
+    display:block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.channel-header__info-row__dropdown:hover .channel-header__info-row__dropdown__dropbtn {
+    border-radius: 100px;
+    background-color: var(--global-selected-color);
+}

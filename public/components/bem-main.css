@@ -5,10 +5,12 @@
     --global-green-color-1: #2DC68B;
     --global-green-color: rgba(39, 172, 113, 0.6);
     --global-grey-color: #D7D7D7;
+    --global-nicegrey-color: #666666;
     --global-darkgrey-color: #626262;
     --global-middlegrey-color: #9e9e9e;
     --global-scrollbar-color: rgba(40, 162, 77, 0.41);
     --global-msgwindow-container-color: rgba(76, 140, 101, 0.13);
+    --global-dropdown-color: rgba(40, 162, 77, 0.41);
     --global-selected-color: rgba(97, 189, 125, 0.15);
     --global-error-color: #FF4E4E;
     --global-loader-grey-color: #F3F3F3 ;
