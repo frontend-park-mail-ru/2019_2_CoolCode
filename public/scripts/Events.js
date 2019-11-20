@@ -2,7 +2,12 @@ import {appLocalStorage, bus, data} from "../main";
 
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
-import {getChats, getCurrentChatInfo} from "../backendDataFetchers/gettingInfo";
+import {
+	getChats,
+	getCurrentChatInfo,
+	getWrkspaceCreatorInfo,
+	getWrkspaceInfo
+} from "../backendDataFetchers/gettingInfo";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
@@ -24,6 +29,8 @@ function createEvents() {
 	bus.on('setCurrentChatId', data.setCurrentChatId.bind(data));
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
+	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
+	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 	bus.on('setChosenMessageId', data.setChosenMessageId.bind(data));
 	bus.on('deleteChosenMessageId', data.deleteChosenMessageId.bind(data));
@@ -41,6 +48,10 @@ function createEvents() {
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
 	bus.on('getChats', getChats);
 	bus.on('sendMessage', sendingMessage);
+
+	bus.on('getWrkspaceInfo', getWrkspaceInfo);
+	bus.on('getWrkspaceCreatorInfo', getWrkspaceCreatorInfo);
+
 	/**/
 	bus.on('getUserPhoto', getUserPhoto);
 	bus.on('hideLoader', hideLoader);

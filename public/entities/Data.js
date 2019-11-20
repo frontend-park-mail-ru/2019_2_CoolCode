@@ -2,6 +2,7 @@ class Data {
 
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
+		currentWrkspace = {}, currentWrkspaceCreator = {},
 		lastSearchUsers = [],
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText) {
@@ -20,6 +21,9 @@ class Data {
 		this.currentChatUser = currentChatUser;
 		this.currentChatUserPhoto = currentChatUserPhoto;
 		this.currentChatMessages = currentChatMessages;
+
+		this.currentWrkspace = currentWrkspace;
+		this.currentWrkspaceCreator = currentWrkspaceCreator;
 
 		this.lastSearchUsers = lastSearchUsers;
 
@@ -45,6 +49,9 @@ class Data {
 		this.currentChatUser = undefined;
 		this.currentChatUserPhoto = undefined;
 		this.currentChatMessages = [];
+
+		this.currentWrkspace = undefined;
+		this.currentWrkspaceCreator = undefined;
 
 		this.lastSearchUsers = [];
 		this.webSocketConns = [];
@@ -213,6 +220,26 @@ class Data {
 	getLastSearchUsers() {
 		this.createLogMessage('get', 'lastSearchUsers', this.lastSearchUsers);
 		return this.lastSearchUsers;
+	}
+
+	setCurrentWrkspace(currentWrkspace) {
+		this.currentWrkspace = currentWrkspace;
+		this.createLogMessage('set', 'currentWrkspace', currentWrkspace);
+	}
+
+	getCurrentWrkspace() {
+		this.createLogMessage('get', 'currentWrkspace', this.currentWrkspace);
+		return this.currentWrkspace;
+	}
+
+	setCurrentWrkspaceCreator(currentWrkspaceCreator) {
+		this.currentWrkspaceCreator = currentWrkspaceCreator;
+		this.createLogMessage('set', 'currentWrkspaceCreator', currentWrkspaceCreator);
+	}
+
+	getCurrentWrkspaceCreator() {
+		this.createLogMessage('get', 'currentWrkspaceCreator', this.currentWrkspaceCreator);
+		return this.currentWrkspaceCreator;
 	}
 
 	getChatIdByChatUserId(userId) {

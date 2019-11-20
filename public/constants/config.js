@@ -44,6 +44,9 @@ const API = {
 	userInfo: (id) => {
 		return `/users/${id}`;
 	},
+	wrkspaceInfo: (id) => {
+		return `/workspaces/${id}`;
+	},
 	logout: '/logout',
 	login: '/login',
 	auth: '/users',

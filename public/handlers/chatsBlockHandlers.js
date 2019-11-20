@@ -14,16 +14,16 @@ function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspac
 		if (!params.wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
 			params.wrkspaceBlockSmall.className += ' wrkspace-expandable_clicked';
 			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
-			arrowDown.classList.remove('wrkspace-visible__chann-row__arrow_hidden');
+			arrowDown.classList.remove('hidden');
 			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
-			arrowUp.className += ' wrkspace-visible__chann-row__arrow_hidden';
+			arrowUp.className += ' hidden';
 		}
 		else {
 			params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
 			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
-			arrowDown.className += ' wrkspace-visible__chann-row__arrow_hidden';
+			arrowDown.className += ' hidden';
 			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
-			arrowUp.classList.remove('wrkspace-visible__chann-row__arrow_hidden');
+			arrowUp.classList.remove('hidden');
 		}
 
 	}
@@ -50,6 +50,8 @@ function createWrkspaceBlockHndlr() {
 		const visibleBlock = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
 		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button");
 		createButton.addEventListener('click', () => router.go('/createChannel', wrkSpaceId));
+		const infoButton = visibleBlock.querySelector(".wrkspace-visible__name-row__info-button");
+		infoButton.addEventListener('click', () => router.go('/wrkspace', wrkSpaceId));
 	});
 }
 
@@ -59,16 +61,6 @@ function createWorkspaceButtonHndlr() {
 		router.go('/createWrkSpace');
 	}
 	);
-}
-
-function createWrkspaceInfoButtonHndlr() {
-	const messageWindow = document.querySelector('.all-chats-window');
-
-}
-
-async function wrkspaceInfoButtonClickEvent(params = {userId:null, chatId:null}) {
-	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
-	router.go('/wrkspace', params.chatId);
 }
 
 export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr, createWorkspaceButtonHndlr};

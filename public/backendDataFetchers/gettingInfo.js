@@ -1,6 +1,24 @@
 import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
+async function getWrkspaceInfo(id) {
+	console.log(` Getting wrkspace ${id} info`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.wrkspaceInfo(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch wrkspace info: ${responseStatuses[response.status]}`);
+		}
+		const wrkspace = await response.json();
+		bus.emit('setCurrentWrkspace', null, wrkspace);
+	} catch (error) {
+		console.error(error);
+	}
+
+}
+
 async function getPhoto(id) {
 	console.log(` Getting user ${id} photo`);
 	try {
@@ -56,7 +74,7 @@ async function getChats(id) {
 	}
 }
 
-async function getUserInfo(id) {
+async function getAnyUserInfo(id) {
 	console.log(` Getting user ${id} info`);
 	try {
 		const response = await FetchModule._doGet(
@@ -66,10 +84,23 @@ async function getUserInfo(id) {
 			throw new Error(
 				`Couldn't fetch user info: ${responseStatuses[response.status]}`);
 		}
-		const user = await response.json();
-		bus.emit('setCurrentChatUser', null, user);
+		return await response.json();
 	} catch (error) {
 		console.error(error);
+	}
+}
+
+async function getUserInfo(id) {
+	const user = await getAnyUserInfo(id);
+	if (user) {
+		bus.emit('setCurrentChatUser', null, user);
+	}
+}
+
+async function getWrkspaceCreatorInfo(id) {
+	const user = await getAnyUserInfo(id);
+	if (user) {
+		bus.emit('setCurrentWrkspaceCreator', null, user);
 	}
 }
 
@@ -81,4 +112,4 @@ async function getCurrentChatInfo(userId, chatId) {
 	bus.emit('setCurrentChatId', null, chatId);
 }
 
-export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto};
+export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo};

@@ -1,13 +1,18 @@
 import BaseComponent from "../../../baseComponent";
 const WrkspacePageHeaderTemlate = require('./wrkspacePageHeader.pug');
 
-import './wrkspace-page-header.css.css';
+import './wrkspace-page-header.css';
+import './WrkspacePageDropdown/wrkspace-page-dropdown.css';
 
 class WrkspacePageHeaderComponent extends BaseComponent {
 
-    render() {
-        return WrkspacePageHeaderTemlate(this._data);
-    }
+	createHandlers() {
+
+	}
+
+	render() {
+		return WrkspacePageHeaderTemlate(this._data);
+	}
 }
 
 export default WrkspacePageHeaderComponent;
