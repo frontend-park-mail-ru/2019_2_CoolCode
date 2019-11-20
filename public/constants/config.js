@@ -57,17 +57,44 @@ const API = {
 
 };
 
+const KEYWORDS = {
+	mainPage : [],
+	profile : ['profile'],
+	login :  ['login'],
+	logout : ['logout'],
+	signup : ['signup'],
+	search :  ['search'],
+	chat : ['chat'],
+	createWrkSpace: ['createWrkSpace'],
+	createChannel : ['createChannel'],
+	wrkspacePage : ['wrkspace'],
+	wrkspaceSearch: ['wrkspace', 'search'],
+};
+
 const ROUTER = {
 	mainPage : '/',
 	profile : '/profile',
  	login :  '/login',
  	logout : '/logout',
  	signup : '/signup',
-	search : '/search',
- 	chat : '/chat',
+	search :  (query) => {
+		return `/search/${query}`;
+	},
+	chat : (id) => {
+		return `/chat/${id}`;
+	},
  	createWrkSpace: '/createWrkSpace',
 	createChannel : '/createChannel',
-	wrkspacePage : '/wrkspace',
+	wrkspacePage : (id) => {
+		return `/wrkspace/${id}`;
+	},
+	wrkspaceSearch: (id, query) => {
+		if (query) {
+			return `/wrkspace/${id}/search/${query}`;
+		} else {
+			return `/wrkspace/${id}/search/`;
+		}
+	},
 };
 
-export {settings, responseStatuses, keys, API, ROUTER};
+export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS};

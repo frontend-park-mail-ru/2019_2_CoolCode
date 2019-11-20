@@ -1,6 +1,6 @@
 import BaseComponent from "../baseComponent";
-import ChatMessageComponent from "../ChatBlock/Message/ChatMessageComponent";
 import WrkspacePageHeaderComponent from "./WrkspacePageBlocks/WrkspacePageHeader/wrkspacePageHeaderComponent";
+import WrkspacePageSearchComponent from "./WrkspacePageBlocks/WrkspacePageSearch/WrkspaceSearchPageComponent";
 
 class WrkspacePageComponent extends BaseComponent {
 
@@ -16,9 +16,14 @@ class WrkspacePageComponent extends BaseComponent {
 
     }
 
+    renderSearchContent() {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const searchComponent = new WrkspacePageSearchComponent(this._data, contentListRoot);
+    	contentListRoot.innerHTML += searchComponent.render();
+    }
+
     render() {
     	this.renderHeader();
-    	this.renderInfo();
     }
 }
 

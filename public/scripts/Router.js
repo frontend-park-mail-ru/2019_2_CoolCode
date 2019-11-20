@@ -4,6 +4,7 @@ class Router {
 			return Router.__instance;
 		}
 
+		this._keyWords = [];
 		this._paths = {};
 		this._application = application;
 
@@ -11,56 +12,75 @@ class Router {
 
 	}
 
-	register(path, view) {
-		this._paths[path] = {
+	register(path, view, keyWords) {
+		this._paths[keyWords] = {
 			viewClassName : view.name,
 			viewObject: new view({}, this._application),
 			parent : this._application,
+			pathFunction: path,
 		};
+		keyWords.forEach((keyWord)=> {
+			if (!(keyWord in this._keyWords)) {
+				this._keyWords.push(keyWord);
+			}
+		});
 	};
 
 	return() {
 		window.history.back();
 	}
 
-	go(path, identity) {
-		this.open(path, identity);
-	}
-
-	open(path, identity) {
-		const currentPath = this._paths[path];
-		if (identity) {
-			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
-			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
-			if (currentPath.viewClassName === 'wrkspaceView') path = `${path}/${identity}`;
-			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
+	create(pathObject, identities) {
+		let path = "";
+		if (identities.length !== 0) {
+			path = pathObject.pathFunction(...identities);
+		} else {
+			path = pathObject.pathFunction;
 		}
 		if (window.location.pathname !== path) {
 			window.history.pushState(
-				{'id':identity},
+				{'id':identities},
 				'',
 				path,
 			);
 		};
-		currentPath.viewObject.show({id: identity});
+		pathObject.viewObject.show(identities);
+	}
 
+	go(viewName, ...identities) {
+		for (let path in this._paths) {
+			console.log(viewName);
+			console.log(path);
+			if (this._paths[path].viewClassName === viewName) {
+				this.create(this._paths[path], identities);
+			}
+		}
+		console.log('couldn\'t open page');
+	}
+
+	open(keyWords, identities) {
+		console.log(keyWords);
+		const currentPath = this._paths[keyWords];
+		this.create(currentPath, identities);
 	}
 
 	parsePath(path) {
-		if (this._paths[path]) {
-			return path;
-		}
-		let pathArgs = path.split('/');
-		pathArgs[1] = `/${pathArgs[1]}`;
-		if (pathArgs.length === 2) {
-			let pathRegExp = /\?=/;
-			if (pathRegExp.test(pathArgs[1])) {
-				pathArgs[1].split('?=');
+		const pathSplitted = path.split(/\/|\?=/);
+		const keyWords = [];
+		const args = [];
+		pathSplitted.slice(1, pathSplitted.length).forEach((argument) => {
+			if (argument != "") {
+				if (this._keyWords.includes(argument)) {
+					keyWords.push(argument);
+				} else {
+					args.push(argument);
+				}
 			}
-			return pathArgs[1];
-		} else {
-			return pathArgs.slice(1, 3);
-		}
+		});
+		return {
+			keyWords : keyWords,
+			args: args,
+		};
 	}
 
 	start() {
@@ -69,33 +89,21 @@ class Router {
 			if (!(target instanceof HTMLAnchorElement)) {
 				return;
 			}
-
 			event.preventDefault();
-			const link = event.target;
-			// console.log({
-			// 	pathname: link.pathname
-			// });
+			const link = event.target.dataset.section;
+			this.open([link], []);
 
-			this.open(link.pathname);
 		}.bind(this));
 
 		window.onpopstate = function () {
 			const currentPath = window.location.pathname;
-			let pathArgs = this.parsePath(currentPath);
-			if (typeof(pathArgs) === 'string') {
-				this.open(pathArgs);
-			} else {
-				this.open(pathArgs[0], pathArgs[1]);
-			}
+			const pathArgs = this.parsePath(currentPath);
+			this.open(pathArgs.keyWords, pathArgs.args);
 		}.bind(this);
 
 		const currentPath = window.location.pathname;
-		let pathArgs = this.parsePath(currentPath);
-		if (typeof(pathArgs) === 'string') {
-			this.open(pathArgs);
-		} else {
-			this.open(pathArgs[0], pathArgs[1]);
-		}
+		const pathArgs = this.parsePath(currentPath);
+		this.open(pathArgs.keyWords, pathArgs.args);
 	};
 
 }

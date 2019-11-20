@@ -12,7 +12,7 @@ function createWrkSpaceEvent() {
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
 	if (channelName) {
-		createWrkspace(channelName).then(() => router.go('/profile'));
+		createWrkspace(channelName).then(() => router.go('profileView'));
 	} else {
 		drawWrkspaceFormError(inputField);
 	}
@@ -33,7 +33,7 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
 	if (channelName) {
-		createChannel(channelName, params.wrkSpaceId).then(() => router.go('/profile'));
+		createChannel(channelName, params.wrkSpaceId).then(() => router.go('profilePaageView'));
 	} else {
 		drawWrkspaceFormError(inputField);
 

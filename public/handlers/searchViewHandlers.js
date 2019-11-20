@@ -8,16 +8,16 @@ function foundUserClickEvent(params = {personId:null}) {
 			const chatId = data.getChatIdByChatUserId(id);
 			if (!chatId) {
 				console.log('error finding chatId');
-				router.go('/');
+				router.go('mainPageView');
 			} else {
 				bus.emit('createWebsocketConn', null, chatId);
-				promiseMaker.createPromise('getCurrentChatInfo', id, chatId).then(() => router.go('/chat', chatId));
+				promiseMaker.createPromise('getCurrentChatInfo', id, chatId).then(() => router.go('chatView', chatId));
 			}
 		});
 	}
 	else{
 		const chatId = data.getChatIdByChatUserId(id);
-		router.go('/chat', chatId);
+		router.go('chatView', chatId);
 	}
 }
 

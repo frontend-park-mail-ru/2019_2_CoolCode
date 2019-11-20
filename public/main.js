@@ -4,7 +4,7 @@ import Router from './scripts/Router';
 import Bus from './scripts/Bus';
 import PromiseMaker from './scripts/PromiseMaker';
 import Fetch from "./modules/fetch";
-import {settings, responseStatuses, ROUTER} from './constants/config';
+import {settings, responseStatuses, ROUTER, KEYWORDS} from './constants/config';
 const {backend} = settings;
 const {backendPort} = settings;
 const {connection} = settings;
@@ -27,6 +27,7 @@ import channelFormView from "./views/channelFormView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 import LocalStorage from "./entities/LocalStorage";
 import wrkspaceView from "./views/wrkspaceView";
+import wrkspaceSearchView from "./views/wrkspaceSearchView";
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
@@ -44,16 +45,17 @@ const data = new Data();
 
 //serviceWorkerRegister();
 createEvents();
-router.register(ROUTER.mainPage, mainPageView);
-router.register(ROUTER.profile, profileView);
-router.register(ROUTER.login, loginView);
-router.register(ROUTER.signup, signUpView);
-router.register(ROUTER.logout, logoutView);
-router.register(ROUTER.search, searchView);
-router.register(ROUTER.chat, chatView);
-router.register(ROUTER.createWrkSpace, wrkspaceFormView);
-router.register(ROUTER.createChannel, channelFormView);
-router.register(ROUTER.wrkspacePage, wrkspaceView);
+router.register(ROUTER.mainPage, mainPageView, KEYWORDS.mainPage);
+router.register(ROUTER.profile, profileView, KEYWORDS.profile);
+router.register(ROUTER.login, loginView, KEYWORDS.login);
+router.register(ROUTER.signup, signUpView, KEYWORDS.signup);
+router.register(ROUTER.logout, logoutView, KEYWORDS.logout);
+router.register(ROUTER.search, searchView, KEYWORDS.search);
+router.register(ROUTER.chat, chatView, KEYWORDS.chat);
+router.register(ROUTER.createWrkSpace, wrkspaceFormView, KEYWORDS.createWrkSpace);
+router.register(ROUTER.createChannel, channelFormView, KEYWORDS.createChannel);
+router.register(ROUTER.wrkspacePage, wrkspaceView, KEYWORDS.wrkspacePage);
+router.register(ROUTER.wrkspaceSearch, wrkspaceSearchView, KEYWORDS.wrkspaceSearch);
 
 if (appLocalStorage.getUser()) {
 	bus.emit('setUser', null, appLocalStorage.getUser());

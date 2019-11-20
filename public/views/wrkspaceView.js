@@ -50,13 +50,13 @@ class wrkspaceView extends BaseView {
 		this._data.currentWrkspaceCreator = data.getCurrentWrkspaceCreator();
 	}
 
-	show(args) {
+	show(...args) {
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-			if (!data.getLoggedIn()) router.go('/');
+			if (!data.getLoggedIn()) router.go('mainPageView');
 			else {
 				Promise.all(
 					[creatingChats(this._parent),
-						promiseMaker.createPromise('getWrkspaceInfo', args.id),
+						promiseMaker.createPromise('getWrkspaceInfo', args),
 					]
 				).then(() => {
 					promiseMaker.createPromise('getWrkspaceCreatorInfo', data.getCurrentWrkspace().CreatorID).then(
@@ -73,21 +73,21 @@ class wrkspaceView extends BaseView {
 	}
 
 	drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
+		const basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
 	}
 
 	drawLeftColumn() {
-		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
+		const leftColumn = new ChatsColumnComponent(this._data, this._parent);
 		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
 		leftColumn.renderChatsContent();
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		let rightColumn = new WrkspacePageComponent(this._data, this._parent);
-		rightColumn.render();
-		//this._parent.querySelector('.column_right').innerHTML += rightColumn.render();
+		const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+		wrkspacePage.render();
+		componentsStorage.setWrkspacePage(wrkspacePage);
 	}
 
 	render() {

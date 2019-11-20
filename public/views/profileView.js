@@ -47,7 +47,7 @@ class profileView extends BaseView {
 
 	show() {
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-			if (!data.getLoggedIn()) router.go('/');
+			if (!data.getLoggedIn()) router.go('mainPageView');
 			else {
 				creatingChats(this._parent).then(() => {
 					this.setContent();

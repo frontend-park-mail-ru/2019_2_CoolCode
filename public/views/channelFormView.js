@@ -16,12 +16,12 @@ class channelFormView extends BaseView {
     	this._data.loggedIn = data.getLoggedIn();
     }
 
-    show(args) {
-    	if (!data.getLoggedIn()) router.go('/profile');
+    show(...args) {
+    	if (!data.getLoggedIn()) router.go('profileView');
     	else {
     		this.setContent();
     		this.render();
-    		createChannelCreateSubmitHndlr(args.id);
+    		createChannelCreateSubmitHndlr(args);
     		createOverlayHndlr();
     	}
     }

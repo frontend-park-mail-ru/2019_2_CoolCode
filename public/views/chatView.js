@@ -63,15 +63,15 @@ class chatView extends BaseView {
 				this.setEvents();
 			});
 		} else {
-			router.go('/profile');
+			router.go('profileView');
 		}
 	}
 
-	show(args) {
+	show(...args) {
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-			if (!data.getLoggedIn()) router.go('/');
+			if (!data.getLoggedIn()) router.go('mainPageView');
 			creatingChats(this._parent).then(() => {
-				this.findUser(args.id);
+				this.findUser(args);
 			});
 		});
 		console.log('show: chat page');

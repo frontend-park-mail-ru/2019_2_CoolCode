@@ -40,7 +40,7 @@ function createChatBlockHndlr() {
 
 async function chatBlockClickEvent(params = {userId:null, chatId:null}) {
 	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
-	router.go('/chat', params.chatId);
+	router.go('chatView', params.chatId);
 }
 
 function createWrkspaceBlockHndlr() {
@@ -49,16 +49,19 @@ function createWrkspaceBlockHndlr() {
 		const wrkSpaceId = parseFloat(wrkspaceBlockOuter.id.split('-')[1]);
 		const visibleBlock = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
 		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button");
-		createButton.addEventListener('click', () => router.go('/createChannel', wrkSpaceId));
+		createButton.addEventListener('click', () => router.go('channelFormView', wrkSpaceId));
 		const infoButton = visibleBlock.querySelector(".wrkspace-visible__name-row__info-button");
-		infoButton.addEventListener('click', () => router.go('/wrkspace', wrkSpaceId));
+		infoButton.addEventListener('click', () => {
+		    event.stopPropagation();
+		    router.go('wrkspaceView', wrkSpaceId);
+		});
 	});
 }
 
 function createWorkspaceButtonHndlr() {
 	const wrkSpaceButton = document.querySelector(".wrkspaces-block__header__button__icon");
 	wrkSpaceButton.addEventListener('click', ()=>{
-		router.go('/createWrkSpace');
+		router.go('wrkspaceFormView');
 	}
 	);
 }

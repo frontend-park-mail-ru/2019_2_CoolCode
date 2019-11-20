@@ -1,27 +1,39 @@
 .wrkspace-page-header {
-    flex: 0 0 auto;
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/*info-row element*/
+
+.wrkspace-page-header__info-row {
+    flex: 10 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
-    justify-content: center;
+    justify-content: flex-start;
+    height: 80%;
     width: 100%;
-    height: 20%;
+
 }
 
 
 /* image-row element*/
 
-.wrkspace-page-header__image-row {
+.wrkspace-page-header__info-row__image-row {
     flex: 0 0 30%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    height: 100%;
     margin: 10px 0 0 0;
 }
 
 /* image element in image-row*/
 
-.wrkspace-page-header__image-row__image {
+.wrkspace-page-header__info-row__image-row__image {
     width: 18vh; /*experimenting with viewports*/
     height: 18vh;
 
@@ -30,25 +42,25 @@
     box-sizing: border-box;
 }
 
-.wrkspace-page-header__image-row__image_style {
+.wrkspace-page-header__info-row__image-row__image_style {
     border: 2px solid var(--global-green-color);
     border-radius: 50%;
 
 }
 
-.wrkspace-page-header__image-row__image_style:hover {
+.wrkspace-page-header__info-row__image-row__image_style:hover {
     border: 3px solid var(--global-green-color);
 }
 /* loader element in image-row*/
 
-.wrkspace-page-header__image-row__loader {
+.wrkspace-page-header__info-row__image-row__loader {
     width: 16vh; /*experimenting with viewports*/
     height: 16vh;
 
     animation: spin 2s linear infinite;
 }
 
-.wrkspace-page-header__image-row__loader_style {
+.wrkspace-page-header__info-row__image-row__loader_style {
     border: 16px solid var(--global-loader-grey-color);
     border-top: 16px solid var(--global-green-color-1);
     border-radius: 50%;
@@ -56,15 +68,15 @@
 
 /* input element in image-row*/
 
-.wrkspace-page-header__image-row__input{
+.wrkspace-page-header__info-row__image-row__input{
     display: none;
 }
 
 
 /* info-column element*/
 
-.wrkspace-page-header__info-column {
-    flex: 0 0 40%;
+.wrkspace-page-header__info-row__info-column {
+    flex: 0 0 30%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,15 +85,17 @@
 
 /* name element in info-column*/
 
-.wrkspace-page-header__info-column__name {
+.wrkspace-page-header__info-row__info-column__name {
     flex: 0 0 20%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
+    margin: 5px 0 5px 0;
+
 }
 
-.wrkspace-page-header__info-column__name_style {
+.wrkspace-page-header__info-row__info-column__name_style {
     font-family:var(--global-font-family-Montserrat);
     font-size: 36px;
     color: #000000;
@@ -90,40 +104,55 @@
 
 /* info element in info-column*/
 
-.wrkspace-page-header__info-column__info {
+.wrkspace-page-header__info-row__info-column__info {
     flex: 0 0 10%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
+    margin: 3px 0 3px 0;
 }
 
-.wrkspace-page-header__info-column__info_style {
+.wrkspace-page-header__info-row__info-column__info_style {
     font-family:var(--global-font-family-Montserrat);
     font-size: 18px;
-    color: var(--global-darkgrey-color);
+    color: var(--global-middlegrey-color);
     font-weight: 200;
 }
 
+
 /* settings-column element*/
 
-.wrkspace-page-header__settings-column {
-    flex: 0 0 25%;
+.wrkspace-page-header__info-row__settings-column {
+    flex: 0 0 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    height: 70%;
+
+}
+
+/* container element*/
+
+.wrkspace-page-header__info-row__settings-column__container {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 60%;
+    height: 100%;
+    width: 100%;
 
 }
 
 /* button element in settings-column */
 
-.wrkspace-page-header__settings-column__button {
+.wrkspace-page-header__info-row__settings-column__container__button {
     flex: 0 0 15%;
     display: flex;
     flex-direction: row;
     min-height: 4vh; /*experimenting with viewports*/
-    width: 20%;
+    width: 50%;
     height: auto;
     align-self: flex-end;
     justify-content: center;
@@ -131,7 +160,7 @@
 
 /*icon element in button*/
 
-.wrkspace-page-header__settings-column__button__icon {
+.wrkspace-page-header__info-row__settings-column__container__button__icon {
     object-fit: scale-down;
     object-position: bottom;
     max-width:100%;
@@ -139,7 +168,7 @@
     height: 4vh; /*experimenting with viewports*/
 }
 
-.wrkspace-page-header__settings-column__button__icon_style {
+.wrkspace-page-header__info-row__settings-column__container__button__icon_style {
     filter: opacity(0.9);
 }
 

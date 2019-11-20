@@ -17,7 +17,7 @@ class wrkspaceFormView extends BaseView {
 	}
 
 	show() {
-		if (!data.getLoggedIn()) router.go('/profile');
+		if (!data.getLoggedIn()) router.go('profileView');
 		else {
 			this.setContent();
 			this.render();

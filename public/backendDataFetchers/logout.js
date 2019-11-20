@@ -12,7 +12,7 @@ async function handleLogout() {
 		}
 		await promiseMaker.createPromise('clearData');
 		await promiseMaker.createPromise('clearStorage');
-		router.go('/');
+		router.go('mainPageView');
 	} catch (error) {
 		console.error(error);
 	}

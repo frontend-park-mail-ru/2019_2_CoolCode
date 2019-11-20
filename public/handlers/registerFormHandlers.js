@@ -43,7 +43,7 @@ async function createLoginEvent(params = {form: null}) {
 		bus.emit('hideError', null, `.${errorSelector}`);
 		bus.emit('removeErrorStyle', null, emailField, `${textSelector}`);
 		bus.emit('removeErrorStyle', null, passwordField, `${textSelector}`);
-		router.go('/profile');
+		router.go('profileView');
 	}
 }
 
@@ -81,7 +81,7 @@ async function createSignUpEvent(params = {form: null}) {
 		bus.emit('removeErrorStyle', null, emailField, `${textSelector}`);
 		bus.emit('removeErrorStyle', null, passwordField, `${textSelector}`);
 		bus.emit('removeErrorStyle', null, usernameField, `${textSelector}`);
-		router.go('/profile');
+		router.go('profileView');
 	}
 }
 

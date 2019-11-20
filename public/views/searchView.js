@@ -16,7 +16,7 @@ class searchView extends BaseView {
 	}
 
 	show() {
-		if (!data.getLoggedIn()) router.go('/'); /*checking if reloading page*/
+		if (!data.getLoggedIn()) router.go('mainPageView'); /*checking if reloading page*/
 		else {
 			this.setContent();
 			this.render();
