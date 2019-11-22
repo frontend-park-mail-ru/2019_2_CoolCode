@@ -21,6 +21,9 @@ import searchView from "./views/searchView";
 import Data from "./entities/Data";
 import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
+import channelView from "./views/channelView";
+import channelInfoView from "./views/channelInfoView";
+import addMemberView from "./views/addMemberView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
@@ -50,6 +53,9 @@ router.register(ROUTER.signup, signUpView);
 router.register(ROUTER.logout, logoutView);
 router.register(ROUTER.search, searchView);
 router.register(ROUTER.chat, chatView);
+router.register(ROUTER.channel, channelView);///
+// router.register(ROUTER.channelInfo, channelInfoView);///
+// router.register(ROUTER.addMember, addMemberView);///
 router.register(ROUTER.createWrkSpace, wrkspaceFormView);
 router.register(ROUTER.createChannel, channelFormView);
 

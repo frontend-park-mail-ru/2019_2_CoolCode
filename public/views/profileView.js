@@ -13,7 +13,7 @@ import {
 } from "../handlers/chatsBlockHandlers";
 import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
-import {channelView, menuHandlers} from "../handlers/channelViewHandlers";
+import {channelViewHandler, menuHandlers} from "../handlers/channelViewHandlers";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -30,7 +30,7 @@ class profileView extends BaseView {
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
-		channelView();
+		channelViewHandler();
 	}
 
 	createClickablePic() {

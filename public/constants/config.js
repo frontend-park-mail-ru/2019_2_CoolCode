@@ -39,7 +39,7 @@ const API = {
 		return `/chats/${chatId}/messages`;
 	},
 	currentChannelMessages : (chanId) => {
-		return `/channels/${chanId}`;
+		return `/channels/${chanId}/messages`;
 	},
 	getUserChats : (id) => {
 		return `/users/${id}/chats`;
@@ -65,7 +65,10 @@ const ROUTER = {
  	signup : '/signup',
 	search : '/search',
  	chat : '/chat',
- 	createWrkSpace: '/createWrkSpace',
+	channel : '/channel',
+	addMember : '/addMember',
+	channelInfo : '/channelInfo',
+	createWrkSpace: '/createWrkSpace',
 	createChannel : '/createChannel',
 };
 

@@ -32,6 +32,7 @@ class Router {
 		if (identity) {
 			if (currentPath.viewClassName === 'chatView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'channelFormView') path = `${path}/${identity}`;
+			if (currentPath.viewClassName === 'channelView') path = `${path}/${identity}`;
 			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
 			if (currentPath.viewClassName === 'searchView') path = `${path}?=${identity}`;
 		}
@@ -42,6 +43,7 @@ class Router {
 				path,
 			);
 		};
+		console.log("AAAAA",currentPath.viewObject );
 		currentPath.viewObject.show({id: identity});
 
 	}
