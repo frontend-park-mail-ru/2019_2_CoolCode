@@ -21,6 +21,9 @@ import searchView from "./views/searchView";
 import Data from "./entities/Data";
 import createEvents from "./scripts/Events";
 import chatView from "./views/chatView";
+import channelView from "./views/channelView";
+import channelInfoView from "./views/channelInfoView";
+import addMemberView from "./views/addMemberView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
@@ -56,6 +59,7 @@ router.register(ROUTER.createWrkSpace, wrkspaceFormView, KEYWORDS.createWrkSpace
 router.register(ROUTER.createChannel, channelFormView, KEYWORDS.createChannel);
 router.register(ROUTER.wrkspacePage, wrkspaceView, KEYWORDS.wrkspacePage);
 router.register(ROUTER.wrkspaceSearch, wrkspaceSearchView, KEYWORDS.wrkspaceSearch);
+router.register(ROUTER.channelPage, channelView, KEYWORDS.channelPage);
 
 if (appLocalStorage.getUser()) {
 	bus.emit('setUser', null, appLocalStorage.getUser());

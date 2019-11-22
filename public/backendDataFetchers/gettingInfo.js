@@ -1,6 +1,24 @@
 import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
+async function getChannelInfo(id) {
+	console.log(` Getting channel ${id} info`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.channelInfo(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch channel info: ${responseStatuses[response.status]}`);
+		}
+		const channel = await response.json();
+		bus.emit('setCurrentChannel', null, channel);
+	} catch (error) {
+		console.error(error);
+	}
+
+}
+
 async function getWrkspaceInfo(id) {
 	console.log(` Getting wrkspace ${id} info`);
 	try {
@@ -112,4 +130,4 @@ async function getCurrentChatInfo(userId, chatId) {
 	bus.emit('setCurrentChatId', null, chatId);
 }
 
-export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo};
+export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo, getChannelInfo};

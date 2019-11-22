@@ -14,13 +14,13 @@ class Router {
 
 	register(path, view, keyWords) {
 		this._paths[keyWords] = {
-			viewClassName : view.name,
+			viewClassName: view.name,
 			viewObject: new view({}, this._application),
-			parent : this._application,
+			parent: this._application,
 			pathFunction: path,
 		};
-		keyWords.forEach((keyWord)=> {
-			if (!(keyWord in this._keyWords)) {
+		keyWords.forEach((keyWord) => {
+			if (!(this._keyWords.includes(keyWord))) {
 				this._keyWords.push(keyWord);
 			}
 		});

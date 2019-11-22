@@ -1,4 +1,5 @@
 import {data, promiseMaker, router} from "../main";
+import {menuHandlers} from "./channelViewHandlers";
 
 function createWrkspaceBlockExpandHndlr() {
 	const wrkspaceBlocksOuter = document.querySelectorAll('.wrkspace-block');
@@ -66,4 +67,31 @@ function createWorkspaceButtonHndlr() {
 	);
 }
 
-export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr, createWorkspaceButtonHndlr};
+function channelViewHandler() {
+	const wrks = document.querySelectorAll('.wrkspace-block.wrkspace-block_style');
+	wrks.forEach((wrk)=>{
+		const wrkSpaceId = parseFloat(wrk.id.split('-')[1]);
+		const wrkName = wrk.querySelector('.wrkspace-visible__name-row__text.wrkspace-visible__name-row__text_style').textContent;
+		const wrkPhoto = wrk.querySelector('.wrkspace-visible__image-row__image.wrkspace-visible__image-row__image_style').getAttribute('src');
+		const channels = wrk.querySelectorAll('.wrkspace-chann');
+		channels.forEach((channel) => {
+			const channelName = channel.textContent;
+			const channelId = channel.getAttribute('id').split('-')[1];
+			channel.addEventListener('click', ()=>{
+				// document.querySelector(".column.column_right.column_right-outlined").innerHTML = '';
+				// //bus.emit('createChannelView', null);
+				// let importantMsg = "hello";
+				// document.querySelector(".column.column_right.column_right-outlined").innerHTML = channelTemplate({
+				// 	wrkName:wrkName,
+				// 	channelName:channelName,
+				// 	wrkPhoto:wrkPhoto,
+				// 	importantMessage : importantMsg,
+				// });
+				router.go('channelView', wrkSpaceId, channelId);
+			});
+			//router.go('/channel', id);
+		});
+	});
+}
+
+export {createChatBlockHndlr, createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr, createWorkspaceButtonHndlr, channelViewHandler};

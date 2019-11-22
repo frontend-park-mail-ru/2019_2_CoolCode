@@ -1,6 +1,7 @@
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
+import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
 
 class ComponentsStorage {
 	constructor(leftColumn = null, chatBlock = null, wrkspacePage = null) {
@@ -38,7 +39,8 @@ class ComponentsStorage {
 
 	setChatBlock(chatBlock) {
 		try {
-			if (chatBlock instanceof ChatComponent) {
+			if (chatBlock instanceof ChatComponent ||
+				chatBlock instanceof ChannelComponent) {
 				this.chatBlock = chatBlock;
 			} else{
 				throw new Error('Can\'t set chatBlock component');

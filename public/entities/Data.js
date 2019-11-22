@@ -242,6 +242,16 @@ class Data {
 		return this.currentWrkspaceCreator;
 	}
 
+	setCurrentChannel(currentChannel) {
+		this.currentChannel = currentChannel;
+		this.createLogMessage('set', 'currentChannel', currentChannel);
+	}
+
+	getCurrentChannel() {
+		this.createLogMessage('get', 'currentChannel', this.currentChannel);
+		return this.currentChannel;
+	}
+
 	getChatIdByChatUserId(userId) {
 		let chatId = null;
 		for (let chat of this.userChats) {

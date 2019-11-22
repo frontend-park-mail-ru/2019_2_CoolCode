@@ -33,7 +33,7 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
 	if (channelName) {
-		createChannel(channelName, params.wrkSpaceId).then(() => router.go('profilePaageView'));
+		createChannel(channelName, params.wrkSpaceId).then(() => router.go('profileView'));
 	} else {
 		drawWrkspaceFormError(inputField);
 

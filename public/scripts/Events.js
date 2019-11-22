@@ -3,6 +3,7 @@ import {appLocalStorage, bus, data} from "../main";
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn} from "../backendDataFetchers/websockets";
 import {
+	getChannelInfo,
 	getChats,
 	getCurrentChatInfo,
 	getWrkspaceCreatorInfo,
@@ -30,6 +31,7 @@ function createEvents() {
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
+	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 	bus.on('setChosenMessageId', data.setChosenMessageId.bind(data));
@@ -50,6 +52,7 @@ function createEvents() {
 	bus.on('sendMessage', sendingMessage);
 
 	bus.on('getWrkspaceInfo', getWrkspaceInfo);
+	bus.on('getChannelInfo', getChannelInfo);
 	bus.on('getWrkspaceCreatorInfo', getWrkspaceCreatorInfo);
 
 	/**/

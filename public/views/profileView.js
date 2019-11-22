@@ -5,13 +5,16 @@ import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} fro
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
+
 import {
+	channelViewHandler,
 	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
+import {menuHandlers} from "../handlers/channelViewHandlers";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -28,6 +31,7 @@ class profileView extends BaseView {
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
+		channelViewHandler();
 	}
 
 	createClickablePic() {

@@ -13,6 +13,7 @@ import {
 	createSendMessageBtnHndlr
 } from "../handlers/chatViewHandlers";
 import {
+	channelViewHandler,
 	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
@@ -41,6 +42,7 @@ class chatView extends BaseView {
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
+		channelViewHandler();
 	}
 
 	setContent() {
