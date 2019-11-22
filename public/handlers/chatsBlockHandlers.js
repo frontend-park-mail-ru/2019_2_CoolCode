@@ -1,5 +1,5 @@
 import {data, promiseMaker, router} from "../main";
-import {menuHandlers} from "./channelViewHandlers";
+import {menuHandlers, menuHandlersInfo} from "./channelViewHandlers";
 
 function createWrkspaceBlockExpandHndlr() {
 	const wrkspaceBlocksOuter = document.querySelectorAll('.wrkspace-block');
@@ -92,7 +92,6 @@ function channelViewHandler() {
 			});
 			//router.go('/channel', id);
 		});
-		menuHandlers();
 	});
 }
 

@@ -38,6 +38,7 @@
     height: 100%;
     width: 100%;
     z-index: 10; /*make it overlay*/
+    display: none;
 }
 
 /*.channelHeaderMenuItems__info_overlay_style {*/

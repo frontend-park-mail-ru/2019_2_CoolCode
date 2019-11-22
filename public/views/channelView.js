@@ -21,7 +21,7 @@ import {
 	createMessageInputHndlr,
 	createSendMessageBtnHndlr
 } from "../handlers/chatViewHandlers";
-import {menuHandlers} from "../handlers/channelViewHandlers";
+import {menuHandlers, menuHandlersAdd, menuHandlersInfo} from "../handlers/channelViewHandlers";
 
 class channelView extends BaseView {
 
@@ -33,10 +33,6 @@ class channelView extends BaseView {
 	};
 
 	setEvents() {
-		// bus.emit('showLoader', null, '.profile-header__image-row');
-		// getProfilePhoto(data.getUserId());
-		// bus.emit('createProfileInputs', null, this._parent, this._data.user);
-		// this.createClickablePic();
 		createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
 		createMessageInputHndlr();
@@ -48,7 +44,8 @@ class channelView extends BaseView {
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
 		channelViewHandler();
-		menuHandlers();
+		menuHandlersInfo();
+		menuHandlersAdd();
 
 	}
 	setContent() {
@@ -59,7 +56,6 @@ class channelView extends BaseView {
 		this._data.currentChannel = data.getCurrentChannel();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.importantMessage = {text: 'hello'};
-		//this._data.channelMessages = data.getCurrentChannelMessages();
 	}
 
 	show(args) {
