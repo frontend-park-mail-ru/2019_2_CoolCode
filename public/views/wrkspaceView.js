@@ -6,6 +6,7 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
 import {
+	channelViewHandler,
 	createChatBlockHndlr, createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
@@ -13,7 +14,11 @@ import {
 import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
-import {createWorkspaceSettingsButtonHndlr} from "../handlers/wrkspaceBlockHandlers";
+import {
+	createWorkspaceSettingsButtonHndlr,
+	createWrkspaceDropdownHandler,
+	createWrkspaceInfoColumnHandler
+} from "../handlers/wrkspaceBlockHandlers";
 
 class wrkspaceView extends BaseView {
 	constructor (data, parent) {
@@ -31,6 +36,9 @@ class wrkspaceView extends BaseView {
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
 		createWorkspaceSettingsButtonHndlr();
+		channelViewHandler();
+		createWrkspaceDropdownHandler();
+		createWrkspaceInfoColumnHandler();
 	}
 
 	createClickablePic() {

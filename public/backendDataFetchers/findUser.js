@@ -11,7 +11,6 @@ async function findUser(query) {
 		}
 		const data = await response.json();
 		await promiseMaker.createPromise('setLastSearchUsers', data['users']);
-		router.go('search', query);
 	} catch (error) {
 		console.error(error);
 	}

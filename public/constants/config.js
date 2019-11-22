@@ -85,7 +85,11 @@ const ROUTER = {
  	logout : '/logout',
  	signup : '/signup',
 	search :  (query) => {
-		return `/search/${query}`;
+		if (query) {
+			return `/search?=${query}`;
+		} else {
+			return '/search';
+		}
 	},
 	chat : (id) => {
 		return `/chat/${id}`;
@@ -102,9 +106,9 @@ const ROUTER = {
 	},
 	wrkspaceSearch: (id, query) => {
 		if (query) {
-			return `/wrkspace/${id}/search/${query}`;
+			return `/wrkspace/${id}/search?=${query}`;
 		} else {
-			return `/wrkspace/${id}/search/`;
+			return `/wrkspace/${id}/search`;
 		}
 	},
 };

@@ -15,6 +15,7 @@ import {
 import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import {menuHandlers} from "../handlers/channelViewHandlers";
+import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -75,15 +76,19 @@ class profileView extends BaseView {
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
-	drawRightColumn() {
-		let rightColumn = new ProfilePageComponent(this._data.user, this._parent);
-		this._parent.querySelector('.column_right').innerHTML += rightColumn.render();
+	drawRightColumn(profileBlock) {
+		this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
+		componentsStorage.setProfileBlock(profileBlock);
 	}
 
 	render() {
-		this.drawBasics();
-		this.drawLeftColumn();
-		this.drawRightColumn();
+		let profileBlock = componentsStorage.getRightColumn();
+		if (!profileBlock || !(profileBlock instanceof ProfilePageComponent)) {
+			this.drawBasics();
+			this.drawLeftColumn();
+			profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+		}
+		this.drawRightColumn(profileBlock);
 	}
 
 }

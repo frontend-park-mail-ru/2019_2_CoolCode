@@ -222,6 +222,26 @@ class Data {
 		return this.lastSearchUsers;
 	}
 
+	deleteLastSearchUsers() {
+		this.lastSearchUsers = undefined;
+		this.createLogMessage('set', 'lastSearchUsers', this.lastSearchUsers);
+	}
+
+	setLastSearchMessages (lastSearchMessages) {
+		this.lastSearchMessages = lastSearchMessages;
+		this.createLogMessage('set', 'lastSearchMessages', lastSearchMessages);
+	}
+
+	getLastSearchMessages() {
+		this.createLogMessage('get', 'lastSearchMessages', this.lastSearchMessages);
+		return this.lastSearchMessages;
+	}
+
+	deleteLastSearchMessages() {
+		this.lastSearchMessages = undefined;
+		this.createLogMessage('set', 'lastSearchMessages', this.lastSearchMessages);
+	}
+
 	setCurrentWrkspace(currentWrkspace) {
 		this.currentWrkspace = currentWrkspace;
 		this.createLogMessage('set', 'currentWrkspace', currentWrkspace);
@@ -232,6 +252,11 @@ class Data {
 		return this.currentWrkspace;
 	}
 
+	getCurrentWrkspaceId() {
+		this.createLogMessage('get', 'currentWrkspaceId', this.currentWrkspace.ID);
+		return this.currentWrkspace.ID;
+	}
+
 	setCurrentWrkspaceCreator(currentWrkspaceCreator) {
 		this.currentWrkspaceCreator = currentWrkspaceCreator;
 		this.createLogMessage('set', 'currentWrkspaceCreator', currentWrkspaceCreator);
@@ -240,6 +265,12 @@ class Data {
 	getCurrentWrkspaceCreator() {
 		this.createLogMessage('get', 'currentWrkspaceCreator', this.currentWrkspaceCreator);
 		return this.currentWrkspaceCreator;
+	}
+
+	addCurrentWrkspaceMember(id) {
+		if (!this.currentWrkspace.Members.includes(id)) {
+			this.currentWrkspace.Members.push(id);
+		}
 	}
 
 	setCurrentChannel(currentChannel) {
