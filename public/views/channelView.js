@@ -49,6 +49,7 @@ class channelView extends BaseView {
 		createDeleteMessageBlockHndlr();
 		channelViewHandler();
 		menuHandlers();
+
 	}
 	setContent() {
 		this._data.user = data.getUser();

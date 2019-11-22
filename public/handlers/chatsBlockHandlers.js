@@ -88,9 +88,11 @@ function channelViewHandler() {
 				// 	importantMessage : importantMsg,
 				// });
 				router.go('channelView', wrkSpaceId, channelId);
+
 			});
 			//router.go('/channel', id);
 		});
+		menuHandlers();
 	});
 }
 
