@@ -16,6 +16,7 @@ import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import {menuHandlers} from "../handlers/channelViewHandlers";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -67,6 +68,7 @@ class profileView extends BaseView {
 	drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 
 	drawLeftColumn() {

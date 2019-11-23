@@ -19,6 +19,7 @@ import {
 	createWrkspaceDropdownHandler,
 	createWrkspaceInfoColumnHandler
 } from "../handlers/wrkspaceBlockHandlers";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class wrkspaceView extends BaseView {
 	constructor (data, parent) {
@@ -83,6 +84,7 @@ class wrkspaceView extends BaseView {
 	drawBasics() {
 		const basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 
 	drawLeftColumn() {

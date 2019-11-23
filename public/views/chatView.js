@@ -19,6 +19,7 @@ import {
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {saveUserPhoto} from "../handlers/photosHandlers";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class chatView extends BaseView {
 
@@ -82,6 +83,7 @@ class chatView extends BaseView {
 	drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
     	this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 
 	drawLeftColumn() {

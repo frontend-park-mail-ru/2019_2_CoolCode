@@ -1,0 +1,23 @@
+.bem-support-btn__support_btn {
+    position: fixed; /*make it centered and overlay*/
+    bottom: 5vh; /*experimenting with viewports*/
+    right: 3vw;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 11; /*make it overlay*/
+    padding: 5px;
+}
+.bem-support-btn__support_btn_style {
+    -webkit-backface-visibility: hidden;
+}
+.bem-support-btn_img__image{
+    width: 50px;
+    height: 50px;
+}
+.bem-support-btn__blockIframe{
+    transform: translateY(-50%);
+    left: 50%;
+    display: none;
+}
