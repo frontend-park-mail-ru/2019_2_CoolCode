@@ -76,19 +76,22 @@ class profileView extends BaseView {
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
-	drawRightColumn(profileBlock) {
+	drawRightColumn() {
+		const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
 		this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
 		componentsStorage.setProfileBlock(profileBlock);
 	}
 
 	render() {
-		let profileBlock = componentsStorage.getRightColumn();
-		if (!profileBlock || !(profileBlock instanceof ProfilePageComponent)) {
-			this.drawBasics();
-			this.drawLeftColumn();
-			profileBlock = new ProfilePageComponent(this._data.user, this._parent);
-		}
-		this.drawRightColumn(profileBlock);
+		this.drawBasics();
+		this.drawLeftColumn();
+		// let profileBlock = componentsStorage.getRightColumn();
+		// if (!profileBlock || !(profileBlock instanceof ProfilePageComponent)) {
+		// 	this.drawBasics();
+		// 	this.drawLeftColumn();
+		// 	profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+		// }
+		this.drawRightColumn();
 	}
 
 }

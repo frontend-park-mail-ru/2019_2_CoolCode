@@ -90,20 +90,24 @@ class wrkspaceSearchView extends BaseView {
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
-	drawRightColumn(wrkspacePage) {
+	drawRightColumn() {
+		const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+		wrkspacePage.render();
 		wrkspacePage.renderSearchContent(this._data);
 		componentsStorage.setWrkspacePage(wrkspacePage);
 	}
 
 	render() {
-		let wrkspacePage = componentsStorage.getRightColumn();
-		if (!wrkspacePage || !(wrkspacePage instanceof WrkspacePageComponent)) {
-			this.drawBasics();
-			this.drawLeftColumn();
-			wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
-			wrkspacePage.render();
-		}
-		this.drawRightColumn(wrkspacePage);
+		// let wrkspacePage = componentsStorage.getRightColumn();
+		// if (!wrkspacePage || !(wrkspacePage instanceof WrkspacePageComponent)) {
+		// 	this.drawBasics();
+		// 	this.drawLeftColumn();
+		// 	wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+		// 	wrkspacePage.render();
+		// }
+		this.drawBasics();
+		this.drawLeftColumn();
+		this.drawRightColumn();
 	}
 
 }
