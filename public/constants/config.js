@@ -28,10 +28,11 @@ const API = {
 		return `/messages/${id}`;
 	},
 	createChat: '/chats',
+
 	createChannel : (id) => {
 		return `/workspaces/${id}/channels`;
 	},
-	createWrkSpace: '/workspaces',
+	createWrkSpace: 'api/workspaces',
 	findUser : (query) => {
 		return `/users/${query}`;
 	},

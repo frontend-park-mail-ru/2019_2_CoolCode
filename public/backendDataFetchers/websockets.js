@@ -10,7 +10,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
+	const websocketConn = new WebSocket(`wss://boiling-chamber-90136.herokuapp.com/ws/chats/${chatId}/notifications`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {

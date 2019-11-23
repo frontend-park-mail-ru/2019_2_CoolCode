@@ -7,6 +7,8 @@ import Fetch from "./modules/fetch";
 import {settings, responseStatuses, ROUTER, KEYWORDS} from './constants/config';
 const {backend} = settings;
 const {backendPort} = settings;
+const {frontend} = settings;
+const {frontendPort} = settings;
 const {connection} = settings;
 
 import './components/bem-main.css';

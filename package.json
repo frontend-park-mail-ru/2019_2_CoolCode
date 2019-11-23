@@ -9,18 +9,23 @@
     "build": "webpack -p",
     "watch": "webpack --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "latest",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.20.0",
     "express-history-api-fallback": "^2.2.1",
     "express-http-proxy": "^1.6.0",
     "morgan": "^1.9.1",
     "pug": "^2.0.4",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "http-proxy": "latest",
+    "http-proxy": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",

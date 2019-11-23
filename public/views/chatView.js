@@ -39,7 +39,6 @@ class chatView extends BaseView {
 		createSendMessageBtnHndlr();
 		createWrkspaceBlockHndlr();
 		createWorkspaceButtonHndlr();
-		//createOpenSettingsMessageHndlr();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
