@@ -22,6 +22,7 @@ import {
 	createSendMessageBtnHndlr
 } from "../handlers/chatViewHandlers";
 import {menuHandlers} from "../handlers/channelViewHandlers";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class channelView extends BaseView {
 
@@ -85,6 +86,7 @@ class channelView extends BaseView {
 	drawBasics() {
 		const basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 
 	drawLeftColumn() {

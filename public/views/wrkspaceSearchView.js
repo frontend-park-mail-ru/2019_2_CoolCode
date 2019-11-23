@@ -17,6 +17,7 @@ import {
 import {creatingChats} from "../backendDataFetchers/websockets";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class wrkspaceSearchView extends BaseView {
 
@@ -81,6 +82,7 @@ class wrkspaceSearchView extends BaseView {
 	drawBasics() {
 		const basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 
 	drawLeftColumn() {

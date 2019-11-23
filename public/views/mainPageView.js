@@ -2,6 +2,7 @@ import BaseView from './baseView';
 import {data, bus, router, promiseMaker, appLocalStorage, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import MainPageComponent from "../components/MainPage/mainPageComponent";
+import {clickSupport} from "../handlers/supportHandlers";
 
 class mainPageView extends BaseView {
 	constructor (data, parent) {
@@ -22,6 +23,7 @@ class mainPageView extends BaseView {
 	drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		clickSupport();
 	}
 	render() {
 		this.drawBasics();
