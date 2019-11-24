@@ -11,7 +11,8 @@ class WrkSpaceComponent extends BaseComponent {
 		wSpace.id = "wrkspace-" + this._data.ID;
 		wSpace.innerHTML = wrkSpaceTempl(this._data);
 
-		if (this._data.Channels !== null) {
+		if (this._data.Channels !== null ||
+				this._data.Channels !== 0) {
 			const wspaceChannels = document.createElement('div');
 			wspaceChannels.className = "wrkspace-expandable wrkspace-expandable_style";
 			this._data.Channels.forEach((ch) => {
