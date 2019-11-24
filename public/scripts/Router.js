@@ -54,6 +54,7 @@ class Router {
 				break;
 			}
 			console.log(path);
+			console.log(this._paths[path].viewClassName);
 			console.log(viewName);
 			console.log(`couldn\'t open page : ${viewName}`);
 
