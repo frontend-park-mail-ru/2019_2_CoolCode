@@ -50,6 +50,8 @@ class Router {
 	go(viewName, ...identities) {
 		for (let path in this._paths) {
 			if (this._paths[path].viewClassName === viewName) {
+				console.log(path);
+				console.log(viewName);
 				this.create(this._paths[path], identities);
 				break;
 			}
