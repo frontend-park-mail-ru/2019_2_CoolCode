@@ -16,11 +16,63 @@ async function alterWrkspace(wrkspace) {
 		);
 		if (response.status !== 200) {
 			throw new Error(
-				`Couldn't fetch wrkspace info: ${responseStatuses[response.status]}`);
+				`Couldn't alter wrkspace : ${responseStatuses[response.status]}`);
 		}
 	} catch (error) {
 		console.error(error);
 	}
 }
-export {alterWrkspace};
+
+async function alterChannel(channel) {
+	try {
+		let response = await FetchModule._doPut(
+			{path: API.channelInfo(channel.ID),
+				data:   {
+					id: channel.ID,
+					name: channel.Name,
+					members: channel.Members,
+					admins: channel.Admins
+				},
+				contentType : 'application/json;charset=utf-8'}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't alter channel: ${responseStatuses[response.status]}`);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function deleteChannel(id) {
+	try {
+		let response = await FetchModule._doDelete(
+			{path: API.channelInfo(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't delete channel: ${responseStatuses[response.status]}`);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+async function leaveChannel(id) {
+	try {
+		let response = await FetchModule._doDelete(
+			{path: API.channelLeave(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't leave channel: ${responseStatuses[response.status]}`);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+export {alterWrkspace, alterChannel, deleteChannel, leaveChannel};
 

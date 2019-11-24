@@ -63,7 +63,7 @@ class ChannelMessageComponent extends BaseComponent {
 					if (this._data.error) {
 						this.messageElement.querySelector('.primary-row__text').classList += ' primary-row__text_error';
 					}
-					//this.createHandlerRight();
+					this.createHandlerRight();
 
 				} else {
 					this.renderLeft();

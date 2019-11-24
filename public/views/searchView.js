@@ -1,5 +1,9 @@
 import BaseView from "./baseView";
-import {createMessageFoundChatBlockHndlr, createUserBlockHndlr} from "../handlers/searchViewHandlers";
+import {
+	createMessageFoundChannelBlockHndlr,
+	createMessageFoundChatBlockHndlr,
+	createUserBlockHndlr
+} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "./../main";
 import {createWorkspaceButtonHndlr, createWrkspaceBlockHndlr} from "../handlers/chatsBlockHandlers";
 
@@ -26,6 +30,7 @@ class searchView extends BaseView {
 			this.render();
 			createUserBlockHndlr('.all-chats-window');
 			createMessageFoundChatBlockHndlr();
+			createMessageFoundChannelBlockHndlr();
 		}
 	}
 	render() {

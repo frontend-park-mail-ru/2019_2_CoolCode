@@ -6,13 +6,15 @@ block page
                     div.channel-header__info-row__info-column__name-row.channel-header__info-row__info-column__name-row_style=currentWrkspace.Name
                     div.channel-header__info-row__info-column__status-row.channel-header__info-row__info-column__status-row_style=`#${currentChannel.Name}`
                 div.channel-header__info-row__btnblock
-                    div.channel-header__info-row__dropdown
-                        img.channel-header__info-row__dropdown__dropbtn(src="/images/setting1.png")
-                        div.channel-header__info-row__dropdown__dropdown-content
-                            p.channel-header__info-row__dropdown__dropdown-content__info view channel info
-                            p.channel-header__info-row__dropdown__dropdown-content__add add member
-                            p.channel-header__info-row__dropdown__dropdown-content__find find message
-                            p.channel-header__info-row__dropdown__dropdown-content__delete delete and exit
+                    div.channel-header__dropdown
+                        img.channel-header__dropdown__dropbtn(src="/images/setting1.png")
+                        div.channel-header__dropdown__dropdown-content
+                            p.channel-header__dropdown__dropdown-content__option(data-section='viewInfo') view channel info
+                            p.channel-header__dropdown__dropdown-content__option(data-section='addMember') add member
+                            p.channel-header__dropdown__dropdown-content__option(data-section='findMessage') find message
+                            p.channel-header__dropdown__dropdown-content__option(data-section='deleteChannel') delete channel
+                            p.channel-header__dropdown__dropdown-content__option(data-section='leaveChannel') leave channel
+
             if Object.keys(importantMessage).length !== 0
                 div.channel-header__pinned-message.channel-header__pinned-message_style
                     div.channel-header__pinned-message__content.channel-header__pinned-message__content_style=importantMessage.text

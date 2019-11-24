@@ -7,7 +7,7 @@ import {
 	getChats, getCurrentChannelInfo,
 	getCurrentChatInfo, getUserInfo,
 	getWrkspaceCreatorInfo,
-	getWrkspaceInfo
+	getWrkspaceInfo, getWrkspaceUsers
 } from "../backendDataFetchers/gettingInfo";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
@@ -15,9 +15,9 @@ import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
 import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
-import {sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findUser, findMessagesFullInfo} from "../backendDataFetchers/findInfo";
-import {alterWrkspace} from "../backendDataFetchers/alterEntities";
+import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
 function createEvents() {
 
 	/*setting data*/
@@ -43,6 +43,9 @@ function createEvents() {
 	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('addCurrentWrkspaceMember', data.addCurrentWrkspaceMember.bind(data));
+	bus.on('addCurrentWrkspaceUser', data.addCurrentWrkspaceUser.bind(data));
+	bus.on('deleteCurrentWrkspaceUsers', data.deleteCurrentWrkspaceUsers.bind(data));
+	bus.on('addCurrentChannelMember', data.addCurrentChannelMember.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 	bus.on('setChosenMessageId', data.setChosenMessageId.bind(data));
 	bus.on('deleteChosenMessageId', data.deleteChosenMessageId.bind(data));
@@ -60,11 +63,16 @@ function createEvents() {
 	bus.on('findUser', findUser);
 	bus.on('findMessagesFullInfo', findMessagesFullInfo);
 	bus.on('alterWrkspace', alterWrkspace);
+	bus.on('alterChannel', alterChannel);
+	bus.on('deleteChannel', deleteChannel);
+	bus.on('leaveChannel', leaveChannel);
 
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
 	bus.on('getCurrentChannelInfo', getCurrentChannelInfo);
+	bus.on('getWrkspaceUsers', getWrkspaceUsers);
 	bus.on('getChats', getChats);
 	bus.on('sendMessage', sendingMessage);
+	bus.on('likeMessage', likeMessage);
 
 	bus.on('getWrkspaceInfo', getWrkspaceInfo);
 	bus.on('getChannelInfo', getChannelInfo);

@@ -30,7 +30,7 @@ class Fetch {
 	async _fetch({path = '/', method = null, data = null, contentType = null} = {}) {
 	    this.setInit(method, data, contentType);
 	    try {
-			let response = await fetch(this._url + path, this._init);
+			let response = await fetch(encodeURI(this._url + path), this._init);
 			//console.log(response.headers['X-CSRF-Token']);
 			return response;
 		} catch (error) {

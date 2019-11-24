@@ -24,6 +24,9 @@ const keys = {
 };
 
 const API = {
+	likingMessage: (id) => {
+		return `/messages/${id}/likes`;
+	},
 	messageInteraction : (id) => {
 		return `/messages/${id}`;
 	},
@@ -53,6 +56,9 @@ const API = {
 	channelInfo: (id) => {
 		return `/channels/${id}`;
 	},
+	channelLeave:(id) => {
+		return `/channels/${id}/members`;
+	},
 	wrkspaceInfo: (id) => {
 		return `/workspaces/${id}`;
 	},
@@ -75,6 +81,7 @@ const KEYWORDS = {
 	search :  ['search'],
 	chat : ['chat'],
 	chatFoundMessage : ['chat', 'message'],
+	channelFoundMessage : ['wrkspace', 'channel', 'message'],
 	createWrkSpace: ['createWrkSpace'],
 	createChannel : ['createChannel'],
 	wrkspacePage : ['wrkspace'],
@@ -101,6 +108,9 @@ const ROUTER = {
 	},
 	chatFoundMessage : (id, messageId) => {
 		return `/chat/${id}/message?=${messageId}`;
+	},
+	channelFoundMessage : (wrkspaceId, channelId, messageId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/message?=${messageId}`;
 	},
 	channelPage: (wrkspaceId, channelId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}`;

@@ -54,7 +54,7 @@
 
 .channel-header__info-row__info-column__name-row {
     flex: 0 0 40%;
-    width: 98%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +79,7 @@
 
 .channel-header__info-row__info-column__status-row {
     flex: 0 0 40%;
-    width: 98%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -98,7 +98,7 @@
 /*pinned-element element*/
 
 .channel-header__pinned-message {
-    flex: 0 0 30%;
+    flex: 0 0 20%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -147,7 +147,7 @@
 /*drop-down settings*/
 
 
-.channel-header__info-row__dropdown__dropbtn {
+.channel-header__dropdown__dropbtn {
     padding: 10px;
     cursor: pointer;
     width: 20px;
@@ -155,7 +155,7 @@
 }
 
 /* The container <div> - needed to position the dropdown content */
-.channel-header__info-row__dropdown {
+.channel-header__dropdown {
     position: relative;
     display: inline-block;
     flex: 0 0 10%;
@@ -172,7 +172,7 @@
 }
 
 /* Dropdown Content (Hidden by Default) */
-.channel-header__info-row__dropdown__dropdown-content {
+.channel-header__dropdown__dropdown-content {
     display: none;
     position: absolute;
     background-color: var(--global-dropdown-color);
@@ -185,7 +185,7 @@
 }
 
 /* Links inside the dropdown */
-.channel-header__info-row__dropdown__dropdown-content p {
+.channel-header__dropdown__dropdown-content p {
     color: black    ;
     padding: 6px 2px;
     text-align: center;
@@ -198,15 +198,19 @@
 }
 
 /* Change color of dropdown links on hover */
-.channel-header__info-row__dropdown__dropdown-content p:hover {background-color: #f1f1f1}
+.channel-header__dropdown__dropdown-content p:hover {background-color: #f1f1f1}
 
 /* Show the dropdown menu on hover */
-.channel-header__info-row__dropdown:hover .channel-header__info-row__dropdown__dropdown-content {
+.channel-header__dropdown:hover .channel-header__dropdown__dropdown-content {
     display:block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.channel-header__info-row__dropdown:hover .channel-header__info-row__dropdown__dropbtn {
+.channel-header__dropdown:hover .channel-header__dropdown__dropbtn {
     border-radius: 100px;
     background-color: var(--global-selected-color);
+}
+
+.channel-header__dropdown__dropdown-content__option {
+
 }

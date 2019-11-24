@@ -93,7 +93,6 @@
 
 .profile-header__username-column__username__text_style {
     font-family: var(--global-font-family-Montserrat);
-    font-size: 36px;
     color: #000000;
     font-weight: 400;
 }
@@ -145,7 +144,6 @@
 
 .profile-header__username-column__fullname__text_style {
     font-family: var(--global-font-family-Roboto);
-    font-size: 24px;
     color: #000000;
     font-weight: 200;
 }

@@ -1,40 +1,49 @@
-import {bus, componentsStorage, data, router} from "../main";
-import {deletingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 const channelTemplate = require('../components/ChannelBlock/channel.pug');
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.css';
-import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channelHeaderMenuItems.css';
+import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {sendingMessageChannel} from "../backendDataFetchers/channelMessagesInteraction";
-import {growInput} from "./chatViewHandlers";
+import {createHiddenSettingsMessageBlock, createVisibleSettingsMessageBlock, growInput} from "./chatViewHandlers";
 import {
 	addMemberinChanell,
 	addMemberinChanellFunc,
 	getAnyUserInfo,
 	getUserbyId
 } from "../backendDataFetchers/gettingInfo";
+import {alterChannel} from "../backendDataFetchers/alterEntities";
 
-const addMemberTempl = require('../components/ChannelBlock/addMember.pug');
+const addMemberTempl = require('../components/addMemberBlock/addMember.pug');
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
-function menuHandlersDelete() {
-	const menuDelete = document.querySelector('.channel-header__info-row__dropdown__dropdown-content__delete');
+async function menuClickEvent() {
+	switch (event.target.dataset.section) {
+	case 'addMember':
+		router.go('addMemberView');
+		break;
+	case 'viewInfo':
+		menuHandlersInfo();
+		break;
+	case 'deleteChannel':
+		await promiseMaker.createPromise('deleteChannel', data.getCurrentChannelId());
+		router.go('profileView');
+		break;
+	case 'leaveChannel':
+		await promiseMaker.createPromise('leaveChannel', data.getCurrentChannelId());
+		router.go('profileView');
+		break;
+	}
 }
 
-function menuHandlersSearch() {
-	const menuSearch = document.querySelector('.channel-header__info-row__dropdown__dropdown-content__find');
-}
-
-function menuHandlersAdd() {
-	const contentListRoot = document.querySelector('.header');
-	const menuAdd = document.querySelector('.channel-header__info-row__dropdown__dropdown-content__add');
-	menuAdd.addEventListener('click', ()=>{
-		router.go('addMember');
-	});
+function menuHandlers() {
+	const menuAdd = document.querySelector('.channel-header__dropdown__dropdown-content');
+	menuAdd.addEventListener('click', menuClickEvent.bind(event, {}));
 }
 
 function addMemberOverlayHndlr() {
-	const lay = document.querySelector('.channelHeaderMenuItems__info_overlay');
+	const lay = document.querySelector('.channel-header-menu__info_overlay');
 	lay.style.display = 'flex';
 	lay.addEventListener('click', () => {
 		lay.style.display = 'none';
@@ -42,45 +51,46 @@ function addMemberOverlayHndlr() {
 	});
 }
 
-function addMemberinChannel(member, idMember, channel) {
-	member.addEventListener('click',()=>{
-		let members = channel.Members;
-		let admin = channel.Admins;
-		let idChannel = channel.ID;
-		let nameChannel = channel.Name;
-		members.push(idMember);
-		addMemberinChanellFunc(idChannel, admin, members, nameChannel);
-		const lay = document.querySelector('.channelHeaderMenuItems__info_overlay');
+function menuHandlersInfo() {
+	const contentListRoot = document.querySelector('.header');
+	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
+	const block = document.querySelector('.channel-header-menu__info.channel-header-menu__info_style');
+	const lay = document.querySelector('.channel-header-menu__info_overlay');
+	block.style.display = 'flex';
+	lay.style.display = 'flex';
+	const ok = block.querySelector('.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style');
+	ok.addEventListener('click', () => {
+		block.style.display = "none";
 		lay.style.display = 'none';
-		router.return();
+	});
+	lay.addEventListener('click', () => {
+		block.style.display = "none";
+		lay.style.display = 'none';
 	});
 }
 
-function menuHandlersInfo() {
-	const contentListRoot = document.querySelector('.header');
-	const menuInfo = document.querySelector('.channel-header__info-row__dropdown__dropdown-content__info');
-	menuInfo.addEventListener('click', ()=>{
-		contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
-		const block = document.querySelector('.channelHeaderMenuItems__info.channelHeaderMenuItems__info_style');
-		const lay = document.querySelector('.channelHeaderMenuItems__info_overlay');
-		block.style.display = 'flex';
-		lay.style.display = 'flex';
-		const ok = block.querySelector('.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style');
-		ok.addEventListener('click', () => {
-			block.style.display = "none";
-			lay.style.display = 'none';
-		});
-		lay.addEventListener('click', () => {
-			block.style.display = "none";
-			lay.style.display = 'none';
-		});
+function addMemberClickEvent(params = {memberId:null, contentListRoot:null}) {
+	const id = parseFloat(params.memberId.split('-')[1]);
+	bus.emit('addCurrentChannelMember', null, id);
+	const channel = data.getCurrentChannel();
+	promiseMaker.createPromise('alterChannel', channel).then(() => {
+		router.return();
 	});
 
+}
+
+function createAddChannelMemberHndlr() {
+	const contentListRoot = document.querySelector('.channel-add-form__form');
+	const persons = contentListRoot.querySelectorAll(".member");
+	persons.forEach((person)=> {
+		person.addEventListener('click', addMemberClickEvent.bind(null, {memberId:person.id, contentListRoot : contentListRoot}));
+	});
 }
 
 function chooseSendMessageChannelEvent() {
 	event.preventDefault();
 	if (data.getChosenMessageId()) {
+		sendEditedMessageChannelEvent();
 	} else {
 		sendMessageChannelEvent();
 	}
@@ -102,6 +112,28 @@ function createSendMessageBtnChannelHndlr() {
 	sendBtn.addEventListener('click', chooseSendMessageChannelEvent);
 }
 
+async function sendEditedMessageChannelEvent() {
+	const chatBlock = componentsStorage.getChatBlock();
+	const text = chatBlock.getMessageInputData();
+	if (text !== '') {
+		console.log(`edited message : ${text}`);
+		chatBlock.setMessageInputData('');
+		const date = new currentDate();
+		try {
+			await editingMessage(text, date.getDate(), data.getChosenMessageId());
+			chatBlock.renderEditedMessage(data.getUser(), {id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: date.getDate()});
+		} catch (error) {
+			const messageText = data.getChosenMessageText();
+			chatBlock.setMessageInputData(messageText);
+		}
+	} else {
+		const messageText = data.getChosenMessageText();
+		chatBlock.setMessageInputData(messageText);
+	}
+	createHiddenSettingsMessageBlock();
+	componentsStorage.setChatBlock(chatBlock);
+}
+
 async function sendMessageChannelEvent() {
 	const channelBlock = componentsStorage.getChatBlock();
 	const text = channelBlock.getMessageInputData();
@@ -121,6 +153,22 @@ async function sendMessageChannelEvent() {
 	componentsStorage.setChatBlock(channelBlock);
 }
 
-export { createMessageInputChannelHndlr, createSendMessageBtnChannelHndlr, addMemberinChannel,
-	menuHandlersAdd,menuHandlersInfo, menuHandlersDelete, menuHandlersSearch, addMemberOverlayHndlr };
+function likeEvent(params = {messageId:null}) {
+	const id = parseFloat(params.messageId.split('-')[1]);
+	promiseMaker.createPromise('likeMessage', id).then(() => {
+		const channelBlock = componentsStorage.getChatBlock();
+		channelBlock.likeMessage(id);
+	});
+}
+
+function createLikeBtnHndlr() {
+	const userMessages = document.querySelectorAll('.chat-msg_left');
+	userMessages.forEach((userMessage) => {
+		const settingsMessageBtn = userMessage.querySelector('.secondary-row__like__button');
+		settingsMessageBtn.addEventListener('click', likeEvent.bind(null, {messageId:userMessage.id}));
+	});
+}
+
+export { createMessageInputChannelHndlr, createSendMessageBtnChannelHndlr, createAddChannelMemberHndlr,
+	menuHandlers, addMemberOverlayHndlr, createLikeBtnHndlr};
 

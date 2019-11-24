@@ -1,21 +1,7 @@
-.channelHeaderMenuItems__info {
+.channel-header-menu__add {
     position: fixed; /*make it centered and overlay*/
-    top: 18vh; /*experimenting with viewports*/
-    left: 66vw;
-    align-self: center;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 20vh; /*experimenting with viewports*/
-    width: 40vh;
-    border-radius: 5px;
-    z-index: 11; /*make it overlay*/
-    padding: 5px;
-}
-.channelHeaderMenuItems__add {
-    position: fixed; /*make it centered and overlay*/
-    top: 18vh; /*experimenting with viewports*/
-    left: 66vw;
+    top: 35vh; /*experimenting with viewports*/
+    left: 40vw;
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -26,35 +12,19 @@
     z-index: 11; /*make it overlay*/
     padding: 5px;
 }
-.channelHeaderMenuItems__info_style {
-    background: var(--global-dropdown-color);
+.channel-add-form__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0 0 0 0;
+}
+.channel-add-form__form_style {
     -webkit-backface-visibility: hidden;
 }
 
-.channelHeaderMenuItems__info_overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 10; /*make it overlay*/
-    display: none;
-}
-
-/*.channelHeaderMenuItems__info_overlay_style {*/
-/*    background-color: #000000;*/
-/*    opacity: 0.5;*/
-/*}*/
-
-.channelHeaderMenuItems__info__text{
-    padding: 5px;
-    margin: 5px 10px;
-}
-.channelHeaderMenuItems__info_style__text{
-    font-family: var(--global-font-family-Montserrat);
-}
-
-.channel-form__form__input-field {
+.channel-add-form__input-field {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -65,7 +35,7 @@
     max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
     width: 70%;
 }
-.channel-form__form__input-field_style{
+.channel-add-form__input-field_style{
     outline: none;
     font-size: 18px;
     font-family: var(--global-font-family-Roboto);
@@ -73,7 +43,7 @@
     border-radius: 5px;
     padding: 5px;
 }
-.channel-form__form__name {
+.channel-add-form__name {
     flex: 0 0 20%;
     display: flex;
     flex-direction: column;
@@ -83,7 +53,7 @@
     width: 90%;
 }
 
-.channel-form__form__name_style  {
+.channel-add-form__name_style  {
     font-weight: 700;
     font-size: 20px;
     font-family: var(--global-font-family-Montserrat);
@@ -91,21 +61,18 @@
     border-color: #282828;
 }
 
-.add-form_style {
-    -webkit-backface-visibility: hidden;
-}
-
-.channel-add-form__prokrutka {
+.channel-add-form__scroll {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-self: center;
     width: 35vh; /* ширина нашего блока */
-    height:120px; /* высота нашего блока */
-    margin: 5px;
+    height:20vh; /* высота нашего блока */
+    margin: 5px 0 0 0;
     padding: 10px;
     overflow: auto; /* свойство для прокрутки по горизонтали. Автоматом, если больше блока */
 }
-.channel-add-form__prokrutka_style{
+.channel-add-form__scroll_style {
     background-color:rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     font-size: 15px;
@@ -113,3 +80,13 @@
     color: #282828;
 }
 
+.channel-add-form__scroll::-webkit-scrollbar {
+    width: 7px;
+    background-color: #FFFFFF;
+}
+
+.channel-add-form__scroll::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var( --global-scrollbar-color);
+    -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
+}

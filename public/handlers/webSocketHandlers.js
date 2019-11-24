@@ -16,12 +16,52 @@ function webSocketOnMessageChannel(event) {
 				const chatBlock = componentsStorage.getChatBlock();
 				promiseMaker.createPromise('getUserInfo', messageContent.author_id).then(() => {
 					chatBlock.renderCurrentChatIncomingMessage(data.getCurrentChatUser(), messageContent);
+					componentsStorage.setChatBlock(chatBlock);
 				});
 				break;
 			}
 			break;
 		default:
 			console.log(`message in other channel sent: ${messageContent.text}`);
+			break;
+		}
+		break;
+	case 2:
+		switch (messageContent.chat_id) {
+		case data.getCurrentChannelId():
+			switch (messageContent.author_id) {
+			case data.getUserId():
+				console.log(`my message deleted: ${messageContent.text}`);
+				break;
+			default:
+				const chatBlock = componentsStorage.getChatBlock();
+				chatBlock.deleteOldMessage(messageContent);
+				componentsStorage.setChatBlock(chatBlock);
+			}
+			break;
+		default:
+			console.log(`message in other channel deleted: ${messageContent.text}`);
+			break;
+		}
+		break;
+	case 3:
+		switch (messageContent.chat_id) {
+		case data.getCurrentChannelId():
+			switch (messageContent.author_id) {
+			case data.getUserId():
+				console.log(`my message edited: ${messageContent.text}`);
+				break;
+			default:
+				const chatBlock = componentsStorage.getChatBlock();
+				promiseMaker.createPromise('getUserInfo', messageContent.author_id).then(() => {
+					chatBlock.renderEditedMessage(data.getCurrentChatUser(), messageContent);
+					componentsStorage.setChatBlock(chatBlock);
+				});
+				break;
+			}
+			break;
+		default:
+			console.log(`message in other channel edited: ${messageContent.text}`);
 			break;
 		}
 		break;

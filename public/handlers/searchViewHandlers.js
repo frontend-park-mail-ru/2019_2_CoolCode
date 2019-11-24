@@ -55,5 +55,16 @@ function createMessageFoundChatBlockHndlr() {
 		message.addEventListener('click', foundMessageChatClickEvent.bind(null, {messageId:message.id}));
 	});
 }
+function foundMessageChannelClickEvent(params = {messageId:null}) {
+	const fullMessage = data.getLastSearchFullMessageByMessageId(params.messageId.split('-')[1]);
+	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.ID, fullMessage.channel.ID, fullMessage.message.id]);
+}
 
-export {createUserBlockHndlr, createMessageFoundChatBlockHndlr};
+function createMessageFoundChannelBlockHndlr() {
+	const message = document.querySelectorAll(".message-channel-found");
+	message.forEach((message)=> {
+		message.addEventListener('click', foundMessageChannelClickEvent.bind(null, {messageId:message.id}));
+	});
+}
+
+export {createUserBlockHndlr, createMessageFoundChatBlockHndlr, createMessageFoundChannelBlockHndlr};

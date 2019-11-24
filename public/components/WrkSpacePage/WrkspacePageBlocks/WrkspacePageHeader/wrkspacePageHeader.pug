@@ -6,7 +6,9 @@ div.wrkspace-page-header
             input.wrkspace-page-header__info-row__image-row__input(type='file')
         div.wrkspace-page-header__info-row__info-column
             div.wrkspace-page-header__info-row__info-column__name.wrkspace-page-header__info-row__info-column__name_style(data-section='wrkspaceName')= currentWrkspace.Name
-            div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CHANNELS   ${currentWrkspace.Channels.length}`
+            if (currentWrkspace.Channels)
+                div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CHANNELS   ${currentWrkspace.Channels.length}`
+            if (currentWrkspace.Members)
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `MEMBERS    ${currentWrkspace.Members.length}`
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CREATOR    ${currentWrkspaceCreator.username}`
         div.wrkspace-page-header__info-row__settings-column

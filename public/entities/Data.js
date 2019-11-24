@@ -2,7 +2,7 @@ class Data {
 
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [], channelMessagesFull = [],
-		currentWrkspace = {}, currentWrkspaceCreator = {},
+		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText) {
@@ -25,6 +25,7 @@ class Data {
 
 		this.currentWrkspace = currentWrkspace;
 		this.currentWrkspaceCreator = currentWrkspaceCreator;
+		this.currentWrkspaceUsers = currentWrkspaceUsers;
 
 		this.lastSearchUsers = lastSearchUsers;
 		this.lastSearchMessages = lastSearchMessages;
@@ -56,6 +57,7 @@ class Data {
 
 		this.currentWrkspace = undefined;
 		this.currentWrkspaceCreator = undefined;
+		this.currentWrkspaceUsers = [];
 
 		this.lastSearchUsers = [];
 		this.lastSearchMessages = [];
@@ -309,6 +311,26 @@ class Data {
 			this.currentWrkspace.Members.push(id);
 		}
 	}
+	getCurrentWrkspaceMembers() {
+		this.createLogMessage('get', 'currentWrkspaceMembers', this.currentWrkspace.Members);
+		return this.currentWrkspace.Members;
+
+	}
+
+	deleteCurrentWrkspaceUsers() {
+		this.currentWrkspaceUsers = [];
+		this.createLogMessage('set', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+	}
+
+	addCurrentWrkspaceUser(user) {
+		this.currentWrkspaceUsers.push(user);
+		this.createLogMessage('set', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+	}
+	getCurrentWrkspaceUsers() {
+		this.createLogMessage('get', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+		return this.currentWrkspaceUsers;
+
+	}
 
 	setCurrentChannel(currentChannel) {
 		this.currentChannel = currentChannel;
@@ -322,6 +344,12 @@ class Data {
 	getCurrentChannelId() {
 		this.createLogMessage('get', 'currentChannelId', this.currentChannel.ID);
 		return this.currentChannel.ID;
+	}
+
+	addCurrentChannelMember(id) {
+		if (!this.currentChannel.Members.includes(id)) {
+			this.currentChannel.Members.push(id);
+		}
 	}
 
 	checkIfChat(chatId) {

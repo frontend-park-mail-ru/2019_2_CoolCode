@@ -79,9 +79,7 @@ function channelViewHandler() {
 			const channelName = channel.textContent;
 			const channelId = channel.getAttribute('id').split('-')[1];
 			channel.addEventListener('click', ()=>{
-
-				router.go('channelView', wrkSpaceId, channelId);
-
+				router.open(KEYWORDS.channelPage, [wrkSpaceId, channelId]);
 			});
 			//router.go('/channel', id);
 		});

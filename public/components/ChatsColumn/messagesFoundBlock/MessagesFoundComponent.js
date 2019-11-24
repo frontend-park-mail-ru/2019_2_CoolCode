@@ -17,7 +17,6 @@ class MessagesFoundBlockComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.searchMessages) {
     		this._data.searchMessages.forEach((message) => {
-    		    console.log(message);
     			const messageComponent = new MessageComponent(message, contentListRoot);
 
     			if (message.user) {

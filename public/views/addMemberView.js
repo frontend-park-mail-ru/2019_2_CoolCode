@@ -1,14 +1,15 @@
 import BaseView from "./baseView";
-import {data, router} from "../main";
+import {data, promiseMaker, router} from "../main";
 import {
 	addMemberinChannel,
 	addMemberOverlayHndlr,
-	arrayMembers,
+	arrayMembers, createAddChannelMemberHndlr,
 	menuHandlersAdd
 } from "../handlers/channelViewHandlers";
-import AddMemberComponent from "../components/ChannelBlock/addMemberComponent";
+import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
+import {createOverlayHndlr} from "../handlers/creationFormHandlers";
 
-class addMember extends BaseView {
+class addMemberView extends BaseView {
 	contentListRootSelector = '.header';
 
 	constructor (data, parent) {
@@ -18,16 +19,19 @@ class addMember extends BaseView {
 	setContent() {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
-		this._data.membersOfWrkS = data.getCurrentWrkspace().Members;
+		this._data.wrkspaceMembers = data.getCurrentWrkspaceUsers();
 		this._data.currentChannel = data.getCurrentChannel();
 	}
 	show() {
 		if (!data.getLoggedIn()) router.go('profileView');
 		if (document.querySelector(this.contentListRootSelector) === null) router.return();
 		else {
-			this.setContent();
-			this.render();
-			addMemberOverlayHndlr();
+			promiseMaker.createPromise('getWrkspaceUsers').then(() => {
+				this.setContent();
+				this.render();
+				createOverlayHndlr();
+				createAddChannelMemberHndlr();
+			});
 
 		}
 	}
@@ -39,4 +43,4 @@ class addMember extends BaseView {
 	}
 }
 
-export default addMember;
+export default addMemberView;

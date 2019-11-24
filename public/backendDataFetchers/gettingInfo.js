@@ -1,5 +1,6 @@
 import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
+import {findUser} from "./findInfo";
 
 async function getChannelInfo(id) {
 	console.log(` Getting channel ${id} info`);
@@ -173,28 +174,15 @@ async function getCurrentChannelInfo(wrkspaceId, channelId) {
 	await fullChannelMessages();
 }
 
-async function addMemberinChanellFunc(idChannel, admin, members, nameChannel) {
-	try {
-		let response = await FetchModule._doPut(
-			{path: `/channels/${idChannel}`,
-				data:   {
-					id: idChannel,
-					name: nameChannel,
-					members: members,
-					admins: admin
-				},
-				contentType : 'application/json;charset=utf-8'}
-		);
-		if (response.status !== 200) {
-			throw new Error(
-				`Couldn't fetch addMemberinChanellFunc: ${responseStatuses[response.status]}`);
-		}
-
-	} catch (error) {
-		console.error(error);
+async function getWrkspaceUsers() {
+	await promiseMaker.createPromise('deleteCurrentWrkspaceUsers');
+	const members = data.getCurrentWrkspaceMembers();
+	for (const member of members) {
+		const user = await getAnyUserInfo(member);
+		await promiseMaker.createPromise('addCurrentWrkspaceUser', user);
 	}
 }
 
-export {addMemberinChanellFunc, getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
-	getCurrentChannelInfo,
+export {getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
+	getCurrentChannelInfo,getWrkspaceUsers,
 	getWrkspaceCreatorInfo, getChannelInfo};

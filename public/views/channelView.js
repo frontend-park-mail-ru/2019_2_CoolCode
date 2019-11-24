@@ -23,6 +23,7 @@ import {
 } from "../handlers/chatViewHandlers";
 
 import {
+	createLikeBtnHndlr,
 	createMessageInputChannelHndlr,
 	createSendMessageBtnChannelHndlr,
 	menuHandlers, menuHandlersAdd, menuHandlersInfo
@@ -32,7 +33,7 @@ class channelView extends BaseView {
 
 	constructor(data, parent) {
 		super({
-			viewType: "channel", user: {}, loggedIn: null,
+			viewType: "channel", user: {}, loggedIn: null, foundMessageId: null,
 			wrkSpaces: [], chats: [], currentWrkspace:{}, currentChannel: {},
 			importantMessage: {}, channelMessages: []}, parent);
 	};
@@ -46,9 +47,12 @@ class channelView extends BaseView {
 		createWorkspaceButtonHndlr();
 		createMessageInputChannelHndlr();
 		channelViewHandler();
-		menuHandlersInfo();
-		menuHandlersAdd();
+		menuHandlers();
 
+		createEditMessageBlockHndlr();
+		createLikeBtnHndlr();
+		createCloseSettingsMessageHndlr();
+		createDeleteMessageBlockHndlr();
 	}
 	setContent() {
 		this._data.user = data.getUser();
@@ -58,11 +62,13 @@ class channelView extends BaseView {
 		this._data.currentChannel = data.getCurrentChannel();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.importantMessage = {text: 'hello'};
-		//this._data.chatMessages = data.getCurrentChatMessages();
 		this._data.channelMessages = data.getChannelMessagesFull();
 	}
 
 	show(args) {
+		if (args.length === 3) {
+			this._data.foundMessageId = args[2];
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (!data.getLoggedIn()) router.go('mainPageView');
 			else {
@@ -98,6 +104,9 @@ class channelView extends BaseView {
 		let channelBlock = new ChannelComponent(this._data, this._parent);
 		this._parent.querySelector('.column_right').innerHTML += channelBlock.render();
 		channelBlock.renderContent();
+		if (this._data.foundMessageId) {
+			channelBlock.slideToMessage();
+		}
 		componentsStorage.setChatBlock(channelBlock);
 
 	}

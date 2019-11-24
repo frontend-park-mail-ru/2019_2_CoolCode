@@ -5,6 +5,21 @@ const {frontend} = settings;
 const {frontendPort} = settings;
 const {connection} = settings;
 
+async function likeMessage(id) {
+	console.log(`Liking message : ${id}`);
+	try {
+		const response = await FetchModule._doPost({
+			path: API.likingMessage(id)});
+
+		if (response.status !== 200) {
+			throw new Error (`Haven't like message: ${text} cause: ${responseStatuses[response.status]}`);
+		}
+	}catch (error) {
+		console.error(error);
+		throw error;
+	}
+}
+
 async function editingMessage(text, time, id) {
 	console.log(`Editing message : ${id}`);
 	try {
@@ -72,4 +87,4 @@ async function deletingMessage(id) {
 	}
 }
 
-export {sendingMessage, deletingMessage, editingMessage};
+export {sendingMessage, deletingMessage, editingMessage, likeMessage};
