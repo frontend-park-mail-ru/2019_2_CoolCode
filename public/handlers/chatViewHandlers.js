@@ -159,5 +159,5 @@ async function sendEditedMessageEvent() {
 }
 
 export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr
+	createEditMessageBlockHndlr, growInput
 };

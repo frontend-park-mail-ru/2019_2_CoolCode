@@ -1,10 +1,10 @@
 import {appLocalStorage, bus, data} from "../main";
 
 import {createChat} from "../backendDataFetchers/creationEntities";
-import {createWebsocketConn} from "../backendDataFetchers/websockets";
+import {createWebsocketConn, createWebsocketConnChannel} from "../backendDataFetchers/websockets";
 import {
 	getChannelInfo,
-	getChats,
+	getChats, getCurrentChannelInfo,
 	getCurrentChatInfo, getUserInfo,
 	getWrkspaceCreatorInfo,
 	getWrkspaceInfo
@@ -31,6 +31,8 @@ function createEvents() {
 	bus.on('addLastSearchMessageFull', data.addLastSearchMessageFull.bind(data));
 	bus.on('deleteLastSearchMessagesFull', data.deleteLastSearchMessagesFull.bind(data));
 	bus.on('setChatMessages', data.setCurrentChatMessages.bind(data));
+	bus.on('addChannelMessageFull', data.addChannelMessageFull.bind(data));
+	bus.on('deleteChannelMessagesFull', data.deleteChannelMessagesFull.bind(data));
 	bus.on('setUserPhoto', data.setUserPhoto.bind(data));
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
 	bus.on('setCurrentChatUserPhoto', data.setCurrentChatUserPhoto.bind(data));
@@ -53,12 +55,14 @@ function createEvents() {
 	bus.on('checkLogin', checkLogin);
 	bus.on('createChat', createChat);
 	bus.on('createWebsocketConn', createWebsocketConn);
+	bus.on('createWebsocketConnChannel', createWebsocketConnChannel);
 	bus.on('logout', handleLogout);
 	bus.on('findUser', findUser);
 	bus.on('findMessagesFullInfo', findMessagesFullInfo);
 	bus.on('alterWrkspace', alterWrkspace);
 
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
+	bus.on('getCurrentChannelInfo', getCurrentChannelInfo);
 	bus.on('getChats', getChats);
 	bus.on('sendMessage', sendingMessage);
 

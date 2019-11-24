@@ -1,4 +1,33 @@
-import {bus, componentsStorage, data} from "../main";
+import {bus, componentsStorage, data, promiseMaker} from "../main";
+
+function webSocketOnMessageChannel(event) {
+	console.log('new message from webSocketChannel');
+	const message = JSON.parse(event.data);
+	const messageContent = message.body;
+	switch (message.event_type) {
+	case 1:
+		switch (messageContent.chat_id) {
+		case data.getCurrentChannelId():
+			switch (messageContent.author_id) {
+			case data.getUserId():
+				console.log(`my message sent: ${messageContent.text}`);
+				break;
+			default:
+				const chatBlock = componentsStorage.getChatBlock();
+				promiseMaker.createPromise('getUserInfo', messageContent.author_id).then(() => {
+					chatBlock.renderCurrentChatIncomingMessage(data.getCurrentChatUser(), messageContent);
+				});
+				break;
+			}
+			break;
+		default:
+			console.log(`message in other channel sent: ${messageContent.text}`);
+			break;
+		}
+		break;
+
+	}
+}
 
 function webSocketOnMessage(event) {
 	console.log('new message from webSocket');
@@ -51,4 +80,4 @@ function webSocketOnMessage(event) {
 
 }
 
-export {webSocketOnMessage};
+export {webSocketOnMessage, webSocketOnMessageChannel};

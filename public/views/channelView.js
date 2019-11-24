@@ -21,7 +21,11 @@ import {
 	createMessageInputHndlr,
 	createSendMessageBtnHndlr
 } from "../handlers/chatViewHandlers";
-import {menuHandlers} from "../handlers/channelViewHandlers";
+import {
+	createMessageInputChannelHndlr,
+	createSendMessageBtnChannelHndlr,
+	menuHandlers
+} from "../handlers/channelViewHandlers";
 
 class channelView extends BaseView {
 
@@ -39,14 +43,11 @@ class channelView extends BaseView {
 		// this.createClickablePic();
 		createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
-		createMessageInputHndlr();
 		createChatBlockHndlr();
-		createSendMessageBtnHndlr();
+		createSendMessageBtnChannelHndlr();
 		createWrkspaceBlockHndlr();
 		createWorkspaceButtonHndlr();
-		createEditMessageBlockHndlr();
-		createCloseSettingsMessageHndlr();
-		createDeleteMessageBlockHndlr();
+		createMessageInputChannelHndlr();
 		channelViewHandler();
 		menuHandlers();
 	}
@@ -58,7 +59,8 @@ class channelView extends BaseView {
 		this._data.currentChannel = data.getCurrentChannel();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.importantMessage = {text: 'hello'};
-		//this._data.channelMessages = data.getCurrentChannelMessages();
+		this._data.chatMessages = data.getCurrentChatMessages();
+		this._data.channelMessages = data.getChannelMessagesFull();
 	}
 
 	show(args) {
@@ -67,8 +69,7 @@ class channelView extends BaseView {
 			else {
 				Promise.all(
 					[creatingChats(this._parent),
-						promiseMaker.createPromise('getWrkspaceInfo', args[0]),
-						promiseMaker.createPromise('getChannelInfo', args[1]),
+						promiseMaker.createPromise('getCurrentChannelInfo', args[0], args[1]),
 					]
 				).then(
 					() => {

@@ -1,7 +1,7 @@
 class Data {
 
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
-		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
+		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [], channelMessagesFull = [],
 		currentWrkspace = {}, currentWrkspaceCreator = {},
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [],
 		webSocketConns = [], socketConnection = false,
@@ -21,6 +21,7 @@ class Data {
 		this.currentChatUser = currentChatUser;
 		this.currentChatUserPhoto = currentChatUserPhoto;
 		this.currentChatMessages = currentChatMessages;
+		this.channelMessagesFull = channelMessagesFull;
 
 		this.currentWrkspace = currentWrkspace;
 		this.currentWrkspaceCreator = currentWrkspaceCreator;
@@ -51,6 +52,7 @@ class Data {
 		this.currentChatUser = undefined;
 		this.currentChatUserPhoto = undefined;
 		this.currentChatMessages = [];
+		this.channelMessagesFull = [];
 
 		this.currentWrkspace = undefined;
 		this.currentWrkspaceCreator = undefined;
@@ -193,6 +195,21 @@ class Data {
 		return this.currentChatMessages;
 	}
 
+	getChannelMessagesFull() {
+		this.createLogMessage('get', 'channelMessagesFull', this.channelMessagesFull);
+		return this.channelMessagesFull;
+	}
+
+	deleteChannelMessagesFull() {
+		this.channelMessagesFull = [];
+		this.createLogMessage('set', 'channelMessagesFull', this.channelMessagesFull);
+	}
+
+	addChannelMessageFull(channelMessageFull) {
+		this.channelMessagesFull.push(channelMessageFull);
+		this.createLogMessage('set', 'channelMessagesFull', this.channelMessagesFull);
+	}
+
 	addWebSocketConn(chatId, conn) {
 		this.webSocketConns.push({ chatId: chatId,
 			connection : conn});
@@ -301,6 +318,11 @@ class Data {
 	getCurrentChannel() {
 		this.createLogMessage('get', 'currentChannel', this.currentChannel);
 		return this.currentChannel;
+	}
+
+	getCurrentChannelId() {
+		this.createLogMessage('get', 'currentChannelId', this.currentChannel.ID);
+		return this.currentChannel.ID;
 	}
 
 	checkIfChat(chatId) {

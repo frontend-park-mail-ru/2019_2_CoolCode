@@ -72,6 +72,23 @@ async function getCurrentChatMessages(chatId) {
 	}
 }
 
+async function getCurrentChannelMessages(chatId) {
+	console.log(`Getting current channel: ${chatId} messages`);
+	try {
+		const response = await FetchModule._doGet({
+			path: API.currentChannelMessages(chatId),
+		});
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch messages: ${responseStatuses[response.status]}`);
+		}
+		const data = await response.json();
+		bus.emit('setChatMessages', null, data['Messages']);
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 async function getChats(id) {
 	console.log(` Getting user ${id} chats and wrkspaces`);
 	try {
@@ -130,4 +147,31 @@ async function getCurrentChatInfo(userId, chatId) {
 	bus.emit('setCurrentChatId', null, chatId);
 }
 
-export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo, getChannelInfo};
+async function setChannelMessageUser(fullMessage, userId) {
+	await promiseMaker.createPromise('getUserInfo', userId);
+	fullMessage.user = data.getCurrentChatUser();
+	await promiseMaker.createPromise('addChannelMessageFull', fullMessage);
+}
+
+async function fullChannelMessages() {
+	const messages = data.getCurrentChatMessages();
+	if (messages) {
+		for (const message of messages) {
+			const fullMessage = {
+				message: message,
+				user: null,
+			};
+			await setChannelMessageUser(fullMessage, message.author_id);
+		}
+	}
+}
+
+async function getCurrentChannelInfo(wrkspaceId, channelId) {
+	data.deleteChannelMessagesFull();
+	await Promise.all([promiseMaker.createPromise('getWrkspaceInfo', wrkspaceId),
+		promiseMaker.createPromise('getChannelInfo', channelId),
+		getCurrentChannelMessages(channelId)]);
+	await fullChannelMessages();
+}
+
+export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo, getChannelInfo, getCurrentChannelInfo};

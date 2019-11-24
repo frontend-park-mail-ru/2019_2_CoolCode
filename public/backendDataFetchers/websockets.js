@@ -1,10 +1,38 @@
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
-import {webSocketOnMessage} from "../handlers/webSocketHandlers";
+import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
 import {settings, responseStatuses, ROUTER} from '../constants/config';
 import sendingMessage from "./messagesInteraction";
 const {backend} = settings;
 const {backendPort} = settings;
+
+function createWebsocketConnChannel(channelId) {
+	if (data.checkWebsocketConn(channelId)) {
+		return;
+	}
+	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/channels/${channelId}/notifications`);
+	data.addWebSocketConn(channelId, websocketConn);
+
+	websocketConn.onopen = () => {
+		console.log('opened webSocket connection channel');
+	};
+
+	websocketConn.onmessage = (event) => webSocketOnMessageChannel(event);
+
+	websocketConn.onclose = (event) => {
+		if (event.wasClean) {
+			console.log(`webSocketChannel was closed with code : ${event.code}, cause : ${event.reason}`);
+		} else {
+			console.log(`error occurred, webSocketChannel was closed with code : ${event.code}`);
+		}
+	};
+
+	websocketConn.onerror = (error) => {
+		console.log(`websocketChannel error : ${error.message}`);
+		websocketConn.close();
+	};
+
+}
 
 function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
@@ -34,12 +62,30 @@ function createWebsocketConn(chatId) {
 
 }
 
+async function openChatSockets() {
+	const chatUsersWChatID = data.getChatUsersWChatIDs();
+	for (const chat of chatUsersWChatID) {
+		await promiseMaker.createPromise('createWebsocketConn', chat.chatId);
+	}
+}
+
+async function openWrkspacesSockets() {
+	const userWrkspaces = data.getUserWrkSpaces();
+	if (userWrkspaces) {
+		for (const wrkspace of userWrkspaces) {
+			if (wrkspace.Channels) {
+				for (const channel of wrkspace.Channels) {
+					await promiseMaker.createPromise('createWebsocketConnChannel', channel.ID);
+				}
+			}
+		}
+	}
+}
+
 async function openWebSocketConnections() {
 	if (data.getSocketConnection() === false) {
-		const chatUsersWChatID = data.getChatUsersWChatIDs();
-		for (const chat of chatUsersWChatID) {
-			await promiseMaker.createPromise('createWebsocketConn', chat.chatId);
-		}
+		await openChatSockets();
+		await openWrkspacesSockets();
 		await promiseMaker.createPromise('setSocketConnection', true);
 	}
 }
@@ -76,4 +122,4 @@ async function creatingChats() {
 
 }
 
-export {createWebsocketConn, openWebSocketConnections, creatingChats};
+export {createWebsocketConn, openWebSocketConnections, creatingChats, createWebsocketConnChannel};

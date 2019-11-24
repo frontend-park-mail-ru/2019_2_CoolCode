@@ -17,11 +17,13 @@
 .chat-block_found {
     background-color: transparent;
     box-shadow: 0 0 4px var(--global-grey-color);
+    border-bottom: 1px solid #FFFFFF;
 }
 
 .chat-block_found-ch {
     background-color: transparent;
     box-shadow: 0 0 4px var(--global-grey-color);
+    border-bottom: 1px solid #FFFFFF;
 }
 
 .chat-block_style:hover {

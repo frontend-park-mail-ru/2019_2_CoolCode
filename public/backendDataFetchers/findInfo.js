@@ -37,6 +37,19 @@ async function setFoundMessageUser(fullMessage, userId) {
 	await promiseMaker.createPromise('addLastSearchMessageFull', fullMessage);
 }
 
+async function setFoundMessageChannelContent(fullMessage) {
+	await promiseMaker.createPromise('getWrkspaceInfo', fullMessage.channel.WorkspaceID);
+	fullMessage.wrkspace = data.getCurrentWrkspace();
+	await promiseMaker.createPromise('addLastSearchMessageFull', fullMessage);
+}
+
+async function setFoundMessageChannel(fullMessage, channelId) {
+	await promiseMaker.createPromise('getChannelInfo', channelId);
+	fullMessage.channel = data.getCurrentChannel();
+	await setFoundMessageChannelContent(fullMessage);
+
+}
+
 async function findMessagesFullInfo(query) {
 	await promiseMaker.createPromise('deleteLastSearchMessagesFull');
 	await findMessages(query);
@@ -49,11 +62,8 @@ async function findMessagesFullInfo(query) {
 				await setFoundMessageUser(fullMessage, userId);
 
 			} else {
-				await promiseMaker.createPromise('getChannelInfo', message.chat_id);
-				fullMessage.channel = data.getCurrentChannel();
-				await promiseMaker.createPromise('getWrkspaceInfo', fullMessage.channel.WorkspaceID);
-				fullMessage.wrkspace = data.getCurrentWrkspace();
-				await promiseMaker.createPromise('addLastSearchMessageFull', fullMessage);
+				await setFoundMessageChannel(fullMessage, message.chat_id);
+
 			}
 		}
 	}
