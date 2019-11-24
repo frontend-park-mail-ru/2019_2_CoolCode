@@ -1,5 +1,5 @@
 import BaseView from "./baseView";
-import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
+import {createMessageFoundChatBlockHndlr, createUserBlockHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage} from "./../main";
 import {createWorkspaceButtonHndlr, createWrkspaceBlockHndlr} from "../handlers/chatsBlockHandlers";
 
@@ -13,18 +13,19 @@ class searchView extends BaseView {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.searchUsers = data.getLastSearchUsers();
-		this._data.searchMessages = data.getLastSearchMessages();
+		this._data.searchMessages = data.getLastSearchMessagesFull();
 	}
 
 	show() {
 		if (data.getLastSearchUsers() && data.getLastSearchUsers().length === 0 ||
-		data.getLastSearchMessages() && data.getLastSearchMessages().length == 0 ) {
+		data.getLastSearchMessages() && data.getLastSearchMessages().length === 0 ) {
 			router.go('mainPageView');
 		} /*checking if reloading page*/
 		else {
 			this.setContent();
 			this.render();
 			createUserBlockHndlr('.all-chats-window');
+			createMessageFoundChatBlockHndlr();
 		}
 	}
 	render() {

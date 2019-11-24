@@ -12,7 +12,7 @@ async function getChannelInfo(id) {
 				`Couldn't fetch channel info: ${responseStatuses[response.status]}`);
 		}
 		const channel = await response.json();
-		bus.emit('setCurrentChannel', null, channel);
+		await promiseMaker.createPromise('setCurrentChannel', channel);
 	} catch (error) {
 		console.error(error);
 	}
@@ -30,7 +30,7 @@ async function getWrkspaceInfo(id) {
 				`Couldn't fetch wrkspace info: ${responseStatuses[response.status]}`);
 		}
 		const wrkspace = await response.json();
-		bus.emit('setCurrentWrkspace', null, wrkspace);
+		await promiseMaker.createPromise('setCurrentWrkspace', wrkspace);
 	} catch (error) {
 		console.error(error);
 	}

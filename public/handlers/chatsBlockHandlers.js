@@ -1,5 +1,6 @@
 import {data, promiseMaker, router} from "../main";
 import {menuHandlers} from "./channelViewHandlers";
+import {KEYWORDS} from "../constants/config";
 
 function createWrkspaceBlockExpandHndlr() {
 	const wrkspaceBlocksOuter = document.querySelectorAll('.wrkspace-block');
@@ -41,7 +42,7 @@ function createChatBlockHndlr() {
 
 async function chatBlockClickEvent(params = {userId:null, chatId:null}) {
 	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
-	router.go('chatView', params.chatId);
+	router.open(KEYWORDS.chat, [params.chatId]);
 }
 
 function createWrkspaceBlockHndlr() {

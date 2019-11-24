@@ -7,7 +7,7 @@ import '../ChatsBlock/bemChatsBlock/bem-chats-block.css';
 import UserComponent from "../User/UserComponent";
 
 class UsersFoundBlockComponent extends BaseComponent {
-    contentListRootSelector = '.chats-block__content';
+    contentListRootSelector = '.users-found-block__content';
 
     render() {
     	return UsersFoundBlockTemplate(this._data);

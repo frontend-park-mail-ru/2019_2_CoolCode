@@ -3,7 +3,7 @@ class Data {
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
 		currentWrkspace = {}, currentWrkspaceCreator = {},
-		lastSearchUsers = [],
+		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [],
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText) {
 		if (Data.__instance) {
@@ -26,6 +26,8 @@ class Data {
 		this.currentWrkspaceCreator = currentWrkspaceCreator;
 
 		this.lastSearchUsers = lastSearchUsers;
+		this.lastSearchMessages = lastSearchMessages;
+		this.lastSearchMessagesFull = lastSearchMessagesFull;
 
 		this.webSocketConns = webSocketConns;
 		this.socketConnectionOn = socketConnection;
@@ -54,6 +56,9 @@ class Data {
 		this.currentWrkspaceCreator = undefined;
 
 		this.lastSearchUsers = [];
+		this.lastSearchMessages = [];
+		this.lastSearchMessagesFull = [];
+
 		this.webSocketConns = [];
 		this.socketConnectionOn = false;
 
@@ -238,8 +243,23 @@ class Data {
 	}
 
 	deleteLastSearchMessages() {
-		this.lastSearchMessages = undefined;
+		this.lastSearchMessages = [];
 		this.createLogMessage('set', 'lastSearchMessages', this.lastSearchMessages);
+	}
+
+	getLastSearchMessagesFull() {
+		this.createLogMessage('get', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+		return this.lastSearchMessagesFull;
+	}
+
+	deleteLastSearchMessagesFull() {
+		this.lastSearchMessagesFull = [];
+		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+	}
+
+	addLastSearchMessageFull(lastSearchMessageFull) {
+		this.lastSearchMessagesFull.push(lastSearchMessageFull);
+		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
 	}
 
 	setCurrentWrkspace(currentWrkspace) {
@@ -281,6 +301,25 @@ class Data {
 	getCurrentChannel() {
 		this.createLogMessage('get', 'currentChannel', this.currentChannel);
 		return this.currentChannel;
+	}
+
+	checkIfChat(chatId) {
+		for (let chat of this.userChats) {
+			if (chatId == chat.ID) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	getLastSearchFullMessageByMessageId(id) {
+		for (let fullMessage of this.lastSearchMessagesFull) {
+			if (fullMessage.message.id == id) {
+				return fullMessage;
+			}
+		}
+		return undefined;
 	}
 
 	getChatIdByChatUserId(userId) {

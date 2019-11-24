@@ -28,6 +28,19 @@ async function saveUserPhoto(id) {
 	};
 }
 
+async function getMessagePhoto(userId, blockId, parentId, photoClass) {
+	showLoaderSmall(blockId, parentId, photoClass);
+	const buffer = await getPhoto(userId);
+	const worker = new MyWorker();
+	worker.postMessage(buffer);
+
+	worker.onmessage = function (result) {
+		const person = document.getElementById(`${parentId}-${blockId}`);
+		person.querySelector(photoClass).src = result.data;
+		hideLoaderSmall(blockId, parentId, photoClass);
+	};
+}
+
 async function getUserPhoto(id, parentId, photoClass) {
 	showLoaderSmall(id, parentId, photoClass);
 	const buffer = await getPhoto(id);
@@ -70,4 +83,4 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getProfilePhoto};
+export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getProfilePhoto,getMessagePhoto};

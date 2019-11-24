@@ -35,6 +35,9 @@ const API = {
 	findUser : (query) => {
 		return `/users/${query}`;
 	},
+	findMessages : (query) => {
+		return `/messages/${query}`;
+	},
 	currentChatMessages : (chatId) => {
 		return `/chats/${chatId}/messages`;
 	},
@@ -71,6 +74,7 @@ const KEYWORDS = {
 	signup : ['signup'],
 	search :  ['search'],
 	chat : ['chat'],
+	chatFoundMessage : ['chat', 'message'],
 	createWrkSpace: ['createWrkSpace'],
 	createChannel : ['createChannel'],
 	wrkspacePage : ['wrkspace'],
@@ -93,6 +97,9 @@ const ROUTER = {
 	},
 	chat : (id) => {
 		return `/chat/${id}`;
+	},
+	chatFoundMessage : (id, messageId) => {
+		return `/chat/${id}/message?=${messageId}`;
 	},
 	channelPage: (wrkspaceId, channelId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}`;

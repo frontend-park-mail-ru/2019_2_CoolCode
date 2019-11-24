@@ -1,4 +1,5 @@
 import {data, promiseMaker, router, bus} from "../main";
+import {KEYWORDS} from "../constants/config";
 
 function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 	const ids = data.getChatUsersIds();
@@ -14,14 +15,14 @@ function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 					bus.emit('createWebsocketConn', null, chatId);
 					promiseMaker.createPromise('getCurrentChatInfo', id, chatId).then(() => {
 						bus.emit('deleteLastSearchUsers', null);
-						router.go('chatView', chatId);
+						router.open(KEYWORDS.chat, [chatId]);
 					});
 				}
 			});
 		} else {
 			const chatId = data.getChatIdByChatUserId(id);
 			bus.emit('deleteLastSearchUsers', null);
-			router.go('chatView', chatId);
+			router.open(KEYWORDS.chat, [chatId]);
 		}
 	}
 	if (params.contentListRoot.classList.contains('wrkspace-search__search-container')) {
@@ -43,4 +44,16 @@ function createUserBlockHndlr(selector) {
 	});
 }
 
-export {createUserBlockHndlr};
+function foundMessageChatClickEvent(params = {messageId:null}) {
+	const fullMessage = data.getLastSearchFullMessageByMessageId(params.messageId.split('-')[1]);
+	router.open(KEYWORDS.chatFoundMessage, [fullMessage.chatId, fullMessage.message.id]);
+}
+
+function createMessageFoundChatBlockHndlr() {
+	const message = document.querySelectorAll(".message-chat-found");
+	message.forEach((message)=> {
+		message.addEventListener('click', foundMessageChatClickEvent.bind(null, {messageId:message.id}));
+	});
+}
+
+export {createUserBlockHndlr, createMessageFoundChatBlockHndlr};

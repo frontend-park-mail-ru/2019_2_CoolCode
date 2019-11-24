@@ -60,6 +60,7 @@ router.register(ROUTER.createChannel, channelFormView, KEYWORDS.createChannel);
 router.register(ROUTER.wrkspacePage, wrkspaceView, KEYWORDS.wrkspacePage);
 router.register(ROUTER.wrkspaceSearch, wrkspaceSearchView, KEYWORDS.wrkspaceSearch);
 router.register(ROUTER.channelPage, channelView, KEYWORDS.channelPage);
+router.register(ROUTER.chatFoundMessage, chatView, KEYWORDS.chatFoundMessage);
 
 if (appLocalStorage.getUser()) {
 	bus.emit('setUser', null, appLocalStorage.getUser());

@@ -91,8 +91,9 @@ class Router {
 				return;
 			}
 			event.preventDefault();
-			const link = event.target.dataset.section;
-			this.open([link], []);
+			const link = event.target.href;
+			const pathArgs = this.parsePath(link);
+			this.open(pathArgs.keyWords, pathArgs.args);
 
 		}.bind(this));
 

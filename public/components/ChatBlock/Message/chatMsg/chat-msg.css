@@ -23,4 +23,9 @@
     height: auto;
 }
 
+.chat-msg__container_found {
+    background-color: var(--global-selected-color);
+    border-radius: 10px;
+}
+
 

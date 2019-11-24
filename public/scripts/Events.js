@@ -5,7 +5,7 @@ import {createWebsocketConn} from "../backendDataFetchers/websockets";
 import {
 	getChannelInfo,
 	getChats,
-	getCurrentChatInfo,
+	getCurrentChatInfo, getUserInfo,
 	getWrkspaceCreatorInfo,
 	getWrkspaceInfo
 } from "../backendDataFetchers/gettingInfo";
@@ -14,9 +14,9 @@ import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
-import {getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {sendingMessage} from "../backendDataFetchers/messagesInteraction";
-import findUser from "../backendDataFetchers/findUser";
+import {findUser, findMessagesFullInfo} from "../backendDataFetchers/findInfo";
 import {alterWrkspace} from "../backendDataFetchers/alterEntities";
 function createEvents() {
 
@@ -28,6 +28,8 @@ function createEvents() {
 	bus.on('deleteLastSearchUsers', data.deleteLastSearchUsers.bind(data));
 	bus.on('setLastSearchMessages', data.setLastSearchMessages.bind(data));
 	bus.on('deleteLastSearchMessages', data.deleteLastSearchMessages.bind(data));
+	bus.on('addLastSearchMessageFull', data.addLastSearchMessageFull.bind(data));
+	bus.on('deleteLastSearchMessagesFull', data.deleteLastSearchMessagesFull.bind(data));
 	bus.on('setChatMessages', data.setCurrentChatMessages.bind(data));
 	bus.on('setUserPhoto', data.setUserPhoto.bind(data));
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
@@ -53,6 +55,7 @@ function createEvents() {
 	bus.on('createWebsocketConn', createWebsocketConn);
 	bus.on('logout', handleLogout);
 	bus.on('findUser', findUser);
+	bus.on('findMessagesFullInfo', findMessagesFullInfo);
 	bus.on('alterWrkspace', alterWrkspace);
 
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
@@ -64,7 +67,9 @@ function createEvents() {
 	bus.on('getWrkspaceCreatorInfo', getWrkspaceCreatorInfo);
 
 	/**/
+	bus.on('getUserInfo', getUserInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getMessagePhoto', getMessagePhoto);
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);
 	bus.on('setPicture', setPicture);

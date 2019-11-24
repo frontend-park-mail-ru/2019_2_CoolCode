@@ -16,6 +16,13 @@ class ChatComponent extends BaseComponent {
 
     contentListRootSelector = '.msgwindow-container__msgwindow';
 
+    slideToMessage() {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const foundMessage = contentListRoot.querySelector(`#message-${this._data.foundMessageId}`);
+    	foundMessage.scrollIntoView({ behavior: 'smooth', block: 'start'});
+    	foundMessage.firstElementChild.classList += ' chat-msg__container_found';
+    }
+
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;
     }

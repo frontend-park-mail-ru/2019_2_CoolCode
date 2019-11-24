@@ -24,7 +24,7 @@ class chatView extends BaseView {
 
 	constructor (data, parent) {
     	super ({viewType: "chat", user:{}, loggedIn: null,
-			wrkSpaces:[], chats: [], currentChat: {},
+			wrkSpaces:[], chats: [], currentChat: {}, foundMessageId: null,
 			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
 	};
 
@@ -69,11 +69,14 @@ class chatView extends BaseView {
 		}
 	}
 
-	show(...args) {
+	show(args) {
+		if (args.length === 2) {
+			this._data.foundMessageId = args[1];
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (!data.getLoggedIn()) router.go('mainPageView');
 			creatingChats(this._parent).then(() => {
-				this.findUser(args);
+				this.findUser(args[0]);
 			});
 		});
 		console.log('show: chat page');
@@ -95,6 +98,9 @@ class chatView extends BaseView {
 		let chatBlock = new ChatComponent(this._data, this._parent);
 		this._parent.querySelector('.column_right').innerHTML += chatBlock.render();
 		chatBlock.renderContent();
+		if (this._data.foundMessageId) {
+			chatBlock.slideToMessage();
+		}
 		componentsStorage.setChatBlock(chatBlock);
 
 	}
