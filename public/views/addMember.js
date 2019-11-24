@@ -7,7 +7,7 @@ class addMember extends BaseView {
 	contentListRootSelector = '.header';
 
 	constructor (data, parent) {
-		super({viewType: "addMember", user:{}, loggedIn: null}, parent);
+		super({viewType: "addMember", user:{}, membersOfWrkS:{},membersOfChannel:{}, loggedIn: null}, parent);
 	}
 
 	setContent() {
