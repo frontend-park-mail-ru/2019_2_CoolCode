@@ -1,12 +1,26 @@
 .channelHeaderMenuItems__info {
     position: fixed; /*make it centered and overlay*/
-    top: 20vh; /*experimenting with viewports*/
-    left: 70vw;
+    top: 18vh; /*experimenting with viewports*/
+    left: 66vw;
+    align-self: center;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20vh; /*experimenting with viewports*/
+    width: 40vh;
+    border-radius: 5px;
+    z-index: 11; /*make it overlay*/
+    padding: 5px;
+}
+.channelHeaderMenuItems__add {
+    position: fixed; /*make it centered and overlay*/
+    top: 18vh; /*experimenting with viewports*/
+    left: 66vw;
     align-self: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 20vh; /*experimenting with viewports*/
+    height: 30vh; /*experimenting with viewports*/
     width: 40vh;
     border-radius: 5px;
     z-index: 11; /*make it overlay*/
@@ -24,6 +38,7 @@
     height: 100%;
     width: 100%;
     z-index: 10; /*make it overlay*/
+    display: none;
 }
 
 /*.channelHeaderMenuItems__info_overlay_style {*/
@@ -68,9 +83,33 @@
     width: 90%;
 }
 
-.channel-form__form__name_style {
+.channel-form__form__name_style  {
     font-weight: 700;
     font-size: 20px;
     font-family: var(--global-font-family-Montserrat);
-    color: white;
+    color: #282828;
+    border-color: #282828;
 }
+
+.add-form_style {
+    -webkit-backface-visibility: hidden;
+}
+
+.channel-add-form__prokrutka {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35vh; /* ширина нашего блока */
+    height:120px; /* высота нашего блока */
+    margin: 5px;
+    padding: 10px;
+    overflow: auto; /* свойство для прокрутки по горизонтали. Автоматом, если больше блока */
+}
+.channel-add-form__prokrutka_style{
+    background-color:rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #282828;
+}
+

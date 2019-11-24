@@ -16,7 +16,6 @@ async function getChannelInfo(id) {
 	} catch (error) {
 		console.error(error);
 	}
-
 }
 
 async function getWrkspaceInfo(id) {
@@ -174,4 +173,28 @@ async function getCurrentChannelInfo(wrkspaceId, channelId) {
 	await fullChannelMessages();
 }
 
-export {getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo, getWrkspaceCreatorInfo, getChannelInfo, getCurrentChannelInfo};
+async function addMemberinChanellFunc(idChannel, admin, members, nameChannel) {
+	try {
+		let response = await FetchModule._doPut(
+			{path: `/channels/${idChannel}`,
+				data:   {
+					id: idChannel,
+					name: nameChannel,
+					members: members,
+					admins: admin
+				},
+				contentType : 'application/json;charset=utf-8'}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch addMemberinChanellFunc: ${responseStatuses[response.status]}`);
+		}
+
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export {addMemberinChanellFunc, getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
+	getCurrentChannelInfo,
+	getWrkspaceCreatorInfo, getChannelInfo};

@@ -3,13 +3,13 @@ class Data {
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [], channelMessagesFull = [],
 		currentWrkspace = {}, currentWrkspaceCreator = {},
-		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [],
+		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
-
+		this.currentChannelID = currentChannelID;
 		this.user = user;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
@@ -319,7 +319,6 @@ class Data {
 		this.createLogMessage('get', 'currentChannel', this.currentChannel);
 		return this.currentChannel;
 	}
-
 	getCurrentChannelId() {
 		this.createLogMessage('get', 'currentChannelId', this.currentChannel.ID);
 		return this.currentChannel.ID;
@@ -342,6 +341,16 @@ class Data {
 			}
 		}
 		return undefined;
+	}
+
+	setCurrentChannelID(currentChannelID) {
+		this.currentChannelID = currentChannelID;
+		this.createLogMessage('set', 'currentChannelID', currentChannelID);
+	}
+
+	getCurrentChannelID() {
+		this.createLogMessage('get', 'currentChannelID', this.currentChannelID);
+		return this.currentChannelID;
 	}
 
 	getChatIdByChatUserId(userId) {

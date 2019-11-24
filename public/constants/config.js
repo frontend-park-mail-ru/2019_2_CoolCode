@@ -78,6 +78,7 @@ const KEYWORDS = {
 	createWrkSpace: ['createWrkSpace'],
 	createChannel : ['createChannel'],
 	wrkspacePage : ['wrkspace'],
+	addMember : ['addMember'],
 	wrkspaceSearch: ['wrkspace', 'search'],
 	channelPage: ['wrkspace', 'channel'],
 };
@@ -104,7 +105,8 @@ const ROUTER = {
 	channelPage: (wrkspaceId, channelId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}`;
 	},
- 	createWrkSpace: '/createWrkSpace',
+	addMember: '/addMember',
+	createWrkSpace: '/createWrkSpace',
 	createChannel : (id) => {
 		return `/createChannel/${id}`;
 	},
