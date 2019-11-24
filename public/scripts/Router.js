@@ -54,13 +54,11 @@ class Router {
 				break;
 			}
 			console.log(`couldn\'t open page : ${viewName}`);
-			//console.log(viewName);
-			// console.log(this._paths[path].viewClassName);
+
 		}
 	}
 
 	open(keyWords, identities) {
-		console.log(keyWords);
 		const currentPath = this._paths[keyWords];
 		this.create(currentPath, identities);
 	}
@@ -105,8 +103,6 @@ class Router {
 
 		const currentPath = window.location.pathname;
 		const pathArgs = this.parsePath(currentPath);
-		console.log(pathArgs.keyWords);
-		console.log(pathArgs.args);
 		this.open(pathArgs.keyWords, pathArgs.args);
 	};
 

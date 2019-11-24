@@ -238,17 +238,17 @@ class Data {
 
 	setLastSearchUsers(lastSearchUsers) {
 		this.lastSearchUsers = lastSearchUsers;
-		this.createLogMessage('set', 'lastSearchUsers', lastSearchUsers);
+		this.createLogMessage('set', 'lastSearchUsers', 'lastSearchUsers');
 	}
 
 	getLastSearchUsers() {
-		this.createLogMessage('get', 'lastSearchUsers', this.lastSearchUsers);
+		this.createLogMessage('get', 'lastSearchUsers', 'lastSearchUsers');
 		return this.lastSearchUsers;
 	}
 
 	deleteLastSearchUsers() {
 		this.lastSearchUsers = undefined;
-		this.createLogMessage('set', 'lastSearchUsers', this.lastSearchUsers);
+		this.createLogMessage('set', 'lastSearchUsers','lastSearchUsers');
 	}
 
 	setLastSearchMessages (lastSearchMessages) {
@@ -257,28 +257,28 @@ class Data {
 	}
 
 	getLastSearchMessages() {
-		this.createLogMessage('get', 'lastSearchMessages', this.lastSearchMessages);
+		this.createLogMessage('get', 'lastSearchMessages', 'lastSearchMessages');
 		return this.lastSearchMessages;
 	}
 
 	deleteLastSearchMessages() {
 		this.lastSearchMessages = [];
-		this.createLogMessage('set', 'lastSearchMessages', this.lastSearchMessages);
+		this.createLogMessage('set', 'lastSearchMessages', 'lastSearchMessages');
 	}
 
 	getLastSearchMessagesFull() {
-		this.createLogMessage('get', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+		this.createLogMessage('get', 'lastSearchMessagesFull', 'lastSearchMessagesFull');
 		return this.lastSearchMessagesFull;
 	}
 
 	deleteLastSearchMessagesFull() {
 		this.lastSearchMessagesFull = [];
-		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+		this.createLogMessage('set', 'lastSearchMessagesFull', 'lastSearchMessagesFull');
 	}
 
 	addLastSearchMessageFull(lastSearchMessageFull) {
 		this.lastSearchMessagesFull.push(lastSearchMessageFull);
-		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+		this.createLogMessage('set', 'lastSearchMessagesFull', 'lastSearchMessagesFull');
 	}
 
 	setCurrentWrkspace(currentWrkspace) {
@@ -312,7 +312,7 @@ class Data {
 		}
 	}
 	getCurrentWrkspaceMembers() {
-		this.createLogMessage('get', 'currentWrkspaceMembers', this.currentWrkspace.Members);
+		this.createLogMessage('get', 'currentWrkspaceMembers', 'currentWrkspaceMembers');
 		return this.currentWrkspace.Members;
 
 	}
@@ -324,10 +324,10 @@ class Data {
 
 	addCurrentWrkspaceUser(user) {
 		this.currentWrkspaceUsers.push(user);
-		this.createLogMessage('set', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+		this.createLogMessage('set', 'currentWrkspaceUsers', 'currentWrkspaceUsers');
 	}
 	getCurrentWrkspaceUsers() {
-		this.createLogMessage('get', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+		this.createLogMessage('get', 'currentWrkspaceUsers', 'currentWrkspaceUsers');
 		return this.currentWrkspaceUsers;
 
 	}

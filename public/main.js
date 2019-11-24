@@ -11,6 +11,7 @@ const {connection} = settings;
 
 import './components/bem-main.css';
 import './scss/text-resize.scss';
+import './scss/wrap.scss';
 
 import loginView from "./views/loginView";
 import mainPageView from "./views/mainPageView";

@@ -1,0 +1,23 @@
+.container-wrap {
+
+  @media screen and (min-width: 400px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (min-width: 1000px) {
+    flex-wrap: nowrap;
+  }
+
+}
+
+.column-wrap {
+
+  @media screen and (min-width: 400px) {
+    height: 100vh
+  }
+
+  @media screen and (min-width: 1000px) {
+    height: 100%;
+  }
+
+}
