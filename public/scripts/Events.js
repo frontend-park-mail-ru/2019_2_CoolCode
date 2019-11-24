@@ -16,6 +16,8 @@ import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
 import {getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import findUser from "../backendDataFetchers/findUser";
+import {alterWrkspace} from "../backendDataFetchers/alterEntities";
 function createEvents() {
 
 	/*setting data*/
@@ -23,6 +25,9 @@ function createEvents() {
 	bus.on('setUser', data.setUser.bind(data));
 	bus.on('setLoggedIn', data.setLoggedIn.bind(data));
 	bus.on('setLastSearchUsers', data.setLastSearchUsers.bind(data));
+	bus.on('deleteLastSearchUsers', data.deleteLastSearchUsers.bind(data));
+	bus.on('setLastSearchMessages', data.setLastSearchMessages.bind(data));
+	bus.on('deleteLastSearchMessages', data.deleteLastSearchMessages.bind(data));
 	bus.on('setChatMessages', data.setCurrentChatMessages.bind(data));
 	bus.on('setUserPhoto', data.setUserPhoto.bind(data));
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
@@ -33,6 +38,7 @@ function createEvents() {
 	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
 	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
+	bus.on('addCurrentWrkspaceMember', data.addCurrentWrkspaceMember.bind(data));
 	bus.on('setSocketConnection', data.setSocketConnection.bind(data));
 	bus.on('setChosenMessageId', data.setChosenMessageId.bind(data));
 	bus.on('deleteChosenMessageId', data.deleteChosenMessageId.bind(data));
@@ -46,6 +52,8 @@ function createEvents() {
 	bus.on('createChat', createChat);
 	bus.on('createWebsocketConn', createWebsocketConn);
 	bus.on('logout', handleLogout);
+	bus.on('findUser', findUser);
+	bus.on('alterWrkspace', alterWrkspace);
 
 	bus.on('getCurrentChatInfo', getCurrentChatInfo);
 	bus.on('getChats', getChats);

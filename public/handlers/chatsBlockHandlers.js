@@ -1,5 +1,6 @@
 import {data, promiseMaker, router} from "../main";
 import {menuHandlers, menuHandlersInfo} from "./channelViewHandlers";
+import {getChannelInfo} from "../backendDataFetchers/gettingInfo";
 
 function createWrkspaceBlockExpandHndlr() {
 	const wrkspaceBlocksOuter = document.querySelectorAll('.wrkspace-block');
@@ -78,15 +79,7 @@ function channelViewHandler() {
 			const channelName = channel.textContent;
 			const channelId = channel.getAttribute('id').split('-')[1];
 			channel.addEventListener('click', ()=>{
-				// document.querySelector(".column.column_right.column_right-outlined").innerHTML = '';
-				// //bus.emit('createChannelView', null);
-				// let importantMsg = "hello";
-				// document.querySelector(".column.column_right.column_right-outlined").innerHTML = channelTemplate({
-				// 	wrkName:wrkName,
-				// 	channelName:channelName,
-				// 	wrkPhoto:wrkPhoto,
-				// 	importantMessage : importantMsg,
-				// });
+
 				router.go('channelView', wrkSpaceId, channelId);
 
 			});

@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {data, bus, router, promiseMaker} from "../main";
+import {data, bus, router, promiseMaker, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import RegisterComponent from "../components/RegisterBlock/registerComponent";
 const signupTemplate = require('../components/RegisterBlock/register.pug');
@@ -23,6 +23,7 @@ class signUpView extends BaseView {
 		this.drawBasics();
 		let signup = new RegisterComponent(this._data, this._parent);
 		this._parent.querySelector('.primary-container').innerHTML += signup.render();
+		componentsStorage.clear();
 	}
 }
 

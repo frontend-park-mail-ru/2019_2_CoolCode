@@ -1,11 +1,10 @@
-import {router} from "../main";
+import {router, data} from "../main";
 
 function wrkspaceDropdownClickEvent() {
 	switch (event.target.dataset.section) {
-	case inviteUser:
-
+	case 'inviteUser':
+		router.go('wrkspaceSearchView', data.getCurrentWrkspaceId());
 	}
-
 }
 
 function createWrkspaceDropdownHandler() {
@@ -31,4 +30,17 @@ function wrkspaceDropdownExpandEvent(params = {wrkspaceSettingsDropdown:null}) {
 	}
 }
 
-export {createWorkspaceSettingsButtonHndlr};
+function wrkspaceInfoColumnClickEvent() {
+	switch (event.target.dataset.section) {
+	case 'wrkspaceName':
+		router.go('wrkspaceView', data.getCurrentWrkspaceId());
+	}
+}
+
+function createWrkspaceInfoColumnHandler() {
+	const wrkspaceInfoColumn = document.querySelector('.wrkspace-page-header__info-row__info-column');
+	wrkspaceInfoColumn.addEventListener('click', wrkspaceInfoColumnClickEvent.bind(event, {}));
+
+}
+
+export {createWorkspaceSettingsButtonHndlr,createWrkspaceDropdownHandler, createWrkspaceInfoColumnHandler};

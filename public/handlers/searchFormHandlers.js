@@ -1,18 +1,30 @@
 import findUser from "../backendDataFetchers/findUser";
-import {router} from "../main";
+import {promiseMaker, router, data} from "../main";
 
-function searchEvent() {
+async function searchEvent(params = {parentContainer:null}) {
 	event.preventDefault();
-	const searchInput = document.querySelector('.search-menu__form__input-container__input');
+	const searchInput = params.parentContainer.querySelector('.search-menu__form__input-container__input');
 	const searchInputValue = searchInput.value;
-	findUser(searchInputValue);
+	await promiseMaker.createPromise('findUser', searchInputValue);
+	const parentParentContainer = params.parentContainer.parentNode;
+	if (parentParentContainer.classList.contains('column_left')) {
+		router.go('searchView', searchInputValue);
+	} else {
+		if (parentParentContainer.classList.contains('wrkspace-search__column')) {
+			router.go('wrkspaceSearchView', data.getCurrentWrkspaceId(), searchInputValue);
+		}
+	}
+
 }
 
 function createSearchInputHndlr() {
-	const searchForm = document.querySelector('.search-menu__form');
-	searchForm.addEventListener('submit', searchEvent);
-	const searchFormButton = searchForm.querySelector('.search-menu__form__button');
-	searchFormButton.addEventListener('click', searchEvent);
+	const searchFormContainers = document.querySelectorAll('.search-menu');
+	searchFormContainers.forEach((searchFormContainer) => {
+		const searchForm = searchFormContainer.querySelector('.search-menu__form');
+		searchForm.addEventListener('submit', searchEvent.bind(event, {parentContainer: searchFormContainer}));
+		const searchFormButton = searchFormContainer.querySelector('.search-menu__form__button');
+		searchFormButton.addEventListener('click', searchEvent.bind(event, {parentContainer: searchFormContainer}));
+	});
 }
 
 export {createSearchInputHndlr};

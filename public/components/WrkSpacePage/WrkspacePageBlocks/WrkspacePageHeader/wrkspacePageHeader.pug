@@ -5,7 +5,7 @@ div.wrkspace-page-header
             img.wrkspace-page-header__info-row__image-row__image.wrkspace-page-header__info-row__image-row__image_style(src='/images/abkhazia.jpg')
             input.wrkspace-page-header__info-row__image-row__input(type='file')
         div.wrkspace-page-header__info-row__info-column
-            div.wrkspace-page-header__info-row__info-column__name.wrkspace-page-header__info-row__info-column__name_style= currentWrkspace.Name
+            div.wrkspace-page-header__info-row__info-column__name.wrkspace-page-header__info-row__info-column__name_style(data-section='wrkspaceName')= currentWrkspace.Name
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CHANNELS   ${currentWrkspace.Channels.length}`
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `MEMBERS    ${currentWrkspace.Members.length}`
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CREATOR    ${currentWrkspaceCreator.username}`
@@ -14,6 +14,6 @@ div.wrkspace-page-header
                 div.wrkspace-page-header__info-row__settings-column__container__button
                     img.wrkspace-page-header__info-row__settings-column__container__button__icon.wrkspace-page-header__info-row__settings-column__container__button__icon_style(src='/images/dots.png')
                 div.wrkspace-page-dropdown.wrkspace-page-dropdown_style
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style Invite user
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style See users
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style Watch statistics
+                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='inviteUser')  Invite user
+                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='seeUsers') See users
+                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='watchStatistics')  Watch statistics

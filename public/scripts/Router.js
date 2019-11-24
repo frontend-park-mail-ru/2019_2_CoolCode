@@ -32,7 +32,7 @@ class Router {
 
 	create(pathObject, identities) {
 		let path = "";
-		if (identities.length !== 0) {
+		if (pathObject.pathFunction instanceof Function) {
 			path = pathObject.pathFunction(...identities);
 		} else {
 			path = pathObject.pathFunction;
@@ -49,13 +49,14 @@ class Router {
 
 	go(viewName, ...identities) {
 		for (let path in this._paths) {
-			console.log(viewName);
-			console.log(path);
 			if (this._paths[path].viewClassName === viewName) {
 				this.create(this._paths[path], identities);
+				break;
 			}
+			console.log(`couldn\'t open page : ${viewName}`);
+			//console.log(viewName);
+			// console.log(this._paths[path].viewClassName);
 		}
-		console.log('couldn\'t open page');
 	}
 
 	open(keyWords, identities) {
@@ -103,6 +104,8 @@ class Router {
 
 		const currentPath = window.location.pathname;
 		const pathArgs = this.parsePath(currentPath);
+		console.log(pathArgs.keyWords);
+		console.log(pathArgs.args);
 		this.open(pathArgs.keyWords, pathArgs.args);
 	};
 

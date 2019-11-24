@@ -3,13 +3,13 @@ class Data {
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [],
 		currentWrkspace = {}, currentWrkspaceCreator = {},
-		lastSearchUsers = [],
+		lastSearchUsers = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
-
+		this.currentChannelID = currentChannelID;
 		this.user = user;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
@@ -222,6 +222,26 @@ class Data {
 		return this.lastSearchUsers;
 	}
 
+	deleteLastSearchUsers() {
+		this.lastSearchUsers = undefined;
+		this.createLogMessage('set', 'lastSearchUsers', this.lastSearchUsers);
+	}
+
+	setLastSearchMessages (lastSearchMessages) {
+		this.lastSearchMessages = lastSearchMessages;
+		this.createLogMessage('set', 'lastSearchMessages', lastSearchMessages);
+	}
+
+	getLastSearchMessages() {
+		this.createLogMessage('get', 'lastSearchMessages', this.lastSearchMessages);
+		return this.lastSearchMessages;
+	}
+
+	deleteLastSearchMessages() {
+		this.lastSearchMessages = undefined;
+		this.createLogMessage('set', 'lastSearchMessages', this.lastSearchMessages);
+	}
+
 	setCurrentWrkspace(currentWrkspace) {
 		this.currentWrkspace = currentWrkspace;
 		this.createLogMessage('set', 'currentWrkspace', currentWrkspace);
@@ -230,6 +250,11 @@ class Data {
 	getCurrentWrkspace() {
 		this.createLogMessage('get', 'currentWrkspace', this.currentWrkspace);
 		return this.currentWrkspace;
+	}
+
+	getCurrentWrkspaceId() {
+		this.createLogMessage('get', 'currentWrkspaceId', this.currentWrkspace.ID);
+		return this.currentWrkspace.ID;
 	}
 
 	setCurrentWrkspaceCreator(currentWrkspaceCreator) {
@@ -242,6 +267,12 @@ class Data {
 		return this.currentWrkspaceCreator;
 	}
 
+	addCurrentWrkspaceMember(id) {
+		if (!this.currentWrkspace.Members.includes(id)) {
+			this.currentWrkspace.Members.push(id);
+		}
+	}
+
 	setCurrentChannel(currentChannel) {
 		this.currentChannel = currentChannel;
 		this.createLogMessage('set', 'currentChannel', currentChannel);
@@ -252,6 +283,15 @@ class Data {
 		return this.currentChannel;
 	}
 
+	setCurrentChannelID(currentChannelID) {
+		this.currentChannelID = currentChannelID;
+		this.createLogMessage('set', 'currentChannelID', currentChannelID);
+	}
+
+	getCurrentChannelID() {
+		this.createLogMessage('get', 'currentChannelID', this.currentChannelID);
+		return this.currentChannelID;
+	}
 	getChatIdByChatUserId(userId) {
 		let chatId = null;
 		for (let chat of this.userChats) {

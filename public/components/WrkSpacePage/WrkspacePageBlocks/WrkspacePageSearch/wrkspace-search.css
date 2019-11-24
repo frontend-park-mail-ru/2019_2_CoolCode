@@ -3,112 +3,76 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    align-self: center;
     justify-content: center;
     width: 80%;
 }
 
-.wrkspace-search__search-menu {
+.wrkspace-search__column {
     flex: 0 0 auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /*so everything in one line*/
-    justify-content: space-between;
-    width: 100%;
-    height: 7vh; /*experimenting with viewports*/
+    flex-direction: column;
+    align-self: center;
+    height: 90%;
+    width: 80%;
+}
 
-    box-sizing: border-box;
+.wrkspace-search__search-container {
+    flex: 0 0 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.wrkspace-search__search-container_style {
+    background-color: var(--global-light-grey-color);
+    border-radius: 10px;
+}
+
+.wrkspace-search__search-container__input_style {
+    background-color: #FFFFFF;
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    font-family: var(--global-font-family-Roboto);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+.wrkspace-search__user-found_style {
+    border-bottom: 1px solid var(--global-middlegrey-color);
+}
+
+.wrkspace-search__user-found_style:hover {
+    border-radius: 10px;
+    border: 1px solid var(--global-darkgrey-color);
+    box-shadow: 0 0 2px var(--global-darkgrey-color)
 }
 
 
-/* form element*/
-
-.wrkspace-search__search-menu__form{
-    flex: 10 0 0; /*width not specified, max growing*/
-    height: 80%;
-
-    display: flex;
-    flex-direction: row;
+.wrkspace-search__msgwindow {
+    flex: 0 0 auto;
+    flex-direction: column;
     justify-content: flex-end;
-
-    margin: 5px 10px 5px 10px;
-}
-
-/* input element in form*/
-.wrkspace-search__search-menu__form__input-container{
-    flex: 10 0 auto; /*max growing*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px 10px 10px 10px;
     align-self: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 60%;
-    width: 100%;
+    width: 95%;
+    height: unset;
+    max-height: 95%;
 }
 
-.wrkspace-search__search-menu__form__input-container_style{
-    background-color: var(--global-search-input-color);
-    background-position: right 5px;
-    background-repeat: no-repeat;
-    font-family: var(--global-font-family-Roboto);
-    border: none;
-    outline: none;
-    border-radius: 10px;
-}
-
-/* input element in input-container*/
-.wrkspace-search__search-menu__form__input-container__input {
-    flex: 10 0 auto; /*max growing*/
-    align-self: center;
-    width: 80%; /*fixed width*/
-    height: 60%;
-    padding: 0 0 0 10px;
-}
-
-.wrkspace-search__search-menu__form__input-container__input_style {
+.wrkspace-search__msgwindow_style {
     background-color: transparent;
-    background-position: right 5px;
-    background-repeat: no-repeat;
-    font-family: var(--global-font-family-Roboto);
-    border: none;
-    outline: none;
-    border-radius: 10px;
 }
 
-.wrkspace-search__search-menu__form__input-container__input_style ::-webkit-search-cancel-button{
-    visibility: hidden; /*hide red cross in input*/
+.wrkspace-search__msgwindow::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
 }
 
-
-/* submit-button element in form*/
-.wrkspace-search__search-menu__form__button {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 10%;
-    height: 100%;
-
-}
-
-.wrkspace-search__search-menu__form__button_style {
-    outline: none;
-    border: none;
-}
-
-
-/*icon element in submit-button*/
-
-.wrkspace-search__search-menu__form__button__icon {
-    object-fit: scale-down;
-    object-position: top;
-    align-self: center;
-    max-width:40%;
-    max-height:40%;
-    height: 3vh; /*experimenting with viewports*/
-}
-.wrkspace-search__search-menu__form__button__icon_style {
-    filter: opacity(0.9);
-}
-.wrkspace-search__search-menu__form__button__icon_style:hover{
-    filter: invert(0.7) brightness(200%) saturate(10%);
-    border-radius: 20px;
+.wrkspace-search__msgwindow::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF;
 }

@@ -29,7 +29,7 @@
 }
 
 .wrkspace-visible__name-row__text {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     max-width: 80%;
     height: 50%;
     align-self: center;

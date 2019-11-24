@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {router, data, promiseMaker, bus} from "../main";
+import {router, data, promiseMaker, bus, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import RegisterComponent from "../components/RegisterBlock/registerComponent";
 
@@ -20,6 +20,7 @@ class loginView extends BaseView {
 		this.drawBasics();
 		let login = new RegisterComponent(this._data, this._parent);
 		this._parent.querySelector('.primary-container').innerHTML += login.render();
+		componentsStorage.clear();
 	}
 }
 

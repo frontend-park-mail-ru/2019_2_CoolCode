@@ -1,6 +1,12 @@
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.css';
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channelHeaderMenuItems.css';
 import {router} from "../main";
+import {
+	addMemberinChanell,
+	addMemberinChanellFunc,
+	getAnyUserInfo,
+	getUserbyId
+} from "../backendDataFetchers/gettingInfo";
 const addMemberTempl = require('../components/ChannelBlock/addMember.pug');
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
@@ -29,6 +35,20 @@ function addMemberOverlayHndlr() {
 	});
 }
 
+function addMemberinChannel(member, idMember, channel) {
+	member.addEventListener('click',()=>{
+		let members = channel.Members;
+		let admin = channel.Admins;
+		let idChannel = channel.ID;
+		let nameChannel = channel.Name;
+		members.push(idMember);
+		addMemberinChanellFunc(idChannel, admin, members, nameChannel);
+		const lay = document.querySelector('.channelHeaderMenuItems__info_overlay');
+		lay.style.display = 'none';
+		router.return();
+	});
+}
+
 function menuHandlersInfo() {
 	const contentListRoot = document.querySelector('.header');
 	const menuInfo = document.querySelector('.channel-header__info-row__dropdown__dropdown-content__info');
@@ -50,4 +70,4 @@ function menuHandlersInfo() {
 	});
 }
 
-export { menuHandlersAdd,menuHandlersInfo, menuHandlersDelete, menuHandlersSearch, addMemberOverlayHndlr };
+export { addMemberinChannel, menuHandlersAdd,menuHandlersInfo, menuHandlersDelete, menuHandlersSearch, addMemberOverlayHndlr };

@@ -14,6 +14,8 @@ import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/be
 import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bemWrkspaceChannBlock/bem-wrkspace-chann.css';
 import './User/bemUserFoundBlock/bem-user-found.css';
 import './bemSearchMenu/bem-search-menu.css';
+import UsersFoundBlockComponent from "./usersFoundBlock/UsersFoundBlockComponent";
+import MessagesFoundBlockComponent from "./messagesFoundBlock/MessagesFoundComponent";
 
 class ChatsColumnComponent extends BaseComponent {
 
@@ -26,21 +28,17 @@ class ChatsColumnComponent extends BaseComponent {
     	lastMessage.innerHTML = message.text;
     }
 
-    renderSearchContent(searchUsers) {
+    renderSearchContent(data) {
+    	this._data = data;
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	contentListRoot.innerHTML = "";
 
-    	if (searchUsers) {
-    		searchUsers.forEach((user) => {
-    			const userComponent = new UserComponent(user, contentListRoot);
-    			const userBlock = document.createElement('div');
-    			userBlock.className = 'user-found user-found_style';
-    			userBlock.id = "search-" + user.id;
-    			userBlock.innerHTML = userComponent.render();
-    			contentListRoot.appendChild(userBlock);
-    			bus.emit('getUserPhoto', null, user.id ,'search', userComponent.getPhotoBlock());
-    		});
-    	}
+    	const usersFoundBlock = new UsersFoundBlockComponent(this._data, contentListRoot);
+    	const messagesFoundBlock = new MessagesFoundBlockComponent(this._data, contentListRoot);
+    	contentListRoot.innerHTML += usersFoundBlock.render();
+    	contentListRoot.innerHTML += messagesFoundBlock.render();
+    	usersFoundBlock.renderContent();
+    	messagesFoundBlock.renderContent();
 
     }
 

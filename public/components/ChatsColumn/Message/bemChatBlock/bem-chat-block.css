@@ -72,6 +72,10 @@
     border: 2px solid var(--global-green-color);
 }
 
+.chat-block__image-row__image_found {
+    border: 1px solid var(--global-middlegrey-color);
+}
+
 
 /*message-column element*/
 
@@ -105,6 +109,15 @@
     color: var(--global-green-color-1);
 }
 
+.chat-block__message-column__name-row_found {
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 18px;
+    letter-spacing: 0.7px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+
 .chat-block__message-column__message-row {
     display: flex;
     flex-direction: row;
@@ -127,6 +140,17 @@
     white-space: nowrap;
     border-radius: 10px;
     background-color:var(--global-light-grey-color);
+    text-align-all: justify; /*CHECK THIS*/
+    font-size: 16px;
+    color: #000000;
+    font-weight: 300;
+    font-family: var(--global-font-family-Roboto);
+}
+
+.chat-block__message-column__message-row__last-message_found {
+    text-overflow: ellipsis; /* crop text with dots*/
+    overflow: hidden;
+    white-space: nowrap;
     text-align-all: justify; /*CHECK THIS*/
     font-size: 16px;
     color: #000000;
@@ -159,3 +183,50 @@
     background-color: #1d916b;
 }
 
+
+/*found-channel-column element*/
+
+.chat-block__found-channel-column {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+}
+
+/*wrkspace element*/
+
+.chat-block__found-channel-column__wrkspace {
+    width: 90%;
+    height: 25%;
+    align-self: center;
+}
+
+.chat-block__found-channel-column__wrkspace_style {
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 16px;
+    letter-spacing: 0.7px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+
+.chat-block__found-channel-column__channel {
+    width: 90%;
+    height: 20%;
+    align-self: center;
+}
+
+.chat-block__found-channel-column__channel_style {
+    color: var(--global-darkgrey-color);
+    font-family: var(--global-font-family-Roboto);
+    font-size: 14px;
+}
+
+
+.chat-block__found-channel-column__message {
+    width: 90%;
+    height: 50%;
+    align-self: center;
+}

@@ -2,6 +2,7 @@ import BaseComponent from "../baseComponent";
 const channelTemplate = require('./channel.pug');
 const rightMsg = require('../ChatBlock/Message/msgRight.pug');
 const leftMsg = require('../ChatBlock/Message/msgLeft.pug');
+import {data} from "../../main";
 
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
 import './bemChannelHeader/channelHeader/channel-header.css';
@@ -13,6 +14,7 @@ import '../ChatBlock/Message/chatMsg/chat-msg.css';
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
 import ChatMessageComponent from "../ChatBlock/Message/ChatMessageComponent";
+import {getChannelInfo} from "../../backendDataFetchers/gettingInfo";
 
 class ChannelComponent extends BaseComponent {
 
@@ -60,6 +62,10 @@ class ChannelComponent extends BaseComponent {
 	}
 
 	render() {
+		let idChan = window.location.href.split('/');
+		idChan = window.location.href.split('/')[idChan.length - 1];
+		data.setCurrentChannelID(idChan);
+		getChannelInfo(idChan);
 		return channelTemplate(this._data);
 
 	}

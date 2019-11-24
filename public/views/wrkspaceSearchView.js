@@ -3,12 +3,17 @@ import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
 import {data, bus, router, componentsStorage, promiseMaker} from "../main";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import {
+	channelViewHandler,
 	createChatBlockHndlr,
 	createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {createWorkspaceSettingsButtonHndlr} from "../handlers/wrkspaceBlockHandlers";
+import {
+	createWorkspaceSettingsButtonHndlr,
+	createWrkspaceDropdownHandler,
+	createWrkspaceInfoColumnHandler
+} from "../handlers/wrkspaceBlockHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
@@ -40,12 +45,17 @@ class wrkspaceSearchView extends BaseView {
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
 		createWorkspaceSettingsButtonHndlr();
+		createUserBlockHndlr('.wrkspace-search__search-container');
+		channelViewHandler();
+		createWrkspaceDropdownHandler();
+		createWrkspaceInfoColumnHandler();
 	}
 
-	show(...args) {
+	show(args) {
+		if (!data.getLoggedIn()) router.go('mainPageView');
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-			if (!data.getLoggedIn()) router.go('mainPageView');
-			else {
+			if (JSON.stringify(data.getCurrentWrkspace()) === '{}') {
+				console.log('here');
 				Promise.all(
 					[creatingChats(this._parent),
 						promiseMaker.createPromise('getWrkspaceInfo', args[0]),
@@ -59,6 +69,10 @@ class wrkspaceSearchView extends BaseView {
 						}
 					);
 				});
+			} else {
+				this.setContent();
+				this.render();
+				this.setEvents();
 			}
 		});
 		console.log('show: wrkspacePageSearch');
@@ -76,20 +90,20 @@ class wrkspaceSearchView extends BaseView {
 		componentsStorage.setLeftColumn(leftColumn);
 	}
 
-	drawRightColumn() {
-		let wrkspacePage = componentsStorage.getWrkspacePage();
-		if (!wrkspacePage) {
-			wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
-			wrkspacePage.render();
-		}
-		wrkspacePage.renderSearchContent(this._data.searchUsers);
+	drawRightColumn(wrkspacePage) {
+		wrkspacePage.renderSearchContent(this._data);
 		componentsStorage.setWrkspacePage(wrkspacePage);
 	}
 
 	render() {
-		this.drawBasics();
-		this.drawLeftColumn();
-		this.drawRightColumn();
+		let wrkspacePage = componentsStorage.getRightColumn();
+		if (!wrkspacePage || !(wrkspacePage instanceof WrkspacePageComponent)) {
+			this.drawBasics();
+			this.drawLeftColumn();
+			wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+			wrkspacePage.render();
+		}
+		this.drawRightColumn(wrkspacePage);
 	}
 
 }

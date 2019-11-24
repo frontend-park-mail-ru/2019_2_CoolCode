@@ -16,10 +16,12 @@ class WrkspacePageComponent extends BaseComponent {
 
     }
 
-    renderSearchContent() {
+    renderSearchContent(data) {
+    	this._data = data;
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const searchComponent = new WrkspacePageSearchComponent(this._data, contentListRoot);
     	contentListRoot.innerHTML += searchComponent.render();
+    	searchComponent.renderContent();
     }
 
     render() {
