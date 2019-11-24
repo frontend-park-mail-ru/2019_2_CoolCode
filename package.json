@@ -6,8 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "prestart": "webpack-cli",
-    "build": "webpack",
-    "heroku-postbuild": "webpack --config webpack.config.prod.js",
+    "heroku-postbuild": "webpack -p",
     "watch": "webpack --watch"
   },
   "keywords": [],
