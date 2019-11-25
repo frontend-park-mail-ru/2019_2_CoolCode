@@ -10,7 +10,7 @@ const responseStatuses = {
 
 const settings = {
 	connection : 'http',
-	frontendPort : ':3000',
+	frontendPort : ':8000',
 	backendPort : ':8080',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
@@ -36,7 +36,7 @@ const API = {
 	},
 	createWrkSpace: '/workspaces',
 	findUser : (query) => {
-		return `/users/${query}`;
+		return `/users/names/${query}`;
 	},
 	findMessages : (query) => {
 		return `/messages/${query}`;
