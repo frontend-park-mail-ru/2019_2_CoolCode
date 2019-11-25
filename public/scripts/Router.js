@@ -19,6 +19,8 @@ class Router {
 			parent: this._application,
 			pathFunction: path,
 		};
+		console.log(view.name);
+		console.log(this._paths[keyWords].viewClassName);
 		keyWords.forEach((keyWord) => {
 			if (!(this._keyWords.includes(keyWord))) {
 				this._keyWords.push(keyWord);
