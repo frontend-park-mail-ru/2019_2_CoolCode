@@ -43,7 +43,7 @@ baseBlock.className = 'main';
 application.appendChild(baseBlock);
 const router = new Router(baseBlock);
 const FetchModule = new Fetch();
-FetchModule.setUrl(`${connection}://${backend}${backendPort}`);
+FetchModule.setUrl(`${connection}://${backend}`);
 const data = new Data();
 
 //serviceWorkerRegister();

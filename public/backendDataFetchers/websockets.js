@@ -4,13 +4,13 @@ import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSock
 import {settings, responseStatuses, ROUTER} from '../constants/config';
 import sendingMessage from "./messagesInteraction";
 const {backend} = settings;
-const {backendPort} = settings;
+const {backendNotificationsPort} = settings;
 
 function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/channels/${channelId}/notifications`);
+	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/channels/${channelId}`);
 	data.addWebSocketConn(channelId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -38,7 +38,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
+	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {

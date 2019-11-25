@@ -10,13 +10,16 @@ const responseStatuses = {
 
 const settings = {
 	connection : 'http',
-	frontendPort : ':8000',
-	backendPort : ':8080',
+	frontendPort : ':3000',
+	backendUsersPort : ':8080',
+	backendChatsPort : ':8081',
+	backendMessagesPort : ':8082',
+	backendNotificationsPort : ':8083',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
-	backend: '95.163.209.195',
+	//backend: '95.163.209.195',
 	//backend: '192.168.1.69:8080',
-	//backend: 'localhost:8080'
+	backend: 'localhost'
 };
 
 const keys = {
@@ -43,13 +46,13 @@ const API = {
 
 	},
 	currentChatMessages : (chatId) => {
-		return `/chats/${chatId}/messages`;
+		return `/messages/chats/${chatId}`;
 	},
 	currentChannelMessages : (chanId) => {
-		return `/channels/${chanId}/messages`;
+		return `/messages/channels/${chanId}`;
 	},
 	getUserChats : (id) => {
-		return `/users/${id}/chats`;
+		return `/chats/users/${id}`;
 	},
 	userInfo: (id) => {
 		return `/users/${id}`;
@@ -63,13 +66,13 @@ const API = {
 	wrkspaceInfo: (id) => {
 		return `/workspaces/${id}`;
 	},
-	logout: '/logout',
-	login: '/login',
+	logout: '/users/logout',
+	login: '/users/login',
 	auth: '/users',
 	getPhoto : (id) => {
-		return `/photos/${id}`;
+		return `/users/photos/${id}`;
 	},
-	postPhoto : '/photos',
+	postPhoto : '/users/photos',
 
 };
 
