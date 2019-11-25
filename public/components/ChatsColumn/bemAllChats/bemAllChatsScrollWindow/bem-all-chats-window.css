@@ -1,0 +1,21 @@
+.all-chats-window{
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll; /*make it scroll window*/
+    overflow-x: hidden;
+}
+
+/*styling scrollable window block*/
+.all-chats-window_style{
+
+}
+
+.all-chats-window_style::-webkit-scrollbar{
+    width: 7px;
+    background-color: transparent;
+}
+.all-chats-window_style::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var( --global-scrollbar-color);
+    -webkit-box-shadow: inset 0 0 5px var(--global-darkgrey-color);
+}

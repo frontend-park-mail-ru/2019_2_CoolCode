@@ -1,0 +1,88 @@
+.secondary-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+
+.secondary-row_left {
+    justify-content: flex-start;
+}
+
+.secondary-row_right {
+    justify-content: flex-end;
+}
+
+/*edited element*/
+
+.secondary-row__edited {
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: right;
+    margin: 3px 5px 0 5px;
+}
+
+.secondary-row__edited_style {
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14px;
+    font-family: var(--global-font-family-Roboto);
+    color: var(--global-darkgrey-color);
+}
+
+
+/*like element*/
+
+.secondary-row__like {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: auto;
+    height: auto;
+    margin: 3px 5px 0 5px;
+}
+
+/*like-button element */
+
+.secondary-row__like__button {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: 0 3px 0 3px;
+}
+
+/*icon element in like-button */
+
+.secondary-row__like__button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+.secondary-row__like__button__icon_style {
+    filter: opacity(0.9);
+}
+
+/*like-button element */
+
+.secondary-row__like__count {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.secondary-row__like__count_style {
+    word-wrap: break-word;
+    font-weight: 300;
+    font-size: 12px;
+    font-family: var(--global-font-family-Roboto);
+    color: #000000;
+}

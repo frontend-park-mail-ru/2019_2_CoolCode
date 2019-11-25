@@ -1,0 +1,106 @@
+.message-sett-block {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+}
+
+.message-sett-block__content {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 80%;
+}
+.message-sett-block__content_hidden {
+    display: none;
+}
+
+.message-sett-block__content__header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: center;
+    width: 100%;
+    height: 4vh;
+    padding: 0 0 0 5px;
+}
+
+.message-sett-block__content__header_style {
+    border-radius: 5px;
+    background-color: var(--global-green-color);
+}
+
+.message-sett-block__content__option {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    height: 4vh;
+    padding: 0 0 0 5px;
+    margin: 5px 0 0 0;
+}
+
+.message-sett-block__content__option_style {
+    border-radius: 5px;
+    background-color: var(--global-msgwindow-container-color);
+    font-weight: 300;
+    font-size: 16px;
+    font-family: var(--global-font-family-Roboto);
+    color: #000000;
+}
+
+.message-sett-block__content__option_style:hover {
+    cursor: pointer;
+}
+
+.message-sett-block__content__button {
+    flex: 0 0 auto;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-self: center;
+}
+
+.message-sett-block__content__button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:90%;
+    max-height:90%;
+    height: 1.5vh; /*experimenting with viewports*/
+}
+
+.message-sett-block__content__button__icon_style {
+    filter: opacity(0.6);
+}
+
+.message-sett-block__content__button__icon_style:hover {
+    cursor: pointer;
+}
+
+
+.message-sett-block__content__text {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    height: 100%;
+    align-self: center;
+
+}
+
+.message-sett-block__content__text_style {
+    font-weight: 300;
+    font-size: 14px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #000000;
+}

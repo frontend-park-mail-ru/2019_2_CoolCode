@@ -1,0 +1,41 @@
+block page
+    div.chat-column
+        div.channel-header
+            div.channel-header__info-row.channel-header__info-row_style
+                div.channel-header__info-row__info-column
+                    div.channel-header__info-row__info-column__name-row.channel-header__info-row__info-column__name-row_style=currentWrkspace.Name
+                    div.channel-header__info-row__info-column__status-row.channel-header__info-row__info-column__status-row_style=`#${currentChannel.Name}`
+                div.channel-header__info-row__btnblock
+                    div.channel-header__dropdown
+                        img.channel-header__dropdown__dropbtn(src="/images/setting1.png")
+                        div.channel-header__dropdown__dropdown-content.channel-header__dropdown__dropdown-content_style
+                            p.channel-header__dropdown__dropdown-content__option(data-section='viewInfo') view channel info
+                            p.channel-header__dropdown__dropdown-content__option(data-section='addMember') add member
+                            p.channel-header__dropdown__dropdown-content__option(data-section='findMessage') find message
+                            p.channel-header__dropdown__dropdown-content__option(data-section='deleteChannel') delete channel
+                            p.channel-header__dropdown__dropdown-content__option(data-section='leaveChannel') leave channel
+
+            if Object.keys(importantMessage).length !== 0
+                div.channel-header__pinned-message.channel-header__pinned-message_style
+                    div.channel-header__pinned-message__content.channel-header__pinned-message__content_style=importantMessage.text
+                    img.channel-header__pinned-message__icon.channel-header__pinned-message__icon_style(src="/images/pinned.png")
+
+        div.chat-column-main
+            div.typing-block
+                div.msgwindow-container.msgwindow-container__style
+                    div.msgwindow-container__msgwindow.msgwindow-container__msgwindow_style
+                form.input
+                    div.input__icon-container
+                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/add.png")
+                    textarea.input__text.input__text_style(placeholder="chat here..")
+                    div.input__icon-container
+                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/send.png")
+            div.message-sett-block
+                div.message-sett-block__content.message-sett-block__content_hidden
+                    div.message-sett-block__content__header.message-sett-block__content__header_style
+                        div.message-sett-block__content__text.message-sett-block__content__text_style choose option
+                        div.message-sett-block__content__button
+                            img.message-sett-block__content__button__icon.message-sett-block__content__button__icon_style(src="/images/close.png")
+                    div.message-sett-block__content__option.message-sett-block__content__option_style#delete delete message
+                    div.message-sett-block__content__option.message-sett-block__content__option_style#edit edit message
+

@@ -17,6 +17,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "express-history-api-fallback": "^2.2.1",
+    "express-http-proxy": "^1.6.0",
     "morgan": "^1.9.1",
     "pug": "^2.0.4",
     "sass-loader": "^8.0.0"
@@ -36,6 +37,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-babel": "^5.3.0",
+    "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
     "node-sass": "^4.13.0",
     "pug-loader": "^2.4.0",

@@ -1,6 +1,5 @@
 import BaseView from './baseView';
-import handleLogout from "../backendDataFetchers/logout";
-import {data, bus, router} from "../main";
+import {bus} from "../main";
 
 class logoutView extends BaseView {
 	constructor (data, parent) {

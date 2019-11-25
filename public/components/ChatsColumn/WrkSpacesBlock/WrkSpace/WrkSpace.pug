@@ -1,0 +1,19 @@
+div.wrkspace-visible.wrkspace-visible_style
+        div.wrkspace-visible__name-row
+            div.wrkspace-visible__image-row
+                img.wrkspace-visible__image-row__image.wrkspace-visible__image-row__image_style(src='/images/abkhazia.jpg')
+            div.wrkspace-visible__name-row__text.wrkspace-visible__name-row__text_style= Name
+            div.wrkspace-visible__name-row__info-button
+                img.wrkspace-visible__name-row__info-button__icon(src='/images/info_1.png')
+        div.wrkspace-visible__chann-row
+            div.wrkspace-visible__chann-row__channels.wrkspace-visible__chann-row__channels_style CHANNELS
+            div.wrkspace-visible__chann-row__add-channel-button
+                img.wrkspace-visible__chann-row__add-channel-button__icon.wrkspace-visible__chann-row__add-channel-button__icon_style(src="/images/add_1.png" title="add channel")
+            if Channels !== null
+                div.wrkspace-visible__chann-row__arrow
+                    img.wrkspace-visible__chann-row__arrow__icon-up.wrkspace-visible__chann-row__arrow_style(src="/images/arr_up.png")
+                    img.wrkspace-visible__chann-row__arrow__icon-down.wrkspace-visible__chann-row__arrow_style.hidden(src="/images/arr_down.png")
+                div.wrkspace-visible__chann-row__number.wrkspace-visible__chann-row__number_style= Channels.length
+
+
+

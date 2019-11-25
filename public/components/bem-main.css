@@ -1,0 +1,52 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import url(http://fonts.googleapis.com/css?family=Montserrat&display=swap);
+
+:root{
+    --global-green-color-1: #2DC68B;
+    --global-green-color: rgba(39, 172, 113, 0.6);
+    --global-grey-color: #D7D7D7;
+    --global-search-input-color: rgba(207, 222, 211, 0.41);
+    --global-nicegrey-color: #666666;
+    --global-darkgrey-color: #626262;
+    --global-middlegrey-color: #9e9e9e;
+    --global-scrollbar-color: rgba(40, 162, 77, 0.41);
+    --global-msgwindow-container-color: rgba(76, 140, 101, 0.13);
+    --global-dropdown-color: rgba(40, 162, 77, 0.59);
+    --global-selected-color: rgba(97, 189, 125, 0.15);
+    --global-error-color: #FF4E4E;
+    --global-loader-grey-color: #F3F3F3 ;
+    --global-light-grey-color: #E6E6E6;
+    --global-font-family-Roboto: 'Roboto', sans-serif;
+    --global-font-family-Montserrat: 'Montserrat',  sans-serif;
+
+    --global-z-index-overlay: 2;
+    --global-z-index-form: 3;
+}
+
+::placeholder {
+    color: var(--global-darkgrey-color);
+}
+
+
+/*spin function*/
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*bounce function*/
+
+@keyframes bounce {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(-360deg); }
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display : none;
+}

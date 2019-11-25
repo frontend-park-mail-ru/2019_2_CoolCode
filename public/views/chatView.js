@@ -1,24 +1,32 @@
 import BaseView from './baseView';
 
-import { saveUserPhoto, showLoader, creatingChats } from "../modules/API/profile";
-import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
-import {data, bus, router, promiseMaker, componentsStorage} from "../main";
-import {chooseChat, fetchUserInfo} from "../backendDataFetchers/websockets";
+import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import {creatingChats} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
-import ChatComponent from "../components/Chat/ChatComponent";
+import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import {createMessageInputHndlr, createSendMessageBtnHndlr} from "../handlers/chatViewHandlers";
 import {
+	createCloseSettingsMessageHndlr,
+	createDeleteMessageBlockHndlr,
+	createEditMessageBlockHndlr,
+	createMessageInputHndlr,
+	createSendMessageBtnHndlr
+} from "../handlers/chatViewHandlers";
+import {
+	channelViewHandler,
 	createChatBlockHndlr,
+	createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
+import {saveUserPhoto} from "../handlers/photosHandlers";
 
 class chatView extends BaseView {
 
 	constructor (data, parent) {
     	super ({viewType: "chat", user:{}, loggedIn: null,
-			wrkSpaces:[], chats: [],
+			wrkSpaces:[], chats: [], currentChat: {}, foundMessageId: null,
 			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
 	};
 
@@ -27,11 +35,16 @@ class chatView extends BaseView {
 		saveUserPhoto(this._data.chatUser.id);
     	createSearchInputHndlr();
 		createWrkspaceBlockExpandHndlr();
-		createWorkspaceButtonHndlr();
 		createMessageInputHndlr();
 		createChatBlockHndlr();
 		createSendMessageBtnHndlr();
 		createWrkspaceBlockHndlr();
+		createWorkspaceButtonHndlr();
+		//createOpenSettingsMessageHndlr();
+		createEditMessageBlockHndlr();
+		createCloseSettingsMessageHndlr();
+		createDeleteMessageBlockHndlr();
+		channelViewHandler();
 	}
 
 	setContent() {
@@ -40,6 +53,7 @@ class chatView extends BaseView {
 		this._data.chatUser = data.getCurrentChatUser();
 		this._data.chats = data.getUserChats();
 		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
 	}
@@ -53,22 +67,20 @@ class chatView extends BaseView {
 				this.setEvents();
 			});
 		} else {
-			router.go('/profile');
+			router.go('profileView');
 		}
 	}
 
 	show(args) {
-		if (this._data.chatUser.id) {
-			this.findUser(args.id);
-		} else {
-			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-				if (!data.getLoggedIn()) router.go('/');
-				creatingChats(this._parent).then(() => {
-					this.findUser(args.id);
-				});
-			});
+		if (args.length === 2) {
+			this._data.foundMessageId = args[1];
 		}
-
+		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+			if (!data.getLoggedIn()) router.go('mainPageView');
+			creatingChats(this._parent).then(() => {
+				this.findUser(args[0]);
+			});
+		});
 		console.log('show: chat page');
 	}
 
@@ -88,6 +100,9 @@ class chatView extends BaseView {
 		let chatBlock = new ChatComponent(this._data, this._parent);
 		this._parent.querySelector('.column_right').innerHTML += chatBlock.render();
 		chatBlock.renderContent();
+		if (this._data.foundMessageId) {
+			chatBlock.slideToMessage();
+		}
 		componentsStorage.setChatBlock(chatBlock);
 
 	}

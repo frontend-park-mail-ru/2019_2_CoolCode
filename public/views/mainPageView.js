@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {data, bus, router, promiseMaker} from "../main";
+import {componentsStorage, data, promiseMaker} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import MainPageComponent from "../components/MainPage/mainPageComponent";
 
@@ -27,6 +27,7 @@ class mainPageView extends BaseView {
 		this.drawBasics();
 		let mainPage = new MainPageComponent(this._data, this._parent);
 		this._parent.querySelector('.primary-container').innerHTML += mainPage.render();
+		componentsStorage.clear();
 	}
 }
 

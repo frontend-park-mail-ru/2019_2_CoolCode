@@ -1,0 +1,33 @@
+block page
+    div.chat-column
+        div.chat-header
+            div.chat-header__info-row.chat-header__info-row_style
+                div.chat-header__info-row__image-row
+                    div.chat-header__info-row__image-row__loader.chat-header__info-row__image-row__loader_style
+                    img.chat-header__info-row__image-row__image.chat-header__info-row__image-row__image_style(src='/' + chatUserPhoto)
+                div.chat-header__info-row__info-column
+                    div.chat-header__info-row__info-column__name-row.chat-header__info-row__info-column__name-row_style #{currentChat.Name}
+                    div.chat-header__info-row__info-column__status-row.chat-header__info-row__info-column__status-row_style last seen..
+            if Object.keys(importantMessage).length !== 0
+                div.chat-header__pinned-message.chat-header__pinned-message_style
+                    div.chat-header__pinned-message__content.chat-header__pinned-message__content_style=importantMessage.text
+                    img.chat-header__pinned-message__icon.chat-header__pinned-message__icon_style(src="/images/pinned.png")
+        div.chat-column-main
+            div.typing-block
+                div.msgwindow-container.msgwindow-container__style
+                    div.msgwindow-container__msgwindow.msgwindow-container__msgwindow_style
+                form.input
+                    div.input__icon-container
+                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/add.png")
+                    textarea.input__text.input__text_style(placeholder="chat here..")
+                    div.input__icon-container
+                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/send.png")
+            div.message-sett-block
+                div.message-sett-block__content.message-sett-block__content_hidden
+                    div.message-sett-block__content__header.message-sett-block__content__header_style
+                        div.message-sett-block__content__text.message-sett-block__content__text_style choose option
+                        div.message-sett-block__content__button
+                            img.message-sett-block__content__button__icon.message-sett-block__content__button__icon_style(src="/images/close.png")
+                    div.message-sett-block__content__option.message-sett-block__content__option_style#delete delete message
+                    div.message-sett-block__content__option.message-sett-block__content__option_style#edit edit message
+

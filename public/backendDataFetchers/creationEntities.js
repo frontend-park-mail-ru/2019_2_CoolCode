@@ -1,10 +1,10 @@
-import {FetchModule, data, promiseMaker} from "../main";
+import {data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function createChat(id) { /*creating new chat and fetching all chats info*/
 	console.log(`Creating chat with user: ${id}`);
 	try {
-		const response = await FetchModule._doPost({path: API.chats, data: {
+		const response = await FetchModule._doPost({path: API.createChat, data: {
 			user_id:parseFloat(id),
 		},
 		contentType : 'application/json;charset=utf-8'});

@@ -1,13 +1,15 @@
 class Data {
 
-	constructor(loggedIn, user , userPhoto, userChats = [], userWrkSpaces = [],
-		currentChatId, currentChatUser, currentChatUserPhoto, currentChatMessages = [],
-		lastSearchUsers = [],
-		webSocketConns = [], socketConnection = false) {
+	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
+		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [], channelMessagesFull = [],
+		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
+		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
+		webSocketConns = [], socketConnection = false,
+		chosenMessageId, chosenMessageText) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
-
+		this.currentChannelID = currentChannelID;
 		this.user = user;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
@@ -15,14 +17,25 @@ class Data {
 		this.userPhoto = userPhoto;
 
 		this.currentChatId = currentChatId;
+		this.currentChat = currentChat;
 		this.currentChatUser = currentChatUser;
 		this.currentChatUserPhoto = currentChatUserPhoto;
 		this.currentChatMessages = currentChatMessages;
+		this.channelMessagesFull = channelMessagesFull;
+
+		this.currentWrkspace = currentWrkspace;
+		this.currentWrkspaceCreator = currentWrkspaceCreator;
+		this.currentWrkspaceUsers = currentWrkspaceUsers;
 
 		this.lastSearchUsers = lastSearchUsers;
+		this.lastSearchMessages = lastSearchMessages;
+		this.lastSearchMessagesFull = lastSearchMessagesFull;
 
 		this.webSocketConns = webSocketConns;
 		this.socketConnectionOn = socketConnection;
+
+		this.chosenMessageId = chosenMessageId;
+		this.chosenMessageText = chosenMessageText;
 
 		Data.__instance = this;
 	}
@@ -36,13 +49,25 @@ class Data {
 		this.userPhoto = undefined;
 
 		this.currentChatId = undefined;
+		this.currentChat = undefined;
 		this.currentChatUser = undefined;
 		this.currentChatUserPhoto = undefined;
 		this.currentChatMessages = [];
+		this.channelMessagesFull = [];
+
+		this.currentWrkspace = undefined;
+		this.currentWrkspaceCreator = undefined;
+		this.currentWrkspaceUsers = [];
 
 		this.lastSearchUsers = [];
+		this.lastSearchMessages = [];
+		this.lastSearchMessagesFull = [];
+
 		this.webSocketConns = [];
 		this.socketConnectionOn = false;
+
+		this.chosenMessageId = undefined;
+		this.chosenMessageText = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -114,11 +139,27 @@ class Data {
 	setCurrentChatId(currentChatId) {
 		this.currentChatId = currentChatId;
 		this.createLogMessage('set', 'currentChatId', currentChatId);
+		this.setCurrentChat(currentChatId);
 	}
 
 	getCurrentChatId() {
 		this.createLogMessage('get', 'currentChatId', this.currentChatId);
 		return this.currentChatId;
+	}
+
+	setCurrentChat(currentChatId) {
+		for (let chat of this.userChats) {
+			if (chat.ID == currentChatId) {
+				this.currentChat = chat;
+				break;
+			}
+		}
+		this.createLogMessage('set', 'currentChat', this.currentChat);
+	}
+
+	getCurrentChat() {
+		this.createLogMessage('get', 'currentChat', this.currentChat);
+		return this.currentChat;
 	}
 
 	setCurrentChatUser(currentChatUser) {
@@ -156,6 +197,21 @@ class Data {
 		return this.currentChatMessages;
 	}
 
+	getChannelMessagesFull() {
+		this.createLogMessage('get', 'channelMessagesFull', this.channelMessagesFull);
+		return this.channelMessagesFull;
+	}
+
+	deleteChannelMessagesFull() {
+		this.channelMessagesFull = [];
+		this.createLogMessage('set', 'channelMessagesFull', this.channelMessagesFull);
+	}
+
+	addChannelMessageFull(channelMessageFull) {
+		this.channelMessagesFull.push(channelMessageFull);
+		this.createLogMessage('set', 'channelMessagesFull', this.channelMessagesFull);
+	}
+
 	addWebSocketConn(chatId, conn) {
 		this.webSocketConns.push({ chatId: chatId,
 			connection : conn});
@@ -188,6 +244,141 @@ class Data {
 	getLastSearchUsers() {
 		this.createLogMessage('get', 'lastSearchUsers', this.lastSearchUsers);
 		return this.lastSearchUsers;
+	}
+
+	deleteLastSearchUsers() {
+		this.lastSearchUsers = undefined;
+		this.createLogMessage('set', 'lastSearchUsers', this.lastSearchUsers);
+	}
+
+	setLastSearchMessages (lastSearchMessages) {
+		this.lastSearchMessages = lastSearchMessages;
+		this.createLogMessage('set', 'lastSearchMessages', lastSearchMessages);
+	}
+
+	getLastSearchMessages() {
+		this.createLogMessage('get', 'lastSearchMessages', this.lastSearchMessages);
+		return this.lastSearchMessages;
+	}
+
+	deleteLastSearchMessages() {
+		this.lastSearchMessages = [];
+		this.createLogMessage('set', 'lastSearchMessages', this.lastSearchMessages);
+	}
+
+	getLastSearchMessagesFull() {
+		this.createLogMessage('get', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+		return this.lastSearchMessagesFull;
+	}
+
+	deleteLastSearchMessagesFull() {
+		this.lastSearchMessagesFull = [];
+		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+	}
+
+	addLastSearchMessageFull(lastSearchMessageFull) {
+		this.lastSearchMessagesFull.push(lastSearchMessageFull);
+		this.createLogMessage('set', 'lastSearchMessagesFull', this.lastSearchMessagesFull);
+	}
+
+	setCurrentWrkspace(currentWrkspace) {
+		this.currentWrkspace = currentWrkspace;
+		this.createLogMessage('set', 'currentWrkspace', currentWrkspace);
+	}
+
+	getCurrentWrkspace() {
+		this.createLogMessage('get', 'currentWrkspace', this.currentWrkspace);
+		return this.currentWrkspace;
+	}
+
+	getCurrentWrkspaceId() {
+		this.createLogMessage('get', 'currentWrkspaceId', this.currentWrkspace.ID);
+		return this.currentWrkspace.ID;
+	}
+
+	setCurrentWrkspaceCreator(currentWrkspaceCreator) {
+		this.currentWrkspaceCreator = currentWrkspaceCreator;
+		this.createLogMessage('set', 'currentWrkspaceCreator', currentWrkspaceCreator);
+	}
+
+	getCurrentWrkspaceCreator() {
+		this.createLogMessage('get', 'currentWrkspaceCreator', this.currentWrkspaceCreator);
+		return this.currentWrkspaceCreator;
+	}
+
+	addCurrentWrkspaceMember(id) {
+		if (!this.currentWrkspace.Members.includes(id)) {
+			this.currentWrkspace.Members.push(id);
+		}
+	}
+	getCurrentWrkspaceMembers() {
+		this.createLogMessage('get', 'currentWrkspaceMembers', this.currentWrkspace.Members);
+		return this.currentWrkspace.Members;
+
+	}
+
+	deleteCurrentWrkspaceUsers() {
+		this.currentWrkspaceUsers = [];
+		this.createLogMessage('set', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+	}
+
+	addCurrentWrkspaceUser(user) {
+		this.currentWrkspaceUsers.push(user);
+		this.createLogMessage('set', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+	}
+	getCurrentWrkspaceUsers() {
+		this.createLogMessage('get', 'currentWrkspaceUsers', this.currentWrkspaceUsers);
+		return this.currentWrkspaceUsers;
+
+	}
+
+	setCurrentChannel(currentChannel) {
+		this.currentChannel = currentChannel;
+		this.createLogMessage('set', 'currentChannel', currentChannel);
+	}
+
+	getCurrentChannel() {
+		this.createLogMessage('get', 'currentChannel', this.currentChannel);
+		return this.currentChannel;
+	}
+	getCurrentChannelId() {
+		this.createLogMessage('get', 'currentChannelId', this.currentChannel.ID);
+		return this.currentChannel.ID;
+	}
+
+	addCurrentChannelMember(id) {
+		if (!this.currentChannel.Members.includes(id)) {
+			this.currentChannel.Members.push(id);
+		}
+	}
+
+	checkIfChat(chatId) {
+		for (let chat of this.userChats) {
+			if (chatId == chat.ID) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	getLastSearchFullMessageByMessageId(id) {
+		for (let fullMessage of this.lastSearchMessagesFull) {
+			if (fullMessage.message.id == id) {
+				return fullMessage;
+			}
+		}
+		return undefined;
+	}
+
+	setCurrentChannelID(currentChannelID) {
+		this.currentChannelID = currentChannelID;
+		this.createLogMessage('set', 'currentChannelID', currentChannelID);
+	}
+
+	getCurrentChannelID() {
+		this.createLogMessage('get', 'currentChannelID', this.currentChannelID);
+		return this.currentChannelID;
 	}
 
 	getChatIdByChatUserId(userId) {
@@ -248,6 +439,38 @@ class Data {
 			};
 		});
 		return ids;
+	}
+
+	setChosenMessageId(chosenMessageId) {
+		this.chosenMessageId = chosenMessageId;
+		this.createLogMessage('set', 'chosenMessageId', chosenMessageId);
+	}
+
+	getChosenMessageId() {
+		this.createLogMessage('get', 'chosenMessageId', this.chosenMessageId);
+		return this.chosenMessageId;
+	}
+
+	deleteChosenMessageId() {
+		this.chosenMessageId = undefined;
+		this.createLogMessage('set', 'chosenMessageId', undefined);
+
+	}
+
+	setChosenMessageText(chosenMessageText) {
+		this.chosenMessageText = chosenMessageText;
+		this.createLogMessage('set', 'chosenMessageText', chosenMessageText);
+	}
+
+	getChosenMessageText() {
+		this.createLogMessage('get', 'chosenMessageText', this.chosenMessageText);
+		return this.chosenMessageText;
+	}
+
+	deleteChosenMessageText() {
+		this.chosenMessageText = undefined;
+		this.createLogMessage('set', 'chosenMessageText', undefined);
+
 	}
 }
 

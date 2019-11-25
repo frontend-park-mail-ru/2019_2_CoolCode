@@ -1,0 +1,227 @@
+.wrkspace-visible{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 8vh; /*experimenting with viewports*/
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+
+.wrkspace-visible_style {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px var(--global-grey-color);
+}
+
+.wrkspace-visible_style:hover {
+    box-shadow: 0 0 8px var(--global-grey-color);
+}
+
+.wrkspace-visible__name-row {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: flex-start;
+    align-self: center;
+    width: 95%;
+    height: 50%;
+}
+
+.wrkspace-visible__name-row__text {
+    flex: 1 0 auto;
+    max-width: 80%;
+    height: 50%;
+    align-self: center;
+    padding: 0 0 0 10px;
+}
+
+.wrkspace-visible__name-row__text_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+    align-self: center;
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+
+/*info-button element in name row*/
+
+.wrkspace-visible__name-row__info-button {
+    align-self: center;
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/*icon element in add-channel-button*/
+
+.wrkspace-visible__name-row__info-button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:100%;
+    max-height:100%;
+    height: 2vh; /*experimenting with viewports*/
+}
+.wrkspace-visible__name-row__info-button__icon_style {
+    filter: opacity(0.7);
+    color: var(--global-green-color);
+}
+
+
+
+/*image-column element*/
+
+.wrkspace-visible__image-row {
+    flex: 0 0 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+
+    margin: 5px 0 0 0;
+}
+
+/*image-column elements*/
+
+.wrkspace-visible__image-row__image {
+    width: 4vh; /*experimenting with viewports*/
+    height: 4vh;
+
+    object-position: center center;
+    object-fit: fill;
+    box-sizing: border-box;
+}
+
+.wrkspace-visible__image-row__image_style {
+    border: 1px solid var(--global-green-color);
+    border-radius: 50%;
+}
+
+.wrkspace-visible__image-row__image_style:hover {
+    border: 2px solid var(--global-green-color);
+}
+
+
+.wrkspace-visible__chann-row {
+    align-self: center;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 95%;
+    height: 40%;
+    padding: 5px 0 0 0;
+}
+
+
+/*channels element in chann-row*/
+
+.wrkspace-visible__chann-row__channels {
+    align-self: center;
+    flex: 0 0 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align-all: justify; /*CHECK THIS*/
+}
+
+.wrkspace-visible__chann-row__channels_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+/*number element in chann-row*/
+.wrkspace-visible__chann-row__number {
+    align-self: center;
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align-all: justify; /*CHECK THIS*/
+
+}
+
+.wrkspace-visible__chann-row__number_style {
+    font-family: var(--global-font-family-Roboto);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 300;
+}
+    /*add-channel-button element in chann row*/
+
+.wrkspace-visible__chann-row__add-channel-button {
+    align-self: center;
+    flex: 0 0 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/*icon element in add-channel-button*/
+
+.wrkspace-visible__chann-row__add-channel-button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+.wrkspace-visible__chann-row__add-channel-button__icon_style {
+    filter: opacity(0.9);
+}
+
+/*arrow element in chann row*/
+
+.wrkspace-visible__chann-row__arrow {
+    align-self: center;
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;}
+
+
+/*icon element in arrow*/
+
+.wrkspace-visible__chann-row__arrow__icon-up {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+
+.wrkspace-visible__chann-row__arrow__icon-down {
+    object-fit: scale-down;
+    object-position: top;
+    max-width:80%;
+    max-height:80%;
+    height: 2vh; /*experimenting with viewports*/
+}
+
+.wrkspace-visible__chann-row__arrow_hidden {
+    display: none;
+}
+
+
+.wrkspace-visible__chann-row__arrow_style {
+    filter: opacity(0.7);
+}

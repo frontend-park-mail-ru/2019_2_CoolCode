@@ -1,19 +1,20 @@
 import BaseView from './baseView';
-import {
-	createInputs,
-	showLoader,
-	hideLoader, setPicture, getProfilePhoto, creatingChats
-} from "../modules/API/profile";
-import {createSearchInputHndlr, createWorkspaceButtonHndlr} from "../handlers/searchFormHandlers";
+
+import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import ProfilePageComponent from "../components/Profile/profilePageComponent";
+import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
+
 import {
+	channelViewHandler,
 	createChatBlockHndlr,
+	createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
+import {getProfilePhoto} from "../handlers/photosHandlers";
+import {creatingChats} from "../backendDataFetchers/websockets";
 
 class profileView extends BaseView {
 	constructor (data, parent) {
@@ -30,7 +31,7 @@ class profileView extends BaseView {
 		createWrkspaceBlockExpandHndlr();
 		createWorkspaceButtonHndlr();
 		createWrkspaceBlockHndlr();
-
+		channelViewHandler();
 	}
 
 	createClickablePic() {
@@ -49,22 +50,16 @@ class profileView extends BaseView {
 	}
 
 	show() {
-		if (this._data.user.id) {
-			this.setContent();
-			this.render();
-			this.setEvents();
-		} else {
-			promiseMaker.createPromise('checkLogin', this._parent).then(() => {
-				if (!data.getLoggedIn()) router.go('/');
-				else {
-					creatingChats(this._parent).then(() => {
-						this.setContent();
-						this.render();
-						this.setEvents();
-					});
-				}
-			});
-		}
+		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
+			if (!data.getLoggedIn()) router.go('mainPageView');
+			else {
+				creatingChats(this._parent).then(() => {
+					this.setContent();
+					this.render();
+					this.setEvents();
+				});
+			}
+		});
 		console.log('show: profile');
 	}
 
@@ -81,13 +76,20 @@ class profileView extends BaseView {
 	}
 
 	drawRightColumn() {
-		let rightColumn = new ProfilePageComponent(this._data.user, this._parent);
-		this._parent.querySelector('.column_right').innerHTML += rightColumn.render();
+		const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+		this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
+		componentsStorage.setProfileBlock(profileBlock);
 	}
 
 	render() {
 		this.drawBasics();
 		this.drawLeftColumn();
+		// let profileBlock = componentsStorage.getRightColumn();
+		// if (!profileBlock || !(profileBlock instanceof ProfilePageComponent)) {
+		// 	this.drawBasics();
+		// 	this.drawLeftColumn();
+		// 	profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+		// }
 		this.drawRightColumn();
 	}
 

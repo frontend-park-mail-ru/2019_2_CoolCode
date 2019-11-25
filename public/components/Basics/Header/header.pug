@@ -3,7 +3,7 @@ mixin item(title, href, section, id)
 
 div.header
     a.header__logo(href='/')
-        img.header__logo__image(src='../images/logo_2.png')
+        img.header__logo__image(src='/images/logo_2.png')
     if viewType !== 'signUp' && viewType !== 'login'
         div.header-refs
             if loggedIn

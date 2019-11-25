@@ -1,0 +1,48 @@
+.wrkspace-page-dropdown {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+    height: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+
+    overflow: hidden;
+    max-height: 0;
+
+    transition: all .5s ease-in-out;
+}
+
+.wrkspace-page-dropdown_style {
+    border-radius: 10px;
+    background: rgba(40, 162, 77, 0.41);
+}
+
+.wrkspace-page-dropdown__option {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.wrkspace-page-dropdown__option_style {
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 300;
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    color: #000000;
+}
+
+.wrkspace-page-dropdown__option_style:hover {
+    cursor:default;
+    background-color: var(--global-light-grey-color);
+}
+.wrkspace-page-dropdown_clicked {
+    padding: 5px 5px 5px 5px;
+    max-height: 40vh;
+}

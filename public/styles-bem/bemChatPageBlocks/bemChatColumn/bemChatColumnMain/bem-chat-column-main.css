@@ -1,7 +1,0 @@
-.chat-column-main {
-    flex: 0 0 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 100%;
-}

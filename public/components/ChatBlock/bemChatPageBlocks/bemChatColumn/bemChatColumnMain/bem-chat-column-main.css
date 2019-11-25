@@ -1,0 +1,9 @@
+.chat-column-main {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: flex-end;
+    height: 80%;
+    width: 100%;
+}

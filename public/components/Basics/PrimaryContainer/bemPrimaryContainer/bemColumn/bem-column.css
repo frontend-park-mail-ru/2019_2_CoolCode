@@ -1,0 +1,25 @@
+.column{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* left and right column modifiers - standart layout*/
+.column_left{
+   flex: 0 0 auto;
+    width: 34vw;
+}
+.column_right{
+    flex: 0 0 auto;
+    width: 65vw;
+}
+
+/* outline modifier */
+.column_right-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}
+
+/* outline modifier */
+.column_left-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}

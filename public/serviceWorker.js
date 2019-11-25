@@ -1,10 +1,39 @@
-const CACHE = 'offline-fallback-v1';
+const settings = {
+	connection : 'http',
+	backendPort : ':8080',
+	//backend: '172.20.10.9:8080',
+	backend: '95.163.209.195',
+	//backend: '192.168.1.69:8080',
+	//backend: 'localhost:8080'
+};
+const {backend} = settings;
+const {backendPort} = settings;
+const {connection} = settings;
+
+const CACHE = 'chat-cache';
 let urlsToCache = [
-	'/styles-bem/bemPrimaryContainer/bem-primary-container.css',
-	'/styles-bem/bemMainPage/bem-main-page.css',
-	'/styles-bem/bemHeader/bem-chat-header.css',
-	'/fallback/fallback.html',
-	'/images/logo_2.png'
+	'images/abkhazia.jpg',
+	'images/add_1.png',
+	'images/add.png',
+	'images/arr_up.png',
+	'images/arr_down.png',
+	'images/info.png',
+	'images/lock.png',
+	'images/logo_2.png',
+	'images/loupe_2.png',
+	'images/muted.png',
+	'images/pinned.png',
+	'images/plus.png',
+	'images/post.png',
+	'images/sasha.jpeg',
+	'images/send.png',
+	'images/settings.jpg',
+	'images/square-root-mathematical-sign.png',
+	'images/star.png',
+	'images/therefore-mathematical-symbol.png',
+	'/profile',
+	'/',
+	'/main.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -27,36 +56,44 @@ self.addEventListener('fetch', function(event) {
 async function networkOrCache(request) {
 	try{
 		const response = await fetch(request);
-		//console.log(request.url);
-		//console.log(request.url.toString().startsWith('http://fonts.googleapis.com/css'));
-		// if (request.url.toString().startsWith('http://fonts.googleapis.com/css')) {
-		// 	console.log(request.url);
-		// 	const cache = await caches.open(CACHE);
-		// 	const cacheResponse = await cache.match(request);
-		// 	if (cacheResponse) {
-		// 		return cacheResponse;
-		// 	}
-		// 	const css = await response.text();
-		// 	const patched = css.replace(/}/g, "font-display: swap; }");
-		// 	const newResponse = new Response(patched, {headers: {
-		// 			"Content-Type": "text/css",
-		// 		}});
-		// 	await cache.put(request, newResponse.clone());
-		// 	return newResponse;
-		// }
-		return response;
+		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+			return response;
+		}
+		if (response.ok) {
+			return response;
+		}
+		 if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+
+			const cache = await caches.open(CACHE);
+		     return cache.match("/images/abkhazia.jpg");
+		}
 	} catch (error) {
+		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+			return response;
+		}
+		if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+
+			const cache = await caches.open(CACHE);
+			return cache.match("/images/abkhazia.jpg");
+		}
 		return await fromCache(request);
 	}
 }
 
 function useFallback() {
-	return Promise.resolve( caches.match('/fallback/fallback.html'));
+	return Promise.resolve( caches.match( '/'));
 }
 
 function fromCache(request) {
 	return caches.open(CACHE).then((cache) =>
-		cache.match(request).then((matching) =>
-			matching || Promise.reject('no-match')
+		cache.match(request).then((matching) => {
+		    if (matching) {
+				console.log(request.url);
+				console.log('MATCH');
+		        return (matching);
+			} else {
+		        return Promise.reject('no-match');
+			}
+		}
 		));
 }

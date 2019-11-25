@@ -1,21 +1,16 @@
 import BaseView from './baseView';
-import {createLogin} from "../modules/API/login";
-import {router, data, promiseMaker, bus} from "../main";
+import {bus, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import RegisterComponent from "../components/Register/registerComponent";
+import RegisterComponent from "../components/RegisterBlock/registerComponent";
 
 class loginView extends BaseView {
 	constructor (data, parent) {
 		super ({viewType: "login", user:{}, loggedIn: null}, parent);
-		bus.on('login', createLogin);
 	};
 
 	show() {
 		this.render();
-
-		promiseMaker.createPromise('login', this._parent).then(() => console.log('BUSSSS'));
-		console.log('HI');
-
+		bus.emit('createRegisterForm', null, this._data.viewType);
 	}
 	drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
@@ -25,6 +20,7 @@ class loginView extends BaseView {
 		this.drawBasics();
 		let login = new RegisterComponent(this._data, this._parent);
 		this._parent.querySelector('.primary-container').innerHTML += login.render();
+		componentsStorage.clear();
 	}
 }
 

@@ -1,5 +1,6 @@
-import {bus, FetchModule, router, data, promiseMaker} from '../main';
+import {FetchModule, promiseMaker, router} from '../main';
 import {API, responseStatuses} from "../constants/config";
+
 async function handleLogout() {
 	try {
 		const response = await FetchModule._doDelete(
@@ -11,7 +12,8 @@ async function handleLogout() {
 			`Error while logout: ${responseStatuses[response.status]}`;
 		}
 		await promiseMaker.createPromise('clearData');
-		router.go('/');
+		await promiseMaker.createPromise('clearStorage');
+		router.go('mainPageView');
 	} catch (error) {
 		console.error(error);
 	}
