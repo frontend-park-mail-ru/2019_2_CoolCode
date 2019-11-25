@@ -1,6 +1,5 @@
-import {bus, FetchModule, promiseMaker, router} from "../main";
+import {FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
-import {showError} from "../handlers/errorHandlers";
 
 async function login(email, password) {
 	try {
@@ -31,13 +30,14 @@ async function login(email, password) {
 }
 
 async function signup(params = {email:null, password: null, fullname: null, username: null}) {
+	const {email, password, fullname, username} = params;
 	try {
 		let response = await FetchModule._doPost({path: API.auth,
 			data: {
-				email: params.email,
-				password: params.password,
-				fullname: params.fullname,
-				username: params.username,
+				email: email,
+				password: password,
+				fullname: fullname,
+				username: username,
 			},
 			contentType : 'application/json;charset=utf-8'});
 		switch (response.status) {
@@ -46,7 +46,7 @@ async function signup(params = {email:null, password: null, fullname: null, user
 				'This username or email is already taken'
 			);
 		case 200:
-			await login(params.email, params.password);
+			await login(email, password);
 			return null;
 		default:
 			return new Error(

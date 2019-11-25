@@ -4,8 +4,7 @@ import {
 	createMessageFoundChatBlockHndlr,
 	createUserBlockHndlr
 } from "../handlers/searchViewHandlers";
-import {data, bus, router, componentsStorage} from "./../main";
-import {createWorkspaceButtonHndlr, createWrkspaceBlockHndlr} from "../handlers/chatsBlockHandlers";
+import {componentsStorage, data, router} from "./../main";
 
 class searchView extends BaseView {
 

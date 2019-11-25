@@ -1,4 +1,4 @@
-import {bus, componentsStorage, data, promiseMaker} from "../main";
+import {componentsStorage, data, promiseMaker} from "../main";
 
 function webSocketOnMessageChannel(event) {
 	console.log('new message from webSocketChannel');

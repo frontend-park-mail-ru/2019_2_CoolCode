@@ -1,4 +1,4 @@
-import {bus, FetchModule, promiseMaker, data} from "../main";
+import {data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function findUser(query) {

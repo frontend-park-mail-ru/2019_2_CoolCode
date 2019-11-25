@@ -1,17 +1,16 @@
 import BaseView from './baseView';
 
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
+import {componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
-import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
 import {
 	channelViewHandler,
-	createChatBlockHndlr, createWorkspaceButtonHndlr,
+	createChatBlockHndlr,
+	createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
-import {getProfilePhoto} from "../handlers/photosHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import {

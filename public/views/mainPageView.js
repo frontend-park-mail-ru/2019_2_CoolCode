@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {data, bus, router, promiseMaker, appLocalStorage, componentsStorage} from "../main";
+import {componentsStorage, data, promiseMaker} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import MainPageComponent from "../components/MainPage/mainPageComponent";
 

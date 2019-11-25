@@ -1,5 +1,3 @@
-import Bus from "../scripts/Bus";
-
 class BaseView {
 	constructor (data = {}, parent = document.body) {
 		this._data = data;

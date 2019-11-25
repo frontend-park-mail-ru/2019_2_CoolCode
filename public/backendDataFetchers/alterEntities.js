@@ -1,8 +1,7 @@
-import {bus, FetchModule} from "../main";
+import {FetchModule} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function alterWrkspace(wrkspace) {
-	console.log(wrkspace.Members);
 	console.log(` Changing wrkspace ${wrkspace.ID} info`);
 	try {
 		const response = await FetchModule._doPut(

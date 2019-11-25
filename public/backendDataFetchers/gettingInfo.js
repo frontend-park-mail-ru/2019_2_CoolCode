@@ -1,6 +1,5 @@
 import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
-import {findUser} from "./findInfo";
 
 async function getChannelInfo(id) {
 	console.log(` Getting channel ${id} info`);
@@ -92,14 +91,14 @@ async function getCurrentChannelMessages(chatId) {
 async function getChats(id) {
 	console.log(` Getting user ${id} chats and wrkspaces`);
 	try {
-		let response = await FetchModule._doGet(
+		const response = await FetchModule._doGet(
 			{path: API.getUserChats(id)}
 		);
 		if (response.status !== 200) {
 			throw new Error(
 				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
 		}
-		let chats = await response.json();
+		const chats = await response.json();
 		await promiseMaker.createPromise('setUserChats', chats['Chats']);
 		await promiseMaker.createPromise('setUserWrkSpaces', chats['Workspaces']);
 		bus.emit('setLSChats', null);

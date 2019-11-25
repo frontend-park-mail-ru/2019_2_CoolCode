@@ -1,12 +1,12 @@
 import findUser from "../backendDataFetchers/findInfo";
-import {promiseMaker, router, data} from "../main";
-import {creatingChats} from "../backendDataFetchers/websockets";
+import {data, promiseMaker, router} from "../main";
 
 async function searchEvent(params = {parentContainer:null}) {
+	const {parentContainer} = params;
 	event.preventDefault();
-	const searchInput = params.parentContainer.querySelector('.search-menu__form__input-container__input');
+	const searchInput = parentContainer.querySelector('.search-menu__form__input-container__input');
 	const searchInputValue = searchInput.value;
-	const parentParentContainer = params.parentContainer.parentNode;
+	const parentParentContainer = parentContainer.parentNode;
 	if (parentParentContainer.classList.contains('column_left')) {
 		Promise.all([
 			promiseMaker.createPromise('findUser', searchInputValue),

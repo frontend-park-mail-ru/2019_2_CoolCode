@@ -9,7 +9,7 @@
     height: 30vh; /*experimenting with viewports*/
     width: 40vh;
     border-radius: 5px;
-    z-index: 11; /*make it overlay*/
+    z-index: var(--global-z-index-form); /*make it overlay*/
     padding: 5px;
 }
 .channel-add-form__form {

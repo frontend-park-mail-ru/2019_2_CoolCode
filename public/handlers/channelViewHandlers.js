@@ -1,21 +1,12 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
-import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
-const channelTemplate = require('../components/ChannelBlock/channel.pug');
+import {editingMessage} from "../backendDataFetchers/messagesInteraction";
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.css';
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {sendingMessageChannel} from "../backendDataFetchers/channelMessagesInteraction";
-import {createHiddenSettingsMessageBlock, createVisibleSettingsMessageBlock, growInput} from "./chatViewHandlers";
-import {
-	addMemberinChanell,
-	addMemberinChanellFunc,
-	getAnyUserInfo,
-	getUserbyId
-} from "../backendDataFetchers/gettingInfo";
+import {createHiddenSettingsMessageBlock, growInput} from "./chatViewHandlers";
 import {alterChannel} from "../backendDataFetchers/alterEntities";
-
-const addMemberTempl = require('../components/addMemberBlock/addMember.pug');
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
 async function menuClickEvent() {
@@ -70,7 +61,8 @@ function menuHandlersInfo() {
 }
 
 function addMemberClickEvent(params = {memberId:null, contentListRoot:null}) {
-	const id = parseFloat(params.memberId.split('-')[1]);
+	const {memberId, contentListRoot} = params;
+	const id = parseFloat(memberId.split('-')[1]);
 	bus.emit('addCurrentChannelMember', null, id);
 	const channel = data.getCurrentChannel();
 	promiseMaker.createPromise('alterChannel', channel).then(() => {
@@ -154,7 +146,8 @@ async function sendMessageChannelEvent() {
 }
 
 function likeEvent(params = {messageId:null}) {
-	const id = parseFloat(params.messageId.split('-')[1]);
+	const {messageId} = params;
+	const id = parseFloat(messageId.split('-')[1]);
 	promiseMaker.createPromise('likeMessage', id).then(() => {
 		const channelBlock = componentsStorage.getChatBlock();
 		channelBlock.likeMessage(id);

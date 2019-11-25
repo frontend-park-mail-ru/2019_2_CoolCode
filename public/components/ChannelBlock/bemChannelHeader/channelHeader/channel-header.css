@@ -175,13 +175,16 @@
 .channel-header__dropdown__dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--global-dropdown-color);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     transform: translateX(-50%);
     left: 50%;
     border-radius: 5px;
+}
+
+.channel-header__dropdown__dropdown-content_style {
+    background-color: var(--global-dropdown-color);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 /* Links inside the dropdown */

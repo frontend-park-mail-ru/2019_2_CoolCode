@@ -1,10 +1,7 @@
 import BaseView from './baseView';
-import {data, bus, router, promiseMaker, componentsStorage} from "../main";
+import {bus, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import RegisterComponent from "../components/RegisterBlock/registerComponent";
-const signupTemplate = require('../components/RegisterBlock/register.pug');
-const containerTemplate = require('../components/Basics/PrimaryContainer/container.pug');
-const headerTemplate = require('../components/Basics/Header/header.pug');
 
 class signUpView extends BaseView {
 	constructor (data, parent) {

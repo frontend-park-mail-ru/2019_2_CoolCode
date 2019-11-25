@@ -1,8 +1,7 @@
 import {showError} from "./errorHandlers";
 import {login, signup} from "../backendDataFetchers/register";
 import Validation from "../modules/validation";
-import {bus, data, router} from "../main";
-import {setUserInfo} from "../backendDataFetchers/setUserInfo";
+import {bus, router} from "../main";
 
 const validation = new Validation();
 
@@ -18,9 +17,10 @@ function emitRegisterError(block, errorMessage) {
 }
 
 async function createLoginEvent(params = {form: null}) {
+	const {form} = params;
 	event.preventDefault();
-	const emailField = params.form.elements['email'];
-	const passwordField = params.form.elements['password'];
+	const emailField = form.elements['email'];
+	const passwordField = form.elements['password'];
 	if (passwordField.value === '') {
 		emitRegisterError(passwordField, 'Please, input password');
 		return;
@@ -48,10 +48,11 @@ async function createLoginEvent(params = {form: null}) {
 }
 
 async function createSignUpEvent(params = {form: null}) {
+	const {form} = params;
 	event.preventDefault();
-	const emailField = params.form.elements['email'];
-	const passwordField = params.form.elements['password'];
-	const usernameField = params.form.elements['username'];
+	const emailField = form.elements['email'];
+	const passwordField = form.elements['password'];
+	const usernameField = form.elements['username'];
 	if (passwordField.value === '') {
 		emitRegisterError(passwordField, 'Please, input password');
 		return;

@@ -1,32 +1,29 @@
 import BaseView from "./baseView";
 import {componentsStorage, data, promiseMaker, router} from "../main";
-import ChatComponent from "../components/ChatBlock/ChatComponent";
-import chatView from "./chatView";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
-import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
 import {
 	channelViewHandler,
 	createChatBlockHndlr,
 	createWorkspaceButtonHndlr,
-	createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {createWorkspaceSettingsButtonHndlr} from "../handlers/wrkspaceBlockHandlers";
 import {
-	createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr,
-	createEditMessageBlockHndlr,
-	createMessageInputHndlr,
-	createSendMessageBtnHndlr
+	createCloseSettingsMessageHndlr,
+	createDeleteMessageBlockHndlr,
+	createEditMessageBlockHndlr
 } from "../handlers/chatViewHandlers";
 
 import {
 	createLikeBtnHndlr,
 	createMessageInputChannelHndlr,
 	createSendMessageBtnChannelHndlr,
-	menuHandlers, menuHandlersAdd, menuHandlersInfo
+	menuHandlers,
+	menuHandlersInfo
 } from "../handlers/channelViewHandlers";
 
 class channelView extends BaseView {

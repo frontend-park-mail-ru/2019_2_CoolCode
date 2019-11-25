@@ -1,4 +1,4 @@
-import {bus, FetchModule, promiseMaker, router} from "../main";
+import {FetchModule} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function sendingMessageChannel(text, time, id) {
@@ -19,7 +19,7 @@ async function sendingMessageChannel(text, time, id) {
 		const message = await response.json();
 		console.log(`Message sent : ${message.id}`);
 		return message.id;
-	}catch (error) {
+	} catch (error) {
 		console.error(error);
 		throw error;
 	}

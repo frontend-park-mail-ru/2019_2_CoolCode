@@ -1,5 +1,6 @@
 import BaseComponent from "../../baseComponent";
-import {data, bus, router} from "../../../main";
+import {data} from "../../../main";
+
 const msgTempl = require('./message.pug');
 const msgFoundChatTempl = require('./messageFoundChat.pug');
 const msgFoundChannelTempl = require('./messageFoundChannel.pug');

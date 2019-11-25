@@ -7,11 +7,11 @@
 /* left and right column modifiers - standart layout*/
 .column_left{
    flex: 0 0 auto;
-    width: 35%;
+    width: 34vw;
 }
 .column_right{
     flex: 0 0 auto;
-    width: 65%;
+    width: 65vw;
 }
 
 /* outline modifier */

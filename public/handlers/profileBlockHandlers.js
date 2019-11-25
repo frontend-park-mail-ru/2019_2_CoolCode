@@ -1,7 +1,6 @@
-import {bus, data, FetchModule, router} from "../main";
+import {bus, data} from "../main";
 import {setUserInfo, setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import Validation from "../modules/validation";
-import {API} from "../constants/config";
 import {getProfilePhoto} from "./photosHandlers";
 
 const validation = new Validation();
@@ -47,14 +46,15 @@ async function setProfileField(value, field, block, textSelector, errorSelector)
 }
 
 function dblClickEvent(params = {block: null, textSelector: null, inputSelector: null, errorSelector: null}) {
+	const {block, textSelector, inputSelector, errorSelector} = params;
 	event.preventDefault();
-	const fieldName = params.block.id.split('-')[0];
-	const textField = params.block.querySelector(`.${params.textSelector}`);
-	const inputField = params.block.querySelector(`.${params.inputSelector}`);
-	if (!textField.classList.contains(`${params.textSelector}_hidden`)) {
-		textField.className += ` ${params.textSelector}_hidden`;
+	const fieldName = block.id.split('-')[0];
+	const textField = block.querySelector(`.${textSelector}`);
+	const inputField = block.querySelector(`.${inputSelector}`);
+	if (!textField.classList.contains(`${textSelector}_hidden`)) {
+		textField.className += ` ${textSelector}_hidden`;
 	}
-	inputField.classList.remove(`${params.inputSelector}_hidden`);
+	inputField.classList.remove(`${inputSelector}_hidden`);
 	inputField.innerHTML = textField.innerHTML;
 	inputField.placeholder = fieldName;
 	inputField.focus();
@@ -62,31 +62,36 @@ function dblClickEvent(params = {block: null, textSelector: null, inputSelector:
 
 function createDblClickInputHndlr(block, textSelector, inputSelector, errorSelector) {
 	const textField = block.querySelector(`.${textSelector}`);
-	textField.addEventListener('dblclick', dblClickEvent.bind(event, {block:block, textSelector: textSelector,
-		inputSelector: inputSelector, errorSelector: errorSelector}));
+	textField.addEventListener('dblclick', dblClickEvent.bind(event, {
+		block: block, textSelector: textSelector,
+		inputSelector: inputSelector, errorSelector: errorSelector
+	}));
 }
 
 async function blurEvent(params = {block: null, textSelector: null, inputSelector: null, errorSelector: null}) {
+	const {block, textSelector, inputSelector, errorSelector} = params;
 	event.preventDefault();
-	const fieldName = params.block.id.split('-')[0];
-	const textField = params.block.querySelector(`.${params.textSelector}`);
-	const inputField = params.block.querySelector(`.${params.inputSelector}`);
-	const value = await setProfileField(inputField.value, fieldName, params.block, params.textSelector, params.errorSelector);
+	const fieldName = block.id.split('-')[0];
+	const textField = block.querySelector(`.${textSelector}`);
+	const inputField = block.querySelector(`.${inputSelector}`);
+	const value = await setProfileField(inputField.value, fieldName, block, textSelector, errorSelector);
 	if (value) {
 		textField.innerHTML = value;
 	}
-	if (!inputField.classList.contains(`${params.inputSelector}_hidden`)) {
-		inputField.className += ` ${params.inputSelector}_hidden`;
+	if (!inputField.classList.contains(`${inputSelector}_hidden`)) {
+		inputField.className += ` ${inputSelector}_hidden`;
 	}
-	textField.classList.remove(`${params.textSelector}_hidden`);
+	textField.classList.remove(`${textSelector}_hidden`);
 	inputField.value = '';
 
 }
 
 function createBlurInputHndlr(block, textSelector, inputSelector, errorSelector) {
 	const inputField = block.querySelector(`.${inputSelector}`);
-	inputField.addEventListener('blur', blurEvent.bind(event, {block:block, textSelector: textSelector,
-		inputSelector: inputSelector, errorSelector: errorSelector}));
+	inputField.addEventListener('blur', blurEvent.bind(event, {
+		block: block, textSelector: textSelector,
+		inputSelector: inputSelector, errorSelector: errorSelector
+	}));
 }
 
 function createProfileInputs() {
@@ -118,19 +123,20 @@ function createProfileInputs() {
 	createImageUpload(data.getUserId());
 }
 
-async function imageUploading(params = {id:null, fileInput:null}) {
+async function imageUploading(params = {id: null, fileInput: null}) {
+	const {id, fileInput} = params;
 	const formData = new FormData();
-	formData.append('file', params.fileInput.files[0]);
+	formData.append('file', fileInput.files[0]);
 	const result = await setUserPhoto(formData);
 	if (result) {
 		bus.emit('showLoader', null, '.profile-header__image-row');
-		getProfilePhoto(params.id);
+		getProfilePhoto(id);
 	}
 }
 
-function createImageUpload (id) {
+function createImageUpload(id) {
 	const imageInput = document.querySelector('.profile-header__image-row__input');
-	imageInput.addEventListener('change', imageUploading.bind(null, {id:id,fileInput: imageInput}));
+	imageInput.addEventListener('change', imageUploading.bind(null, {id: id, fileInput: imageInput}));
 }
 
 export {createProfileInputs};

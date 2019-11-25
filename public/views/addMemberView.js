@@ -1,11 +1,6 @@
 import BaseView from "./baseView";
 import {data, promiseMaker, router} from "../main";
-import {
-	addMemberinChannel,
-	addMemberOverlayHndlr,
-	arrayMembers, createAddChannelMemberHndlr,
-	menuHandlersAdd
-} from "../handlers/channelViewHandlers";
+import {createAddChannelMemberHndlr} from "../handlers/channelViewHandlers";
 import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
 import {createOverlayHndlr} from "../handlers/creationFormHandlers";
 

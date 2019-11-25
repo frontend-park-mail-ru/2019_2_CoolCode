@@ -1,14 +1,13 @@
 import BaseComponent from "../../baseComponent";
 import {createVisibleSettingsMessageBlock} from "../../../handlers/chatViewHandlers";
-
-const rightMsg = require('./msgRightChannel.pug');
-const leftMsg = require('./msgLeftChannel.pug');
-const deletedMsg = require('./msgDeletedChannel.pug');
-
 import './channelMsg/chat-msg.css';
 import './channelMsg/primaryRow/primary-row.css';
 import './channelMsg/secondaryRow/secondary-row.css';
 import './channelMsg/upperRow/upper-row.css';
+
+const rightMsg = require('./msgRightChannel.pug');
+const leftMsg = require('./msgLeftChannel.pug');
+const deletedMsg = require('./msgDeletedChannel.pug');
 
 class ChannelMessageComponent extends BaseComponent {
 
@@ -28,22 +27,22 @@ class ChannelMessageComponent extends BaseComponent {
 	}
 
 	renderLeftDeleted() {
-		this.messageElement.classList += ' chat-msg_left';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_left`;
 		this.messageElement.innerHTML = deletedMsg();
 	}
 
 	renderRightDeleted() {
-		this.messageElement.classList += ' chat-msg_right';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_right`;
 		this.messageElement.innerHTML = deletedMsg();
 	}
 
 	renderLeft() {
-		this.messageElement.classList += ' chat-msg_left';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_left`;
 		this.messageElement.innerHTML = leftMsg({message: this._data.message, user: this._data.messageUser});
 	}
 
 	renderRight() {
-		this.messageElement.classList += ' chat-msg_right';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_right`;
 		this.messageElement.innerHTML = rightMsg({message: this._data.message, user: this._data.messageUser});
 	}
 
@@ -61,7 +60,8 @@ class ChannelMessageComponent extends BaseComponent {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRight();
 					if (this._data.error) {
-						this.messageElement.querySelector('.primary-row__text').classList += ' primary-row__text_error';
+						const textClassList = this.messageElement.querySelector('.primary-row__text').classList;
+						this.messageElement.querySelector('.primary-row__text').classList = `${textClassList} primary-row__text_error`;
 					}
 					this.createHandlerRight();
 

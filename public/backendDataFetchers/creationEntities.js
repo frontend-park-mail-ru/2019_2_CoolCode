@@ -1,4 +1,4 @@
-import {FetchModule, data, promiseMaker} from "../main";
+import {data, FetchModule, promiseMaker} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function createChat(id) { /*creating new chat and fetching all chats info*/

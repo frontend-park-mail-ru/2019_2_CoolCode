@@ -1,8 +1,8 @@
 import BaseComponent from "../baseComponent";
-const creationFormTemplate = require('./creationForm.pug');
-
 import './bemWrkspaceForm/bem-wrkspace-form.css';
 import './bemOverlay/bem-overlay.css';
+
+const creationFormTemplate = require('./creationForm.pug');
 
 class CreationFormComponent extends BaseComponent {
 

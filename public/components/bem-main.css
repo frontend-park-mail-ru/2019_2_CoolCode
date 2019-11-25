@@ -18,6 +18,9 @@
     --global-light-grey-color: #E6E6E6;
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
+
+    --global-z-index-overlay: 2;
+    --global-z-index-form: 3;
 }
 
 ::placeholder {

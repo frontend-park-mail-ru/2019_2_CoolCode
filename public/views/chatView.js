@@ -1,20 +1,22 @@
 import BaseView from './baseView';
 
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {data, bus, router, promiseMaker, componentsStorage, appLocalStorage} from "../main";
-import {chooseChat, creatingChats, fetchUserInfo} from "../backendDataFetchers/websockets";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import {creatingChats} from "../backendDataFetchers/websockets";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {
-	createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createEditMessageBlockHndlr,
+	createCloseSettingsMessageHndlr,
+	createDeleteMessageBlockHndlr,
+	createEditMessageBlockHndlr,
 	createMessageInputHndlr,
-	createOpenSettingsMessageHndlr,
 	createSendMessageBtnHndlr
 } from "../handlers/chatViewHandlers";
 import {
 	channelViewHandler,
-	createChatBlockHndlr, createWorkspaceButtonHndlr,
+	createChatBlockHndlr,
+	createWorkspaceButtonHndlr,
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";

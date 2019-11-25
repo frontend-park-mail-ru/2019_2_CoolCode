@@ -1,5 +1,5 @@
-import {sendingMessage, deletingMessage, editingMessage} from "../backendDataFetchers/messagesInteraction";
-import {componentsStorage, data, bus} from "../main";
+import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {bus, componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 
@@ -43,7 +43,7 @@ function deleteOpenSettingsEvents() {
 function createHiddenSettingsMessageBlock() {
 	createOpenSettingsMessageHndlr();
 	const settingsMessageBlock = document.querySelector('.message-sett-block__content');
-	settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+	settingsMessageBlock.classList = `${settingsMessageBlock.classList} message-sett-block__content_hidden`;
 	bus.emit('deleteChosenMessageId', null);
 	bus.emit('deleteChosenMessageText', null);
 }
@@ -67,7 +67,7 @@ function createVisibleSettingsMessageBlock(event) {
 	}
 	if (event.type == 'mouseout') {
 		event.currentTarget.classList.remove('mouseover');
-		settingsMessageBlock.classList += ' message-sett-block__content_hidden';
+		settingsMessageBlock.classList = `${settingsMessageBlock.classList} message-sett-block__content_hidden`;
 	}
 
 }

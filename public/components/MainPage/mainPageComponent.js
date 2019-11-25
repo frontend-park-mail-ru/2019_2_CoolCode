@@ -1,7 +1,7 @@
 import BaseComponent from "../baseComponent";
-const mainPageTemplate = require('./mainPage.pug');
-
 import './bemMainPage/bem-main-page.css';
+
+const mainPageTemplate = require('./mainPage.pug');
 
 class MainPageComponent extends BaseComponent {
 

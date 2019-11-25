@@ -1,10 +1,4 @@
 import BaseComponent from "../baseComponent";
-const channelTemplate = require('./channel.pug');
-const rightMsg = require('./ChannelMessage/msgRightChannel.pug');
-const leftMsg = require('./ChannelMessage/msgLeftChannel.pug');
-
-//import {componentsStorage, data, promiseMaker, router} from "../../../main";
-
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
 import './bemChannelHeader/channelHeader/channel-header.css';
 import './bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
@@ -15,8 +9,8 @@ import './ChannelMessage/channelMsg/chat-msg.css';
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
 import ChannelMessageComponent from "./ChannelMessage/ChannelMessageComponent";
-import ChatMessageComponent from "../ChatBlock/Message/ChatMessageComponent";
-import {getChannelInfo} from "../../backendDataFetchers/gettingInfo";
+
+const channelTemplate = require('./channel.pug');
 
 class ChannelComponent extends BaseComponent {
 
@@ -26,7 +20,7 @@ class ChannelComponent extends BaseComponent {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		const foundMessage = contentListRoot.querySelector(`#message-${this._data.foundMessageId}`);
 		foundMessage.scrollIntoView({ behavior: 'smooth', block: 'start'});
-		foundMessage.firstElementChild.classList += ' chat-msg__container_found';
+		foundMessage.firstElementChild.classList = `${foundMessage.firstElementChild.classList} chat-msg__container_found`;
 	}
 
 	getMessageInputData() {

@@ -8,7 +8,7 @@
     justify-content: space-between;
     height: 20vh; /*experimenting with viewports*/
     width: 40vh;
-    z-index: 11; /*make it overlay*/
+    z-index: var(--global-z-index-form); /*make it overlay*/
 }
 
 .wrkspace-form_style {

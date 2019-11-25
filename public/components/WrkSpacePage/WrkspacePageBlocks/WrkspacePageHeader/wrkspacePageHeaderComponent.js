@@ -1,8 +1,8 @@
 import BaseComponent from "../../../baseComponent";
-const WrkspacePageHeaderTemlate = require('./wrkspacePageHeader.pug');
-
 import './wrkspace-page-header.css';
 import './WrkspacePageDropdown/wrkspace-page-dropdown.css';
+
+const WrkspacePageHeaderTemlate = require('./wrkspacePageHeader.pug');
 
 class WrkspacePageHeaderComponent extends BaseComponent {
 

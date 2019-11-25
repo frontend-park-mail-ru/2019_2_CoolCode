@@ -1,11 +1,9 @@
 import BaseComponent from "../baseComponent";
-import UserComponent from "./userFoundChannel/userFoundChannelComponent.js";
-import {getAnyUserInfo} from "../../backendDataFetchers/gettingInfo";
-import {addMemberinChannel} from "../../handlers/channelViewHandlers";
-const addMemberTempl = require('./addMember.pug');
-import {data} from "../../main.js";
 import './channelAddForm/channel-add-form.css';
 import UserFoundChannelComponent from "./userFoundChannel/userFoundChannelComponent";
+
+const addMemberTempl = require('./addMember.pug');
+
 class AddMemberComponent extends BaseComponent {
 
 	contentListRootSelector = '.channel-add-form__scroll';

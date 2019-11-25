@@ -1,8 +1,8 @@
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
-import {getCurrentChatMessages, getUserInfo} from "./gettingInfo";
+import {getCurrentChatMessages} from "./gettingInfo";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
-import {settings, responseStatuses, ROUTER} from '../constants/config';
-import sendingMessage from "./messagesInteraction";
+import {settings} from '../constants/config';
+
 const {backend} = settings;
 const {backendPort} = settings;
 
@@ -93,14 +93,14 @@ async function openWebSocketConnections() {
 async function sendNotSentMessages() {
 	const notSentMessages = appLocalStorage.getNotSentMessages();
 	if (notSentMessages) {
-		for (let i = 0; i < notSentMessages.length; i++) {
-			if (notSentMessages[i]) {
-				for (const message of notSentMessages[i]) {
+		for (const item of notSentMessages) {
+			if (item) {
+				for (const message of item) {
 					await promiseMaker.createPromise('sendMessage', message, i);
 				}
 			}
-		}
 
+		}
 	}
 }
 

@@ -1,9 +1,9 @@
 import BaseComponent from "../../../baseComponent";
-const WrkspacePageSearchTemlate = require('./wrkspacePageSearch.pug');
-
 import './wrkspace-search.css';
 import UserComponent from "../../../ChatsColumn/User/UserComponent";
 import {bus} from "../../../../main";
+
+const WrkspacePageSearchTemlate = require('./wrkspacePageSearch.pug');
 
 class WrkspacePageSearchComponent extends BaseComponent {
 

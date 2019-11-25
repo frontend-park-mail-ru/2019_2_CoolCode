@@ -1,13 +1,12 @@
 import BaseComponent from "../../baseComponent";
 import {createVisibleSettingsMessageBlock} from "../../../handlers/chatViewHandlers";
+import './chatMsg/chat-msg.css';
+import './chatMsg/primaryRow/primary-row.css';
+import './chatMsg/secondaryRow/secondary-row.css';
 
 const rightMsg = require('./msgRight.pug');
 const leftMsg = require('./msgLeft.pug');
 const deletedMsg = require('./msgDeleted.pug');
-
-import './chatMsg/chat-msg.css';
-import './chatMsg/primaryRow/primary-row.css';
-import './chatMsg/secondaryRow/secondary-row.css';
 
 class ChatMessageComponent extends BaseComponent {
 
@@ -27,22 +26,22 @@ class ChatMessageComponent extends BaseComponent {
 	}
 
 	renderLeftDeleted() {
-		this.messageElement.classList += ' chat-msg_left';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_left`;
 		this.messageElement.innerHTML = deletedMsg();
 	}
 
 	renderRightDeleted() {
-		this.messageElement.classList += ' chat-msg_right';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_right`;
 		this.messageElement.innerHTML = deletedMsg();
 	}
 
 	renderLeft() {
-		this.messageElement.classList += ' chat-msg_left';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_left`;
 		this.messageElement.innerHTML = leftMsg(this._data.message);
 	}
 
 	renderRight() {
-		this.messageElement.classList += ' chat-msg_right';
+		this.messageElement.classList = `${this.messageElement.classList} chat-msg_right`;
 		this.messageElement.innerHTML = rightMsg(this._data.message);
 	}
 
@@ -60,7 +59,8 @@ class ChatMessageComponent extends BaseComponent {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRight();
 					if (this._data.error) {
-						this.messageElement.querySelector('.primary-row__text').classList += ' primary-row__text_error';
+						const textClassList = this.messageElement.querySelector('.primary-row__text').classList;
+						this.messageElement.querySelector('.primary-row__text').classList = `${textClassList} primary-row__text_error`;
 					}
 					this.createHandlerRight();
 

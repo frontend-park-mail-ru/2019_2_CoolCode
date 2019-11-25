@@ -1,5 +1,5 @@
 import BaseView from "./baseView";
-import {data, bus, router} from "../main";
+import {data, router} from "../main";
 import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/creationFormHandlers";
 import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 

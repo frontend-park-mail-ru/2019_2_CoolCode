@@ -4,13 +4,10 @@ import Router from './scripts/Router';
 import Bus from './scripts/Bus';
 import PromiseMaker from './scripts/PromiseMaker';
 import Fetch from "./modules/fetch";
-import {settings, responseStatuses, ROUTER, KEYWORDS} from './constants/config';
-const {backend} = settings;
-const {backendPort} = settings;
-const {connection} = settings;
-
+import {KEYWORDS, ROUTER, settings} from './constants/config';
 import './components/bem-main.css';
 import './scss/text-resize.scss';
+import './scss/wrap.scss';
 
 import loginView from "./views/loginView";
 import mainPageView from "./views/mainPageView";
@@ -26,10 +23,13 @@ import addMemberView from "./views/addMemberView";
 import wrkspaceFormView from "./views/wrkspaceFormView";
 import ComponentsStorage from "./entities/ComponentsStorage";
 import channelFormView from "./views/channelFormView";
-import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 import LocalStorage from "./entities/LocalStorage";
 import wrkspaceView from "./views/wrkspaceView";
 import wrkspaceSearchView from "./views/wrkspaceSearchView";
+
+const {backend} = settings;
+const {backendPort} = settings;
+const {connection} = settings;
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();

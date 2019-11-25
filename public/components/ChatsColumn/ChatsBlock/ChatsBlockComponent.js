@@ -1,17 +1,18 @@
 import BaseComponent from "../../baseComponent";
-import {data, bus, router} from "../../../main";
+import {bus, data} from "../../../main";
 import MessageComponent from "../Message/MessageComponent";
-const ChatsBlockTemplate = require('./chatsBlock.pug');
-
 import './bemChatsBlock/bem-chats-block.css';
+
+const ChatsBlockTemplate = require('./chatsBlock.pug');
 
 class ChatsBlockComponent extends BaseComponent {
     contentListRootSelector = '.chats-block__content';
 
     drawSelected(chatId, messageElement) {
     	if (chatId == this._data.currentChat.ID) {
-    		messageElement.className += ' chat-block_selected';
-    		messageElement.querySelector('.chat-block__message-column__name-row').className += ' chat-block__message-column__name-row_selected';
+    		messageElement.className = `${messageElement.className} chat-block_selected`;
+    		const nameRowClassName = messageElement.querySelector('.chat-block__message-column__name-row').className;
+    		messageElement.querySelector('.chat-block__message-column__name-row').className = `${nameRowClassName} chat-block__message-column__name-row_selected`;
     	}
     }
 

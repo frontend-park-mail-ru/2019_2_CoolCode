@@ -1,10 +1,9 @@
 import BaseComponent from "../../baseComponent";
-import {data, bus, router} from "../../../main";
-import MessageComponent from "../Message/MessageComponent";
-const UsersFoundBlockTemplate = require('./usersFoundBlock.pug');
-
+import {bus} from "../../../main";
 import '../ChatsBlock/bemChatsBlock/bem-chats-block.css';
 import UserComponent from "../User/UserComponent";
+
+const UsersFoundBlockTemplate = require('./usersFoundBlock.pug');
 
 class UsersFoundBlockComponent extends BaseComponent {
     contentListRootSelector = '.users-found-block__content';

@@ -1,4 +1,4 @@
-import {bus, data, FetchModule, promiseMaker} from "../main";
+import {bus, data, promiseMaker} from "../main";
 import MyWorker from "../workers/profile.worker";
 import {getPhoto} from "../backendDataFetchers/gettingInfo";
 

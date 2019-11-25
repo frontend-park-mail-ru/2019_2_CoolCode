@@ -1,4 +1,4 @@
-import {router, data} from "../main";
+import {data, router} from "../main";
 
 function wrkspaceDropdownClickEvent() {
 	switch (event.target.dataset.section) {
@@ -20,12 +20,13 @@ function createWorkspaceSettingsButtonHndlr() {
 }
 
 function wrkspaceDropdownExpandEvent(params = {wrkspaceSettingsDropdown:null}) {
-	if (params.wrkspaceSettingsDropdown !== null) {
-		if (!params.wrkspaceSettingsDropdown.classList.contains('wrkspace-page-dropdown_clicked')) {
-			params.wrkspaceSettingsDropdown.className += ' wrkspace-page-dropdown_clicked';
+	const {wrkspaceSettingsDropdown} = params;
+	if (wrkspaceSettingsDropdown !== null) {
+		if (!wrkspaceSettingsDropdown.classList.contains('wrkspace-page-dropdown_clicked')) {
+			wrkspaceSettingsDropdown.className = `${wrkspaceSettingsDropdown.className} wrkspace-page-dropdown_clicked`;
 		}
 		else {
-			params.wrkspaceSettingsDropdown.classList.remove('wrkspace-page-dropdown_clicked');
+			wrkspaceSettingsDropdown.classList.remove('wrkspace-page-dropdown_clicked');
 		}
 	}
 }

@@ -1,9 +1,7 @@
 import {API, responseStatuses, settings} from '../constants/config';
-import {appLocalStorage, FetchModule, bus} from '../main';
+import {bus, FetchModule} from '../main';
 
-const {frontend} = settings;
-const {frontendPort} = settings;
-const {connection} = settings;
+const {frontend, frontendPort, connection} = settings;
 
 async function likeMessage(id) {
 	console.log(`Liking message : ${id}`);

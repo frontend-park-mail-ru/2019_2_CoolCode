@@ -4,10 +4,13 @@ import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn, createWebsocketConnChannel} from "../backendDataFetchers/websockets";
 import {
 	getChannelInfo,
-	getChats, getCurrentChannelInfo,
-	getCurrentChatInfo, getUserInfo,
+	getChats,
+	getCurrentChannelInfo,
+	getCurrentChatInfo,
+	getUserInfo,
 	getWrkspaceCreatorInfo,
-	getWrkspaceInfo, getWrkspaceUsers
+	getWrkspaceInfo,
+	getWrkspaceUsers
 } from "../backendDataFetchers/gettingInfo";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
@@ -16,8 +19,9 @@ import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
 import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
-import {findUser, findMessagesFullInfo} from "../backendDataFetchers/findInfo";
+import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
+
 function createEvents() {
 
 	/*setting data*/

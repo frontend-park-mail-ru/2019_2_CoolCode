@@ -1,10 +1,11 @@
-import {data, promiseMaker, router, bus} from "../main";
+import {bus, data, promiseMaker, router} from "../main";
 import {KEYWORDS} from "../constants/config";
 
 function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
+	const {personId, contentListRoot} = params;
 	const ids = data.getChatUsersIds();
-	const id = parseFloat(params.personId.split('-')[1]);
-	if (params.contentListRoot.classList.contains('all-chats-window')) {
+	const id = parseFloat(personId.split('-')[1]);
+	if (contentListRoot.classList.contains('all-chats-window')) {
 		if (!ids.includes(id)) {
 			promiseMaker.createPromise('createChat', id).then(() => {
 				const chatId = data.getChatIdByChatUserId(id);
@@ -25,7 +26,7 @@ function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 			router.open(KEYWORDS.chat, [chatId]);
 		}
 	}
-	if (params.contentListRoot.classList.contains('wrkspace-search__search-container')) {
+	if (contentListRoot.classList.contains('wrkspace-search__search-container')) {
 		bus.emit('addCurrentWrkspaceMember', null, id);
 		const wrkspace = data.getCurrentWrkspace();
 		promiseMaker.createPromise('alterWrkspace', wrkspace).then(() => {
@@ -45,7 +46,8 @@ function createUserBlockHndlr(selector) {
 }
 
 function foundMessageChatClickEvent(params = {messageId:null}) {
-	const fullMessage = data.getLastSearchFullMessageByMessageId(params.messageId.split('-')[1]);
+	const {messageId} = params;
+	const fullMessage = data.getLastSearchFullMessageByMessageId(messageId.split('-')[1]);
 	router.open(KEYWORDS.chatFoundMessage, [fullMessage.chatId, fullMessage.message.id]);
 }
 
@@ -56,7 +58,8 @@ function createMessageFoundChatBlockHndlr() {
 	});
 }
 function foundMessageChannelClickEvent(params = {messageId:null}) {
-	const fullMessage = data.getLastSearchFullMessageByMessageId(params.messageId.split('-')[1]);
+	const {messageId} = params;
+	const fullMessage = data.getLastSearchFullMessageByMessageId(messageId.split('-')[1]);
 	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.ID, fullMessage.channel.ID, fullMessage.message.id]);
 }
 

@@ -1,12 +1,13 @@
 import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
-import {data, bus, router, componentsStorage, promiseMaker} from "../main";
+import {componentsStorage, data, promiseMaker, router} from "../main";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import {
 	channelViewHandler,
 	createChatBlockHndlr,
 	createWorkspaceButtonHndlr,
-	createWrkspaceBlockExpandHndlr, createWrkspaceBlockHndlr
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {

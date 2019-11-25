@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {router, data, promiseMaker, bus, componentsStorage} from "../main";
+import {bus, componentsStorage} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import RegisterComponent from "../components/RegisterBlock/registerComponent";
 

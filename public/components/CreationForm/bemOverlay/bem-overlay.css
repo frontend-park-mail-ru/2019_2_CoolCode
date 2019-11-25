@@ -4,7 +4,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 10; /*make it overlay*/
+    z-index: var(--global-z-index-overlay); /*make it overlay*/
 }
 
 .overlay_style {

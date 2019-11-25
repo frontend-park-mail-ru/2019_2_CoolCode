@@ -1,4 +1,4 @@
-import {appLocalStorage, bus, data, FetchModule, promiseMaker} from "../main";
+import {data} from "../main";
 
 class LocalStorage {
 

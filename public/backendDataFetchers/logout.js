@@ -1,5 +1,6 @@
-import {bus, FetchModule, router, data, promiseMaker} from '../main';
+import {FetchModule, promiseMaker, router} from '../main';
 import {API, responseStatuses} from "../constants/config";
+
 async function handleLogout() {
 	try {
 		const response = await FetchModule._doDelete(

@@ -1,8 +1,8 @@
 import BaseComponent from "../baseComponent";
-const registerTemplate = require('./register.pug');
-
 import './bemRegisterBlocks/bem-register-form.css';
 import './bemRegisterBlocks/bemInputBlock/bem-input-block.css';
+
+const registerTemplate = require('./register.pug');
 
 class RegisterComponent extends BaseComponent {
 

@@ -1,5 +1,4 @@
 import {data, promiseMaker, router} from "../main";
-import {menuHandlers} from "./channelViewHandlers";
 import {KEYWORDS} from "../constants/config";
 
 function createWrkspaceBlockExpandHndlr() {
@@ -12,19 +11,20 @@ function createWrkspaceBlockExpandHndlr() {
 }
 
 function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspaceBlockVisible : null}) {
-	if (params.wrkspaceBlockSmall !== null) {
-		if (!params.wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
-			params.wrkspaceBlockSmall.className += ' wrkspace-expandable_clicked';
-			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
+	const {wrkspaceBlockSmall, wrkspaceBlockVisible} = params;
+	if (wrkspaceBlockSmall !== null) {
+		if (!wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
+			wrkspaceBlockSmall.className = `${wrkspaceBlockSmall.className} wrkspace-expandable_clicked`;
+			const arrowDown = wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
 			arrowDown.classList.remove('hidden');
-			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
-			arrowUp.className += ' hidden';
+			const arrowUp = wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
+			arrowUp.className = `${arrowUp.className} hidden`;
 		}
 		else {
-			params.wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
-			const arrowDown = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
-			arrowDown.className += ' hidden';
-			const arrowUp = params.wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
+			wrkspaceBlockSmall.classList.remove('wrkspace-expandable_clicked');
+			const arrowDown = wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-down');
+			arrowDown.className = `${arrowDown.className} hidden`;
+			const arrowUp = wrkspaceBlockVisible.querySelector('.wrkspace-visible__chann-row__arrow__icon-up');
 			arrowUp.classList.remove('hidden');
 		}
 
@@ -41,8 +41,9 @@ function createChatBlockHndlr() {
 }
 
 async function chatBlockClickEvent(params = {userId:null, chatId:null}) {
-	await promiseMaker.createPromise('getCurrentChatInfo', params.userId, params.chatId);
-	router.open(KEYWORDS.chat, [params.chatId]);
+	const {userId, chatId} = params;
+	await promiseMaker.createPromise('getCurrentChatInfo', userId, chatId);
+	router.open(KEYWORDS.chat, [chatId]);
 }
 
 function createWrkspaceBlockHndlr() {
