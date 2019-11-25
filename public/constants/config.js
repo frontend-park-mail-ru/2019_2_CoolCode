@@ -40,6 +40,7 @@ const API = {
 	},
 	findMessages : (query) => {
 		return `/messages/${query}`;
+
 	},
 	currentChatMessages : (chatId) => {
 		return `/chats/${chatId}/messages`;
