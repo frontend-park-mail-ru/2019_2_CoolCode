@@ -1,7 +1,25 @@
 .column{
     display: flex;
     flex-direction: column;
-    height: 100%;
+}
+
+.column_size {
+
+  @media screen and (min-height: 10px) {
+    height: 200px;
+  }
+
+  @media screen and (min-height: 400px) {
+    height: 600px;
+  }
+
+  @media screen and (min-height: 600px) {
+    height: 750px;
+  }
+
+  @media screen and (min-height: 800px) {
+    height: 910px;
+  }
 }
 
 /* left and right column modifiers - standart layout*/
