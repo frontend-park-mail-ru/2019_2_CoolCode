@@ -17,9 +17,9 @@ const settings = {
 	backendNotificationsPort : ':8003',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
-	//backend: '95.163.209.195',
+	backend: '95.163.209.195',
 	//backend: '192.168.1.69:8080',
-	backend: 'localhost'
+	//backend: 'localhost'
 };
 
 const keys = {
