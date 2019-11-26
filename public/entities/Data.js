@@ -149,7 +149,7 @@ class Data {
 
 	setCurrentChat(currentChatId) {
 		for (let chat of this.userChats) {
-			if (chat.ID == currentChatId) {
+			if (chat.id == currentChatId) {
 				this.currentChat = chat;
 				break;
 			}
@@ -292,8 +292,8 @@ class Data {
 	}
 
 	getCurrentWrkspaceId() {
-		this.createLogMessage('get', 'currentWrkspaceId', this.currentWrkspace.ID);
-		return this.currentWrkspace.ID;
+		this.createLogMessage('get', 'currentWrkspaceId', this.currentWrkspace.id);
+		return this.currentWrkspace.id;
 	}
 
 	setCurrentWrkspaceCreator(currentWrkspaceCreator) {
@@ -307,13 +307,13 @@ class Data {
 	}
 
 	addCurrentWrkspaceMember(id) {
-		if (!this.currentWrkspace.Members.includes(id)) {
-			this.currentWrkspace.Members.push(id);
+		if (!this.currentWrkspace.members.includes(id)) {
+			this.currentWrkspace.members.push(id);
 		}
 	}
 	getCurrentWrkspaceMembers() {
 		this.createLogMessage('get', 'currentWrkspaceMembers', 'currentWrkspaceMembers');
-		return this.currentWrkspace.Members;
+		return this.currentWrkspace.members;
 
 	}
 
@@ -342,19 +342,19 @@ class Data {
 		return this.currentChannel;
 	}
 	getCurrentChannelId() {
-		this.createLogMessage('get', 'currentChannelId', this.currentChannel.ID);
-		return this.currentChannel.ID;
+		this.createLogMessage('get', 'currentChannelId', this.currentChannel.id);
+		return this.currentChannel.id;
 	}
 
 	addCurrentChannelMember(id) {
-		if (!this.currentChannel.Members.includes(id)) {
-			this.currentChannel.Members.push(id);
+		if (!this.currentChannel.members.includes(id)) {
+			this.currentChannel.members.push(id);
 		}
 	}
 
 	checkIfChat(chatId) {
 		for (let chat of this.userChats) {
-			if (chatId == chat.ID) {
+			if (chatId == chat.id) {
 				return true;
 			}
 		}
@@ -385,13 +385,13 @@ class Data {
 		let chatId = null;
 		for (let chat of this.userChats) {
 			let otherId;
-			if (chat["Members"][0] == this.user.id) {
-				otherId = chat["Members"][1];
+			if (chat["members"][0] == this.user.id) {
+				otherId = chat["members"][1];
 			} else {
-				otherId = chat["Members"][0];
+				otherId = chat["members"][0];
 			}
 			if (otherId == userId) {
-				chatId = chat.ID;
+				chatId = chat.id;
 				break;
 			}
 		}
@@ -402,11 +402,11 @@ class Data {
 	getChatUserIdByChatId(chatId) {
 		let userId = null;
 		for (let chat of this.userChats) {
-			if (chatId == chat.ID) {
-				if (chat["Members"][0] == this.user.id) {
-					userId = chat["Members"][1];
+			if (chatId == chat.id) {
+				if (chat["members"][0] == this.user.id) {
+					userId = chat["members"][1];
 				} else {
-					userId = chat["Members"][0];
+					userId = chat["members"][0];
 				}
 				break;
 			}
@@ -418,10 +418,10 @@ class Data {
 	getChatUsersIds() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
-			if (chat["Members"][0] == this.user.id) {
-				ids.push(chat["Members"][1]);
+			if (chat["members"][0] == this.user.id) {
+				ids.push(chat["members"][1]);
 			} else {
-				ids.push(chat["Members"][0]);
+				ids.push(chat["members"][0]);
 			};
 		});
 		return ids;
@@ -430,12 +430,12 @@ class Data {
 	getChatUsersWChatIDs() {
 		const ids = [];
 		this.userChats.forEach((chat) => {
-			if (chat["Members"][0] == this.user.id) {
-				ids.push({userId: chat["Members"][1],
-					chatId : chat.ID});
+			if (chat["members"][0] == this.user.id) {
+				ids.push({userId: chat["members"][1],
+					chatId : chat.id});
 			} else {
-				ids.push({userId: chat["Members"][0],
-					chatId : chat.ID});
+				ids.push({userId: chat["members"][0],
+					chatId : chat.id});
 			};
 		});
 		return ids;

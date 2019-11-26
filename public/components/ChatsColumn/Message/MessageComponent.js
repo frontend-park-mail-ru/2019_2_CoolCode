@@ -32,7 +32,7 @@ class MessageComponent extends BaseComponent {
 		const message = document.createElement('div');
 		message.className = 'chat-block chat-block_style';
 		message.innerHTML = msgTempl(this._data);
-		message.id = "chat-" + data.getChatUserIdByChatId(this._data.ID);
+		message.id = "chat-" + data.getChatUserIdByChatId(this._data.id);
 		return message;
 	}
 }

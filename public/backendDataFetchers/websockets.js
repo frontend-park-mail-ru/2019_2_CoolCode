@@ -73,9 +73,9 @@ async function openWrkspacesSockets() {
 	const userWrkspaces = data.getUserWrkSpaces();
 	if (userWrkspaces) {
 		for (const wrkspace of userWrkspaces) {
-			if (wrkspace.Channels) {
-				for (const channel of wrkspace.Channels) {
-					await promiseMaker.createPromise('createWebsocketConnChannel', channel.ID);
+			if (wrkspace.channels) {
+				for (const channel of wrkspace.channels) {
+					await promiseMaker.createPromise('createWebsocketConnChannel', channel.id);
 				}
 			}
 		}
@@ -107,8 +107,8 @@ async function sendNotSentMessages() {
 async function storeMessages() {
 	const chats = data.getUserChats();
 	for (const chat of chats) {
-		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.ID));
-		await getCurrentChatMessages(chat.ID);
+		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.id));
+		await getCurrentChatMessages(chat.id);
 	}
 
 }

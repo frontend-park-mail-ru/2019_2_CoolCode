@@ -2,15 +2,15 @@ import {bus, FetchModule} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function alterWrkspace(wrkspace) {
-	console.log(wrkspace.Members);
-	console.log(` Changing wrkspace ${wrkspace.ID} info`);
+	console.log(wrkspace.members);
+	console.log(` Changing wrkspace ${wrkspace.id} info`);
 	try {
 		const response = await FetchModule._doPut(
-			{path: API.wrkspaceInfo(wrkspace.ID), data: {
-				id: wrkspace.ID,
-				name: wrkspace.Name,
-				members: wrkspace.Members,
-				admins: wrkspace.Admins,
+			{path: API.wrkspaceInfo(wrkspace.id), data: {
+				id: wrkspace.id,
+				name: wrkspace.name,
+				members: wrkspace.members,
+				admins: wrkspace.admins,
 			},
 			contentType : 'application/json;charset=utf-8'}
 		);
@@ -26,12 +26,12 @@ async function alterWrkspace(wrkspace) {
 async function alterChannel(channel) {
 	try {
 		let response = await FetchModule._doPut(
-			{path: API.channelInfo(channel.ID),
+			{path: API.channelInfo(channel.id),
 				data:   {
-					id: channel.ID,
-					name: channel.Name,
-					members: channel.Members,
-					admins: channel.Admins
+					id: channel.id,
+					name: channel.name,
+					members: channel.members,
+					admins: channel.admins
 				},
 				contentType : 'application/json;charset=utf-8'}
 		);

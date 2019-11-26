@@ -58,6 +58,8 @@ class Fetch {
 				break;
 			}
 
+			console.log(path);
+
 			let response = await fetch(encodeURI(this._url + port + path), this._init);
 			//console.log(response.headers['X-CSRF-Token']);
 			return response;

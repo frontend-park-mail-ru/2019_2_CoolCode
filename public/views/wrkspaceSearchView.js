@@ -29,7 +29,7 @@ class wrkspaceSearchView extends BaseView {
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.searchUsers = data.getLastSearchUsers();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.currentWrkspaceCreator = data.getCurrentWrkspaceCreator();
 	}

@@ -57,7 +57,7 @@ function createMessageFoundChatBlockHndlr() {
 }
 function foundMessageChannelClickEvent(params = {messageId:null}) {
 	const fullMessage = data.getLastSearchFullMessageByMessageId(params.messageId.split('-')[1]);
-	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.ID, fullMessage.channel.ID, fullMessage.message.id]);
+	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.id, fullMessage.channel.id, fullMessage.message.id]);
 }
 
 function createMessageFoundChannelBlockHndlr() {

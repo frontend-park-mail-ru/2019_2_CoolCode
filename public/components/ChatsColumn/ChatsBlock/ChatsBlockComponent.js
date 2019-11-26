@@ -9,7 +9,7 @@ class ChatsBlockComponent extends BaseComponent {
     contentListRootSelector = '.chats-block__content';
 
     drawSelected(chatId, messageElement) {
-    	if (chatId == this._data.currentChat.ID) {
+    	if (chatId == this._data.currentChat.id) {
     		messageElement.className += ' chat-block_selected';
     		messageElement.querySelector('.chat-block__message-column__name-row').className += ' chat-block__message-column__name-row_selected';
     	}
@@ -27,9 +27,9 @@ class ChatsBlockComponent extends BaseComponent {
     			const messageElement = message.render();
     			contentListRoot.appendChild(messageElement);
     			if (this._data.currentChat) {
-    				this.drawSelected(chat.ID, messageElement);
+    				this.drawSelected(chat.id, messageElement);
     			}
-    			const id = data.getChatUserIdByChatId(chat.ID);
+    			const id = data.getChatUserIdByChatId(chat.id);
     			bus.emit('getUserPhoto', null, id ,"chat", message.getPhotoBlock());
     		});
     	}

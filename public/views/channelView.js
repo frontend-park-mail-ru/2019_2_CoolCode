@@ -50,7 +50,6 @@ class channelView extends BaseView {
 		menuHandlers();
 
 		createEditMessageBlockHndlr();
-		createLikeBtnHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
 	}
@@ -58,7 +57,7 @@ class channelView extends BaseView {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentChannel = data.getCurrentChannel();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.importantMessage = {text: 'hello'};
