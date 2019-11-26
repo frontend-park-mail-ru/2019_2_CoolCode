@@ -3,7 +3,7 @@ import ChatsBlockComponent from "./ChatsBlock/ChatsBlockComponent";
 import WrkSpacesBlockComponent from "./WrkSpacesBlock/WrkSpacesBlockComponent";
 import './bemAllChats/bem-all-chats.css';
 import './bemAllChats/bemAllChatsScrollWindow/bem-all-chats-window.css';
-import './Message/bemChatBlock/bem-chat-block.css';
+import './Message/bemChatBlock/bem-chat-block.scss';
 import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bem-wrkspace-block.css';
 import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkscpaceVisibleBlock/bem-wrkspace-visible.css';
 import './WrkSpacesBlock/WrkSpace/bemWrkspaceBlock/bemWrkspaceExpandableBlock/bem-wrkspace-expandable.css';

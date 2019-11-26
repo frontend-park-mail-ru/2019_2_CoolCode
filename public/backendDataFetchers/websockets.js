@@ -4,13 +4,13 @@ import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSock
 import {settings} from '../constants/config';
 
 const {backend} = settings;
-const {backendPort} = settings;
+const {backendNotificationsPort} = settings;
 
 function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/channels/${channelId}/notifications`);
+	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/channels/${channelId}`);
 	data.addWebSocketConn(channelId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -38,7 +38,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
+	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -73,9 +73,9 @@ async function openWrkspacesSockets() {
 	const userWrkspaces = data.getUserWrkSpaces();
 	if (userWrkspaces) {
 		for (const wrkspace of userWrkspaces) {
-			if (wrkspace.Channels) {
-				for (const channel of wrkspace.Channels) {
-					await promiseMaker.createPromise('createWebsocketConnChannel', channel.ID);
+			if (wrkspace.channels) {
+				for (const channel of wrkspace.channels) {
+					await promiseMaker.createPromise('createWebsocketConnChannel', channel.id);
 				}
 			}
 		}
@@ -107,8 +107,8 @@ async function sendNotSentMessages() {
 async function storeMessages() {
 	const chats = data.getUserChats();
 	for (const chat of chats) {
-		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.ID));
-		await getCurrentChatMessages(chat.ID);
+		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.id));
+		await getCurrentChatMessages(chat.id);
 	}
 
 }

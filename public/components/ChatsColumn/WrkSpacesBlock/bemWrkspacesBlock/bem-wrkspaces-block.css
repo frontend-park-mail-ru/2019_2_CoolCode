@@ -53,6 +53,10 @@
     height: 100%;
 }
 
+.wrkspaces-block__header__button:hover {
+    cursor: pointer;
+}
+
 /*icon element in button*/
 
 .wrkspaces-block__header__button__icon {

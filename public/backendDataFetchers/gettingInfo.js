@@ -99,8 +99,8 @@ async function getChats(id) {
 				`Couldn't fetch user chats: ${responseStatuses[response.status]}`);
 		}
 		const chats = await response.json();
-		await promiseMaker.createPromise('setUserChats', chats['Chats']);
-		await promiseMaker.createPromise('setUserWrkSpaces', chats['Workspaces']);
+		await promiseMaker.createPromise('setUserChats', chats['chats']);
+		await promiseMaker.createPromise('setUserWrkSpaces', chats['workspaces']);
 		bus.emit('setLSChats', null);
 
 	} catch (error) {

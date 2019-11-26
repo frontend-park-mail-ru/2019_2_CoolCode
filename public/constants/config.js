@@ -10,13 +10,16 @@ const responseStatuses = {
 
 const settings = {
 	connection : 'http',
-	frontendPort : ':3000',
-	backendPort : ':8080',
+	frontendPort : ':8000',
+	backendUsersPort : ':8001',
+	backendChatsPort : ':8002',
+	backendMessagesPort : ':8004',
+	backendNotificationsPort : ':8003',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
 	//backend: '192.168.1.69:8080',
-	//backend: 'localhost:8080'
+	//backend: 'localhost'
 };
 
 const keys = {
@@ -36,19 +39,20 @@ const API = {
 	},
 	createWrkSpace: '/workspaces',
 	findUser : (query) => {
-		return `/users/${query}`;
+		return `/users/names/${query}`;
 	},
 	findMessages : (query) => {
 		return `/messages/${query}`;
+
 	},
 	currentChatMessages : (chatId) => {
-		return `/chats/${chatId}/messages`;
+		return `/messages/chats/${chatId}`;
 	},
 	currentChannelMessages : (chanId) => {
-		return `/channels/${chanId}/messages`;
+		return `/messages/channels/${chanId}`;
 	},
 	getUserChats : (id) => {
-		return `/users/${id}/chats`;
+		return `/chats/users/${id}`;
 	},
 	userInfo: (id) => {
 		return `/users/${id}`;
@@ -62,13 +66,13 @@ const API = {
 	wrkspaceInfo: (id) => {
 		return `/workspaces/${id}`;
 	},
-	logout: '/logout',
-	login: '/login',
+	logout: '/users/logout',
+	login: '/users/login',
 	auth: '/users',
 	getPhoto : (id) => {
-		return `/photos/${id}`;
+		return `/users/photos/${id}`;
 	},
-	postPhoto : '/photos',
+	postPhoto : '/users/photos',
 
 };
 

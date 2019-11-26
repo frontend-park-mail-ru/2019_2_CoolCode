@@ -163,5 +163,5 @@ function createLikeBtnHndlr() {
 }
 
 export { createMessageInputChannelHndlr, createSendMessageBtnChannelHndlr, createAddChannelMemberHndlr,
-	menuHandlers, addMemberOverlayHndlr, createLikeBtnHndlr};
+	menuHandlers, addMemberOverlayHndlr, createLikeBtnHndlr, likeEvent};
 

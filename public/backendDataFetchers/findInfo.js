@@ -38,7 +38,7 @@ async function setFoundMessageUser(fullMessage, userId) {
 }
 
 async function setFoundMessageChannelContent(fullMessage) {
-	await promiseMaker.createPromise('getWrkspaceInfo', fullMessage.channel.WorkspaceID);
+	await promiseMaker.createPromise('getWrkspaceInfo', fullMessage.channel.workspace_id);
 	fullMessage.wrkspace = data.getCurrentWrkspace();
 	await promiseMaker.createPromise('addLastSearchMessageFull', fullMessage);
 }

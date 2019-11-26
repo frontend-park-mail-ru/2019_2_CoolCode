@@ -1,13 +1,14 @@
 import BaseComponent from "../../baseComponent";
 import {createVisibleSettingsMessageBlock} from "../../../handlers/chatViewHandlers";
+
+import {likeEvent} from "../../../handlers/channelViewHandlers";
+const rightMsg = require('./msgRightChannel.pug');
+const leftMsg = require('./msgLeftChannel.pug');
+const deletedMsg = require('./msgDeletedChannel.pug');
 import './channelMsg/chat-msg.css';
 import './channelMsg/primaryRow/primary-row.css';
 import './channelMsg/secondaryRow/secondary-row.css';
 import './channelMsg/upperRow/upper-row.css';
-
-const rightMsg = require('./msgRightChannel.pug');
-const leftMsg = require('./msgLeftChannel.pug');
-const deletedMsg = require('./msgDeletedChannel.pug');
 
 class ChannelMessageComponent extends BaseComponent {
 
@@ -24,6 +25,11 @@ class ChannelMessageComponent extends BaseComponent {
 		settingsMessageBtn.addEventListener('mouseover', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('mouseout', createVisibleSettingsMessageBlock);
 		settingsMessageBtn.addEventListener('click', createVisibleSettingsMessageBlock);
+	}
+
+	createLikeHandler() {
+		const settingsMessageBtn = this.messageElement.querySelector('.secondary-row__like__button');
+		settingsMessageBtn.addEventListener('click', likeEvent.bind(null, {messageId:this.messageElement.id}));
 	}
 
 	renderLeftDeleted() {
@@ -67,6 +73,7 @@ class ChannelMessageComponent extends BaseComponent {
 
 				} else {
 					this.renderLeft();
+					this.createLikeHandler();
 				}
 				if (this._data.edited) {
 					this.messageElement.querySelector('.secondary-row__edited').innerText = 'edited';

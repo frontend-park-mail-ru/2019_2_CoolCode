@@ -52,7 +52,7 @@ class chatView extends BaseView {
     	this._data.loggedIn = data.getLoggedIn();
 		this._data.chatUser = data.getCurrentChatUser();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();

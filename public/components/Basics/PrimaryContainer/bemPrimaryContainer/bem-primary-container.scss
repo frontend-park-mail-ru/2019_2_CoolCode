@@ -1,0 +1,30 @@
+.primary-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.primary-container_size {
+
+  @media screen and (min-height: 10px) {
+    height: 200px;
+  }
+
+  @media screen and (min-height: 400px) {
+    height: 600px;
+  }
+
+
+  @media screen and (min-height: 600px) {
+    height: 800px;
+  }
+
+  @media screen and (min-height: 820px) {
+    height: 910px;
+  }
+}
+
+.primary-container_style{
+  background-color: #FFFFFF;
+}

@@ -2,9 +2,9 @@ div.chat-block__image-row
     div.chat-block__image-row__loader.chat-block__image-row__loader_style
     img.chat-block__image-row__image.chat-block__image-row__image_style(src='images/sasha.jpeg')
 div.chat-block__message-column
-    div.chat-block__message-column__name-row.chat-block__message-column__name-row_style.fluid-font-size_1= Name
+    div.chat-block__message-column__name-row.chat-block__message-column__name-row_style.fluid-font-size_1= name
     div.chat-block__message-column__message-row
-        div.chat-block__message-column__message-row__last-message.chat-block__message-column__message-row__last-message_style= LastMessage
-        if TotalMSGCount !== 0
-            div.chat-block__message-column__message-row__messages-counter.chat-block__message-column__message-row__messages-counter_style= TotalMSGCount
+        div.chat-block__message-column__message-row__last-message.chat-block__message-column__message-row__last-message_style= last_message
+        //if total_msg_count !== 0
+            div.chat-block__message-column__message-row__messages-counter.chat-block__message-column__message-row__messages-counter_style= total_msg_count
 

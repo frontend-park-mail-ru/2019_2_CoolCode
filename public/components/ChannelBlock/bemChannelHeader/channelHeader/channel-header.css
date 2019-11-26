@@ -21,8 +21,6 @@
 
 .channel-header__info-row_style {
     border-bottom: 1.5px solid var(--global-grey-color);
-    border-top: 1px solid var(--global-grey-color)
-
 }
 
 
@@ -54,42 +52,36 @@
 
 .channel-header__info-row__info-column__name-row {
     flex: 0 0 40%;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-}
-
-.channel-header__info-row__info-column__name-row_style {
-    font-family: var(--global-font-family-Roboto);
-    font-size: 28px;
-    letter-spacing: -0.2px;
-    word-spacing: -1px;
-    color: #000000;
-    font-weight: 400;
-}
-
-.channel-header__info-row__info-column__name-row_style:hover, .chat-header__info-row__info-column__name-row_style:focus{
-    color:var(--global-darkgrey-color);
-    font-weight: bolder;
-    font-style: inherit;
-    text-shadow: 1px 1px 1px #1d916b; //TODO: create color
-}
-
-.channel-header__info-row__info-column__status-row {
-    flex: 0 0 40%;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-self: center;
 }
 
-.channel-header__info-row__info-column__status-row_style {
+.channel-header__info-row__info-column__name-row_style {
+    font-family: var(--global-font-family-Montserrat);
+    font-size: 20px;
+    letter-spacing: -0.2px;
+    word-spacing: -1px;
+    color: #000000;
+    font-weight: 400;
+}
+
+
+.channel-header__info-row__info-column__channel-row {
+    flex: 0 0 30%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: center;
+}
+
+.channel-header__info-row__info-column__channel-row_style {
     font-family: var(--global-font-family-Roboto);
     color: var(--global-nicegrey-color);
-    font-size: 19px;
+    font-size: 28px;
 }
 
 
@@ -113,7 +105,7 @@
 
 .channel-header__pinned-message__content  {
     align-self: center;
-    padding: 0 0 0 10px;
+    margin: 0 0 0 20px;
 }
 
 .channel-header__pinned-message__content_style {

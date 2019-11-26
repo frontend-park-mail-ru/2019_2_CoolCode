@@ -52,7 +52,7 @@ class wrkspaceView extends BaseView {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.currentWrkspaceCreator = data.getCurrentWrkspaceCreator();
 	}
@@ -66,7 +66,7 @@ class wrkspaceView extends BaseView {
 						promiseMaker.createPromise('getWrkspaceInfo', args),
 					]
 				).then(() => {
-					promiseMaker.createPromise('getWrkspaceCreatorInfo', data.getCurrentWrkspace().CreatorID).then(
+					promiseMaker.createPromise('getWrkspaceCreatorInfo', data.getCurrentWrkspace().creator_id).then(
 						() => {
 							this.setContent();
 							this.render();

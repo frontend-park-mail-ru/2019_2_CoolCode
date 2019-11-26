@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 5px 0 5px;
+}
+
+.header_size {
+
+  @media screen and (min-height: 10px) {
+    height: 30px;
+  }
+
+  @media screen and (min-height: 400px) {
+    height: 50px;
+  }
+}
+
+/*logo component*/
+
+.header__logo {
+  float: right;
+
+}
+
+.header__logo__image {
+  object-position: center center;
+  object-fit: fill;
+  height: 100%;
+  width:auto;
+}

@@ -7,9 +7,10 @@ div.chat-msg__container
         div.primary-row__time.primary-row__time_style.primary-row__time_style-right=message.message_time
         div.primary-row__text.primary-row__text_style.primary-row__text_style-right=message.text
     div.secondary-row.secondary-row_right
-        div.secondary-row__like
-            div.secondary-row__like__count.secondary-row__like__count_style=message.likes
-            div.secondary-row__like__button
-                img.secondary-row__like__button__icon.secondary-row__like__button__icon_style(src='/images/like.png')
+        if (message.likes)
+            div.secondary-row__like
+                div.secondary-row__like__count.secondary-row__like__count_style=message.likes
+                div.secondary-row__like__button
+                    img.secondary-row__like__button__icon.secondary-row__like__button__icon_style(src='/images/like.png')
         div.secondary-row__edited.secondary-row__edited_style
 

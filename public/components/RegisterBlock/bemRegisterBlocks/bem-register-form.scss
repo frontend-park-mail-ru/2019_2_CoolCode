@@ -3,8 +3,27 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 35vh; /*experimenting with viewports*/
-    width: 45vh;
+
+}
+
+.register-form_size {
+
+    @media screen and (min-height: 10px) {
+        height: 200px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: calc(100px + 30vh);
+    }
+
+    @media screen and (min-width: 10px) {
+        width: 300px;
+    }
+
+    @media screen and (min-width: 600px) {
+        width: calc(50px + 30vw);
+
+    }
 }
 
 .register-form_style {
