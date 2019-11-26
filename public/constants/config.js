@@ -10,11 +10,11 @@ const responseStatuses = {
 
 const settings = {
 	connection : 'http',
-	frontendPort : ':3000',
-	backendUsersPort : ':8080',
-	backendChatsPort : ':8081',
-	backendMessagesPort : ':8082',
-	backendNotificationsPort : ':8083',
+	frontendPort : ':8000',
+	backendUsersPort : ':8001',
+	backendChatsPort : ':8002',
+	backendMessagesPort : ':8004',
+	backendNotificationsPort : ':8003',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
 	//backend: '172.20.10.9:8080',
 	//backend: '95.163.209.195',
