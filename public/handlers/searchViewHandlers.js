@@ -3,6 +3,7 @@ import {KEYWORDS} from "../constants/config";
 
 function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 	const {personId, contentListRoot} = params;
+	event.currentTarget.removeEventListener('click', foundUserClickEvent.bind(event, {personId:personId, contentListRoot : contentListRoot}));
 	const ids = data.getChatUsersIds();
 	const id = parseFloat(personId.split('-')[1]);
 	if (contentListRoot.classList.contains('all-chats-window')) {
@@ -41,7 +42,7 @@ function createUserBlockHndlr(selector) {
 	const contentListRoot = document.querySelector(selector);
 	const persons = contentListRoot.querySelectorAll(".user-found");
 	persons.forEach((person)=> {
-		person.addEventListener('click', foundUserClickEvent.bind(null, {personId:person.id, contentListRoot : contentListRoot}));
+		person.addEventListener('click', foundUserClickEvent.bind(event, {personId:person.id, contentListRoot : contentListRoot}));
 	});
 }
 

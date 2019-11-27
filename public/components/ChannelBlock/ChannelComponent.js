@@ -74,6 +74,10 @@ class ChannelComponent extends BaseComponent {
 		} else {
 			message.querySelector('.secondary-row__like__count').innerText = 1;
 		}
+		message.querySelector('.secondary-row__like__add').innerText = '+1';
+		setTimeout(() => {
+			message.querySelector('.secondary-row__like__add').innerText = '';
+		}, 1000);
 	}
 
 	deleteOldMessage(messageData) {

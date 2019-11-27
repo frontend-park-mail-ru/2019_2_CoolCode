@@ -28,8 +28,8 @@ class ChannelMessageComponent extends BaseComponent {
 	}
 
 	createLikeHandler() {
-		const settingsMessageBtn = this.messageElement.querySelector('.secondary-row__like__button');
-		settingsMessageBtn.addEventListener('click', likeEvent.bind(null, {messageId:this.messageElement.id}));
+		const settingsMessageBtn = this.messageElement.querySelector('.secondary-row__like__button__icon');
+		settingsMessageBtn.addEventListener('click', likeEvent.bind(event, {messageId:this.messageElement.id}));
 	}
 
 	renderLeftDeleted() {

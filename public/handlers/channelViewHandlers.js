@@ -5,7 +5,7 @@ import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderM
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {sendingMessageChannel} from "../backendDataFetchers/channelMessagesInteraction";
-import {createHiddenSettingsMessageBlock, growInput} from "./chatViewHandlers";
+import {createHiddenSettingsMessageBlock, createVisibleSettingsMessageBlock, growInput} from "./chatViewHandlers";
 import {alterChannel} from "../backendDataFetchers/alterEntities";
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
@@ -147,18 +147,35 @@ async function sendMessageChannelEvent() {
 
 function likeEvent(params = {messageId:null}) {
 	const {messageId} = params;
+	const eventTarget = event.currentTarget;
+	console.log(eventTarget);
+	eventTarget.removeEventListener('click', likeEvent);
+	// setTimeout(() => {
+	// 	eventTarget.addEventListener('click', likeEvent.bind(event, {messageId:messageId}));
+	// }, 1000);
 	const id = parseFloat(messageId.split('-')[1]);
 	promiseMaker.createPromise('likeMessage', id).then(() => {
 		const channelBlock = componentsStorage.getChatBlock();
 		channelBlock.likeMessage(id);
 	});
+
+}
+
+function likeHoverEvent() {
+	if (event.type == 'mouseover') {
+		event.currentTarget.src = '/images/like_hover.png';
+	}
+	if (event.type == 'mouseout') {
+		event.currentTarget.src = '/images/like_1.png';
+	}
 }
 
 function createLikeBtnHndlr() {
 	const userMessages = document.querySelectorAll('.chat-msg_left');
 	userMessages.forEach((userMessage) => {
-		const settingsMessageBtn = userMessage.querySelector('.secondary-row__like__button');
-		settingsMessageBtn.addEventListener('click', likeEvent.bind(null, {messageId:userMessage.id}));
+		const settingsMessageBtn = userMessage.querySelector('.secondary-row__like__button__icon');
+		settingsMessageBtn.addEventListener('mouseover', likeHoverEvent);
+		settingsMessageBtn.addEventListener('mouseout', likeHoverEvent);
 	});
 }
 

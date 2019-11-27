@@ -69,7 +69,7 @@
     filter: opacity(0.9);
 }
 
-/*like-button element */
+/*count element */
 
 .secondary-row__like__count {
     align-self: center;
@@ -85,4 +85,15 @@
     font-size: 12px;
     font-family: var(--global-font-family-Roboto);
     color: #000000;
+}
+
+/*add element */
+
+.secondary-row__like__add {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: 0 0 0 10px;
 }
