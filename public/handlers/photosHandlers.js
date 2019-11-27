@@ -9,8 +9,8 @@ async function getProfilePhoto(id) {
 
 	worker.onmessage = function (result) {
 		promiseMaker.createPromise('setUserPhoto', result.data).then(() => {
-			bus.emit('setPicture', null, '.profile-header__image-row__image', data.getUserPhoto());
-			bus.emit('hideLoader', null, '.profile-header__image-row');
+			bus.emit('setPicture', null, '.profile-header__content__image', data.getUserPhoto());
+			bus.emit('hideLoader', null, '.profile-header__content');
 		});
 	};
 }

@@ -41,8 +41,8 @@ class wrkspaceView extends BaseView {
 	}
 
 	createClickablePic() {
-		const img = document.querySelector('.profile-header__image-row__image');
-		const input = document.querySelector('.profile-header__image-row__input');
+		const img = document.querySelector('.profile-header__content__image');
+		const input = document.querySelector('.profile-header__content__input');
 		img.addEventListener('click', function () {
 			input.click();
 		});

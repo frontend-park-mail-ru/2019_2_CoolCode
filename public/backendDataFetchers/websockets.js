@@ -1,7 +1,7 @@
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages} from "./gettingInfo";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
-import {settings} from '../constants/config';
+import {ports, settings} from '../constants/config';
 
 const {backend} = settings;
 const {backendNotificationsPort} = settings;
@@ -10,7 +10,7 @@ function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/channels/${channelId}`);
+	const websocketConn = new WebSocket(`ws://${backend}${ports.notifications}/notifications/channels/${channelId}`);
 	data.addWebSocketConn(channelId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -38,7 +38,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendNotificationsPort}/notifications/chats/${chatId}`);
+	const websocketConn = new WebSocket(`ws://${backend}${ports.notifications}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {

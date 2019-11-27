@@ -14,14 +14,25 @@
 .profile-header__image-row {
     flex: 0 0 40%;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 0 0 0;
+}
+
+/* content element*/
+
+.profile-header__image-row__content {
+    flex: 0 0 auto;
+    display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
     margin: 10px 0 0 0;
 }
 
-/* image element in image-row*/
+/* image element in content*/
 
-.profile-header__image-row__image {
+.profile-header__content__image {
     width: 24vh; /*experimenting with viewports*/
     height: 24vh;
 
@@ -30,36 +41,54 @@
     box-sizing: border-box;
 }
 
-.profile-header__image-row__image_style {
+.profile-header__content__image_style {
     border: 2px solid var(--global-green-color);
     border-radius: 50%;
 
 }
 
-.profile-header__image-row__image_style:hover {
+.profile-header__content__image_style:hover {
     border: 3px solid var(--global-green-color);
 }
-/* loader element in image-row*/
+/* loader element in content*/
 
-.profile-header__image-row__loader {
+.profile-header__content__loader {
     width: 20vh; /*experimenting with viewports*/
     height: 20vh;
 
     animation: spin 2s linear infinite;
 }
 
-.profile-header__image-row__loader_style {
+.profile-header__content__loader_style {
     border: 16px solid var(--global-loader-grey-color);
     border-top: 16px solid var(--global-green-color-1);
     border-radius: 50%;
 }
 
-/* input element in image-row*/
+/* input element in content*/
 
-.profile-header__image-row__input{
+.profile-header__content__input {
     display: none;
 }
 
+/* error element*/
+
+.profile-header__image-row__error {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 60%;
+    height: auto;
+    max-height: 20px;
+    margin: 15px 0 0 0;
+}
+
+.profile-header__image-row__error_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
+}
 
 /* username-column element*/
 

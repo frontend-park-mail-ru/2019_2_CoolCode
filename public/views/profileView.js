@@ -22,7 +22,7 @@ class profileView extends BaseView {
 	};
 
 	setEvents() {
-		bus.emit('showLoader', null, '.profile-header__image-row');
+		bus.emit('showLoader', null, '.profile-header__content');
 		getProfilePhoto(data.getUserId());
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
@@ -35,8 +35,8 @@ class profileView extends BaseView {
 	}
 
 	createClickablePic() {
-		const img = document.querySelector('.profile-header__image-row__image');
-		const input = document.querySelector('.profile-header__image-row__input');
+		const img = document.querySelector('.profile-header__content__image');
+		const input = document.querySelector('.profile-header__content__input');
 		img.addEventListener('click', function () {
 			input.click();
 		});

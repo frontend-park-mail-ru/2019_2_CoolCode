@@ -8,18 +8,20 @@ const responseStatuses = {
 	500 : "Internal Server Error",
 };
 
+const ports = {
+	'users' : ':8001',
+	'chats' : ':8002',
+	'workspaces' : ':8002',
+	'channels' : ':8002',
+	'notifications' : ':8003',
+	'messages' : ':8004',
+};
+
 const settings = {
 	connection : 'http',
 	frontendPort : ':8000',
-	backendUsersPort : ':8001',
-	backendChatsPort : ':8002',
-	backendMessagesPort : ':8004',
-	backendNotificationsPort : ':8003',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
-	//backend: '172.20.10.9:8080',
 	backend: '95.163.209.195',
-	//backend: '192.168.1.69:8080',
-	//backend: 'localhost'
 };
 
 const keys = {
@@ -136,4 +138,4 @@ const ROUTER = {
 	},
 };
 
-export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS};
+export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports};

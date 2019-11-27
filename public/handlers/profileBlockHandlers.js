@@ -125,17 +125,22 @@ function createProfileInputs() {
 
 async function imageUploading(params = {id: null, fileInput: null}) {
 	const {id, fileInput} = params;
-	const formData = new FormData();
-	formData.append('file', fileInput.files[0]);
-	const result = await setUserPhoto(formData);
-	if (result) {
-		bus.emit('showLoader', null, '.profile-header__image-row');
-		getProfilePhoto(id);
+	if (!validation.validatePhotoFormat(fileInput.files[0])) {
+		emitError(fileInput.parentNode.parentNode, 'profile-header__image-row__error', null, 'Please, input image');
+	} else {
+		bus.emit('hideError', null, `.profile-header__image-row__error`);
+		const formData = new FormData();
+		formData.append('file', fileInput.files[0]);
+		const result = await setUserPhoto(formData);
+		if (result) {
+			bus.emit('showLoader', null, '.profile-header__content');
+			getProfilePhoto(id);
+		}
 	}
 }
 
 function createImageUpload(id) {
-	const imageInput = document.querySelector('.profile-header__image-row__input');
+	const imageInput = document.querySelector('.profile-header__content__input');
 	imageInput.addEventListener('change', imageUploading.bind(null, {id: id, fileInput: imageInput}));
 }
 

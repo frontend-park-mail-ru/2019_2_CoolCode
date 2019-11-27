@@ -1,8 +1,4 @@
-import {settings, responseStatuses, ROUTER, KEYWORDS} from './../constants/config';
-const {backendUsersPort} = settings;
-const {backendChatsPort} = settings;
-const {backendNotificationsPort} = settings;
-const {backendMessagesPort} = settings;
+import {ports} from "../constants/config";
 
 class Fetch {
 
@@ -37,32 +33,10 @@ class Fetch {
 		let port = "";
 	    this.setInit(method, data, contentType);
 	    try {
-	    	switch (path.split("/")[1]) {
-			case "users":
-				port = backendUsersPort;
-				break;
-			case "messages":
-				port = backendMessagesPort;
-				break;
-			case "chats":
-				port = backendChatsPort;
-				break;
-			case "channels":
-				port = backendChatsPort;
-				break;
-			case "workspaces":
-				port = backendChatsPort;
-				break;
-			case "notifications":
-				port = backendNotificationsPort;
-				break;
-			}
-
-			console.log(path);
-
-			let response = await fetch(encodeURI(this._url + port + path), this._init);
+	    	const option = path.split("/")[1];
+	    	const port = ports[option];
 			//console.log(response.headers['X-CSRF-Token']);
-			return response;
+			return await fetch(encodeURI(`${this._url}${port}${path}`), this._init);
 		} catch (error) {
 	        return error;
 		}

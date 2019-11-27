@@ -13,6 +13,10 @@ class Validation {
 		return this._phoneRegex.test(phone);
 	}
 
+	validatePhotoFormat(file) {
+		return file.type.includes('image');
+	}
+
 }
 
 export default Validation;

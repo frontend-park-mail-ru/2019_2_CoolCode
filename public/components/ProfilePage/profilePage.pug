@@ -8,9 +8,11 @@ mixin field(pText, fieldText, id)
 block page
     div.profile-header
         div.profile-header__image-row
-            div.profile-header__image-row__loader.profile-header__image-row__loader_style
-            img.profile-header__image-row__image.profile-header__image-row__image_style(src='/images/user.jpg')
-            input.profile-header__image-row__input(type='file')
+            div.profile-header__image-row__content
+                div.profile-header__content__loader.profile-header__content__loader_style
+                img.profile-header__content__image.profile-header__content__image_style(src='/images/user.jpg')
+                input.profile-header__content__input(type='file')
+            div.profile-header__image-row__error.div.profile-header__image-row__error_style
         div.profile-header__username-column
             div.profile-header__username-column__username#username-setting
                 div.profile-header__username-column__username__text.profile-header__username-column__username__text_style.responsive_text_3= username
