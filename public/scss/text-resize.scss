@@ -66,14 +66,14 @@ $html-font-size-xs: 13px;
 
 
 .responsive_text_3 {
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 100px) {
     font-size: calc(24px + 6 * ((100vw - 320px) / 680));
   }
   @media screen and (min-width: 1000px) {
     font-size: 36px;
   }
 
-  @media screen and (min-height: 240px) {
+  @media screen and (min-height: 10px) {
     font-size: calc(24px + 6 * ((100vh - 320px) / 680));
   }
   @media screen and (min-height: 800px) {

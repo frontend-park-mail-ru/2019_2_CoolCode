@@ -5,8 +5,26 @@
     flex-wrap: nowrap; /*so everything in one line*/
     justify-content: center;
     width: 100%;
-    height: 40%;
+}
 
+
+.profile-header_size {
+
+    @media screen and (min-height: 10px) {
+        height: 150px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 250px;
+    }
+
+    @media screen and (min-height: 600px) {
+        height: 350px;
+    }
+
+    @media screen and (min-height: 800px) {
+        height: 400px;
+    }
 }
 
 /* image-row element*/
@@ -14,8 +32,9 @@
 .profile-header__image-row {
     flex: 0 0 40%;
     display: flex;
+    height:100%;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 0 0 0 0;
 }
 
@@ -27,20 +46,38 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    margin: 10px 0 0 0;
+    margin: 0 0 0 10px;
 }
 
 /* image element in content*/
 
 .profile-header__content__image {
-    width: 24vh; /*experimenting with viewports*/
-    height: 24vh;
 
     object-position: center center;
     object-fit: fill;
     box-sizing: border-box;
 }
+.profile-header__content__image_size {
+    @media screen and (min-height: 10px) {
+        width: 100px;
+        height: 100px;
+    }
 
+    @media screen and (min-height: 400px) {
+        width: 150px;
+        height: 150px;
+    }
+
+    @media screen and (min-height: 600px) {
+        width: 170px;
+        height: 170px;
+    }
+
+    @media screen and (min-height: 800px) {
+        width: 200px;
+        height: 200px;
+    }
+}
 .profile-header__content__image_style {
     border: 2px solid var(--global-green-color);
     border-radius: 50%;
@@ -53,9 +90,6 @@
 /* loader element in content*/
 
 .profile-header__content__loader {
-    width: 20vh; /*experimenting with viewports*/
-    height: 20vh;
-
     animation: spin 2s linear infinite;
 }
 
@@ -78,10 +112,11 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    width: 60%;
+    text-align: center;
+    width: 100%;
     height: auto;
     max-height: 20px;
-    margin: 15px 0 0 0;
+    margin: 15px 0 0 15px;
 }
 
 .profile-header__image-row__error_style {

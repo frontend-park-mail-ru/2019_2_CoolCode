@@ -1,8 +1,27 @@
 .profile-info {
-    flex: 0 0 50%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.profile-info_size {
+
+    @media screen and (min-height: 10px) {
+        height: 200px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 300px;
+    }
+
+    @media screen and (min-height: 600px) {
+        height: 400px;
+    }
+
+    @media screen and (min-height: 800px) {
+        height: 450px;
+    }
 }
 
 /*field element*/

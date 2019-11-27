@@ -145,21 +145,19 @@ async function sendMessageChannelEvent() {
 	componentsStorage.setChatBlock(channelBlock);
 }
 
-function likeEvent(params = {messageId:null}) {
-	const {messageId} = params;
-	const eventTarget = event.currentTarget;
-	console.log(eventTarget);
+function likeEvent() {
+	const {messageId} = event.currentTarget.params;
+	const eventTarget = event.target;
 	eventTarget.removeEventListener('click', likeEvent);
-	// setTimeout(() => {
-	// 	eventTarget.addEventListener('click', likeEvent.bind(event, {messageId:messageId}));
-	// }, 1000);
+	setTimeout(() => {
+	 	eventTarget.addEventListener('click', likeEvent);
+	}, 1000);
 	const id = parseFloat(messageId.split('-')[1]);
 	promiseMaker.createPromise('likeMessage', id).then(() => {
 		const channelBlock = componentsStorage.getChatBlock();
 		channelBlock.likeMessage(id);
 	});
-
-}
+};
 
 function likeHoverEvent() {
 	if (event.type == 'mouseover') {

@@ -1,9 +1,9 @@
 import {bus, data, promiseMaker, router} from "../main";
 import {KEYWORDS} from "../constants/config";
 
-function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
-	const {personId, contentListRoot} = params;
-	event.currentTarget.removeEventListener('click', foundUserClickEvent.bind(event, {personId:personId, contentListRoot : contentListRoot}));
+function foundUserClickEvent() {
+	const {personId, contentListRoot} = event.currentTarget.params;
+	event.currentTarget.removeEventListener('click', foundUserClickEvent);
 	const ids = data.getChatUsersIds();
 	const id = parseFloat(personId.split('-')[1]);
 	if (contentListRoot.classList.contains('all-chats-window')) {
@@ -42,7 +42,8 @@ function createUserBlockHndlr(selector) {
 	const contentListRoot = document.querySelector(selector);
 	const persons = contentListRoot.querySelectorAll(".user-found");
 	persons.forEach((person)=> {
-		person.addEventListener('click', foundUserClickEvent.bind(event, {personId:person.id, contentListRoot : contentListRoot}));
+		person.params = {personId:person.id, contentListRoot : contentListRoot};
+		person.addEventListener('click', foundUserClickEvent);
 	});
 }
 

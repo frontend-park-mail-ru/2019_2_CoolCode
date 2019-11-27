@@ -1,0 +1,25 @@
+.all-chats {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+    height: 86vh; /*experimenting with viewports*/
+}
+
+.all-chats_size {
+    @media screen and (min-height: 10px) {
+        height: 370px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 540px;
+    }
+
+    @media screen and (min-height: 600px) {
+        height: 750px;
+    }
+
+    @media screen and (min-height: 800px) {
+        height: 850px;
+    }
+}
