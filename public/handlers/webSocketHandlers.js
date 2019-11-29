@@ -1,5 +1,6 @@
-import {componentsStorage, data, promiseMaker} from "../main";
+import {componentsStorage, data, promiseMaker, router} from "../main";
 import {getAnyUserInfo} from "../backendDataFetchers/gettingInfo";
+import {KEYWORDS} from "../constants/config";
 
 function webSocketOnMessageChannel(event) {
 	console.log('new message from webSocketChannel');
@@ -87,7 +88,7 @@ function webSocketOnMessage(event) {
 			console.log(`message accepted: ${messageContent.text}`);
 			sendNotification(chatBlock._data.chatUser.username, {
 				body: messageContent.text
-			});
+			}, messageContent.id, messageContent.chat_id);
 			break;
 		case data.getUserId():
 			console.log(`my message sent: ${messageContent.text}`);
@@ -100,7 +101,8 @@ function webSocketOnMessage(event) {
 			const chats = leftColumn._data.chats;
 			sendNotification(chatNameIterate(messageContent.chat_id, chats), {
 				body: messageContent.text
-			});
+			}, messageContent.id, messageContent.chat_id);
+			//console.log(messageContent);
 		}
 		break;
 	case 2:
@@ -142,15 +144,22 @@ function chatNameIterate(chatID, chats) {
 	}
 }
 
-function sendNotification(title, options) {
+function sendNotification(title, options, id, chatID) {
 	if ("Notification" in window) {
 		if (Notification.permission === 'granted') {
 			let notification = new Notification(title, options);
-			//TODO: onclick -> messagedChat
+			function clickFunc() {
+				router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
+			}
+			notification.onclick = clickFunc;
 		} else if (Notification.permission !== 'denied') {
 			Notification.requestPermission(function (permission) {
 				if (permission === 'granted') {
 					let notification = new Notification(title, options);
+					function clickFunc() {
+						router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
+					}
+					notification.onclick = clickFunc;
 				}
 			});
 		}
