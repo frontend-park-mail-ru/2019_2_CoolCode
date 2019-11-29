@@ -1,5 +1,4 @@
 import {componentsStorage, data, promiseMaker, router} from "../main";
-import {getAnyUserInfo} from "../backendDataFetchers/gettingInfo";
 import {KEYWORDS} from "../constants/config";
 
 function webSocketOnMessageChannel(event) {
@@ -150,6 +149,7 @@ function sendNotification(title, options, id, chatID) {
 			let notification = new Notification(title, options);
 			function clickFunc() {
 				router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
+				window.focus();
 			}
 			notification.onclick = clickFunc;
 		} else if (Notification.permission !== 'denied') {
@@ -158,6 +158,7 @@ function sendNotification(title, options, id, chatID) {
 					let notification = new Notification(title, options);
 					function clickFunc() {
 						router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
+						window.focus();
 					}
 					notification.onclick = clickFunc;
 				}
