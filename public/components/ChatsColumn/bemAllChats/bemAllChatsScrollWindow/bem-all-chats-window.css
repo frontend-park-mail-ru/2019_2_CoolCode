@@ -1,7 +1,7 @@
 .all-chats-window{
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: scroll; /*make it scroll window*/
+    overflow-y: auto; /*make it scroll window*/
     overflow-x: hidden;
 }
 
