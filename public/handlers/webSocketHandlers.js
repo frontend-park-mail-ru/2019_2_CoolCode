@@ -179,9 +179,7 @@ function sendNotification(title, options, chatParams) {
 				}
 			});
 		} else {
-			//TODO: remove
 			console.log('notifications denied');
-			createNotification(title, options, chatParams);
 		}
 	}
 }
