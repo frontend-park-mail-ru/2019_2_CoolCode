@@ -180,6 +180,7 @@ function sendNotification(title, options, chatParams) {
 			});
 		} else {
 			console.log('notifications denied');
+			createNotification(title, options, chatParams);
 		}
 	}
 }
