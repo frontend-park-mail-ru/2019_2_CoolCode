@@ -85,9 +85,16 @@ function webSocketOnMessage(event) {
 
 			chatBlock.renderCurrentChatIncomingMessage(messageContent);
 			console.log(`message accepted: ${messageContent.text}`);
-			sendNotification(chatBlock._data.chatUser.username, {
-				body: messageContent.text
-			}, messageContent.id, messageContent.chat_id);
+			sendNotification(
+				chatBlock._data.chatUser.username,
+				{
+					body: messageContent.text
+				},
+				{
+					messageID: messageContent.id,
+					chatID: messageContent.chat_id
+				}
+			);
 			break;
 		case data.getUserId():
 			console.log(`my message sent: ${messageContent.text}`);
@@ -98,10 +105,15 @@ function webSocketOnMessage(event) {
 			console.log(`message accepted in back: ${messageContent.text}`);
 
 			const chats = leftColumn._data.chats;
-			sendNotification(chatNameIterate(messageContent.chat_id, chats), {
-				body: messageContent.text
-			}, messageContent.id, messageContent.chat_id);
-			//console.log(messageContent);
+			sendNotification(
+				getChatNameIterate(messageContent.chat_id, chats),
+				{
+					body: messageContent.text
+				},
+				{
+					messageID: messageContent.id,
+					chatID: messageContent.chat_id
+				});
 		}
 		break;
 	case 2:
@@ -135,7 +147,7 @@ function webSocketOnMessage(event) {
 	}
 }
 
-function chatNameIterate(chatID, chats) {
+function getChatNameIterate(chatID, chats) {
 	for (let i = 0; i < chats.length; i++) {
 		if (chats[i].id === chatID) {
 			return chats[i].name;
@@ -143,24 +155,25 @@ function chatNameIterate(chatID, chats) {
 	}
 }
 
-function sendNotification(title, options, id, chatID) {
+function createNotification(title, options, chatParams) {
+	let notification = new Notification(title, options);
+
+	function clickFunc() {
+		router.open(KEYWORDS.chatFoundMessage, [chatParams.chatID, chatParams.messageID]);
+		window.focus();
+	}
+
+	notification.onclick = clickFunc;
+}
+
+function sendNotification(title, options, chatParams) {
 	if ("Notification" in window) {
 		if (Notification.permission === 'granted') {
-			let notification = new Notification(title, options);
-			function clickFunc() {
-				router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
-				window.focus();
-			}
-			notification.onclick = clickFunc;
+			createNotification(title, options, chatParams);
 		} else if (Notification.permission !== 'denied') {
 			Notification.requestPermission(function (permission) {
 				if (permission === 'granted') {
-					let notification = new Notification(title, options);
-					function clickFunc() {
-						router.open(KEYWORDS.chatFoundMessage, [chatID, id]);
-						window.focus();
-					}
-					notification.onclick = clickFunc;
+					sendNotification(title, options, chatParams);
 				}
 			});
 		}
