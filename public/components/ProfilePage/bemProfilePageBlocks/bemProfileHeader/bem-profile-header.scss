@@ -32,7 +32,7 @@
 .profile-header__image-row {
     flex: 0 0 40%;
     display: flex;
-    height:100%;
+    height: 80%;
     flex-direction: column;
     justify-content: center;
     margin: 0 0 0 0;
@@ -68,12 +68,12 @@
         height: 150px;
     }
 
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 610px) {
         width: 170px;
         height: 170px;
     }
 
-    @media screen and (min-height: 800px) {
+    @media screen and (min-height: 810px) {
         width: 200px;
         height: 200px;
     }
@@ -116,7 +116,7 @@
     width: 100%;
     height: auto;
     max-height: 20px;
-    margin: 15px 0 0 15px;
+    margin: 15px 0 0 20px;
 }
 
 .profile-header__image-row__error_style {
@@ -145,9 +145,8 @@
     flex-direction: column;
     justify-content: center;
     align-self: flex-start;
-    width: 100%;
+    width: 100%
 }
-
 .profile-header__username-column__username__text {
     flex: 0 0 auto;
     align-self: center;

@@ -17,7 +17,7 @@ import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
-import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import {getMessagePhoto, getUserPhoto, getHeaderPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
@@ -85,6 +85,7 @@ function createEvents() {
 	/**/
 	bus.on('getUserInfo', getUserInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getHeaderPhoto', getHeaderPhoto);
 	bus.on('getMessagePhoto', getMessagePhoto);
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);

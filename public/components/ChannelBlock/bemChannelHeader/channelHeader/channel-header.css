@@ -121,8 +121,8 @@
 /*icon element in pinned-message*/
 .channel-header__pinned-message__icon {
     flex: 0 0 auto;
-    height: 2.5vh; /*experimenting with viewports*/
-    width: 2.5vh;
+    width: 20px;
+    height: 20px;
     object-position: center center;
     object-fit: fill;
 

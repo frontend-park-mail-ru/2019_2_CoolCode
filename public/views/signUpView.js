@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {bus, componentsStorage} from "../main";
+import {bus, componentsStorage, promiseMaker} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import RegisterComponent from "../components/RegisterBlock/registerComponent";
 
@@ -12,9 +12,10 @@ class signUpView extends BaseView {
 		bus.emit('createRegisterForm', null, this._data.viewType);
 
 	}
-	drawBasics() {
+	async drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 	render() {
 		this.drawBasics();

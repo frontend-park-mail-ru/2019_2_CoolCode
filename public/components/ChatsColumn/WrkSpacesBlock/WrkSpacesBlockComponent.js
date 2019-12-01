@@ -4,7 +4,7 @@ import MessageComponent from "../Message/MessageComponent";
 import WrkSpaceComponent from "./WrkSpace/WrkSpaceComponent";
 const WrkSpacesBlockTemplate = require('./wrkspacesBlock.pug');
 
-import './bemWrkspacesBlock/bem-wrkspaces-block.css';
+import './bemWrkspacesBlock/bem-wrkspaces-block.scss';
 
 class WrkSpacesBlockComponent extends BaseComponent {
 

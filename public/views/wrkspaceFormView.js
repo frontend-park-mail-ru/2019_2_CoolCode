@@ -1,5 +1,5 @@
 import BaseView from "./baseView";
-import {data, router} from "../main";
+import {appLocalStorage, bus, data, router} from "../main";
 import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/creationFormHandlers";
 import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 
@@ -18,12 +18,13 @@ class wrkspaceFormView extends BaseView {
 
 	show() {
 		if (!data.getLoggedIn()) router.go('profileView');
-		else {
-			this.setContent();
-			this.render();
-			createWrkSpaceCreateSubmitHndlr();
-			createOverlayHndlr();
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
 		}
+		this.setContent();
+		this.render();
+		createWrkSpaceCreateSubmitHndlr();
+		createOverlayHndlr();
 	}
 	render() {
 		let wsForm = new CreationFormComponent(this._data, this._parent);

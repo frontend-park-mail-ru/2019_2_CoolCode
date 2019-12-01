@@ -1,5 +1,5 @@
 import BaseView from "./baseView";
-import {data, router} from "../main";
+import {appLocalStorage, bus, data, router} from "../main";
 import {createChannelCreateSubmitHndlr, createOverlayHndlr} from "../handlers/creationFormHandlers";
 import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 
@@ -18,12 +18,14 @@ class channelFormView extends BaseView {
 
     show(...args) {
     	if (!data.getLoggedIn()) router.go('profileView');
-    	else {
-    		this.setContent();
-    		this.render();
-    		createChannelCreateSubmitHndlr(args);
-    		createOverlayHndlr();
+    	if (appLocalStorage.getUser()) {
+    		bus.emit('setUser', null, appLocalStorage.getUser());
     	}
+    	this.setContent();
+    	this.render();
+    	createChannelCreateSubmitHndlr(args);
+    	createOverlayHndlr();
+
     }
 
     render() {

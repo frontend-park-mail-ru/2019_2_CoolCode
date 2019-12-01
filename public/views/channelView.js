@@ -1,5 +1,5 @@
 import BaseView from "./baseView";
-import {componentsStorage, data, promiseMaker, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
@@ -84,9 +84,10 @@ class channelView extends BaseView {
 		console.log('show: channel page');
 	}
 
-	drawBasics() {
-		const basics = new BasicsComponent(this._data, this._parent);
+	async drawBasics() {
+		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
@@ -99,6 +100,7 @@ class channelView extends BaseView {
 	drawRightColumn() {
 		let channelBlock = new ChannelComponent(this._data, this._parent);
 		this._parent.querySelector('.column_right').innerHTML += channelBlock.render();
+		channelBlock.renderTextingArea();
 		channelBlock.renderContent();
 		if (this._data.foundMessageId) {
 			channelBlock.slideToMessage();

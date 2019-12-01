@@ -1,6 +1,6 @@
 import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
-import {componentsStorage, data, promiseMaker, router} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import {
 	channelViewHandler,
@@ -53,7 +53,10 @@ class wrkspaceSearchView extends BaseView {
 	}
 
 	show(args) {
-		if (!data.getLoggedIn()) router.go('mainPageView');
+		if (!data.getLoggedIn()) router.go('profileView');
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (JSON.stringify(data.getCurrentWrkspace()) === '{}') {
 				console.log('here');
@@ -79,9 +82,10 @@ class wrkspaceSearchView extends BaseView {
 		console.log('show: wrkspacePageSearch');
 	}
 
-	drawBasics() {
-		const basics = new BasicsComponent(this._data, this._parent);
+	async drawBasics() {
+		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {

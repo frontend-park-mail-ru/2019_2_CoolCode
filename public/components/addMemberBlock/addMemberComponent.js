@@ -1,5 +1,5 @@
 import BaseComponent from "../baseComponent";
-import './channelAddForm/channel-add-form.css';
+import './channelAddForm/channel-add-form.scss';
 import UserFoundChannelComponent from "./userFoundChannel/userFoundChannelComponent";
 
 const addMemberTempl = require('./addMember.pug');

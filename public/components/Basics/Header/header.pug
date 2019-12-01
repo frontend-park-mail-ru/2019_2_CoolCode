@@ -8,7 +8,11 @@ div.header.header_size
         div.header-refs
             if loggedIn
                 +item('log out', '/logout', 'logout')
-                +item('profile', '/profile', 'profile')
+                a.header-refs__ref_profile.header-refs__ref_style(href='/profile' data-section='profile')
+                    div.header__profile.header__profile_style
+                        div.header__profile__image-row
+                            img.header__profile__image-row__image.header__profile__image-row__image_style.header__profile__image-row__image_size(src='images/white.png')
+                        div.header__profile__name.header__profile__name_style=user.username
             else
                 +item('log in', '/login', 'login')
                 +item('sign up', '/signup', 'signUp')

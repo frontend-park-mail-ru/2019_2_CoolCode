@@ -63,10 +63,6 @@ router.register(ROUTER.channelPage, channelView, KEYWORDS.channelPage);
 router.register(ROUTER.chatFoundMessage, chatView, KEYWORDS.chatFoundMessage);
 router.register(ROUTER.channelFoundMessage, channelView, KEYWORDS.channelFoundMessage);
 
-if (appLocalStorage.getUser()) {
-	bus.emit('setUser', null, appLocalStorage.getUser());
-}
-
 router.start();
 
 export {bus, data, router, promiseMaker, componentsStorage, appLocalStorage, FetchModule};

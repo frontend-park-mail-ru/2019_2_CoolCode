@@ -1,7 +1,7 @@
 import BaseView from './baseView';
 
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
 import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
@@ -50,6 +50,9 @@ class profileView extends BaseView {
 	}
 
 	show() {
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (!data.getLoggedIn()) router.go('mainPageView');
 			else {
@@ -63,9 +66,10 @@ class profileView extends BaseView {
 		console.log('show: profile');
 	}
 
-	drawBasics() {
+	async drawBasics() {
 		let basics = new BasicsComponent(this._data, this._parent);
 		this._parent.innerHTML = basics.render();
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
