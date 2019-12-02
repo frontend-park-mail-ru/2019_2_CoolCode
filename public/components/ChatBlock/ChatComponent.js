@@ -25,6 +25,9 @@ class ChatComponent extends BaseComponent {
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;
     }
+    getMessageInputRecord() {
+    	return this._parent.querySelector('input__record').value;
+    }
 
     setMessageInputData(inputData) {
     	this._parent.querySelector('.input__text').value = inputData;
@@ -38,6 +41,13 @@ class ChatComponent extends BaseComponent {
     }
 
     renderOutgoingMessage(messageData) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
+    	contentListRoot.appendChild(messageComponent.render());
+    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
+    renderOutgoingRecord(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());

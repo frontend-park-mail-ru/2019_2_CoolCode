@@ -12,10 +12,23 @@ class ChatMessageComponent extends BaseComponent {
 
 	messageElement;
 
-	createMessage() {
-		this.messageElement = document.createElement('div');
-		this.messageElement.className = 'chat-msg';
-		this.messageElement.id = `message-${this._data.message.id}`;
+	createMessage(data) {
+		if(data.text == null) {
+			let audio = document.getElementById('audio');
+			let input = document.querySelector('.input__text.input__text_style');
+			audio.style.display = 'none';
+			input.style.display = 'flex';
+			this.messageElement = document.createElement('audio');
+			this.messageElement.setAttribute('controls', 'controls');
+			this.messageElement.src = URL.createObjectURL(data.record[0]);
+			this.messageElement.className = 'chat-msg';
+			this.messageElement.id = `message-${this._data.message.id}`;
+		}else{
+			this.messageElement = document.createElement('div');
+			this.messageElement.className = 'chat-msg';
+			this.messageElement.id = `message-${this._data.message.id}`;
+		}
+
 	}
 
 	createHandlerRight() {
@@ -48,7 +61,7 @@ class ChatMessageComponent extends BaseComponent {
 	render() {
 		if (this._data.message) {
 			this._data.message.message_time = this._data.message.message_time.split(' ')[1];
-			this.createMessage();
+			this.createMessage(this._data.message);
 			if (this._data.deleted) {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRightDeleted();
