@@ -1,11 +1,9 @@
 import BaseView from "./baseView";
-import {appLocalStorage, bus, data, router} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, router} from "../main";
 import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/creationFormHandlers";
 import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 
 class wrkspaceFormView extends BaseView {
-
-	contentListRootSelector = '.header';
 
 	constructor (data, parent) {
 		super({viewType: "wrkspaceForm", user:{}, loggedIn: null}, parent);
@@ -14,6 +12,8 @@ class wrkspaceFormView extends BaseView {
 	setContent() {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
+		this._parent = document.querySelector('.header');
+
 	}
 
 	show() {
@@ -26,10 +26,9 @@ class wrkspaceFormView extends BaseView {
 		createWrkSpaceCreateSubmitHndlr();
 		createOverlayHndlr();
 	}
+
 	render() {
-		const wsForm = new CreationFormComponent(this._data, this._parent);
-		const contentListRoot = document.querySelector(this.contentListRootSelector);
-		contentListRoot.insertAdjacentHTML("beforebegin", wsForm.render());
+		const creationForm = componentsStorage.getForm(this._data, this._parent);
 	}
 
 }

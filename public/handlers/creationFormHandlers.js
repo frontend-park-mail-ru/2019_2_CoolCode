@@ -1,4 +1,4 @@
-import {router} from "../main";
+import {componentsStorage, router} from "../main";
 import {createChannel, createWrkspace} from "../backendDataFetchers/creationEntities";
 
 function drawWrkspaceFormError(inputField) {
@@ -25,7 +25,10 @@ function createWrkSpaceCreateSubmitHndlr() {
 
 function createOverlayHndlr() {
 	const overlay = document.querySelector('.overlay');
-	overlay.addEventListener('click', () => router.return());
+	overlay.addEventListener('click', () => {
+		componentsStorage.clearForm();
+		router.return();
+	});
 }
 
 function createChannelEvent(params = {wrkSpaceId:null}) {

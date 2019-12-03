@@ -1,11 +1,10 @@
 import BaseView from "./baseView";
-import {appLocalStorage, bus, data, promiseMaker, router} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {createAddChannelMemberHndlr} from "../handlers/channelViewHandlers";
 import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
 import {createOverlayHndlr} from "../handlers/creationFormHandlers";
 
 class addMemberView extends BaseView {
-	contentListRootSelector = '.header';
 
 	constructor (data, parent) {
 		super({viewType: "addMember", user:{}, membersOfWrkS:[], currentChannel:[], loggedIn: null}, parent);
@@ -16,6 +15,7 @@ class addMemberView extends BaseView {
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.wrkspaceMembers = data.getCurrentWrkspaceUsers();
 		this._data.currentChannel = data.getCurrentChannel();
+		this._parent = document.querySelector('.header');
 	}
 	show() {
 		if (!data.getLoggedIn()) router.go('profileView');
@@ -30,10 +30,7 @@ class addMemberView extends BaseView {
 		});
 	}
 	render() {
-		const addMemberForm = new AddMemberComponent(this._data, this._parent);
-		const contentListRoot = document.querySelector(this.contentListRootSelector);
-		contentListRoot.insertAdjacentHTML("beforebegin", addMemberForm.render());
-		addMemberForm.renderContent();
+		const addMemberForm = componentsStorage.getForm(this._data, this._parent);
 	}
 }
 

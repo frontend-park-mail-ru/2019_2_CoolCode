@@ -8,14 +8,20 @@ class AddMemberComponent extends BaseComponent {
 
 	contentListRootSelector = '.channel-add-form__scroll';
 
+	renderTo() {
+		this._parent.insertAdjacentHTML("beforebegin", this.render());
+		this.renderContent();
+	}
+
 	render() {
 		return addMemberTempl(this._data);
 	}
 
 	deleteSelf() {
-
+		const parentContainer = this._parent.parentNode;
+		parentContainer.firstChild.remove();
+		parentContainer.firstChild.remove();
 	}
-
 	renderContent() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		this._data.wrkspaceMembers.forEach(user=> {
