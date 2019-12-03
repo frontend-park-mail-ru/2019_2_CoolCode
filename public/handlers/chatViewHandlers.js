@@ -14,15 +14,13 @@ function deleteMessageEvent() {
 }
 
 function onRecordingReady(e) {
-	chunks.length = 0;
-	chunks.push(e.data);
 	let audio = document.getElementById('audio');
 	let input = document.querySelector('.input__text.input__text_style');
 	audio.style.display = 'flex';
 	input.style.display = 'none';
 
 	audio.src = URL.createObjectURL(e.data);// e.data contains a blob representing the recording
-
+	chunks.push(URL.createObjectURL(e.data));
 	//audio.play();
 }
 
@@ -116,7 +114,7 @@ function createSendMessageBtnHndlr() {
 }
 
 function createMessageInputHndlr() {
-	const messageInput = document.querySelector(".input__text");
+	const messageInput = document.querySelector(".input__text.input__text_style");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
 			chooseSendMessageEvent(event);
@@ -139,7 +137,8 @@ async function sendMessageEvent() {
 		audio.style.display = 'none';
 		input.style.display = 'flex';
 		const date = new currentDate();
-		chatBlock.renderOutgoingRecord({id: 100, author_id : data.getUserId(),text: null, record: chunks, message_time: date.getDate()});
+		chatBlock.renderOutgoingRecord({id: 100, author_id : data.getUserId(),text: null, record: chunks[0], message_time: date.getDate()});
+		chunks.length = 0;
 	}else {
 		const text = chatBlock.getMessageInputData();
 		if (text !== '') {
@@ -198,11 +197,11 @@ function recordMessage() {
 					recorder.stop();
 					audio.style.display = 'flex';
 					input.style.display = 'none';
-					console.log("STOP RECORD", recorder.state);
+					console.log(recorder.state);
 					microphone.style.background = 'white';
 					microphone.style.filter = 'opacity(0.9)';
 					input.value = '';
-					input.style.color = '#D7D7D7';
+					input.style.color = '#000000';
 				}else if(recorder.state == 'inactive') {
 					recorder.start();
 					audio.style.display = 'none';
@@ -212,7 +211,7 @@ function recordMessage() {
 					microphone.style.filter = 'invert(0.1) brightness(300%) saturate(100%)';
 					input.value = "recording...";
 					input.style.color = 'red';
-					console.log("START RECORD", recorder.state);
+					console.log(recorder.state);
 
 				}
 			});
