@@ -41,10 +41,12 @@ function createEvents() {
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
 	bus.on('setCurrentChatUserPhoto', data.setCurrentChatUserPhoto.bind(data));
 	bus.on('setCurrentChatId', data.setCurrentChatId.bind(data));
+	bus.on('deleteCurrentChat', data.deleteCurrentChat.bind(data));
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
 	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
+	bus.on('deleteCurrentChannel', data.deleteCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('addCurrentWrkspaceMember', data.addCurrentWrkspaceMember.bind(data));
 	bus.on('addCurrentWrkspaceUser', data.addCurrentWrkspaceUser.bind(data));

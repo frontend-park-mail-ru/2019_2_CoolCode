@@ -11,6 +11,11 @@ class AddMemberComponent extends BaseComponent {
 	render() {
 		return addMemberTempl(this._data);
 	}
+
+	deleteSelf() {
+
+	}
+
 	renderContent() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		this._data.wrkspaceMembers.forEach(user=> {
@@ -24,7 +29,6 @@ class AddMemberComponent extends BaseComponent {
 			}
 		}
 		);
-
 	}
 }
 

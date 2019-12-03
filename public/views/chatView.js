@@ -46,6 +46,7 @@ class chatView extends BaseView {
 	}
 
 	setContent() {
+		bus.emit('deleteCurrentChannel', null);
     	this._data.user = data.getUser();
     	this._data.loggedIn = data.getLoggedIn();
 		this._data.chatUser = data.getCurrentChatUser();
@@ -92,6 +93,7 @@ class chatView extends BaseView {
 
 	drawLeftColumn() {
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		leftColumn.selectCurrentChat();
 		//componentsStorage.setLeftColumn(leftColumn);
 	}
 

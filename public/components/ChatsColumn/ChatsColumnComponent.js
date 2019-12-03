@@ -25,6 +25,8 @@ const chatsColumnTemplate = require('./chatsColumn.pug');
 class ChatsColumnComponent extends BaseComponent {
 
     contentListRootSelector = '.all-chats-window';
+    chatsBlock;
+    wrkSpacesBlock;
 
     createChatContentHandlers() {
     	createSearchInputHndlr();
@@ -33,6 +35,17 @@ class ChatsColumnComponent extends BaseComponent {
     	createWrkspaceBlockHndlr();
     	createWorkspaceButtonHndlr();
     	channelViewHandler();
+    }
+
+    selectCurrentChat() {
+    	if (this._data.currentChat) {
+    		this.chatsBlock.setData(this._data);
+    		this.chatsBlock.drawSelected();
+    	}
+    	if (this._data.currentChannel) {
+    		this.wrkSpacesBlock.setData(this._data);
+    		this.wrkSpacesBlock.drawSelected();
+    	}
     }
 
     renderNewMessage(message) { //TODO: переделать когда на бэке появится дата
@@ -58,12 +71,12 @@ class ChatsColumnComponent extends BaseComponent {
 
     renderChatsContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	const chatsBlock = new ChatsBlockComponent(this._data, contentListRoot);
-    	const wrkSpacesBlock = new WrkSpacesBlockComponent(this._data, contentListRoot);
-    	contentListRoot.innerHTML += chatsBlock.render();
-    	contentListRoot.innerHTML += wrkSpacesBlock.render();
-    	chatsBlock.renderContent();
-    	wrkSpacesBlock.renderContent();
+    	this.chatsBlock = new ChatsBlockComponent(this._data, contentListRoot);
+    	this.wrkSpacesBlock = new WrkSpacesBlockComponent(this._data, contentListRoot);
+    	contentListRoot.innerHTML += this.chatsBlock.render();
+    	contentListRoot.innerHTML += this.wrkSpacesBlock.render();
+    	this.chatsBlock.renderContent();
+    	this.wrkSpacesBlock.renderContent();
     }
 
     renderTo(rootSelector) {

@@ -83,6 +83,7 @@ class wrkspaceView extends BaseView {
 
 	drawLeftColumn() {
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		leftColumn.selectCurrentChat();
 		//componentsStorage.setLeftColumn(leftColumn);
 	}
 

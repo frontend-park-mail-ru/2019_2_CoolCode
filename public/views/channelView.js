@@ -45,6 +45,7 @@ class channelView extends BaseView {
 		createDeleteMessageBlockHndlr();
 	}
 	setContent() {
+		bus.emit('deleteCurrentChat', null);
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.chats = data.getUserChats();
@@ -85,6 +86,7 @@ class channelView extends BaseView {
 
 	drawLeftColumn() {
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		leftColumn.selectCurrentChat();
 		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
