@@ -4,7 +4,7 @@ import {API, responseStatuses} from "../constants/config";
 async function setUserInfo(user) {
 	console.log(` Setting user ${user.id} info`);
 	try {
-		let response = await FetchModule._doPut(
+		const response = await FetchModule._doPut(
 			{path: API.userInfo(user.id),
 				data: user,
 				contentType:'application/json;charset=utf-8'}

@@ -30,7 +30,7 @@ class addMemberView extends BaseView {
 		});
 	}
 	render() {
-		let addMemberForm = new AddMemberComponent(this._data, this._parent);
+		const addMemberForm = new AddMemberComponent(this._data, this._parent);
 		const contentListRoot = document.querySelector(this.contentListRootSelector);
 		contentListRoot.insertAdjacentHTML("beforebegin", addMemberForm.render());
 		addMemberForm.renderContent();

@@ -24,7 +24,7 @@ async function alterWrkspace(wrkspace) {
 
 async function alterChannel(channel) {
 	try {
-		let response = await FetchModule._doPut(
+		const response = await FetchModule._doPut(
 			{path: API.channelInfo(channel.id),
 				data:   {
 					id: channel.id,
@@ -46,7 +46,7 @@ async function alterChannel(channel) {
 
 async function deleteChannel(id) {
 	try {
-		let response = await FetchModule._doDelete(
+		const response = await FetchModule._doDelete(
 			{path: API.channelInfo(id)}
 		);
 		if (response.status !== 200) {
@@ -61,7 +61,7 @@ async function deleteChannel(id) {
 
 async function leaveChannel(id) {
 	try {
-		let response = await FetchModule._doDelete(
+		const response = await FetchModule._doDelete(
 			{path: API.channelLeave(id)}
 		);
 		if (response.status !== 200) {

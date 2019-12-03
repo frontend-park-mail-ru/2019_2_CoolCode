@@ -3,7 +3,7 @@ import {API, responseStatuses} from "../constants/config";
 
 async function login(email, password) {
 	try {
-		let response = await FetchModule._doPost(
+		const response = await FetchModule._doPost(
 			{path: API.login,
 				data:   {email: email,
 					password: password},
@@ -32,7 +32,7 @@ async function login(email, password) {
 async function signup(params = {email:null, password: null, fullname: null, username: null}) {
 	const {email, password, fullname, username} = params;
 	try {
-		let response = await FetchModule._doPost({path: API.auth,
+		const response = await FetchModule._doPost({path: API.auth,
 			data: {
 				email: email,
 				password: password,

@@ -33,18 +33,16 @@ class chatView extends BaseView {
 	setEvents() {
 		bus.emit('showLoader', null, '.chat-header__info-row__image-row');
 		saveUserPhoto(this._data.chatUser.id);
-    	createSearchInputHndlr();
-		createWrkspaceBlockExpandHndlr();
+
 		createMessageInputHndlr();
-		createChatBlockHndlr();
+
 		createSendMessageBtnHndlr();
-		createWrkspaceBlockHndlr();
-		createWorkspaceButtonHndlr();
+
 		//createOpenSettingsMessageHndlr();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
-		channelViewHandler();
+
 	}
 
 	setContent() {
@@ -59,7 +57,7 @@ class chatView extends BaseView {
 	}
 
 	findUser(chatId) {
-		let chatUser = data.getChatUserIdByChatId(chatId);
+		const chatUser = data.getChatUserIdByChatId(chatId);
 		if (chatUser) {
 			promiseMaker.createPromise('getCurrentChatInfo',chatUser, chatId).then(() => {
 				this.setContent();
@@ -88,21 +86,19 @@ class chatView extends BaseView {
 	}
 
 	async drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
-    	this._parent.querySelector('.column_left').innerHTML += leftColumn.render();
-    	leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		let chatBlock = new ChatComponent(this._data, this._parent);
-		this._parent.querySelector('.column_right').innerHTML += chatBlock.render();
+		const chatBlock = new ChatComponent(this._data, this._parent);
+		this._parent.querySelector('.column_right').innerHTML = "";
+		this._parent.querySelector('.column_right').innerHTML = chatBlock.render();
 		chatBlock.renderTextingArea();
 		chatBlock.renderContent();
 		if (this._data.foundMessageId) {

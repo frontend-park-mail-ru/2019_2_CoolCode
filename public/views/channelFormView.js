@@ -29,7 +29,7 @@ class channelFormView extends BaseView {
     }
 
     render() {
-    	let channelForm = new CreationFormComponent(this._data, this._parent);
+    	const channelForm = new CreationFormComponent(this._data, this._parent);
     	const contentListRoot = document.querySelector(this.contentListRootSelector);
     	contentListRoot.insertAdjacentHTML("beforebegin", channelForm.render());
     }

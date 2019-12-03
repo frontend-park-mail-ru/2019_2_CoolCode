@@ -13,13 +13,12 @@ class signUpView extends BaseView {
 
 	}
 	async drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 	render() {
 		this.drawBasics();
-		let signup = new RegisterComponent(this._data, this._parent);
+		const signup = new RegisterComponent(this._data, this._parent);
 		this._parent.querySelector('.primary-container').innerHTML += signup.render();
 		componentsStorage.clear();
 	}

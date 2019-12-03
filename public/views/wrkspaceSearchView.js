@@ -83,16 +83,13 @@ class wrkspaceSearchView extends BaseView {
 	}
 
 	async drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		const leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
-		leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
@@ -103,7 +100,7 @@ class wrkspaceSearchView extends BaseView {
 	}
 
 	render() {
-		// let wrkspacePage = componentsStorage.getRightColumn();
+		// const wrkspacePage = componentsStorage.getRightColumn();
 		// if (!wrkspacePage || !(wrkspacePage instanceof WrkspacePageComponent)) {
 		// 	this.drawBasics();
 		// 	this.drawLeftColumn();

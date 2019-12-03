@@ -12,12 +12,28 @@ import './User/bemUserFoundBlock/bem-user-found.scss';
 import './bemSearchMenu/bem-search-menu.scss';
 import UsersFoundBlockComponent from "./usersFoundBlock/UsersFoundBlockComponent";
 import MessagesFoundBlockComponent from "./messagesFoundBlock/MessagesFoundComponent";
+import {createSearchInputHndlr} from "../../handlers/searchFormHandlers";
+import {
+	channelViewHandler,
+	createChatBlockHndlr, createWorkspaceButtonHndlr,
+	createWrkspaceBlockExpandHndlr,
+	createWrkspaceBlockHndlr
+} from "../../handlers/chatsBlockHandlers";
 
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
 class ChatsColumnComponent extends BaseComponent {
 
     contentListRootSelector = '.all-chats-window';
+
+    createChatContentHandlers() {
+    	createSearchInputHndlr();
+    	createWrkspaceBlockExpandHndlr();
+    	createChatBlockHndlr();
+    	createWrkspaceBlockHndlr();
+    	createWorkspaceButtonHndlr();
+    	channelViewHandler();
+    }
 
     renderNewMessage(message) { //TODO: переделать когда на бэке появится дата
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
@@ -48,6 +64,13 @@ class ChatsColumnComponent extends BaseComponent {
     	contentListRoot.innerHTML += wrkSpacesBlock.render();
     	chatsBlock.renderContent();
     	wrkSpacesBlock.renderContent();
+    }
+
+    renderTo(rootSelector) {
+    	this._parent.querySelector(rootSelector).innerHTML = "";
+    	this._parent.querySelector(rootSelector).innerHTML = this.render();
+    	this.renderChatsContent();
+    	this.createChatContentHandlers();
     }
 
     render() {

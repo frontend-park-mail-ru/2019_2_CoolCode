@@ -156,7 +156,7 @@ function getChatNameIterate(chatID, chats) {
 }
 
 function createNotification(title, options, chatParams) {
-	let notification = new Notification(title, options);
+	const notification = new Notification(title, options);
 
 	function clickFunc() {
 		router.open(KEYWORDS.chatFoundMessage, [chatParams.chatID, chatParams.messageID]);

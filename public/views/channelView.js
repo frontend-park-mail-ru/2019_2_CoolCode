@@ -36,14 +36,8 @@ class channelView extends BaseView {
 	};
 
 	setEvents() {
-		createSearchInputHndlr();
-		createWrkspaceBlockExpandHndlr();
-		createChatBlockHndlr();
 		createSendMessageBtnChannelHndlr();
-		createWrkspaceBlockHndlr();
-		createWorkspaceButtonHndlr();
 		createMessageInputChannelHndlr();
-		channelViewHandler();
 		menuHandlers();
 		createLikeBtnHndlr();
 		createEditMessageBlockHndlr();
@@ -85,21 +79,19 @@ class channelView extends BaseView {
 	}
 
 	async drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		const leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
-		leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		let channelBlock = new ChannelComponent(this._data, this._parent);
-		this._parent.querySelector('.column_right').innerHTML += channelBlock.render();
+		const channelBlock = new ChannelComponent(this._data, this._parent);
+		this._parent.querySelector('.column_right').innerHTML = "";
+		this._parent.querySelector('.column_right').innerHTML = channelBlock.render();
 		channelBlock.renderTextingArea();
 		channelBlock.renderContent();
 		if (this._data.foundMessageId) {

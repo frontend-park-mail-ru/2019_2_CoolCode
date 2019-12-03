@@ -27,7 +27,7 @@ class wrkspaceFormView extends BaseView {
 		createOverlayHndlr();
 	}
 	render() {
-		let wsForm = new CreationFormComponent(this._data, this._parent);
+		const wsForm = new CreationFormComponent(this._data, this._parent);
 		const contentListRoot = document.querySelector(this.contentListRootSelector);
 		contentListRoot.insertAdjacentHTML("beforebegin", wsForm.render());
 	}

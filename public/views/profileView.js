@@ -26,12 +26,6 @@ class profileView extends BaseView {
 		getProfilePhoto(data.getUserId());
 		bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		this.createClickablePic();
-		createChatBlockHndlr();
-		createSearchInputHndlr();
-		createWrkspaceBlockExpandHndlr();
-		createWorkspaceButtonHndlr();
-		createWrkspaceBlockHndlr();
-		channelViewHandler();
 	}
 
 	createClickablePic() {
@@ -67,20 +61,18 @@ class profileView extends BaseView {
 	}
 
 	async drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		let leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
-		leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
 		const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+		this._parent.querySelector('.column_right').innerHTML = "";
 		this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
 		componentsStorage.setProfileBlock(profileBlock);
 	}
@@ -88,7 +80,7 @@ class profileView extends BaseView {
 	render() {
 		this.drawBasics();
 		this.drawLeftColumn();
-		// let profileBlock = componentsStorage.getRightColumn();
+		// const profileBlock = componentsStorage.getRightColumn();
 		// if (!profileBlock || !(profileBlock instanceof ProfilePageComponent)) {
 		// 	this.drawBasics();
 		// 	this.drawLeftColumn();
