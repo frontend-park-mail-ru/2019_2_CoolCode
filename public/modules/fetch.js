@@ -22,7 +22,7 @@ class Fetch {
 			method: method,
 			body: data,
 			credentials: 'include',
-			//mode: 'cors',
+			mode: 'cors',
 		};
 		if (contentType !== null && contentType !== 'multipart/form-data') {
 			this._init ["headers"]["Content-Type"] = contentType;
