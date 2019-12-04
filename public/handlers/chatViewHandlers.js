@@ -1,14 +1,30 @@
 import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
-import {bus, componentsStorage, data} from "../main";
+import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
+
+function attachesDropdownClickEvent() {
+	switch (event.target.dataset.section) {
+	case 'inviteUser':
+		router.go('wrkspaceSearchView', data.getCurrentWrkspaceId());
+	}
+}
+
+function createWrkspaceDropdownHandler() {
+	const wrkspaceDropdown = document.querySelector('.wrkspace-page-dropdown');
+	wrkspaceDropdown.addEventListener('click', wrkspaceDropdownClickEvent.bind(event, {}));
+}
+
+function resizeAttach() {
+	const attachMenu = document.querySelector('.attaches');
+	const input = document.querySelector('.input');
+	attachMenu.style.bottom = input.clientHeight;
+}
 
 function attachBtnEvent() {
 	if (event.type == 'click') {
 		const attachMenu = document.querySelector('.attaches');
 		attachMenu.classList = `${attachMenu.classList} attaches_clicked`;
-		const input = document.querySelector('.input');
-		attachMenu.style.bottom += input.clientHeight;
 	}
 	if (event.type == 'mouseout') {
 		event.currentTarget.classList.remove('attaches_clicked');
@@ -23,6 +39,8 @@ function createAttachButton() {
 function createAttachesMenuHndlr() {
 	const attachMenu = document.querySelector(".attaches");
 	attachMenu.addEventListener('mouseout', attachBtnEvent);
+	attachMenu.addEventListener('click', attachesDropdownClickEvent);
+
 }
 
 function deleteMessageEvent() {
@@ -181,5 +199,5 @@ async function sendEditedMessageEvent() {
 }
 
 export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, createAttachButton, createAttachesMenuHndlr
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, createAttachButton, createAttachesMenuHndlr, resizeAttach
 };

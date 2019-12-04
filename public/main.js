@@ -26,6 +26,8 @@ import channelFormView from "./views/channelFormView";
 import LocalStorage from "./entities/LocalStorage";
 import wrkspaceView from "./views/wrkspaceView";
 import wrkspaceSearchView from "./views/wrkspaceSearchView";
+import ResizeThrottler from "./modules/throttler";
+import {resizeAttach} from "./handlers/chatViewHandlers";
 
 const {backend} = settings;
 const {backendPort} = settings;
@@ -44,6 +46,8 @@ const router = new Router(baseBlock);
 const FetchModule = new Fetch();
 FetchModule.setUrl(`${connection}://${backend}`);
 const data = new Data();
+
+const throttler = new ResizeThrottler(resizeAttach);
 
 //serviceWorkerRegister();
 createEvents();

@@ -3,14 +3,14 @@ div.chat-column-main
         div.msgwindow-container.msgwindow-container__style
             div.msgwindow-container__msgwindow.msgwindow-container__msgwindow_style
         form.input
+            div.attaches.attaches_style
+                div.attaches__option.attaches__option_style(data-section='attachFile') files
+                div.attaches__option.attaches__option_style(data-section='attachPhoto') photo
             div.input__icon-container
                 img.input__icon-container__icon.input__icon-container__icon_style.input__icon-container__icon_size(src="/images/add.png")
             textarea.input__text.input__text_style(placeholder="chat here..")
             div.input__icon-container
                 img.input__icon-container__icon.input__icon-container__icon_style.input__icon-container__icon_size(src="/images/send.png")
-        div.attaches.attaches_style
-            div.attaches__option.attaches__option_style(data-section='attachFile') files
-            div.attaches__option.attaches__option_style(data-section='attachPhoto') photo
     div.message-sett-block
         div.message-sett-block__content.message-sett-block__content_hidden
             div.message-sett-block__content__header.message-sett-block__content__header_style
