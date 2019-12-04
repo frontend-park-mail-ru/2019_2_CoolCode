@@ -3,6 +3,28 @@ import {bus, componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 
+function attachBtnEvent() {
+	if (event.type == 'click') {
+		const attachMenu = document.querySelector('.attaches');
+		attachMenu.classList = `${attachMenu.classList} attaches_clicked`;
+		const input = document.querySelector('.input');
+		attachMenu.style.bottom += input.clientHeight;
+	}
+	if (event.type == 'mouseout') {
+		event.currentTarget.classList.remove('attaches_clicked');
+	}
+}
+
+function createAttachButton() {
+	const attachBtn = document.querySelectorAll(".input__icon-container__icon")[0];
+	attachBtn.addEventListener('click', attachBtnEvent);
+}
+
+function createAttachesMenuHndlr() {
+	const attachMenu = document.querySelector(".attaches");
+	attachMenu.addEventListener('mouseout', attachBtnEvent);
+}
+
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
 	deletingMessage(messageId);
@@ -159,5 +181,5 @@ async function sendEditedMessageEvent() {
 }
 
 export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, createAttachButton, createAttachesMenuHndlr
 };

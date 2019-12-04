@@ -7,6 +7,8 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {
+	createAttachButton,
+	createAttachesMenuHndlr,
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr,
@@ -38,10 +40,12 @@ class chatView extends BaseView {
 
 		createSendMessageBtnHndlr();
 
-		//createOpenSettingsMessageHndlr();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
+
+		createAttachesMenuHndlr();
+		createAttachButton();
 
 	}
 

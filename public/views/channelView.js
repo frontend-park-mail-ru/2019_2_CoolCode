@@ -13,6 +13,8 @@ import {
 } from "../handlers/chatsBlockHandlers";
 import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {
+	createAttachButton,
+	createAttachesMenuHndlr,
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr
@@ -43,6 +45,9 @@ class channelView extends BaseView {
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
+
+		createAttachesMenuHndlr();
+		createAttachButton();
 	}
 	setContent() {
 		bus.emit('deleteCurrentChat', null);

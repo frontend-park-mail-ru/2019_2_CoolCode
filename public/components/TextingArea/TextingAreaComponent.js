@@ -2,6 +2,7 @@ import BaseComponent from "../baseComponent";
 import './TextingArea/bem-chat-column-main.css';
 import './TextingArea/MessageSettBlock/message-sett-block.scss';
 import './TextingArea/TypingBlock/InputBlock/input.scss';
+import './TextingArea/TypingBlock/InputBlock/Attaches/attaches.scss';
 import './TextingArea/TypingBlock/MsgWindow/msgwindow.css';
 import './TextingArea/TypingBlock/typing-block.css';
 
