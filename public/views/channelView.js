@@ -15,7 +15,7 @@ import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
-	createEditMessageBlockHndlr
+	createEditMessageBlockHndlr, recordMessage
 } from "../handlers/chatViewHandlers";
 
 import {
@@ -40,6 +40,7 @@ class channelView extends BaseView {
 		createMessageInputChannelHndlr();
 		menuHandlers();
 		createLikeBtnHndlr();
+		recordMessage();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
