@@ -4,7 +4,9 @@ block page
             div.channel-header__info-row.channel-header__info-row_style
                 div.channel-header__info-row__info-column
                     div.channel-header__info-row__info-column__channel-row.channel-header__info-row__info-column__channel-row_style=`#${currentChannel.name}`
-                    div.channel-header__info-row__info-column__name-row.channel-header__info-row__info-column__name-row_style=`wrkspace ${currentWrkspace.name}`
+                    div.channel-header__info-row__info-column__name-row
+                        div.channel-header__name-row__text.channel-header__name-row__text_word=`wrkspace `
+                        div.channel-header__name-row__text.channel-header__name-row__text_style=`${currentWrkspace.name}`
                 div.channel-header__info-row__btnblock
                     div.channel-header__dropdown
                         img.channel-header__dropdown__dropbtn(src="/images/setting1.png")

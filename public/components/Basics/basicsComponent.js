@@ -11,7 +11,8 @@ const containerTemplate = require('./PrimaryContainer/container.pug');
 class BasicsComponent extends BaseComponent {
 
 	renderTo() {
-		this._parent.innerHTML += this.render();
+		this._parent.innerHTML = "";
+		this._parent.innerHTML = this.render();
 	}
 
 	render() {
