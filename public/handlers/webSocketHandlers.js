@@ -101,8 +101,9 @@ function webSocketOnMessage(event) {
 			break;
 		default:
 			const leftColumn = componentsStorage.getLeftColumn();
-			leftColumn.renderNewMessage(messageContent);
 			console.log(`message accepted in back: ${messageContent.text}`);
+			console.log(messageContent);
+			leftColumn.renderNewMessage(messageContent);
 
 			const chats = leftColumn._data.chats;
 			sendNotification(
