@@ -6,8 +6,7 @@ div.chat-msg__container
         if(text != null)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-right=text
         else
-            audio(controls = 'controls' src = record).primary-row__text.primary-row__text_style.primary-row__text_style-right
-                //audio#audio1(controls ).input__record.input__record_style
+            audio(controls src = record ).primary-row__text.primary-row__text_style.primary-row__text_style-right
     div.secondary-row.secondary-row_right
         div.secondary-row__edited.secondary-row__edited_style
 

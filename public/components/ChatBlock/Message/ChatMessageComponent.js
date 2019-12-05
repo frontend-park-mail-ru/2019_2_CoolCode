@@ -68,6 +68,12 @@ class ChatMessageComponent extends BaseComponent {
 				}
 			} else {
 				if (this._data.message.author_id === this._data.user.id) {
+
+					if(this._data.message.record != null) {
+						const blob = new Blob(this._data.message.record);
+						this._data.message.record = URL.createObjectURL(blob);
+						console.log("res", this._data.message.record);
+					}
 					this.renderRight();
 					if (this._data.error) {
 						const textClassList = this.messageElement.querySelector('.primary-row__text').classList;

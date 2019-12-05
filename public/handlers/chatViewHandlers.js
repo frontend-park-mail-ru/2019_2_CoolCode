@@ -2,7 +2,6 @@ import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFet
 import {bus, componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
-let chunks = [];
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -12,15 +11,14 @@ function deleteMessageEvent() {
 	componentsStorage.setChatBlock(chatBlock);
 	createHiddenSettingsMessageBlock();
 }
-
+const chunk = [];
 function onRecordingReady(e) {
 	let audio = document.getElementById('audio');
 	let input = document.querySelector('.input__text.input__text_style');
 	audio.style.display = 'flex';
 	input.style.display = 'none';
-
 	audio.src = URL.createObjectURL(e.data);// e.data contains a blob representing the recording
-	chunks.push(URL.createObjectURL(e.data));
+	chunk.push(e.data);
 	//audio.play();
 }
 
@@ -132,13 +130,12 @@ async function sendMessageEvent() {
 	let audio = document.getElementById('audio');
 	let input = document.querySelector('.input__text.input__text_style');
 	const chatBlock = componentsStorage.getChatBlock();
-	if(chunks.length > 0) {
-		console.log("CHUNKS2", chunks);
+	if(chunk.length > 0) {
 		audio.style.display = 'none';
 		input.style.display = 'flex';
 		const date = new currentDate();
-		chatBlock.renderOutgoingRecord({id: 100, author_id : data.getUserId(),text: null, record: chunks[0], message_time: date.getDate()});
-		chunks.length = 0;
+		chatBlock.renderOutgoingRecord({id: 100, author_id : data.getUserId(),text: null, record: chunk, message_time: date.getDate()});
+
 	}else {
 		const text = chatBlock.getMessageInputData();
 		if (text !== '') {
@@ -147,15 +144,16 @@ async function sendMessageEvent() {
 			const date = new currentDate();
 			try {
 				const messageId = await sendingMessage(text, date.getDate(), data.getCurrentChatId());
-				chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
+				chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text,record: null, message_time: date.getDate()});
 
 			} catch (error) {
-				chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});
+				chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, record: null, message_time: date});
 			}
 
 		}
 		componentsStorage.setChatBlock(chatBlock);
 	}
+	chunk.length = 0;
 
 }
 
