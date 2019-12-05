@@ -36,6 +36,8 @@ class Fetch {
 	    	const option = path.split("/")[1];
 	    	const port = ports[option];
 			//console.log(response.headers['X-CSRF-Token']);
+			console.log(this._url);
+
 			return await fetch(encodeURI(`${this._url}/api/users${path}`), this._init);
 		} catch (error) {
 	        return error;

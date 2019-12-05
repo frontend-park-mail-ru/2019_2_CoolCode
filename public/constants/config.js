@@ -18,10 +18,10 @@ const ports = {
 };
 
 const settings = {
-	connection : 'http',
+	connection : 'https',
 	frontendPort : ':8000',
 	frontend: 'https://boiling-chamber-90136.herokuapp.com',
-	backend: '95.163.209.195',
+	backend: 'coolcode.site',
 };
 
 const keys = {
