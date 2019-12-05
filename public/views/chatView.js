@@ -7,13 +7,11 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {
-	createAttachButton,
-	createAttachesMenuHndlr,
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr,
 	createMessageInputHndlr,
-	createSendMessageBtnHndlr
+	createSendMessageBtnHndlr,
 } from "../handlers/chatViewHandlers";
 import {
 	channelViewHandler,
@@ -23,6 +21,7 @@ import {
 	createWrkspaceBlockHndlr
 } from "../handlers/chatsBlockHandlers";
 import {saveUserPhoto} from "../handlers/photosHandlers";
+import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
 
 class chatView extends BaseView {
 
@@ -44,8 +43,8 @@ class chatView extends BaseView {
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
 
-		createAttachesMenuHndlr();
 		createAttachButton();
+		resizeAttach();
 
 	}
 

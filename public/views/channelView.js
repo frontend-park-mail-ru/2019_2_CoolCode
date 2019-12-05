@@ -1,23 +1,12 @@
 import BaseView from "./baseView";
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {creatingChats} from "../backendDataFetchers/websockets";
-import BasicsComponent from "../components/Basics/basicsComponent";
-import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
+
 import {
-	channelViewHandler,
-	createChatBlockHndlr,
-	createWorkspaceButtonHndlr,
-	createWrkspaceBlockExpandHndlr,
-	createWrkspaceBlockHndlr
-} from "../handlers/chatsBlockHandlers";
-import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
-import {
-	createAttachButton,
-	createAttachesMenuHndlr,
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
-	createEditMessageBlockHndlr
+	createEditMessageBlockHndlr,
 } from "../handlers/chatViewHandlers";
 
 import {
@@ -25,8 +14,8 @@ import {
 	createMessageInputChannelHndlr,
 	createSendMessageBtnChannelHndlr,
 	menuHandlers,
-	menuHandlersInfo
 } from "../handlers/channelViewHandlers";
+import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
 
 class channelView extends BaseView {
 
@@ -45,9 +34,8 @@ class channelView extends BaseView {
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
-
-		createAttachesMenuHndlr();
 		createAttachButton();
+		resizeAttach();
 	}
 	setContent() {
 		bus.emit('deleteCurrentChat', null);

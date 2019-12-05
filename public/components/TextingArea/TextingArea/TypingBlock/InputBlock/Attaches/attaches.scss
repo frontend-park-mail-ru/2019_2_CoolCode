@@ -1,47 +1,61 @@
 .attaches {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  align-self: flex-start;
-  justify-content: flex-start;
-  position: sticky;
-  overflow: hidden;
-  bottom: 5px;
-  z-index: 1;
-  max-height: 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    bottom: 5px;
+    z-index: 1;
+    max-height: 0;
+    position: absolute;
 }
 
 .attaches_style {
-  border-radius: 10px;
-  background: rgba(40, 162, 77, 0.41);
+    border-radius: 10px;
+    background: var(--global-green-color);
+}
+
+.attaches__options-container {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 2px 2px 2px 2px;
+}
+
+.attaches__options-container_style {
+    border-radius: 10px;
 }
 
 .attaches__option {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-  width: 100%;
-  text-align: center;
-  margin: 5px 0 5px 0;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0 5px 0;
+    margin: 5px 5px 5px 5px ;
 }
 
 .attaches__option_style {
-  border-radius: 10px;
-  background-color: transparent;
-  font-weight: 300;
-  font-size: 16px;
-  font-family: var(--global-font-family-Montserrat);
-  color: #000000;
+    border-radius: 10px;
+    background-color: var(--global-green-color-1);
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #000000;
 }
 
 .attaches__option_style:hover {
-  cursor:default;
-  background-color: var(--global-light-grey-color);
+    cursor:default;
+    background-color: var(--global-light-grey-color);
 }
 .attaches_clicked {
-  padding: 5px 5px 5px 5px;
-  max-height: 40vh;
+    padding: 5px 5px 5px 5px;
+    max-height: 40vh;
 }
