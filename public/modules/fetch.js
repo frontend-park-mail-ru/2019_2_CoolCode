@@ -1,4 +1,5 @@
 import {ports} from "../constants/config";
+import {microservices, settings} from "../constants/config";
 
 class Fetch {
 
@@ -35,10 +36,10 @@ class Fetch {
 	    try {
 	    	const option = path.split("/")[1];
 	    	const port = ports[option];
+	    	const service = microservices[option];
 			//console.log(response.headers['X-CSRF-Token']);
-			console.log(this._url);
 
-			return await fetch(encodeURI(`${this._url}/api/users${path}`), this._init);
+			return await fetch(encodeURI(`${this._url}${service}${path}`), this._init);
 		} catch (error) {
 	        return error;
 		}
