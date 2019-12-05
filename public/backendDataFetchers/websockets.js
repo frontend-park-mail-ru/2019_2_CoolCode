@@ -1,9 +1,9 @@
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages} from "./gettingInfo";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
-import {ports, settings, backendSuffix, microservices} from '../constants/config';
+import {ports, settings, microservices} from '../constants/config';
 
-const {backend} = settings;
+const {backend, backendSuffix} = settings;
 const {backendNotificationsPort} = settings;
 
 function createWebsocketConnChannel(channelId) {
