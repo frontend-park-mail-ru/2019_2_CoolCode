@@ -39,7 +39,8 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`wss://${backend}${service}/notifications/chats/${chatId}`);
+	const service = microservices.notifications;
+	const websocketConn = new WebSocket(`wss://${backend}${backendSuffix}${service}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
