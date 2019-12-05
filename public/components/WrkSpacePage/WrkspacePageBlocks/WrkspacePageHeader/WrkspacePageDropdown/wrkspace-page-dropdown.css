@@ -5,7 +5,7 @@
 
     width: 70%;
     height: auto;
-    align-self: flex-start;
+    align-self: flex-end;
     justify-content: flex-start;
 
     overflow: hidden;
@@ -26,6 +26,7 @@
     justify-content: center;
     align-self: center;
     width: 100%;
+    text-align: center;
     margin: 5px 0 5px 0;
 }
 
@@ -33,8 +34,8 @@
     border-radius: 10px;
     background-color: transparent;
     font-weight: 300;
-    font-size: 18px;
-    font-family: var(--global-font-family-Roboto);
+    font-size: 16px;
+    font-family: var(--global-font-family-Montserrat);
     color: #000000;
 }
 

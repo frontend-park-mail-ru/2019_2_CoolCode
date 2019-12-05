@@ -156,7 +156,7 @@ function getChatNameIterate(chatID, chats) {
 }
 
 function createNotification(title, options, chatParams) {
-	let notification = new Notification(title, options);
+	const notification = new Notification(title, options);
 
 	function clickFunc() {
 		router.open(KEYWORDS.chatFoundMessage, [chatParams.chatID, chatParams.messageID]);
@@ -169,13 +169,17 @@ function createNotification(title, options, chatParams) {
 function sendNotification(title, options, chatParams) {
 	if ("Notification" in window) {
 		if (Notification.permission === 'granted') {
+			console.log('notifications granted');
 			createNotification(title, options, chatParams);
 		} else if (Notification.permission !== 'denied') {
+			console.log('notifications default');
 			Notification.requestPermission(function (permission) {
 				if (permission === 'granted') {
 					sendNotification(title, options, chatParams);
 				}
 			});
+		} else {
+			console.log('notifications denied');
 		}
 	}
 }

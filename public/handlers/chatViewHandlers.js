@@ -2,6 +2,7 @@ import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFet
 import {bus, componentsStorage, data} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
+let chunks = [];
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -10,6 +11,17 @@ function deleteMessageEvent() {
 	chatBlock.deleteMessage(messageId);
 	componentsStorage.setChatBlock(chatBlock);
 	createHiddenSettingsMessageBlock();
+}
+
+function onRecordingReady(e) {
+	let audio = document.getElementById('audio');
+	let input = document.querySelector('.input__text.input__text_style');
+	audio.style.display = 'flex';
+	input.style.display = 'none';
+
+	audio.src = URL.createObjectURL(e.data);// e.data contains a blob representing the recording
+	chunks.push(URL.createObjectURL(e.data));
+	//audio.play();
 }
 
 function createDeleteMessageBlockHndlr() {
@@ -102,14 +114,13 @@ function createSendMessageBtnHndlr() {
 }
 
 function createMessageInputHndlr() {
-	const messageInput = document.querySelector(".input__text");
+	const messageInput = document.querySelector(".input__text.input__text_style");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
 			chooseSendMessageEvent(event);
 		}
 	});
 	messageInput.addEventListener('input', growInput.bind(null, messageInput));
-
 }
 
 function growInput(element) {
@@ -118,22 +129,34 @@ function growInput(element) {
 }
 
 async function sendMessageEvent() {
+	let audio = document.getElementById('audio');
+	let input = document.querySelector('.input__text.input__text_style');
 	const chatBlock = componentsStorage.getChatBlock();
-	const text = chatBlock.getMessageInputData();
-	if (text !== '') {
-		console.log(`new message : ${text}`);
-		chatBlock.setMessageInputData('');
+	if(chunks.length > 0) {
+		console.log("CHUNKS2", chunks);
+		audio.style.display = 'none';
+		input.style.display = 'flex';
 		const date = new currentDate();
-		try {
-			const messageId = await sendingMessage(text, date.getDate(), data.getCurrentChatId());
-			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
+		chatBlock.renderOutgoingRecord({id: 229, author_id : data.getUserId(),text: null, record: chunks[0], message_time: date.getDate()});
+		chunks.length = 0;
+	}else {
+		const text = chatBlock.getMessageInputData();
+		if (text !== '') {
+			console.log(`new message : ${text}`);
+			chatBlock.setMessageInputData('');
+			const date = new currentDate();
+			try {
+				const messageId = await sendingMessage(text, date.getDate(), data.getCurrentChatId());
+				chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
 
-		} catch (error) {
-			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});
+			} catch (error) {
+				chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});
+			}
+
 		}
-
+		componentsStorage.setChatBlock(chatBlock);
 	}
-	componentsStorage.setChatBlock(chatBlock);
+
 }
 
 async function sendEditedMessageEvent() {
@@ -158,6 +181,43 @@ async function sendEditedMessageEvent() {
 	componentsStorage.setChatBlock(chatBlock);
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+function recordMessage() {
+	let recorder;
+	let audio = document.getElementById('audio');
+	let input = document.querySelector('.input__text.input__text_style');
+	let microphone = document.querySelector('.input__icon-container__icon_microphone.input__icon-container__icon_microphone_style');
+	navigator.mediaDevices.getUserMedia({
+		audio: true
+	})
+		.then(function (stream) {
+			recorder = new MediaRecorder(stream);
+			recorder.addEventListener('dataavailable', onRecordingReady);
+			microphone.addEventListener('click',()=>{
+				if(recorder.state == 'recording') {
+					recorder.stop();
+					audio.style.display = 'flex';
+					input.style.display = 'none';
+					console.log(recorder.state);
+					microphone.style.background = 'white';
+					microphone.style.filter = 'opacity(0.9)';
+					input.value = '';
+					input.style.color = '#000000';
+				}else if(recorder.state == 'inactive') {
+					recorder.start();
+					audio.style.display = 'none';
+					input.style.display = 'flex';
+					microphone.style.background = 'red';
+					microphone.style.borderRadius = '20px';
+					microphone.style.filter = 'invert(0.1) brightness(300%) saturate(100%)';
+					input.value = "recording...";
+					input.style.color = 'red';
+					console.log(recorder.state);
+
+				}
+			});
+		});
+}
+
+export {recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
 	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock
 };

@@ -4,7 +4,9 @@ block page
             div.channel-header__info-row.channel-header__info-row_style
                 div.channel-header__info-row__info-column
                     div.channel-header__info-row__info-column__channel-row.channel-header__info-row__info-column__channel-row_style=`#${currentChannel.name}`
-                    div.channel-header__info-row__info-column__name-row.channel-header__info-row__info-column__name-row_style=`wrkspace ${currentWrkspace.name}`
+                    div.channel-header__info-row__info-column__name-row
+                        div.channel-header__name-row__text.channel-header__name-row__text_word=`wrkspace `
+                        div.channel-header__name-row__text.channel-header__name-row__text_style=`${currentWrkspace.name}`
                 div.channel-header__info-row__btnblock
                     div.channel-header__dropdown
                         img.channel-header__dropdown__dropbtn(src="/images/setting1.png")
@@ -19,23 +21,4 @@ block page
                 div.channel-header__pinned-message.channel-header__pinned-message_style
                     div.channel-header__pinned-message__content.channel-header__pinned-message__content_style=importantMessage.text
                     img.channel-header__pinned-message__icon.channel-header__pinned-message__icon_style(src="/images/pinned.png")
-
-        div.chat-column-main
-            div.typing-block
-                div.msgwindow-container.msgwindow-container__style
-                    div.msgwindow-container__msgwindow.msgwindow-container__msgwindow_style
-                form.input
-                    div.input__icon-container
-                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/add.png")
-                    textarea.input__text.input__text_style(placeholder="chat here..")
-                    div.input__icon-container
-                        img.input__icon-container__icon.input__icon-container__icon_style(src="/images/send.png")
-            div.message-sett-block
-                div.message-sett-block__content.message-sett-block__content_hidden
-                    div.message-sett-block__content__header.message-sett-block__content__header_style
-                        div.message-sett-block__content__text.message-sett-block__content__text_style choose option
-                        div.message-sett-block__content__button
-                            img.message-sett-block__content__button__icon.message-sett-block__content__button__icon_style(src="/images/close.png")
-                    div.message-sett-block__content__option.message-sett-block__content__option_style#delete delete message
-                    div.message-sett-block__content__option.message-sett-block__content__option_style#edit edit message
 

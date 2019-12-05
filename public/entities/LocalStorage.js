@@ -56,7 +56,7 @@ class LocalStorage {
 	}
 
 	getChatMessages(chatId) {
-		const chatsMessages = this.getItem('chatsMessages');
+		let chatsMessages = this.getItem('chatsMessages');
 		if (chatsMessages && chatId < chatsMessages.length) {
 			return chatsMessages[chatId];
 		} else {

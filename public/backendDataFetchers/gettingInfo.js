@@ -63,7 +63,7 @@ async function getCurrentChatMessages(chatId) {
 			throw new Error(
 				`Couldn't fetch messages: ${responseStatuses[response.status]}`);
 		}
-		const data = await response.json();
+		let data = await response.json();
 		bus.emit('setChatMessages', null, data['Messages']);
 		appLocalStorage.setChatMessages(data['Messages'], chatId);
 	} catch (error) {

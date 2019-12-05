@@ -20,7 +20,7 @@ class UsersFoundBlockComponent extends BaseComponent {
     		this._data.searchUsers.forEach((user) => {
     			const userComponent = new UserComponent(user, contentListRoot);
     			const userBlock = document.createElement('div');
-    			userBlock.className = 'user-found user-found_style';
+    			userBlock.className = 'user-found user-found_size user-found_style';
     			userBlock.id = "search-" + user.id;
     			userBlock.innerHTML = userComponent.render();
     			contentListRoot.appendChild(userBlock);

@@ -17,7 +17,7 @@ import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
-import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import {getMessagePhoto, getUserPhoto, getHeaderPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
@@ -41,10 +41,12 @@ function createEvents() {
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
 	bus.on('setCurrentChatUserPhoto', data.setCurrentChatUserPhoto.bind(data));
 	bus.on('setCurrentChatId', data.setCurrentChatId.bind(data));
+	bus.on('deleteCurrentChat', data.deleteCurrentChat.bind(data));
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
 	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
+	bus.on('deleteCurrentChannel', data.deleteCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('addCurrentWrkspaceMember', data.addCurrentWrkspaceMember.bind(data));
 	bus.on('addCurrentWrkspaceUser', data.addCurrentWrkspaceUser.bind(data));
@@ -85,6 +87,7 @@ function createEvents() {
 	/**/
 	bus.on('getUserInfo', getUserInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getHeaderPhoto', getHeaderPhoto);
 	bus.on('getMessagePhoto', getMessagePhoto);
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);

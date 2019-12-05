@@ -22,7 +22,7 @@ async function setProfileField(value, field, block, textSelector, errorSelector)
 	}
 	if (field === 'phone') {
 		if (!validation.validatePhone(value)) {
-			emitError(block, errorSelector, textSelector, 'Please, input correct phone number');
+			emitError(block, errorSelector, textSelector, 'Please, input phone number containing from 10 to 16 numbers');
 			return null;
 		}
 	}
@@ -55,14 +55,14 @@ function dblClickEvent(params = {block: null, textSelector: null, inputSelector:
 		textField.className += ` ${textSelector}_hidden`;
 	}
 	inputField.classList.remove(`${inputSelector}_hidden`);
-	inputField.innerHTML = textField.innerHTML;
+	inputField.value = textField.innerHTML;
 	inputField.placeholder = fieldName;
 	inputField.focus();
 }
 
 function createDblClickInputHndlr(block, textSelector, inputSelector, errorSelector) {
 	const textField = block.querySelector(`.${textSelector}`);
-	textField.addEventListener('dblclick', dblClickEvent.bind(event, {
+	textField.addEventListener('click', dblClickEvent.bind(event, {
 		block: block, textSelector: textSelector,
 		inputSelector: inputSelector, errorSelector: errorSelector
 	}));

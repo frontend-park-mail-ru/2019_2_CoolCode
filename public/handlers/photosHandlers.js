@@ -15,6 +15,18 @@ async function getProfilePhoto(id) {
 	};
 }
 
+async function getHeaderPhoto() {
+	const buffer = await getPhoto(data.getUserId());
+	const worker = new MyWorker();
+	worker.postMessage(buffer);
+
+	worker.onmessage = function (result) {
+		promiseMaker.createPromise('setUserPhoto', result.data).then(() => {
+			bus.emit('setPicture', null, '.header__profile__image-row__image', data.getUserPhoto());
+		});
+	};
+}
+
 async function saveUserPhoto(id) {
 	const buffer = await getPhoto(id);
 	const worker = new MyWorker();
@@ -83,4 +95,4 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getProfilePhoto,getMessagePhoto};
+export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getHeaderPhoto, getProfilePhoto,getMessagePhoto};

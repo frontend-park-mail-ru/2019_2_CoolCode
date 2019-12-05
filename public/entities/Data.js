@@ -162,6 +162,11 @@ class Data {
 		return this.currentChat;
 	}
 
+	deleteCurrentChat() {
+		this.currentChat = undefined;
+		this.createLogMessage('set', 'currentChat', this.currentChat);
+	}
+
 	setCurrentChatUser(currentChatUser) {
 		this.currentChatUser = currentChatUser;
 		this.createLogMessage('set', 'currentChatUser', currentChatUser);
@@ -337,6 +342,10 @@ class Data {
 		this.createLogMessage('set', 'currentChannel', currentChannel);
 	}
 
+	deleteCurrentChannel() {
+		this.currentChannel = undefined;
+		this.createLogMessage('set', 'currentChannel', this.currentChannel);
+	}
 	getCurrentChannel() {
 		this.createLogMessage('get', 'currentChannel', this.currentChannel);
 		return this.currentChannel;

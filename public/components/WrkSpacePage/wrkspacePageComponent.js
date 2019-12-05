@@ -9,7 +9,7 @@ class WrkspacePageComponent extends BaseComponent {
     renderHeader() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const headerComponent = new WrkspacePageHeaderComponent(this._data, contentListRoot);
-    	contentListRoot.innerHTML += headerComponent.render();
+    	contentListRoot.innerHTML = headerComponent.render();
     }
 
     renderInfo() {

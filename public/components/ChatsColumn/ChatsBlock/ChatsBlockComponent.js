@@ -8,12 +8,21 @@ const ChatsBlockTemplate = require('./chatsBlock.pug');
 class ChatsBlockComponent extends BaseComponent {
     contentListRootSelector = '.chats-block__content';
 
-    drawSelected(chatId, messageElement) {
-    	if (chatId == this._data.currentChat.id) {
-    		messageElement.className = `${messageElement.className} chat-block_selected`;
-    		const nameRowClassName = messageElement.querySelector('.chat-block__message-column__name-row').className;
-    		messageElement.querySelector('.chat-block__message-column__name-row').className = `${nameRowClassName} chat-block__message-column__name-row_selected`;
+    drawSelected() {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const selectedMessage = contentListRoot.querySelector('.chat-block_selected');
+    	const selectedChannel = document.querySelector('.wrkspace-chann_selected');
+    	if (selectedMessage) {
+    		selectedMessage.classList.remove('chat-block_selected');
     	}
+    	if (selectedChannel) {
+    		selectedChannel.classList.remove('wrkspace-chann_selected');
+    	}
+    	const userId = data.getChatUserIdByChatId(this._data.currentChat.id);
+    	const messageElement = contentListRoot.querySelector(`#chat-${userId}`);
+    	messageElement.className = `${messageElement.className} chat-block_selected`;
+    	const nameRowClassName = messageElement.querySelector('.chat-block__message-column__name-row').className;
+    	messageElement.querySelector('.chat-block__message-column__name-row').className = `${nameRowClassName} chat-block__message-column__name-row_selected`;
     }
 
     render() {
@@ -27,9 +36,6 @@ class ChatsBlockComponent extends BaseComponent {
     			const message = new MessageComponent(chat, contentListRoot);
     			const messageElement = message.render();
     			contentListRoot.appendChild(messageElement);
-    			if (this._data.currentChat) {
-    				this.drawSelected(chat.id, messageElement);
-    			}
     			const id = data.getChatUserIdByChatId(chat.id);
     			bus.emit('getUserPhoto', null, id ,"chat", message.getPhotoBlock());
     		});

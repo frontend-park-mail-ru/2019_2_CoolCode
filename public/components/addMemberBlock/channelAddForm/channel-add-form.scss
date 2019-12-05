@@ -1,0 +1,104 @@
+.channel-header-menu__add {
+    position: fixed; /*make it centered and overlay*/
+    top: 40vh; /*experimenting with viewports*/
+    left: 35vw;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+    z-index: var(--global-z-index-form); /*make it overlay*/
+    padding: 5px;
+}
+
+.channel-header-menu__add_size {
+    @media screen and (min-height: 10px) {
+        height: 100px;
+    }
+    @media screen and (min-height: 400px) {
+        height: calc(50px + 20vh);
+    }
+    @media screen and (min-width: 10px) {
+        width: 150px;
+    }
+    @media screen and (min-width: 600px) {
+        width: calc(20px + 20vw);
+    }
+}
+.channel-add-form__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0 0 0 0;
+}
+.channel-add-form__form_style {
+    -webkit-backface-visibility: hidden;
+}
+
+.channel-add-form__input-field {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 0 0 5px 0;
+    height:auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+    width: 70%;
+}
+.channel-add-form__input-field_style{
+    outline: none;
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    padding: 5px;
+}
+.channel-add-form__name {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 90%;
+}
+
+.channel-add-form__name_style  {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #282828;
+    border-color: #282828;
+}
+
+.channel-add-form__scroll {
+    display: flex;
+    flex: 0 0 70%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: center;
+    width: 90%; /* ширина нашего блока */
+    padding: 2px;
+    overflow: auto; /* свойство для прокрутки по горизонтали. Автоматом, если больше блока */
+}
+.channel-add-form__scroll_style {
+    background-color:rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #282828;
+}
+
+.channel-add-form__scroll::-webkit-scrollbar {
+    width: 7px;
+    background-color: #FFFFFF;
+}
+
+.channel-add-form__scroll::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var( --global-scrollbar-color);
+    -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
+}

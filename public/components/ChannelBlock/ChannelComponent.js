@@ -2,13 +2,8 @@ import BaseComponent from "../baseComponent";
 import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
 import './bemChannelHeader/channelHeader/channel-header.css';
 import './bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
-import './ChannelMessage/channelMsg/chat-msg.css';
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
-import ChannelMessageComponent from "./ChannelMessage/ChannelMessageComponent";
+import ChannelMessageComponent from "../TextingArea/Message/ChannelMessage/ChannelMessageComponent";
+import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
 
 const channelTemplate = require('./channel.pug');
 
@@ -106,9 +101,15 @@ class ChannelComponent extends BaseComponent {
 		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
+	renderTextingArea() {
+		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+		const textingArea = new TextingAreaComponent(this._data, contentListRoot);
+		const container = document.querySelector('.chat-column');
+		container.innerHTML += textingArea.render();
+	}
+
 	render() {
 		return channelTemplate(this._data);
-
 	}
 }
 

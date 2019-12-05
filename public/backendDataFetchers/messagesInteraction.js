@@ -34,7 +34,7 @@ async function editingMessage(text, time, id) {
 			throw new Error (`Haven't edited message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
 		// const message = await response.json();
-		// console.log(`Message edited : ${message.id}`);
+		// console.log(`ChatMessage edited : ${message.id}`);
 		// return message.id;
 	}catch (error) {
 		console.error(error);

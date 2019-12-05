@@ -1,0 +1,126 @@
+.wrkspace-form {
+    position: fixed; /*make it centered and overlay*/
+    top: 35vh; /*experimenting with viewports*/
+    left: 40vw;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: var(--global-z-index-form); /*make it overlay*/
+}
+
+.wrkspace-form_size {
+    @media screen and (min-height: 10px) {
+        height: 100px;
+    }
+    @media screen and (min-height: 400px) {
+        height: calc(50px + 20vh);
+    }
+    @media screen and (min-width: 10px) {
+        width: 150px;
+    }
+    @media screen and (min-width: 600px) {
+        width: calc(20px + 20vw);
+    }
+}
+
+.wrkspace-form_style {
+    background: #FFFFFF;
+    -webkit-backface-visibility: hidden;
+}
+
+/*form element*/
+
+.wrkspace-form__form {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+}
+
+
+/*input element in form*/
+
+.wrkspace-form__form__input-field {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: center;
+    padding: 0 0 5px 0;
+    height:auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+    width: 70%;
+}
+
+.wrkspace-form__form__input-field_style {
+    outline: none;
+    font-size: 18px;
+    font-family: var(--global-font-family-Roboto);
+    border: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--global-grey-color);
+}
+
+.wrkspace-form__form__input-field_error {
+    border-bottom: 1px solid var(--global-error-color);
+}
+
+/*submit-button element in form*/
+
+.wrkspace-form__form__submit-button {
+    flex: 0 0 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    align-self: center;
+    width: auto;
+}
+
+.wrkspace-form__form__submit-button_style {
+    outline: 0;
+    font-family: var(--global-font-family-Roboto);
+    background-color: var(--global-green-color);
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 4px;
+    border: none;
+}
+
+/*name element in form*/
+
+.wrkspace-form__form__name {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 90%;
+}
+
+.wrkspace-form__form__name_style {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: var(--global-font-family-Montserrat);
+    color: var(--global-green-color);
+}
+
+/*error element in form*/
+
+.wrkspace-form__form__error-field {
+    align-self:center;
+    width: 70%;
+    height: auto;
+    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
+}
+.wrkspace-form__form__error-field_style {
+    color: var(--global-error-color);
+    font-size: 18px;
+    font-family: var(--global-font-family-Montserrat);
+}

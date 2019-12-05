@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: stretch;
     width: 100%;
-    height: 86vh; /*experimenting with viewports*/
 }
 
 .all-chats_size {
@@ -12,14 +11,14 @@
     }
 
     @media screen and (min-height: 400px) {
-        height: 540px;
+        height: 560px;
     }
 
-    @media screen and (min-height: 600px) {
-        height: 750px;
+    @media screen and (min-height: 610px) {
+        height: 700px;
     }
 
-    @media screen and (min-height: 800px) {
+    @media screen and (min-height: 810px) {
         height: 850px;
     }
 }

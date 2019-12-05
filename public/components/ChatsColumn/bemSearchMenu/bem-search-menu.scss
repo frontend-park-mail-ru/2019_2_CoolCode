@@ -19,11 +19,11 @@
         height: 40px;
     }
 
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 610px) {
         height: 50px;
     }
 
-    @media screen and (min-height: 800px) {
+    @media screen and (min-height: 810px) {
         height: 60px;
     }
 
@@ -115,14 +115,20 @@
     object-fit: scale-down;
     object-position: top;
     align-self: center;
-    max-width:40%;
-    max-height:40%;
-    height: 3vh; /*experimenting with viewports*/
+}
+
+.search-menu__form__button__icon_size {
+
+    @media screen and (min-height: 10px) {
+        width: 14px;
+        height: 14px;
+
+    }
+    @media screen and (min-height: 610px) {
+        width: 18px;
+        height: 18px;
+    }
 }
 .search-menu__form__button__icon_style {
     filter: opacity(0.9);
-}
-.search-menu__form__button__icon_style:hover{
-    filter: invert(0.7) brightness(200%) saturate(10%);
-    border-radius: 20px;
 }

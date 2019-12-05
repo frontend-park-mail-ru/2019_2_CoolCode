@@ -1,19 +1,19 @@
 block content
     div.overlay.overlay_style
-    div.wrkspace-form.wrkspace-form_style
+    div.wrkspace-form.wrkspace-form_style.wrkspace-form_size
         form.wrkspace-form__form
             if viewType == "channelForm"
                 div.wrkspace-form__form__name.wrkspace-form__form__name_style create channel
                 input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='channel name' name='channelName')
             if viewType == "wrkspaceForm"
-                div.wrkspace-form__form__name.wrkspace-form__form__name_style create workspace
-                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='workspace name' name='wsName')
+                div.wrkspace-form__form__name.wrkspace-form__form__name_style create wrkspace
+                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='wrkspace name' name='wsName')
             if viewType == "addMember"
                 div.wrkspace-form__form__name.wrkspace-form__form__name_style add member
                 input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='user name' name='userName')
 
             div.wrkspace-form__form__error-field.wrkspace-form__form__error-field_style
             if  viewType == "addMember"
-                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') Add!
+                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') ADD
             else
-                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') Create!
+                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') CREATE

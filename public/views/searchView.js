@@ -4,7 +4,7 @@ import {
 	createMessageFoundChatBlockHndlr,
 	createUserBlockHndlr
 } from "../handlers/searchViewHandlers";
-import {componentsStorage, data, router} from "./../main";
+import {appLocalStorage, bus, componentsStorage, data, router} from "./../main";
 
 class searchView extends BaseView {
 
@@ -20,6 +20,9 @@ class searchView extends BaseView {
 	}
 
 	show() {
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
+		}
 		if (data.getLastSearchUsers() && data.getLastSearchUsers().length === 0 ||
 		data.getLastSearchMessages() && data.getLastSearchMessages().length === 0 ) {
 			router.go('mainPageView');
@@ -33,7 +36,7 @@ class searchView extends BaseView {
 		}
 	}
 	render() {
-		let leftColumn = componentsStorage.getLeftColumn();
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
 		leftColumn.renderSearchContent(this._data);
 	}
 

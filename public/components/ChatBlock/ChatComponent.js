@@ -1,12 +1,8 @@
 import BaseComponent from "../baseComponent";
 import './bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
-import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
-import ChatMessageComponent from "./Message/ChatMessageComponent";
+import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.scss';
+import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
+import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
 
 const chatTemplate = require('./chat.pug');
 
@@ -25,6 +21,9 @@ class ChatComponent extends BaseComponent {
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;
     }
+    getMessageInputRecord() {
+    	return this._parent.querySelector('input__record').value;
+    }
 
     setMessageInputData(inputData) {
     	this._parent.querySelector('.input__text').value = inputData;
@@ -38,6 +37,13 @@ class ChatComponent extends BaseComponent {
     }
 
     renderOutgoingMessage(messageData) {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
+    	contentListRoot.appendChild(messageComponent.render());
+    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
+    renderOutgoingRecord(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
@@ -89,6 +95,13 @@ class ChatComponent extends BaseComponent {
     		});
     	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
+    renderTextingArea() {
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const textingArea = new TextingAreaComponent(this._data, contentListRoot);
+    	const container = document.querySelector('.chat-column');
+    	container.innerHTML += textingArea.render();
     }
 
     render() {
