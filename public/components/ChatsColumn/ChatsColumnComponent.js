@@ -50,7 +50,8 @@ class ChatsColumnComponent extends BaseComponent {
 
     renderNewMessage(message) { //TODO: переделать когда на бэке появится дата
     	console.log(this);
-    	const contentListRoot = this.querySelector(this.contentListRootSelector);
+    	//FIXME:
+    	const contentListRoot = this.chatsBlock._parent.querySelector(this.contentListRootSelector);
     	const messageBlock = contentListRoot.querySelector(`#chat-${message.author_id}`);
     	const lastMessage = messageBlock.querySelector('.chat-block__message-column__message-row__last-message');
     	lastMessage.innerHTML = message.text;
