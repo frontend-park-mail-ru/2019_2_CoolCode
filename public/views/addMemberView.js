@@ -7,7 +7,7 @@ import {createOverlayHndlr} from "../handlers/creationFormHandlers";
 class addMemberView extends BaseView {
 
 	constructor (data, parent) {
-		super({viewType: "addMember", user:{}, membersOfWrkS:[], currentChannel:[], loggedIn: null}, parent);
+		super({viewType: "addMember", user:{}, wrkspaceMembers:[], currentChannel:[], loggedIn: null}, parent);
 	}
 
 	setContent() {
