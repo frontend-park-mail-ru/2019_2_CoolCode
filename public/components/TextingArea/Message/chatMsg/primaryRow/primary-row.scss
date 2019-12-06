@@ -50,14 +50,14 @@
 }
 
 .primary-row__text_style-right {
-    background: var(--global-green-color-1);
+    background: var(--global-green-color);
 }
 .primary-row__text_style-right:before {
     content: "";
     position: absolute;
-    border-left: 0vh solid var(--global-green-color-1);
+    border-left: 0vh solid var(--global-green-color);
     border-right:1vh solid transparent;
-    border-top: 2vh solid var(--global-green-color-1);
+    border-top: 2vh solid var(--global-green-color);
     border-bottom: 1vh solid transparent;
     right: -0.5vh;
 }
@@ -100,7 +100,7 @@
 }
 
 .primary-row__time_style-left {
-    color: var(--global-green-color-1);
+    color: var(--global-green-color);
 }
 .primary-row__time_style-right {
     color: #000000;

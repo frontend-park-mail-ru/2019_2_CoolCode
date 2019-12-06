@@ -3,11 +3,15 @@ import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import {getProfilePhoto} from "./photosHandlers";
 import MyWorker from "../workers/profile.worker";
 
-function attachPhotos() {
+function photoDeleteBtnEvent() {
+	event.currentTarget.parentNode.remove();
+}
+
+async function attachPhotos() {
 	if (event.currentTarget.files.length > 10) alert('10 photos');
 	else {
 		const chatBlock = componentsStorage.getChatBlock();
-		chatBlock.renderPhotos(event.currentTarget.files);
+		await chatBlock.renderPhotos(event.currentTarget.files);
 	}
 
 }

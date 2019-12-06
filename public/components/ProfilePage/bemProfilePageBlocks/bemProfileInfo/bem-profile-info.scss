@@ -47,7 +47,7 @@
 }
 
 .profile-info__field__name_style {
-    color: var(--global-green-color-1);
+    color: var(--global-green-color);
     font-family: var(--global-font-family-Roboto);
     letter-spacing: -0.5px;
     font-weight: 300;
@@ -64,7 +64,7 @@
 }
 
 .profile-info__field__info_style {
-    border-bottom: 1px solid var(--global-green-color-1);
+    border-bottom: 1px solid var(--global-green-color);
     font-family: var(--global-font-family-Montserrat);
     letter-spacing: -0.2px;
     color: #000000;
@@ -93,11 +93,10 @@
     color: var(--global-darkgrey-color);
     outline: none;
     border: none;
-    border-bottom: 1px solid var(--global-green-color-1);
+    border-bottom: 1px solid var(--global-green-color);
     font-family: var(--global-font-family-Montserrat);
     font-size: 24px;
     letter-spacing: -0.2px;
-    color: #000000;
     font-weight: 100;
 }
 
@@ -147,7 +146,7 @@
 }
 
 .profile-info__settings__name_style {
-    color: var(--global-green-color-1);
+    color: var(--global-green-color);
     font-family: var(--global-font-family-Roboto);
     font-size: 20px;
     letter-spacing: -0.5px;

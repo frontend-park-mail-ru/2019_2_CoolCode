@@ -94,10 +94,8 @@ class ChatComponent extends BaseComponent {
     	this.textAreaComponent.renderTo('.chat-column');
     }
 
-    renderPhotos(files) {
-    	console.log(this.textAreaComponent._data);
-
-    	this.textAreaComponent.renderPhotos(files);
+    async renderPhotos(files) {
+    	await this.textAreaComponent.renderPhotos(files);
     }
 
     render() {

@@ -13,18 +13,34 @@ const textingAreaTemplate = require('./textarea.pug');
 
 class TextingAreaComponent extends BaseComponent {
 
-	renderPhotos(files) {
-		const imagesContainer = document.querySelector('.content-container__images');
-		document.querySelector('.input__text').classList += ' input__text_hidden';
-		imagesContainer.classList.remove('content-container__images_hidden');
+	createHandlers(container) {
+		const closeBtns = container.querySelectorAll('.overlay_button__image-container__icon');
+		closeBtns.forEach((closeBtn) => {
+			closeBtn.addEventListener('click', () => {
+				event.target.parentNode.parentNode.parentNode.remove();
+			});
+		});
+	}
+
+	async renderPhotosAll(files) {
 		for (let i = 0; i < files.length; i++) {
+			const photoAttach = new AttachComponent({id:i});
+			photoAttach.renderTo('.content-container__images');
 			const worker = new MyWorker();
 			worker.postMessage(files[i]);
 			worker.onmessage = function (result) {
-				const photoAttach = new AttachComponent({imageSrc : result.data}, this._parent);
-				photoAttach.renderTo('.content-container__images');
+				bus.emit('setPicture', null, `#photoattach-${i}`,result.data);
 			};
 		}
+	}
+
+	async renderPhotos(files) {
+		const imagesContainer = document.querySelector('.content-container__images');
+		document.querySelector('.input__text').classList += ' input__text_hidden';
+		imagesContainer.classList.remove('content-container__images_hidden');
+		await this.renderPhotosAll(files);
+		this.createHandlers(imagesContainer);
+
 	}
 
 	showTextArea() {

@@ -136,7 +136,6 @@
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
     justify-content: flex-start;
-    height: 20%;
 }
 
 .channel-header__pinned-message_style {
@@ -147,7 +146,7 @@
 
 .channel-header__pinned-message__content  {
     align-self: center;
-    margin: 0 0 0 20px;
+    padding: 0 0 0 10px;
 }
 
 .channel-header__pinned-message__content_style {
