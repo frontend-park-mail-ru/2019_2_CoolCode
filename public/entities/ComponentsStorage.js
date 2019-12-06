@@ -92,6 +92,10 @@ class ComponentsStorage {
 
 	}
 
+	returnLeftColumn() {
+		return this.leftColumn;
+	}
+
 	setChatBlock(chatBlock) {
 		try {
 			if (chatBlock instanceof ChatComponent ||

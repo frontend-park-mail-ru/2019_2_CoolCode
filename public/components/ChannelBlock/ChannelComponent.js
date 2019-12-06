@@ -1,6 +1,6 @@
 import BaseComponent from "../baseComponent";
-import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
-import './bemChannelHeader/channelHeader/channel-header.css';
+import '../ChatBlock/bemChatPageBlocks/bemChatColumn/bem-chat-column.scss';
+import './bemChannelHeader/channelHeader/channel-header.scss';
 import './bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import ChannelMessageComponent from "../TextingArea/Message/ChannelMessage/ChannelMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
@@ -104,8 +104,7 @@ class ChannelComponent extends BaseComponent {
 	renderTextingArea() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		const textingArea = new TextingAreaComponent(this._data, contentListRoot);
-		const container = document.querySelector('.chat-column');
-		container.innerHTML += textingArea.render();
+		textingArea.renderTo('.chat-column');
 	}
 
 	render() {

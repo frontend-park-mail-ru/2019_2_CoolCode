@@ -96,6 +96,9 @@ class chatView extends BaseView {
 
 	drawLeftColumn() {
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		if (leftColumn.getState() !== 'chats') {
+			leftColumn.renderChatsContent();
+		}
 		leftColumn.selectCurrentChat();
 		//componentsStorage.setLeftColumn(leftColumn);
 	}

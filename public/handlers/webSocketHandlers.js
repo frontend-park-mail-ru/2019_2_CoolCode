@@ -100,7 +100,7 @@ function webSocketOnMessage(event) {
 			console.log(`my message sent: ${messageContent.text}`);
 			break;
 		default:
-			const leftColumn = componentsStorage.getLeftColumn();
+			const leftColumn = componentsStorage.returnLeftColumn();
 			leftColumn.renderNewMessage(messageContent);
 			console.log(`message accepted in back: ${messageContent.text}`);
 

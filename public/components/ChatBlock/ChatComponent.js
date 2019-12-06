@@ -1,5 +1,5 @@
 import BaseComponent from "../baseComponent";
-import './bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
+import './bemChatPageBlocks/bemChatColumn/bem-chat-column.scss';
 import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.scss';
 import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
@@ -9,6 +9,7 @@ const chatTemplate = require('./chat.pug');
 class ChatComponent extends BaseComponent {
 
     contentListRootSelector = '.msgwindow-container__msgwindow';
+    textAreaComponent;
 
     slideToMessage() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
@@ -88,10 +89,15 @@ class ChatComponent extends BaseComponent {
     }
 
     renderTextingArea() {
-    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	const textingArea = new TextingAreaComponent(this._data, contentListRoot);
-    	const container = document.querySelector('.chat-column');
-    	container.innerHTML += textingArea.render();
+    	const contentListRoot = document.querySelector(this.contentListRootSelector);
+    	this.textAreaComponent = new TextingAreaComponent(this._data, contentListRoot);
+    	this.textAreaComponent.renderTo('.chat-column');
+    }
+
+    renderPhotos(files) {
+    	console.log(this.textAreaComponent._data);
+
+    	this.textAreaComponent.renderPhotos(files);
     }
 
     render() {

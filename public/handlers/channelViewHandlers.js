@@ -1,6 +1,6 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {editingMessage} from "../backendDataFetchers/messagesInteraction";
-import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.css';
+import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.scss';
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
@@ -66,6 +66,7 @@ function addMemberClickEvent(params = {memberId:null, contentListRoot:null}) {
 	bus.emit('addCurrentChannelMember', null, id);
 	const channel = data.getCurrentChannel();
 	promiseMaker.createPromise('alterChannel', channel).then(() => {
+		componentsStorage.clearForm();
 		router.return();
 	});
 

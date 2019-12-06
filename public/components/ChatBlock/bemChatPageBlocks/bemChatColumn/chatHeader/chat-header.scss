@@ -1,20 +1,39 @@
 .chat-header {
-    flex: 0 0 20%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
 }
 
+.chat-header_size {
+    /*@media screen and (min-height: 10px) {
+        height: 80px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 120px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        height: 150px;
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 182px;
+    }*/
+    height: auto;
+}
+
 /*info-row element*/
 
 .chat-header__info-row {
-    flex: 10 0 auto;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
     justify-content: flex-start;
-    height: 80%;
     width: 100%;
 
 }
@@ -97,6 +116,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-self: center;
     height: 100%;
 
 }
@@ -148,7 +168,7 @@
 /*pinned-element element*/
 
 .chat-header__pinned-message {
-    flex: 0 0 20%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/

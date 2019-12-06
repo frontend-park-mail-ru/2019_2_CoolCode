@@ -1,15 +1,37 @@
 .channel-header {
-    flex: 0 0 20%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
+    height: auto;
 }
+
+.channel-header_size {
+    @media screen and (min-height: 10px) {
+        height: 100px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 120px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        height: 140px;
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 162px;
+    }
+
+}
+
 
 /*info-row element*/
 
 .channel-header__info-row {
-    flex: 0 0 60%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
@@ -109,11 +131,12 @@
 /*pinned-element element*/
 
 .channel-header__pinned-message {
-    flex: 0 0 20%;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
     justify-content: flex-start;
+    height: 20%;
 }
 
 .channel-header__pinned-message_style {

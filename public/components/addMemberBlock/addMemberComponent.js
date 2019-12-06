@@ -23,7 +23,7 @@ class AddMemberComponent extends BaseComponent {
 		parentContainer.firstChild.remove();
 	}
 	renderContent() {
-		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+		const contentListRoot = document.querySelector(this.contentListRootSelector);
 		this._data.wrkspaceMembers.forEach(user=> {
 			if (user.id != this._data.user.id) {
 				const userComponent = new UserFoundChannelComponent(user, contentListRoot);

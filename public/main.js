@@ -27,7 +27,7 @@ import LocalStorage from "./entities/LocalStorage";
 import wrkspaceView from "./views/wrkspaceView";
 import wrkspaceSearchView from "./views/wrkspaceSearchView";
 import ResizeThrottler from "./modules/throttler";
-import {resizeAttach} from "./handlers/chatViewHandlers";
+import {resizeAttach} from "./handlers/attachesHandlers";
 
 const {backend} = settings;
 const {backendPort} = settings;

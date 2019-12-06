@@ -27,6 +27,11 @@ class ChatsColumnComponent extends BaseComponent {
     contentListRootSelector = '.all-chats-window';
     chatsBlock;
     wrkSpacesBlock;
+    state;
+
+    getState() {
+    	return this.state;
+    }
 
     createChatContentHandlers() {
     	createSearchInputHndlr();
@@ -56,6 +61,7 @@ class ChatsColumnComponent extends BaseComponent {
     }
 
     renderSearchContent(data) {
+    	this.state = 'search';
     	this._data = data;
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	contentListRoot.innerHTML = "";
@@ -70,7 +76,10 @@ class ChatsColumnComponent extends BaseComponent {
     }
 
     renderChatsContent() {
+    	this.state = 'chats';
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	contentListRoot.innerHTML = "";
+
     	this.chatsBlock = new ChatsBlockComponent(this._data, contentListRoot);
     	this.wrkSpacesBlock = new WrkSpacesBlockComponent(this._data, contentListRoot);
     	contentListRoot.innerHTML += this.chatsBlock.render();
