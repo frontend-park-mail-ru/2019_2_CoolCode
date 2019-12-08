@@ -1,5 +1,5 @@
 import {API, responseStatuses, settings} from '../constants/config';
-import {bus, FetchModule} from '../main';
+import {bus, data, FetchModule} from '../main';
 
 const {frontend, frontendPort, connection} = settings;
 
@@ -85,4 +85,25 @@ async function deletingMessage(id) {
 	}
 }
 
-export {sendingMessage, deletingMessage, editingMessage, likeMessage};
+async function sendingFile(id, formData) {
+	console.log(` Sending photo in chat ${id}`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.messageFile(id),
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			return true;
+		} else {
+			throw new Error(
+				`Error while upload image : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {sendingMessage, deletingMessage, editingMessage, likeMessage, sendingFile};

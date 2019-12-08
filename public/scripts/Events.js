@@ -59,7 +59,6 @@ function createEvents() {
 	bus.on('deleteChosenMessageText', data.deleteChosenMessageText.bind(data));
 	bus.on('setInputType', data.setInputType.bind(data));
 
-
 	bus.on('clearData', data.clear.bind(data));
 
 	/*fetching functions*/

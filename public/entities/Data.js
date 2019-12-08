@@ -6,7 +6,7 @@ class Data {
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText,
-				inputType) {
+		inputType) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}

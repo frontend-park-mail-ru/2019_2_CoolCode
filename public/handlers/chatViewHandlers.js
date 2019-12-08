@@ -2,6 +2,7 @@ import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFet
 import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
+import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -89,11 +90,19 @@ function createOpenSettingsMessageHndlr() {
 
 function chooseSendMessageEvent() {
 	event.preventDefault();
-	if (data.getChosenMessageId()) {
-		sendEditedMessageEvent();
-	} else {
-		sendMessageEvent();
+	switch (data.getInputType()) {
+	case 0:
+		if (data.getChosenMessageId()) {
+			sendEditedMessageEvent();
+		} else {
+			sendMessageEvent();
+		}
+		break;
+	case 1:
+		sendPhotosEvent();
+		break;
 	}
+
 }
 
 function createSendMessageBtnHndlr() {
@@ -115,6 +124,18 @@ function createMessageInputHndlr() {
 function growInput(element) {
 	element.style.height = element.style.minHeight;
 	element.style.height = element.scrollHeight;
+}
+
+async function sendPhotosEvent() {
+	const chatBlock = componentsStorage.getChatBlock();
+    const imagesContainer = document.querySelector('.content-container__images');
+    imagesContainer.childNodes.forEach((imageContainer) => {
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const result = await setUserPhoto(formData);
+
+    })
+	componentsStorage.setChatBlock(chatBlock);
 }
 
 async function sendMessageEvent() {

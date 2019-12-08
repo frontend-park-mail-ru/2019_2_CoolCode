@@ -35,6 +35,9 @@ const API = {
 	messageInteraction : (id) => {
 		return `/messages/${id}`;
 	},
+	messageFile : (id) => {
+		return `/messages/chats/${id}/files`;
+	},
 	createChat: '/chats',
 	createChannel : (id) => {
 		return `/workspaces/${id}/channels`;

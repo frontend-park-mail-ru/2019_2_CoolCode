@@ -44,20 +44,20 @@ class TextingAreaComponent extends BaseComponent {
 		imagesContainer.classList.remove('content-container__images_hidden');
 		await this.renderPhotosAll(files);
 		this.createHandlers(imagesContainer);
-		bus.emit('setInputType', null, 1)
+		bus.emit('setInputType', null, 1);
 
 	}
 
 	showTextArea() {
 		document.querySelector('.input__text').classList.remove('input__text_hidden');
 		document.querySelector('.content-container__images').classList += ' content-container__images_hidden';
-		bus.emit('setInputType', null, 0)
+		bus.emit('setInputType', null, 0);
 	}
 
 	renderTo(rootSelector) {
 		const container = document.querySelector(rootSelector);
 		container.innerHTML += this.render();
-		bus.emit('setInputType', null, 0)
+		bus.emit('setInputType', null, 0);
 	}
 
 	render() {
