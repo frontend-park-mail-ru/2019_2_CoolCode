@@ -5,10 +5,10 @@ div.chat-msg__container
         div.primary-row__icon-container
             img.primary-row__icon-container__icon.primary-row__icon-container__icon_style.primary-row__icon-container__icon_size(src='/images/dots.png')
         div.primary-row__time.primary-row__time_style.primary-row__time_style-right=message.message_time
-        if (message.file_id == 0)
-            div.primary-row__text.primary-row__text_style.primary-row__text_style-right=message.text
-        if (message.file_id == 1)
-            div.primary-row__image-container.primary-row__image-container_style-right
+    if (message.message_type == 0)
+        div.primary-row__text.primary-row__text_style.primary-row__text_style-right=text
+    if (message.message_type == 1)
+        div.primary-row__image-container.primary-row__image-container_style-right
     div.secondary-row.secondary-row_right
         if (message.likes)
             div.secondary-row__like

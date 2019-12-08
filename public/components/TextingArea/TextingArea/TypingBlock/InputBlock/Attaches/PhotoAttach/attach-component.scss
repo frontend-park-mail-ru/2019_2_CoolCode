@@ -49,7 +49,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  right: 20px;
+  right: 18px;
 }
 
 .overlay_button__image-container {
@@ -71,23 +71,23 @@
 
 .overlay_button__image-container__icon_size {
   @media screen and (min-height: 10px) {
+    width: 8px;
+    height: 8px;
+  }
+
+  @media screen and (min-height: 400px) {
     width: 10px;
     height: 10px;
   }
 
-  @media screen and (min-height: 400px) {
-    width: 12px;
-    height: 12px;
-  }
-
   @media screen and (min-height: 610px) {
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
   }
 
   @media screen and (min-height: 810px) {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
   }
 }
 

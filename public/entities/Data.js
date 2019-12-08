@@ -5,7 +5,8 @@ class Data {
 		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId, chosenMessageText) {
+		chosenMessageId, chosenMessageText,
+				inputType) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -36,6 +37,8 @@ class Data {
 
 		this.chosenMessageId = chosenMessageId;
 		this.chosenMessageText = chosenMessageText;
+
+		this.inputType = inputType;
 
 		Data.__instance = this;
 	}
@@ -68,6 +71,8 @@ class Data {
 
 		this.chosenMessageId = undefined;
 		this.chosenMessageText = undefined;
+
+		this.inputType = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -480,6 +485,16 @@ class Data {
 		this.chosenMessageText = undefined;
 		this.createLogMessage('set', 'chosenMessageText', undefined);
 
+	}
+
+	setInputType(inputType) {
+		this.inputType = inputType;
+		this.createLogMessage('set', 'inputType', inputType);
+	}
+
+	getInputType() {
+		this.createLogMessage('get', 'inputType', this.inputType);
+		return this.inputType;
 	}
 }
 

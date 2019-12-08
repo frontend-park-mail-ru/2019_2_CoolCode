@@ -17,7 +17,11 @@ class TextingAreaComponent extends BaseComponent {
 		const closeBtns = container.querySelectorAll('.overlay_button__image-container__icon');
 		closeBtns.forEach((closeBtn) => {
 			closeBtn.addEventListener('click', () => {
+				const imagesContainer = document.querySelector('.content-container__images');
 				event.target.parentNode.parentNode.parentNode.remove();
+				if (imagesContainer.childNodes.length === 0) {
+					this.showTextArea();
+				}
 			});
 		});
 	}
@@ -40,17 +44,20 @@ class TextingAreaComponent extends BaseComponent {
 		imagesContainer.classList.remove('content-container__images_hidden');
 		await this.renderPhotosAll(files);
 		this.createHandlers(imagesContainer);
+		bus.emit('setInputType', null, 1)
 
 	}
 
 	showTextArea() {
 		document.querySelector('.input__text').classList.remove('input__text_hidden');
 		document.querySelector('.content-container__images').classList += ' content-container__images_hidden';
+		bus.emit('setInputType', null, 0)
 	}
 
 	renderTo(rootSelector) {
 		const container = document.querySelector(rootSelector);
 		container.innerHTML += this.render();
+		bus.emit('setInputType', null, 0)
 	}
 
 	render() {

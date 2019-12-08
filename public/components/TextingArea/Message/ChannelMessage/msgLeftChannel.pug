@@ -2,10 +2,10 @@ div.chat-msg__container
     div.upper-row.upper-row_left
         div.upper-row__name.upper-row__name_style=user.username
     div.primary-row.primary-row_left
-        if (message.file_id == 0)
-            div.primary-row__text.primary-row__text_style.primary-row__text_style-left=message.text
-        if (message.file_id == 1)
-            div.primary-row__image-container.primary-row__image-container_style-right
+        if (message.message_type == 0)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-left=text
+        if (message.message_type == 1)
+            div.primary-row__image-container.primary-row__image-container_style-left
         div.primary-row__time.primary-row__time_style.primary-row__time_style-left=message.message_time
         //div.primary-row__icon-container
             img.primary-row__icon-container__icon.primary-row__icon-container__icon_style(src='/images/dots.png')

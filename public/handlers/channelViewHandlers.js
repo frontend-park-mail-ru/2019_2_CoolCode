@@ -114,7 +114,7 @@ async function sendEditedMessageChannelEvent() {
 		const date = new currentDate();
 		try {
 			await editingMessage(text, date.getDate(), data.getChosenMessageId());
-			chatBlock.renderEditedMessage(data.getUser(), {id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: date.getDate()});
+			chatBlock.renderEditedMessage(data.getUser(), {id: data.getChosenMessageId(), author_id : data.getUserId(), text: text, message_time: date.getDate(), message_type: 0});
 		} catch (error) {
 			const messageText = data.getChosenMessageText();
 			chatBlock.setMessageInputData(messageText);
@@ -136,7 +136,7 @@ async function sendMessageChannelEvent() {
 		const date = new currentDate();
 		try {
 			const messageId = await sendingMessageChannel(text, date.getDate(), data.getCurrentChannelId());
-			channelBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
+			channelBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate(), message_type: 0});
 		} catch (error) {
 			console.log(`error sending message in channel : ${text}`);
 			//channelBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});

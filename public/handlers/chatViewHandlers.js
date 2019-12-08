@@ -126,10 +126,10 @@ async function sendMessageEvent() {
 		const date = new currentDate();
 		try {
 			const messageId = await sendingMessage(text, date.getDate(), data.getCurrentChatId());
-			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate()});
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate(), message_type: 0});
 
 		} catch (error) {
-			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date});
+			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date, message_type: 0});
 		}
 
 	}

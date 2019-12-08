@@ -1,8 +1,8 @@
 div.chat-msg__container
     div.primary-row.primary-row_left
-        if (file_id == 0)
+        if (message_type == 0)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-left=text
-        if (file_id == 1)
+        if (message_type == 1)
             div.primary-row__image-container.primary-row__image-container_style-left
         div.primary-row__time.primary-row__time_style.primary-row__time_style-left=message_time
         //div.primary-row__icon-container
