@@ -18,7 +18,9 @@ class TextingAreaComponent extends BaseComponent {
 		closeBtns.forEach((closeBtn) => {
 			closeBtn.addEventListener('click', () => {
 				const imagesContainer = document.querySelector('.content-container__images');
-				event.target.parentNode.parentNode.parentNode.remove();
+				const imageParent = event.target.parentNode.parentNode.parentNode;
+				const imageId = imageParent.id.split('-')[1];
+				bus.emit('deleteChosenFile', null, imageId);
 				if (imagesContainer.childNodes.length === 0) {
 					this.showTextArea();
 				}

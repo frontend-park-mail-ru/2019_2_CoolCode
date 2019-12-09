@@ -167,4 +167,48 @@
     filter: opacity(0.5);
 }
 
+/*image-container element*/
 
+.primary-row__image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    position: relative;
+    padding: 2px 2px 2px 2px;
+}
+
+.primary-row__image-container_style-left {
+
+}
+
+.primary-row__image-container_style-right {
+
+}
+
+.primary-row__image-container__image {
+    object-fit: scale-down;
+    object-position: top;
+}
+
+.primary-row__image-container__image_size {
+    @media screen and (min-height: 10px) {
+        width: 80px;
+        height: 80px;
+    }
+
+    @media screen and (min-height: 400px) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 120px;
+        height: 120px;
+    }
+
+    @media screen and (min-height: 810px) {
+        width: 150px;
+        height: 150px;
+    }
+}

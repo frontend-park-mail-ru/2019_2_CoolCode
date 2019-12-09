@@ -10,6 +10,7 @@ function photoDeleteBtnEvent() {
 async function attachPhotos() {
 	if (event.currentTarget.files.length > 10) alert('10 photos');
 	else {
+		bus.emit('setChosenFiles', null, event.currentTarget.files);
 		const chatBlock = componentsStorage.getChatBlock();
 		await chatBlock.renderPhotos(event.currentTarget.files);
 	}

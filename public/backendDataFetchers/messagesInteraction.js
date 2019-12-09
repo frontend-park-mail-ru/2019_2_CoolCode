@@ -85,7 +85,7 @@ async function deletingMessage(id) {
 	}
 }
 
-async function sendingFile(id, formData) {
+async function sendingFile(formData, id) {
 	console.log(` Sending photo in chat ${id}`);
 	try {
 		const response = await FetchModule._doPost(
@@ -94,7 +94,8 @@ async function sendingFile(id, formData) {
 				contentType:'multipart/form-data'}
 		);
 		if (response.status === 200) {
-			return true;
+			const answer = await response.json();
+			console.log(answer);
 		} else {
 			throw new Error(
 				`Error while upload image : ${responseStatuses[response.status]}`);

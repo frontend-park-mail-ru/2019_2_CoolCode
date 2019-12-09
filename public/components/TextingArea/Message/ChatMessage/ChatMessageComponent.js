@@ -12,6 +12,11 @@ class ChatMessageComponent extends BaseComponent {
 
 	messageElement;
 
+	createPhotoMessageTemplate() {
+		this.messageElement = document.createElement('div');
+		this.messageElement.className = 'chat-msg';
+		this.messageElement.id = `photorender-${this._data.message.id}`;
+	}
 	createMessage() {
 		this.messageElement = document.createElement('div');
 		this.messageElement.className = 'chat-msg';
@@ -48,7 +53,13 @@ class ChatMessageComponent extends BaseComponent {
 	render() {
 		if (this._data.message) {
 			this._data.message.message_time = this._data.message.message_time.split(' ')[1];
-			this.createMessage();
+			switch(this._data.message.message_type) {
+			case 0:
+				this.createMessage();
+				break;
+			case 1:
+				this.createPhotoMessageTemplate();
+			}
 			if (this._data.deleted) {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRightDeleted();

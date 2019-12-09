@@ -1,4 +1,4 @@
-import {deletingMessage, editingMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {deletingMessage, editingMessage, sendingFile, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
@@ -126,15 +126,34 @@ function growInput(element) {
 	element.style.height = element.scrollHeight;
 }
 
+function deleteSendingPhoto(id) {
+	const imagesContainer = document.querySelector('.content-container__images');
+	const image = imagesContainer.querySelector(`photoattach-${id}`);
+	image.remove();
+}
+
 async function sendPhotosEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
-    const imagesContainer = document.querySelector('.content-container__images');
-    imagesContainer.childNodes.forEach((imageContainer) => {
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
-        const result = await setUserPhoto(formData);
+	const chosenFiles = data.getChosenFiles();
+	for (let i = 0; i < chosenFiles.length; i++) {
+		if (chosenFiles[i]) {
+			deleteSendingPhoto(i);
+			const date = new currentDate();
+			chatBlock.renderOutgoingMessage({id: i, author_id : data.getUserId(), text : '', message_time: date.getDate(), message_type: 1});
+			const formData = new FormData();
+			formData.append('file', chosenFiles[i]);
+			let chatId = data.getCurrentChatId();
+			if (!chatId) {
+				chatId = data.getCurrentChannelId();
+			}
+			try {
+				//const result = await sendingFile(formData, chatId);
+			} catch (error) {
+				//chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text : '', message_time:  date.getDate(), message_type: 1});
+			}
 
-    })
+		}
+	}
 	componentsStorage.setChatBlock(chatBlock);
 }
 

@@ -6,7 +6,7 @@ class Data {
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText,
-		inputType) {
+		inputType, chosenFiles) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -39,6 +39,7 @@ class Data {
 		this.chosenMessageText = chosenMessageText;
 
 		this.inputType = inputType;
+		this.chosenFiles = chosenFiles;
 
 		Data.__instance = this;
 	}
@@ -73,6 +74,7 @@ class Data {
 		this.chosenMessageText = undefined;
 
 		this.inputType = undefined;
+		this.chosenFiles = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -142,17 +144,21 @@ class Data {
 	}
 
 	setCurrentChatId(currentChatId) {
+		this.currentChannel = undefined;
 		this.currentChatId = currentChatId;
 		this.createLogMessage('set', 'currentChatId', currentChatId);
 		this.setCurrentChat(currentChatId);
 	}
 
 	getCurrentChatId() {
-		this.createLogMessage('get', 'currentChatId', this.currentChatId);
-		return this.currentChatId;
+		if (this.currentChat) {
+			this.createLogMessage('get', 'currentChatId', this.currentChatId);
+			return this.currentChatId;
+		}
 	}
 
 	setCurrentChat(currentChatId) {
+		this.currentChannel = undefined;
 		for (let chat of this.userChats) {
 			if (chat.id == currentChatId) {
 				this.currentChat = chat;
@@ -343,6 +349,7 @@ class Data {
 	}
 
 	setCurrentChannel(currentChannel) {
+		this.currentChat = undefined;
 		this.currentChannel = currentChannel;
 		this.createLogMessage('set', 'currentChannel', currentChannel);
 	}
@@ -356,8 +363,10 @@ class Data {
 		return this.currentChannel;
 	}
 	getCurrentChannelId() {
-		this.createLogMessage('get', 'currentChannelId', this.currentChannel.id);
-		return this.currentChannel.id;
+		if (this.currentChannel) {
+			this.createLogMessage('get', 'currentChannelId', this.currentChannel.id);
+			return this.currentChannel.id;
+		}
 	}
 
 	addCurrentChannelMember(id) {
@@ -496,6 +505,26 @@ class Data {
 		this.createLogMessage('get', 'inputType', this.inputType);
 		return this.inputType;
 	}
+
+	setChosenFiles(chosenFiles) {
+		this.chosenFiles = chosenFiles;
+		this.createLogMessage('set', 'chosenFiles', chosenFiles);
+	}
+
+	getChosenFiles() {
+		this.createLogMessage('get', 'chosenFiles', this.chosenFiles);
+		return this.chosenFiles;
+	}
+
+	deleteChosenFiles() {
+		this.chosenFiles = undefined;
+		this.createLogMessage('set', 'chosenFiles', this.chosenFiles);
+	}
+
+	deleteChosenFile(id) {
+		this.chosenFiles[id] = undefined;
+	}
+
 }
 
 export default Data;
