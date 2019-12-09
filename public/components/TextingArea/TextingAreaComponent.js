@@ -21,8 +21,9 @@ class TextingAreaComponent extends BaseComponent {
 				const imageParent = event.target.parentNode.parentNode.parentNode;
 				const imageId = imageParent.id.split('-')[1];
 				bus.emit('deleteChosenFile', null, imageId);
+				imageParent.remove();
 				if (imagesContainer.childNodes.length === 0) {
-					this.showTextArea();
+					bus.emit('showTextArea', null, 0);
 				}
 			});
 		});
@@ -48,12 +49,6 @@ class TextingAreaComponent extends BaseComponent {
 		this.createHandlers(imagesContainer);
 		bus.emit('setInputType', null, 1);
 
-	}
-
-	showTextArea() {
-		document.querySelector('.input__text').classList.remove('input__text_hidden');
-		document.querySelector('.content-container__images').classList += ' content-container__images_hidden';
-		bus.emit('setInputType', null, 0);
 	}
 
 	renderTo(rootSelector) {

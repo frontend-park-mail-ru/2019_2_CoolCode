@@ -38,6 +38,9 @@ const API = {
 	messageFile : (id) => {
 		return `/messages/chats/${id}/files`;
 	},
+	messageFileRequest : (id, fileId) => {
+		return `/messages/chats/${id}/files/${fileId}`;
+	},
 	createChat: '/chats',
 	createChannel : (id) => {
 		return `/workspaces/${id}/channels`;

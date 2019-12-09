@@ -178,6 +178,9 @@
     padding: 2px 2px 2px 2px;
 }
 
+.primary-row__image-container_hidden{
+    display: none;
+}
 .primary-row__image-container_style-left {
 
 }
@@ -189,9 +192,44 @@
 .primary-row__image-container__image {
     object-fit: scale-down;
     object-position: top;
+    height:auto;
+    width: auto;
 }
 
 .primary-row__image-container__image_size {
+    @media screen and (min-height: 10px) {
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    @media screen and (min-height: 400px) {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    @media screen and (min-height: 610px) {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    @media screen and (min-height: 810px) {
+        max-width: 150px;
+        max-height: 150px;
+    }
+}
+
+/*loader-container element*/
+
+.primary-row__loader-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    padding: 2px 2px 2px 2px;
+}
+
+
+.primary-row__loader-container_size {
     @media screen and (min-height: 10px) {
         width: 80px;
         height: 80px;
@@ -211,4 +249,60 @@
         width: 150px;
         height: 150px;
     }
+}
+
+.primary-row__loader-container_hidden{
+    display: none;
+}
+
+.primary-row__loader-container__loader {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+}
+
+.primary-row__loader-container__loader_style {
+    border-radius: 70px;
+    border: 2px solid #FFFFFF;
+
+}
+
+
+
+.primary-row__loader-container__loader_size {
+    @media screen and (min-height: 10px) {
+        width: 25px;
+        height: 25px;
+    }
+
+    @media screen and (min-height: 400px) {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 35px;
+        height: 35px;
+    }
+
+    @media screen and (min-height: 810px) {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+.primary-row__loader-container__loader::after{
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    bottom: 50%;
+    left: 46%;
+    height: 10px;
+    width: 3px;
+    border-radius: 2px;
+    -webkit-transform-origin: 50% 97%;
+    transform-origin: 50% 97%;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
 }

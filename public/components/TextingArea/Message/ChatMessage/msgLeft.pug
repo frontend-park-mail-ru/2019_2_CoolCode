@@ -3,7 +3,11 @@ div.chat-msg__container
         if (message_type == 0)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-left=text
         if (message_type == 1)
-            div.primary-row__image-container.primary-row__image-container_style-left
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-left
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-left.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_size(src='/images/abkhazia.jpg')
         div.primary-row__time.primary-row__time_style.primary-row__time_style-left=message_time
         //div.primary-row__icon-container
             img.primary-row__icon-container__icon.primary-row__icon-container__icon_style(src='/images/dots.png')

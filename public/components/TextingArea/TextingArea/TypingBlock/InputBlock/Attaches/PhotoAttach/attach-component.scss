@@ -17,27 +17,29 @@
 .attach-component__image {
   object-fit: scale-down;
   object-position: top;
+  height: auto;
+  width: auto;
 }
 
 .attach-component__image_size {
   @media screen and (min-height: 10px) {
-    width: 30px;
-    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
   }
 
   @media screen and (min-height: 400px) {
-    width: 40px;
-    height:40px;
+    max-width: 40px;
+    max-height:40px;
   }
 
   @media screen and (min-height: 610px) {
-    width: 50px;
-    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
   }
 
   @media screen and (min-height: 810px) {
-    width: 60px;
-    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
   }
 }
 

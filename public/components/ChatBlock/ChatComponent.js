@@ -3,6 +3,10 @@ import './bemChatPageBlocks/bemChatColumn/bem-chat-column.scss';
 import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.scss';
 import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
+import {getPhoto} from "../../backendDataFetchers/gettingInfo";
+import MyWorker from "../../workers/profile.worker";
+import {bus, data, promiseMaker} from "../../main";
+import {getChatFile} from "../../backendDataFetchers/filesRequest";
 
 const chatTemplate = require('./chat.pug');
 
@@ -45,6 +49,9 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
+    	if (messageData.message_type == 1) {
+    		this.setMessagePhoto(messageData);
+    	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
@@ -77,13 +84,36 @@ class ChatComponent extends BaseComponent {
 
     }
 
-    renderContent() {
+    async setMessagePhoto(message) {
+    	let chatId = data.getCurrentChatId();
+    	if (!chatId) {
+    		chatId = data.getCurrentChannelId();
+    	}
+    	const buffer = await getChatFile(chatId, message.file_id);
+    	const worker = new MyWorker();
+    	worker.postMessage(buffer);
+    	worker.onmessage = function (result) {
+    		const messageBlock = document.getElementById(`message-${message.id}`);
+    		messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+    		bus.emit('showPhotoContent', null, messageBlock);
+    	};
+    }
+
+    async renderContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
-    		this._data.chatMessages.forEach((message) => {
-    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user, error: false, deleted:false}, contentListRoot);
+    		for (const message of this._data.chatMessages) {
+    			const messageComponent = new ChatMessageComponent({
+    				message: message,
+    				user: this._data.user,
+    				error: false,
+    				deleted: false
+    			}, contentListRoot);
     			contentListRoot.appendChild(messageComponent.render());
-    		});
+    			if (message.message_type == 1) {
+    				this.setMessagePhoto(message);
+    			}
+    		}
     	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }

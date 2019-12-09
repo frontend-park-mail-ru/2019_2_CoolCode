@@ -3,6 +3,7 @@ import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
+import MyWorker from "../workers/profile.worker";
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -126,10 +127,25 @@ function growInput(element) {
 	element.style.height = element.scrollHeight;
 }
 
-function deleteSendingPhoto(id) {
+function deleteSendingPhoto(id, chatBlock) {
 	const imagesContainer = document.querySelector('.content-container__images');
-	const image = imagesContainer.querySelector(`photoattach-${id}`);
-	image.remove();
+	const image = imagesContainer.querySelector(`#photoattach-${id}`);
+	image.parentNode.remove();
+	if (imagesContainer.childNodes.length === 0) {
+		showTextArea();
+	}
+}
+
+function showPhotoContent(messageBlock) {
+	messageBlock.querySelector('.primary-row__image-container').classList.remove('primary-row__image-container_hidden');
+	const imagesClassList = messageBlock.querySelector('.primary-row__image-container').classList;
+	messageBlock.querySelector('.primary-row__loader-container').classList = `${imagesClassList} primary-row__loader-container_hidden`;
+}
+
+function showTextArea() {
+	document.querySelector('.input__text').classList.remove('input__text_hidden');
+	document.querySelector('.content-container__images').classList += ' content-container__images_hidden';
+	bus.emit('setInputType', null, 0);
 }
 
 async function sendPhotosEvent() {
@@ -137,9 +153,8 @@ async function sendPhotosEvent() {
 	const chosenFiles = data.getChosenFiles();
 	for (let i = 0; i < chosenFiles.length; i++) {
 		if (chosenFiles[i]) {
-			deleteSendingPhoto(i);
-			const date = new currentDate();
-			chatBlock.renderOutgoingMessage({id: i, author_id : data.getUserId(), text : '', message_time: date.getDate(), message_type: 1});
+			deleteSendingPhoto(i, chatBlock);
+
 			const formData = new FormData();
 			formData.append('file', chosenFiles[i]);
 			let chatId = data.getCurrentChatId();
@@ -147,8 +162,19 @@ async function sendPhotosEvent() {
 				chatId = data.getCurrentChannelId();
 			}
 			try {
-				//const result = await sendingFile(formData, chatId);
+				const result = await sendingFile(formData, chatId);
+				const messageId = result.id;
+				chatBlock.renderOutgoingMessage(result);
+
+				const worker = new MyWorker();
+				worker.postMessage(chosenFiles[i]);
+				worker.onmessage = function (result) {
+					const messageBlock = document.getElementById(`message-${messageId}`);
+					messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+					showPhotoContent(messageBlock);
+				};
 			} catch (error) {
+				console.log(error);
 				//chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text : '', message_time:  date.getDate(), message_type: 1});
 			}
 
@@ -199,5 +225,5 @@ async function sendEditedMessageEvent() {
 }
 
 export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock,
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
 };

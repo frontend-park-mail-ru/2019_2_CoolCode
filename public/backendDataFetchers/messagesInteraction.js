@@ -94,8 +94,7 @@ async function sendingFile(formData, id) {
 				contentType:'multipart/form-data'}
 		);
 		if (response.status === 200) {
-			const answer = await response.json();
-			console.log(answer);
+			return await response.json();
 		} else {
 			throw new Error(
 				`Error while upload image : ${responseStatuses[response.status]}`);
