@@ -10,6 +10,11 @@ const containerTemplate = require('./PrimaryContainer/container.pug');
 
 class BasicsComponent extends BaseComponent {
 
+	rerenderHeader() {
+		this._parent.firstChild.remove();
+		this._parent.firstChild.insertAdjacentHTML('beforebegin', `${headerTemplate(this._data)}`);
+	}
+
 	renderTo() {
 		this._parent.innerHTML = "";
 		this._parent.innerHTML = this.render();

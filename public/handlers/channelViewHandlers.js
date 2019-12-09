@@ -1,12 +1,18 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
-import {editingMessage} from "../backendDataFetchers/messagesInteraction";
+import {editingMessage, sendingFile} from "../backendDataFetchers/messagesInteraction";
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.scss';
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {sendingMessageChannel} from "../backendDataFetchers/channelMessagesInteraction";
-import {createHiddenSettingsMessageBlock, createVisibleSettingsMessageBlock, growInput} from "./chatViewHandlers";
+import {
+	createHiddenSettingsMessageBlock,
+	createVisibleSettingsMessageBlock, deleteSendingPhoto,
+	growInput,
+	showPhotoContent
+} from "./chatViewHandlers";
 import {alterChannel} from "../backendDataFetchers/alterEntities";
+import MyWorker from "../workers/profile.worker";
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
 async function menuClickEvent() {
@@ -82,10 +88,17 @@ function createAddChannelMemberHndlr() {
 
 function chooseSendMessageChannelEvent() {
 	event.preventDefault();
-	if (data.getChosenMessageId()) {
-		sendEditedMessageChannelEvent();
-	} else {
-		sendMessageChannelEvent();
+	switch (data.getInputType()) {
+	case 0:
+		if (data.getChosenMessageId()) {
+			sendEditedMessageChannelEvent();
+		} else {
+			sendMessageChannelEvent();
+		}
+		break;
+	case 1:
+		sendPhotosChannelEvent();
+		break;
 	}
 }
 
@@ -103,6 +116,42 @@ function createMessageInputChannelHndlr() {
 function createSendMessageBtnChannelHndlr() {
 	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[1];
 	sendBtn.addEventListener('click', chooseSendMessageChannelEvent);
+}
+
+async function sendPhotosChannelEvent() {
+	// const chatBlock = componentsStorage.getChatBlock();
+	// const chosenFiles = data.getChosenFiles();
+	// for (let i = 0; i < chosenFiles.length; i++) {
+	// 	if (chosenFiles[i]) {
+	// 		deleteSendingPhoto();
+	//
+	// 		const formData = new FormData();
+	// 		formData.append('file', chosenFiles[i].file);
+	// 		let chatId = data.getCurrentChatId();
+	// 		if (!chatId) {
+	// 			chatId = data.getCurrentChannelId();
+	// 		}
+	// 		try {
+	// 			const result = await sendingFile(formData, chatId);
+	// 			const messageId = result.id;
+	// 			chatBlock.renderOutgoingMessage(result);
+	//
+	// 			const worker = new MyWorker();
+	// 			worker.postMessage(chosenFiles[i].file);
+	// 			worker.onmessage = function (result) {
+	// 				const messageBlock = document.getElementById(`message-${messageId}`);
+	// 				messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+	// 				showPhotoContent(messageBlock);
+	// 			};
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 			const date = new currentDate();
+	// 			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text : 'haven\'t sent message', message_time:  date.getDate(), message_type: 1});
+	// 		}
+	//
+	// 	}
+	// }
+	// componentsStorage.setChatBlock(chatBlock);
 }
 
 async function sendEditedMessageChannelEvent() {

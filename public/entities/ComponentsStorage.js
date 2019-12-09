@@ -44,7 +44,7 @@ class ComponentsStorage {
 	setHeader(header) {
 		try {
 			if (header instanceof BasicsComponent) {
-				this.headerBlock = BasicsComponent;
+				this.headerBlock = header;
 			} else{
 				throw new Error('Can\'t set headerBlock component');
 			}
@@ -59,9 +59,11 @@ class ComponentsStorage {
 			let headerBlock = new BasicsComponent(data, parent);
 			headerBlock.renderTo();
 			this.setHeader(headerBlock);
+		} else {
+			this.headerBlock.setData(data);
+			this.headerBlock.setParent(parent);
 		}
 		return this.headerBlock;
-
 	}
 
 	setLeftColumn(leftColumn) {

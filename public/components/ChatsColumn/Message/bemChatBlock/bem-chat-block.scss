@@ -69,6 +69,19 @@
     border-radius: 50%;
 }
 
+.chat-block__image-row__loader_size {
+
+    @media screen and (min-height: 10px) {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 50px;
+        height: 60px;
+    }
+}
+
 
 .chat-block__image-row__image {
     object-position: center center;

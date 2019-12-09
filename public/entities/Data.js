@@ -506,9 +506,15 @@ class Data {
 		return this.inputType;
 	}
 
-	setChosenFiles(chosenFiles) {
-		this.chosenFiles = chosenFiles;
-		this.createLogMessage('set', 'chosenFiles', chosenFiles);
+	setChosenFile(file) {
+		if (this.chosenFiles) {
+			this.chosenFiles.push(file);
+		} else {
+			var files = [];
+			files.push(file);
+			this.chosenFiles = files;
+		}
+		this.createLogMessage('set', 'chosenFiles', this.chosenFiles);
 	}
 
 	getChosenFiles() {
@@ -522,7 +528,29 @@ class Data {
 	}
 
 	deleteChosenFile(id) {
-		this.chosenFiles[id] = undefined;
+		var newFiles = [];
+		let i = 0;
+		for ( ; i < this.chosenFiles.length; i++) {
+			if (this.chosenFiles[i].id == id) {
+				break;
+			} else {
+				newFiles[i] = this.chosenFiles[i];
+			}
+		}
+		for (let j = i; j < this.chosenFiles.length - 1 ; j++) {
+			newFiles[j] = this.chosenFiles[j + 1];
+		}
+		this.chosenFiles = newFiles;
+
+	}
+
+	getChosenFilesLength() {
+		if (this.chosenFiles) {
+			return this.chosenFiles.length;
+		} else {
+			return 0;
+		}
+
 	}
 
 }

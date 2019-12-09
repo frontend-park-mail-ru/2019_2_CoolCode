@@ -1,37 +1,12 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
-import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
-import {getProfilePhoto} from "./photosHandlers";
-import MyWorker from "../workers/profile.worker";
-
-function photoDeleteBtnEvent() {
-	event.currentTarget.parentNode.remove();
-}
 
 async function attachPhotos() {
-	if (event.currentTarget.files.length > 10) alert('10 photos');
+	if (event.currentTarget.files.length > (10 - data.getChosenFilesLength())) alert('Can upload maximum 10 photos');
 	else {
-		bus.emit('setChosenFiles', null, event.currentTarget.files);
 		const chatBlock = componentsStorage.getChatBlock();
 		await chatBlock.renderPhotos(event.currentTarget.files);
 	}
-
 }
-//
-// async function imageUploading(params = {id: null, fileInput: null}) {
-// 	const {id, fileInput} = params;
-// 	if (!validation.validatePhotoFormat(fileInput.files[0])) {
-// 		emitError(fileInput.parentNode.parentNode, 'profile-header__image-row__error', null, 'Please, input image');
-// 	} else {
-// 		bus.emit('hideError', null, `.profile-header__image-row__error`);
-// 		const formData = new FormData();
-// 		formData.append('file', fileInput.files[0]);
-// 		const result = await setUserPhoto(formData);
-// 		if (result) {
-// 			bus.emit('showLoader', null, '.profile-header__content');
-// 			getProfilePhoto(id);
-// 		}
-// 	}
-// }
 
 function attachesDropdownClickEvent() {
 	const input = event.target.firstElementChild;

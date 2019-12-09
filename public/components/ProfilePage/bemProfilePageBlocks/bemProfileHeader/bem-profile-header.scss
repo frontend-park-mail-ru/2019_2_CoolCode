@@ -99,6 +99,28 @@
     border-radius: 50%;
 }
 
+.profile-header__content__loader_size {
+    @media screen and (min-height: 10px) {
+        width: 90px;
+        height: 90px;
+    }
+
+    @media screen and (min-height: 400px) {
+        width: 140px;
+        height: 140px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 160px;
+        height: 160px;
+    }
+
+    @media screen and (min-height: 810px) {
+        width: 170px;
+        height: 170px;
+    }
+}
+
 /* input element in content*/
 
 .profile-header__content__input {

@@ -49,13 +49,6 @@ class ChatMessageComponent extends BaseComponent {
 		if (this._data.message) {
 			this._data.message.message_time = this._data.message.message_time.split(' ')[1];
 			this.createMessage();
-			// switch(this._data.message.message_type) {
-			// case 0:
-			// 	this.createMessage();
-			// 	break;
-			// case 1:
-			// 	this.createPhotoMessageTemplate();
-			// }
 			if (this._data.deleted) {
 				if (this._data.message.author_id === this._data.user.id) {
 					this.renderRightDeleted();

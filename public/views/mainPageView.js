@@ -11,6 +11,7 @@ class mainPageView extends BaseView {
 	setContent() {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
+		this._parent = document.querySelector('.main');
 	}
 
 	show() {
@@ -22,7 +23,10 @@ class mainPageView extends BaseView {
 	}
 	async drawBasics() {
 		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
-		await promiseMaker.createPromise('getHeaderPhoto');
+		header.rerenderHeader();
+		if (this.data.loggedIn) {
+			await promiseMaker.createPromise('getHeaderPhoto');
+		}
 	}
 
 	render() {

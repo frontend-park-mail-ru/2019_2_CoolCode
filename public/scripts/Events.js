@@ -59,9 +59,9 @@ function createEvents() {
 	bus.on('setChosenMessageText', data.setChosenMessageText.bind(data));
 	bus.on('deleteChosenMessageText', data.deleteChosenMessageText.bind(data));
 	bus.on('setInputType', data.setInputType.bind(data));
-	bus.on('setChosenFiles', data.setChosenFiles.bind(data));
 	bus.on('deleteChosenFiles', data.deleteChosenFiles.bind(data));
 	bus.on('deleteChosenFile', data.deleteChosenFile.bind(data));
+	bus.on('setChosenFile', data.setChosenFile.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 

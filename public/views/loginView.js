@@ -13,9 +13,7 @@ class loginView extends BaseView {
 		bus.emit('createRegisterForm', null, this._data.viewType);
 	}
 	async drawBasics() {
-		const basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
-		await promiseMaker.createPromise('getHeaderPhoto');
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
 	}
 	render() {
 		this.drawBasics();

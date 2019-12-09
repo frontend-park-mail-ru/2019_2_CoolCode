@@ -8,6 +8,7 @@ import './TextingArea/TypingBlock/typing-block.css';
 import MyWorker from "../../workers/profile.worker";
 import {bus, data, promiseMaker} from "../../main";
 import AttachComponent from "./TextingArea/TypingBlock/InputBlock/Attaches/PhotoAttach/AttachComponent";
+import {getRandomInt} from "../../modules/random";
 
 const textingAreaTemplate = require('./textarea.pug');
 
@@ -19,9 +20,12 @@ class TextingAreaComponent extends BaseComponent {
 			closeBtn.addEventListener('click', () => {
 				const imagesContainer = document.querySelector('.content-container__images');
 				const imageParent = event.target.parentNode.parentNode.parentNode;
-				const imageId = imageParent.id.split('-')[1];
-				bus.emit('deleteChosenFile', null, imageId);
-				imageParent.remove();
+				const imageId = imageParent.firstChild.id.split('-')[1];
+				promiseMaker.createPromise('deleteChosenFile', imageId).then(
+					() => {
+						imageParent.remove();
+					}
+				);
 				if (imagesContainer.childNodes.length === 0) {
 					bus.emit('showTextArea', null, 0);
 				}
@@ -31,12 +35,14 @@ class TextingAreaComponent extends BaseComponent {
 
 	async renderPhotosAll(files) {
 		for (let i = 0; i < files.length; i++) {
-			const photoAttach = new AttachComponent({id:i});
+			const attachId = getRandomInt(1000);
+			bus.emit('setChosenFile', null, {file: files[i], id : attachId});
+			const photoAttach = new AttachComponent({id:attachId});
 			photoAttach.renderTo('.content-container__images');
 			const worker = new MyWorker();
 			worker.postMessage(files[i]);
 			worker.onmessage = function (result) {
-				bus.emit('setPicture', null, `#photoattach-${i}`,result.data);
+				bus.emit('setPicture', null, `#photoattach-${attachId}`,result.data);
 			};
 		}
 	}

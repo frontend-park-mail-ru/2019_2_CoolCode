@@ -4,12 +4,16 @@ import './bemChannelHeader/channelHeader/channel-header.scss';
 import './bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
 import ChannelMessageComponent from "../TextingArea/Message/ChannelMessage/ChannelMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
+import {bus, data} from "../../main";
+import {getChatFile} from "../../backendDataFetchers/filesRequest";
+import MyWorker from "../../workers/profile.worker";
 
 const channelTemplate = require('./channel.pug');
 
 class ChannelComponent extends BaseComponent {
 
 	contentListRootSelector = '.msgwindow-container__msgwindow';
+	textAreaComponent;
 
 	slideToMessage() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
@@ -89,6 +93,21 @@ class ChannelComponent extends BaseComponent {
 
 	}
 
+	async setMessagePhoto(message) {
+		let chatId = data.getCurrentChatId();
+		if (!chatId) {
+			chatId = data.getCurrentChannelId();
+		}
+		const buffer = await getChatFile(chatId, message.file_id);
+		const worker = new MyWorker();
+		worker.postMessage(buffer);
+		worker.onmessage = function (result) {
+			const messageBlock = document.getElementById(`message-${message.id}`);
+			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+			bus.emit('showPhotoContent', null, messageBlock);
+		};
+	}
+
 	renderContent() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		if (this._data.channelMessages) {
@@ -96,15 +115,22 @@ class ChannelComponent extends BaseComponent {
 				const messageComponent = new ChannelMessageComponent({messageUser: message.user, message: message.message,
 					user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
 				contentListRoot.appendChild(messageComponent.render());
+				if (message.message.message_type == 1) {
+					this.setMessagePhoto(message.message);
+				}
 			});
 		}
 		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
 	renderTextingArea() {
-		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-		const textingArea = new TextingAreaComponent(this._data, contentListRoot);
-		textingArea.renderTo('.chat-column');
+		const contentListRoot = document.querySelector(this.contentListRootSelector);
+		this.textAreaComponent = new TextingAreaComponent(this._data, contentListRoot);
+		this.textAreaComponent.renderTo('.chat-column');
+	}
+
+	async renderPhotos(files) {
+		await this.textAreaComponent.renderPhotos(files);
 	}
 
 	render() {

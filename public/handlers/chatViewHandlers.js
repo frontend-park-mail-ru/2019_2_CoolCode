@@ -127,10 +127,12 @@ function growInput(element) {
 	element.style.height = element.scrollHeight;
 }
 
-function deleteSendingPhoto(id, chatBlock) {
+function deleteSendingPhoto() {
 	const imagesContainer = document.querySelector('.content-container__images');
-	const image = imagesContainer.querySelector(`#photoattach-${id}`);
-	image.parentNode.remove();
+	// const image = imagesContainer.querySelector(`#photoattach-${id}`);
+	//image.parentNode.remove();
+	const image = imagesContainer.querySelector('.attach-component');
+	image.remove();
 	if (imagesContainer.childNodes.length === 0) {
 		showTextArea();
 	}
@@ -146,6 +148,7 @@ function showTextArea() {
 	document.querySelector('.input__text').classList.remove('input__text_hidden');
 	document.querySelector('.content-container__images').classList += ' content-container__images_hidden';
 	bus.emit('setInputType', null, 0);
+	bus.emit('deleteChosenFiles', null);
 }
 
 async function sendPhotosEvent() {
@@ -153,10 +156,10 @@ async function sendPhotosEvent() {
 	const chosenFiles = data.getChosenFiles();
 	for (let i = 0; i < chosenFiles.length; i++) {
 		if (chosenFiles[i]) {
-			deleteSendingPhoto(i, chatBlock);
+			deleteSendingPhoto();
 
 			const formData = new FormData();
-			formData.append('file', chosenFiles[i]);
+			formData.append('file', chosenFiles[i].file);
 			let chatId = data.getCurrentChatId();
 			if (!chatId) {
 				chatId = data.getCurrentChannelId();
@@ -167,7 +170,7 @@ async function sendPhotosEvent() {
 				chatBlock.renderOutgoingMessage(result);
 
 				const worker = new MyWorker();
-				worker.postMessage(chosenFiles[i]);
+				worker.postMessage(chosenFiles[i].file);
 				worker.onmessage = function (result) {
 					const messageBlock = document.getElementById(`message-${messageId}`);
 					messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
@@ -175,7 +178,8 @@ async function sendPhotosEvent() {
 				};
 			} catch (error) {
 				console.log(error);
-				//chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text : '', message_time:  date.getDate(), message_type: 1});
+				const date = new currentDate();
+				chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text : 'haven\'t sent message', message_time:  date.getDate(), message_type: 1});
 			}
 
 		}
@@ -225,5 +229,5 @@ async function sendEditedMessageEvent() {
 }
 
 export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea, deleteSendingPhoto
 };

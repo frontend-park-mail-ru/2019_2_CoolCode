@@ -14,7 +14,6 @@ class signUpView extends BaseView {
 	}
 	async drawBasics() {
 		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
-		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 	render() {
 		this.drawBasics();
