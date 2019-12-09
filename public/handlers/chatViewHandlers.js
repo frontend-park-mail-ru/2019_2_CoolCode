@@ -4,6 +4,20 @@ import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
+let chunks = [];
+
+function onRecordingReady(e) {
+	chunks.length = 0;
+	chunks.push(e.data);
+	let audio = document.getElementById('audio');
+	let input = document.querySelector('.input__text.input__text_style');
+	audio.style.display = 'flex';
+	input.style.display = 'none';
+
+	audio.src = URL.createObjectURL(e.data);// e.data contains a blob representing the recording
+
+	//audio.play();
+}
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -188,8 +202,22 @@ async function sendPhotosEvent() {
 }
 
 async function sendMessageEvent() {
+	let audio = document.getElementById('audio');
+	let input = document.querySelector('.input__text.input__text_style');
 	const chatBlock = componentsStorage.getChatBlock();
 	const text = chatBlock.getMessageInputData();
+	if(chunks.length > 0) {
+		console.log("CHUNKS2", chunks);
+		audio.style.display = 'none';
+		input.style.display = 'flex';
+		const date = new currentDate();
+		const formData = new FormData();
+		formData.append('file', chunks[0]);
+		const result = await sendingFile(formData, data.getCurrentChatId());
+		const messageId = result.id;
+		chatBlock.renderOutgoingRecord({id: messageId, author_id : data.getUserId(),text: null, record: chunks, message_time: date.getDate()});
+	}
+
 	if (text !== '') {
 		console.log(`new message : ${text}`);
 		chatBlock.setMessageInputData('');
@@ -228,6 +256,43 @@ async function sendEditedMessageEvent() {
 	componentsStorage.setChatBlock(chatBlock);
 }
 
-export {createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea, deleteSendingPhoto
+function recordMessage() {
+	let recorder;
+	const audio = document.getElementById('audio');
+	const input = document.querySelector('.input__text.input__text_style');
+	const microphone = document.querySelector('.input__icon-container__icon_microphone.input__icon-container__icon_microphone_style');
+	navigator.mediaDevices.getUserMedia({
+		audio: true
+	})
+		.then(function (stream) {
+			recorder = new MediaRecorder(stream);
+			recorder.addEventListener('dataavailable', onRecordingReady);
+			microphone.addEventListener('click',()=>{
+				if(recorder.state == 'recording') {
+					recorder.stop();
+					audio.style.display = 'flex';
+					input.style.display = 'none';
+					console.log("STOP RECORD", recorder.state);
+					microphone.style.background = 'white';
+					microphone.style.filter = 'opacity(0.9)';
+					input.value = '';
+					input.style.color = 'black';
+				}else if(recorder.state == 'inactive') {
+					recorder.start();
+					audio.style.display = 'none';
+					input.style.display = 'flex';
+					microphone.style.background = 'red';
+					microphone.style.borderRadius = '20px';
+					microphone.style.filter = 'invert(0.1) brightness(300%) saturate(100%)';
+					input.value = "recording...";
+					input.style.color = 'red';
+					console.log("START RECORD", recorder.state);
+
+				}
+			});
+		});
+}
+
+export {recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
 };

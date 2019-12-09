@@ -11,7 +11,7 @@ import {
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr,
 	createMessageInputHndlr,
-	createSendMessageBtnHndlr,
+	createSendMessageBtnHndlr, recordMessage,
 } from "../handlers/chatViewHandlers";
 import {
 	channelViewHandler,
@@ -38,7 +38,7 @@ class chatView extends BaseView {
 		createMessageInputHndlr();
 
 		createSendMessageBtnHndlr();
-
+		recordMessage();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();

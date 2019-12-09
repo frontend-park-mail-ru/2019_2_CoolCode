@@ -13,9 +13,19 @@ class ChatMessageComponent extends BaseComponent {
 	messageElement;
 
 	createMessage() {
-		this.messageElement = document.createElement('div');
-		this.messageElement.className = 'chat-msg';
-		this.messageElement.id = `message-${this._data.message.id}`;
+		let audio = document.getElementById('audio');
+		let input = document.querySelector('.input__text.input__text_style');
+		if(this._data.message.text == null) {
+			audio.style.display = 'none';
+			input.style.display = 'flex';
+			this.messageElement = document.createElement('div');
+			this.messageElement.className = 'chat-msg';
+			this.messageElement.id = `message-${this._data.message.id}`;
+		}else{
+			this.messageElement = document.createElement('div');
+			this.messageElement.className = 'chat-msg';
+			this.messageElement.id = `message-${this._data.message.id}`;
+		}
 	}
 
 	createHandlerRight() {
@@ -57,6 +67,12 @@ class ChatMessageComponent extends BaseComponent {
 				}
 			} else {
 				if (this._data.message.author_id === this._data.user.id) {
+					if(this._data.message.record != null) {
+						const blob = new Blob(this._data.message.record);
+						this._data.message.record = URL.createObjectURL(blob);
+						this._data.message.message_type = 0;
+						console.log("res", this._data.message.message_type);
+					}
 					this.renderRight();
 					if (this._data.error) {
 						const textClassList = this.messageElement.querySelector('.primary-row__text').classList;

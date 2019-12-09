@@ -6,7 +6,7 @@ import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
 import {
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
-	createEditMessageBlockHndlr,
+	createEditMessageBlockHndlr, recordMessage,
 } from "../handlers/chatViewHandlers";
 
 import {
@@ -32,6 +32,7 @@ class channelView extends BaseView {
 		menuHandlers();
 		createLikeBtnHndlr();
 		createEditMessageBlockHndlr();
+		recordMessage();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
 		createAttachButton();
