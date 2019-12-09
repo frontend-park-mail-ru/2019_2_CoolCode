@@ -306,3 +306,11 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }
+
+.primary-row__audio {
+    position: relative;
+    max-width: 100%;
+    min-height: 2vh;
+    width: 150px;
+    height: 25px;
+}
