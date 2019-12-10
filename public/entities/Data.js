@@ -6,7 +6,7 @@ class Data {
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText,
-		inputType, chosenFiles) {
+		inputType, chosenFiles, chunks) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -40,6 +40,7 @@ class Data {
 
 		this.inputType = inputType;
 		this.chosenFiles = chosenFiles;
+		this.chunks = chunks;
 
 		Data.__instance = this;
 	}
@@ -75,6 +76,7 @@ class Data {
 
 		this.inputType = undefined;
 		this.chosenFiles = undefined;
+		this.chunks = undefined;
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -551,6 +553,21 @@ class Data {
 			return 0;
 		}
 
+	}
+
+	setChunks(chunks) {
+		this.chunks = chunks;
+		this.createLogMessage('set', 'chunks', this.chunks);
+	}
+
+	getChunks() {
+		this.createLogMessage('get', 'chunks', this.chunks);
+		return this.chunks;
+	}
+
+	deleteChunks() {
+		this.chunks = undefined;
+		this.createLogMessage('set', 'chunks', this.chunks);
 	}
 
 }

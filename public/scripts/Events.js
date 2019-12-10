@@ -62,6 +62,8 @@ function createEvents() {
 	bus.on('deleteChosenFiles', data.deleteChosenFiles.bind(data));
 	bus.on('deleteChosenFile', data.deleteChosenFile.bind(data));
 	bus.on('setChosenFile', data.setChosenFile.bind(data));
+	bus.on('deleteChunks', data.deleteChunks.bind(data));
+	bus.on('setChunks', data.setChunks.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 

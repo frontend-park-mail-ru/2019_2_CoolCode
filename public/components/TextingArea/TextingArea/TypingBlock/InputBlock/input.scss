@@ -58,6 +58,18 @@
     border-radius: 20px;
 }
 
+.input__icon-container__icon_microphone {
+    background: #FFFFFF;
+}
+
+.input__icon-container__icon_microphone-recording {
+    background: var(--global-error-color);
+    border-radius: 20px;
+    filter: invert(0.1) brightness(300%) saturate(100%);
+}
+
+
+
 /*content-container element*/
 
 
@@ -93,6 +105,9 @@
     box-sizing: border-box;
     min-height: 50%;
     max-height: 100%;
+}
+
+.input__record_hidden {
     display: none;
 }
 
@@ -106,17 +121,19 @@
     -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
 }
 
-.input__icon-container__icon_microphone {
-    object-fit: scale-down;
-    object-position: top;
-    max-width:40%;
-    max-height:40%;
-    height: 3vh; /*experimenting with viewports*/
-}
-.input__icon-container__icon_microphone_style {
-    background: white;
-    filter: opacity(0.9);
-}
+//.input__icon-container__icon_microphone {
+//    object-fit: scale-down;
+//    object-position: top;
+//    max-width:40%;
+//    max-height:40%;
+//    height: 3vh; /*experimenting with viewports*/
+//}
+//.input__icon-container__icon_microphone_style {
+//    background: white;
+//    filter: opacity(0.9);
+//}
+
+
 .input__record_style {
     outline: none;
     border: none;
@@ -124,6 +141,7 @@
     border-radius: 60px;
     background-color: var(--global-grey-color);
 }
+
 controls{
     background-color: #1d916b;
 }
@@ -167,6 +185,10 @@ controls{
 
 .input__text_hidden {
     display: none;
+}
+
+.input__text_recording {
+    color: var(--global-error-color);
 }
 
 /*images element*/

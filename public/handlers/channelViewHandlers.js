@@ -114,7 +114,7 @@ function createMessageInputChannelHndlr() {
 }
 
 function createSendMessageBtnChannelHndlr() {
-	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[1];
+	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[2];
 	sendBtn.addEventListener('click', chooseSendMessageChannelEvent);
 }
 

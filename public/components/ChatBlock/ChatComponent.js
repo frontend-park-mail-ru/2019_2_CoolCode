@@ -91,17 +91,20 @@ class ChatComponent extends BaseComponent {
 
     }
 
-    async setMessagePhoto(message) {
+    async setMessageContent(message) {
     	let chatId = data.getCurrentChatId();
     	if (!chatId) {
     		chatId = data.getCurrentChannelId();
     	}
     	const buffer = await getChatFile(chatId, message.file_id);
+    	// const file = new File([buffer], "a");
+    	// console.log(file);
     	const worker = new MyWorker();
     	worker.postMessage(buffer);
     	worker.onmessage = function (result) {
+    		const resultData = result.data;
     		const messageBlock = document.getElementById(`message-${message.id}`);
-    		messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+    		messageBlock.querySelector('.primary-row__image-container__image').src = resultData;
     		bus.emit('showPhotoContent', null, messageBlock);
     	};
     }
@@ -118,7 +121,7 @@ class ChatComponent extends BaseComponent {
     			}, contentListRoot);
     			contentListRoot.appendChild(messageComponent.render());
     			if (message.message_type == 1) {
-    				this.setMessagePhoto(message);
+    				this.setMessageContent(message);
     			}
     		}
     	}
