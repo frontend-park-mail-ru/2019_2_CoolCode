@@ -7,6 +7,8 @@ import {getPhoto} from "../../backendDataFetchers/gettingInfo";
 import MyWorker from "../../workers/profile.worker";
 import {bus, data, promiseMaker} from "../../main";
 import {getChatFile} from "../../backendDataFetchers/filesRequest";
+import {getType, Type} from "../../modules/getType";
+import {showAudioContent, showPhotoContent} from "../../handlers/chatViewHandlers";
 
 const chatTemplate = require('./chat.pug');
 
@@ -57,7 +59,7 @@ class ChatComponent extends BaseComponent {
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
     	if (messageData.message_type == 1) {
-    		this.setMessagePhoto(messageData);
+    		this.setMessageContent(messageData);
     	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
@@ -96,16 +98,28 @@ class ChatComponent extends BaseComponent {
     	if (!chatId) {
     		chatId = data.getCurrentChannelId();
     	}
-    	const buffer = await getChatFile(chatId, message.file_id);
-    	// const file = new File([buffer], "a");
-    	// console.log(file);
+    	let buffer = await getChatFile(chatId, message.file_id);
+    	const fileCheck = new Type();
+    	if (fileCheck.checkAudio(message.file_type) ||
+				fileCheck.checkFile(message.file_type)) {
+    		buffer = buffer.slice(0, buffer.size, fileCheck.createMimeType(message.file_type));
+    	}
     	const worker = new MyWorker();
     	worker.postMessage(buffer);
     	worker.onmessage = function (result) {
-    		const resultData = result.data;
     		const messageBlock = document.getElementById(`message-${message.id}`);
-    		messageBlock.querySelector('.primary-row__image-container__image').src = resultData;
-    		bus.emit('showPhotoContent', null, messageBlock);
+    		if (fileCheck.checkImage(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+    			bus.emit('showPhotoContent', null, messageBlock);
+    		} else if (fileCheck.checkAudio(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__audio').src = result.data;
+    			bus.emit('showAudioContent', null, messageBlock);
+    		} else if (fileCheck.checkFile(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__file-ref').download = `${message.file_id}.${message.file_type}`;
+    			messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+    			bus.emit('showFileContent', null, messageBlock);
+    		}
+
     	};
     }
 
@@ -134,8 +148,8 @@ class ChatComponent extends BaseComponent {
     	this.textAreaComponent.renderTo('.chat-column');
     }
 
-    async renderPhotos(files) {
-    	await this.textAreaComponent.renderPhotos(files);
+    async renderFiles(files, type) {
+    	await this.textAreaComponent.renderFiles(files, type);
     }
 
     render() {

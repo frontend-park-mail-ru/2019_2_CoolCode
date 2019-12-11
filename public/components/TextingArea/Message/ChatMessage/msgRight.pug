@@ -11,8 +11,11 @@ div.chat-msg__container
                 div.primary-row__loader-container.primary-row__loader-container_size
                     div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
                 div.primary-row__image-container.primary-row__image-container_style-right.primary-row__image-container_hidden
-                    img.primary-row__image-container__image.primary-row__image-container__image_size(src='/images/abkhazia.jpg')
-                audio.primary-row__audio.primary-row__audio_hidden(controls src=record )
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src='/images/abkhazia.jpg')
+                audio.primary-row__audio.primary-row__audio_hidden(controls src=record type="audio/mpeg")
+                a.primary-row__file-ref.primary-row__file-ref_hidden
+                    div.file-ref__image-container.file-ref__image-container_style
+                        img.file-ref__image-container__image.file-ref__image-container__image_style.file-ref__image-container__image_size(src='/images/file.png')
     div.secondary-row.secondary-row_right
         div.secondary-row__edited.secondary-row__edited_style
 

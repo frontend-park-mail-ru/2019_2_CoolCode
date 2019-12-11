@@ -1,10 +1,11 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 
-async function attachPhotos() {
+async function attachFiles() {
+	const {type} = event.currentTarget.params;
 	if (event.currentTarget.files.length > (10 - data.getChosenFilesLength())) alert('Can upload maximum 10 photos');
 	else {
 		const chatBlock = componentsStorage.getChatBlock();
-		await chatBlock.renderPhotos(event.currentTarget.files);
+		await chatBlock.renderFiles(event.currentTarget.files, type);
 	}
 }
 
@@ -13,13 +14,22 @@ function attachesDropdownClickEvent() {
 	switch (event.target.dataset.section) {
 	case 'attachFile':
 		event.target.firstElementChild.click();
+		input.params = {type : 1};
 		input.addEventListener('change', attachFiles);
 		break;
 	case 'attachPhoto':
 		event.target.firstElementChild.click();
-		input.addEventListener('change', attachPhotos);
+		input.params = {type : 0};
+		input.addEventListener('change', attachFiles);
 		break;
 	}
+}
+
+function showAttachContent(attach) {
+	attach.querySelector('.attach-component__image').classList.remove('attach-component__image_hidden');
+	attach.querySelector('.overlay_button').classList.remove('overlay_button_hidden');
+	const imagesClassList = attach.querySelector('.attach-component__loader-container').classList;
+	attach.querySelector('.attach-component__loader-container').classList = `${imagesClassList} attach-component__loader-container_hidden`;
 }
 
 function countOffset(inputWidth) {
@@ -66,4 +76,4 @@ function createAttachButton() {
 	attachesContainer.addEventListener('mouseenter', attachBtnEvent);
 }
 
-export { createAttachButton, resizeAttach};
+export { createAttachButton, resizeAttach, showAttachContent};

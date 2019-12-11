@@ -24,16 +24,16 @@ class TextingAreaComponent extends BaseComponent {
 				promiseMaker.createPromise('deleteChosenFile', imageId).then(
 					() => {
 						imageParent.remove();
+						if (imagesContainer.childNodes.length === 0) {
+							bus.emit('showTextArea', null);
+						}
 					}
 				);
-				if (imagesContainer.childNodes.length === 0) {
-					bus.emit('showTextArea', null, 0);
-				}
 			});
 		});
 	}
 
-	async renderPhotosAll(files) {
+	async renderFilesAll(files, type) {
 		for (let i = 0; i < files.length; i++) {
 			const attachId = getRandomInt(1000);
 			bus.emit('setChosenFile', null, {file: files[i], id : attachId});
@@ -42,16 +42,26 @@ class TextingAreaComponent extends BaseComponent {
 			const worker = new MyWorker();
 			worker.postMessage(files[i]);
 			worker.onmessage = function (result) {
-				bus.emit('setPicture', null, `#photoattach-${attachId}`,result.data);
+				const attach = document.getElementById(`photoattach-${attachId}`).parentNode;
+				bus.emit('showAttachContent', null, attach);
+				switch(type) {
+				case 0:
+					bus.emit('setPicture', null, `#photoattach-${attachId}`,result.data);
+					break;
+				case 1:
+					bus.emit('setPicture', null, `#photoattach-${attachId}`,'/images/file.png');
+					break;
+				}
+
 			};
 		}
 	}
 
-	async renderPhotos(files) {
+	async renderFiles(files, type) {
 		const imagesContainer = document.querySelector('.content-container__images');
 		document.querySelector('.input__text').classList += ' input__text_hidden';
 		imagesContainer.classList.remove('content-container__images_hidden');
-		await this.renderPhotosAll(files);
+		await this.renderFilesAll(files, type);
 		this.createHandlers(imagesContainer);
 		bus.emit('setInputType', null, 1);
 

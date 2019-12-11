@@ -157,6 +157,12 @@ function showAudioContent(messageBlock) {
 	messageBlock.querySelector('.primary-row__loader-container').classList = `${imagesClassList} primary-row__loader-container_hidden`;
 }
 
+function showFileContent(messageBlock) {
+	messageBlock.querySelector('.primary-row__file-ref').classList.remove('primary-row__file-ref_hidden');
+	const imagesClassList = messageBlock.querySelector('.primary-row__loader-container').classList;
+	messageBlock.querySelector('.primary-row__loader-container').classList = `${imagesClassList} primary-row__loader-container_hidden`;
+}
+
 function showTextArea() {
 	document.querySelector('.input__text').classList.remove('input__text_hidden');
 	switch (data.getInputType()) {
@@ -177,10 +183,12 @@ async function sendPhotosEvent() {
 	const chosenFiles = data.getChosenFiles();
 	for (let i = 0; i < chosenFiles.length; i++) {
 		if (chosenFiles[i]) {
+			const currentFile = chosenFiles[i].file;
 			deleteSendingPhoto();
 
 			const formData = new FormData();
-			formData.append('file', chosenFiles[i].file);
+			formData.append('file', currentFile);
+			console.log(chosenFiles[i].file);
 			let chatId = data.getCurrentChatId();
 			if (!chatId) {
 				chatId = data.getCurrentChannelId();
@@ -191,11 +199,18 @@ async function sendPhotosEvent() {
 				chatBlock.renderOutgoingMessage(result);
 
 				const worker = new MyWorker();
-				worker.postMessage(chosenFiles[i].file);
+				worker.postMessage(currentFile);
 				worker.onmessage = function (result) {
 					const messageBlock = document.getElementById(`message-${messageId}`);
-					messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
-					showPhotoContent(messageBlock);
+					if (currentFile.type.startsWith('image')) {
+						messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+						showPhotoContent(messageBlock);
+					} else {
+						messageBlock.querySelector('.primary-row__file-ref').download = currentFile.name;
+						messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+						showFileContent(messageBlock);
+					}
+
 				};
 			} catch (error) {
 				console.log(error);
@@ -215,7 +230,7 @@ async function sendRecordEvent() {
 		showTextArea();
 		const date = new currentDate();
 		const formData = new FormData();
-		formData.append('file', chunks[0]);
+		formData.append('file', chunks[0], 'file.webm');
 		let chatId = data.getCurrentChatId();
 		if (!chatId) {
 			chatId = data.getCurrentChannelId();
@@ -287,13 +302,16 @@ async function sendEditedMessageEvent() {
 
 function onRecordingReady(e) {
 	let chunks = [];
-	chunks.length = 0;
 	chunks.push(e.data);
 	bus.emit('setChunks', null, chunks);
 	const audio = document.getElementById('audio');
 	showAudioBlock();
-	audio.src = URL.createObjectURL(e.data);// e.data contains a blob representing the recording
-	//audio.play();
+	const worker = new MyWorker();
+	worker.postMessage(chunks[0]);
+	worker.onmessage = function (result) {
+		audio.src = result.data;
+		audio.play();
+	};
 }
 
 function recordEvent() {
@@ -329,7 +347,7 @@ function recordEvent() {
 
 function recordMessage() {
 	navigator.mediaDevices.getUserMedia({
-		audio: true
+		audio: true, video: false
 	})
 		.then(function (stream) {
 			const recorder = new MediaRecorder(stream);
@@ -341,5 +359,5 @@ function recordMessage() {
 }
 
 export {recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
-	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
+	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea, showAudioContent, showFileContent
 };

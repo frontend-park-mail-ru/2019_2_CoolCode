@@ -21,7 +21,8 @@ import {getMessagePhoto, getUserPhoto, getHeaderPhoto, hideLoader, setPicture, s
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
-import {showPhotoContent, showTextArea} from "../handlers/chatViewHandlers";
+import {showAudioContent, showFileContent, showPhotoContent, showTextArea} from "../handlers/chatViewHandlers";
+import {showAttachContent} from "../handlers/attachesHandlers";
 
 function createEvents() {
 
@@ -108,7 +109,10 @@ function createEvents() {
 	bus.on('removeErrorStyle', removeErrorStyle);
 	bus.on('hideError', hideError);
 	bus.on('showPhotoContent', showPhotoContent);
+	bus.on('showAttachContent', showAttachContent);
 	bus.on('showTextArea', showTextArea);
+	bus.on('showAudioContent', showAudioContent);
+	bus.on('showFileContent', showFileContent);
 
 	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
 	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));
