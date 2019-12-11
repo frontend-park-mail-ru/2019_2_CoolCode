@@ -215,7 +215,7 @@ async function sendRecordEvent() {
 		showTextArea();
 		const date = new currentDate();
 		const formData = new FormData();
-		formData.append('file', chunks[0]);
+		formData.append('file', chunks[0],'file.webm');
 		let chatId = data.getCurrentChatId();
 		if (!chatId) {
 			chatId = data.getCurrentChannelId();

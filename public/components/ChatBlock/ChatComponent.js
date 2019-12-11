@@ -97,8 +97,8 @@ class ChatComponent extends BaseComponent {
     		chatId = data.getCurrentChannelId();
     	}
     	const buffer = await getChatFile(chatId, message.file_id);
-    	// const file = new File([buffer], "a");
-    	// console.log(file);
+    	 //const file = new File([buffer]);
+    	 console.log("AAA", buffer);
     	const worker = new MyWorker();
     	worker.postMessage(buffer);
     	worker.onmessage = function (result) {
