@@ -80,6 +80,8 @@ function createCloseSettingsMessageHndlr() {
 }
 
 function createOpenSettingsMessageHndlr() {
+	const stickers = document.querySelector(".input__content-container__sticker.input__content-container__sticker_style");
+	stickers.style.display = "none";
 	const userMessages = document.querySelectorAll('.chat-msg_right');
 	userMessages.forEach((userMessage) => {
 		const settingsMessageBtn = userMessage.querySelector('.primary-row__icon-container');
@@ -340,6 +342,19 @@ function recordMessage() {
 		});
 }
 
-export {recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+function showStickers() {
+	const stickers = document.querySelector(".input__content-container__sticker.input__content-container__sticker_style");
+	stickers.addEventListener('click', (e)=>{
+		const block = document.querySelector(".sticker-block");
+		if(block.style.display == "flex") {
+			block.style.display = "none";
+		}else {
+			block.style.display = "flex";
+		}
+		console.log("aaaaa");
+	});
+}
+
+export {showStickers, recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
 	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
 };
