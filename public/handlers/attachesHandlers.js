@@ -1,8 +1,18 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
+import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
+import AlertPhotoComponent from "../components/filesAlertComponent/alertPhotoComponent";
 
 async function attachFiles() {
 	const {type} = event.currentTarget.params;
-	if (event.currentTarget.files.length > (10 - data.getChosenFilesLength())) alert('Can upload maximum 10 photos');
+	if (event.currentTarget.files.length > (10 - data.getChosenFilesLength())) {
+		const parent = document.querySelector('.header');
+		const form = new AlertPhotoComponent({}, parent);
+		form.renderTo();
+		const button = document.querySelector('.alert-photo__button-row_button');
+		button.addEventListener('click', () => {
+			form.deleteSelf();
+		});
+	}
 	else {
 		const chatBlock = componentsStorage.getChatBlock();
 		await chatBlock.renderFiles(event.currentTarget.files, type);

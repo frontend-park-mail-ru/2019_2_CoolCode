@@ -1,3 +1,5 @@
+import {bus, data} from "../main";
+
 class Data {
 
 	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
@@ -568,6 +570,21 @@ class Data {
 	deleteChunks() {
 		this.chunks = undefined;
 		this.createLogMessage('set', 'chunks', this.chunks);
+	}
+
+	setCurrentPhotoSrc(src) {
+		this.currentPhotoSrc = src;
+		this.createLogMessage('set', 'currentPhotoSrc', 'photoSrc');
+	}
+
+	deleteCurrentPhotoSrc() {
+		this.currentPhotoSrc = undefined;
+		this.createLogMessage('set', 'currentPhotoSrc', this.currentPhotoSrc);
+	}
+
+	getCurrentPhotoSrc() {
+		this.createLogMessage('get', 'currentPhotoSrc', 'photoSrc');
+		return this.currentPhotoSrc;
 	}
 
 }

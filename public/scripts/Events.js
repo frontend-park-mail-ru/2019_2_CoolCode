@@ -23,6 +23,7 @@ import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
 import {showAudioContent, showFileContent, showPhotoContent, showTextArea} from "../handlers/chatViewHandlers";
 import {showAttachContent} from "../handlers/attachesHandlers";
+import {createMessagePhotoHandler} from "../handlers/messagesHandlers";
 
 function createEvents() {
 
@@ -65,6 +66,8 @@ function createEvents() {
 	bus.on('setChosenFile', data.setChosenFile.bind(data));
 	bus.on('deleteChunks', data.deleteChunks.bind(data));
 	bus.on('setChunks', data.setChunks.bind(data));
+	bus.on('setCurrentPhotoSrc', data.setCurrentPhotoSrc.bind(data));
+	bus.on('deleteCurrentPhotoSrc', data.deleteCurrentPhotoSrc.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 
@@ -100,6 +103,7 @@ function createEvents() {
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);
 	bus.on('setPicture', setPicture);
+	bus.on('createMessagePhotoHandler', createMessagePhotoHandler);
 
 	bus.on('createProfileInputs', createProfileInputs);
 	bus.on('createRegisterForm', createRegisterForm);

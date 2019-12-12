@@ -4,6 +4,7 @@ import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
+import {getRandomInt} from "../modules/random";
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -109,6 +110,11 @@ function chooseSendMessageEvent() {
 
 }
 
+function deleteSendMessageBtnHndlr() {
+	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[2];
+	sendBtn.removeEventListener('click', chooseSendMessageEvent);
+}
+
 function createSendMessageBtnHndlr() {
 	const sendBtn = document.querySelectorAll(".input__icon-container__icon")[2];
 	sendBtn.addEventListener('click', chooseSendMessageEvent);
@@ -185,19 +191,17 @@ async function sendPhotosEvent() {
 		if (chosenFiles[i]) {
 			const currentFile = chosenFiles[i].file;
 			deleteSendingPhoto();
-
+			const date = new currentDate();
 			const formData = new FormData();
 			formData.append('file', currentFile);
-			console.log(chosenFiles[i].file);
 			let chatId = data.getCurrentChatId();
 			if (!chatId) {
 				chatId = data.getCurrentChannelId();
 			}
 			try {
+				const messageId = getRandomInt(10000);
+				chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), message_time: date.getDate(), message_type: 1});
 				const result = await sendingFile(formData, chatId);
-				const messageId = result.id;
-				chatBlock.renderOutgoingMessage(result);
-
 				const worker = new MyWorker();
 				worker.postMessage(currentFile);
 				worker.onmessage = function (result) {
@@ -205,6 +209,7 @@ async function sendPhotosEvent() {
 					if (currentFile.type.startsWith('image')) {
 						messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
 						showPhotoContent(messageBlock);
+						bus.emit('createMessagePhotoHandler', null, messageId);
 					} else {
 						messageBlock.querySelector('.primary-row__file-ref').download = currentFile.name;
 						messageBlock.querySelector('.primary-row__file-ref').href = result.data;
@@ -227,8 +232,9 @@ async function sendRecordEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
 	const chunks = data.getChunks();
 	if (chunks.length > 0) {
-		showTextArea();
 		const date = new currentDate();
+
+		showTextArea();
 		const formData = new FormData();
 		formData.append('file', chunks[0], 'file.webm');
 		let chatId = data.getCurrentChatId();
@@ -236,8 +242,9 @@ async function sendRecordEvent() {
 			chatId = data.getCurrentChannelId();
 		}
 		try {
+			const messageId = getRandomInt(10000);
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), message_time: date.getDate(), message_type: 1});
 			const result = await sendingFile(formData, chatId);
-			const messageId = result.id;
 			chatBlock.renderOutgoingMessage(result);
 
 			const worker = new MyWorker();
@@ -310,7 +317,6 @@ function onRecordingReady(e) {
 	worker.postMessage(chunks[0]);
 	worker.onmessage = function (result) {
 		audio.src = result.data;
-		audio.play();
 	};
 }
 
@@ -319,6 +325,7 @@ function recordEvent() {
 	const input = document.querySelector('.input__text');
 	const {recorder} = microphone.params;
 	if(recorder.state == 'recording') {
+		createSendMessageBtnHndlr();
 		recorder.stop();
 		showAudioBlock();
 		console.log("STOP RECORD", recorder.state);
@@ -331,6 +338,7 @@ function recordEvent() {
 		}
 		input.value = '';
 	}else if(recorder.state == 'inactive') {
+		deleteSendMessageBtnHndlr();
 		recorder.start();
 		showTextArea();
 		if (!microphone.classList.contains('input__icon-container__icon_microphone-recording')) {

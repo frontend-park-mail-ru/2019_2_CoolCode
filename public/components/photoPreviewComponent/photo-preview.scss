@@ -1,0 +1,45 @@
+.photo-preview {
+    position: fixed; /*make it centered and overlay*/
+    top: 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    padding: 2px 2px 2px 2px;
+
+    z-index: var(--global-z-index-form); /*make it overlay*/
+}
+
+.photo-preview__image {
+    object-fit: scale-down;
+    object-position: top;
+    height: auto;
+    width: auto;
+}
+
+.photo-preview__image_style {
+    border-radius: 20px;
+}
+
+.photo-preview__image_size {
+    @media screen and (min-height: 10px) {
+      max-width: 400px;
+      max-height: 400px;
+    }
+
+    @media screen and (min-height: 400px) {
+      max-width: 600px;
+      max-height: 600px;
+    }
+
+    @media screen and (min-height: 610px) {
+      max-width: 800px;
+      max-height: 800px;
+    }
+
+    @media screen and (min-height: 810px) {
+      max-width: 900px;
+      max-height: 900px;
+    }
+}

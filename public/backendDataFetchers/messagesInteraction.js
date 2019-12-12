@@ -1,7 +1,7 @@
 import {API, responseStatuses, settings} from '../constants/config';
 import {bus, data, FetchModule} from '../main';
 
-const {frontend, frontendPort, connection} = settings;
+//const {frontend, frontendPort, connection} = settings;
 
 async function likeMessage(id) {
 	console.log(`Liking message : ${id}`);
@@ -57,9 +57,9 @@ async function sendingMessage(text, time, id) {
 		if (response.status !== 200) {
 			throw new Error (`Haven't sent message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
-		if (response.url.toString().startsWith(`${frontend}`)) {
-			bus.emit('setNotSentMessage', text, id);
-		}
+		// if (response.url.toString().startsWith(`${frontend}`)) {
+		// 	bus.emit('setNotSentMessage', text, id);
+		// }
 		const message = await response.json();
 		console.log(`Message sent : ${message.id}`);
 		return message.id;

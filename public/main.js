@@ -28,10 +28,11 @@ import wrkspaceView from "./views/wrkspaceView";
 import wrkspaceSearchView from "./views/wrkspaceSearchView";
 import ResizeThrottler from "./modules/throttler";
 import {resizeAttach} from "./handlers/attachesHandlers";
+import photoPreviewView from "./views/photoPreviewView";
 
-const {backend} = settings;
-const {backendPort} = settings;
-const {connection} = settings;
+const backend = '95.163.209.195';
+//const {backendPort} = settings;
+const connection = 'http';
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
@@ -66,6 +67,8 @@ router.register(ROUTER.wrkspaceSearch, wrkspaceSearchView, KEYWORDS.wrkspaceSear
 router.register(ROUTER.channelPage, channelView, KEYWORDS.channelPage);
 router.register(ROUTER.chatFoundMessage, chatView, KEYWORDS.chatFoundMessage);
 router.register(ROUTER.channelFoundMessage, channelView, KEYWORDS.channelFoundMessage);
+router.register(ROUTER.photoPreviewChat, photoPreviewView, KEYWORDS.photoPreviewChat);
+router.register(ROUTER.photoPreviewChannel, photoPreviewView, KEYWORDS.photoPreviewChannel);
 
 router.start();
 

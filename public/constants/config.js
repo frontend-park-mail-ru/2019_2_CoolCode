@@ -1,3 +1,5 @@
+import chatView from "../views/chatView";
+
 const responseStatuses = {
 	200 : "OK" ,
 	304 : "Not Modified",
@@ -100,6 +102,8 @@ const KEYWORDS = {
 	addMember : ['addMember'],
 	wrkspaceSearch: ['wrkspace', 'search'],
 	channelPage: ['wrkspace', 'channel'],
+	photoPreviewChat: ['chat', 'photo'],
+	photoPreviewChannel: ['wrkspace', 'channel', 'photo'],
 };
 
 const ROUTER = {
@@ -127,6 +131,12 @@ const ROUTER = {
 	channelPage: (wrkspaceId, channelId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}`;
 	},
+	photoPreviewChat: (chatId, messageId) => {
+		return `/chat/${chatId}/photo/${messageId}`;
+	},
+	photoPreviewChannel: (wrkspaceId, channelId, messageId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/photo/${messageId}`;
+	},
 	addMember: '/addMember',
 	createWrkSpace: '/createWrkSpace',
 	createChannel : (id) => {
@@ -144,4 +154,4 @@ const ROUTER = {
 	},
 };
 
-export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports};
+export { responseStatuses, keys, API, ROUTER, KEYWORDS, ports};

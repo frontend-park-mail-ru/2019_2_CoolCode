@@ -1,4 +1,4 @@
-import {componentsStorage, router} from "../main";
+import {componentsStorage, router, bus} from "../main";
 import {createChannel, createWrkspace} from "../backendDataFetchers/creationEntities";
 
 function drawWrkspaceFormError(inputField) {
@@ -26,6 +26,7 @@ function createWrkSpaceCreateSubmitHndlr() {
 function createOverlayHndlr() {
 	const overlay = document.querySelector('.overlay');
 	overlay.addEventListener('click', () => {
+		bus.emit('deleteCurrentPhotoSrc', null);
 		componentsStorage.clearForm();
 		router.return();
 	});

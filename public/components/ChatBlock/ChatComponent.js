@@ -3,11 +3,10 @@ import './bemChatPageBlocks/bemChatColumn/bem-chat-column.scss';
 import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.scss';
 import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
-import {getPhoto} from "../../backendDataFetchers/gettingInfo";
 import MyWorker from "../../workers/profile.worker";
-import {bus, data, promiseMaker} from "../../main";
+import {bus, data} from "../../main";
 import {getChatFile} from "../../backendDataFetchers/filesRequest";
-import {getType, Type} from "../../modules/getType";
+import { Type} from "../../modules/getType";
 import {showAudioContent, showPhotoContent} from "../../handlers/chatViewHandlers";
 
 const chatTemplate = require('./chat.pug');
@@ -111,6 +110,7 @@ class ChatComponent extends BaseComponent {
     		if (fileCheck.checkImage(message.file_type)) {
     			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
     			bus.emit('showPhotoContent', null, messageBlock);
+    			bus.emit('createMessagePhotoHandler', null, message.id);
     		} else if (fileCheck.checkAudio(message.file_type)) {
     			messageBlock.querySelector('.primary-row__audio').src = result.data;
     			bus.emit('showAudioContent', null, messageBlock);
