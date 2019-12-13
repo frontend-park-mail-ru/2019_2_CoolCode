@@ -3,28 +3,28 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
-    width: 60%;
+    margin: 10px 0 0 0;
 }
 
 .typing-block_size {
-    @media screen and (min-height: 10px) {
-        height: 330px;
-    }
-
-    @media screen and (min-height: 400px) {
-        height: 500px;
-    }
-
-
-    @media screen and (min-height: 610px) {
-        height: 625px;
-    }
-
-    @media screen and (min-height: 810px) {
-        height: 755px;
-
-    }
+    //@media screen and (min-height: 10px) {
+    //    height: 330px;
+    //}
+    //
+    //@media screen and (min-height: 400px) {
+    //    height: 500px;
+    //}
+    //
+    //
+    //@media screen and (min-height: 610px) {
+    //    height: 625px;
+    //}
+    //
+    //@media screen and (min-height: 810px) {
+    //    height: 755px;
+    //
+    //}
+    height: fit-content;
 }
 .typing-block_width {
 

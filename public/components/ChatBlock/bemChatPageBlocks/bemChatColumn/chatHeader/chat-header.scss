@@ -38,6 +38,25 @@
     padding: 0 0 5px 0;
 }
 
+.chat-header__info-row_size {
+    @media screen and (min-height: 10px) {
+        height: 80px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 100px;
+    }
+
+    @media screen and (min-height: 610px) {
+        height: 115px;
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 130px;
+    }
+}
+
+
 .chat-header__info-row_style {
     border-bottom: 1.5px solid var(--global-grey-color);
 }
