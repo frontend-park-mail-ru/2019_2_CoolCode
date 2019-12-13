@@ -13,20 +13,9 @@ class ChatMessageComponent extends BaseComponent {
 	messageElement;
 
 	createMessage() {
-		let audio = document.getElementById('audio');
-		let input = document.querySelector('.input__text.input__text_style');
-		if(this._data.message.text == null) {
-			audio.style.display = 'none';
-			input.style.display = 'flex';
-			this.messageElement = document.createElement('div');
-			this.messageElement.className = 'chat-msg';
-			this.messageElement.id = `message-${this._data.message.id}`;
-		}else{
-			this.messageElement = document.createElement('div');
-			this.messageElement.className = 'chat-msg';
-			this.messageElement.id = `message-${this._data.message.id}`;
-		}
-
+		this.messageElement = document.createElement('div');
+		this.messageElement.className = 'chat-msg';
+		this.messageElement.id = `message-${this._data.message.id}`;
 	}
 
 	createHandlerRight() {
