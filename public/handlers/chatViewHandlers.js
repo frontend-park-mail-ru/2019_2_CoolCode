@@ -278,7 +278,8 @@ async function sendMessageEvent() {
 			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), text: text, message_time: date.getDate(), message_type: 0});
 
 		} catch (error) {
-			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date, message_type: 0});
+			bus.emit('setNotSentMessage', null, text, data.getCurrentChatId());
+			chatBlock.renderErrorOutgoingMessage({author_id : data.getUserId(), text: text, message_time: date.getDate(), message_type: 0});
 		}
 	}
 }

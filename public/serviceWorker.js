@@ -1,14 +1,13 @@
-const settings = {
-	connection : 'https',
-	backendPortUsers : ':8081',
-	//backend: '172.20.10.9:8080',
-	backend: 'coolcode.site',
-	//backend: '192.168.1.69:8080',
-	//backend: 'localhost:8080'
-};
-const {backend} = settings;
-const {backendPortUsers} = settings;
-const {connection} = settings;
+// const settings = {
+// 	connection : 'https',
+// 	backendPortUsers : ':8081',
+// 	//backend: '172.20.10.9:8080',
+// 	backend: 'coolcode.site',
+// 	backendSuffix: '/api/',
+// 	//backend: '192.168.1.69:8080',
+// 	//backend: 'localhost:8080'
+// };
+// const {backend, backendSuffix, backendPortUsers, connection} = settings;
 
 const CACHE = 'chat-cache';
 let urlsToCache = [
@@ -69,22 +68,22 @@ self.addEventListener('fetch', function(event) {
 async function networkOrCache(request) {
 	try{
 		const response = await fetch(request);
-		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;
 		}
 		if (response.ok) {
 			return response;
 		}
-		 if (request.url.toString().startsWith(`${connection}://${backend}${backendPortUsers}/photos/`)) {
+		 if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
 		     return cache.match("/images/abkhazia.jpg");
 		}
 	} catch (error) {
-		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;
 		}
-		if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+		if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
 			return cache.match("/images/abkhazia.jpg");

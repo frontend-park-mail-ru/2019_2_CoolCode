@@ -4,6 +4,7 @@ import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages} from "./gettingInfo";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
 import {ports, settings, microservices} from '../constants/config';
+import currentDate from "../modules/currentDate";
 
 function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
@@ -94,10 +95,11 @@ async function openWebSocketConnections() {
 async function sendNotSentMessages() {
 	const notSentMessages = appLocalStorage.getNotSentMessages();
 	if (notSentMessages) {
-		for (const item of notSentMessages) {
-			if (item) {
-				for (const message of item) {
-					await promiseMaker.createPromise('sendMessage', message, i);
+		for (let i = 0; i < notSentMessages.length; i++) {
+			if (notSentMessages[i]) {
+				for (const message of notSentMessages[i]) {
+					const date = new currentDate();
+					await promiseMaker.createPromise('sendMessage', message, date.getDate(), i);
 				}
 			}
 

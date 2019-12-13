@@ -88,7 +88,6 @@ function createEvents() {
 	bus.on('getCurrentChannelInfo', getCurrentChannelInfo);
 	bus.on('getWrkspaceUsers', getWrkspaceUsers);
 	bus.on('getChats', getChats);
-	bus.on('sendMessage', sendingMessage);
 	bus.on('likeMessage', likeMessage);
 
 	bus.on('getWrkspaceInfo', getWrkspaceInfo);
@@ -117,6 +116,7 @@ function createEvents() {
 	bus.on('showTextArea', showTextArea);
 	bus.on('showAudioContent', showAudioContent);
 	bus.on('showFileContent', showFileContent);
+	bus.on('sendMessage', sendingMessage);
 
 	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
 	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));
