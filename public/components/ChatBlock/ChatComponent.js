@@ -27,6 +27,9 @@ class ChatComponent extends BaseComponent {
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;
     }
+    getMessageInputRecord() {
+    	return this._parent.querySelector('input__record').value;
+    }
 
     setMessageInputData(inputData) {
     	this._parent.querySelector('.input__text').value = inputData;

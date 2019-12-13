@@ -16,7 +16,6 @@ import {
 	menuHandlers,
 } from "../handlers/channelViewHandlers";
 import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
-import ChatComponent from "../components/ChatBlock/ChatComponent";
 
 class channelView extends BaseView {
 
@@ -32,6 +31,7 @@ class channelView extends BaseView {
 		createMessageInputChannelHndlr();
 		menuHandlers();
 		createLikeBtnHndlr();
+		recordMessage();
 		createEditMessageBlockHndlr();
 		recordMessage();
 		createCloseSettingsMessageHndlr();

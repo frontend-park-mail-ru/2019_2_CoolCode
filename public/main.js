@@ -31,6 +31,7 @@ import {resizeAttach} from "./handlers/attachesHandlers";
 import photoPreviewView from "./views/photoPreviewView";
 
 const {backend} = settings;
+const {backendSuffix} = settings;
 const {backendPort} = settings;
 //const connection = 'http';
 const {connection} = settings;
@@ -46,7 +47,7 @@ baseBlock.className = 'main';
 application.appendChild(baseBlock);
 const router = new Router(baseBlock);
 const FetchModule = new Fetch();
-FetchModule.setUrl(`${connection}://${backend}`);
+FetchModule.setUrl(`${connection}://${backend}${backendSuffix}`);
 const data = new Data();
 
 const throttler = new ResizeThrottler(resizeAttach);

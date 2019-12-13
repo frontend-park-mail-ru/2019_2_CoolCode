@@ -2,7 +2,6 @@ import {deletingMessage, editingMessage, sendingFile, sendingMessage} from "../b
 import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
-import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
 import {getRandomInt} from "../modules/random";
 
@@ -121,14 +120,13 @@ function createSendMessageBtnHndlr() {
 }
 
 function createMessageInputHndlr() {
-	const messageInput = document.querySelector(".input__text");
+	const messageInput = document.querySelector(".input__text.input__text_style");
 	messageInput.addEventListener('keypress', function (event) {
 		if (event.which === keys.ENTER) {
 			chooseSendMessageEvent(event);
 		}
 	});
 	messageInput.addEventListener('input', growInput.bind(null, messageInput));
-
 }
 
 function growInput(element) {
@@ -265,7 +263,6 @@ async function sendRecordEvent() {
 	}
 	componentsStorage.setChatBlock(chatBlock);
 }
-
 async function sendMessageEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
 	const text = chatBlock.getMessageInputData();
@@ -350,7 +347,6 @@ function recordEvent() {
 		console.log("START RECORD", recorder.state);
 	}
 }
-
 function recordMessage() {
 	navigator.mediaDevices.getUserMedia({
 		audio: true, video: false

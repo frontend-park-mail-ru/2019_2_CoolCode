@@ -11,15 +11,8 @@ import {
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr,
 	createMessageInputHndlr,
-	createSendMessageBtnHndlr, recordMessage,
+	createSendMessageBtnHndlr, recordMessage
 } from "../handlers/chatViewHandlers";
-import {
-	channelViewHandler,
-	createChatBlockHndlr,
-	createWorkspaceButtonHndlr,
-	createWrkspaceBlockExpandHndlr,
-	createWrkspaceBlockHndlr
-} from "../handlers/chatsBlockHandlers";
 import {saveUserPhoto} from "../handlers/photosHandlers";
 import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
 
@@ -42,10 +35,8 @@ class chatView extends BaseView {
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
-
 		createAttachButton();
 		resizeAttach();
-
 	}
 
 	setContent() {

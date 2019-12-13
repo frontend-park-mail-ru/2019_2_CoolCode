@@ -19,11 +19,21 @@ const ports = {
 	'messages' : ':8004',
 };
 
+const microservices = {
+	'users' : 'users',
+	'chats' : 'chats',
+	'workspaces' : 'chats',
+	'channels' : 'chats',
+	'notifications' : 'notifications',
+	'messages' : 'messages',
+};
+
 const settings = {
-	connection : 'http',
+	connection : 'https',
 	frontendPort : ':8000',
 	frontend: 'https://coolcode.site',
-	backend: '95.163.209.195',
+	backend: 'coolcode.site',
+	backendSuffix: '/api/',
 };
 
 const keys = {
@@ -154,4 +164,4 @@ const ROUTER = {
 	},
 };
 
-export { settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports};
+export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports, microservices};

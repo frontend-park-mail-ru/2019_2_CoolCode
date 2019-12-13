@@ -72,6 +72,7 @@ function addMemberClickEvent(params = {memberId:null, contentListRoot:null}) {
 	bus.emit('addCurrentChannelMember', null, id);
 	const channel = data.getCurrentChannel();
 	promiseMaker.createPromise('alterChannel', channel).then(() => {
+		componentsStorage.clearForm();
 		router.return();
 	});
 
