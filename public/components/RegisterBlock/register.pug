@@ -1,9 +1,9 @@
 mixin input(name)
     label.input-block_label(for=name)
     if name === 'password'
-        input.input-block_input-field.input-block_input-field_style(type=name id=name placeholder=name name=name)
+        input.input-block_input-field.input-block_input-field_style.fluid-font-size_1(type=name id=name placeholder=name name=name)
     else
-        input.input-block_input-field.input-block_input-field_style(type='text' id=name placeholder=name name=name)
+        input.input-block_input-field.input-block_input-field_style.fluid-font-size_1(type='text' id=name placeholder=name name=name)
 
 
 

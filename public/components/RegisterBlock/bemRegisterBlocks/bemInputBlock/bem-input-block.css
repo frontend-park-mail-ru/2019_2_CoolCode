@@ -32,7 +32,6 @@
     outline: none;
     border: 1px solid #FFFFFF;
     border-bottom: 1px solid var(--global-grey-color);
-    font-size: 18px;
     font-family: var(--global-font-family-Roboto);
     color: var(--global-darkgrey-color);
 }

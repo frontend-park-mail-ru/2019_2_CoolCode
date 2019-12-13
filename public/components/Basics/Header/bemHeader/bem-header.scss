@@ -33,11 +33,21 @@
 /*profile component*/
 
 .header__profile {
-  height: auto;
   width: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.header__profile_size {
+
+  @media screen and (min-height: 10px) {
+    height: 25px;
+  }
+
+  @media screen and (min-height: 400px) {
+    height: 45px;
+  }
 }
 
 .header__profile_style {
