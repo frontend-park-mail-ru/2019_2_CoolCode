@@ -94,6 +94,7 @@ class ChannelComponent extends BaseComponent {
 	}
 
 	async setMessagePhoto(message) {
+		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		let chatId = data.getCurrentChatId();
 		if (!chatId) {
 			chatId = data.getCurrentChannelId();
@@ -106,19 +107,22 @@ class ChannelComponent extends BaseComponent {
 			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
 			bus.emit('showPhotoContent', null, messageBlock);
 		};
+		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
-	renderContent() {
+	async renderContent() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		if (this._data.channelMessages) {
-			this._data.channelMessages.forEach((message) => {
-				const messageComponent = new ChannelMessageComponent({messageUser: message.user, message: message.message,
-					user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
+			for (const message of this._data.channelMessages) {
+				const messageComponent = new ChannelMessageComponent({
+					messageUser: message.user, message: message.message,
+					user: this._data.user, error: false, deleted: false, edited: false
+				}, contentListRoot);
 				contentListRoot.appendChild(messageComponent.render());
 				if (message.message.message_type == 1) {
-					this.setMessagePhoto(message.message);
+					await this.setMessagePhoto(message.message);
 				}
-			});
+			}
 		}
 		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}

@@ -102,9 +102,9 @@ class chatView extends BaseView {
 		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
-	drawRightColumn() {
+	async drawRightColumn() {
 		const form = componentsStorage.returnForm();
-	    if (form) {
+		if (form) {
 			componentsStorage.clearForm();
 		} else {
 			const chatBlock = new ChatComponent(this._data, this._parent);

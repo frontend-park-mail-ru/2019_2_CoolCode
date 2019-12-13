@@ -3,11 +3,12 @@
 
 .attach-component {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   height: auto;
   position: relative;
   padding: 2px 2px 2px 2px;
+
 }
 
 
@@ -133,17 +134,35 @@
   animation: spin 2s linear infinite;
 }
 
+.attach-component__text {
+  height: auto;
+  width: auto;
+
+}
+
+.attach-component__text_style {
+  font-family: var(--global-font-family-Roboto);
+  font-size: 10px;
+  color: #000000;
+  font-weight: 300;
+
+}
+
 
 .overlay_button {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  height: auto;
+  height: 0;
   position: relative;
   z-index: 1;
-  overflow: hidden;
-  right: 18px;
 }
+
+.overlay_button_big {
+  top: 0px;
+  right: 35px
+}
+
 .overlay_button_hidden {
   display: none;
 }
@@ -185,6 +204,29 @@
     height: 13px;
   }
 }
+
+.overlay_button__image-container__icon_size-big {
+  @media screen and (min-height: 10px) {
+    width: 12px;
+    height: 12px;
+  }
+
+  @media screen and (min-height: 400px) {
+    width: 15px;
+    height: 15px;
+  }
+
+  @media screen and (min-height: 610px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (min-height: 810px) {
+    width: 25px;
+    height: 25px;
+  }
+}
+
 
 .overlay_button__image-container__icon_style {
   filter: opacity(0.6);

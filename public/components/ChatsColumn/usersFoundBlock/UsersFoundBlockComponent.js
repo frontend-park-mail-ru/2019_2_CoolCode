@@ -14,8 +14,6 @@ class UsersFoundBlockComponent extends BaseComponent {
 
     renderContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	console.log(contentListRoot);
-    	console.log(this._data.searchUsers);
     	if (this._data.searchUsers) {
     		this._data.searchUsers.forEach((user) => {
     			const userComponent = new UserComponent(user, contentListRoot);

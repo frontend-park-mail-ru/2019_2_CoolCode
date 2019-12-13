@@ -77,6 +77,9 @@ function webSocketOnMessage(event) {
 	switch (message.event_type) {
 	case 1:
 		switch (messageContent.author_id) {
+		case data.getUserId():
+			console.log(`my message sent: ${messageContent.text}`);
+			break;
 		case data.getCurrentChatUserId():
 			const chatBlock = componentsStorage.getChatBlock();
 			console.log(chatBlock);
@@ -95,9 +98,6 @@ function webSocketOnMessage(event) {
 					chatID: messageContent.chat_id
 				}
 			);
-			break;
-		case data.getUserId():
-			console.log(`my message sent: ${messageContent.text}`);
 			break;
 		default:
 			const leftColumn = componentsStorage.returnLeftColumn();

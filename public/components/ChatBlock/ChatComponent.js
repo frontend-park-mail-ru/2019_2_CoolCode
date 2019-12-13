@@ -119,7 +119,6 @@ class ChatComponent extends BaseComponent {
     			messageBlock.querySelector('.primary-row__file-ref').href = result.data;
     			bus.emit('showFileContent', null, messageBlock);
     		}
-
     	};
     }
 
@@ -134,12 +133,14 @@ class ChatComponent extends BaseComponent {
     				deleted: false
     			}, contentListRoot);
     			contentListRoot.appendChild(messageComponent.render());
+    		}
+    		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    		for (const message of this._data.chatMessages.reverse()) {
     			if (message.message_type == 1) {
-    				this.setMessageContent(message);
+    				await this.setMessageContent(message);
     			}
     		}
     	}
-    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
     renderTextingArea() {

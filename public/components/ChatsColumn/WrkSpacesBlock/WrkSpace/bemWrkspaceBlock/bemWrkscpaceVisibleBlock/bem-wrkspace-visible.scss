@@ -189,9 +189,6 @@
     height: 100%;
 }
 
-.wrkspace-visible__chann-row__add-channel-button:hover {
-    cursor: pointer;
-}
 
 /*icon element in add-channel-button*/
 
@@ -201,6 +198,10 @@
 }
 .wrkspace-visible__chann-row__add-channel-button__icon_style {
     filter: opacity(0.9);
+}
+
+.wrkspace-visible__chann-row__add-channel-button__icon:hover {
+    cursor: pointer;
 }
 
 /*arrow element in chann row*/
@@ -234,4 +235,8 @@
 
 .wrkspace-visible__chann-row__arrow_style {
     filter: opacity(0.7);
+}
+
+.wrkspace-visible__chann-row__arrow_style:hover {
+    cursor: pointer;
 }

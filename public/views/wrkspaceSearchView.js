@@ -59,7 +59,6 @@ class wrkspaceSearchView extends BaseView {
 		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (JSON.stringify(data.getCurrentWrkspace()) === '{}') {
-				console.log('here');
 				Promise.all(
 					[creatingChats(this._parent),
 						promiseMaker.createPromise('getWrkspaceInfo', args[0]),
