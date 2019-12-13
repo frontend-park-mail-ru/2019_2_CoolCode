@@ -29,13 +29,9 @@ import wrkspaceSearchView from "./views/wrkspaceSearchView";
 import ResizeThrottler from "./modules/throttler";
 import {resizeAttach} from "./handlers/attachesHandlers";
 import photoPreviewView from "./views/photoPreviewView";
+import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 
-const {backend} = settings;
-const {backendSuffix} = settings;
-const {backendPort} = settings;
-//const connection = 'http';
-const {connection} = settings;
-
+const {backend, backendSuffix, connection} = settings;
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
 const componentsStorage = new ComponentsStorage();
@@ -52,7 +48,7 @@ const data = new Data();
 
 const throttler = new ResizeThrottler(resizeAttach);
 
-//serviceWorkerRegister();
+serviceWorkerRegister();
 createEvents();
 router.register(ROUTER.mainPage, mainPageView, KEYWORDS.mainPage);
 router.register(ROUTER.profile, profileView, KEYWORDS.profile);

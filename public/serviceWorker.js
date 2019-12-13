@@ -1,13 +1,13 @@
 const settings = {
-	connection : 'http',
-	backendPort : ':8080',
+	connection : 'https',
+	backendPortUsers : ':8081',
 	//backend: '172.20.10.9:8080',
-	backend: '95.163.209.195',
+	backend: 'coolcode.site',
 	//backend: '192.168.1.69:8080',
 	//backend: 'localhost:8080'
 };
 const {backend} = settings;
-const {backendPort} = settings;
+const {backendPortUsers} = settings;
 const {connection} = settings;
 
 const CACHE = 'chat-cache';
@@ -75,7 +75,7 @@ async function networkOrCache(request) {
 		if (response.ok) {
 			return response;
 		}
-		 if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+		 if (request.url.toString().startsWith(`${connection}://${backend}${backendPortUsers}/photos/`)) {
 
 			const cache = await caches.open(CACHE);
 		     return cache.match("/images/abkhazia.jpg");
