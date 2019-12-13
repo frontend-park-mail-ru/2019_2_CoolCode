@@ -145,7 +145,10 @@ function deleteSendingPhoto() {
 
 function showAudioBlock() {
 	document.querySelector('.input__record').classList.remove('input__record_hidden');
-	document.querySelector('.input__text').classList += ' input__text_hidden';
+	let textarea = document.querySelector('.input__text').classList;
+	if (!textarea.contains('input__text_hidden')) {
+		document.querySelector('.input__text').classList = `${textarea} input__text_hidden`;
+	}
 	bus.emit('setInputType', null, 2);
 }
 
