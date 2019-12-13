@@ -174,6 +174,10 @@ class ComponentsStorage {
 		this.form = null;
 	}
 
+	removeForm() {
+		this.form = null;
+	}
+
 	getForm(data, parent, rootSelector) {
 		if (!this.form) {
 			let form;
@@ -198,7 +202,10 @@ class ComponentsStorage {
 			this.form.setParent(parent);
 		}
 		return this.form;
+	}
 
+	returnForm() {
+	    return this.form;
 	}
 }
 

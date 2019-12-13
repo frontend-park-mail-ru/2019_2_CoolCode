@@ -75,10 +75,15 @@ class profileView extends BaseView {
 	}
 
 	drawRightColumn() {
-		const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
-		this._parent.querySelector('.column_right').innerHTML = "";
-		this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
-		componentsStorage.setProfileBlock(profileBlock);
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
+			this._parent.querySelector('.column_right').innerHTML = "";
+			this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
+			componentsStorage.setProfileBlock(profileBlock);
+		}
 	}
 
 	render() {

@@ -36,6 +36,10 @@ class searchView extends BaseView {
 		}
 	}
 	render() {
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		}
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
 		leftColumn.renderSearchContent(this._data);
 	}

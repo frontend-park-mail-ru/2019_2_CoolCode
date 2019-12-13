@@ -66,7 +66,6 @@ class chatView extends BaseView {
 			promiseMaker.createPromise('getCurrentChatInfo',chatUser, chatId).then(() => {
 				this.setContent();
 				this.render();
-				this.setEvents();
 			});
 		} else {
 			router.go('profileView');
@@ -104,16 +103,21 @@ class chatView extends BaseView {
 	}
 
 	drawRightColumn() {
-		const chatBlock = new ChatComponent(this._data, this._parent);
-		this._parent.querySelector('.column_right').innerHTML = "";
-		this._parent.querySelector('.column_right').innerHTML = chatBlock.render();
-		chatBlock.renderTextingArea();
-		chatBlock.renderContent();
-		if (this._data.foundMessageId) {
-			chatBlock.slideToMessage();
+		const form = componentsStorage.returnForm();
+	    if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const chatBlock = new ChatComponent(this._data, this._parent);
+			this._parent.querySelector('.column_right').innerHTML = "";
+			this._parent.querySelector('.column_right').innerHTML = chatBlock.render();
+			chatBlock.renderTextingArea();
+			chatBlock.renderContent();
+			if (this._data.foundMessageId) {
+				chatBlock.slideToMessage();
+			}
+			componentsStorage.setChatBlock(chatBlock);
+			this.setEvents();
 		}
-		componentsStorage.setChatBlock(chatBlock);
-
 	}
 
 	render() {

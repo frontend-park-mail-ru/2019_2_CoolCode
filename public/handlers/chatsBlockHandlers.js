@@ -52,7 +52,10 @@ function createWrkspaceBlockHndlr() {
 		const wrkSpaceId = parseFloat(wrkspaceBlockOuter.id.split('-')[1]);
 		const visibleBlock = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
 		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button").firstChild;
-		createButton.addEventListener('click', () => router.go('channelFormView', wrkSpaceId));
+		createButton.addEventListener('click', () => {
+			event.stopPropagation();
+			router.go('channelFormView', wrkSpaceId);
+		});
 		const infoButton = visibleBlock.querySelector(".wrkspace-visible__name-row__info-button").firstChild;
 		infoButton.addEventListener('click', () => {
 		    event.stopPropagation();
@@ -64,6 +67,7 @@ function createWrkspaceBlockHndlr() {
 function createWorkspaceButtonHndlr() {
 	const wrkSpaceButton = document.querySelector(".wrkspaces-block__header__button__icon");
 	wrkSpaceButton.addEventListener('click', ()=>{
+		event.stopPropagation();
 		router.go('wrkspaceFormView');
 	}
 	);

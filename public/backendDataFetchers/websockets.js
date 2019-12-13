@@ -1,16 +1,15 @@
+'use strict';
+
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
 import {getCurrentChatMessages} from "./gettingInfo";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
 import {ports, settings} from '../constants/config';
 
-//const {backend} = settings;
-//const {backendNotificationsPort} = settings;
-
 function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://95.163.209.195${ports.notifications}/notifications/channels/${channelId}`);
+	const websocketConn = new WebSocket(`ws://${settings.backend}${ports.notifications}/notifications/channels/${channelId}`);
 	data.addWebSocketConn(channelId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -38,7 +37,7 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://95.163.209.195${ports.notifications}/notifications/chats/${chatId}`);
+	const websocketConn = new WebSocket(`ws://${settings.backend}${ports.notifications}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {

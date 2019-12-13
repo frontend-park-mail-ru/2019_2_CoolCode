@@ -30,9 +30,10 @@ import ResizeThrottler from "./modules/throttler";
 import {resizeAttach} from "./handlers/attachesHandlers";
 import photoPreviewView from "./views/photoPreviewView";
 
-const backend = '95.163.209.195';
-//const {backendPort} = settings;
-const connection = 'http';
+const {backend} = settings;
+const {backendPort} = settings;
+//const connection = 'http';
+const {connection} = settings;
 
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();

@@ -245,8 +245,6 @@ async function sendRecordEvent() {
 			const messageId = getRandomInt(10000);
 			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), message_time: date.getDate(), message_type: 1});
 			const result = await sendingFile(formData, chatId);
-			chatBlock.renderOutgoingMessage(result);
-
 			const worker = new MyWorker();
 			worker.postMessage(chunks[0]);
 			worker.onmessage = function (result) {

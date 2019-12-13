@@ -16,6 +16,7 @@ import {
 	menuHandlers,
 } from "../handlers/channelViewHandlers";
 import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
+import ChatComponent from "../components/ChatBlock/ChatComponent";
 
 class channelView extends BaseView {
 
@@ -65,7 +66,6 @@ class channelView extends BaseView {
 					() => {
 						this.setContent();
 						this.render();
-						this.setEvents();
 					}
 				);
 			}
@@ -88,16 +88,21 @@ class channelView extends BaseView {
 	}
 
 	drawRightColumn() {
-		const channelBlock = new ChannelComponent(this._data, this._parent);
-		this._parent.querySelector('.column_right').innerHTML = "";
-		this._parent.querySelector('.column_right').innerHTML = channelBlock.render();
-		channelBlock.renderTextingArea();
-		channelBlock.renderContent();
-		if (this._data.foundMessageId) {
-			channelBlock.slideToMessage();
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const channelBlock = new ChannelComponent(this._data, this._parent);
+			this._parent.querySelector('.column_right').innerHTML = "";
+			this._parent.querySelector('.column_right').innerHTML = channelBlock.render();
+			channelBlock.renderTextingArea();
+			channelBlock.renderContent();
+			if (this._data.foundMessageId) {
+				channelBlock.slideToMessage();
+			}
+			componentsStorage.setChatBlock(channelBlock);
+			this.setEvents();
 		}
-		componentsStorage.setChatBlock(channelBlock);
-
 	}
 
 	render() {

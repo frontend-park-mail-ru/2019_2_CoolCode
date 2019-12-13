@@ -12,7 +12,9 @@ function createWrkSpaceEvent() {
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
 	if (channelName) {
-		createWrkspace(channelName).then(() => router.go('profileView'));
+		createWrkspace(channelName).then(() => {
+			router.return();
+		});
 	} else {
 		drawWrkspaceFormError(inputField);
 	}
@@ -27,7 +29,6 @@ function createOverlayHndlr() {
 	const overlay = document.querySelector('.overlay');
 	overlay.addEventListener('click', () => {
 		bus.emit('deleteCurrentPhotoSrc', null);
-		componentsStorage.clearForm();
 		router.return();
 	});
 }
@@ -38,7 +39,9 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
 	if (channelName) {
-		createChannel(channelName, wrkSpaceId).then(() => router.go('profileView'));
+		createChannel(channelName, wrkSpaceId).then(() => {
+			router.return();
+		});
 	} else {
 		drawWrkspaceFormError(inputField);
 

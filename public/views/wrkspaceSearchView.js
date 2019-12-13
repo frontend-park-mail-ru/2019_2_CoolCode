@@ -76,7 +76,6 @@ class wrkspaceSearchView extends BaseView {
 			} else {
 				this.setContent();
 				this.render();
-				this.setEvents();
 			}
 		});
 		console.log('show: wrkspacePageSearch');
@@ -97,10 +96,16 @@ class wrkspaceSearchView extends BaseView {
 	}
 
 	drawRightColumn() {
-		const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
-		wrkspacePage.render();
-		wrkspacePage.renderSearchContent(this._data);
-		componentsStorage.setWrkspacePage(wrkspacePage);
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+			wrkspacePage.render();
+			wrkspacePage.renderSearchContent(this._data);
+			componentsStorage.setWrkspacePage(wrkspacePage);
+			this.setEvents();
+		}
 	}
 
 	render() {

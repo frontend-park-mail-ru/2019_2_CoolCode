@@ -28,6 +28,7 @@ class wrkspaceFormView extends BaseView {
 	}
 
 	render() {
+		//debugger;
 		const creationForm = componentsStorage.getForm(this._data, this._parent);
 	}
 

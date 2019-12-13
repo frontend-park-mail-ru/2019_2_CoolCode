@@ -154,4 +154,4 @@ const ROUTER = {
 	},
 };
 
-export { responseStatuses, keys, API, ROUTER, KEYWORDS, ports};
+export { settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports};

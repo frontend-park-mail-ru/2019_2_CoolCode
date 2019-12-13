@@ -67,7 +67,6 @@ class wrkspaceView extends BaseView {
 						() => {
 							this.setContent();
 							this.render();
-							this.setEvents();
 						}
 					);
 				});
@@ -91,9 +90,15 @@ class wrkspaceView extends BaseView {
 	}
 
 	drawRightColumn() {
-		const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
-		wrkspacePage.render();
-		componentsStorage.setWrkspacePage(wrkspacePage);
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+			wrkspacePage.render();
+			componentsStorage.setWrkspacePage(wrkspacePage);
+			this.setEvents();
+		}
 	}
 
 	render() {
