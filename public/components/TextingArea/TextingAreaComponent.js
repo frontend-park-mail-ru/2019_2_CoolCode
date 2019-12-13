@@ -4,7 +4,7 @@ import './TextingArea/MessageSettBlock/message-sett-block.scss';
 import './TextingArea/TypingBlock/InputBlock/input.scss';
 import './TextingArea/TypingBlock/InputBlock/Attaches/attaches.scss';
 import './TextingArea/TypingBlock/MsgWindow/msgwindow.scss';
-import './TextingArea/TypingBlock/typing-block.css';
+import './TextingArea/TypingBlock/typing-block.scss';
 import MyWorker from "../../workers/profile.worker";
 import {bus, data, promiseMaker} from "../../main";
 import AttachComponent from "./TextingArea/TypingBlock/InputBlock/Attaches/PhotoAttach/AttachComponent";

@@ -1,7 +1,7 @@
 import BaseComponent from "../../baseComponent";
 import {bus, data} from "../../../main";
 import MessageComponent from "../Message/MessageComponent";
-import './bemChatsBlock/bem-chats-block.css';
+import './bemChatsBlock/bem-chats-block.scss';
 
 const ChatsBlockTemplate = require('./chatsBlock.pug');
 

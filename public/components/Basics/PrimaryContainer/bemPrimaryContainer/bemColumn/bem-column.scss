@@ -1,5 +1,6 @@
 .column{
-    display: flex;
+  flex: 0 0 auto;
+  display: flex;
     flex-direction: column;
 }
 
@@ -24,12 +25,23 @@
 
 /* left and right column modifiers - standart layout*/
 .column_left{
-   flex: 0 0 auto;
+  @media screen and (min-width: 100px) {
+    width: 375px;
+  }
+
+  @media screen and (min-width: 1000px) {
     width: 34vw;
+  }
 }
+
 .column_right{
-    flex: 0 0 auto;
+  @media screen and (min-width: 100px) {
+    width: 375px;
+  }
+
+  @media screen and (min-width: 1000px) {
     width: 65vw;
+  }
 }
 
 /* outline modifier */

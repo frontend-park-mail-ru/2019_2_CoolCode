@@ -1,6 +1,6 @@
 import BaseComponent from "../../baseComponent";
 import {bus} from "../../../main";
-import '../ChatsBlock/bemChatsBlock/bem-chats-block.css';
+import '../ChatsBlock/bemChatsBlock/bem-chats-block.scss';
 import UserComponent from "../User/UserComponent";
 
 const UsersFoundBlockTemplate = require('./usersFoundBlock.pug');
