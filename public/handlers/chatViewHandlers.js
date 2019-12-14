@@ -351,10 +351,56 @@ function showStickers() {
 		}else {
 			block.style.display = "flex";
 		}
-		console.log("aaaaa");
+	});
+}
+function buyStickers(stickers) {
+	const stickersAll = data.getStickers();
+	stickersAll.forEach((id)=>{
+		const s = document.querySelector(`.stickerpack-${id}`);
+		s.style.filter = 'grayscale(100%)';
+	});
+	for(let i = 0; i < stickers.length; i++) {
+		const s = document.querySelector(`.stickerpack-${stickers[i]}`);
+		s.style.filter = 'none';
+		s.addEventListener('click', (e)=>{
+			const stickerId = e.target.getAttribute("id");//чтобы отправить на сервер
+			//нарисовать
+		});
+	};
+	stickersAll.forEach((id)=>{
+		const s = document.querySelector(`.stickerpack-${id}`);//id стикерпака
+		if(s.style.filter == 'grayscale(100%)') {
+			s.addEventListener('click',(e)=>{
+				// const stickerId = e.target.getAttribute("id");
+				// const stickerScr = e.target.src;
+				//предложить купить
+				buy(id);
+			});
+		}
+
+	});
+
+}
+const infoTemplate = require('../components/ChatBlock/advice.pug');
+function buy(stickerackID) {
+
+	const contentListRoot = document.querySelector('.header');
+	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
+	const block = document.querySelector('.channel-header-menu__advice.channel-header-menu__advice_style');
+	const lay = document.querySelector('.channel-header-menu__advice_overlay');
+	block.style.display = 'flex';
+	lay.style.display = 'flex';
+	const ok = block.querySelector('.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style');
+	ok.addEventListener('click', () => {
+		block.style.display = "none";
+		lay.style.display = 'none';
+	});
+	lay.addEventListener('click', () => {
+		block.style.display = "none";
+		lay.style.display = 'none';
 	});
 }
 
-export {showStickers, recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+export {buyStickers, showStickers, recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
 	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea
 };

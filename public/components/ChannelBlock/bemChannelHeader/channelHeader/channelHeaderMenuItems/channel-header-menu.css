@@ -34,3 +34,44 @@
 .channel-header-menu__info_style__text{
     font-family: var(--global-font-family-Montserrat);
 }
+
+
+/*advice*/
+.channel-header-menu__advice {
+    position: fixed; /*make it centered and overlay*/
+    top: 35vh; /*experimenting with viewports*/
+    left: 66vw;
+    align-self: center;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20vh; /*experimenting with viewports*/
+    width: 40vh;
+    border-radius: 5px;
+    z-index: var(--global-z-index-form); /*make it overlay*/
+    padding: 5px;
+    overflow: auto;
+}
+.channel-header-menu__advice_style {
+    background: var(--global-green-color);
+    -webkit-backface-visibility: hidden;
+}
+
+.channel-header-menu__advice_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: var(--global-z-index-overlay); /*make it overlay*/
+    display: none;
+}
+
+.channel-header-menu__advice__text{
+    padding: 5px;
+    margin: 5px 10px;
+
+}
+.channel-header-menu__advice_style__text{
+    font-family: var(--global-font-family-Montserrat);
+}

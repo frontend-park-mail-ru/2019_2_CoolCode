@@ -5,13 +5,15 @@ class Data {
 		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId, chosenMessageText,
-		inputType, chosenFiles, chunks) {
+		chosenMessageId, chosenMessageText,userStickers = [],
+		inputType, chosenFiles, chunks, stickers = []) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
 		this.currentChannelID = currentChannelID;
 		this.user = user;
+		this.stickers = stickers;
+		this.userStickers = userStickers;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
 		this.userWrkSpaces = userWrkSpaces;
@@ -49,6 +51,7 @@ class Data {
 
 		this.user = undefined;
 		this.userChats = [];
+		this.userStickers = [];
 		this.userWrkSpaces = [];
 		this.loggedIn = undefined;
 		this.userPhoto = undefined;
@@ -86,6 +89,22 @@ class Data {
 		if (method === 'set') {
 			console.log(`placing ${dataname} : ${data} in Data storage`);
 		}
+	}
+
+	getUserStickers() {
+		return this.userStickers;
+	}
+
+	setUserStickers(userStickers) {
+		this.userStickers = userStickers;
+	}
+
+	getStickers() {
+		return this.stickers;
+	}
+
+	setStickers(stickers) {
+		this.stickers = stickers;
 	}
 
 	getUser() {

@@ -7,6 +7,7 @@ import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent
 import ChatComponent from "../components/ChatBlock/ChatComponent";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import {
+	buyStickers,
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
 	createEditMessageBlockHndlr,
@@ -27,7 +28,7 @@ class chatView extends BaseView {
 
 	constructor (data, parent) {
     	super ({viewType: "chat", user:{}, loggedIn: null,
-			wrkSpaces:[], chats: [], currentChat: {}, foundMessageId: null,
+			wrkSpaces:[], chats: [], currentChat: {}, usersStickers: [], foundMessageId: null,
 			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
 	};
 
@@ -40,6 +41,7 @@ class chatView extends BaseView {
 		createSendMessageBtnHndlr();
 		recordMessage();
 		showStickers();
+		buyStickers(this._data.usersStickers);
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
@@ -59,6 +61,7 @@ class chatView extends BaseView {
 		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
+		this._data.usersStickers = [1];
 	}
 
 	findUser(chatId) {
