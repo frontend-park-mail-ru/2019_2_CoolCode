@@ -10,14 +10,12 @@
 // const {backend, backendSuffix, backendPortUsers, connection} = settings;
 
 const CACHE = 'chat-cache';
-let urlsToCache = ['/', '/index.html', '/main.js','/images/abkhazia.jpg'];
-/* let urlsToCache = [
-	'images/abkhazia.jpg',
-	'images/add_1.png',
-	'images/add.png',
-	'images/arr_up.png',
-	'images/arr_down.png',
-	'images/bin.png',
+//let urlsToCache = [
+//	'images/abkhazia.jpg',
+//	'images/add_1.png',
+//	'images/add.png',
+//	'images/arr_up.png',
+//	'images/arr_down.png',	'images/bin.png',
 	'images/close.png',
 	'images/dots.png',
 	'images/file.png',
@@ -47,7 +45,7 @@ let urlsToCache = ['/', '/index.html', '/main.js','/images/abkhazia.jpg'];
 	'/profile',
 	'/',
 	'/main.js'
-];*/
+];
 
 self.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -68,7 +66,7 @@ self.addEventListener('fetch', function(event) {
 
 async function networkOrCache(request) {
 	try{
-		const response = await fetch(request);
+		const response = await fetch(request, {mode: 'no-cors'});
 		console.log(response);
 		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;

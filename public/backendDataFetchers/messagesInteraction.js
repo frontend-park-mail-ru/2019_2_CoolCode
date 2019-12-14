@@ -53,10 +53,10 @@ async function sendingMessage(text, time, id) {
 			},
 			contentType: 'application/json;charset=utf-8'
 		});
-		if (!response.url.toString().startsWith(`https://coolcode.site/api/messages/messages/chats/`)) {
-			bus.emit('setNotSentMessage', text, id);
-			return 0;
-		}
+		//if (!response.url.toString().startsWith(`https://coolcode.site/api/messages/messages/chats/`)) {
+		//	bus.emit('setNotSentMessage', text, id);
+		//	return 0;
+		//}
 
 		if (response.status !== 200) {
 			throw new Error (`Haven't sent message: ${text} cause: ${responseStatuses[response.status]}`);

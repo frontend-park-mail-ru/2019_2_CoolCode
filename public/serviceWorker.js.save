@@ -10,7 +10,7 @@
 // const {backend, backendSuffix, backendPortUsers, connection} = settings;
 
 const CACHE = 'chat-cache';
-let urlsToCache = ['/', '/index.html', '/main.js','/images/abkhazia.jpg'];
+let url
 /* let urlsToCache = [
 	'images/abkhazia.jpg',
 	'images/add_1.png',
@@ -68,7 +68,7 @@ self.addEventListener('fetch', function(event) {
 
 async function networkOrCache(request) {
 	try{
-		const response = await fetch(request);
+		const response = await fetch(request, {mode: 'no-cors'});
 		console.log(response);
 		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;
