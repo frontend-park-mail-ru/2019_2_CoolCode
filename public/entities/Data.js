@@ -92,6 +92,7 @@ class Data {
 	}
 
 	getUserStickers() {
+		this.userStickers = this.user.stickerpacks;
 		return this.userStickers;
 	}
 

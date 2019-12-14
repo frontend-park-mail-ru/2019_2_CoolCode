@@ -61,7 +61,7 @@ class chatView extends BaseView {
 		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
-		this._data.usersStickers = [1];
+		this._data.usersStickers = data.getUserStickers();
 	}
 
 	findUser(chatId) {

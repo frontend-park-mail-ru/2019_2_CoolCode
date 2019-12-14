@@ -374,7 +374,7 @@ function buyStickers(stickers) {
 				// const stickerId = e.target.getAttribute("id");
 				// const stickerScr = e.target.src;
 				//предложить купить
-				buy(id);
+				adviceBuy(id);
 			});
 		}
 
@@ -382,8 +382,7 @@ function buyStickers(stickers) {
 
 }
 const infoTemplate = require('../components/ChatBlock/advice.pug');
-function buy(stickerackID) {
-
+function adviceBuy(stickerackID) {
 	const contentListRoot = document.querySelector('.header');
 	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
 	const block = document.querySelector('.channel-header-menu__advice.channel-header-menu__advice_style');
@@ -394,10 +393,46 @@ function buy(stickerackID) {
 	ok.addEventListener('click', () => {
 		block.style.display = "none";
 		lay.style.display = 'none';
+		buy(stickerackID);
 	});
 	lay.addEventListener('click', () => {
 		block.style.display = "none";
 		lay.style.display = 'none';
+	});
+}
+function buy(stickerackID) {
+	const paymentMethods = [{
+		supportedMethods: 'basic-card',
+		data: {
+			supportedNetworks: [
+				'visa', 'mastercard', 'amex', 'discover',
+				'diners', 'jcb', 'unionpay'
+			]
+		}
+	}, {
+		supportedMethods: 'https://bobpay.xyz/pay',
+	}];
+	const paymentDetails = {
+		total: {
+			label: 'Buy Stickers',
+			amount: { currency: 'RUB', value: '0.99' },
+		},
+	};
+	const paymentOptions = {
+		requestShipping: false,
+		requestPayerEmail: true,
+		requestPayerPhone: true,
+		requestPayerName: true,
+		shippingType: 'delivery'
+	};
+	const request = new PaymentRequest(paymentMethods, paymentDetails, paymentOptions);
+	request.show().then(response => {
+		console.log(response);
+		// [process payment]
+		// send to a PSP etc.
+		response.complete('success');
+		const s = document.querySelector(`.stickerpack-${stickerackID}`);
+		s.style.filter = 'none';
 	});
 }
 
