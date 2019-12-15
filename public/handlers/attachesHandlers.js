@@ -32,10 +32,6 @@ async function captureImage() {
 			router.open(KEYWORDS.photoCreateChat, [data.getCurrentChatId()]);
 		}
 	);
-
-	// const {type} = event.currentTarget.params;
-	// const chatBlock = componentsStorage.getChatBlock();
-	// await chatBlock.renderFiles(event.currentTarget.files, type);
 }
 
 function attachesDropdownClickEvent() {

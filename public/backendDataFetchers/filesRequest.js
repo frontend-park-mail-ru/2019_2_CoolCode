@@ -9,7 +9,7 @@ async function getChatFile(chatId, fileId) {
 		);
 		if (response.status !== 200) {
 			throw new Error(
-				`Couldn't fetch user photo: ${response.status}`);
+				`Couldn't fetch file: ${response.status}`);
 		}
 		return await response.blob();
 	} catch (error) {
@@ -18,4 +18,20 @@ async function getChatFile(chatId, fileId) {
 	}
 }
 
-export {getChatFile};
+async function getChannelFile(channelId, fileId) {
+	console.log(` Getting file ${fileId}`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.messageFileRequestChannel(channelId, fileId)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch file: ${response.status}`);
+		}
+		return await response.blob();
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+export {getChatFile, getChannelFile};

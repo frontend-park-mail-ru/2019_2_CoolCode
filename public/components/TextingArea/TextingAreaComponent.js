@@ -1,6 +1,7 @@
 import BaseComponent from "../baseComponent";
 import './TextingArea/bem-chat-column-main.scss';
 import './TextingArea/MessageSettBlock/message-sett-block.scss';
+import './TextingArea/MessageSettBlock/stiker-block.scss';
 import './TextingArea/TypingBlock/InputBlock/input.scss';
 import './TextingArea/TypingBlock/InputBlock/Attaches/attaches.scss';
 import './TextingArea/TypingBlock/MsgWindow/msgwindow.scss';
@@ -13,6 +14,41 @@ import {getRandomInt} from "../../modules/random";
 const textingAreaTemplate = require('./textarea.pug');
 
 class TextingAreaComponent extends BaseComponent {
+
+	renderStikers() {
+		for (let n = 1; n < 62; n++) {
+			let img = document.createElement('img');
+			img.id = `sticker1-${n}`;
+			img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+			img.src = `/images/go/BeepCar${n}.png`;
+			document.querySelector(".stickerpack-1").appendChild(img);
+		}
+
+		for (let n = 1; n < 65; n++) {
+			let img = document.createElement('img');
+			img.id = `sticker2-${n}`;
+			img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+			img.src = `/images/hate/Hate_everything${n}.png`;
+			document.querySelector(".stickerpack-2").appendChild(img);
+		}
+
+		for (let n = 1; n < 4; n++) {
+			let img = document.createElement('img');
+			img.id = `sticker3-${n}`;
+			img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+			img.src = `/images/Sashuly/S_a_s_h_u_l_y_a${n}.png`;
+			document.querySelector(".stickerpack-3").appendChild(img);
+		}
+
+		for (let n = 1; n < 35; n++) {
+			let img = document.createElement('img');
+			img.id = `sticker4-${n}`;
+			img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+			img.src = `/images/cats/Catkus${n}.png`;
+			document.querySelector(".stickerpack-4").appendChild(img);
+
+		}
+	}
 
 	createHandlers(container) {
 		const closeBtns = container.querySelectorAll('.overlay_button__image-container__icon');
@@ -71,10 +107,12 @@ class TextingAreaComponent extends BaseComponent {
 	renderTo(rootSelector) {
 		const container = document.querySelector(rootSelector);
 		container.innerHTML += this.render();
+		this.renderStikers();
 		bus.emit('setInputType', null, 0);
 	}
 
 	render() {
+		data.setStickers([1,2, 3, 4, 5, 6]);
 		return textingAreaTemplate(this._data);
 	}
 }

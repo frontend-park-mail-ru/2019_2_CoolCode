@@ -6,6 +6,12 @@ div.chat-msg__container
         if (message_type == 0)
             if(text != null)
                 div.primary-row__text.primary-row__text_style.primary-row__text_style-right=text
+        if (message_type == 3)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-right
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-right.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src= src)
         if (message_type == 1)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-right
                 div.primary-row__loader-container.primary-row__loader-container_size

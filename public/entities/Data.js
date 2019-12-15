@@ -7,13 +7,15 @@ class Data {
 		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId, chosenMessageText,
+		chosenMessageId, chosenMessageText,userStickers = [], stickers = [],
 		inputType, chosenFiles, chunks, stream) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
 		this.currentChannelID = currentChannelID;
 		this.user = user;
+		this.stickers = stickers;
+		this.userStickers = userStickers;
 		this.loggedIn = loggedIn;
 		this.userChats = userChats;
 		this.userWrkSpaces = userWrkSpaces;
@@ -53,6 +55,7 @@ class Data {
 
 		this.user = undefined;
 		this.userChats = [];
+		this.userStickers = [];
 		this.userWrkSpaces = [];
 		this.loggedIn = undefined;
 		this.userPhoto = undefined;
@@ -92,6 +95,23 @@ class Data {
 		if (method === 'set') {
 			console.log(`placing ${dataname} : ${data} in Data storage`);
 		}
+	}
+
+	getUserStickers() {
+		this.userStickers = this.user.stickerpacks;
+		return this.userStickers;
+	}
+
+	setUserStickers(userStickers) {
+		this.userStickers = userStickers;
+	}
+
+	getStickers() {
+		return this.stickers;
+	}
+
+	setStickers(stickers) {
+		this.stickers = stickers;
 	}
 
 	getUser() {
@@ -505,8 +525,10 @@ class Data {
 	}
 
 	setInputType(inputType) {
-		this.inputType = inputType;
-		this.createLogMessage('set', 'inputType', inputType);
+		if(inputType != 3) {
+			this.inputType = inputType;
+			this.createLogMessage('set', 'inputType', inputType);
+		}
 	}
 
 	getInputType() {

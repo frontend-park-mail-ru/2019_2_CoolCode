@@ -5,10 +5,24 @@ div.chat-msg__container
         div.primary-row__icon-container
             img.primary-row__icon-container__icon.primary-row__icon-container__icon_style.primary-row__icon-container__icon_size(src='/images/dots.png')
         div.primary-row__time.primary-row__time_style.primary-row__time_style-right=message.message_time
-    if (message.message_type == 0)
-        div.primary-row__text.primary-row__text_style.primary-row__text_style-right=text
-    if (message.message_type == 1)
-        div.primary-row__image-container.primary-row__image-container_style-right
+        if (message.message_type == 0)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-right=message.text
+        if (message.message_type == 3)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-right
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-right.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src= message.src)
+        if (message.message_type == 1)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-right
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-right.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src='/images/abkhazia.jpg')
+                audio.primary-row__audio.primary-row__audio_hidden(controls src=message.record type="audio/mpeg")
+                a.primary-row__file-ref.primary-row__file-ref_hidden
+                    div.file-ref__image-container.file-ref__image-container_style
+                        img.file-ref__image-container__image.file-ref__image-container__image_style.file-ref__image-container__image_size(src='/images/file.png')
     div.secondary-row.secondary-row_right
         if (message.likes)
             div.secondary-row__like

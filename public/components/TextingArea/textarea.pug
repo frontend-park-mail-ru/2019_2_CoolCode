@@ -8,12 +8,13 @@ div.chat-column-main.chat-column-main_size
                     div.attaches__option.attaches__option_style(data-section='attachFile') add files
                         input.attaches__option__input(type='file' multiple accept='.pdf, .docx, .doc')
                     div.attaches__option.attaches__option_style(data-section='attachPhoto') add photos
-                        input.attaches__option__input(type='file' multiple accept='image/*;capture=camera')
+                        input.attaches__option__input(type='file' multiple accept='image/*')
                     div.attaches__option.attaches__option_style(data-section='makePhoto') make photo
             div.input__icon-container
                 img.input__icon-container__icon.input__icon-container__icon_style.input__icon-container__icon_size(src="/images/add.png")
             div.input__content-container.input__content-container_size
                 textarea.input__text.input__text_style(placeholder="chat here..")
+                img.input__content-container__sticker(src="/images/sticker.png")
                 audio#audio(controls ).input__record.input__record_style.input__record_hidden
                 div.content-container__images.content-container__images_style.content-container__images_hidden
             div.input__icon-container
@@ -28,3 +29,33 @@ div.chat-column-main.chat-column-main_size
                     img.message-sett-block__content__button__icon.message-sett-block__content__button__icon_style.message-sett-block__content__button__icon_size(src="/images/close.png")
             div.message-sett-block__content__option.message-sett-block__content__option_style.message-sett-block__content__option_size#delete delete message
             div.message-sett-block__content__option.message-sett-block__content__option_style.message-sett-block__content__option_size#edit edit message
+        div.sticker-block.sticker-block_hidden
+            div.sticker-block__content
+                div.sticker-block__content__img
+                    div.sticker-block__content__img__place-stickers
+                        div.stickerpack-1
+                        div.stickerpack-2
+                        div.stickerpack-3
+                        div.stickerpack-4
+                        div.stickerpack-5
+                            img#sticker5-0.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/001-kitty-47.png")
+                            img#sticker5-1.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/002-kitty-46.png")
+                            img#sticker5-2.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/003-kitty-45.png")
+                            img#sticker5-3.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/004-idea.png")
+                            img#sticker5-4.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/005-kitty-44.png")
+                            img#sticker5-5.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/006-kitty-43.png")
+                            img#sticker5-6.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/007-kitty-42.png")
+                            img#sticker5-7.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/008-kitty-41.png")
+                            img#sticker5-8.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/009-kitty-40.png")
+                            img#sticker5-9.sticker-block__content__img__place-stickers__img(src="/images/sticker-pack/010-kitty-39.png")
+                        div.stickerpack-6
+                            img#sticker6-0.sticker-block__content__img__place-stickers__img(src="/images/food/001-cup.png")
+                            img#sticker6-1.sticker-block__content__img__place-stickers__img(src="/images/food/002-burger.png")
+                            img#sticker6-2.sticker-block__content__img__place-stickers__img(src="/images/food/003-lemon.png")
+                            img#sticker6-3.sticker-block__content__img__place-stickers__img(src="/images/food/004-banana.png")
+                            img#sticker6-4.sticker-block__content__img__place-stickers__img(src="/images/food/005-apple.png")
+                            img#sticker6-5.sticker-block__content__img__place-stickers__img(src="/images/food/013-nut.png")
+                            img#sticker6-6.sticker-block__content__img__place-stickers__img(src="/images/food/014-peas.png")
+                            img#sticker6-7.sticker-block__content__img__place-stickers__img(src="/images/food/016-toast.png")
+                            img#sticker6-8.sticker-block__content__img__place-stickers__img(src="/images/food/017-cupcake.png")
+                            img#sticker6-9.sticker-block__content__img__place-stickers__img(src="/images/food/020-donut.png")

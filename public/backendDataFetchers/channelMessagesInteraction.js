@@ -25,4 +25,25 @@ async function sendingMessageChannel(text, time, id) {
 	}
 }
 
-export {sendingMessageChannel};
+async function sendingFileChannel(formData, id) {
+	console.log(` Sending photo in channel ${id}`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.messageFileChannel(id),
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			return await response.json();
+		} else {
+			throw new Error(
+				`Error while upload file : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {sendingMessageChannel, sendingFileChannel};

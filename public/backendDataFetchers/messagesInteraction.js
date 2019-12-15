@@ -1,8 +1,6 @@
 import {API, responseStatuses, settings} from '../constants/config';
 import {bus, data, FetchModule} from '../main';
 
-//const {frontend, frontendPort, connection} = settings;
-
 async function likeMessage(id) {
 	console.log(`Liking message : ${id}`);
 	try {
@@ -109,4 +107,29 @@ async function sendingFile(formData, id) {
 
 }
 
-export {sendingMessage, deletingMessage, editingMessage, likeMessage, sendingFile};
+async function sendingSticker(chatId, stickerpackId,stickerId,message_type, date) {
+	console.log(` sendingSticker ${chatId}`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.currentChatMessages(chatId),
+				data: {
+					message_type: message_type,
+					sticker_id: `${stickerpackId}-${stickerId}`,
+					message_time : date,
+				},
+				contentType: 'application/json;charset=utf-8'}
+		);
+		if (response.status === 200) {
+			return await response.json();
+		} else {
+			throw new Error(
+				`Error while upload image : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {sendingSticker, sendingMessage, deletingMessage, editingMessage, likeMessage, sendingFile};

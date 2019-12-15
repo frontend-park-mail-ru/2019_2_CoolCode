@@ -62,6 +62,9 @@ class ChatComponent extends BaseComponent {
     	if (messageData.message_type == 1) {
     		this.setMessageContent(messageData);
     	}
+    	if (messageData.message_type == 3) {
+    		this.setStickerContent(messageData);
+    	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
@@ -94,11 +97,15 @@ class ChatComponent extends BaseComponent {
 
     }
 
+    async setStickerContent(message) {
+    	const sticker = document.querySelector(`#sticker${message.sticker_id}`);
+    	const messageBlock = document.getElementById(`message-${message.id}`);
+    	messageBlock.querySelector('.primary-row__image-container__image').src = sticker.src;
+    	bus.emit('showPhotoContent', null, messageBlock);
+    }
+
     async setMessageContent(message) {
     	let chatId = data.getCurrentChatId();
-    	if (!chatId) {
-    		chatId = data.getCurrentChannelId();
-    	}
     	let buffer = await getChatFile(chatId, message.file_id);
     	const fileCheck = new Type();
     	if (fileCheck.checkAudio(message.file_type) ||
@@ -143,6 +150,9 @@ class ChatComponent extends BaseComponent {
     			if (message) {
     				if (message.message_type == 1) {
     					await this.setMessageContent(message);
+    				}
+    				if (message.message_type == 3) {
+    					await this.setStickerContent(message);
     				}
     			}
     		}

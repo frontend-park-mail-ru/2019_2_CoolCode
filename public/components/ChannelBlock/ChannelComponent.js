@@ -5,8 +5,10 @@ import './bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-m
 import ChannelMessageComponent from "../TextingArea/Message/ChannelMessage/ChannelMessageComponent";
 import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
 import {bus, data} from "../../main";
-import {getChatFile} from "../../backendDataFetchers/filesRequest";
+import {getChannelFile, getChatFile} from "../../backendDataFetchers/filesRequest";
 import MyWorker from "../../workers/profile.worker";
+import {Type} from "../../modules/getType";
+import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
 
 const channelTemplate = require('./channel.pug');
 
@@ -43,6 +45,12 @@ class ChannelComponent extends BaseComponent {
 		const messageComponent = new ChannelMessageComponent({messageUser: user, message: messageData, user: this._data.user,
 			error: false, deleted:false, edited:false}, contentListRoot);
 		contentListRoot.appendChild(messageComponent.render());
+		if (messageData.message_type == 1) {
+			this.setMessageContent(messageData);
+		}
+		if (messageData.message_type == 3) {
+			this.setStickerContent(messageData);
+		}
 		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
@@ -93,38 +101,64 @@ class ChannelComponent extends BaseComponent {
 
 	}
 
-	async setMessagePhoto(message) {
-		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-		let chatId = data.getCurrentChatId();
-		if (!chatId) {
-			chatId = data.getCurrentChannelId();
+	async setStickerContent(message) {
+		const sticker = document.querySelector(`#sticker${message.sticker_id}`);
+		const messageBlock = document.getElementById(`message-${message.id}`);
+		messageBlock.querySelector('.primary-row__image-container__image').src = sticker.src;
+		bus.emit('showPhotoContent', null, messageBlock);
+	}
+
+	async setMessageContent(message) {
+		const channelId = data.getCurrentChannelId();
+		let buffer = await getChannelFile(channelId, message.file_id);
+		const fileCheck = new Type();
+		if (fileCheck.checkAudio(message.file_type) ||
+			fileCheck.checkFile(message.file_type)) {
+			buffer = buffer.slice(0, buffer.size, fileCheck.createMimeType(message.file_type));
 		}
-		const buffer = await getChatFile(chatId, message.file_id);
 		const worker = new MyWorker();
 		worker.postMessage(buffer);
 		worker.onmessage = function (result) {
 			const messageBlock = document.getElementById(`message-${message.id}`);
-			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
-			bus.emit('showPhotoContent', null, messageBlock);
+			if (fileCheck.checkImage(message.file_type)) {
+				messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+				bus.emit('showPhotoContent', null, messageBlock);
+				bus.emit('createMessagePhotoHandler', null, message.id);
+			} else if (fileCheck.checkAudio(message.file_type)) {
+				messageBlock.querySelector('.primary-row__audio').src = result.data;
+				bus.emit('showAudioContent', null, messageBlock);
+			} else if (fileCheck.checkFile(message.file_type)) {
+				messageBlock.querySelector('.primary-row__file-ref').download = `${message.file_id}.${message.file_type}`;
+				messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+				bus.emit('showFileContent', null, messageBlock);
+			}
 		};
-		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
 	async renderContent() {
 		const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
 		if (this._data.channelMessages) {
 			for (const message of this._data.channelMessages) {
-				const messageComponent = new ChannelMessageComponent({
-					messageUser: message.user, message: message.message,
-					user: this._data.user, error: false, deleted: false, edited: false
-				}, contentListRoot);
-				contentListRoot.appendChild(messageComponent.render());
-				if (message.message.message_type == 1) {
-					await this.setMessagePhoto(message.message);
+				if (message) {
+					const messageComponent = new ChannelMessageComponent({
+						messageUser: message.user, message: message.message,
+						user: this._data.user, error: false, deleted: false, edited: false
+					}, contentListRoot);
+					contentListRoot.appendChild(messageComponent.render());
+				}
+			}
+			contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+			for (const message of this._data.channelMessages.reverse()) {
+				if (message) {
+					if (message.message.message_type == 1) {
+						await this.setMessageContent(message.message);
+					}
+					if (message.message.message_type == 3) {
+						await this.setStickerContent(message.message);
+					}
 				}
 			}
 		}
-		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
 	}
 
 	renderTextingArea() {
@@ -133,8 +167,8 @@ class ChannelComponent extends BaseComponent {
 		this.textAreaComponent.renderTo('.chat-column');
 	}
 
-	async renderPhotos(files) {
-		await this.textAreaComponent.renderPhotos(files);
+	async renderFiles(files, type) {
+		await this.textAreaComponent.renderFiles(files, type);
 	}
 
 	render() {

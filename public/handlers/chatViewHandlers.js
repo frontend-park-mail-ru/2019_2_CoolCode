@@ -1,7 +1,14 @@
-import {deletingMessage, editingMessage, sendingFile, sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {
+	deletingMessage,
+	editingMessage,
+	sendingFile,
+	sendingMessage,
+	sendingSticker
+} from "../backendDataFetchers/messagesInteraction";
 import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
+import {setUserPhoto, setUserStickers} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
 import {getRandomInt} from "../modules/random";
 
@@ -68,6 +75,10 @@ function createVisibleSettingsMessageBlock(event) {
 	if (event.type == 'mouseover') {
 		event.currentTarget.classList.add('mouseover');
 		settingsMessageBlock.classList.remove('message-sett-block__content_hidden');
+		const stikerBlock = document.querySelector('.sticker-block');
+		if (!stikerBlock.classList.contains('sticker-block_hidden')) {
+			stikerBlock.classList = `${stikerBlock.classList} sticker-block_hidden`;
+		}
 	}
 	if (event.type == 'mouseout') {
 		event.currentTarget.classList.remove('mouseover');
@@ -108,7 +119,6 @@ function chooseSendMessageEvent() {
 		sendRecordEvent();
 		break;
 	}
-
 }
 
 function deleteSendMessageBtnHndlr() {
@@ -136,7 +146,7 @@ function growInput(element) {
 	element.style.height = element.scrollHeight;
 }
 
-function deleteSendingPhoto() {
+export function deleteSendingPhoto() {
 	const imagesContainer = document.querySelector('.content-container__images');
 	const image = imagesContainer.querySelector('.attach-component');
 	image.remove();
@@ -197,10 +207,7 @@ async function sendPhotosEvent() {
 			const date = new currentDate();
 			const formData = new FormData();
 			formData.append('file', currentFile);
-			let chatId = data.getCurrentChatId();
-			if (!chatId) {
-				chatId = data.getCurrentChannelId();
-			}
+			const chatId = data.getCurrentChatId();
 			try {
 				const messageId = getRandomInt(10000);
 				chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), message_time: date.getDate(), message_type: 1});
@@ -378,6 +385,6 @@ function recordMessage() {
 	microphone.addEventListener('click', getMedia);
 }
 
-export {recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
+export { recordMessage, createSendMessageBtnHndlr, createMessageInputHndlr, createOpenSettingsMessageHndlr, createCloseSettingsMessageHndlr, createDeleteMessageBlockHndlr, createVisibleSettingsMessageBlock,
 	createEditMessageBlockHndlr, growInput, createHiddenSettingsMessageBlock, showPhotoContent, showTextArea, showAudioContent, showFileContent
 };

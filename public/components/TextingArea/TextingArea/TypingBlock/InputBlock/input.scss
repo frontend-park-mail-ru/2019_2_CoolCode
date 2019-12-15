@@ -76,6 +76,7 @@
 .input__content-container {
     flex: 0 0 70%;
     display: flex;
+    position: relative;
     flex-direction: column;
     width: auto;
     overflow: hidden;
@@ -222,4 +223,12 @@ controls{
     border-radius: 5px;
     background-color: var(--global-grey-color);
     -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}
+
+.input__content-container__sticker {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: 10px;
+    top: 5px;
 }
