@@ -64,7 +64,7 @@ class TextingAreaComponent extends BaseComponent {
 	}
 
 	render() {
-		data.setStickers([1,2]);
+		data.setStickers([1,2, 3, 4, 5, 6]);
 		return textingAreaTemplate(this._data);
 	}
 }

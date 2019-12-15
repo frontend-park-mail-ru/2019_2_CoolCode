@@ -348,7 +348,43 @@ function recordMessage() {
 		});
 }
 
+function allStickersView() {
+	for (let n = 1; n < 62; n++) {
+		let img = document.createElement('img');
+		img.id = `sticker1-${n}`;
+		img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+		img.src = `/images/go/BeepCar${n}.png`;
+		document.querySelector(".stickerpack-1").appendChild(img);
+	}
+
+	for (let n = 1; n < 65; n++) {
+		let img = document.createElement('img');
+		img.id = `sticker2-${n}`;
+		img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+		img.src = `/images/hate/Hate_everything${n}.png`;
+		document.querySelector(".stickerpack-2").appendChild(img);
+	}
+
+	for (let n = 1; n < 4; n++) {
+		let img = document.createElement('img');
+		img.id = `sticker3-${n}`;
+		img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+		img.src = `/images/Sashuly/S_a_s_h_u_l_y_a${n}.png`;
+		document.querySelector(".stickerpack-3").appendChild(img);
+	}
+
+	for (let n = 1; n < 35; n++) {
+		let img = document.createElement('img');
+		img.id = `sticker4-${n}`;
+		img.setAttribute("class", `sticker-block__content__img__place-stickers__img`);
+		img.src = `/images/cats/Catkus${n}.png`;
+		document.querySelector(".stickerpack-4").appendChild(img);
+
+	}
+}
+
 function showStickers() {
+	allStickersView();
 	const stickers = document.querySelector(".input__content-container__sticker.input__content-container__sticker_style");
 	stickers.addEventListener('click', (e)=>{
 		const block = document.querySelector(".sticker-block");
