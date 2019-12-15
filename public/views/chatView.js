@@ -41,7 +41,7 @@ class chatView extends BaseView {
 		createSendMessageBtnHndlr();
 		recordMessage();
 		showStickers();
-		buyStickers(this._data.usersStickers);
+		buyStickers(this._data.user.id, this._data.usersStickers);
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();

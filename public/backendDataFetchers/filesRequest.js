@@ -11,7 +11,6 @@ async function getChatFile(chatId, fileId) {
 			throw new Error(
 				`Couldn't fetch user photo: ${response.status}`);
 		}
-		console.log("AAA", response);
 		return await response.blob();
 	} catch (error) {
 		console.error(error);

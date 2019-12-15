@@ -48,4 +48,23 @@ async function setUserPhoto(formData) {
 
 }
 
-export {setUserInfo, setUserPhoto};
+async function setUserStickers(id, idPack) {
+	console.log(` Sset stickers`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.addStickers(id, idPack)}
+		);
+		if (response.status === 200) {
+			return true;
+		} else {
+			throw new Error(
+				`Error while upload stickers : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {setUserStickers, setUserInfo, setUserPhoto};

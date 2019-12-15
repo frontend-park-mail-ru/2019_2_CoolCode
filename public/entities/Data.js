@@ -519,8 +519,10 @@ class Data {
 	}
 
 	setInputType(inputType) {
-		this.inputType = inputType;
-		this.createLogMessage('set', 'inputType', inputType);
+		if(inputType != 3) {
+			this.inputType = inputType;
+			this.createLogMessage('set', 'inputType', inputType);
+		}
 	}
 
 	getInputType() {

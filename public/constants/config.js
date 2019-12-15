@@ -65,6 +65,9 @@ const API = {
 	userInfo: (id) => {
 		return `/users/${id}`;
 	},
+	addStickers: (userId, stickerpackId) =>{
+		return `/users/${userId}/stickers/${stickerpackId}`;
+	},
 	channelInfo: (id) => {
 		return `/channels/${id}`;
 	},

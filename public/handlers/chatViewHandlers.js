@@ -1,8 +1,14 @@
-import {deletingMessage, editingMessage, sendingFile, sendingMessage} from "../backendDataFetchers/messagesInteraction";
+import {
+	deletingMessage,
+	editingMessage,
+	sendingFile,
+	sendingMessage,
+	sendingSticker
+} from "../backendDataFetchers/messagesInteraction";
 import {bus, componentsStorage, data, router} from "../main";
 import {keys} from "../constants/config";
 import currentDate from "../modules/currentDate";
-import {setUserPhoto} from "../backendDataFetchers/setUserInfo";
+import {setUserPhoto, setUserStickers} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
 
 function deleteMessageEvent() {
@@ -353,36 +359,48 @@ function showStickers() {
 		}
 	});
 }
-function buyStickers(stickers) {
+
+function buyStickers(userId, stickers) {
 	const stickersAll = data.getStickers();
+	const chatBlock = componentsStorage.getChatBlock();
 	stickersAll.forEach((id)=>{
 		const s = document.querySelector(`.stickerpack-${id}`);
 		s.style.filter = 'grayscale(100%)';
 	});
 	for(let i = 0; i < stickers.length; i++) {
-		const s = document.querySelector(`.stickerpack-${stickers[i]}`);
+		const stickerpackId = stickers[i];
+		const s = document.querySelector(`.stickerpack-${stickerpackId}`);
 		s.style.filter = 'none';
-		s.addEventListener('click', (e)=>{
-			const stickerId = e.target.getAttribute("id");//чтобы отправить на сервер
-			//нарисовать
+		s.addEventListener('click', async (e) => {
+			let stickerId = e.target.getAttribute("id");
+			stickerId = stickerId.split("-")[1];
+			const date = new currentDate();
+			const src = e.target.getAttribute("src");
+			const messageId = await sendStickerEvent(stickerpackId, stickerId, date.getDate());
+			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), src: src, message_time: date.getDate(), message_type: 3});
 		});
 	};
 	stickersAll.forEach((id)=>{
 		const s = document.querySelector(`.stickerpack-${id}`);//id стикерпака
 		if(s.style.filter == 'grayscale(100%)') {
-			s.addEventListener('click',(e)=>{
-				// const stickerId = e.target.getAttribute("id");
-				// const stickerScr = e.target.src;
-				//предложить купить
-				adviceBuy(id);
+			s.addEventListener('click',()=>{
+				adviceBuy(userId, id); //предложить купить
 			});
 		}
 
 	});
-
 }
+
+async function sendStickerEvent(stickerpackId, stickerId, date) {
+	let chatId = data.getCurrentChatId();
+	const message_type = 3;
+	const result = await sendingSticker(chatId, stickerpackId,stickerId, message_type, date);
+	return result.id;
+}
+
 const infoTemplate = require('../components/ChatBlock/advice.pug');
-function adviceBuy(stickerackID) {
+
+function adviceBuy(userid, stickerackID) {
 	const contentListRoot = document.querySelector('.header');
 	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
 	const block = document.querySelector('.channel-header-menu__advice.channel-header-menu__advice_style');
@@ -393,14 +411,16 @@ function adviceBuy(stickerackID) {
 	ok.addEventListener('click', () => {
 		block.style.display = "none";
 		lay.style.display = 'none';
-		buy(stickerackID);
+		buy(userid, stickerackID);
 	});
 	lay.addEventListener('click', () => {
 		block.style.display = "none";
 		lay.style.display = 'none';
 	});
 }
-function buy(stickerackID) {
+
+function buy(userid, stickerackID) {
+
 	const paymentMethods = [{
 		supportedMethods: 'basic-card',
 		data: {
@@ -412,12 +432,14 @@ function buy(stickerackID) {
 	}, {
 		supportedMethods: 'https://bobpay.xyz/pay',
 	}];
+
 	const paymentDetails = {
 		total: {
 			label: 'Buy Stickers',
 			amount: { currency: 'RUB', value: '0.99' },
 		},
 	};
+
 	const paymentOptions = {
 		requestShipping: false,
 		requestPayerEmail: true,
@@ -425,14 +447,16 @@ function buy(stickerackID) {
 		requestPayerName: true,
 		shippingType: 'delivery'
 	};
+
 	const request = new PaymentRequest(paymentMethods, paymentDetails, paymentOptions);
+
 	request.show().then(response => {
 		console.log(response);
 		// [process payment]
 		// send to a PSP etc.
 		response.complete('success');
-		const s = document.querySelector(`.stickerpack-${stickerackID}`);
-		s.style.filter = 'none';
+		const res = setUserStickers(userid, stickerackID);
+		location.reload();
 	});
 }
 

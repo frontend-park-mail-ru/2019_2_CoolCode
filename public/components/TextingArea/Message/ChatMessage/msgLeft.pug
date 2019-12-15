@@ -2,6 +2,9 @@ div.chat-msg__container
     div.primary-row.primary-row_left
         if (message_type == 0)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-left=text
+        if (message_type == 3)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-left
+                img.primary-row__image-container__image.primary-row__image-container__image_size(src=src)
         if (message_type == 1)
             div.primary-row__text.primary-row__text_style.primary-row__text_style-left
                 div.primary-row__loader-container.primary-row__loader-container_size
