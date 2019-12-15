@@ -122,18 +122,22 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
     		for (const message of this._data.chatMessages) {
-    			const messageComponent = new ChatMessageComponent({
-    				message: message,
-    				user: this._data.user,
-    				error: false,
-    				deleted: false
-    			}, contentListRoot);
-    			contentListRoot.appendChild(messageComponent.render());
+    			if (message) {
+    				const messageComponent = new ChatMessageComponent({
+    					message: message,
+    					user: this._data.user,
+    					error: false,
+    					deleted: false
+    				}, contentListRoot);
+    				contentListRoot.appendChild(messageComponent.render());
+    			}
     		}
     		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     		for (const message of this._data.chatMessages.reverse()) {
-    			if (message.message_type == 1) {
-    				await this.setMessageContent(message);
+    			if (message) {
+    				if (message.message_type == 1) {
+    					await this.setMessageContent(message);
+    				}
     			}
     		}
     	}
