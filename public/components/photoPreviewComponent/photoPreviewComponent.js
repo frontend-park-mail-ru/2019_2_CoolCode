@@ -28,6 +28,8 @@ class PhotoPreviewComponent extends BaseComponent {
 		const parentContainer = this._parent.parentNode;
 		parentContainer.firstChild.remove();
 		parentContainer.firstChild.remove();
+		parentContainer.firstChild.remove();
+
 	}
 
 	render() {

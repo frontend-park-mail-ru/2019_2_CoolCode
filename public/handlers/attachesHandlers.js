@@ -1,6 +1,7 @@
 import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
 import AlertPhotoComponent from "../components/filesAlertComponent/alertPhotoComponent";
+import {KEYWORDS} from "../constants/config";
 
 async function attachFiles() {
 	const {type} = event.currentTarget.params;
@@ -19,6 +20,24 @@ async function attachFiles() {
 	}
 }
 
+async function captureImage() {
+	navigator.mediaDevices.getUserMedia({
+		video:  {
+			width: { ideal: 800},
+			height: { ideal: 720}
+		},
+	}).then(
+		function (stream) {
+			bus.emit('setStream', null, stream);
+			router.open(KEYWORDS.photoCreateChat, [data.getCurrentChatId()]);
+		}
+	);
+
+	// const {type} = event.currentTarget.params;
+	// const chatBlock = componentsStorage.getChatBlock();
+	// await chatBlock.renderFiles(event.currentTarget.files, type);
+}
+
 function attachesDropdownClickEvent() {
 	const input = event.target.firstElementChild;
 	switch (event.target.dataset.section) {
@@ -31,6 +50,9 @@ function attachesDropdownClickEvent() {
 		event.target.firstElementChild.click();
 		input.params = {type : 0};
 		input.addEventListener('change', attachFiles);
+		break;
+	case 'makePhoto':
+		captureImage();
 		break;
 	}
 }

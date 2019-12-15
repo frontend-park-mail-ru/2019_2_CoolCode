@@ -114,6 +114,8 @@ const KEYWORDS = {
 	channelPage: ['wrkspace', 'channel'],
 	photoPreviewChat: ['chat', 'photo'],
 	photoPreviewChannel: ['wrkspace', 'channel', 'photo'],
+	photoCreateChat: ['chat', 'makePhoto'],
+	photoCreateChannel: ['wrkspace', 'channel', 'makePhoto'],
 };
 
 const ROUTER = {
@@ -146,6 +148,12 @@ const ROUTER = {
 	},
 	photoPreviewChannel: (wrkspaceId, channelId, messageId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}/photo/${messageId}`;
+	},
+	photoCreateChat: (chatId) => {
+		return `/chat/${chatId}/makePhoto`;
+	},
+	photoCreateChannel: (wrkspaceId, channelId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/makePhoto}`;
 	},
 	addMember: '/addMember',
 	createWrkSpace: '/createWrkSpace',

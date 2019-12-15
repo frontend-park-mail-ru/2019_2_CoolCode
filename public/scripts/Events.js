@@ -24,6 +24,7 @@ import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backe
 import {showAudioContent, showFileContent, showPhotoContent, showTextArea} from "../handlers/chatViewHandlers";
 import {showAttachContent} from "../handlers/attachesHandlers";
 import {createMessagePhotoHandler} from "../handlers/messagesHandlers";
+import {capturePhotoEvent, recapturePhotoEvent, sendCapturedPhotoEvent} from "../handlers/createPhotoViewHandlers";
 
 function createEvents() {
 
@@ -68,6 +69,8 @@ function createEvents() {
 	bus.on('setChunks', data.setChunks.bind(data));
 	bus.on('setCurrentPhotoSrc', data.setCurrentPhotoSrc.bind(data));
 	bus.on('deleteCurrentPhotoSrc', data.deleteCurrentPhotoSrc.bind(data));
+	bus.on('setStream', data.setStream.bind(data));
+	bus.on('deleteStream', data.deleteStream.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 
@@ -117,6 +120,9 @@ function createEvents() {
 	bus.on('showAudioContent', showAudioContent);
 	bus.on('showFileContent', showFileContent);
 	bus.on('sendMessage', sendingMessage);
+	bus.on('capturePhotoEvent', capturePhotoEvent);
+	bus.on('recapturePhotoEvent', recapturePhotoEvent);
+	bus.on('sendCapturedPhotoEvent', sendCapturedPhotoEvent);
 
 	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
 	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));

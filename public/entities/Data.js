@@ -8,7 +8,7 @@ class Data {
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText,
-		inputType, chosenFiles, chunks) {
+		inputType, chosenFiles, chunks, stream) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -43,6 +43,8 @@ class Data {
 		this.inputType = inputType;
 		this.chosenFiles = chosenFiles;
 		this.chunks = chunks;
+
+		this.stream = stream;
 
 		Data.__instance = this;
 	}
@@ -79,6 +81,8 @@ class Data {
 		this.inputType = undefined;
 		this.chosenFiles = undefined;
 		this.chunks = undefined;
+		this.stream = undefined;
+
 	}
 
 	createLogMessage(method, dataname, data) { //TODO: log module!
@@ -585,6 +589,18 @@ class Data {
 	getCurrentPhotoSrc() {
 		this.createLogMessage('get', 'currentPhotoSrc', 'photoSrc');
 		return this.currentPhotoSrc;
+	}
+
+	setStream(stream) {
+		this.stream = stream;
+	}
+
+	getStream() {
+		return this.stream;
+	}
+
+	deleteStream() {
+		this.stream = undefined;
 	}
 
 }

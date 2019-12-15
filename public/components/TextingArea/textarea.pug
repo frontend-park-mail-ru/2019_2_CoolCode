@@ -5,10 +5,11 @@ div.chat-column-main.chat-column-main_size
         form.input
             div.attaches.attaches_style
                 div.attaches__options-container.attaches__options-container_style
-                    div.attaches__option.attaches__option_style(data-section='attachFile') files
+                    div.attaches__option.attaches__option_style(data-section='attachFile') add files
                         input.attaches__option__input(type='file' multiple accept='.pdf, .docx, .doc')
-                    div.attaches__option.attaches__option_style(data-section='attachPhoto') photos
-                        input.attaches__option__input(type='file' multiple accept='image/*')
+                    div.attaches__option.attaches__option_style(data-section='attachPhoto') add photos
+                        input.attaches__option__input(type='file' multiple accept='image/*;capture=camera')
+                    div.attaches__option.attaches__option_style(data-section='makePhoto') make photo
             div.input__icon-container
                 img.input__icon-container__icon.input__icon-container__icon_style.input__icon-container__icon_size(src="/images/add.png")
             div.input__content-container.input__content-container_size

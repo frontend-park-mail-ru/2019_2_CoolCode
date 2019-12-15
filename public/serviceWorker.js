@@ -1,6 +1,6 @@
 const CACHE = 'chat-cache';
-let urlsToCache = ['/', '/index.html', '/main.js','/images/abkhazia.jpg',
-	'/images/add_1.png',
+let urlsToCache = ['/', '/main.js', '/index.html', '/images/abkhazia.jpg',
+/*	'/images/add_1.png',
 	'/images/add.png',
 	'/images/arr_up.png',
 	'/images/arr_down.png',
@@ -31,7 +31,7 @@ let urlsToCache = ['/', '/index.html', '/main.js','/images/abkhazia.jpg',
 	'/images/white.png',
 	'/images/user.jpg',
 	'/images/therefore-mathematical-symbol.png',
-	'/profile',
+	'/profile', */
 ];
 
 self.addEventListener('install', (event) => {
@@ -63,7 +63,7 @@ async function networkOrCache(request) {
 		 if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
-			 return cache.match("images/user.jpg");
+			 return cache.match("/images/abkhazia.jpg");
 		}
 	} catch (error) {
 		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
@@ -72,7 +72,7 @@ async function networkOrCache(request) {
 		if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
-			return cache.match("images/user.jpg");
+			return cache.match("/images/abkhazia.jpg");
 		}
 		return await fromCache(request);
 	}

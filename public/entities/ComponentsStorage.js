@@ -7,6 +7,7 @@ import BasicsComponent from "../components/Basics/basicsComponent";
 import CreationFormComponent from "../components/CreationForm/creationFormComponent";
 import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
 import PhotoPreviewComponent from "../components/photoPreviewComponent/photoPreviewComponent";
+import PhotoCreateComponent from "../components/photoCreateComponent/photoCreateComponent";
 
 class ComponentsStorage {
 	constructor(leftColumn = null, chatBlock = null, wrkspacePage = null, rightColumn = null, profileBlock = null, headerBlock = null, form = null) {
@@ -158,7 +159,8 @@ class ComponentsStorage {
 		try {
 			if (form instanceof CreationFormComponent ||
                 form instanceof AddMemberComponent ||
-				form instanceof PhotoPreviewComponent) {
+				form instanceof PhotoPreviewComponent ||
+				form instanceof PhotoCreateComponent) {
 				this.form = form;
 			} else{
 				throw new Error('Can\'t set form component');
@@ -193,6 +195,9 @@ class ComponentsStorage {
 				break;
 			case 'photoPreview'	:
 				form = new PhotoPreviewComponent(data, parent);
+				break;
+			case 'photoCreate'	:
+				form = new PhotoCreateComponent(data, parent);
 				break;
 			}
 			form.renderTo();

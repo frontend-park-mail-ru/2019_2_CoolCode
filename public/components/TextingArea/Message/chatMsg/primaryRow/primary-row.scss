@@ -160,11 +160,33 @@
 .primary-row__icon-container__deleted-icon {
     object-fit: scale-down;
     object-position: bottom;
-    height: auto;
 }
 
 .primary-row__icon-container__deleted-icon_style {
     filter: opacity(0.5);
+}
+
+
+.primary-row__icon-container__deleted-icon_size {
+    @media screen and (min-height: 10px) {
+        width: 15px;
+        height: 15px;
+    }
+
+    @media screen and (min-height: 400px) {
+        width: 18px;
+        height: 18px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 23px;
+        height: 23px;
+    }
+
+    @media screen and (min-height: 810px) {
+        width: 27px;
+        height: 27px;
+    }
 }
 
 /*image-container element*/

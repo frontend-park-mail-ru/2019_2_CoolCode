@@ -2,17 +2,16 @@ import BaseView from "./baseView";
 import {appLocalStorage, bus, componentsStorage, data, router} from "../main";
 import {createOverlayHndlr, createWrkSpaceCreateSubmitHndlr} from "../handlers/creationFormHandlers";
 
-class photoPreviewView extends BaseView {
+class photoCreateView extends BaseView {
 
 	constructor (data, parent) {
-		super({viewType: "photoPreview", user:{}, messageId:null, loggedIn: null}, parent);
+		super({viewType: "photoCreate", user:{}, chatId:null, loggedIn: null}, parent);
 	}
 
 	setContent() {
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._parent = document.querySelector('.header');
-
 	}
 
 	show(args) {
@@ -20,15 +19,14 @@ class photoPreviewView extends BaseView {
 		if (appLocalStorage.getUser()) {
 			bus.emit('setUser', null, appLocalStorage.getUser());
 		}
-		this._data.messageId = args[args.length - 1];
 		this.setContent();
 		this.render();
 		createOverlayHndlr();
 	}
 
 	render() {
-		const photoPreviewForm = componentsStorage.getForm(this._data, this._parent);
+		const photoCreateForm = componentsStorage.getForm(this._data, this._parent);
 	}
 
 }
-export default photoPreviewView;
+export default photoCreateView;

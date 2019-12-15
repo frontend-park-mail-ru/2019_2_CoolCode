@@ -32,6 +32,22 @@
     height: 800px;
   }
 }
+
+.photo-preview_width {
+
+  @media screen and (min-width: 100px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media screen and (min-width: 1000px) {
+
+    width: 800px;
+    height: 800px;
+  }
+
+
+}
 .photo-preview_style {
     border-radius: 20px;
     border: 2px solid var(--global-green-color);
@@ -78,4 +94,21 @@
       max-width: 800px;
       max-height: 800px;
     }
+}
+
+
+.photo-preview__image_width {
+
+  @media screen and (min-width: 100px) {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  @media screen and (min-width: 1000px) {
+
+    max-width: 800px;
+    max-height: 800px;
+  }
+
+
 }

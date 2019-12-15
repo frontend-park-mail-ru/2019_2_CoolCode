@@ -30,6 +30,7 @@ import ResizeThrottler from "./modules/throttler";
 import {resizeAttach} from "./handlers/attachesHandlers";
 import photoPreviewView from "./views/photoPreviewView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
+import photoCreateView from "./views/photoCreateView";
 
 const {backend, backendSuffix, connection} = settings;
 const bus = new Bus();
@@ -67,6 +68,8 @@ router.register(ROUTER.chatFoundMessage, chatView, KEYWORDS.chatFoundMessage);
 router.register(ROUTER.channelFoundMessage, channelView, KEYWORDS.channelFoundMessage);
 router.register(ROUTER.photoPreviewChat, photoPreviewView, KEYWORDS.photoPreviewChat);
 router.register(ROUTER.photoPreviewChannel, photoPreviewView, KEYWORDS.photoPreviewChannel);
+router.register(ROUTER.photoCreateChat, photoCreateView, KEYWORDS.photoCreateChat);
+router.register(ROUTER.photoCreateChannel, photoCreateView, KEYWORDS.photoCreateChannel);
 
 router.start();
 

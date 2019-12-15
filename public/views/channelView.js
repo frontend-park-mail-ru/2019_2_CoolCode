@@ -33,7 +33,6 @@ class channelView extends BaseView {
 		createLikeBtnHndlr();
 		recordMessage();
 		createEditMessageBlockHndlr();
-		recordMessage();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
 		createAttachButton();

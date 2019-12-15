@@ -38,7 +38,13 @@ class ChatComponent extends BaseComponent {
     renderErrorOutgoingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: true, deleted:false}, contentListRoot);
-    	contentListRoot.appendChild(messageComponent.render());
+    	const message = contentListRoot.querySelector(`#message-${messageData.id}`);
+    	if (message) {
+    		message.insertAdjacentElement( 'beforebegin', messageComponent.render());
+    		message.remove();
+    	} else {
+    		contentListRoot.appendChild(messageComponent.render());
+    	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
