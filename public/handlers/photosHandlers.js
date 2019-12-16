@@ -1,6 +1,6 @@
 import {bus, data, promiseMaker} from "../main";
 import MyWorker from "../workers/profile.worker";
-import {getPhoto} from "../backendDataFetchers/gettingInfo";
+import {getPhoto} from "../backendDataFetchers/getEntitiesRequests";
 
 async function getProfilePhoto(id) {
 	const buffer = await getPhoto(id);

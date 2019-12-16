@@ -11,7 +11,7 @@ import {
 	getWrkspaceCreatorInfo,
 	getWrkspaceInfo,
 	getWrkspaceUsers
-} from "../backendDataFetchers/gettingInfo";
+} from "../backendDataFetchers/getEntitiesRequests";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
@@ -71,7 +71,7 @@ function createEvents() {
 	bus.on('deleteCurrentPhotoSrc', data.deleteCurrentPhotoSrc.bind(data));
 	bus.on('setStream', data.setStream.bind(data));
 	bus.on('deleteStream', data.deleteStream.bind(data));
-	bus.on('setChosenStickerpack', data.setChosenStickerpack.bind(data));
+	bus.on('setChosenStikerpack', data.setChosenStickerpack.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 

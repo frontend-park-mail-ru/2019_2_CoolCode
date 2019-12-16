@@ -31,12 +31,6 @@ class WrkspacePageSearchComponent extends BaseComponent {
 	}
 
 	render() {
-		// const wrkspaceSearchBlock = document.querySelector('.wrkspace-search');
-		// if (wrkspaceSearchBlock) {
-		// 	console.log(wrkspaceSearchBlock);
-		// 	wrkspaceSearchBlock.remove();
-		// }
-		// debugger;
 		return WrkspacePageSearchTemlate(this._data);
 	}
 }

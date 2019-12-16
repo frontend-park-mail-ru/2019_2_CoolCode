@@ -1,4 +1,4 @@
-import {bus, componentsStorage, data, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import currentDate from "../modules/currentDate";
 import {sendingSticker} from "../backendDataFetchers/messagesInteraction";
 import {setUserStickers} from "../backendDataFetchers/setUserInfo";
@@ -22,6 +22,7 @@ function showStickers() {
 function buyStickers() {
 	const userId = data.getUserId();
 	const stickers = data.getUserStickers();
+	console.log(stickers);
 	const stickersAll = data.getStickers();
 	const chatBlock = componentsStorage.getChatBlock();
 	stickersAll.forEach((id)=>{
@@ -91,8 +92,7 @@ function adviceBuy(userid, stickerackID) {
 	});
 }
 
-function buy(userid, stickerpackID) {
-
+function buy(userid, stickerackID) {
 	const paymentMethods = [{
 		supportedMethods: 'basic-card',
 		data: {
@@ -127,8 +127,10 @@ function buy(userid, stickerpackID) {
 		// [process payment]
 		// send to a PSP etc.
 		response.complete('success');
-		const res = setUserStickers(userid, stickerpackID);
-		location.reload();
+		setUserStickers(userid, stickerackID).then(() => promiseMaker.createPromise('checkLogin').then(() => {
+			location.reload();
+		}));
+
 	})
 		.catch((response) => console.log(response));
 }

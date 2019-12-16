@@ -1,7 +1,7 @@
 'use strict';
 
 import {appLocalStorage, bus, data, promiseMaker} from "../main";
-import {getCurrentChatMessages} from "./gettingInfo";
+import {getCurrentChatMessages} from "./getEntitiesRequests";
 import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
 import {ports, settings, microservices} from '../constants/config';
 import currentDate from "../modules/currentDate";
