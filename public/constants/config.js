@@ -125,6 +125,8 @@ const KEYWORDS = {
 	photoPreviewChannel: ['wrkspace', 'channel', 'photo'],
 	photoCreateChat: ['chat', 'makePhoto'],
 	photoCreateChannel: ['wrkspace', 'channel', 'makePhoto'],
+	buyStikerpackChat: ['chat', 'buystikerpack'],
+	buyStikerpackChannel: ['wrkspace', 'channel', 'buystikerpack'],
 };
 
 const ROUTER = {
@@ -162,7 +164,13 @@ const ROUTER = {
 		return `/chat/${chatId}/makePhoto`;
 	},
 	photoCreateChannel: (wrkspaceId, channelId) => {
-		return `/wrkspace/${wrkspaceId}/channel/${channelId}/makePhoto}`;
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/makePhoto`;
+	},
+	buyStikerpackChat: (chatId) => {
+		return `/chat/${chatId}/buystikerpack`;
+	},
+	buyStikerpackChannel: (wrkspaceId, channelId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/buystikerpack`;
 	},
 	addMember: '/addMember',
 	createWrkSpace: '/createWrkSpace',

@@ -4,7 +4,7 @@ import {KEYWORDS} from "../constants/config";
 async function createMessagePhotoHandler(id) {
 	const message = document.querySelector(`#message-${id}`);
 	const image = message.querySelector('.primary-row__image-container__image');
-	if (id) {
+	if (data.getCurrentChat()) {
 		image.params = {messageId : id};
 		image.addEventListener('click', () => {
 			promiseMaker.createPromise('setCurrentPhotoSrc', event.currentTarget.src).then( () => {
@@ -17,10 +17,12 @@ async function createMessagePhotoHandler(id) {
 	}
 	else {
 		image.addEventListener('click', () => {
+			image.params = {messageId : id};
 			promiseMaker.createPromise('setCurrentPhotoSrc', event.currentTarget.src).then( () => {
+				const {messageId} = event.currentTarget.params;
 				const wrkspaceId = data.getCurrentWrkspaceId();
 				const channelId = data.getCurrentChannelId();
-				router.open(KEYWORDS.channelPage, [wrkspaceId, channelId]);
+				router.open(KEYWORDS.photoPreviewChannel, [wrkspaceId, channelId, messageId]);
 			}
 			);
 		});

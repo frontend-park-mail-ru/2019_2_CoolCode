@@ -31,6 +31,7 @@ import {resizeAttach} from "./handlers/attachesHandlers";
 import photoPreviewView from "./views/photoPreviewView";
 import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
 import photoCreateView from "./views/photoCreateView";
+import buyStikerpackView from "./views/buyStikerpackView";
 
 const {backend, backendSuffix, connection} = settings;
 const bus = new Bus();
@@ -70,6 +71,8 @@ router.register(ROUTER.photoPreviewChat, photoPreviewView, KEYWORDS.photoPreview
 router.register(ROUTER.photoPreviewChannel, photoPreviewView, KEYWORDS.photoPreviewChannel);
 router.register(ROUTER.photoCreateChat, photoCreateView, KEYWORDS.photoCreateChat);
 router.register(ROUTER.photoCreateChannel, photoCreateView, KEYWORDS.photoCreateChannel);
+router.register(ROUTER.buyStikerpackChat, buyStikerpackView, KEYWORDS.buyStikerpackChat);
+router.register(ROUTER.buyStikerpackChannel, buyStikerpackView, KEYWORDS.buyStikerpackChannel);
 
 router.start();
 

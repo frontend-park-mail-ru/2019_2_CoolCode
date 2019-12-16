@@ -71,6 +71,7 @@ function createEvents() {
 	bus.on('deleteCurrentPhotoSrc', data.deleteCurrentPhotoSrc.bind(data));
 	bus.on('setStream', data.setStream.bind(data));
 	bus.on('deleteStream', data.deleteStream.bind(data));
+	bus.on('setChosenStickerpack', data.setChosenStickerpack.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 

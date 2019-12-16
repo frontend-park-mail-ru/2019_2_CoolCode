@@ -7,8 +7,8 @@ class Data {
 		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId, chosenMessageText,userStickers = [], stickers = [],
-		inputType, chosenFiles, chunks, stream) {
+		chosenMessageId, chosenMessageText,userStickers = [], stickers = [1,2, 3, 4, 5, 6],
+		inputType, chosenFiles, chunks, stream, chosenStikerpack) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -47,6 +47,7 @@ class Data {
 		this.chunks = chunks;
 
 		this.stream = stream;
+		this.chosenStikerpack = chosenStikerpack;
 
 		Data.__instance = this;
 	}
@@ -85,6 +86,8 @@ class Data {
 		this.chosenFiles = undefined;
 		this.chunks = undefined;
 		this.stream = undefined;
+
+		this.chosenStikerpack = undefined;
 
 	}
 
@@ -623,6 +626,16 @@ class Data {
 
 	deleteStream() {
 		this.stream = undefined;
+	}
+
+	setChosenStickerpack(id) {
+		this.chosenStikerpack = id;
+		this.createLogMessage('set', 'chosenStikerpack', this.chosenStikerpack);
+	}
+
+	getChosenStickerpack() {
+		this.createLogMessage('get', 'chosenStikerpack', this.chosenStikerpack);
+		return this.chosenStikerpack;
 	}
 
 }

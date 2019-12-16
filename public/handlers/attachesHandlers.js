@@ -29,7 +29,11 @@ async function captureImage() {
 	}).then(
 		function (stream) {
 			bus.emit('setStream', null, stream);
-			router.open(KEYWORDS.photoCreateChat, [data.getCurrentChatId()]);
+			if (data.getCurrentChannelId()) {
+				router.open(KEYWORDS.photoCreateChannel, [data.getCurrentWrkspaceId(), data.getCurrentChannelId()]);
+			} else {
+				router.open(KEYWORDS.photoCreateChat, [data.getCurrentChatId()]);
+			}
 		}
 	);
 }

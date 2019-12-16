@@ -6,10 +6,29 @@
     width: 100%;
 }
 
+.wrkspace-page-header_size {
+    @media screen and (min-height: 10px) {
+        height: 100px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 120px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        height: 140px;
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 162px;
+    }
+
+}
 /*info-row element*/
 
 .wrkspace-page-header__info-row {
-    flex: 10 0 auto;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/

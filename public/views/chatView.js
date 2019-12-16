@@ -34,7 +34,7 @@ class chatView extends BaseView {
 		createSendMessageBtnHndlr();
 		recordMessage();
 		showStickers();
-		buyStickers(this._data.user.id, this._data.usersStickers);
+		buyStickers();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
@@ -52,7 +52,6 @@ class chatView extends BaseView {
 		this._data.currentChat = data.getCurrentChat();
 		this._data.importantMessage = {text: 'hello'};
 		this._data.chatMessages = data.getCurrentChatMessages();
-		this._data.usersStickers = data.getUserStickers();
 	}
 
 	findUser(chatId) {

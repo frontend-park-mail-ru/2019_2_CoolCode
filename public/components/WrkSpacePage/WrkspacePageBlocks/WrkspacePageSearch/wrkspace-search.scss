@@ -8,6 +8,25 @@
     width: 80%;
 }
 
+.wrkspace-search_size {
+    @media screen and (min-height: 10px) {
+        height: 330px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 500px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        height: 625px;
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 755px;
+    }
+}
+
 .wrkspace-search__column {
     flex: 0 0 auto;
     display: flex;

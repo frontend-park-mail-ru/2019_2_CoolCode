@@ -1,16 +1,14 @@
-import {componentsStorage, data} from "../main";
+import {bus, componentsStorage, data, router} from "../main";
 import currentDate from "../modules/currentDate";
 import {sendingSticker} from "../backendDataFetchers/messagesInteraction";
 import {setUserStickers} from "../backendDataFetchers/setUserInfo";
+import {sendingStickerChannel} from "../backendDataFetchers/channelMessagesInteraction";
+import {KEYWORDS} from "../constants/config";
 
 function showStickersEvent() {
 	const stikerBlock = document.querySelector('.sticker-block');
 	if (stikerBlock.classList.contains('sticker-block_hidden')) {
 		stikerBlock.classList.remove('sticker-block_hidden');
-		// const settingsMessageBlock = document.querySelector('.message-sett-block__content');
-		// if (!settingsMessageBlock.classList.contains('message-sett-block__content_hidden')) {
-		// 	settingsMessageBlock.classList = `${settingsMessageBlock.classList} message-sett-block__content_hidden`;
-		// }
 	} else {
 		stikerBlock.classList = `${stikerBlock.classList} sticker-block_hidden`;
 	}
@@ -21,7 +19,9 @@ function showStickers() {
 	stickers.addEventListener('click', showStickersEvent);
 }
 
-function buyStickers(userId, stickers) {
+function buyStickers() {
+	const userId = data.getUserId();
+	const stickers = data.getUserStickers();
 	const stickersAll = data.getStickers();
 	const chatBlock = componentsStorage.getChatBlock();
 	stickersAll.forEach((id)=>{
@@ -39,13 +39,20 @@ function buyStickers(userId, stickers) {
 			const src = e.target.getAttribute("src");
 			const messageId = await sendStickerEvent(stickerpackId, stickerId, date.getDate());
 			chatBlock.renderOutgoingMessage({id: messageId, author_id : data.getUserId(), src: src, message_time: date.getDate(), message_type: 3});
+			const messageBlock = document.getElementById(`message-${messageId}`);
+			bus.emit('showPhotoContent', null, messageBlock);
 		});
 	};
 	stickersAll.forEach((id)=>{
 		const s = document.querySelector(`.stickerpack-${id}`);//id стикерпака
 		if(s.classList.contains('sticker-block__content__img__place-stickers__img_notavailiable')) {
 			s.addEventListener('click',()=>{
-				adviceBuy(userId, id); //предложить купить
+				bus.emit('setChosenStikerpack', null, id);
+				if (data.getCurrentChannelId()) {
+					router.open(KEYWORDS.buyStikerpackChannel, [data.getCurrentWrkspaceId(), data.getCurrentChannelId()]);
+				} else {
+					router.open(KEYWORDS.buyStikerpackChat, [data.getCurrentChatId()]);
+				}
 			});
 		}
 
@@ -53,13 +60,17 @@ function buyStickers(userId, stickers) {
 }
 
 async function sendStickerEvent(stickerpackId, stickerId, date) {
-	let chatId = data.getCurrentChatId();
-	const message_type = 3;
-	const result = await sendingSticker(chatId, stickerpackId,stickerId, message_type, date);
-	return result.id;
-}
+	const chatId = data.getCurrentChatId();
+	if (!chatId) {
+		const channelId = data.getCurrentChannelId();
+		const result = await sendingStickerChannel(channelId, stickerpackId,stickerId, date);
+		return result.id;
+	} else {
+		const result = await sendingSticker(chatId, stickerpackId,stickerId, date);
+		return result.id;
+	}
 
-const infoTemplate = require('../components/ChatBlock/advice.pug');
+}
 
 function adviceBuy(userid, stickerackID) {
 	const contentListRoot = document.querySelector('.header');
@@ -118,7 +129,8 @@ function buy(userid, stickerackID) {
 		response.complete('success');
 		const res = setUserStickers(userid, stickerackID);
 		location.reload();
-	});
+	})
+		.catch((response) => console.log(response));
 }
 
-export {buyStickers, showStickers};
+export {buyStickers, showStickers, buy};

@@ -107,13 +107,13 @@ async function sendingFile(formData, id) {
 
 }
 
-async function sendingSticker(chatId, stickerpackId,stickerId,message_type, date) {
+async function sendingSticker(chatId, stickerpackId, stickerId, date) {
 	console.log(` sendingSticker ${chatId}`);
 	try {
 		const response = await FetchModule._doPost(
 			{path: API.currentChatMessages(chatId),
 				data: {
-					message_type: message_type,
+					message_type: 3,
 					sticker_id: `${stickerpackId}-${stickerId}`,
 					message_time : date,
 				},
@@ -123,13 +123,12 @@ async function sendingSticker(chatId, stickerpackId,stickerId,message_type, date
 			return await response.json();
 		} else {
 			throw new Error(
-				`Error while upload image : ${responseStatuses[response.status]}`);
+				`Error sending sticker : ${responseStatuses[response.status]}`);
 		}
 	} catch (error) {
 		console.error(error);
 		return false;
 	}
-
 }
 
 export {sendingSticker, sendingMessage, deletingMessage, editingMessage, likeMessage, sendingFile};

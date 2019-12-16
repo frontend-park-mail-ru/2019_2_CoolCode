@@ -16,6 +16,7 @@ import {
 	menuHandlers,
 } from "../handlers/channelViewHandlers";
 import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
+import {buyStickers, showStickers} from "../handlers/stikersHandlers";
 
 class channelView extends BaseView {
 
@@ -23,7 +24,7 @@ class channelView extends BaseView {
 		super({
 			viewType: "channel", user: {}, loggedIn: null, foundMessageId: null,
 			wrkSpaces: [], chats: [], currentWrkspace:{}, currentChannel: {},
-			importantMessage: {}, channelMessages: []}, parent);
+			importantMessage: {}, channelMessages: [], }, parent);
 	};
 
 	setEvents() {
@@ -32,6 +33,8 @@ class channelView extends BaseView {
 		menuHandlers();
 		createLikeBtnHndlr();
 		recordMessage();
+		showStickers();
+		buyStickers();
 		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();

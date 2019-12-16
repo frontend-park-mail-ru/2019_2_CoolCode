@@ -1,0 +1,117 @@
+.buy-stickerpack {
+  position: fixed; /*make it centered and overlay*/
+  top: 40%; /*experimenting with viewports*/
+  left: 40%;
+  align-self: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  z-index: var(--global-z-index-form); /*make it overlay*/
+  padding: 5px;
+  overflow: auto;
+}
+
+.buy-stickerpack_size {
+  @media screen and (min-height: 10px) {
+    width: 200px;
+    height: 120px;
+  }
+
+  @media screen and (min-height: 400px) {
+    width: 250px;
+    height: 140px;
+  }
+
+  @media screen and (min-height: 610px) {
+    width: 300px;
+    height: 180px;
+  }
+
+  @media screen and (min-height: 810px) {
+    width: 350px;
+    height: 200px;
+  }
+}
+
+.buy-stickerpack_width {
+
+  @media screen and (min-width: 100px) {
+    width: 200px;
+    height: 130px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 350px;
+    height: 200px;
+  }
+
+
+}
+
+.buy-stickerpack_style {
+  border-radius: 5px;
+  background: var(--global-green-color);
+  -webkit-backface-visibility: hidden;
+}
+
+.buy-stickerpack__text {
+
+  text-align: center;
+  padding: 5px 0 0 0;
+
+}
+
+.buy-stickerpack__text_size {
+  @media screen and (min-height: 10px) {
+    width: 200px;
+    height: 50px;
+  }
+
+  @media screen and (min-height: 400px) {
+    width: 250px;
+    height: 60px;
+  }
+
+  @media screen and (min-height: 610px) {
+    width: 300px;
+    height: 80px;
+  }
+
+  @media screen and (min-height: 810px) {
+    width: 350px;
+    height: 90px;
+  }
+}
+.buy-stickerpack__text_style {
+  font-family: var(--global-font-family-Montserrat);
+}
+
+.buy-stickerpack__button-row {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  flex-direction: row;
+}
+
+.buy-stickerpack__button-row_size {
+  @media screen and (min-height: 10px) {
+    width: 200px;
+    height: 60px;
+  }
+
+  @media screen and (min-height: 400px) {
+    width: 250px;
+    height: 70px;
+  }
+
+  @media screen and (min-height: 610px) {
+    width: 300px;
+    height: 90px;
+  }
+
+  @media screen and (min-height: 810px) {
+    width: 350px;
+    height: 100px;
+  }
+}

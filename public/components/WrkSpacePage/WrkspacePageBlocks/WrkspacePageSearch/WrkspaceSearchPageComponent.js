@@ -1,5 +1,5 @@
 import BaseComponent from "../../../baseComponent";
-import './wrkspace-search.css';
+import './wrkspace-search.scss';
 import UserComponent from "../../../ChatsColumn/User/UserComponent";
 import {bus} from "../../../../main";
 
