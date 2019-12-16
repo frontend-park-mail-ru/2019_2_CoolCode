@@ -15,6 +15,7 @@ class BuyStikerpackComponent extends BaseComponent {
 		const ok = document.querySelector('.wrkspace-form__form__submit-button');
 		ok.addEventListener('click', () => {
 		    router.return();
+		    console.log("asdf", data.getUserId(), data.getChosenStickerpack());
 		    buy(data.getUserId(), data.getChosenStickerpack());
 		});
 

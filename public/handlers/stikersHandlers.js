@@ -91,7 +91,7 @@ function adviceBuy(userid, stickerackID) {
 	});
 }
 
-function buy(userid, stickerackID) {
+function buy(userid, stickerpackID) {
 
 	const paymentMethods = [{
 		supportedMethods: 'basic-card',
@@ -127,7 +127,7 @@ function buy(userid, stickerackID) {
 		// [process payment]
 		// send to a PSP etc.
 		response.complete('success');
-		const res = setUserStickers(userid, stickerackID);
+		const res = setUserStickers(userid, stickerpackID);
 		location.reload();
 	})
 		.catch((response) => console.log(response));

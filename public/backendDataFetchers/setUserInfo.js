@@ -49,7 +49,7 @@ async function setUserPhoto(formData) {
 }
 
 async function setUserStickers(id, idPack) {
-	console.log(` Setting user ${id} stikers`);
+	console.log(` Setting user ${id} stikers ${idPack}`);
 	try {
 		const response = await FetchModule._doPost(
 			{path: API.addStickers(id, idPack)}
