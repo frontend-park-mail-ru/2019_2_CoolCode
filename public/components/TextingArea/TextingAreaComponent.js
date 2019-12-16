@@ -102,11 +102,11 @@ class TextingAreaComponent extends BaseComponent {
 				bus.emit('showAttachContent', null, attach);
 				switch(type) {
 				case 0:
-					bus.emit('setPicture', null, `#photoattach-${attachId}`,result.data);
+					bus.emit('setPicture', null, `#photoattach-${attachId}`, result.data);
 					break;
 				case 1:
 					attach.querySelector('.attach-component__text').innerText = files[i].name;
-					bus.emit('setPicture', null, `#photoattach-${attachId}`,'/images/file.png');
+					bus.emit('setPicture', null, `#photoattach-${attachId}`, '/images/file.png');
 					break;
 				}
 

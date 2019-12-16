@@ -10,7 +10,7 @@ function createWrkspaceBlockExpandHndlr() {
 	});
 }
 
-function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspaceBlockVisible : null}) {
+function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null, wrkspaceBlockVisible : null}) {
 	const {wrkspaceBlockSmall, wrkspaceBlockVisible} = params;
 	if (wrkspaceBlockSmall !== null) {
 		if (!wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {

@@ -25,6 +25,7 @@ module.exports = {
         "space-before-blocks" : ["error", "always"],
         "indent" : ["error", "tab"],
         "space-infix-ops" : ["error"],
-        "no-unused-vars" : ["warn"]
+        "no-unused-vars" : ["warn"],
+        "comma-spacing": ["error"]
     },
 };

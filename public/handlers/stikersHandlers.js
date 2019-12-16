@@ -46,7 +46,7 @@ function buyStickers() {
 	stickersAll.forEach((id)=>{
 		const s = document.querySelector(`.stickerpack-${id}`);//id стикерпака
 		if(s.classList.contains('sticker-block__content__img__place-stickers__img_notavailiable')) {
-			s.addEventListener('click',()=>{
+			s.addEventListener('click', ()=>{
 				bus.emit('setChosenStikerpack', null, id);
 				if (data.getCurrentChannelId()) {
 					router.open(KEYWORDS.buyStikerpackChannel, [data.getCurrentWrkspaceId(), data.getCurrentChannelId()]);
@@ -63,10 +63,10 @@ async function sendStickerEvent(stickerpackId, stickerId, date) {
 	const chatId = data.getCurrentChatId();
 	if (!chatId) {
 		const channelId = data.getCurrentChannelId();
-		const result = await sendingStickerChannel(channelId, stickerpackId,stickerId, date);
+		const result = await sendingStickerChannel(channelId, stickerpackId, stickerId, date);
 		return result.id;
 	} else {
-		const result = await sendingSticker(chatId, stickerpackId,stickerId, date);
+		const result = await sendingSticker(chatId, stickerpackId, stickerId, date);
 		return result.id;
 	}
 

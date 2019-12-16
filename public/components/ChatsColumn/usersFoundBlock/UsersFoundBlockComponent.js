@@ -22,7 +22,7 @@ class UsersFoundBlockComponent extends BaseComponent {
     			userBlock.id = "search-" + user.id;
     			userBlock.innerHTML = userComponent.render();
     			contentListRoot.appendChild(userBlock);
-    			bus.emit('getUserPhoto', null, user.id ,'search', userComponent.getPhotoBlock());
+    			bus.emit('getUserPhoto', null, user.id, 'search', userComponent.getPhotoBlock());
     		});
     	}
     }

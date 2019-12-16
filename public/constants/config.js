@@ -1,7 +1,7 @@
 import chatView from "../views/chatView";
 
 const responseStatuses = {
-	200 : "OK" ,
+	200 : "OK",
 	304 : "Not Modified",
 	400 : "Bad Request",
 	401 : "Unauthorized",
