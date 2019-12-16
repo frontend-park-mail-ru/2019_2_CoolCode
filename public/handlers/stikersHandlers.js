@@ -1,4 +1,4 @@
-import {bus, componentsStorage, data, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import currentDate from "../modules/currentDate";
 import {sendingSticker} from "../backendDataFetchers/messagesInteraction";
 import {setUserStickers} from "../backendDataFetchers/setUserInfo";
@@ -22,6 +22,7 @@ function showStickers() {
 function buyStickers() {
 	const userId = data.getUserId();
 	const stickers = data.getUserStickers();
+	console.log(stickers);
 	const stickersAll = data.getStickers();
 	const chatBlock = componentsStorage.getChatBlock();
 	stickersAll.forEach((id)=>{
@@ -72,26 +73,8 @@ async function sendStickerEvent(stickerpackId, stickerId, date) {
 
 }
 
-function adviceBuy(userid, stickerackID) {
-	const contentListRoot = document.querySelector('.header');
-	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
-	const block = document.querySelector('.channel-header-menu__advice.channel-header-menu__advice_style');
-	const lay = document.querySelector('.channel-header-menu__advice_overlay');
-	block.style.display = 'flex';
-	lay.style.display = 'flex';
-	const ok = block.querySelector('.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style');
-	ok.addEventListener('click', () => {
-		block.style.display = "none";
-		lay.style.display = 'none';
-		buy(userid, stickerackID);
-	});
-	lay.addEventListener('click', () => {
-		block.style.display = "none";
-		lay.style.display = 'none';
-	});
-}
-
 function buy(userid, stickerackID) {
+	console.log(userid, stickerackID);
 
 	const paymentMethods = [{
 		supportedMethods: 'basic-card',
@@ -127,8 +110,9 @@ function buy(userid, stickerackID) {
 		// [process payment]
 		// send to a PSP etc.
 		response.complete('success');
-		const res = setUserStickers(userid, stickerackID);
-		location.reload();
+		setUserStickers(userid, stickerackID).then(() => promiseMaker.createPromise('checkLogin').then(() => {
+			location.reload();
+		}));
 	})
 		.catch((response) => console.log(response));
 }

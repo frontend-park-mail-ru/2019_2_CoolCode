@@ -1,7 +1,7 @@
 import {bus, data, promiseMaker, router} from "../main";
 import {setUserPhoto, setWrkspacePhoto} from "../backendDataFetchers/setUserInfo";
 import {getProfilePhoto} from "./photosHandlers";
-import {getPhoto} from "../backendDataFetchers/gettingInfo";
+import {getPhoto} from "../backendDataFetchers/getEntitiesRequests";
 import MyWorker from "../workers/profile.worker";
 
 async function setPhotoWrkspace(id) {
@@ -31,9 +31,9 @@ function wrkspaceDropdownClickEvent() {
 		router.go('wrkspaceSearchView', data.getCurrentWrkspaceId());
 		break;
 	case 'changePicture':
-		// event.target.firstElementChild.click();
-		// event.target.firstElementChild.addEventListener('change', wrkspaceImageUploading);
-		// break;
+		 event.target.firstElementChild.click();
+		 event.target.firstElementChild.addEventListener('change', wrkspaceImageUploading);
+		 break;
 
 	}
 }

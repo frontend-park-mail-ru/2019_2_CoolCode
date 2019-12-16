@@ -17,18 +17,18 @@ async function setProfileField(value, field, block, textSelector, errorSelector)
 	if (field === 'email') {
 		if (!validation.validateEmail(value)) {
 			emitError(block, errorSelector, textSelector, 'Please, input correct email');
-			return null;
+			return value;
 		}
 	}
 	if (field === 'phone') {
 		if (!validation.validatePhone(value)) {
-			emitError(block, errorSelector, textSelector, 'Please, input phone number containing from 10 to 16 numbers');
-			return null;
+			emitError(block, errorSelector, textSelector, 'Please, input phone number containing from 10 to 12 numbers');
+			return value;
 		}
 	}
 	if (value === '') {
 		emitError(block, errorSelector, textSelector, 'Please, input some info');
-		return null;
+		return value;
 	}
 	const user = data.user;
 	user[field] = value;

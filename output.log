@@ -65,10 +65,10 @@ Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
  @ ./public/main.js
  @ multi babel-polyfill ./public/main.js
 
-WARNING in ./public/backendDataFetchers/gettingInfo.js
+WARNING in ./public/backendDataFetchers/getEntitiesRequests.js
 Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
 
-/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/gettingInfo.js
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/getEntitiesRequests.js
   3:9  warning  'findUser' is defined but never used  no-unused-vars
 
 ✖ 1 problem (0 errors, 1 warning)

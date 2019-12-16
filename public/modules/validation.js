@@ -1,7 +1,7 @@
 class Validation {
 
 	constructor() {
-		this._phoneRegex = /^(\+)?([ 0-9]){10,16}$/;
+		this._phoneRegex = /^(\+)?([ 0-9]){10,12}$/;
 		this._emailRegex = /.*(@).*(\.).*/;
 	}
 

@@ -124,6 +124,30 @@
     border: 2px solid var(--global-green-color);
 }
 
+/* loader element in image-row*/
+
+.wrkspace-visible__image-row__loader {
+    animation: spin 2s linear infinite;
+}
+
+.wrkspace-visible__image-row__loader_style {
+    border: 2px solid var(--global-loader-grey-color);
+    border-top: 2px solid var(--global-green-color-1);
+    border-radius: 50%;
+}
+
+.wrkspace-visible__image-row__loader_size {
+    @media screen and (min-height: 10px) {
+        width: 20px;
+        height: 20px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 30px;
+        height: 30px;
+    }
+}
+
 
 .wrkspace-visible__chann-row {
     align-self: center;
