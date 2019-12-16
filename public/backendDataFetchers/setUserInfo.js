@@ -67,4 +67,25 @@ async function setUserStickers(id, idPack) {
 
 }
 
-export {setUserStickers, setUserInfo, setUserPhoto};
+async function setWrkspacePhoto(formData, id) {
+	console.log(` Setting wrkspace ${id} info`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.photoWrkspace(id),
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			return true;
+		} else {
+			throw new Error(
+				`Error while upload image : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+export {setUserStickers, setUserInfo, setUserPhoto, setWrkspacePhoto};

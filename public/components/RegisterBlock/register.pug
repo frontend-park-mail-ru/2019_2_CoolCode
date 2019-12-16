@@ -26,7 +26,7 @@ block content
                 if viewType === "signUp"
                     +input('username')
                 div.input-block_error-field.input-block_error-field_style
-            button.register-form__form__button.register-form__form__button_style.fluid-font-size_1(type='submit')=mainTitle
+            button.register-form__form__button.register-form__form__button_style(type='submit')=mainTitle
             div.register-form__form__login-ref
                 if viewType === "signUp"
                     p.register-form__form__login-ref__text.register-form__form__login-ref__text_style.fluid-font-size_1=question

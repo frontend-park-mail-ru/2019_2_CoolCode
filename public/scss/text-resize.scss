@@ -126,3 +126,14 @@ $html-font-size-xs: 13px;
     font-size: 16px;
   }
 }
+
+
+.fluid-font-size_4 {
+  @media screen and (min-height: 10px) {
+    font-size: calcFluidFontSize(4px, 6px, 120px, 640px, 2px);
+
+  }
+  @media screen and (min-height: 610px) {
+    font-size: 36px;
+  }
+}

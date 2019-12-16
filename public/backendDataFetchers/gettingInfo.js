@@ -53,6 +53,23 @@ async function getPhoto(id) {
 	}
 }
 
+async function getPhotoWrkspace(id) {
+	console.log(` Getting wrkspace ${id} photo`);
+	try {
+		const response = await FetchModule._doGet(
+			{path: API.photoWrkspace(id)}
+		);
+		if (response.status !== 200) {
+			throw new Error(
+				`Couldn't fetch user photo: ${response.status}`);
+		}
+		return await response.blob();
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}
+
 async function getCurrentChatMessages(chatId) {
 	console.log(`Getting current chat: ${chatId} messages`);
 	try {
@@ -184,4 +201,4 @@ async function getWrkspaceUsers() {
 
 export {getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
 	getCurrentChannelInfo,getWrkspaceUsers,
-	getWrkspaceCreatorInfo, getChannelInfo};
+	getWrkspaceCreatorInfo, getChannelInfo, getPhotoWrkspace};

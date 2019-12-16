@@ -18,6 +18,9 @@
     border-radius: 10px;
     background: rgba(40, 162, 77, 0.41);
 }
+.wrkspace-page-dropdown__input {
+    display:none
+}
 
 .wrkspace-page-dropdown__option {
     flex: 0 0 auto;

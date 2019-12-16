@@ -102,7 +102,9 @@ const API = {
 		return `/users/photos/${id}`;
 	},
 	postPhoto : '/users/photos',
-
+	photoWrkspace : (id) => {
+		return `/workspaces/${id}/photos`;
+	},
 };
 
 const KEYWORDS = {

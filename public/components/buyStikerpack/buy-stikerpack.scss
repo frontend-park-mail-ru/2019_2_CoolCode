@@ -83,6 +83,19 @@
     height: 90px;
   }
 }
+
+.buy-stickerpack__text_width {
+  @media screen and (min-width: 100px) {
+    width: 200px;
+    height: 60px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 350px;
+    height: 90px;
+  }
+}
+
 .buy-stickerpack__text_style {
   font-family: var(--global-font-family-Montserrat);
 }
@@ -111,6 +124,18 @@
   }
 
   @media screen and (min-height: 810px) {
+    width: 350px;
+    height: 100px;
+  }
+}
+
+.buy-stickerpack__button-row_width {
+  @media screen and (min-width: 100px) {
+    width: 200px;
+    height: 65px;
+  }
+
+  @media screen and (min-width: 1000px) {
     width: 350px;
     height: 100px;
   }

@@ -101,6 +101,28 @@
     border-radius: 50%;
 }
 
+.wrkspace-page-header__info-row__image-row__loader_size {
+    @media screen and (min-height: 10px) {
+        width: 90px;
+        height: 90px;
+    }
+
+    @media screen and (min-height: 400px) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (min-height: 610px) {
+        width: 110px;
+        height: 110px;
+    }
+
+    @media screen and (min-height: 810px) {
+        width: 125px;
+        height: 125px;
+    }
+}
+
 /* input element in image-row*/
 
 .wrkspace-page-header__info-row__image-row__input{
@@ -132,7 +154,6 @@
 
 .wrkspace-page-header__info-row__info-column__name_style {
     font-family:var(--global-font-family-Montserrat);
-    font-size: 36px;
     color: #000000;
     font-weight: 300;
 }
@@ -150,7 +171,6 @@
 
 .wrkspace-page-header__info-row__info-column__info_style {
     font-family:var(--global-font-family-Roboto);
-    font-size: 18px;
     color: var(--global-middlegrey-color);
     font-weight: 300;
 }
