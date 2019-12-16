@@ -17,59 +17,56 @@ class TextingAreaComponent extends BaseComponent {
 
 	renderStikers() {
 		const classImg = "sticker-block__content__img__place-stickers__img";
-		for (let pack = 1; pack < 7; pack++) {
+		for (let n = 1; n < 62; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker1-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/go/BeepCar${n}.png`;
+			document.querySelector(`.stickerpack-1`)
+				.appendChild(img);
+		}
 
-			for (let n = 1; n < 62; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/go/BeepCar${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
+		for (let n = 1; n < 65; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker2-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/hate/Hate_everything${n}.png`;
+			document.querySelector(`.stickerpack-2`)
+				.appendChild(img);
+		}
 
-			for (let n = 1; n < 65; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/hate/Hate_everything${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
+		for (let n = 1; n < 4; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker3-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/Sashuly/S_a_s_h_u_l_y_a${n}.png`;
+			document.querySelector(`.stickerpack-3`)
+				.appendChild(img);
+		}
 
-			for (let n = 1; n < 4; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/Sashuly/S_a_s_h_u_l_y_a${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
-
-			for (let n = 1; n < 35; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/cats/Catkus${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
-			for (let n = 1; n < 39; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/devyat/dev9tka${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
-			for (let n = 1; n < 26; n++) {
-				const img = document.createElement('img');
-				img.id = `sticker${pack}-${n}`;
-				img.setAttribute("class", classImg);
-				img.src = `/images/penny/MrPennywise${n}.png`;
-				document.querySelector(`.stickerpack-${pack}`)
-					.appendChild(img);
-			}
+		for (let n = 1; n < 35; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker4-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/cats/Catkus${n}.png`;
+			document.querySelector(`.stickerpack-4`)
+				.appendChild(img);
+		}
+		for (let n = 1; n < 39; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker5-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/devyat/dev9tka${n}.png`;
+			document.querySelector(`.stickerpack-5`)
+				.appendChild(img);
+		}
+		for (let n = 1; n < 26; n++) {
+			const img = document.createElement('img');
+			img.id = `sticker6-${n}`;
+			img.setAttribute("class", classImg);
+			img.src = `/images/penny/MrPennywise${n}.png`;
+			document.querySelector(`.stickerpack-6`)
+				.appendChild(img);
 		}
 	}
 

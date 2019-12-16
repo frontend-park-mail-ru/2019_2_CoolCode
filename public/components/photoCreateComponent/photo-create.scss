@@ -13,26 +13,18 @@
 .photo-create_size {
   @media screen and (min-height: 10px) {
     left: 5%;
-    width: 300px;
-    height: 300px;
   }
 
   @media screen and (min-height: 400px) {
     left: 5%;
-    width: 480px;
-    height: 480px;
   }
 
   @media screen and (min-height: 610px) {
     left: 30%;
-    width: 620px;
-    height: 620px;
   }
 
   @media screen and (min-height: 810px) {
     left: 30%;
-    width: 800px;
-    height: 800px;
   }
 }
 
@@ -40,14 +32,10 @@
 
   @media screen and (min-width: 100px) {
     left: 5%;
-    width: 300px;
-    height: 300px;
   }
 
   @media screen and (min-width: 1000px) {
     left: 30%;
-    width: 800px;
-    height: 800px;
   }
 
 }
