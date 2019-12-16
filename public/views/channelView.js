@@ -95,7 +95,6 @@ class channelView extends BaseView {
 			componentsStorage.clearForm();
 		} else {
 			const channelBlock = new ChannelComponent(this._data, this._parent);
-			this._parent.querySelector('.column_right').innerHTML = "";
 			this._parent.querySelector('.column_right').innerHTML = channelBlock.render();
 			channelBlock.renderTextingArea();
 			channelBlock.renderContent();

@@ -127,22 +127,22 @@
 }
 
 .primary-row__icon-container__icon_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 13px;
         height: 13px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 15px;
         height: 15px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 18px;
         height: 18px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 20px;
         height: 20px;
     }
@@ -168,22 +168,22 @@
 
 
 .primary-row__icon-container__deleted-icon_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 15px;
         height: 15px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 18px;
         height: 18px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 23px;
         height: 23px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 27px;
         height: 27px;
     }
@@ -203,13 +203,6 @@
 .primary-row__image-container_hidden{
     display: none;
 }
-.primary-row__image-container_style-left {
-
-}
-
-.primary-row__image-container_style-right {
-
-}
 
 .primary-row__image-container__image {
     object-fit: scale-down;
@@ -223,22 +216,22 @@
 }
 
 .primary-row__image-container__image_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         max-width: 80px;
         max-height: 80px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         max-width: 100px;
         max-height: 100px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         max-width: 120px;
         max-height: 120px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         max-width: 150px;
         max-height: 150px;
     }
@@ -256,22 +249,22 @@
 
 
 .primary-row__loader-container_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 80px;
         height: 80px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 100px;
         height: 100px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 120px;
         height: 120px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 150px;
         height: 150px;
     }
@@ -296,22 +289,22 @@
 
 
 .primary-row__loader-container__loader_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 25px;
         height: 25px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 30px;
         height: 30px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 35px;
         height: 35px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 40px;
         height: 40px;
     }
@@ -375,22 +368,22 @@
 }
 
 .file-ref__image-container__image_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 45px;
         height: 45px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 60px;
         height: 60px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 70px;
         height: 70px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 80px;
         height: 80px;
     }

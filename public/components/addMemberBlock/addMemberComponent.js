@@ -19,8 +19,9 @@ class AddMemberComponent extends BaseComponent {
 
 	deleteSelf() {
 		const parentContainer = this._parent.parentNode;
-		parentContainer.firstChild.remove();
-		parentContainer.firstChild.remove();
+		for (let i = 0; i < 2; i++) {
+			parentContainer.removeChild(parentContainer.firstElementChild);
+		}
 	}
 	renderContent() {
 		const contentListRoot = document.querySelector(this.contentListRootSelector);

@@ -12,10 +12,10 @@
 
 
 .alert-photo_size {
-  @media screen and (min-height: 10px) {
+   @media screen and (min-height: 10px) {
     height: 50px;
   }
-  @media screen and (min-height: 400px) {
+   @media screen and (min-height: 400px) {
     height: calc(5px + 10vh);
   }
   @media screen and (min-width: 10px) {

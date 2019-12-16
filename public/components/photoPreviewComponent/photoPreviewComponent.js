@@ -26,9 +26,9 @@ class PhotoPreviewComponent extends BaseComponent {
 
 	deleteSelf() {
 		const parentContainer = this._parent.parentNode;
-		parentContainer.firstChild.remove();
-		parentContainer.firstChild.remove();
-		parentContainer.firstChild.remove();
+		for (let i = 0; i < 3; i++) {
+			parentContainer.removeChild(parentContainer.firstElementChild);
+		}
 
 	}
 

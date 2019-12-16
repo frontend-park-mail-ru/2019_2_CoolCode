@@ -8,20 +8,20 @@
 }
 
 .msgwindow-container_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         height: 260px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         height: 423px;
     }
 
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         height: 542px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         height: 658px;
     }
 }

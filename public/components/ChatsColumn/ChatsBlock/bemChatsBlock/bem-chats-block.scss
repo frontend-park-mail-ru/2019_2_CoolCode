@@ -18,10 +18,10 @@
 }
 
 .chats-block__header_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         height: 15px;
     }
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         height: 25px;
     }
 }
