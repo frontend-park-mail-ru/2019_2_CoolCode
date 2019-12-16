@@ -37,7 +37,7 @@ class ChatsBlockComponent extends BaseComponent {
     			const messageElement = message.render();
     			contentListRoot.appendChild(messageElement);
     			const id = data.getChatUserIdByChatId(chat.id);
-    			bus.emit('getUserPhoto', null, id ,"chat", message.getPhotoBlock());
+    			bus.emit('getUserPhoto', null, id, "chat", message.getPhotoBlock());
     		});
     	}
     }

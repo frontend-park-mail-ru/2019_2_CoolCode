@@ -22,7 +22,7 @@ class chatView extends BaseView {
 	constructor (data, parent) {
     	super ({viewType: "chat", user:{}, loggedIn: null,
 			wrkSpaces:[], chats: [], currentChat: {}, usersStickers: [], foundMessageId: null,
-			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg',}, parent);
+			chatUser:{}, importantMessage: {}, chatMessages: [], chatUserPhoto: '../images/abkhazia.jpg', }, parent);
 	};
 
 	setEvents() {
@@ -57,7 +57,7 @@ class chatView extends BaseView {
 	findUser(chatId) {
 		const chatUser = data.getChatUserIdByChatId(chatId);
 		if (chatUser) {
-			promiseMaker.createPromise('getCurrentChatInfo',chatUser, chatId).then(() => {
+			promiseMaker.createPromise('getCurrentChatInfo', chatUser, chatId).then(() => {
 				this.setContent();
 				this.render();
 			});

@@ -75,4 +75,4 @@ function createWrkspaceInfoColumnHandler() {
 
 }
 
-export {createWorkspaceSettingsButtonHndlr,createWrkspaceDropdownHandler, createWrkspaceInfoColumnHandler};
+export {createWorkspaceSettingsButtonHndlr, createWrkspaceDropdownHandler, createWrkspaceInfoColumnHandler};

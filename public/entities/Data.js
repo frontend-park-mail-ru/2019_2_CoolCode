@@ -2,12 +2,12 @@ import {bus, data} from "../main";
 
 class Data {
 
-	constructor(loggedIn, user = {} , userPhoto, userChats = [], userWrkSpaces = [],
+	constructor(loggedIn, user = {}, userPhoto, userChats = [], userWrkSpaces = [],
 		currentChatId, currentChat = {}, currentChatUser = {}, currentChatUserPhoto, currentChatMessages = [], channelMessagesFull = [],
 		currentWrkspace = {}, currentWrkspaceCreator = {}, currentWrkspaceUsers = [],
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
-		chosenMessageId, chosenMessageText,userStickers = [], stickers = [1,2, 3, 4, 5, 6],
+		chosenMessageId, chosenMessageText, userStickers = [], stickers = [1, 2, 3, 4, 5, 6],
 		inputType, chosenFiles, chunks, stream, chosenStikerpack) {
 		if (Data.__instance) {
 			return Data.__instance;
@@ -150,7 +150,7 @@ class Data {
 
 	setUserPhoto(userPhoto) {
 		this.userPhoto = userPhoto;
-		this.createLogMessage('set', 'userPhoto','some file');
+		this.createLogMessage('set', 'userPhoto', 'some file');
 	}
 
 	getUserChats() {
@@ -295,7 +295,7 @@ class Data {
 
 	deleteLastSearchUsers() {
 		this.lastSearchUsers = undefined;
-		this.createLogMessage('set', 'lastSearchUsers','lastSearchUsers');
+		this.createLogMessage('set', 'lastSearchUsers', 'lastSearchUsers');
 	}
 
 	setLastSearchMessages (lastSearchMessages) {

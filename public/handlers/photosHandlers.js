@@ -95,4 +95,4 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getHeaderPhoto, getProfilePhoto,getMessagePhoto};
+export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getHeaderPhoto, getProfilePhoto, getMessagePhoto};

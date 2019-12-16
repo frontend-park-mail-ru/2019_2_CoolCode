@@ -2,11 +2,11 @@
 const path = require('path');
 
 module.exports = {
-	context: __dirname ,
+	context: __dirname,
 	mode: "development",
 	entry: ['babel-polyfill', './public/main.js'],
 	output:{
-		path: path.resolve(__dirname ,'packedDir'),
+		path: path.resolve(__dirname, 'packedDir'),
 		filename: '\main.js',
 		publicPath: './',
 	},
@@ -42,7 +42,7 @@ module.exports = {
 			},
 			{
 				test: /\.worker\.js$/,
-				use: { loader: 'worker-loader', options: { inline: true , fallback: false, publicPath: '/workers/' } }
+				use: { loader: 'worker-loader', options: { inline: true, fallback: false, publicPath: '/workers/' } }
 			},
 
 			{

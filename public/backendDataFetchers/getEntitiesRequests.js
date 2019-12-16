@@ -200,5 +200,5 @@ async function getWrkspaceUsers() {
 }
 
 export {getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
-	getCurrentChannelInfo,getWrkspaceUsers,
+	getCurrentChannelInfo, getWrkspaceUsers,
 	getWrkspaceCreatorInfo, getChannelInfo, getPhotoWrkspace};
