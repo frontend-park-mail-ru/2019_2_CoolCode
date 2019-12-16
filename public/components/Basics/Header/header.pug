@@ -1,14 +1,18 @@
 mixin item(title, href, section, id)
     a.header-refs__ref.header-refs__ref_style(href=href data-section=section )= title
 
-div.header
+div.header.header_size
     a.header__logo(href='/')
         img.header__logo__image(src='/images/logo_2.png')
     if viewType !== 'signUp' && viewType !== 'login'
         div.header-refs
             if loggedIn
                 +item('log out', '/logout', 'logout')
-                +item('profile', '/profile', 'profile')
+                a.header-refs__ref_profile.header-refs__ref_style(href='/profile' data-section='profile')
+                    div.header__profile.header__profile_style.header__profile_size
+                        div.header__profile__image-row
+                            img.header__profile__image-row__image.header__profile__image-row__image_style.header__profile__image-row__image_size(src='images/white.png')
+                        div.header__profile__name.header__profile__name_style= user.username
             else
                 +item('log in', '/login', 'login')
                 +item('sign up', '/signup', 'signUp')

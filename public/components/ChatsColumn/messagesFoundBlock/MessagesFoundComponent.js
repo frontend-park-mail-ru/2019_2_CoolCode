@@ -1,7 +1,7 @@
 import BaseComponent from "../../baseComponent";
 import {bus} from "../../../main";
 import MessageComponent from "../Message/MessageComponent";
-import '../ChatsBlock/bemChatsBlock/bem-chats-block.css';
+import '../ChatsBlock/bemChatsBlock/bem-chats-block.scss';
 
 const MessagesFoundBlockTemplate = require('./messagesFoundBlock.pug');
 
@@ -21,7 +21,7 @@ class MessagesFoundBlockComponent extends BaseComponent {
     			if (message.user) {
     				const messageElement = messageComponent.renderMessageFoundInChat();
     				contentListRoot.appendChild(messageElement);
-    				bus.emit('getMessagePhoto', null, message.user.id, message.message.id ,"message", messageComponent.getPhotoBlock());
+    				bus.emit('getMessagePhoto', null, message.user.id, message.message.id, "message", messageComponent.getPhotoBlock());
     			} else {
     				const messageElement = messageComponent.renderMessageFoundInChannel();
     				contentListRoot.appendChild(messageElement);

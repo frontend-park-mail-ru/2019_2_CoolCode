@@ -1,0 +1,234 @@
+.input {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    margin: 10px 0 5px 0;
+    position: relative;
+}
+
+
+
+/*icon-container element*/
+
+.input__icon-container {
+    flex: 0 1 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+}
+
+/*icon element in icon-container*/
+
+.input__icon-container__icon {
+    object-fit: scale-down;
+    object-position: top;
+}
+
+.input__icon-container__icon_size {
+     @media screen and (min-height: 10px) {
+        width: 14px;
+        height: 14px;
+    }
+
+     @media screen and (min-height: 400px) {
+        width: 16px;
+        height: 16px;
+    }
+
+   @media screen and (min-height: 610px) {
+        width: 18px;
+        height: 18px;
+    }
+
+     @media screen and (min-height: 810px) {
+        width: 20px;
+        height: 20px;
+    }
+}
+.input__icon-container__icon_style {
+    filter: opacity(0.9);
+}
+.input__icon-container__icon_style:hover{
+    cursor: pointer;
+    filter: invert(0.7) brightness(200%) saturate(10%);
+    border-radius: 20px;
+}
+
+.input__icon-container__icon_microphone {
+    background: #FFFFFF;
+}
+
+.input__icon-container__icon_microphone-recording {
+    background: var(--global-error-color);
+    border-radius: 20px;
+    filter: invert(0.1) brightness(300%) saturate(100%);
+}
+
+
+
+/*content-container element*/
+
+
+.input__content-container {
+    flex: 0 0 70%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: auto;
+    overflow: hidden;
+}
+
+.input__content-container_size {
+     @media screen and (min-height: 10px) {
+        height: 32px;
+    }
+
+     @media screen and (min-height: 400px) {
+        height: 48px;
+    }
+
+
+   @media screen and (min-height: 610px) {
+        height: 60px;
+    }
+
+     @media screen and (min-height: 810px) {
+        height: 73px;
+    }
+}
+
+.input__record {
+    flex: 0 0 70%;
+    box-sizing: border-box;
+    min-height: 30%;
+    max-height: 40%;
+    width: auto;
+    height: auto;
+}
+
+.input__record_hidden {
+    display: none;
+}
+
+.input__record::-webkit-scrollbar {
+    width: 5px;
+}
+
+.input__record::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--global-scrollbar-color);
+    -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}
+
+//.input__icon-container__icon_microphone {
+//    object-fit: scale-down;
+//    object-position: top;
+//    max-width:40%;
+//    max-height:40%;
+//    height: 3vh; /*experimenting with viewports*/
+//}
+//.input__icon-container__icon_microphone_style {
+//    background: white;
+//    filter: opacity(0.9);
+//}
+
+
+.input__record_style {
+    outline: none;
+    border: none;
+    resize: none;
+    border-radius: 60px;
+    background-color: var(--global-grey-color);
+}
+
+controls{
+    background-color: #1d916b;
+}
+/*text element*/
+
+.input__text {
+    flex: 0 0 70%;
+    box-sizing: border-box;
+    overflow-y:scroll;
+    min-height: 50%;
+    max-height: 100%;
+    padding: 5px 0 0 5px;
+}
+
+.input__text::-webkit-scrollbar {
+    width: 5px;
+}
+
+.input__text::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: var(--global-grey-color);
+    -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}
+
+
+.input__text_style {
+    font-size: 14px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #000000;
+    outline: none;
+    border: none;
+    resize: none;
+    border-radius: 10px;
+    background-color: var(--global-grey-color);
+}
+
+.input__text_style:focus-within {
+    color: #000000;
+}
+
+.input__text_hidden {
+    display: none;
+}
+
+.input__text_recording {
+    color: var(--global-error-color);
+}
+
+/*images element*/
+
+.content-container__images {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: auto;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+
+.content-container__images_style {
+    border-radius: 10px;
+    background-color: var(--global-search-input-color);
+}
+
+.content-container__images_hidden {
+    display: none;
+}
+
+.content-container__images::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content-container__images::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: var(--global-grey-color);
+    -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}
+
+.input__content-container__sticker {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    right: 10px;
+    top: 5px;
+}

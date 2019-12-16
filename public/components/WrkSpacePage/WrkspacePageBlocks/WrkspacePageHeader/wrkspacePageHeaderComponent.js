@@ -1,5 +1,5 @@
 import BaseComponent from "../../../baseComponent";
-import './wrkspace-page-header.css';
+import './wrkspace-page-header.scss';
 import './WrkspacePageDropdown/wrkspace-page-dropdown.css';
 
 const WrkspacePageHeaderTemlate = require('./wrkspacePageHeader.pug');

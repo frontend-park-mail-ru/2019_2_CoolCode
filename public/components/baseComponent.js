@@ -4,19 +4,19 @@ class BaseComponent {
 		this._parent = parent;
 
 	}
-	get data() {
+	getData() {
 		return this._data;
 	}
 
-	set data(dataToSet) {
+	setData(dataToSet) {
 		this._data = {...dataToSet};
 	}
 
-	get parent() {
+	getParent() {
 		return this._parent;
 	}
 
-	set parent(parent) {
+	setParent(parent) {
 		this._parent = parent;
 	}
 

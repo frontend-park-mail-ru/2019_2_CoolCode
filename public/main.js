@@ -26,11 +26,14 @@ import channelFormView from "./views/channelFormView";
 import LocalStorage from "./entities/LocalStorage";
 import wrkspaceView from "./views/wrkspaceView";
 import wrkspaceSearchView from "./views/wrkspaceSearchView";
+import ResizeThrottler from "./modules/throttler";
+import {resizeAttach} from "./handlers/attachesHandlers";
+import photoPreviewView from "./views/photoPreviewView";
+import {serviceWorkerRegister} from "./modules/serviceWorkerRegister";
+import photoCreateView from "./views/photoCreateView";
+import buyStikerpackView from "./views/buyStikerpackView";
 
-const {backend} = settings;
-const {backendPort} = settings;
-const {connection} = settings;
-
+const {backend, backendSuffix, connection} = settings;
 const bus = new Bus();
 const promiseMaker = new PromiseMaker();
 const componentsStorage = new ComponentsStorage();
@@ -42,10 +45,12 @@ baseBlock.className = 'main';
 application.appendChild(baseBlock);
 const router = new Router(baseBlock);
 const FetchModule = new Fetch();
-FetchModule.setUrl(`${connection}://${backend}${backendPort}`);
+FetchModule.setUrl(`${connection}://${backend}${backendSuffix}`);
 const data = new Data();
 
-//serviceWorkerRegister();
+const throttler = new ResizeThrottler(resizeAttach);
+
+serviceWorkerRegister();
 createEvents();
 router.register(ROUTER.mainPage, mainPageView, KEYWORDS.mainPage);
 router.register(ROUTER.profile, profileView, KEYWORDS.profile);
@@ -62,10 +67,12 @@ router.register(ROUTER.wrkspaceSearch, wrkspaceSearchView, KEYWORDS.wrkspaceSear
 router.register(ROUTER.channelPage, channelView, KEYWORDS.channelPage);
 router.register(ROUTER.chatFoundMessage, chatView, KEYWORDS.chatFoundMessage);
 router.register(ROUTER.channelFoundMessage, channelView, KEYWORDS.channelFoundMessage);
-
-if (appLocalStorage.getUser()) {
-	bus.emit('setUser', null, appLocalStorage.getUser());
-}
+router.register(ROUTER.photoPreviewChat, photoPreviewView, KEYWORDS.photoPreviewChat);
+router.register(ROUTER.photoPreviewChannel, photoPreviewView, KEYWORDS.photoPreviewChannel);
+router.register(ROUTER.photoCreateChat, photoCreateView, KEYWORDS.photoCreateChat);
+router.register(ROUTER.photoCreateChannel, photoCreateView, KEYWORDS.photoCreateChannel);
+router.register(ROUTER.buyStikerpackChat, buyStikerpackView, KEYWORDS.buyStikerpackChat);
+router.register(ROUTER.buyStikerpackChannel, buyStikerpackView, KEYWORDS.buyStikerpackChannel);
 
 router.start();
 

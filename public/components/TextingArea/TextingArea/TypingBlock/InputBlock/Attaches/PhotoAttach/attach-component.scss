@@ -1,0 +1,238 @@
+
+/*attach-component element*/
+
+.attach-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: auto;
+  position: relative;
+  padding: 2px 2px 2px 2px;
+
+}
+
+
+.attach-component__image {
+  object-fit: scale-down;
+  object-position: top;
+  height: auto;
+  width: auto;
+}
+.attach-component__image_hidden {
+  display: none;
+}
+.attach-component__image_style  {
+  border-radius: 10px;
+}
+
+.attach-component__image_size {
+   @media screen and (min-height: 10px) {
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+   @media screen and (min-height: 400px) {
+    max-width: 40px;
+    max-height:40px;
+  }
+
+ @media screen and (min-height: 610px) {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+    @media screen and (min-height: 810px) {
+    max-width: 60px;
+    max-height: 60px;
+  }
+}
+
+
+/*loader-container element*/
+
+.attach-component__loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+
+
+.attach-component__loader-container_size {
+   @media screen and (min-height: 10px) {
+    width: 20px;
+    height: 20px;
+  }
+
+   @media screen and (min-height: 400px) {
+    width: 25px;
+    height:25px;
+  }
+
+ @media screen and (min-height: 610px) {
+    width: 30px;
+    height: 30px;
+  }
+
+    @media screen and (min-height: 810px) {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+.attach-component__loader-container_hidden{
+  display: none;
+}
+
+.attach-component__loader {
+  position: absolute;
+  top: 20%;
+}
+
+.attach-component__loader_style {
+  border-radius: 70px;
+  border: 2px solid var(--global-green-color);
+
+}
+
+
+.attach-component__loader_size {
+   @media screen and (min-height: 10px) {
+    width: 8px;
+    height: 8px;
+  }
+
+   @media screen and (min-height: 400px) {
+    width: 12px;
+    height: 12px;
+  }
+
+ @media screen and (min-height: 610px) {
+    width: 15px;
+    height: 15px;
+  }
+
+    @media screen and (min-height: 810px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+.attach-component__loader::after{
+  content: "";
+  position: absolute;
+  background-color: var(--global-green-color);
+  bottom: 50%;
+  left: 46%;
+  height: 7px;
+  width: 2px;
+  border-radius: 2px;
+  -webkit-transform-origin: 50% 97%;
+  transform-origin: 50% 97%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.attach-component__text {
+  height: auto;
+  width: auto;
+
+}
+
+.attach-component__text_style {
+  font-family: var(--global-font-family-Roboto);
+  font-size: 10px;
+  color: #000000;
+  font-weight: 300;
+
+}
+
+
+.overlay_button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 0;
+  position: relative;
+  z-index: var(--global-z-index-overlay);
+}
+
+.overlay_button_big {
+  top: 0px;
+  right: 35px
+}
+
+.overlay_button_hidden {
+  display: none;
+}
+.overlay_button__image-container {
+  flex: 0 0 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  align-self: flex-end;
+}
+
+
+/*icon element*/
+
+.overlay_button__image-container__icon {
+  object-fit: scale-down;
+  object-position: top;
+}
+
+.overlay_button__image-container__icon_size {
+   @media screen and (min-height: 10px) {
+    width: 8px;
+    height: 8px;
+  }
+
+   @media screen and (min-height: 400px) {
+    width: 10px;
+    height: 10px;
+  }
+
+ @media screen and (min-height: 610px) {
+    width: 11px;
+    height: 11px;
+  }
+
+   @media screen and (min-height: 810px) {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+.overlay_button__image-container__icon_size-big {
+   @media screen and (min-height: 10px) {
+    width: 12px;
+    height: 12px;
+  }
+
+   @media screen and (min-height: 400px) {
+    width: 15px;
+    height: 15px;
+  }
+
+ @media screen and (min-height: 610px) {
+    width: 20px;
+    height: 20px;
+  }
+
+   @media screen and (min-height: 810px) {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+
+.overlay_button__image-container__icon_style {
+  filter: opacity(0.6);
+}
+
+.overlay_button__image-container__icon_style:hover {
+  cursor: pointer;
+}
+

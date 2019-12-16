@@ -6,11 +6,13 @@ mixin field(pText, fieldText, id)
 
 
 block page
-    div.profile-header
+    div.profile-header.profile-header_size
         div.profile-header__image-row
-            div.profile-header__image-row__loader.profile-header__image-row__loader_style
-            img.profile-header__image-row__image.profile-header__image-row__image_style(src='/images/user.jpg')
-            input.profile-header__image-row__input(type='file')
+            div.profile-header__image-row__content
+                div.profile-header__content__loader.profile-header__content__loader_style.profile-header__content__loader_size
+                img.profile-header__content__image.profile-header__content__image_style.profile-header__content__image_size(src='/images/user.jpg')
+                input.profile-header__content__input(type='file' accept='image/*')
+            div.profile-header__image-row__error.div.profile-header__image-row__error_style
         div.profile-header__username-column
             div.profile-header__username-column__username#username-setting
                 div.profile-header__username-column__username__text.profile-header__username-column__username__text_style.responsive_text_3= username
@@ -19,7 +21,7 @@ block page
                 div.profile-header__username-column__fullname__text.profile-header__username-column__fullname__text_style.responsive_text_2= fullname
                 input.profile-header__username-column__fullname__input.profile-header__username-column__fullname__input_style.profile-header__username-column__fullname__input_hidden
             div.profile-header__username-column__error.profile-header__username-column__error_style
-    div.profile-info
+    div.profile-info.profile-info_size
         +field('status', fstatus, 'fstatus-setting')
         +field('email', email, 'email-setting')
         +field('phone', phone, 'phone-setting')

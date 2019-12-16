@@ -5,7 +5,7 @@
 
     width: 70%;
     height: auto;
-    align-self: flex-start;
+    align-self: flex-end;
     justify-content: flex-start;
 
     overflow: hidden;
@@ -18,6 +18,9 @@
     border-radius: 10px;
     background: rgba(40, 162, 77, 0.41);
 }
+.wrkspace-page-dropdown__input {
+    display:none
+}
 
 .wrkspace-page-dropdown__option {
     flex: 0 0 auto;
@@ -26,15 +29,16 @@
     justify-content: center;
     align-self: center;
     width: 100%;
-    margin: 5px 0 5px 0;
+    text-align: center;
+    padding: 6px 1px 6px 1px;
 }
 
 .wrkspace-page-dropdown__option_style {
     border-radius: 10px;
     background-color: transparent;
     font-weight: 300;
-    font-size: 18px;
-    font-family: var(--global-font-family-Roboto);
+    font-size: 16px;
+    font-family: var(--global-font-family-Montserrat);
     color: #000000;
 }
 

@@ -1,0 +1,695 @@
+
+> CoolSlack@1.0.0 prestart /home/ubuntu/Front/2019_2_CoolCode
+> webpack-cli
+
+Hash: ae77e9fa75f4c43bdfd4
+Version: webpack 4.41.2
+Time: 11193ms
+Built at: 11/26/2019 10:49:41 PM
+  Asset      Size  Chunks             Chunk Names
+main.js  1.23 MiB    main  [emitted]  main
+Entrypoint main = main.js
+[0] multi babel-polyfill ./public/main.js 40 bytes {main} [built]
+[./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {main} [built]
+[./public/constants/config.js] 3.67 KiB {main} [built]
+[./public/entities/ComponentsStorage.js] 4.47 KiB {main} [built]
+[./public/entities/Data.js] 23.8 KiB {main} [built]
+[./public/entities/LocalStorage.js] 3.46 KiB {main} [built] [1 warning]
+[./public/main.js] 3.08 KiB {main} [built] [1 warning]
+[./public/modules/fetch.js] 8.21 KiB {main} [built] [1 warning]
+[./public/modules/serviceWorkerRegister.js] 488 bytes {main} [built]
+[./public/scripts/Bus.js] 2.21 KiB {main} [built]
+[./public/scripts/Events.js] 4.98 KiB {main} [built]
+[./public/scripts/PromiseMaker.js] 1.49 KiB {main} [built] [1 warning]
+[./public/scripts/Router.js] 4.7 KiB {main} [built]
+[./public/scss/text-resize.scss] 469 bytes {main} [built]
+[./public/scss/wrap.scss] 462 bytes {main} [built]
+    + 517 hidden modules
+
+WARNING in ./public/backendDataFetchers/alterEntities.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/alterEntities.js
+  1:9  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/scripts/Events.js 13:0-112 56:26-39 57:25-37 58:26-39 59:25-37
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/channelMessagesInteraction.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/channelMessagesInteraction.js
+  1:9   warning  'bus' is defined but never used           no-unused-vars
+  1:27  warning  'promiseMaker' is defined but never used  no-unused-vars
+  1:41  warning  'router' is defined but never used        no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/handlers/channelViewHandlers.js 10:0-90 218:42-63
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/findInfo.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/findInfo.js
+  1:9  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/scripts/Events.js 12:0-81 54:21-29 55:33-53
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/getEntitiesRequests.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/getEntitiesRequests.js
+  3:9  warning  'findUser' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/scripts/Events.js 4:0-193 60:31-49 61:34-55 62:29-45 63:21-29 66:28-43 67:27-41 68:35-57 71:24-35
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/logout.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/logout.js
+  1:9   warning  'bus' is defined but never used   no-unused-vars
+  1:35  warning  'data' is defined but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ @ ./public/scripts/Events.js 5:0-57 53:19-31
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/messagesInteraction.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/messagesInteraction.js
+  2:9  warning  'appLocalStorage' is defined but never used        no-unused-vars
+  5:8  warning  'frontendPort' is assigned a value but never used  no-unused-vars
+  6:8  warning  'connection' is assigned a value but never used    no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/scripts/Events.js 11:0-89 64:24-38 65:24-35
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/register.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/register.js
+  1:9   warning  'bus' is defined but never used        no-unused-vars
+  1:41  warning  'router' is defined but never used     no-unused-vars
+  3:9   warning  'showError' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/handlers/registerFormHandlers.js 2:0-64 60:42-47 145:42-48
+ @ ./public/scripts/Events.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/setUserInfo.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/setUserInfo.js
+  1:9  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/handlers/registerFormHandlers.js 5:0-65
+ @ ./public/scripts/Events.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/backendDataFetchers/websockets.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/backendDataFetchers/websockets.js
+  2:33  warning  'getUserInfo' is defined but never used       no-unused-vars
+  4:19  warning  'responseStatuses' is defined but never used  no-unused-vars
+  4:37  warning  'ROUTER' is defined but never used            no-unused-vars
+  5:8   warning  'sendingMessage' is defined but never used    no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/scripts/Events.js 3:0-100 51:32-51 52:39-65
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChannelBlock/ChannelComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChannelBlock/ChannelComponent.js
+   3:7   warning  'rightMsg' is assigned a value but never used     no-unused-vars
+   4:7   warning  'leftMsg' is assigned a value but never used      no-unused-vars
+  18:8   warning  'ChatMessageComponent' is defined but never used  no-unused-vars
+  19:9   warning  'getChannelInfo' is defined but never used        no-unused-vars
+  95:24  warning  'messageData' is defined but never used           no-unused-vars
+
+✖ 5 problems (0 errors, 5 warnings)
+
+ @ ./public/views/channelView.js 27:0-75 125:29-45
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatBlock/ChatComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatBlock/ChatComponent.js
+   3:7   warning  'rightMsg' is assigned a value but never used  no-unused-vars
+   4:7   warning  'leftMsg' is assigned a value but never used   no-unused-vars
+  80:27  warning  'messageData' is defined but never used        no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/views/chatView.js 24:0-66 138:26-39
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/ChatsBlock/ChatsBlockComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/ChatsBlock/ChatsBlockComponent.js
+  2:20  warning  'router' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js 23:0-67 94:27-46
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/ChatsColumnComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/ChatsColumnComponent.js
+  2:9   warning  'data' is defined but never used           no-unused-vars
+  2:15  warning  'bus' is defined but never used            no-unused-vars
+  2:20  warning  'router' is defined but never used         no-unused-vars
+  5:8   warning  'UserComponent' is defined but never used  no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/views/profileView.js 22:0-82 106:27-47
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/Message/MessageComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/Message/MessageComponent.js
+  2:15  warning  'bus' is defined but never used     no-unused-vars
+  2:20  warning  'router' is defined but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ @ ./public/components/ChatsColumn/usersFoundBlock/UsersFoundBlockComponent.js 23:0-59
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/WrkSpacesBlock/WrkSpace/WrkSpaceComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/WrkSpacesBlock/WrkSpace/WrkSpaceComponent.js
+  2:9  warning  'data' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/components/ChatsColumn/WrkSpacesBlock/WrkSpacesBlockComponent.js 24:0-61 65:29-46
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/WrkSpacesBlock/WrkSpacesBlockComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/WrkSpacesBlock/WrkSpacesBlockComponent.js
+  2:9   warning  'data' is defined but never used              no-unused-vars
+  2:15  warning  'bus' is defined but never used               no-unused-vars
+  2:20  warning  'router' is defined but never used            no-unused-vars
+  3:8   warning  'MessageComponent' is defined but never used  no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js 24:0-79 95:31-54
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/messagesFoundBlock/MessagesFoundComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/messagesFoundBlock/MessagesFoundComponent.js
+  2:9   warning  'data' is defined but never used           no-unused-vars
+  2:20  warning  'router' is defined but never used         no-unused-vars
+  7:8   warning  'UserComponent' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js 39:0-86 83:35-62
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/ChatsColumn/usersFoundBlock/UsersFoundBlockComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/ChatsColumn/usersFoundBlock/UsersFoundBlockComponent.js
+  2:9   warning  'data' is defined but never used              no-unused-vars
+  2:20  warning  'router' is defined but never used            no-unused-vars
+  3:8   warning  'MessageComponent' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/components/ChatsColumn/ChatsColumnComponent.js 38:0-82 82:32-56
+ @ ./public/views/profileView.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/components/addMemberBlock/addMemberComponent.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/components/addMemberBlock/addMemberComponent.js
+  2:8  warning  'UserComponent' is defined but never used       no-unused-vars
+  3:9  warning  'getAnyUserInfo' is defined but never used      no-unused-vars
+  4:9  warning  'addMemberinChannel' is defined but never used  no-unused-vars
+  6:9  warning  'data' is defined but never used                no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/views/addMemberView.js 24:0-81 78:30-48
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/entities/LocalStorage.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/entities/LocalStorage.js
+  1:9   warning  'appLocalStorage' is defined but never used  no-unused-vars
+  1:26  warning  'bus' is defined but never used              no-unused-vars
+  1:37  warning  'FetchModule' is defined but never used      no-unused-vars
+  1:50  warning  'promiseMaker' is defined but never used     no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/main.js 29:0-51 35:26-38
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/channelViewHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/channelViewHandlers.js
+   2:9   warning  'deletingMessage' is defined but never used                    no-unused-vars
+   2:42  warning  'sendingMessage' is defined but never used                     no-unused-vars
+   3:7   warning  'channelTemplate' is assigned a value but never used           no-unused-vars
+   9:43  warning  'createVisibleSettingsMessageBlock' is defined but never used  no-unused-vars
+  11:2   warning  'addMemberinChanell' is defined but never used                 no-unused-vars
+  12:2   warning  'addMemberinChanellFunc' is defined but never used             no-unused-vars
+  13:2   warning  'getAnyUserInfo' is defined but never used                     no-unused-vars
+  14:2   warning  'getUserbyId' is defined but never used                        no-unused-vars
+  16:9   warning  'alterChannel' is defined but never used                       no-unused-vars
+  18:7   warning  'addMemberTempl' is assigned a value but never used            no-unused-vars
+
+✖ 10 problems (0 errors, 10 warnings)
+
+ @ ./public/views/profileView.js 28:0-63
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/chatViewHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/chatViewHandlers.js
+  22:8  warning  'messageId' is assigned a value but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/views/chatView.js 26:0-223 60:6-29 62:6-31 66:6-33 67:6-37 68:6-35
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/chatsBlockHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/chatsBlockHandlers.js
+   2:9   warning  'menuHandlers' is defined but never used          no-unused-vars
+  75:9   warning  'wrkName' is assigned a value but never used      no-unused-vars
+  76:9   warning  'wrkPhoto' is assigned a value but never used     no-unused-vars
+  79:10  warning  'channelName' is assigned a value but never used  no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/views/profileView.js 25:0-176 55:6-26 57:6-36 58:6-32 59:6-30 60:6-24
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/photosHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/photosHandlers.js
+  1:20  warning  'FetchModule' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/scripts/Events.js 10:0-111 72:25-37 73:28-43 74:23-33 75:23-33 76:23-33
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/profileBlockHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/profileBlockHandlers.js
+  1:20  warning  'FetchModule' is defined but never used  no-unused-vars
+  1:33  warning  'router' is defined but never used       no-unused-vars
+  4:9   warning  'API' is defined but never used          no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/scripts/Events.js 7:0-71 77:32-51
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/registerFormHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/registerFormHandlers.js
+  1:9   warning  'showError' is defined but never used    no-unused-vars
+  4:14  warning  'data' is defined but never used         no-unused-vars
+  5:9   warning  'setUserInfo' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/scripts/Events.js 8:0-70 78:31-49
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/searchFormHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/searchFormHandlers.js
+  1:8  warning  'findUser' is defined but never used       no-unused-vars
+  3:9  warning  'creatingChats' is defined but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ @ ./public/views/profileView.js 20:0-72 56:6-28
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/handlers/webSocketHandlers.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/handlers/webSocketHandlers.js
+  1:9  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/backendDataFetchers/websockets.js 3:0-94 22:11-36 52:11-29
+ @ ./public/scripts/Events.js
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/main.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/main.js
+   7:19  warning  'responseStatuses' is defined but never used       no-unused-vars
+   9:8   warning  'backendPort' is assigned a value but never used   no-unused-vars
+  30:9   warning  'serviceWorkerRegister' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ multi babel-polyfill ./public/main.js main[1]
+
+WARNING in ./public/modules/fetch.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/modules/fetch.js
+  1:19  warning  'responseStatuses' is defined but never used  no-unused-vars
+  1:37  warning  'ROUTER' is defined but never used            no-unused-vars
+  1:45  warning  'KEYWORDS' is defined but never used          no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 6:0-36 41:22-27
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/scripts/PromiseMaker.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/scripts/PromiseMaker.js
+   4:14  warning  'application' is defined but never used  no-unused-vars
+  13:37  warning  'reject' is defined but never used       no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ @ ./public/main.js 5:0-50 33:23-35
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/addMemberView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/addMemberView.js
+  4:2  warning  'addMemberinChannel' is defined but never used     no-unused-vars
+  5:2  warning  'addMemberOverlayHndlr' is defined but never used  no-unused-vars
+  6:2  warning  'arrayMembers' is defined but never used           no-unused-vars
+  7:2  warning  'menuHandlersAdd' is defined but never used        no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/main.js 24:0-50 55:34-47
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/baseView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/baseView.js
+   1:8  warning  'Bus' is defined but never used   no-unused-vars
+  11:7  warning  'args' is defined but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
+ @ ./public/views/loginView.js 19:0-34 62:2-10
+ @ ./public/main.js
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/channelFormView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/channelFormView.js
+  2:15  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/main.js 27:0-54 54:38-53
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/channelView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/channelView.js
+   3:8   warning  'ChatComponent' is defined but never used                       no-unused-vars
+   4:8   warning  'chatView' is defined but never used                            no-unused-vars
+   8:8   warning  'WrkspacePageComponent' is defined but never used               no-unused-vars
+  17:9   warning  'createWorkspaceSettingsButtonHndlr' is defined but never used  no-unused-vars
+  21:2   warning  'createMessageInputHndlr' is defined but never used             no-unused-vars
+  22:2   warning  'createSendMessageBtnHndlr' is defined but never used           no-unused-vars
+  26:2   warning  'createLikeBtnHndlr' is defined but never used                  no-unused-vars
+  29:16  warning  'menuHandlersAdd' is defined but never used                     no-unused-vars
+  29:33  warning  'menuHandlersInfo' is defined but never used                    no-unused-vars
+
+✖ 9 problems (0 errors, 9 warnings)
+
+ @ ./public/main.js 23:0-46 58:36-47 60:44-55
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/chatView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/chatView.js
+   4:61  warning  'appLocalStorage' is defined but never used                 no-unused-vars
+   5:9   warning  'chooseChat' is defined but never used                      no-unused-vars
+   5:36  warning  'fetchUserInfo' is defined but never used                   no-unused-vars
+  12:2   warning  'createOpenSettingsMessageHndlr' is defined but never used  no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/main.js 22:0-40 52:29-37 59:41-49
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/logOutView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/logOutView.js
+  2:8   warning  'handleLogout' is defined but never used  no-unused-vars
+  3:9   warning  'data' is defined but never used          no-unused-vars
+  3:20  warning  'router' is defined but never used        no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 18:0-44 50:31-41
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/loginView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/loginView.js
+  2:9   warning  'router' is defined but never used        no-unused-vars
+  2:17  warning  'data' is defined but never used          no-unused-vars
+  2:23  warning  'promiseMaker' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 14:0-42 48:30-39
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/mainPageView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/mainPageView.js
+  2:15  warning  'bus' is defined but never used              no-unused-vars
+  2:20  warning  'router' is defined but never used           no-unused-vars
+  2:42  warning  'appLocalStorage' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 15:0-48 46:33-45
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/profileView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/profileView.js
+   4:9  warning  'appLocalStorage' is defined but never used        no-unused-vars
+  17:9  warning  'menuHandlers' is defined but never used           no-unused-vars
+  18:8  warning  'WrkspacePageComponent' is defined but never used  no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 17:0-46 47:32-43
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/searchView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/searchView.js
+  7:15  warning  'bus' is defined but never used                         no-unused-vars
+  8:9   warning  'createWorkspaceButtonHndlr' is defined but never used  no-unused-vars
+  8:37  warning  'createWrkspaceBlockHndlr' is defined but never used    no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+
+ @ ./public/main.js 19:0-44 51:31-41
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/signUpView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/signUpView.js
+  2:9   warning  'data' is defined but never used                        no-unused-vars
+  2:20  warning  'router' is defined but never used                      no-unused-vars
+  2:28  warning  'promiseMaker' is defined but never used                no-unused-vars
+  5:7   warning  'signupTemplate' is assigned a value but never used     no-unused-vars
+  6:7   warning  'containerTemplate' is assigned a value but never used  no-unused-vars
+  7:7   warning  'headerTemplate' is assigned a value but never used     no-unused-vars
+
+✖ 6 problems (0 errors, 6 warnings)
+
+ @ ./public/main.js 16:0-44 49:31-41
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/wrkspaceFormView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/wrkspaceFormView.js
+  2:15  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/main.js 25:0-56 53:39-55
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/wrkspaceSearchView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/wrkspaceSearchView.js
+  3:15  warning  'bus' is defined but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
+ @ ./public/main.js 31:0-60 57:39-57
+ @ multi babel-polyfill ./public/main.js
+
+WARNING in ./public/views/wrkspaceView.js
+Module Warning (from ./node_modules/eslint-loader/dist/cjs.js):
+
+/home/ubuntu/Front/2019_2_CoolCode/public/views/wrkspaceView.js
+   4:9   warning  'appLocalStorage' is defined but never used       no-unused-vars
+   4:26  warning  'bus' is defined but never used                   no-unused-vars
+   7:8   warning  'ProfilePageComponent' is defined but never used  no-unused-vars
+  14:9   warning  'getProfilePhoto' is defined but never used       no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+
+ @ ./public/main.js 30:0-48 56:37-49
+ @ multi babel-polyfill ./public/main.js
+Child worker:
+     1 asset
+    Entrypoint main = 2872dd68edfa9ef5a890.worker.js
+    [./public/workers/profile.worker.js] 140 bytes {main} [built]
+
+> CoolSlack@1.0.0 start /home/ubuntu/Front/2019_2_CoolCode
+> node server/server.js
+
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE :::8000
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1367:14)
+    at listenInCluster (net.js:1408:12)
+    at Server.listen (net.js:1492:7)
+    at Function.listen (/home/ubuntu/Front/2019_2_CoolCode/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/ubuntu/Front/2019_2_CoolCode/server/server.js:25:5)
+    at Module._compile (module.js:652:30)
+    at Object.Module._extensions..js (module.js:663:10)
+    at Module.load (module.js:565:32)
+
+npm ERR! Linux 4.15.0-38-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "start"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code ELIFECYCLE
+npm ERR! CoolSlack@1.0.0 start: `node server/server.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the CoolSlack@1.0.0 start script 'node server/server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the CoolSlack package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node server/server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs CoolSlack
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls CoolSlack
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/ubuntu/Front/2019_2_CoolCode/npm-debug.log

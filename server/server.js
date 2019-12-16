@@ -20,13 +20,7 @@ app.use(express.static(rootImg));
 app.use(fallback('index.html', { root: root }));
 app.use(fallback('index.html', { root: rootImg }));
 
-app.use('*', proxy('https://boiling-chamber-90136.herokuapp.com/', {
-	proxyReqPathResolver: function (req) {
-		return req.originalUrl;
-	}
-}));
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);

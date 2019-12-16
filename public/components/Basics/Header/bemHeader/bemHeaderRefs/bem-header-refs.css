@@ -7,8 +7,8 @@
 .header-refs__ref {
     float: right;
     margin: 15px 5px 0 5px;
-
 }
+
 .header-refs__ref_style {
     font-family: var(--global-font-family-Roboto);
     font-size: 15px;
@@ -19,4 +19,9 @@
 
 .header-refs__ref_style:hover {
     text-decoration: underline;
+}
+
+.header-refs__ref_profile {
+    float: right;
+    margin: 5px 5px 0 5px;
 }

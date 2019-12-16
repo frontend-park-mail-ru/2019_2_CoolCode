@@ -10,7 +10,7 @@ async function searchEvent(params = {parentContainer:null}) {
 	if (parentParentContainer.classList.contains('column_left')) {
 		Promise.all([
 			promiseMaker.createPromise('findUser', searchInputValue),
-			promiseMaker.createPromise('findMessagesFullInfo', searchInputValue) ]
+			promiseMaker.createPromise('findMessagesFullInfo', searchInputValue)]
 		).then(() => router.go('searchView', searchInputValue));
 	} else {
 		if (parentParentContainer.classList.contains('wrkspace-search__column')) {

@@ -1,18 +1,20 @@
 import BaseComponent from "../baseComponent";
-import './bemChatPageBlocks/bemChatColumn/bem-chat-column.css';
-import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/bem-chat-column-main.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/MsgWindow/msgwindow.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/InputBlock/input.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/MessageSettBlock/message-sett-block.css';
-import './bemChatPageBlocks/bemChatColumn/bemChatColumnMain/TypingBlock/typing-block.css';
-import ChatMessageComponent from "./Message/ChatMessageComponent";
+import './bemChatPageBlocks/bemChatColumn/bem-chat-column.scss';
+import './bemChatPageBlocks/bemChatColumn/chatHeader/chat-header.scss';
+import ChatMessageComponent from "../TextingArea/Message/ChatMessage/ChatMessageComponent";
+import TextingAreaComponent from "../TextingArea/TextingAreaComponent";
+import MyWorker from "../../workers/profile.worker";
+import {bus, data} from "../../main";
+import {getChatFile} from "../../backendDataFetchers/filesRequest";
+import { Type} from "../../modules/getType";
+import {showAudioContent, showPhotoContent} from "../../handlers/chatViewHandlers";
 
 const chatTemplate = require('./chat.pug');
 
 class ChatComponent extends BaseComponent {
 
     contentListRootSelector = '.msgwindow-container__msgwindow';
+    textAreaComponent;
 
     slideToMessage() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
@@ -25,6 +27,9 @@ class ChatComponent extends BaseComponent {
     getMessageInputData() {
     	return this._parent.querySelector('.input__text').value;
     }
+    getMessageInputRecord() {
+    	return this._parent.querySelector('input__record').value;
+    }
 
     setMessageInputData(inputData) {
     	this._parent.querySelector('.input__text').value = inputData;
@@ -33,7 +38,13 @@ class ChatComponent extends BaseComponent {
     renderErrorOutgoingMessage(messageData) {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: true, deleted:false}, contentListRoot);
-    	contentListRoot.appendChild(messageComponent.render());
+    	const message = contentListRoot.querySelector(`#message-${messageData.id}`);
+    	if (message) {
+    		message.insertAdjacentElement( 'beforebegin', messageComponent.render());
+    		message.remove();
+    	} else {
+    		contentListRoot.appendChild(messageComponent.render());
+    	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
@@ -48,6 +59,12 @@ class ChatComponent extends BaseComponent {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	const messageComponent = new ChatMessageComponent({message: messageData, user: this._data.user, error: false, deleted:false, edited:false}, contentListRoot);
     	contentListRoot.appendChild(messageComponent.render());
+    	if (messageData.message_type == 1) {
+    		this.setMessageContent(messageData);
+    	}
+    	if (messageData.message_type == 3) {
+    		this.setStickerContent(messageData);
+    	}
     	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
     }
 
@@ -80,15 +97,76 @@ class ChatComponent extends BaseComponent {
 
     }
 
-    renderContent() {
+    async setStickerContent(message) {
+    	const sticker = document.querySelector(`#sticker${message.sticker_id}`);
+    	const messageBlock = document.getElementById(`message-${message.id}`);
+    	messageBlock.querySelector('.primary-row__image-container__image').src = sticker.src;
+    	bus.emit('showPhotoContent', null, messageBlock);
+    }
+
+    async setMessageContent(message) {
+    	let chatId = data.getCurrentChatId();
+    	let buffer = await getChatFile(chatId, message.file_id);
+    	const fileCheck = new Type();
+    	if (fileCheck.checkAudio(message.file_type) ||
+				fileCheck.checkFile(message.file_type)) {
+    		buffer = buffer.slice(0, buffer.size, fileCheck.createMimeType(message.file_type));
+    	}
+    	const worker = new MyWorker();
+    	worker.postMessage(buffer);
+    	worker.onmessage = function (result) {
+    		const messageBlock = document.getElementById(`message-${message.id}`);
+    		if (fileCheck.checkImage(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__image-container__image').src = result.data;
+    			bus.emit('showPhotoContent', null, messageBlock);
+    			bus.emit('createMessagePhotoHandler', null, message.id);
+    		} else if (fileCheck.checkAudio(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__audio').src = result.data;
+    			bus.emit('showAudioContent', null, messageBlock);
+    		} else if (fileCheck.checkFile(message.file_type)) {
+    			messageBlock.querySelector('.primary-row__file-ref').download = `${message.file_id}.${message.file_type}`;
+    			messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+    			bus.emit('showFileContent', null, messageBlock);
+    		}
+    	};
+    }
+
+    async renderContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	if (this._data.chatMessages) {
-    		this._data.chatMessages.forEach((message) => {
-    			const messageComponent = new ChatMessageComponent({message: message, user: this._data.user, error: false, deleted:false}, contentListRoot);
-    			contentListRoot.appendChild(messageComponent.render());
-    		});
+    		for (const message of this._data.chatMessages) {
+    			if (message) {
+    				const messageComponent = new ChatMessageComponent({
+    					message: message,
+    					user: this._data.user,
+    					error: false,
+    					deleted: false
+    				}, contentListRoot);
+    				contentListRoot.appendChild(messageComponent.render());
+    			}
+    		}
+    		contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    		for (const message of this._data.chatMessages.reverse()) {
+    			if (message) {
+    				if (message.message_type == 1) {
+    					await this.setMessageContent(message);
+    				}
+    				if (message.message_type == 3) {
+    					await this.setStickerContent(message);
+    				}
+    			}
+    		}
     	}
-    	contentListRoot.scrollTop = contentListRoot.scrollHeight - contentListRoot.clientHeight;
+    }
+
+    renderTextingArea() {
+    	const contentListRoot = document.querySelector(this.contentListRootSelector);
+    	this.textAreaComponent = new TextingAreaComponent(this._data, contentListRoot);
+    	this.textAreaComponent.renderTo('.chat-column');
+    }
+
+    async renderFiles(files, type) {
+    	await this.textAreaComponent.renderFiles(files, type);
     }
 
     render() {

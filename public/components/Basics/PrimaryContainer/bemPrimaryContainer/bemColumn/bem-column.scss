@@ -1,0 +1,55 @@
+.column{
+  flex: 0 0 auto;
+  display: flex;
+    flex-direction: column;
+}
+
+.column_size {
+   @media screen and (min-height: 10px) {
+    height: 400px;
+    }
+
+   @media screen and (min-height: 400px) {
+    height: 600px;
+  }
+
+
+ @media screen and (min-height: 610px) {
+    height: 750px;
+  }
+
+   @media screen and (min-height: 810px) {
+    height: 910px;
+  }
+}
+
+/* left and right column modifiers - standart layout*/
+.column_left{
+  @media screen and (min-width: 100px) {
+    width: 375px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 34vw;
+  }
+}
+
+.column_right{
+  @media screen and (min-width: 100px) {
+    width: 375px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 65vw;
+  }
+}
+
+/* outline modifier */
+.column_right-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}
+
+/* outline modifier */
+.column_left-outlined {
+    border-left: 1.5px solid var(--global-grey-color);
+}

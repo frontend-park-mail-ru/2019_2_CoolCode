@@ -1,9 +1,9 @@
 mixin input(name)
     label.input-block_label(for=name)
     if name === 'password'
-        input.input-block_input-field.input-block_input-field_style(type=name id=name placeholder=name name=name)
+        input.input-block_input-field.input-block_input-field_style.fluid-font-size_1(type=name id=name placeholder=name name=name)
     else
-        input.input-block_input-field.input-block_input-field_style(type='text' id=name placeholder=name name=name)
+        input.input-block_input-field.input-block_input-field_style.fluid-font-size_1(type='text' id=name placeholder=name name=name)
 
 
 
@@ -17,7 +17,7 @@ if viewType === "login"
     -var question = 'Not registered?'
 
 block content
-    form.register-form.register-form_style(method='POST' action=ref)
+    form.register-form.register-form_size.register-form_style(method='POST' action=ref)
         div.register-form__form
             div.register-form__form__name-field.register-form__form__name-field_style.fluid-font-size_2=mainTitle
             div.input-block
@@ -26,7 +26,7 @@ block content
                 if viewType === "signUp"
                     +input('username')
                 div.input-block_error-field.input-block_error-field_style
-            button.register-form__form__button.register-form__form__button_style.fluid-font-size_1(type='submit')=mainTitle
+            button.register-form__form__button.register-form__form__button_style(type='submit')=mainTitle
             div.register-form__form__login-ref
                 if viewType === "signUp"
                     p.register-form__form__login-ref__text.register-form__form__login-ref__text_style.fluid-font-size_1=question

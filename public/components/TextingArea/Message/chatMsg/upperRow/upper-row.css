@@ -1,0 +1,32 @@
+.upper-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+
+.upper-row_left {
+    justify-content: flex-start;
+}
+
+.upper-row_right {
+    justify-content: flex-end;
+}
+
+
+/* text element */
+.upper-row__name {
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: right;
+    margin: 3px 5px 3px 5px;
+}
+
+.upper-row__name_style {
+    word-wrap: break-word;
+    font-weight: 300;
+    font-size: 16px;
+    font-family: var(--global-font-family-Montserrat);
+    color: #000000;
+}

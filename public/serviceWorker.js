@@ -1,39 +1,37 @@
-const settings = {
-	connection : 'http',
-	backendPort : ':8080',
-	//backend: '172.20.10.9:8080',
-	backend: '95.163.209.195',
-	//backend: '192.168.1.69:8080',
-	//backend: 'localhost:8080'
-};
-const {backend} = settings;
-const {backendPort} = settings;
-const {connection} = settings;
-
 const CACHE = 'chat-cache';
-let urlsToCache = [
-	'images/abkhazia.jpg',
-	'images/add_1.png',
-	'images/add.png',
-	'images/arr_up.png',
-	'images/arr_down.png',
-	'images/info.png',
-	'images/lock.png',
-	'images/logo_2.png',
-	'images/loupe_2.png',
-	'images/muted.png',
-	'images/pinned.png',
-	'images/plus.png',
-	'images/post.png',
-	'images/sasha.jpeg',
-	'images/send.png',
-	'images/settings.jpg',
-	'images/square-root-mathematical-sign.png',
-	'images/star.png',
-	'images/therefore-mathematical-symbol.png',
-	'/profile',
-	'/',
-	'/main.js'
+let urlsToCache = ['/', '/main.js', '/index.html', '/images/abkhazia.jpg',
+/*	'/images/add_1.png',
+	'/images/add.png',
+	'/images/arr_up.png',
+	'/images/arr_down.png',
+	'/images/bin.png',
+	'/images/close.png',
+	'/images/dots.png',
+	'/images/file.png',
+	'/images/info.jpeg',
+	'/images/info_1.png',
+	'/images/like.png',
+	'/images/like_1.png',
+	'/images/like_hover.png',
+	'/images/lock.png',
+	'/images/logo_2.png',
+	'/images/loupe_2.png',
+	'/images/muted.png',
+	'/images/microphone.png',
+	'/images/pinned.png',
+	'/images/plus.png',
+	'/images/post.png',
+	'/images/sasha.jpeg',
+	'/images/search.png',
+	'/images/send.png',
+	'/images/settings.jpg',
+	'/images/settings.png',
+	'/images/square-root-mathematical-sign.png',
+	'/images/star.png',
+	'/images/white.png',
+	'/images/user.jpg',
+	'/images/therefore-mathematical-symbol.png',
+	'/profile', */
 ];
 
 self.addEventListener('install', (event) => {
@@ -56,22 +54,22 @@ self.addEventListener('fetch', function(event) {
 async function networkOrCache(request) {
 	try{
 		const response = await fetch(request);
-		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;
 		}
 		if (response.ok) {
 			return response;
 		}
-		 if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+		 if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
-		     return cache.match("/images/abkhazia.jpg");
+			 return cache.match("/images/abkhazia.jpg");
 		}
 	} catch (error) {
-		if (request.url.toString().startsWith(`${connection}://fonts.googleapis.com/`)) {
+		if (request.url.toString().startsWith(`https://fonts.googleapis.com/`)) {
 			return response;
 		}
-		if (request.url.toString().startsWith(`${connection}://${backend}${backendPort}/photos/`)) {
+		if (request.url.toString().startsWith(`https://coolcode.site/api/users/users/photos/`)) {
 
 			const cache = await caches.open(CACHE);
 			return cache.match("/images/abkhazia.jpg");

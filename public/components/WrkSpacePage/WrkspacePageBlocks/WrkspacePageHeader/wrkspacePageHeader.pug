@@ -1,21 +1,24 @@
-div.wrkspace-page-header
+div.wrkspace-page-header.wrkspace-page-header_size
     div.wrkspace-page-header__info-row
         div.wrkspace-page-header__info-row__image-row
-            div.wrkspace-page-header__info-row__image-row__loader.wrkspace-page-header__info-row__image-row__loader_style.hidden
-            img.wrkspace-page-header__info-row__image-row__image.wrkspace-page-header__info-row__image-row__image_style(src='/images/abkhazia.jpg')
+            div.wrkspace-page-header__info-row__image-row__loader.wrkspace-page-header__info-row__image-row__loader_style.wrkspace-page-header__info-row__image-row__loader_size.hidden
+            img.wrkspace-page-header__info-row__image-row__image.wrkspace-page-header__info-row__image-row__image_style.wrkspace-page-header__info-row__image-row__image_size(src='/images/abkhazia.jpg')
             input.wrkspace-page-header__info-row__image-row__input(type='file')
         div.wrkspace-page-header__info-row__info-column
-            div.wrkspace-page-header__info-row__info-column__name.wrkspace-page-header__info-row__info-column__name_style(data-section='wrkspaceName')= currentWrkspace.Name
-            if (currentWrkspace.Channels)
-                div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CHANNELS   ${currentWrkspace.Channels.length}`
-            if (currentWrkspace.Members)
-            div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `MEMBERS    ${currentWrkspace.Members.length}`
-            div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style= `CREATOR    ${currentWrkspaceCreator.username}`
+            div.wrkspace-page-header__info-row__info-column__name.wrkspace-page-header__info-row__info-column__name_style.fluid-font-size_4(data-section='wrkspaceName')= currentWrkspace.name
+            if (currentWrkspace.channels)
+                div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style.fluid-font-size_3= `CHANNELS   ${currentWrkspace.channels.length}`
+            if (currentWrkspace.members)
+            div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style.fluid-font-size_3= `MEMBERS    ${currentWrkspace.members.length}`
+            div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style.fluid-font-size_3= `CREATOR    ${currentWrkspaceCreator.username}`
         div.wrkspace-page-header__info-row__settings-column
             div.wrkspace-page-header__info-row__settings-column__container
                 div.wrkspace-page-header__info-row__settings-column__container__button
-                    img.wrkspace-page-header__info-row__settings-column__container__button__icon.wrkspace-page-header__info-row__settings-column__container__button__icon_style(src='/images/dots.png')
+                    img.wrkspace-page-header__info-row__settings-column__container__button__icon.wrkspace-page-header__info-row__settings-column__container__button__icon_style.wrkspace-page-header__info-row__settings-column__container__button__icon_size(src='/images/dots.png')
                 div.wrkspace-page-dropdown.wrkspace-page-dropdown_style
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='inviteUser')  Invite user
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='seeUsers') See users
-                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='watchStatistics')  Watch statistics
+                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='seeMembers') see members
+                    div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='watchStatistics')  watch statistics
+                    if user.id == currentWrkspaceCreator.id
+                        div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='changePicture') change picture
+                            input.wrkspace-page-dropdown__input(type='file' accept='image/*')
+                        div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='inviteUser')  invite user

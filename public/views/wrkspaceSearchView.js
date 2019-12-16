@@ -1,6 +1,6 @@
 import BaseView from "./baseView";
 import {createUserBlockHndlr} from "../handlers/searchViewHandlers";
-import {componentsStorage, data, promiseMaker, router} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, promiseMaker, router} from "../main";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import {
 	channelViewHandler,
@@ -30,7 +30,7 @@ class wrkspaceSearchView extends BaseView {
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.searchUsers = data.getLastSearchUsers();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.currentWrkspaceCreator = data.getCurrentWrkspaceCreator();
 	}
@@ -53,10 +53,12 @@ class wrkspaceSearchView extends BaseView {
 	}
 
 	show(args) {
-		if (!data.getLoggedIn()) router.go('mainPageView');
+		if (!data.getLoggedIn()) router.go('profileView');
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			if (JSON.stringify(data.getCurrentWrkspace()) === '{}') {
-				console.log('here');
 				Promise.all(
 					[creatingChats(this._parent),
 						promiseMaker.createPromise('getWrkspaceInfo', args[0]),
@@ -73,33 +75,40 @@ class wrkspaceSearchView extends BaseView {
 			} else {
 				this.setContent();
 				this.render();
-				this.setEvents();
 			}
 		});
 		console.log('show: wrkspacePageSearch');
 	}
 
-	drawBasics() {
-		const basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+	async drawBasics() {
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		const leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
-		leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		if (leftColumn.getState() !== 'chats') {
+			leftColumn.renderChatsContent();
+		}
+		leftColumn.selectCurrentChat();
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
-		wrkspacePage.render();
-		wrkspacePage.renderSearchContent(this._data);
-		componentsStorage.setWrkspacePage(wrkspacePage);
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
+			wrkspacePage.render();
+			wrkspacePage.renderSearchContent(this._data);
+			componentsStorage.setWrkspacePage(wrkspacePage);
+			this.setEvents();
+		}
 	}
 
 	render() {
-		// let wrkspacePage = componentsStorage.getRightColumn();
+		// const wrkspacePage = componentsStorage.getRightColumn();
 		// if (!wrkspacePage || !(wrkspacePage instanceof WrkspacePageComponent)) {
 		// 	this.drawBasics();
 		// 	this.drawLeftColumn();

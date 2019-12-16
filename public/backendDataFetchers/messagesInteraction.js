@@ -1,7 +1,5 @@
 import {API, responseStatuses, settings} from '../constants/config';
-import {bus, FetchModule} from '../main';
-
-const {frontend, frontendPort, connection} = settings;
+import {bus, data, FetchModule} from '../main';
 
 async function likeMessage(id) {
 	console.log(`Liking message : ${id}`);
@@ -34,7 +32,7 @@ async function editingMessage(text, time, id) {
 			throw new Error (`Haven't edited message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
 		// const message = await response.json();
-		// console.log(`Message edited : ${message.id}`);
+		// console.log(`ChatMessage edited : ${message.id}`);
 		// return message.id;
 	}catch (error) {
 		console.error(error);
@@ -57,9 +55,7 @@ async function sendingMessage(text, time, id) {
 		if (response.status !== 200) {
 			throw new Error (`Haven't sent message: ${text} cause: ${responseStatuses[response.status]}`);
 		}
-		if (response.url.toString().startsWith(`${frontend}`)) {
-			bus.emit('setNotSentMessage', text, id);
-		}
+
 		const message = await response.json();
 		console.log(`Message sent : ${message.id}`);
 		return message.id;
@@ -85,4 +81,49 @@ async function deletingMessage(id) {
 	}
 }
 
-export {sendingMessage, deletingMessage, editingMessage, likeMessage};
+async function sendingFile(formData, id) {
+	console.log(` Sending photo in chat ${id}`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.messageFile(id),
+				data: formData,
+				contentType:'multipart/form-data'}
+		);
+		if (response.status === 200) {
+			return await response.json();
+		} else {
+			throw new Error(
+				`Error while upload image : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+
+}
+
+async function sendingSticker(chatId, stickerpackId, stickerId, date) {
+	console.log(` sendingSticker ${chatId}`);
+	try {
+		const response = await FetchModule._doPost(
+			{path: API.currentChatMessages(chatId),
+				data: {
+					message_type: 3,
+					sticker_id: `${stickerpackId}-${stickerId}`,
+					message_time : date,
+				},
+				contentType: 'application/json;charset=utf-8'}
+		);
+		if (response.status === 200) {
+			return await response.json();
+		} else {
+			throw new Error(
+				`Error sending sticker : ${responseStatuses[response.status]}`);
+		}
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+}
+
+export {sendingSticker, sendingMessage, deletingMessage, editingMessage, likeMessage, sendingFile};

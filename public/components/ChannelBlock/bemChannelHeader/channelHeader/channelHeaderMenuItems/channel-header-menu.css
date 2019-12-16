@@ -13,7 +13,7 @@
     padding: 5px;
 }
 .channel-header-menu__info_style {
-    background: var(--global-dropdown-color);
+    background: var(--global-green-color);
     -webkit-backface-visibility: hidden;
 }
 

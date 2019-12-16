@@ -10,7 +10,7 @@ function createWrkspaceBlockExpandHndlr() {
 	});
 }
 
-function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null,wrkspaceBlockVisible : null}) {
+function wrkspaceBlockClickExpandEvent(params = {wrkspaceBlockSmall:null, wrkspaceBlockVisible : null}) {
 	const {wrkspaceBlockSmall, wrkspaceBlockVisible} = params;
 	if (wrkspaceBlockSmall !== null) {
 		if (!wrkspaceBlockSmall.classList.contains('wrkspace-expandable_clicked')) {
@@ -51,9 +51,12 @@ function createWrkspaceBlockHndlr() {
 	wrkspaceBlocksOuter.forEach((wrkspaceBlockOuter)=> {
 		const wrkSpaceId = parseFloat(wrkspaceBlockOuter.id.split('-')[1]);
 		const visibleBlock = wrkspaceBlockOuter.querySelector('.wrkspace-visible');
-		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button");
-		createButton.addEventListener('click', () => router.go('channelFormView', wrkSpaceId));
-		const infoButton = visibleBlock.querySelector(".wrkspace-visible__name-row__info-button");
+		const createButton = visibleBlock.querySelector(".wrkspace-visible__chann-row__add-channel-button").firstChild;
+		createButton.addEventListener('click', () => {
+			event.stopPropagation();
+			router.go('channelFormView', wrkSpaceId);
+		});
+		const infoButton = visibleBlock.querySelector(".wrkspace-visible__name-row__info-button").firstChild;
 		infoButton.addEventListener('click', () => {
 		    event.stopPropagation();
 		    router.go('wrkspaceView', wrkSpaceId);
@@ -64,6 +67,7 @@ function createWrkspaceBlockHndlr() {
 function createWorkspaceButtonHndlr() {
 	const wrkSpaceButton = document.querySelector(".wrkspaces-block__header__button__icon");
 	wrkSpaceButton.addEventListener('click', ()=>{
+		event.stopPropagation();
 		router.go('wrkspaceFormView');
 	}
 	);

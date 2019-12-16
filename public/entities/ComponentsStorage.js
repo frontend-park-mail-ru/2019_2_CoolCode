@@ -3,9 +3,15 @@ import ChatComponent from "../components/ChatBlock/ChatComponent";
 import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageComponent";
 import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
 import ProfilePageComponent from "../components/ProfilePage/profilePageComponent";
+import BasicsComponent from "../components/Basics/basicsComponent";
+import CreationFormComponent from "../components/CreationForm/creationFormComponent";
+import AddMemberComponent from "../components/addMemberBlock/addMemberComponent";
+import PhotoPreviewComponent from "../components/photoPreviewComponent/photoPreviewComponent";
+import PhotoCreateComponent from "../components/photoCreateComponent/photoCreateComponent";
+import BuyStikerpackComponent from "../components/buyStikerpack/buyStikerpackComponent";
 
 class ComponentsStorage {
-	constructor(leftColumn = null, chatBlock = null, wrkspacePage = null, rightColumn = null, profileBlock = null) {
+	constructor(leftColumn = null, chatBlock = null, wrkspacePage = null, rightColumn = null, profileBlock = null, headerBlock = null, form = null) {
 		if (ComponentsStorage.__instance) {
 			return ComponentsStorage.__instance;
 		}
@@ -15,6 +21,8 @@ class ComponentsStorage {
 		this.chatBlock = chatBlock;
 		this.wrkspacePage = wrkspacePage;
 		this.profileBlock = profileBlock;
+		this.headerBlock = headerBlock;
+		this.form = form;
 
 		ComponentsStorage.__instance = this;
 	}
@@ -24,6 +32,8 @@ class ComponentsStorage {
 		this.chatBlock = null;
 		this.wrkspacePage = null;
 		this.profileBlock = null;
+		this.headerBlock = null;
+		this.form = null;
 	}
 
 	setRightColumn(rightColumn) {
@@ -32,6 +42,31 @@ class ComponentsStorage {
 
 	getRightColumn() {
 		return this.rightColumn;
+	}
+
+	setHeader(header) {
+		try {
+			if (header instanceof BasicsComponent) {
+				this.headerBlock = header;
+			} else{
+				throw new Error('Can\'t set headerBlock component');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
+	getHeader(data, parent) {
+		if (!this.headerBlock) {
+			let headerBlock = new BasicsComponent(data, parent);
+			headerBlock.renderTo();
+			this.setHeader(headerBlock);
+		} else {
+			this.headerBlock.setData(data);
+			this.headerBlock.setParent(parent);
+		}
+		return this.headerBlock;
 	}
 
 	setLeftColumn(leftColumn) {
@@ -46,8 +81,23 @@ class ComponentsStorage {
 		}
 
 	}
+	clearLeftColumn() {
+		this.leftColumn = null;
+	}
+	getLeftColumn(data, parent, rootSelector) {
+		if (!this.leftColumn) {
+			let leftColumn = new ChatsColumnComponent(data, parent);
+			leftColumn.renderTo(rootSelector);
+			this.setLeftColumn(leftColumn);
+		} else {
+			this.leftColumn.setData(data);
+			this.leftColumn.setParent(parent);
+		}
+		return this.leftColumn;
 
-	getLeftColumn() {
+	}
+
+	returnLeftColumn() {
 		return this.leftColumn;
 	}
 
@@ -104,6 +154,68 @@ class ComponentsStorage {
 
 	getProfileBlock() {
 		return this.profileBlock;
+	}
+
+	setForm(form) {
+		try {
+			if (form instanceof CreationFormComponent ||
+                form instanceof AddMemberComponent ||
+				form instanceof PhotoPreviewComponent ||
+				form instanceof PhotoCreateComponent ||
+				form instanceof BuyStikerpackComponent) {
+				this.form = form;
+			} else{
+				throw new Error('Can\'t set form component');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+	}
+
+	clearForm() {
+	    this.form.deleteSelf();
+		this.form = null;
+	}
+
+	removeForm() {
+		this.form = null;
+	}
+
+	getForm(data, parent, rootSelector) {
+		if (!this.form) {
+			let form;
+			switch (data.viewType) {
+			case 'addMember':
+				form = new AddMemberComponent(data, parent);
+				break;
+			case 'channelForm':
+				form = new CreationFormComponent(data, parent);
+				break;
+			case 'wrkspaceForm':
+				form = new CreationFormComponent(data, parent);
+				break;
+			case 'photoPreview'	:
+				form = new PhotoPreviewComponent(data, parent);
+				break;
+			case 'photoCreate'	:
+				form = new PhotoCreateComponent(data, parent);
+				break;
+			case 'buyStikerpack':
+				form = new BuyStikerpackComponent(data, parent);
+				break;
+			}
+			form.renderTo();
+			this.setForm(form);
+		} else {
+			this.form.setData(data);
+			this.form.setParent(parent);
+		}
+		return this.form;
+	}
+
+	returnForm() {
+	    return this.form;
 	}
 }
 

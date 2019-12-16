@@ -2,14 +2,15 @@ import {FetchModule} from "../main";
 import {API, responseStatuses} from "../constants/config";
 
 async function alterWrkspace(wrkspace) {
-	console.log(` Changing wrkspace ${wrkspace.ID} info`);
+	const {id, name, members, admins} = wrkspace;
+	console.log(` Changing wrkspace ${wrkspace.id} info`);
 	try {
 		const response = await FetchModule._doPut(
-			{path: API.wrkspaceInfo(wrkspace.ID), data: {
-				id: wrkspace.ID,
-				name: wrkspace.Name,
-				members: wrkspace.Members,
-				admins: wrkspace.Admins,
+			{path: API.wrkspaceInfo(wrkspace.id), data: {
+				id: id,
+				name: name,
+				members: members,
+				admins: admins,
 			},
 			contentType : 'application/json;charset=utf-8'}
 		);
@@ -23,14 +24,15 @@ async function alterWrkspace(wrkspace) {
 }
 
 async function alterChannel(channel) {
+	const {id, name, members, admins} = channel;
 	try {
-		let response = await FetchModule._doPut(
-			{path: API.channelInfo(channel.ID),
+		const response = await FetchModule._doPut(
+			{path: API.channelInfo(channel.id),
 				data:   {
-					id: channel.ID,
-					name: channel.Name,
-					members: channel.Members,
-					admins: channel.Admins
+					id: id,
+					name: name,
+					members: members,
+					admins: admins
 				},
 				contentType : 'application/json;charset=utf-8'}
 		);
@@ -46,7 +48,7 @@ async function alterChannel(channel) {
 
 async function deleteChannel(id) {
 	try {
-		let response = await FetchModule._doDelete(
+		const response = await FetchModule._doDelete(
 			{path: API.channelInfo(id)}
 		);
 		if (response.status !== 200) {
@@ -61,7 +63,7 @@ async function deleteChannel(id) {
 
 async function leaveChannel(id) {
 	try {
-		let response = await FetchModule._doDelete(
+		const response = await FetchModule._doDelete(
 			{path: API.channelLeave(id)}
 		);
 		if (response.status !== 200) {

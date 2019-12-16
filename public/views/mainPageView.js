@@ -1,15 +1,17 @@
 import BaseView from './baseView';
-import {componentsStorage, data, promiseMaker} from "../main";
+import {bus, componentsStorage, data, promiseMaker} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import MainPageComponent from "../components/MainPage/mainPageComponent";
 
 class mainPageView extends BaseView {
 	constructor (data, parent) {
-		super ({viewType: "mainPage", loggedIn: null}, parent);
+		super ({viewType: "mainPage", user: {}, loggedIn: null}, parent);
 	};
 
 	setContent() {
+		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
+		this._parent = document.querySelector('.main');
 	}
 
 	show() {
@@ -19,14 +21,18 @@ class mainPageView extends BaseView {
 		});
 
 	}
-	drawBasics() {
-		let basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+	async drawBasics() {
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
+		header.rerenderHeader();
+		if (this.data.loggedIn) {
+			await promiseMaker.createPromise('getHeaderPhoto');
+		}
 	}
+
 	render() {
 		this.drawBasics();
-		let mainPage = new MainPageComponent(this._data, this._parent);
-		this._parent.querySelector('.primary-container').innerHTML += mainPage.render();
+		const mainPage = new MainPageComponent(this._data, this._parent);
+		mainPage.renderTo('.primary-container');
 		componentsStorage.clear();
 	}
 }

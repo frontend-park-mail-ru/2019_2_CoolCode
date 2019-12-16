@@ -1,5 +1,7 @@
+import chatView from "../views/chatView";
+
 const responseStatuses = {
-	200 : "OK" ,
+	200 : "OK",
 	304 : "Not Modified",
 	400 : "Bad Request",
 	401 : "Unauthorized",
@@ -8,15 +10,30 @@ const responseStatuses = {
 	500 : "Internal Server Error",
 };
 
+const ports = {
+	'users' : ':8001',
+	'chats' : ':8002',
+	'workspaces' : ':8002',
+	'channels' : ':8002',
+	'notifications' : ':8003',
+	'messages' : ':8004',
+};
+
+const microservices = {
+	'users' : 'users',
+	'chats' : 'chats',
+	'workspaces' : 'chats',
+	'channels' : 'chats',
+	'notifications' : 'notifications',
+	'messages' : 'messages',
+};
+
 const settings = {
-	connection : 'http',
-	frontendPort : ':3000',
-	backendPort : ':8080',
-	frontend: 'https://boiling-chamber-90136.herokuapp.com',
-	//backend: '172.20.10.9:8080',
-	backend: '95.163.209.195',
-	//backend: '192.168.1.69:8080',
-	//backend: 'localhost:8080'
+	connection : 'https',
+	frontendPort : ':8000',
+	frontend: 'https://coolcode.site',
+	backend: 'coolcode.site',
+	backendSuffix: '/api/',
 };
 
 const keys = {
@@ -30,28 +47,44 @@ const API = {
 	messageInteraction : (id) => {
 		return `/messages/${id}`;
 	},
+	messageFile : (id) => {
+		return `/messages/chats/${id}/files`;
+	},
+	messageFileChannel : (id) => {
+		return `/messages/channels/${id}/files`;
+	},
+	messageFileRequest : (id, fileId) => {
+		return `/messages/chats/${id}/files/${fileId}`;
+	},
+	messageFileRequestChannel : (id, fileId) => {
+		return `/messages/channels/${id}/files/${fileId}`;
+	},
 	createChat: '/chats',
 	createChannel : (id) => {
 		return `/workspaces/${id}/channels`;
 	},
 	createWrkSpace: '/workspaces',
 	findUser : (query) => {
-		return `/users/${query}`;
+		return `/users/names/${query}`;
 	},
 	findMessages : (query) => {
 		return `/messages/${query}`;
+
 	},
 	currentChatMessages : (chatId) => {
-		return `/chats/${chatId}/messages`;
+		return `/messages/chats/${chatId}`;
 	},
 	currentChannelMessages : (chanId) => {
-		return `/channels/${chanId}/messages`;
+		return `/messages/channels/${chanId}`;
 	},
 	getUserChats : (id) => {
-		return `/users/${id}/chats`;
+		return `/chats/users/${id}`;
 	},
 	userInfo: (id) => {
 		return `/users/${id}`;
+	},
+	addStickers: (userId, stickerpackId) =>{
+		return `/users/${userId}/stickers/${stickerpackId}`;
 	},
 	channelInfo: (id) => {
 		return `/channels/${id}`;
@@ -62,14 +95,16 @@ const API = {
 	wrkspaceInfo: (id) => {
 		return `/workspaces/${id}`;
 	},
-	logout: '/logout',
-	login: '/login',
+	logout: '/users/logout',
+	login: '/users/login',
 	auth: '/users',
 	getPhoto : (id) => {
-		return `/photos/${id}`;
+		return `/users/photos/${id}`;
 	},
-	postPhoto : '/photos',
-
+	postPhoto : '/users/photos',
+	photoWrkspace : (id) => {
+		return `/workspaces/${id}/photos`;
+	},
 };
 
 const KEYWORDS = {
@@ -88,6 +123,12 @@ const KEYWORDS = {
 	addMember : ['addMember'],
 	wrkspaceSearch: ['wrkspace', 'search'],
 	channelPage: ['wrkspace', 'channel'],
+	photoPreviewChat: ['chat', 'photo'],
+	photoPreviewChannel: ['wrkspace', 'channel', 'photo'],
+	photoCreateChat: ['chat', 'makePhoto'],
+	photoCreateChannel: ['wrkspace', 'channel', 'makePhoto'],
+	buyStikerpackChat: ['chat', 'buystikerpack'],
+	buyStikerpackChannel: ['wrkspace', 'channel', 'buystikerpack'],
 };
 
 const ROUTER = {
@@ -115,6 +156,24 @@ const ROUTER = {
 	channelPage: (wrkspaceId, channelId) => {
 		return `/wrkspace/${wrkspaceId}/channel/${channelId}`;
 	},
+	photoPreviewChat: (chatId, messageId) => {
+		return `/chat/${chatId}/photo/${messageId}`;
+	},
+	photoPreviewChannel: (wrkspaceId, channelId, messageId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/photo/${messageId}`;
+	},
+	photoCreateChat: (chatId) => {
+		return `/chat/${chatId}/makePhoto`;
+	},
+	photoCreateChannel: (wrkspaceId, channelId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/makePhoto`;
+	},
+	buyStikerpackChat: (chatId) => {
+		return `/chat/${chatId}/buystikerpack`;
+	},
+	buyStikerpackChannel: (wrkspaceId, channelId) => {
+		return `/wrkspace/${wrkspaceId}/channel/${channelId}/buystikerpack`;
+	},
 	addMember: '/addMember',
 	createWrkSpace: '/createWrkSpace',
 	createChannel : (id) => {
@@ -132,4 +191,4 @@ const ROUTER = {
 	},
 };
 
-export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS};
+export {settings, responseStatuses, keys, API, ROUTER, KEYWORDS, ports, microservices};

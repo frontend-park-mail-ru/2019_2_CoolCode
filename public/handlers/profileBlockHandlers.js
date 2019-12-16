@@ -17,18 +17,18 @@ async function setProfileField(value, field, block, textSelector, errorSelector)
 	if (field === 'email') {
 		if (!validation.validateEmail(value)) {
 			emitError(block, errorSelector, textSelector, 'Please, input correct email');
-			return null;
+			return value;
 		}
 	}
 	if (field === 'phone') {
 		if (!validation.validatePhone(value)) {
-			emitError(block, errorSelector, textSelector, 'Please, input correct phone number');
-			return null;
+			emitError(block, errorSelector, textSelector, 'Please, input phone number containing from 10 to 12 numbers');
+			return value;
 		}
 	}
 	if (value === '') {
 		emitError(block, errorSelector, textSelector, 'Please, input some info');
-		return null;
+		return value;
 	}
 	const user = data.user;
 	user[field] = value;
@@ -55,14 +55,14 @@ function dblClickEvent(params = {block: null, textSelector: null, inputSelector:
 		textField.className += ` ${textSelector}_hidden`;
 	}
 	inputField.classList.remove(`${inputSelector}_hidden`);
-	inputField.innerHTML = textField.innerHTML;
+	inputField.value = textField.innerHTML;
 	inputField.placeholder = fieldName;
 	inputField.focus();
 }
 
 function createDblClickInputHndlr(block, textSelector, inputSelector, errorSelector) {
 	const textField = block.querySelector(`.${textSelector}`);
-	textField.addEventListener('dblclick', dblClickEvent.bind(event, {
+	textField.addEventListener('click', dblClickEvent.bind(event, {
 		block: block, textSelector: textSelector,
 		inputSelector: inputSelector, errorSelector: errorSelector
 	}));
@@ -125,17 +125,22 @@ function createProfileInputs() {
 
 async function imageUploading(params = {id: null, fileInput: null}) {
 	const {id, fileInput} = params;
-	const formData = new FormData();
-	formData.append('file', fileInput.files[0]);
-	const result = await setUserPhoto(formData);
-	if (result) {
-		bus.emit('showLoader', null, '.profile-header__image-row');
-		getProfilePhoto(id);
+	if (!validation.validatePhotoFormat(fileInput.files[0])) {
+		emitError(fileInput.parentNode.parentNode, 'profile-header__image-row__error', null, 'Please, input image');
+	} else {
+		bus.emit('hideError', null, `.profile-header__image-row__error`);
+		const formData = new FormData();
+		formData.append('file', fileInput.files[0]);
+		const result = await setUserPhoto(formData);
+		if (result) {
+			bus.emit('showLoader', null, '.profile-header__content');
+			getProfilePhoto(id);
+		}
 	}
 }
 
 function createImageUpload(id) {
-	const imageInput = document.querySelector('.profile-header__image-row__input');
+	const imageInput = document.querySelector('.profile-header__content__input');
 	imageInput.addEventListener('change', imageUploading.bind(null, {id: id, fileInput: imageInput}));
 }
 

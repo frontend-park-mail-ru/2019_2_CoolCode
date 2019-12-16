@@ -1,6 +1,6 @@
 import BaseComponent from "../baseComponent";
-import './bemProfilePageBlocks/bemProfileHeader/bem-profile-header.css';
-import './bemProfilePageBlocks/bemProfileInfo/bem-profile-info.css';
+import './bemProfilePageBlocks/bemProfileHeader/bem-profile-header.scss';
+import './bemProfilePageBlocks/bemProfileInfo/bem-profile-info.scss';
 
 const ProfilePageTemplate = require('./profilePage.pug');
 

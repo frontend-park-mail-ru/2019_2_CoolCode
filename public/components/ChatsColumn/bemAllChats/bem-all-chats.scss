@@ -1,0 +1,24 @@
+.all-chats {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.all-chats_size {
+     @media screen and (min-height: 10px) {
+        height: 370px;
+    }
+
+     @media screen and (min-height: 400px) {
+        height: 560px;
+    }
+
+   @media screen and (min-height: 610px) {
+        height: 700px;
+    }
+
+      @media screen and (min-height: 810px) {
+        height: 850px;
+    }
+}

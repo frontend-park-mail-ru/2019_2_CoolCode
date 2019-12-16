@@ -1,0 +1,114 @@
+.photo-preview {
+    position: fixed; /*make it centered and overlay*/
+    top: 10%;
+    left: 20%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2px 2px 2px 2px;
+
+    z-index: var(--global-z-index-form); /*make it overlay*/
+}
+
+.photo-preview_size {
+   @media screen and (min-height: 10px) {
+    width: 150px;
+    height: 150px;
+  }
+
+   @media screen and (min-height: 400px) {
+    width: 350px;
+    height: 350px;
+  }
+
+ @media screen and (min-height: 610px) {
+    width: 550px;
+    height: 550px;
+  }
+
+   @media screen and (min-height: 810px) {
+    width: 800px;
+    height: 800px;
+  }
+}
+
+.photo-preview_width {
+
+  @media screen and (min-width: 100px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media screen and (min-width: 1000px) {
+
+    width: 800px;
+    height: 800px;
+  }
+
+
+}
+.photo-preview_style {
+    border-radius: 20px;
+    border: 2px solid var(--global-green-color);
+
+}
+.photo-preview__image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    position: relative;
+}
+
+.photo-preview__image {
+    object-fit: scale-down;
+    object-position: center;
+    height: auto;
+    width: auto;
+}
+
+.photo-preview__image_style {
+    background: var(--global-green-color-1);
+    border-radius: 20px;
+    border: 2px solid var(--global-green-color);
+}
+
+.photo-preview__image_size {
+     @media screen and (min-height: 10px) {
+      max-width: 150px;
+      max-height: 150px;
+    }
+
+     @media screen and (min-height: 400px) {
+      max-width: 350px;
+      max-height: 350px;
+    }
+
+   @media screen and (min-height: 610px) {
+      max-width: 550px;
+      max-height: 550px;
+    }
+
+     @media screen and (min-height: 810px) {
+      max-width: 800px;
+      max-height: 800px;
+    }
+}
+
+
+.photo-preview__image_width {
+
+  @media screen and (min-width: 100px) {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  @media screen and (min-width: 1000px) {
+
+    max-width: 800px;
+    max-height: 800px;
+  }
+
+
+}

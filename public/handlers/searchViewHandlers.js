@@ -1,8 +1,9 @@
-import {bus, data, promiseMaker, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {KEYWORDS} from "../constants/config";
 
-function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
-	const {personId, contentListRoot} = params;
+function foundUserClickEvent() {
+	const {personId, contentListRoot} = event.currentTarget.params;
+	event.currentTarget.removeEventListener('click', foundUserClickEvent);
 	const ids = data.getChatUsersIds();
 	const id = parseFloat(personId.split('-')[1]);
 	if (contentListRoot.classList.contains('all-chats-window')) {
@@ -16,6 +17,7 @@ function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 					bus.emit('createWebsocketConn', null, chatId);
 					promiseMaker.createPromise('getCurrentChatInfo', id, chatId).then(() => {
 						bus.emit('deleteLastSearchUsers', null);
+						componentsStorage.clearLeftColumn();
 						router.open(KEYWORDS.chat, [chatId]);
 					});
 				}
@@ -23,6 +25,7 @@ function foundUserClickEvent(params = {personId:null, contentListRoot:null}) {
 		} else {
 			const chatId = data.getChatIdByChatUserId(id);
 			bus.emit('deleteLastSearchUsers', null);
+			componentsStorage.clearLeftColumn();
 			router.open(KEYWORDS.chat, [chatId]);
 		}
 	}
@@ -41,13 +44,15 @@ function createUserBlockHndlr(selector) {
 	const contentListRoot = document.querySelector(selector);
 	const persons = contentListRoot.querySelectorAll(".user-found");
 	persons.forEach((person)=> {
-		person.addEventListener('click', foundUserClickEvent.bind(null, {personId:person.id, contentListRoot : contentListRoot}));
+		person.params = {personId:person.id, contentListRoot : contentListRoot};
+		person.addEventListener('click', foundUserClickEvent);
 	});
 }
 
 function foundMessageChatClickEvent(params = {messageId:null}) {
 	const {messageId} = params;
 	const fullMessage = data.getLastSearchFullMessageByMessageId(messageId.split('-')[1]);
+	componentsStorage.clearLeftColumn();
 	router.open(KEYWORDS.chatFoundMessage, [fullMessage.chatId, fullMessage.message.id]);
 }
 
@@ -60,7 +65,8 @@ function createMessageFoundChatBlockHndlr() {
 function foundMessageChannelClickEvent(params = {messageId:null}) {
 	const {messageId} = params;
 	const fullMessage = data.getLastSearchFullMessageByMessageId(messageId.split('-')[1]);
-	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.ID, fullMessage.channel.ID, fullMessage.message.id]);
+	componentsStorage.clearLeftColumn();
+	router.open(KEYWORDS.channelFoundMessage, [fullMessage.wrkspace.id, fullMessage.channel.id, fullMessage.message.id]);
 }
 
 function createMessageFoundChannelBlockHndlr() {

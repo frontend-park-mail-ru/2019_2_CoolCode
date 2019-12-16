@@ -1,0 +1,115 @@
+.sticker-block {
+  flex: 0 0 auto;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+}
+
+.sticker-block_size {
+   @media screen and (min-height: 10px) {
+    height: 150px;
+  }
+
+   @media screen and (min-height: 400px) {
+    height: 200px;
+  }
+
+
+ @media screen and (min-height: 610px) {
+    height: 300px;
+  }
+
+   @media screen and (min-height: 810px) {
+    height: 350px;
+
+  }
+}
+.sticker-block_width {
+
+  @media screen and (min-width: 100px) {
+    width: 70px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: 12vw;
+  }
+
+}
+
+.sticker-block_hidden{
+  display: none;
+}
+
+.sticker-block_style {
+    border: 1px solid darkgrey; /* Параметры рамки */
+    border-radius: 15px;
+    background: #FFFFFF;
+}
+
+.sticker-block__content {
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 3px 3px 3px 3px;
+  align-self: center;
+  width: 95%;
+  height: unset;
+  max-height: 95%;
+}
+//.sticker-block__content__img {
+//  flex: 0 0 auto;
+//  display: inline;
+//  flex-direction: row;
+//  justify-content: flex-start;
+//  max-width: 100%;
+//  height: 300px; /* Высота блока */
+//  width: 250px; /* Ширина блока */
+//  overflow: auto;
+//  padding: 7px; /* Поля вокруг текста */
+//  border: 1px solid darkgrey; /* Параметры рамки */
+//  border-radius: 15px;
+//  background: #FFFFFF;
+//}
+
+.sticker-block__content::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+.sticker-block__content::-webkit-scrollbar-thumb {
+
+}
+
+.sticker-block__content:hover::-webkit-scrollbar-thumb {
+  background-color: var( --global-scrollbar-color);
+  -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
+}
+
+
+.sticker-block__content__img__place-stickers{
+  flex: 1 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.sticker-block__content__img__place-stickers__img{
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}
+
+.sticker-block__content__img__place-stickers__img_notavailiable {
+  filter: grayscale(100%);
+}
+
+.sticker-block__content_footer{
+  flex: 0 0 auto;
+}
+
+
+
+

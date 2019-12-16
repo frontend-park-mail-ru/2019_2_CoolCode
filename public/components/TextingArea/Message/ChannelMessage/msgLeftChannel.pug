@@ -1,0 +1,30 @@
+div.chat-msg__container
+    div.upper-row.upper-row_left
+        div.upper-row__name.upper-row__name_style=user.username
+    div.primary-row.primary-row_left
+        if (message.message_type == 0)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-left=message.text
+        if (message.message_type == 3)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-right
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-right.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src= message.src)
+        if (message.message_type == 1)
+            div.primary-row__text.primary-row__text_style.primary-row__text_style-left
+                div.primary-row__loader-container.primary-row__loader-container_size
+                    div.primary-row__loader-container__loader.primary-row__loader-container__loader_style.primary-row__loader-container__loader_size
+                div.primary-row__image-container.primary-row__image-container_style-left.primary-row__image-container_hidden
+                    img.primary-row__image-container__image.primary-row__image-container__image_style.primary-row__image-container__image_size(src='/images/abkhazia.jpg')
+                audio.primary-row__audio.primary-row__audio_hidden(controls src=message.record type="audio/mpeg")
+                a.primary-row__file-ref.primary-row__file-ref_hidden
+                    div.file-ref__image-container.file-ref__image-container_style
+                        img.file-ref__image-container__image.file-ref__image-container__image_style.file-ref__image-container__image_size(src='/images/file.png')
+        div.primary-row__time.primary-row__time_style.primary-row__time_style-left=message.message_time
+    div.secondary-row.secondary-row_left
+        div.secondary-row__edited.secondary-row__edited_style
+        div.secondary-row__like
+            div.secondary-row__like__button
+                img.secondary-row__like__button__icon.secondary-row__like__button__icon_style.secondary-row__like__button__icon_size(src='/images/like.png')
+            div.secondary-row__like__count.secondary-row__like__count_style=message.likes
+            div.secondary-row__like__add.secondary-row__like__count_style

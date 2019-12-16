@@ -53,9 +53,11 @@ class Router {
 				this.create(this._paths[path], identities);
 				break;
 			}
+			console.log(path);
+			console.log(this._paths[path].viewClassName);
+			console.log(viewName);
 			console.log(`couldn\'t open page : ${viewName}`);
-			//console.log(viewName);
-			// console.log(this._paths[path].viewClassName);
+
 		}
 	}
 

@@ -1,6 +1,6 @@
 import {bus, data, promiseMaker} from "../main";
 import MyWorker from "../workers/profile.worker";
-import {getPhoto} from "../backendDataFetchers/gettingInfo";
+import {getPhoto} from "../backendDataFetchers/getEntitiesRequests";
 
 async function getProfilePhoto(id) {
 	const buffer = await getPhoto(id);
@@ -9,8 +9,20 @@ async function getProfilePhoto(id) {
 
 	worker.onmessage = function (result) {
 		promiseMaker.createPromise('setUserPhoto', result.data).then(() => {
-			bus.emit('setPicture', null, '.profile-header__image-row__image', data.getUserPhoto());
-			bus.emit('hideLoader', null, '.profile-header__image-row');
+			bus.emit('setPicture', null, '.profile-header__content__image', data.getUserPhoto());
+			bus.emit('hideLoader', null, '.profile-header__content');
+		});
+	};
+}
+
+async function getHeaderPhoto() {
+	const buffer = await getPhoto(data.getUserId());
+	const worker = new MyWorker();
+	worker.postMessage(buffer);
+
+	worker.onmessage = function (result) {
+		promiseMaker.createPromise('setUserPhoto', result.data).then(() => {
+			bus.emit('setPicture', null, '.header__profile__image-row__image', data.getUserPhoto());
 		});
 	};
 }
@@ -83,4 +95,4 @@ function setPicture(selector, photo) {
 	}
 }
 
-export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getProfilePhoto,getMessagePhoto};
+export {setPicture, showLoader, hideLoader, saveUserPhoto, getUserPhoto, getHeaderPhoto, getProfilePhoto, getMessagePhoto};

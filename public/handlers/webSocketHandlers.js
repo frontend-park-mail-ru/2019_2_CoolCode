@@ -1,4 +1,5 @@
-import {componentsStorage, data, promiseMaker} from "../main";
+import {componentsStorage, data, promiseMaker, router} from "../main";
+import {KEYWORDS} from "../constants/config";
 
 function webSocketOnMessageChannel(event) {
 	console.log('new message from webSocketChannel');
@@ -76,16 +77,44 @@ function webSocketOnMessage(event) {
 	switch (message.event_type) {
 	case 1:
 		switch (messageContent.author_id) {
-		case data.getCurrentChatUserId():
-			const chatBlock = componentsStorage.getChatBlock();
-			chatBlock.renderCurrentChatIncomingMessage(messageContent);
-			break;
 		case data.getUserId():
 			console.log(`my message sent: ${messageContent.text}`);
 			break;
+		case data.getCurrentChatUserId():
+			const chatBlock = componentsStorage.getChatBlock();
+			console.log(chatBlock);
+			console.log(messageContent);
+			console.log(message);
+
+			chatBlock.renderCurrentChatIncomingMessage(messageContent);
+			console.log(`message accepted: ${messageContent.text}`);
+			sendNotification(
+				chatBlock._data.chatUser.username,
+				{
+					body: messageContent.text
+				},
+				{
+					messageID: messageContent.id,
+					chatID: messageContent.chat_id
+				}
+			);
+			break;
 		default:
-			const leftColumn = componentsStorage.getLeftColumn();
+			const leftColumn = componentsStorage.returnLeftColumn();
 			leftColumn.renderNewMessage(messageContent);
+			console.log(`message accepted in back: ${messageContent.text}`);
+			console.log(messageContent);
+
+			const chats = leftColumn._data.chats;
+			sendNotification(
+				getChatNameIterate(messageContent.chat_id, chats),
+				{
+					body: messageContent.text
+				},
+				{
+					messageID: messageContent.id,
+					chatID: messageContent.chat_id
+				});
 		}
 		break;
 	case 2:
@@ -117,7 +146,43 @@ function webSocketOnMessage(event) {
 		}
 		break;
 	}
+}
 
+function getChatNameIterate(chatID, chats) {
+	for (let i = 0; i < chats.length; i++) {
+		if (chats[i].id === chatID) {
+			return chats[i].name;
+		}
+	}
+}
+
+function createNotification(title, options, chatParams) {
+	const notification = new Notification(title, options);
+
+	function clickFunc() {
+		router.open(KEYWORDS.chatFoundMessage, [chatParams.chatID, chatParams.messageID]);
+		window.focus();
+	}
+
+	notification.onclick = clickFunc;
+}
+
+function sendNotification(title, options, chatParams) {
+	if ("Notification" in window) {
+		if (Notification.permission === 'granted') {
+			console.log('notifications granted');
+			createNotification(title, options, chatParams);
+		} else if (Notification.permission !== 'denied') {
+			console.log('notifications default');
+			Notification.requestPermission(function (permission) {
+				if (permission === 'granted') {
+					sendNotification(title, options, chatParams);
+				}
+			});
+		} else {
+			console.log('notifications denied');
+		}
+	}
 }
 
 export {webSocketOnMessage, webSocketOnMessageChannel};

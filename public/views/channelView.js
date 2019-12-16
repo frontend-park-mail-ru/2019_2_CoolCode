@@ -1,21 +1,12 @@
 import BaseView from "./baseView";
-import {componentsStorage, data, promiseMaker, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {creatingChats} from "../backendDataFetchers/websockets";
-import BasicsComponent from "../components/Basics/basicsComponent";
-import ChatsColumnComponent from "../components/ChatsColumn/ChatsColumnComponent";
 import ChannelComponent from "../components/ChannelBlock/ChannelComponent";
-import {
-	channelViewHandler,
-	createChatBlockHndlr,
-	createWorkspaceButtonHndlr,
-	createWrkspaceBlockExpandHndlr,
-	createWrkspaceBlockHndlr
-} from "../handlers/chatsBlockHandlers";
-import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
+
 import {
 	createCloseSettingsMessageHndlr,
 	createDeleteMessageBlockHndlr,
-	createEditMessageBlockHndlr
+	createEditMessageBlockHndlr, recordMessage,
 } from "../handlers/chatViewHandlers";
 
 import {
@@ -23,8 +14,9 @@ import {
 	createMessageInputChannelHndlr,
 	createSendMessageBtnChannelHndlr,
 	menuHandlers,
-	menuHandlersInfo
 } from "../handlers/channelViewHandlers";
+import {createAttachButton, resizeAttach} from "../handlers/attachesHandlers";
+import {buyStickers, showStickers} from "../handlers/stikersHandlers";
 
 class channelView extends BaseView {
 
@@ -32,30 +24,29 @@ class channelView extends BaseView {
 		super({
 			viewType: "channel", user: {}, loggedIn: null, foundMessageId: null,
 			wrkSpaces: [], chats: [], currentWrkspace:{}, currentChannel: {},
-			importantMessage: {}, channelMessages: []}, parent);
+			importantMessage: {}, channelMessages: [], }, parent);
 	};
 
 	setEvents() {
-		createSearchInputHndlr();
-		createWrkspaceBlockExpandHndlr();
-		createChatBlockHndlr();
 		createSendMessageBtnChannelHndlr();
-		createWrkspaceBlockHndlr();
-		createWorkspaceButtonHndlr();
 		createMessageInputChannelHndlr();
-		channelViewHandler();
 		menuHandlers();
-
-		createEditMessageBlockHndlr();
 		createLikeBtnHndlr();
+		recordMessage();
+		showStickers();
+		buyStickers();
+		createEditMessageBlockHndlr();
 		createCloseSettingsMessageHndlr();
 		createDeleteMessageBlockHndlr();
+		createAttachButton();
+		resizeAttach();
 	}
 	setContent() {
+		bus.emit('deleteCurrentChat', null);
 		this._data.user = data.getUser();
 		this._data.loggedIn = data.getLoggedIn();
 		this._data.chats = data.getUserChats();
-		this._data.wrkspaces = data.getUserWrkSpaces();
+		this._data.wrkSpaces = data.getUserWrkSpaces();
 		this._data.currentChannel = data.getCurrentChannel();
 		this._data.currentWrkspace = data.getCurrentWrkspace();
 		this._data.importantMessage = {text: 'hello'};
@@ -77,7 +68,6 @@ class channelView extends BaseView {
 					() => {
 						this.setContent();
 						this.render();
-						this.setEvents();
 					}
 				);
 			}
@@ -85,27 +75,35 @@ class channelView extends BaseView {
 		console.log('show: channel page');
 	}
 
-	drawBasics() {
-		const basics = new BasicsComponent(this._data, this._parent);
-		this._parent.innerHTML = basics.render();
+	async drawBasics() {
+		const header = componentsStorage.getHeader(this._data, this._parent, this._parent);
+		await promiseMaker.createPromise('getHeaderPhoto');
 	}
 
 	drawLeftColumn() {
-		const leftColumn = new ChatsColumnComponent(this._data, this._parent);
-		this._parent.querySelector('.column_left').innerHTML = leftColumn.render();
-		leftColumn.renderChatsContent();
-		componentsStorage.setLeftColumn(leftColumn);
+		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
+		if (leftColumn.getState() !== 'chats') {
+			leftColumn.renderChatsContent();
+		}
+		leftColumn.selectCurrentChat();
+		//componentsStorage.setLeftColumn(leftColumn);
 	}
 
 	drawRightColumn() {
-		let channelBlock = new ChannelComponent(this._data, this._parent);
-		this._parent.querySelector('.column_right').innerHTML += channelBlock.render();
-		channelBlock.renderContent();
-		if (this._data.foundMessageId) {
-			channelBlock.slideToMessage();
+		const form = componentsStorage.returnForm();
+		if (form) {
+			componentsStorage.clearForm();
+		} else {
+			const channelBlock = new ChannelComponent(this._data, this._parent);
+			this._parent.querySelector('.column_right').innerHTML = channelBlock.render();
+			channelBlock.renderTextingArea();
+			channelBlock.renderContent();
+			if (this._data.foundMessageId) {
+				channelBlock.slideToMessage();
+			}
+			componentsStorage.setChatBlock(channelBlock);
+			this.setEvents();
 		}
-		componentsStorage.setChatBlock(channelBlock);
-
 	}
 
 	render() {

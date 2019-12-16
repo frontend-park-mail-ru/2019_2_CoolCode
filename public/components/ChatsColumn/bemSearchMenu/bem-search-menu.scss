@@ -1,0 +1,134 @@
+.search-menu {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /*so everything in one line*/
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-menu_size {
+
+     @media screen and (min-height: 10px) {
+        height: 30px;
+    }
+
+     @media screen and (min-height: 400px) {
+        height: 40px;
+    }
+
+   @media screen and (min-height: 610px) {
+        height: 50px;
+    }
+
+      @media screen and (min-height: 810px) {
+        height: 60px;
+    }
+
+}
+
+.search-menu_outline {
+    border-top: 1px solid var(--global-grey-color);
+    border-bottom: 1px solid var(--global-grey-color);
+}
+
+/* form element*/
+
+.search-menu__form{
+    flex: 10 0 0; /*width not specified, max growing*/
+    height: 80%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin: 5px 10px 5px 10px;
+}
+
+/* input element in form*/
+.search-menu__form__input-container{
+    flex: 10 0 auto; /*max growing*/
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60%;
+    width: 100%;
+}
+
+.search-menu__form__input-container_style{
+    background-color: var(--global-search-input-color);
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    font-family: var(--global-font-family-Roboto);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+/* input element in input-container*/
+.search-menu__form__input-container__input {
+    flex: 10 0 auto; /*max growing*/
+    align-self: center;
+    width: 80%; /*fixed width*/
+    height: 60%;
+    padding: 0 0 0 10px;
+}
+
+.search-menu__form__input-container__input_style {
+    background-color: transparent;
+    background-position: right 5px;
+    background-repeat: no-repeat;
+    font-family: var(--global-font-family-Roboto);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+.search-menu__form__input-container__input_style ::-webkit-search-cancel-button{
+    visibility: hidden; /*hide red cross in input*/
+}
+
+
+/* submit-button element in form*/
+.search-menu__form__button {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 10%;
+    height: 100%;
+
+}
+
+.search-menu__form__button_style {
+    outline: none;
+    border: none;
+}
+
+
+/*icon element in submit-button*/
+
+.search-menu__form__button__icon {
+    object-fit: scale-down;
+    object-position: top;
+    align-self: center;
+}
+
+.search-menu__form__button__icon_size {
+
+     @media screen and (min-height: 10px) {
+        width: 14px;
+        height: 14px;
+
+    }
+   @media screen and (min-height: 610px) {
+        width: 18px;
+        height: 18px;
+    }
+}
+.search-menu__form__button__icon_style {
+    filter: opacity(0.9);
+}

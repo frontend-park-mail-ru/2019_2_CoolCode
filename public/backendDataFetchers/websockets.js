@@ -1,16 +1,17 @@
-import {appLocalStorage, bus, data, promiseMaker} from "../main";
-import {getCurrentChatMessages} from "./gettingInfo";
-import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
-import {settings} from '../constants/config';
+'use strict';
 
-const {backend} = settings;
-const {backendPort} = settings;
+import {appLocalStorage, bus, data, promiseMaker} from "../main";
+import {getCurrentChatMessages} from "./getEntitiesRequests";
+import {webSocketOnMessage, webSocketOnMessageChannel} from "../handlers/webSocketHandlers";
+import {ports, settings, microservices} from '../constants/config';
+import currentDate from "../modules/currentDate";
 
 function createWebsocketConnChannel(channelId) {
 	if (data.checkWebsocketConn(channelId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/channels/${channelId}/notifications`);
+	const service = microservices.notifications;
+	const websocketConn = new WebSocket(`wss://${settings.backend}${settings.backendSuffix}${service}/notifications/channels/${channelId}`);
 	data.addWebSocketConn(channelId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -38,7 +39,8 @@ function createWebsocketConn(chatId) {
 	if (data.checkWebsocketConn(chatId)) {
 		return;
 	}
-	const websocketConn = new WebSocket(`ws://${backend}${backendPort}/chats/${chatId}/notifications`);
+	const service = microservices.notifications;
+	const websocketConn = new WebSocket(`wss://${settings.backend}${settings.backendSuffix}${service}/notifications/chats/${chatId}`);
 	data.addWebSocketConn(chatId, websocketConn);
 
 	websocketConn.onopen = () => {
@@ -73,9 +75,9 @@ async function openWrkspacesSockets() {
 	const userWrkspaces = data.getUserWrkSpaces();
 	if (userWrkspaces) {
 		for (const wrkspace of userWrkspaces) {
-			if (wrkspace.Channels) {
-				for (const channel of wrkspace.Channels) {
-					await promiseMaker.createPromise('createWebsocketConnChannel', channel.ID);
+			if (wrkspace.channels) {
+				for (const channel of wrkspace.channels) {
+					await promiseMaker.createPromise('createWebsocketConnChannel', channel.id);
 				}
 			}
 		}
@@ -93,10 +95,11 @@ async function openWebSocketConnections() {
 async function sendNotSentMessages() {
 	const notSentMessages = appLocalStorage.getNotSentMessages();
 	if (notSentMessages) {
-		for (const item of notSentMessages) {
-			if (item) {
-				for (const message of item) {
-					await promiseMaker.createPromise('sendMessage', message, i);
+		for (let i = 0; i < notSentMessages.length; i++) {
+			if (notSentMessages[i]) {
+				for (const message of notSentMessages[i]) {
+					const date = new currentDate();
+					await promiseMaker.createPromise('sendMessage', message, date.getDate(), i);
 				}
 			}
 
@@ -107,8 +110,8 @@ async function sendNotSentMessages() {
 async function storeMessages() {
 	const chats = data.getUserChats();
 	for (const chat of chats) {
-		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.ID));
-		await getCurrentChatMessages(chat.ID);
+		bus.emit('setChatMessages', null, appLocalStorage.getChatMessages(chat.id));
+		await getCurrentChatMessages(chat.id);
 	}
 
 }

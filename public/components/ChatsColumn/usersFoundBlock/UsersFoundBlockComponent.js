@@ -1,6 +1,6 @@
 import BaseComponent from "../../baseComponent";
 import {bus} from "../../../main";
-import '../ChatsBlock/bemChatsBlock/bem-chats-block.css';
+import '../ChatsBlock/bemChatsBlock/bem-chats-block.scss';
 import UserComponent from "../User/UserComponent";
 
 const UsersFoundBlockTemplate = require('./usersFoundBlock.pug');
@@ -14,17 +14,15 @@ class UsersFoundBlockComponent extends BaseComponent {
 
     renderContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
-    	console.log(contentListRoot);
-    	console.log(this._data.searchUsers);
     	if (this._data.searchUsers) {
     		this._data.searchUsers.forEach((user) => {
     			const userComponent = new UserComponent(user, contentListRoot);
     			const userBlock = document.createElement('div');
-    			userBlock.className = 'user-found user-found_style';
+    			userBlock.className = 'user-found user-found_size user-found_style';
     			userBlock.id = "search-" + user.id;
     			userBlock.innerHTML = userComponent.render();
     			contentListRoot.appendChild(userBlock);
-    			bus.emit('getUserPhoto', null, user.id ,'search', userComponent.getPhotoBlock());
+    			bus.emit('getUserPhoto', null, user.id, 'search', userComponent.getPhotoBlock());
     		});
     	}
     }

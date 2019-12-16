@@ -4,4 +4,4 @@
 
 ### [Backend репозиторий](https://github.com/go-park-mail-ru/2019_2_CoolCode)
 
-### [Ссылка на проект](http://boiling-chamber-90136.herokuapp.com/)
+### [Ссылка на проект](https://coolcode.site/)

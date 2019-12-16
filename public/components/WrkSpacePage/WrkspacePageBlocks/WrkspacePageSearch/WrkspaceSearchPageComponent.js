@@ -1,5 +1,5 @@
 import BaseComponent from "../../../baseComponent";
-import './wrkspace-search.css';
+import './wrkspace-search.scss';
 import UserComponent from "../../../ChatsColumn/User/UserComponent";
 import {bus} from "../../../../main";
 
@@ -21,22 +21,16 @@ class WrkspacePageSearchComponent extends BaseComponent {
 			this._data.searchUsers.forEach((user) => {
 				const userComponent = new UserComponent(user, contentListRoot);
 				const userBlock = document.createElement('div');
-				userBlock.className = 'user-found wrkspace-search__user-found_style';
+				userBlock.className = 'user-found user-found_size wrkspace-search__user-found_style';
 				userBlock.id = "search-" + user.id;
 				userBlock.innerHTML = userComponent.render();
 				contentListRoot.appendChild(userBlock);
-				bus.emit('getUserPhoto', null, user.id ,'search', userComponent.getPhotoBlock());
+				bus.emit('getUserPhoto', null, user.id, 'search', userComponent.getPhotoBlock());
 			});
 		}
 	}
 
 	render() {
-		// const wrkspaceSearchBlock = document.querySelector('.wrkspace-search');
-		// if (wrkspaceSearchBlock) {
-		// 	console.log(wrkspaceSearchBlock);
-		// 	wrkspaceSearchBlock.remove();
-		// }
-		// debugger;
 		return WrkspacePageSearchTemlate(this._data);
 	}
 }

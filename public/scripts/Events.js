@@ -11,16 +11,20 @@ import {
 	getWrkspaceCreatorInfo,
 	getWrkspaceInfo,
 	getWrkspaceUsers
-} from "../backendDataFetchers/gettingInfo";
+} from "../backendDataFetchers/getEntitiesRequests";
 import handleLogout from "../backendDataFetchers/logout";
 import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers/errorHandlers";
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
-import {getMessagePhoto, getUserPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import {getMessagePhoto, getUserPhoto, getHeaderPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
+import {showAudioContent, showFileContent, showPhotoContent, showTextArea} from "../handlers/chatViewHandlers";
+import {showAttachContent} from "../handlers/attachesHandlers";
+import {createMessagePhotoHandler} from "../handlers/messagesHandlers";
+import {capturePhotoEvent, recapturePhotoEvent, sendCapturedPhotoEvent} from "../handlers/createPhotoViewHandlers";
 
 function createEvents() {
 
@@ -41,10 +45,12 @@ function createEvents() {
 	bus.on('setCurrentChatUser', data.setCurrentChatUser.bind(data));
 	bus.on('setCurrentChatUserPhoto', data.setCurrentChatUserPhoto.bind(data));
 	bus.on('setCurrentChatId', data.setCurrentChatId.bind(data));
+	bus.on('deleteCurrentChat', data.deleteCurrentChat.bind(data));
 	bus.on('setUserChats', data.setUserChats.bind(data));
 	bus.on('setUserWrkSpaces', data.setUserWrkSpaces.bind(data));
 	bus.on('setCurrentWrkspace', data.setCurrentWrkspace.bind(data));
 	bus.on('setCurrentChannel', data.setCurrentChannel.bind(data));
+	bus.on('deleteCurrentChannel', data.deleteCurrentChannel.bind(data));
 	bus.on('setCurrentWrkspaceCreator', data.setCurrentWrkspaceCreator.bind(data));
 	bus.on('addCurrentWrkspaceMember', data.addCurrentWrkspaceMember.bind(data));
 	bus.on('addCurrentWrkspaceUser', data.addCurrentWrkspaceUser.bind(data));
@@ -55,6 +61,17 @@ function createEvents() {
 	bus.on('deleteChosenMessageId', data.deleteChosenMessageId.bind(data));
 	bus.on('setChosenMessageText', data.setChosenMessageText.bind(data));
 	bus.on('deleteChosenMessageText', data.deleteChosenMessageText.bind(data));
+	bus.on('setInputType', data.setInputType.bind(data));
+	bus.on('deleteChosenFiles', data.deleteChosenFiles.bind(data));
+	bus.on('deleteChosenFile', data.deleteChosenFile.bind(data));
+	bus.on('setChosenFile', data.setChosenFile.bind(data));
+	bus.on('deleteChunks', data.deleteChunks.bind(data));
+	bus.on('setChunks', data.setChunks.bind(data));
+	bus.on('setCurrentPhotoSrc', data.setCurrentPhotoSrc.bind(data));
+	bus.on('deleteCurrentPhotoSrc', data.deleteCurrentPhotoSrc.bind(data));
+	bus.on('setStream', data.setStream.bind(data));
+	bus.on('deleteStream', data.deleteStream.bind(data));
+	bus.on('setChosenStikerpack', data.setChosenStickerpack.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 
@@ -75,7 +92,6 @@ function createEvents() {
 	bus.on('getCurrentChannelInfo', getCurrentChannelInfo);
 	bus.on('getWrkspaceUsers', getWrkspaceUsers);
 	bus.on('getChats', getChats);
-	bus.on('sendMessage', sendingMessage);
 	bus.on('likeMessage', likeMessage);
 
 	bus.on('getWrkspaceInfo', getWrkspaceInfo);
@@ -85,10 +101,12 @@ function createEvents() {
 	/**/
 	bus.on('getUserInfo', getUserInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getHeaderPhoto', getHeaderPhoto);
 	bus.on('getMessagePhoto', getMessagePhoto);
 	bus.on('hideLoader', hideLoader);
 	bus.on('showLoader', showLoader);
 	bus.on('setPicture', setPicture);
+	bus.on('createMessagePhotoHandler', createMessagePhotoHandler);
 
 	bus.on('createProfileInputs', createProfileInputs);
 	bus.on('createRegisterForm', createRegisterForm);
@@ -97,6 +115,15 @@ function createEvents() {
 	bus.on('showError', showError);
 	bus.on('removeErrorStyle', removeErrorStyle);
 	bus.on('hideError', hideError);
+	bus.on('showPhotoContent', showPhotoContent);
+	bus.on('showAttachContent', showAttachContent);
+	bus.on('showTextArea', showTextArea);
+	bus.on('showAudioContent', showAudioContent);
+	bus.on('showFileContent', showFileContent);
+	bus.on('sendMessage', sendingMessage);
+	bus.on('capturePhotoEvent', capturePhotoEvent);
+	bus.on('recapturePhotoEvent', recapturePhotoEvent);
+	bus.on('sendCapturedPhotoEvent', sendCapturedPhotoEvent);
 
 	bus.on('setLSChats', appLocalStorage.setChats.bind(appLocalStorage));
 	bus.on('setLSUser', appLocalStorage.setUser.bind(appLocalStorage));

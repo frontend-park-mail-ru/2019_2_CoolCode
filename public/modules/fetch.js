@@ -1,3 +1,6 @@
+import {ports} from "../constants/config";
+import {microservices, settings} from "../constants/config";
+
 class Fetch {
 
 	constructor() {
@@ -28,11 +31,15 @@ class Fetch {
 	};
 
 	async _fetch({path = '/', method = null, data = null, contentType = null} = {}) {
+		let port = "";
 	    this.setInit(method, data, contentType);
 	    try {
-			let response = await fetch(encodeURI(this._url + path), this._init);
+	    	const option = path.split("/")[1];
+	    	const port = ports[option];
+	    	const service = microservices[option];
 			//console.log(response.headers['X-CSRF-Token']);
-			return response;
+
+			return await fetch(encodeURI(`${this._url}${service}${path}`), this._init);
 		} catch (error) {
 	        return error;
 		}
