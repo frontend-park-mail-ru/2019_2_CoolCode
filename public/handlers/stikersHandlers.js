@@ -73,25 +73,6 @@ async function sendStickerEvent(stickerpackId, stickerId, date) {
 
 }
 
-function adviceBuy(userid, stickerackID) {
-	const contentListRoot = document.querySelector('.header');
-	contentListRoot.insertAdjacentHTML("beforebegin", infoTemplate());
-	const block = document.querySelector('.channel-header-menu__advice.channel-header-menu__advice_style');
-	const lay = document.querySelector('.channel-header-menu__advice_overlay');
-	block.style.display = 'flex';
-	lay.style.display = 'flex';
-	const ok = block.querySelector('.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style');
-	ok.addEventListener('click', () => {
-		block.style.display = "none";
-		lay.style.display = 'none';
-		buy(userid, stickerackID);
-	});
-	lay.addEventListener('click', () => {
-		block.style.display = "none";
-		lay.style.display = 'none';
-	});
-}
-
 function buy(userid, stickerackID) {
 	const paymentMethods = [{
 		supportedMethods: 'basic-card',
