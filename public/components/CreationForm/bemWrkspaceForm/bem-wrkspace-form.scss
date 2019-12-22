@@ -10,10 +10,10 @@
 }
 
 .wrkspace-form_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         height: 100px;
     }
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         height: calc(50px + 20vh);
     }
     @media screen and (min-width: 10px) {

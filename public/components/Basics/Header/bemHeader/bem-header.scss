@@ -7,11 +7,11 @@
 
 .header_size {
 
-  @media screen and (min-height: 10px) {
+   @media screen and (min-height: 10px) {
     height: 30px;
   }
 
-  @media screen and (min-height: 400px) {
+   @media screen and (min-height: 400px) {
     height: 50px;
   }
 }
@@ -40,11 +40,11 @@
 
 .header__profile_size {
 
-  @media screen and (min-height: 10px) {
+   @media screen and (min-height: 10px) {
     height: 20px;
   }
 
-  @media screen and (min-height: 400px) {
+   @media screen and (min-height: 400px) {
     height: 35px;
   }
 }
@@ -72,12 +72,12 @@
 
 .header__profile__image-row__image_size{
 
-  @media screen and (min-height: 10px) {
+   @media screen and (min-height: 10px) {
     width: 20px;
     height: 20px;
   }
 
-  @media screen and (min-height: 610px) {
+ @media screen and (min-height: 610px) {
     width: 30px;
     height: 30px;
   }

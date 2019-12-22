@@ -102,7 +102,6 @@ class chatView extends BaseView {
 			componentsStorage.clearForm();
 		} else {
 			const chatBlock = new ChatComponent(this._data, this._parent);
-			this._parent.querySelector('.column_right').innerHTML = "";
 			this._parent.querySelector('.column_right').innerHTML = chatBlock.render();
 			chatBlock.renderTextingArea();
 			chatBlock.renderContent();

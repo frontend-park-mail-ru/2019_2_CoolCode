@@ -8,11 +8,11 @@
 
 .register-form_size {
 
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         height: 200px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         height: calc(100px + 30vh);
     }
 

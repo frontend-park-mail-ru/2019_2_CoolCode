@@ -9,20 +9,20 @@
 }
 
 .sticker-block_size {
-  @media screen and (min-height: 10px) {
+   @media screen and (min-height: 10px) {
     height: 150px;
   }
 
-  @media screen and (min-height: 400px) {
+   @media screen and (min-height: 400px) {
     height: 200px;
   }
 
 
-  @media screen and (min-height: 610px) {
+ @media screen and (min-height: 610px) {
     height: 300px;
   }
 
-  @media screen and (min-height: 810px) {
+   @media screen and (min-height: 810px) {
     height: 350px;
 
   }

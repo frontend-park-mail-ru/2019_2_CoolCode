@@ -80,7 +80,6 @@ class profileView extends BaseView {
 			componentsStorage.clearForm();
 		} else {
 			const profileBlock = new ProfilePageComponent(this._data.user, this._parent);
-			this._parent.querySelector('.column_right').innerHTML = "";
 			this._parent.querySelector('.column_right').innerHTML = profileBlock.render();
 			componentsStorage.setProfileBlock(profileBlock);
 		}

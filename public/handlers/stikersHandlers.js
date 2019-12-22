@@ -34,8 +34,7 @@ function buyStickers() {
 		const s = document.querySelector(`.stickerpack-${stickerpackId}`);
 		s.classList.remove(`sticker-block__content__img__place-stickers__img_notavailiable`);
 		s.addEventListener('click', async (e) => {
-			let stickerId = e.target.getAttribute("id");
-			stickerId = stickerId.split("-")[1];
+			const stickerId = e.target.getAttribute("id").split("-")[1];
 			const date = new currentDate();
 			const src = e.target.getAttribute("src");
 			const messageId = await sendStickerEvent(stickerpackId, stickerId, date.getDate());

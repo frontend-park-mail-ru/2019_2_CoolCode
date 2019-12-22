@@ -18,10 +18,10 @@
 }
 
 .wrkspaces-block__header_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         height: 15px;
     }
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         height: 25px;
     }
 }
@@ -75,22 +75,22 @@
 }
 
 .wrkspaces-block__header__button__icon_size {
-    @media screen and (min-height: 10px) {
+     @media screen and (min-height: 10px) {
         width: 14px;
         height: 14px;
     }
 
-    @media screen and (min-height: 400px) {
+     @media screen and (min-height: 400px) {
         width: 16px;
         height: 16px;
     }
 
-    @media screen and (min-height: 610px) {
+   @media screen and (min-height: 610px) {
         width: 18px;
         height: 18px;
     }
 
-    @media screen and (min-height: 810px) {
+     @media screen and (min-height: 810px) {
         width: 20px;
         height: 20px;
     }
