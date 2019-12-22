@@ -1,7 +1,7 @@
 .main-page {
     flex: 0 0 100%;
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     justify-content: center;
     height: 100%;
 }
@@ -9,42 +9,7 @@
 /*figures element*/
 
 .main-page__figures {
-    flex: 0 0 40%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-
-}
-
-/* image element in figures */
-
-.main-page__figures__image-container {
-    flex: 0 0 30%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-self: center;
-
-}
-
-.main-page__figures__image-container__image {
-
-    height: 2vh; /*experimenting with viewports*/
-    width: 2vh;
-
-    transform-origin: bottom;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation: bounce 30s linear infinite;
-
-
-}
-
-/*title element*/
-
-.main-page__title {
-    flex: 0 0 40%;
+    flex: 60%;
     display: flex;
     flex-direction: row;
     align-self: center;
@@ -54,8 +19,51 @@
 
 }
 
+.main-page__figures_img_text{
+    position	: absolute;
+    flex: 20%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.main-page__figures_img {
+
+    width: 100%;
+
+}
+
+.main-page__title {
+    flex: 20%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    color: #00d8c4;
+    margin-top: 200px;
+
+}
+
+.main-page__text{
+    flex: 20%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    color: #272aec;
+    margin-bottom: 200px;
+}
+
 .main-page__title_style {
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: large;
 }
