@@ -70,7 +70,7 @@
     font-weight: 700;
     font-size: 20px;
     font-family: var(--global-font-family-Montserrat);
-    color: #282828;
+    color: slategrey;
     border-color: #282828;
 }
 
@@ -85,11 +85,11 @@
     overflow: auto; /* свойство для прокрутки по горизонтали. Автоматом, если больше блока */
 }
 .channel-add-form__scroll_style {
-    background-color:rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     font-size: 15px;
     font-family: var(--global-font-family-Montserrat);
-    color: #282828;
+    color: snow;
+    text-align: center;
 }
 
 .channel-add-form__scroll::-webkit-scrollbar {
@@ -102,3 +102,4 @@
     background-color: var( --global-scrollbar-color);
     -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
 }
+

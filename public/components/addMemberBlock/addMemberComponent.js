@@ -31,6 +31,7 @@ class AddMemberComponent extends BaseComponent {
 				const userBlock = document.createElement('div');
 				userBlock.className = 'member';
 				userBlock.id = "member-" + user.id;
+				userBlock.style.borderBottom = "solid slategrey";
 				userBlock.innerHTML = userComponent.render();
 				contentListRoot.appendChild(userBlock);
 			}

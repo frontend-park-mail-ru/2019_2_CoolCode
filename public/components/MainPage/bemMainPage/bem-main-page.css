@@ -31,9 +31,16 @@
 }
 
 .main-page__figures_img {
-
+    transform-origin: center;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation: bounce 30s linear infinite;
     width: 100%;
-
+}
+.main-page__figures_itext {
+    position: absolute;
+    width: 30%;
+    top: 50%;
 }
 
 .main-page__title {
@@ -65,5 +72,4 @@
     font-family: var(--global-font-family-Roboto);
     text-transform: uppercase;
     font-weight: 500;
-    font-size: large;
 }
