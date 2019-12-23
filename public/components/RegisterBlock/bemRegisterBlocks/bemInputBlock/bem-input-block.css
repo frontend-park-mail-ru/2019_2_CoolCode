@@ -21,9 +21,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-self: center;
-    padding: 0 0 5px 0;
     height:auto;
-    max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
     width: 90%;
 
 }

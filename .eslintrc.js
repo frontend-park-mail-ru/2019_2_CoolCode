@@ -6,7 +6,8 @@ module.exports = {
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
-        "sourceType": "module",
+        "sourceType": "mo" +
+            "dule",
         "ecmaFeatures": {
             "jsx": true,
             "modules": true,

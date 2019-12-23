@@ -1,5 +1,5 @@
 import BaseComponent from "../baseComponent";
-import './bemMainPage/bem-main-page.css';
+import './bemMainPage/bem-main-page.scss';
 
 const mainPageTemplate = require('./mainPage.pug');
 

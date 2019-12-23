@@ -1,0 +1,211 @@
+.main-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.main-page_size {
+
+    @media screen and (min-height: 10px) {
+        height: 400px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 600px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        @media screen and (min-width: 100px) {
+            height: 600px;
+        }
+
+        @media screen and (min-width: 1000px) {
+            height: 750px;
+        }
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 910px;
+    }
+}
+
+
+/*figures element*/
+
+.main-page__figures {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 40%;
+    height: 90%;
+
+}
+
+.main-page__figures_img_text{
+    position	: absolute;
+    flex: 30%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.main-page__figures__img-container {
+    transform-origin: center;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation: bounce 30s linear infinite;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+}
+
+
+.main-page__figures__img-container__img {
+    object-fit: scale-down;
+    object-position: top;
+}
+
+.main-page__figures__img-container__img_size {
+
+    @media screen and (min-height: 10px) {
+        width: 150px;
+        height: 150px;
+    }
+
+    @media screen and (min-height: 400px) {
+        @media screen and (min-width: 100px) {
+            width: 200px;
+            height: 200px;
+        }
+
+        @media screen and (min-width: 1000px) {
+            width: 300px;
+            height: 300px;
+        }
+    }
+
+    @media screen and (min-height: 610px) {
+        @media screen and (min-width: 100px) {
+            width: 200px;
+            height: 200px;
+        }
+
+        @media screen and (min-width: 1000px) {
+            width: 500px;
+            height: 500px;
+        }
+    }
+
+    @media screen and (min-height: 810px) {
+
+        @media screen and (min-width: 100px) {
+            width: 200px;
+            height: 200px;
+        }
+
+        @media screen and (min-width: 1000px) {
+            width: 650px;
+            height: 650px;
+        }
+
+    }
+}
+
+
+.main-page__figures_itext {
+    position: absolute;
+    width: 30%;
+    top: 50%;
+}
+
+
+.main-page__text-center {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 40%;
+    margin: 4px 0 0 0;
+}
+
+.main-page__text-center_style {
+    color: #5f83ba;
+    font-family: var(--global-font-family-Montserrat);
+    font-weight: 600;
+}
+
+.main-page__text-center_size {
+
+    @media screen and (min-height: 10px) {
+        height: 400px;
+    }
+
+    @media screen and (min-height: 400px) {
+        height: 600px;
+    }
+
+
+    @media screen and (min-height: 610px) {
+        @media screen and (min-width: 100px) {
+            height: 600px;
+        }
+
+        @media screen and (min-width: 1000px) {
+            height: 750px;
+        }
+    }
+
+    @media screen and (min-height: 810px) {
+        height: 910px;
+    }
+}
+
+
+
+.main-page__text-left {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 30%;
+    margin-bottom: 200px;
+}
+
+.main-page__text-left_style {
+    color: #272aec;
+    font-family: var(--global-font-family-Roboto);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.main-page__text-right {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+    width: 30%;
+
+    margin-top: 200px;
+
+}
+
+.main-page__text-right_style {
+    color: #00d8c4;
+    font-family: var(--global-font-family-Roboto);
+    text-transform: uppercase;
+    font-weight: 400;
+}
