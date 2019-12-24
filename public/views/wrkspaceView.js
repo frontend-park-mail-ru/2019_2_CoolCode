@@ -96,6 +96,7 @@ class wrkspaceView extends BaseView {
 		} else {
 			const wrkspacePage = new WrkspacePageComponent(this._data, this._parent);
 			wrkspacePage.render();
+			wrkspacePage.renderInfo(this._data);
 			componentsStorage.setWrkspacePage(wrkspacePage);
 			this.setEvents();
 		}

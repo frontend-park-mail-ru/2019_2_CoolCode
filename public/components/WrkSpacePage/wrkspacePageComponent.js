@@ -1,6 +1,7 @@
 import BaseComponent from "../baseComponent";
 import WrkspacePageHeaderComponent from "./WrkspacePageBlocks/WrkspacePageHeader/wrkspacePageHeaderComponent";
 import WrkspacePageSearchComponent from "./WrkspacePageBlocks/WrkspacePageSearch/WrkspaceSearchPageComponent";
+import WrkspacePageInfoComponent from "./WrkspacePageBlocks/WrkspacePageInfo/WrkspacePageInfoComponent";
 
 class WrkspacePageComponent extends BaseComponent {
 
@@ -12,8 +13,12 @@ class WrkspacePageComponent extends BaseComponent {
     	contentListRoot.innerHTML = headerComponent.render();
     }
 
-    renderInfo() {
-
+    renderInfo(data) {
+    	this._data = data;
+    	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	const infoComponent = new WrkspacePageInfoComponent(this._data, contentListRoot);
+    	contentListRoot.innerHTML += infoComponent.render();
+    	infoComponent.renderContent();
     }
 
     renderSearchContent(data) {

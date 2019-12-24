@@ -1,5 +1,5 @@
 import BaseView from './baseView';
-import {bus, componentsStorage, data, promiseMaker} from "../main";
+import {appLocalStorage, bus, componentsStorage, data, promiseMaker} from "../main";
 import BasicsComponent from "../components/Basics/basicsComponent";
 import MainPageComponent from "../components/MainPage/mainPageComponent";
 
@@ -15,6 +15,9 @@ class mainPageView extends BaseView {
 	}
 
 	show() {
+		if (appLocalStorage.getUser()) {
+			bus.emit('setUser', null, appLocalStorage.getUser());
+		}
 		promiseMaker.createPromise('checkLogin', this._parent).then(() => {
 			this.setContent();
 			this.render();
