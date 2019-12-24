@@ -148,6 +148,13 @@ async function getUserInfo(id) {
 	}
 }
 
+async function getChannelCreatorInfo(id) {
+	const user = await getAnyUserInfo(id);
+	if (user) {
+		bus.emit('setChannelCreator', null, user);
+	}
+}
+
 async function getWrkspaceCreatorInfo(id) {
 	const user = await getAnyUserInfo(id);
 	if (user) {
@@ -200,5 +207,5 @@ async function getWrkspaceUsers() {
 }
 
 export {getAnyUserInfo, getCurrentChatMessages, getChats, getUserInfo, getCurrentChatInfo, getPhoto, getWrkspaceInfo,
-	getCurrentChannelInfo, getWrkspaceUsers,
+	getCurrentChannelInfo, getWrkspaceUsers, getChannelCreatorInfo,
 	getWrkspaceCreatorInfo, getChannelInfo, getPhotoWrkspace};

@@ -8,7 +8,7 @@ class Data {
 		lastSearchUsers = [], lastSearchMessages = [], lastSearchMessagesFull = [], currentChannelID = {},
 		webSocketConns = [], socketConnection = false,
 		chosenMessageId, chosenMessageText, userStickers = [], stickers = [1, 2, 3, 4, 5, 6],
-		inputType, chosenFiles, chunks, stream, chosenStikerpack) {
+		inputType, chosenFiles, chunks, stream, chosenStikerpack, channelCreator) {
 		if (Data.__instance) {
 			return Data.__instance;
 		}
@@ -49,6 +49,8 @@ class Data {
 		this.stream = stream;
 		this.chosenStikerpack = chosenStikerpack;
 
+		this.channelCreator = channelCreator;
+
 		Data.__instance = this;
 	}
 
@@ -88,6 +90,8 @@ class Data {
 		this.stream = undefined;
 
 		this.chosenStikerpack = undefined;
+
+		this.channelCreator = undefined;
 
 	}
 
@@ -636,6 +640,16 @@ class Data {
 	getChosenStickerpack() {
 		this.createLogMessage('get', 'chosenStikerpack', this.chosenStikerpack);
 		return this.chosenStikerpack;
+	}
+
+	setChannelCreator(channelCreator) {
+		this.channelCreator = channelCreator;
+		this.createLogMessage('set', 'channelCreator', channelCreator);
+	}
+
+	getChannelCreator() {
+		this.createLogMessage('get', 'channelCreator', this.channelCreator);
+		return this.channelCreator;
 	}
 
 }

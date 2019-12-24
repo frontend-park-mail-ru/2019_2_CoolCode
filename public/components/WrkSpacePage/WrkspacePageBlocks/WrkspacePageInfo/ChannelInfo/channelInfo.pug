@@ -1,6 +1,15 @@
-div.channel-info__name.channel-info__name_style=`#${name}`
-div.channel-info__info.channel-info__info_style
-//div.channel-info__creator.channel-info__creator_style
-//    div.channel-info__creator__image-row
-//        img.channel-info__creator__image-row__image.channel-info__creator__image-row__image_style.channel-info__creator__image-row__image_size(src='images/white.png')
-//    div.channel-info__creator__name.channel-info__creator__name_style
+div.channel-info__creator__column
+    div.channel-info__name.channel-info__name_style=`#${channel.name}`
+    div.channel-info__info.channel-info__info_style
+        div.channel-info__creator__header.channel-info__creator__header_style creator:
+        div.channel-info__creator.channel-info__creator_style.channel-info__creator_size
+            div.channel-info__creator__image-row
+                img.channel-info__creator__image-row__image.channel-info__creator__image-row__image_size.channel-info__creator__image-row__image_style(src='/images/white.png')
+            div.channel-info__creator__name.channel-info__creator__name_style=creator.username
+div.channel-info__other
+    div.channel-info__other__header.channel-info__other__header_style members:
+    div.channel-info__other__container.channel-info__other__container_size
+        div.channel-info__other__msgwindow.channel-info__other__msgwindow_style
+
+
+

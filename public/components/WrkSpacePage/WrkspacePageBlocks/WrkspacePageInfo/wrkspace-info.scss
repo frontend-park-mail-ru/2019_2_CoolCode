@@ -94,16 +94,16 @@
 
 .wrkspace-info__container_size {
     @media screen and (min-height: 10px) {
-        height: 310px;
+        height: 200px;
     }
 
     @media screen and (min-height: 400px) {
-        height: 470px;
+        height: 300px;
     }
 
 
     @media screen and (min-height: 610px) {
-        height: 580px;
+        height: 550px;
     }
 
 
@@ -124,7 +124,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 10px 10px 10px 10px;
-    align-self: center;
+    align-self: flex-start;
     width: 95%;
     height: unset;
     max-height: 95%;

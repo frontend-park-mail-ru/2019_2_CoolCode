@@ -3,6 +3,7 @@ import {appLocalStorage, bus, data} from "../main";
 import {createChat} from "../backendDataFetchers/creationEntities";
 import {createWebsocketConn, createWebsocketConnChannel} from "../backendDataFetchers/websockets";
 import {
+	getChannelCreatorInfo,
 	getChannelInfo,
 	getChats,
 	getCurrentChannelInfo,
@@ -17,7 +18,15 @@ import {addErrorStyle, hideError, removeErrorStyle, showError} from "../handlers
 import {createProfileInputs} from "../handlers/profileBlockHandlers";
 import {createRegisterForm} from "../handlers/registerFormHandlers";
 import {checkLogin} from "../backendDataFetchers/auth";
-import {getMessagePhoto, getUserPhoto, getHeaderPhoto, hideLoader, setPicture, showLoader} from "../handlers/photosHandlers";
+import {
+	getMessagePhoto,
+	getUserPhoto,
+	getHeaderPhoto,
+	hideLoader,
+	setPicture,
+	showLoader,
+	getChannelInfoPhoto
+} from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
 import {alterChannel, alterWrkspace, deleteChannel, leaveChannel} from "../backendDataFetchers/alterEntities";
@@ -72,6 +81,7 @@ function createEvents() {
 	bus.on('setStream', data.setStream.bind(data));
 	bus.on('deleteStream', data.deleteStream.bind(data));
 	bus.on('setChosenStikerpack', data.setChosenStickerpack.bind(data));
+	bus.on('setChannelCreator', data.setChannelCreator.bind(data));
 
 	bus.on('clearData', data.clear.bind(data));
 
@@ -100,7 +110,9 @@ function createEvents() {
 
 	/**/
 	bus.on('getUserInfo', getUserInfo);
+	bus.on('getChannelCreatorInfo', getChannelCreatorInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getChannelInfoPhoto', getChannelInfoPhoto);
 	bus.on('getHeaderPhoto', getHeaderPhoto);
 	bus.on('getMessagePhoto', getMessagePhoto);
 	bus.on('hideLoader', hideLoader);
