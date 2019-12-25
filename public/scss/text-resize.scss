@@ -159,8 +159,4 @@ $html-font-size-xs: 13px;
     }
   }
 
-  @media screen and (min-height: 610px) {
-    font-size: calcFluidFontSize(8px, 12px, 240px, 640px, 2px);
-  }
-
 }
