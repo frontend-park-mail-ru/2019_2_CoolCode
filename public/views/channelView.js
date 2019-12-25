@@ -10,6 +10,7 @@ import {
 } from "../handlers/chatViewHandlers";
 
 import {
+	createChannelInfoHandler,
 	createLikeBtnHndlr,
 	createMessageInputChannelHndlr,
 	createSendMessageBtnChannelHndlr,
@@ -40,6 +41,7 @@ class channelView extends BaseView {
 		createDeleteMessageBlockHndlr();
 		createAttachButton();
 		resizeAttach();
+		createChannelInfoHandler();
 	}
 	setContent() {
 		bus.emit('deleteCurrentChat', null);
@@ -82,7 +84,7 @@ class channelView extends BaseView {
 
 	drawLeftColumn() {
 		const leftColumn = componentsStorage.getLeftColumn(this._data, this._parent, '.column_left');
-		if (leftColumn.getState() !== 'chats') {
+		if (leftColumn.getState() === 'search') {
 			leftColumn.renderChatsContent();
 		}
 		leftColumn.selectCurrentChat();

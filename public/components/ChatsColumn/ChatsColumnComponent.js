@@ -19,6 +19,7 @@ import {
 	createWrkspaceBlockExpandHndlr,
 	createWrkspaceBlockHndlr
 } from "../../handlers/chatsBlockHandlers";
+import {data} from "../../main";
 
 const chatsColumnTemplate = require('./chatsColumn.pug');
 
@@ -37,6 +38,13 @@ class ChatsColumnComponent extends BaseComponent {
     	createSearchInputHndlr();
     	createWrkspaceBlockExpandHndlr();
     	createChatBlockHndlr();
+    	createWrkspaceBlockHndlr();
+    	createWorkspaceButtonHndlr();
+    	channelViewHandler();
+    }
+
+    createWrkspaceBlockHandlers() {
+    	createWrkspaceBlockExpandHndlr();
     	createWrkspaceBlockHndlr();
     	createWorkspaceButtonHndlr();
     	channelViewHandler();
@@ -62,9 +70,16 @@ class ChatsColumnComponent extends BaseComponent {
     	lastMessage.innerHTML = message.text;
     }
 
+    rerenderWrkspaces() {
+    	this._data.wrkSpaces = data.getUserWrkSpaces();
+    	this.wrkSpacesBlock.setData(this._data);
+    	this.wrkSpacesBlock.renderContent();
+    	this.createWrkspaceBlockHandlers();
+    }
+
     renderSearchContent(data) {
-    	this.state = 'search';
     	this._data = data;
+    	this.state = data.viewType;
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	contentListRoot.innerHTML = "";
 
@@ -78,7 +93,7 @@ class ChatsColumnComponent extends BaseComponent {
     }
 
     renderChatsContent() {
-    	this.state = 'chats';
+    	this.state = this._data.viewType;
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
     	contentListRoot.innerHTML = "";
 
@@ -88,13 +103,13 @@ class ChatsColumnComponent extends BaseComponent {
     	contentListRoot.innerHTML += this.wrkSpacesBlock.render();
     	this.chatsBlock.renderContent();
     	this.wrkSpacesBlock.renderContent();
+    	this.createChatContentHandlers();
     }
 
     renderTo(rootSelector) {
     	this._parent.querySelector(rootSelector).innerHTML = "";
     	this._parent.querySelector(rootSelector).innerHTML = this.render();
     	this.renderChatsContent();
-    	this.createChatContentHandlers();
     }
 
     render() {

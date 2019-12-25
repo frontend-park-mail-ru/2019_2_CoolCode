@@ -109,6 +109,10 @@
     font-weight: 400;
 }
 
+.channel-header__name-row__text_style:hover {
+    cursor: pointer;
+}
+
 
 .channel-header__info-row__info-column__channel-row {
     flex: 0 0 30%;
@@ -118,7 +122,9 @@
     justify-content: flex-start;
     align-self: center;
 }
-
+.channel-header__info-row__info-column__channel-row:hover {
+    cursor: pointer;
+}
 .channel-header__info-row__info-column__channel-row_style {
     font-family: var(--global-font-family-Roboto);
     color: var(--global-nicegrey-color);

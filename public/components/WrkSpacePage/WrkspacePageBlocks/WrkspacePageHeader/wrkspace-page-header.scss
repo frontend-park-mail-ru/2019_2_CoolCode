@@ -152,6 +152,10 @@
 
 }
 
+.wrkspace-page-header__info-row__info-column__name:hover {
+  cursor: pointer;
+}
+
 .wrkspace-page-header__info-row__info-column__name_style {
     font-family:var(--global-font-family-Montserrat);
     color: #000000;

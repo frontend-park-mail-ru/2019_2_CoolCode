@@ -25,6 +25,7 @@
 }
 
 .wrkspace-form_style {
+    border-radius: 10px;
     background: #FFFFFF;
     -webkit-backface-visibility: hidden;
 }
@@ -49,7 +50,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-self: center;
-    padding: 0 0 5px 0;
+    padding: 0 0 1px 0;
     height:auto;
     max-height: 20px; /*dirty code to prevent errors, height set as font-size*/
     width: 70%;
@@ -58,6 +59,7 @@
 .wrkspace-form__form__input-field_style {
     outline: none;
     font-size: 18px;
+    font-weight: 300;
     font-family: var(--global-font-family-Roboto);
     border: 1px solid #FFFFFF;
     border-bottom: 1px solid var(--global-grey-color);
@@ -83,13 +85,13 @@
 .wrkspace-form__form__submit-button_style {
     outline: 0;
     font-family: var(--global-font-family-Roboto);
-    background-color: var(--global-green-color);
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: var(--global-green-color);
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 4px;
     padding: 4px;
-    border: none;
+    border: 1px solid var(--global-green-color);
 }
 
 /*name element in form*/

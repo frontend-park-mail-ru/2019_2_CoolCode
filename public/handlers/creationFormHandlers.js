@@ -13,6 +13,8 @@ function createWrkSpaceEvent() {
 	const channelName = inputField.value;
 	if (channelName) {
 		createWrkspace(channelName).then(() => {
+			const leftColumn = componentsStorage.returnLeftColumn();
+			leftColumn.rerenderWrkspaces();
 			router.return();
 		});
 	} else {
@@ -40,6 +42,8 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 	const channelName = inputField.value;
 	if (channelName) {
 		createChannel(channelName, wrkSpaceId).then(() => {
+			const leftColumn = componentsStorage.returnLeftColumn();
+			leftColumn.rerenderWrkspaces();
 			router.return();
 		});
 	} else {

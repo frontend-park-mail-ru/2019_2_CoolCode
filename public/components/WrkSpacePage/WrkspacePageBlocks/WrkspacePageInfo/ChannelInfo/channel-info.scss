@@ -4,7 +4,7 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   width: 100%;
-  margin: 1px;
+  margin: 5px 0 5px 0;
   padding-left: 5px;
   box-sizing: border-box;
 }
@@ -18,8 +18,9 @@
   }
 }
 .channel-info_style {
-  background-color: var(--global-light-grey-color);
+  background-color: var(--global-green-color);
   box-shadow: 0 0 8px var(--global-grey-color);
+  border-radius: 10px;
 }
 
 .channel-info__creator__column{
@@ -27,7 +28,7 @@
   flex-direction: column;
   justify-content: center;
   flex-wrap: nowrap;
-  width: 15%;
+  width: 50%;
 }
 
 .channel-info__name {
@@ -75,13 +76,15 @@
   font-family:var(--global-font-family-Roboto);
   color: var(--global-darkgrey-color);
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .channel-info__creator {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: fit-content;
+  padding: 0 5px 0 5px;
 }
 
 .channel-info__creator_size {
@@ -160,7 +163,7 @@
   flex-direction: column;
   justify-content: center;
   flex-wrap: nowrap;
-  width: 75%;
+  width: 50%;
   margin: 0 0 0 15px;
 
 }
@@ -191,12 +194,17 @@
   width: 95%;
 }
 
+.channel-info__other__container_style {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}
+
 .channel-info__other__container_size {
   @media screen and (min-height: 10px) {
-    height: 70px;
+    height: 60px;
   }
   @media screen and (min-height: 610px) {
-    height: 90px;
+    height: 80px;
   }
 }
 
@@ -207,11 +215,23 @@
   justify-content: flex-end;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 10px 10px 10px 10px;
   align-self: flex-start;
-  width: 30%;
-  height: 80%;
+  width: 92%;
   max-height: 95%;
+}
+
+.channel-info__other__msgwindow_padding {
+
+  @media screen and (min-width: 100px) {
+    height: 90%;
+    padding: 3px 3px 3px 3px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    height: 70%;
+    padding: 10px 10px 10px 10px;
+  }
+
 }
 
 .channel-info__other__msgwindow_style {
@@ -221,14 +241,17 @@
 .channel-info__other__msgwindow_style::-webkit-scrollbar {
   width: 5px;
 }
-
-.channel-info__other__msgwindow_style::-webkit-scrollbar-thumb {
-  cursor: pointer;
+.channel-info__other__msgwindow_style:hover::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: var(--global-grey-color);
-  -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+  background-color: transparent;
 }
 
+.channel-info__other__msgwindow_style:hover::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: var( --global-scrollbar-color);
+  -webkit-box-shadow: inset 0 0 6px var(--global-darkgrey-color);
+}
 
 
 .channel-info__other__option {
@@ -251,5 +274,5 @@
   font-family:var(--global-font-family-Roboto);
   color: var(--global-green-color-1);
   font-weight: 300;
-  font-size: 16px;
+  font-size: 18px;
 }

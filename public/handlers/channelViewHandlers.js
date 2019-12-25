@@ -2,7 +2,7 @@ import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {editingMessage, sendingFile, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channel-header.scss';
 import '../components/ChannelBlock/bemChannelHeader/channelHeader/channelHeaderMenuItems/channel-header-menu.css';
-import {keys} from "../constants/config";
+import {keys, KEYWORDS} from "../constants/config";
 import currentDate from "../modules/currentDate";
 import {sendingFileChannel, sendingMessageChannel} from "../backendDataFetchers/channelMessagesInteraction";
 import {
@@ -268,6 +268,13 @@ function createLikeBtnHndlr() {
 	});
 }
 
+function createChannelInfoHandler() {
+	const wrkspaceName = document.querySelector('.channel-header__name-row__text_style');
+	wrkspaceName.addEventListener('click', () => router.go('wrkspaceView', data.getCurrentWrkspaceId()));
+	const channelName = document.querySelector('.channel-header__info-row__info-column__channel-row');
+	channelName.addEventListener('click', () => router.open(KEYWORDS.channelPage, [ data.getCurrentWrkspaceId(), data.getCurrentChannelId()]));
+}
+
 export { createMessageInputChannelHndlr, createSendMessageBtnChannelHndlr, createAddChannelMemberHndlr,
-	menuHandlers, createLikeBtnHndlr, likeEvent};
+	menuHandlers, createLikeBtnHndlr, likeEvent, createChannelInfoHandler};
 

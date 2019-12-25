@@ -30,6 +30,7 @@ class WrkSpacesBlockComponent extends BaseComponent {
 
     renderContent() {
     	const contentListRoot = this._parent.querySelector(this.contentListRootSelector);
+    	contentListRoot.innerHTML = "";
     	if (this._data.wrkSpaces) {
     		this._data.wrkSpaces.forEach((wsp) => {
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
