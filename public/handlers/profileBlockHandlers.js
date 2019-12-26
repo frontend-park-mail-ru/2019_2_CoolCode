@@ -14,6 +14,9 @@ function emitError(block, errorSelector, textSelector, errorMessage) {
 }
 
 async function setProfileField(value, field, block, textSelector, errorSelector) {
+	if (value === '') {
+		return value;
+	}
 	if (field === 'email') {
 		if (!validation.validateEmail(value)) {
 			emitError(block, errorSelector, textSelector, 'Please, input correct email');
@@ -25,10 +28,6 @@ async function setProfileField(value, field, block, textSelector, errorSelector)
 			emitError(block, errorSelector, textSelector, 'Please, input phone number containing from 10 to 12 numbers');
 			return value;
 		}
-	}
-	if (value === '') {
-		emitError(block, errorSelector, textSelector, 'Please, input some info');
-		return value;
 	}
 	const user = data.user;
 	user[field] = value;

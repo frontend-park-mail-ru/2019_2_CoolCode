@@ -33,7 +33,6 @@
     flex-direction: row;
     flex-wrap: nowrap; /*so everything in one line*/
     justify-content: flex-start;
-    height: 80%;
     width: 100%;
 
 }
@@ -96,8 +95,8 @@
 }
 
 .wrkspace-page-header__info-row__image-row__loader_style {
-    border: 16px solid var(--global-loader-grey-color);
-    border-top: 16px solid var(--global-green-color-1);
+    border: 12px solid var(--global-loader-grey-color);
+    border-top: 12px solid var(--global-green-color);
     border-radius: 50%;
 }
 

@@ -1,7 +1,7 @@
 .wrkspace-visible {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     padding-left: 5px;
     box-sizing: border-box;
@@ -33,7 +33,7 @@
     justify-content: flex-start;
     align-self: center;
     width: 95%;
-    height: 50%;
+    height: 60%;
 }
 
 .wrkspace-visible__name-row__text {
@@ -156,7 +156,7 @@
     flex-direction: row;
     justify-content: flex-start;
     width: 95%;
-    height: 40%;
+    height: 30%;
     padding: 5px 0 0 0;
 }
 

@@ -35,6 +35,7 @@ class WrkSpacesBlockComponent extends BaseComponent {
     		this._data.wrkSpaces.forEach((wsp) => {
     			const wrkSpace = new WrkSpaceComponent(wsp, contentListRoot);
     			contentListRoot.appendChild(wrkSpace.render());
+    			bus.emit('getWrkspacePhoto', null, wsp.id, "wrkspace", wrkSpace.getPhotoBlock());
     		});
     	}
     }

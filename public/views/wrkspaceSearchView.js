@@ -13,7 +13,7 @@ import {createSearchInputHndlr} from "../handlers/searchFormHandlers";
 import {
 	createWorkspaceSettingsButtonHndlr,
 	createWrkspaceDropdownHandler,
-	createWrkspaceInfoColumnHandler
+	createWrkspaceInfoColumnHandler, setPhotoWrkspace
 } from "../handlers/wrkspaceBlockHandlers";
 import {creatingChats} from "../backendDataFetchers/websockets";
 import BasicsComponent from "../components/Basics/basicsComponent";
@@ -40,16 +40,14 @@ class wrkspaceSearchView extends BaseView {
 		// getProfilePhoto(data.getUserId());
 		// bus.emit('createProfileInputs', null, this._parent, this._data.user);
 		// this.createClickablePic();
-		createChatBlockHndlr();
 		createSearchInputHndlr();
-		createWrkspaceBlockExpandHndlr();
-		createWorkspaceButtonHndlr();
-		createWrkspaceBlockHndlr();
 		createWorkspaceSettingsButtonHndlr();
 		createUserBlockHndlr('.wrkspace-search__search-container');
 		channelViewHandler();
 		createWrkspaceDropdownHandler();
 		createWrkspaceInfoColumnHandler();
+		bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
+		setPhotoWrkspace(data.getCurrentWrkspaceId());
 	}
 
 	show(args) {

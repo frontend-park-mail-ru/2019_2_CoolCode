@@ -60,7 +60,6 @@
   justify-content: center;
   height: 90%;
 
-  margin: 3px 3px 0 0;
 }
 
 
@@ -75,11 +74,13 @@
    @media screen and (min-height: 10px) {
     width: 20px;
     height: 20px;
+    margin: 0 0 0 0;
   }
 
  @media screen and (min-height: 610px) {
     width: 30px;
     height: 30px;
+    margin: 3px 3px 0 0;
   }
 }
 

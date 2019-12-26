@@ -16,7 +16,7 @@ import WrkspacePageComponent from "../components/WrkSpacePage/wrkspacePageCompon
 import {
 	createWorkspaceSettingsButtonHndlr,
 	createWrkspaceDropdownHandler,
-	createWrkspaceInfoColumnHandler
+	createWrkspaceInfoColumnHandler, setPhotoWrkspace
 } from "../handlers/wrkspaceBlockHandlers";
 
 class wrkspaceView extends BaseView {
@@ -32,14 +32,8 @@ class wrkspaceView extends BaseView {
 		createWorkspaceSettingsButtonHndlr();
 		createWrkspaceDropdownHandler();
 		createWrkspaceInfoColumnHandler();
-	}
-
-	createClickablePic() {
-		const img = document.querySelector('.profile-header__content__image');
-		const input = document.querySelector('.profile-header__content__input');
-		img.addEventListener('click', function () {
-			input.click();
-		});
+		bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
+		setPhotoWrkspace(data.getCurrentWrkspaceId());
 	}
 
 	setContent() {

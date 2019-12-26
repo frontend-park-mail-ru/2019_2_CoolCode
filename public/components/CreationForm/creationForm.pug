@@ -4,16 +4,16 @@ block content
         form.wrkspace-form__form
             if viewType == "channelForm"
                 div.wrkspace-form__form__name.wrkspace-form__form__name_style create channel
-                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='channel name' name='channelName')
+                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style.fluid-font-size_1(type='text' placeholder='channel name' name='channelName')
             if viewType == "wrkspaceForm"
                 div.wrkspace-form__form__name.wrkspace-form__form__name_style create wrkspace
-                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='wrkspace name' name='wsName')
+                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style.fluid-font-size_1(type='text' placeholder='wrkspace name' name='wsName')
             if viewType == "addMember"
                 div.wrkspace-form__form__name.wrkspace-form__form__name_style add member
-                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style(type='text' placeholder='user name' name='userName')
+                input.wrkspace-form__form__input-field.wrkspace-form__form__input-field_style.fluid-font-size_1(type='text' placeholder='user name' name='userName')
 
             div.wrkspace-form__form__error-field.wrkspace-form__form__error-field_style
             if  viewType == "addMember"
-                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') ADD
+                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style.fluid-font-size_3(type='submit') ADD
             else
-                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style(type='submit') CREATE
+                button.wrkspace-form__form__submit-button.wrkspace-form__form__submit-button_style.fluid-font-size_3(type='submit') CREATE

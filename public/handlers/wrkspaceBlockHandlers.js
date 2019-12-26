@@ -1,7 +1,7 @@
-import {bus, data, promiseMaker, router} from "../main";
+import {bus, componentsStorage, data, promiseMaker, router} from "../main";
 import {setUserPhoto, setWrkspacePhoto} from "../backendDataFetchers/setUserInfo";
 import {getProfilePhoto} from "./photosHandlers";
-import {getPhoto} from "../backendDataFetchers/getEntitiesRequests";
+import {getPhoto, getPhotoWrkspace} from "../backendDataFetchers/getEntitiesRequests";
 import MyWorker from "../workers/profile.worker";
 
 async function setPhotoWrkspace(id) {
@@ -21,7 +21,10 @@ async function wrkspaceImageUploading() {
 	const result = await setWrkspacePhoto(formData, data.getCurrentWrkspaceId());
 	if (result) {
 		bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
-		setPhotoWrkspace(id);
+		setPhotoWrkspace(data.getCurrentWrkspaceId()).then(() => {
+			const leftColumn = componentsStorage.returnLeftColumn();
+			leftColumn.rerenderWrkspaces();
+		});
 	}
 }
 
@@ -54,9 +57,10 @@ function wrkspaceDropdownExpandEvent(params = {wrkspaceSettingsDropdown:null}) {
 	const {wrkspaceSettingsDropdown} = params;
 	if (wrkspaceSettingsDropdown !== null) {
 		if (!wrkspaceSettingsDropdown.classList.contains('wrkspace-page-dropdown_clicked')) {
-			wrkspaceSettingsDropdown.className = `${wrkspaceSettingsDropdown.className} wrkspace-page-dropdown_clicked`;
+			wrkspaceSettingsDropdown.className = `${wrkspaceSettingsDropdown.className} wrkspace-page-dropdown_style wrkspace-page-dropdown_clicked`;
 		}
 		else {
+			wrkspaceSettingsDropdown.classList.remove('wrkspace-page-dropdown_style');
 			wrkspaceSettingsDropdown.classList.remove('wrkspace-page-dropdown_clicked');
 		}
 	}
@@ -75,4 +79,4 @@ function createWrkspaceInfoColumnHandler() {
 
 }
 
-export {createWorkspaceSettingsButtonHndlr, createWrkspaceDropdownHandler, createWrkspaceInfoColumnHandler};
+export {createWorkspaceSettingsButtonHndlr, createWrkspaceDropdownHandler, createWrkspaceInfoColumnHandler, setPhotoWrkspace};

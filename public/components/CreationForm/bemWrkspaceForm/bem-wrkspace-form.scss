@@ -58,7 +58,6 @@
 
 .wrkspace-form__form__input-field_style {
     outline: none;
-    font-size: 18px;
     font-weight: 300;
     font-family: var(--global-font-family-Roboto);
     border: 1px solid #FFFFFF;
@@ -88,9 +87,8 @@
     background-color: #FFFFFF;
     color: var(--global-green-color);
     font-weight: 500;
-    font-size: 16px;
     border-radius: 4px;
-    padding: 4px;
+    padding: 1px;
     border: 1px solid var(--global-green-color);
 }
 

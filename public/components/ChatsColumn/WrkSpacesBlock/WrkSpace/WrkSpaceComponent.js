@@ -4,6 +4,13 @@ const wrkSpaceTempl = require('./WrkSpace.pug');
 const wrkSpaceChatTempl = require('./WrkSpaceChat.pug');
 
 class WrkSpaceComponent extends BaseComponent {
+
+	photoBlock = '.wrkspace-visible__image-row__image';
+
+	getPhotoBlock() {
+		return this.photoBlock;
+	}
+
 	render() {
 		const wSpace = document.createElement('div');
 		wSpace.className = 'wrkspace-block wrkspace-block_style';

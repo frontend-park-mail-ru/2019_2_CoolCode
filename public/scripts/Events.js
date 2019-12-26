@@ -25,7 +25,7 @@ import {
 	hideLoader,
 	setPicture,
 	showLoader,
-	getChannelInfoPhoto
+	getChannelInfoPhoto, getWrkspacePhoto
 } from "../handlers/photosHandlers";
 import {likeMessage, sendingMessage} from "../backendDataFetchers/messagesInteraction";
 import {findMessagesFullInfo, findUser} from "../backendDataFetchers/findInfo";
@@ -112,6 +112,7 @@ function createEvents() {
 	bus.on('getUserInfo', getUserInfo);
 	bus.on('getChannelCreatorInfo', getChannelCreatorInfo);
 	bus.on('getUserPhoto', getUserPhoto);
+	bus.on('getWrkspacePhoto', getWrkspacePhoto);
 	bus.on('getChannelInfoPhoto', getChannelInfoPhoto);
 	bus.on('getHeaderPhoto', getHeaderPhoto);
 	bus.on('getMessagePhoto', getMessagePhoto);

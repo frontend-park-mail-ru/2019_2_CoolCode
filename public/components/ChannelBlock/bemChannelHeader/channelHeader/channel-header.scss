@@ -88,7 +88,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-self: flex-end;
-    padding: 0 6px 0 0;
 }
 
 .channel-header__name-row__text_word {
@@ -98,6 +97,7 @@
     word-spacing: -1px;
     color: var(--global-darkgrey-color);
     font-weight: 300;
+    padding: 0 6px 4px 0;
 }
 
 .channel-header__name-row__text_style {
@@ -107,6 +107,7 @@
     word-spacing: -1px;
     color: #000000;
     font-weight: 400;
+    padding: 0 6px 0 0;
 }
 
 .channel-header__name-row__text_style:hover {
