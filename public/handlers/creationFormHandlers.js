@@ -8,6 +8,7 @@ function drawWrkspaceFormError(inputField) {
 }
 
 function createWrkSpaceEvent() {
+	event.currentTarget.removeEventListener('submit', createWrkSpaceEvent);
 	event.preventDefault();
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
@@ -35,8 +36,9 @@ function createOverlayHndlr() {
 	});
 }
 
-function createChannelEvent(params = {wrkSpaceId:null}) {
-	const {wrkSpaceId} = params;
+function createChannelEvent() {
+	const {wrkSpaceId} = event.currentTarget.params;
+	event.currentTarget.removeEventListener('submit', createChannelEvent);
 	event.preventDefault();
 	const inputField = document.querySelector('.wrkspace-form__form__input-field');
 	const channelName = inputField.value;
@@ -54,7 +56,8 @@ function createChannelEvent(params = {wrkSpaceId:null}) {
 
 function createChannelCreateSubmitHndlr(wrkSpaceId) {
 	const channelForm = document.querySelector('.wrkspace-form__form');
-	channelForm.addEventListener('submit', createChannelEvent.bind(event, {wrkSpaceId:wrkSpaceId}));
+	channelForm.params = {wrkSpaceId:wrkSpaceId};
+	channelForm.addEventListener('submit', createChannelEvent);
 }
 
 export {createWrkSpaceCreateSubmitHndlr, createOverlayHndlr, createChannelCreateSubmitHndlr};

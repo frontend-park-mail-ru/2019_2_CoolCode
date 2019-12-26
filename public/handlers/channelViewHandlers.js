@@ -17,6 +17,7 @@ import {getRandomInt} from "../modules/random";
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
 async function menuClickEvent() {
+	const leftColumn = componentsStorage.returnLeftColumn();
 	switch (event.target.dataset.section) {
 	case 'addMember':
 		router.go('addMemberView');
@@ -26,10 +27,13 @@ async function menuClickEvent() {
 		break;
 	case 'deleteChannel':
 		await promiseMaker.createPromise('deleteChannel', data.getCurrentChannelId());
+		await promiseMaker.createPromise('getChats', data.getUserId());
+		leftColumn.rerenderWrkspaces();
 		router.go('profileView');
 		break;
 	case 'leaveChannel':
 		await promiseMaker.createPromise('leaveChannel', data.getCurrentChannelId());
+		leftColumn.rerenderWrkspaces();
 		router.go('profileView');
 		break;
 	}

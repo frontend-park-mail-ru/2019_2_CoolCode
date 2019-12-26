@@ -17,7 +17,8 @@
 
 .wrkspace-page-dropdown_style {
     border-radius: 10px;
-    background: rgba(40, 162, 77, 0.41);
+    background: var(--global-green-color);
+    border: 1px solid #FFFFFF;
 }
 .wrkspace-page-dropdown__input {
     display:none
@@ -49,5 +50,5 @@
 }
 .wrkspace-page-dropdown_clicked {
     padding: 5px 5px 5px 5px;
-    max-height: 40vh;
+    max-height: 1000vh;
 }
