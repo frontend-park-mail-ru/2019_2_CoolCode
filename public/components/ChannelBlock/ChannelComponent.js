@@ -130,6 +130,7 @@ class ChannelComponent extends BaseComponent {
 			} else if (fileCheck.checkFile(message.file_type)) {
 				messageBlock.querySelector('.primary-row__file-ref').download = `${message.file_id}.${message.file_type}`;
 				messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+				messageBlock.querySelector('.file-ref__image-container__image').src = fileCheck.getImage(message.file_type);
 				bus.emit('showFileContent', null, messageBlock);
 			}
 		};

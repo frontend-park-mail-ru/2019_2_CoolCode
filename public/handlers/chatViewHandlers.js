@@ -11,6 +11,7 @@ import currentDate from "../modules/currentDate";
 import {setUserPhoto, setUserStickers} from "../backendDataFetchers/setUserInfo";
 import MyWorker from "../workers/profile.worker";
 import {getRandomInt} from "../modules/random";
+import {Type} from "../modules/getType";
 
 function deleteMessageEvent() {
 	const messageId = data.getChosenMessageId();
@@ -200,6 +201,7 @@ function showTextArea() {
 async function sendPhotosEvent() {
 	const chatBlock = componentsStorage.getChatBlock();
 	const chosenFiles = data.getChosenFiles();
+	const fileCheck = new Type();
 	for (let i = 0; i < chosenFiles.length; i++) {
 		if (chosenFiles[i]) {
 			const currentFile = chosenFiles[i].file;
@@ -223,6 +225,8 @@ async function sendPhotosEvent() {
 					} else {
 						messageBlock.querySelector('.primary-row__file-ref').download = currentFile.name;
 						messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+						const fileNameParts = currentFile.name.split('.');
+						messageBlock.querySelector('.file-ref__image-container__image').src = fileCheck.getImage(fileNameParts[fileNameParts.length - 1]);
 						showFileContent(messageBlock);
 					}
 

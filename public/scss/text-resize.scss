@@ -142,26 +142,26 @@ $html-font-size-xs: 13px;
 .fluid-font-size_5 {
 
   @media screen and (min-height: 10px) {
-    font-size: 10px;
+    font-size: 8px;
   }
 
   @media screen and (min-height: 410px) {
     @media screen and (min-width: 100px) {
-      font-size: 10px;
+      font-size: 8px;
     }
 
     @media screen and (min-width: 1000px) {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
   @media screen and (min-height: 610px) {
     @media screen and (min-width: 100px) {
-      font-size: 10px;
+      font-size: 8px;
     }
 
     @media screen and (min-width: 1000px) {
-      font-size: calcFluidFontSize(8px, 12px, 240px, 640px, 2px);
+      font-size: calcFluidFontSize(10px, 12px, 240px, 640px, 2px);
     }
   }
 

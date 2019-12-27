@@ -10,6 +10,7 @@ import MyWorker from "../../workers/profile.worker";
 import {bus, data, promiseMaker} from "../../main";
 import AttachComponent from "./TextingArea/TypingBlock/InputBlock/Attaches/PhotoAttach/AttachComponent";
 import {getRandomInt} from "../../modules/random";
+import {Type} from "../../modules/getType";
 
 const textingAreaTemplate = require('./textarea.pug');
 
@@ -90,10 +91,11 @@ class TextingAreaComponent extends BaseComponent {
 	}
 
 	async renderFilesAll(files, type) {
+		const typeCheck = new Type();
 		for (let i = 0; i < files.length; i++) {
 			const attachId = getRandomInt(1000);
 			bus.emit('setChosenFile', null, {file: files[i], id : attachId});
-			const photoAttach = new AttachComponent({id:attachId});
+			const photoAttach = new AttachComponent({id:attachId, type:type});
 			photoAttach.renderTo('.content-container__images');
 			const worker = new MyWorker();
 			worker.postMessage(files[i]);
@@ -106,7 +108,8 @@ class TextingAreaComponent extends BaseComponent {
 					break;
 				case 1:
 					attach.querySelector('.attach-component__text').innerText = files[i].name;
-					bus.emit('setPicture', null, `#photoattach-${attachId}`, '/images/file.png');
+					const fileNameParts = files[i].name.split('.');
+					bus.emit('setPicture', null, `#photoattach-${attachId}`, typeCheck.getImage(fileNameParts[fileNameParts.length - 1]));
 					break;
 				}
 

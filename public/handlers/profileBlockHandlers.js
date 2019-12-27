@@ -1,7 +1,10 @@
-import {bus, data} from "../main";
+import {bus, data, promiseMaker} from "../main";
 import {setUserInfo, setUserPhoto} from "../backendDataFetchers/setUserInfo";
 import Validation from "../modules/validation";
 import {getProfilePhoto} from "./photosHandlers";
+import {getPhoto} from "../backendDataFetchers/getEntitiesRequests";
+import MyWorker from "../workers/profile.worker";
+import AlertPhotoComponent from "../components/filesAlertComponent/alertPhotoComponent";
 
 const validation = new Validation();
 
@@ -96,7 +99,7 @@ function createBlurInputHndlr(block, textSelector, inputSelector, errorSelector)
 function createProfileInputs() {
 	const phoneBlock = document.querySelector('#phone-setting');
 	const emailBlock = document.querySelector('#email-setting');
-	const statusBlock = document.querySelector('#fstatus-setting');
+	const statusBlock = document.querySelector('#status-setting');
 	const usernameBlock = document.querySelector('#username-setting');
 	const fullnameBlock = document.querySelector('#fullname-setting');
 	createDblClickInputHndlr(phoneBlock, 'profile-info__field__info',
@@ -130,10 +133,23 @@ async function imageUploading(params = {id: null, fileInput: null}) {
 		bus.emit('hideError', null, `.profile-header__image-row__error`);
 		const formData = new FormData();
 		formData.append('file', fileInput.files[0]);
+		const worker = new MyWorker();
+		worker.postMessage(fileInput.files[0]);
+		worker.onmessage = function (result) {
+			promiseMaker.createPromise('setUserPhoto', result.data).then(() => {
+				bus.emit('setPicture', null, '.profile-header__content__image', data.getUserPhoto());
+				bus.emit('hideLoader', null, '.profile-header__content');
+			});
+		};
 		const result = await setUserPhoto(formData);
-		if (result) {
-			bus.emit('showLoader', null, '.profile-header__content');
-			getProfilePhoto(id);
+		if (!result) {
+			const parent = document.querySelector('.header');
+			const form = new AlertPhotoComponent({text:'Couldn\'t upload file'}, parent);
+			form.renderTo();
+			const button = document.querySelector('.alert-photo__button-row_button');
+			button.addEventListener('click', () => {
+				form.deleteSelf();
+			});
 		}
 	}
 }

@@ -70,7 +70,7 @@
     font-weight: 700;
     font-size: 20px;
     font-family: var(--global-font-family-Montserrat);
-    color: slategrey;
+    color: var(--global-slater-color);
     border-color: #282828;
 }
 
@@ -78,7 +78,7 @@
     display: flex;
     flex: 0 0 70%;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-self: center;
     width: 90%; /* ширина нашего блока */
     padding: 2px;
@@ -88,18 +88,25 @@
     border-radius: 5px;
     font-size: 15px;
     font-family: var(--global-font-family-Montserrat);
-    color: snow;
+    color:#FFFFFF;
     text-align: center;
 }
 
 .channel-add-form__scroll::-webkit-scrollbar {
     width: 7px;
-    background-color: #FFFFFF;
+    background-color: transparent;
 }
 
 .channel-add-form__scroll::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: var( --global-scrollbar-color);
+    background-color: var(--global-slater-color);
     -webkit-box-shadow: inset 0 0 2px var(--global-darkgrey-color);
 }
 
+.channel-add-form__member {
+
+}
+
+.channel-add-form__member_style {
+    border-bottom: 2px solid var(--global-slater-color);
+}

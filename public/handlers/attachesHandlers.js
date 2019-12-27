@@ -7,7 +7,7 @@ async function attachFiles() {
 	const {type} = event.currentTarget.params;
 	if (event.currentTarget.files.length > (10 - data.getChosenFilesLength())) {
 		const parent = document.querySelector('.header');
-		const form = new AlertPhotoComponent({}, parent);
+		const form = new AlertPhotoComponent({text:'Can\'t upload more than 10 files'}, parent);
 		form.renderTo();
 		const button = document.querySelector('.alert-photo__button-row_button');
 		button.addEventListener('click', () => {

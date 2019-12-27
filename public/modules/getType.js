@@ -34,6 +34,22 @@ class Type {
 			}
 		}
 	}
+
+	getImage(ext) {
+		switch (ext) {
+		case 'pdf':
+			return '/images/pdf.png';
+			break;
+		case 'doc':
+			return '/images/docx.png';
+			break;
+		case 'docx':
+			return '/images/docx.png';
+			break;
+		default:
+			return '/images/file.png';
+		}
+	}
 }
 
 export {Type};

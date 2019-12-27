@@ -2,6 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat&display=swap);
 
 :root{
+    --global-slater-color : #708090;
     --global-green-color-1: #2DC68B;
     --global-green-color: rgba(82, 212, 154, 0.8);
     --global-grey-color: #D7D7D7;
@@ -19,8 +20,8 @@
     --global-font-family-Roboto: 'Roboto', sans-serif;
     --global-font-family-Montserrat: 'Montserrat',  sans-serif;
 
-    --global-z-index-overlay: 2;
-    --global-z-index-form: 3;
+    --global-z-index-overlay: 3;
+    --global-z-index-form: 4;
 
     --height-4: 810px;
     --height-3: 610px;

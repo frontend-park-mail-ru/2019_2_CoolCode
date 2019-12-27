@@ -3,6 +3,7 @@ import {setUserPhoto, setWrkspacePhoto} from "../backendDataFetchers/setUserInfo
 import {getProfilePhoto} from "./photosHandlers";
 import {getPhoto, getPhotoWrkspace} from "../backendDataFetchers/getEntitiesRequests";
 import MyWorker from "../workers/profile.worker";
+import AlertPhotoComponent from "../components/filesAlertComponent/alertPhotoComponent";
 
 async function setPhotoWrkspace(id) {
 	const buffer = await getPhotoWrkspace(id);
@@ -18,12 +19,25 @@ async function setPhotoWrkspace(id) {
 async function wrkspaceImageUploading() {
 	const formData = new FormData();
 	formData.append('file', event.currentTarget.files[0]);
+	bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
+	const worker = new MyWorker();
+	worker.postMessage( event.currentTarget.files[0]);
+	worker.onmessage = function (result) {
+		bus.emit('setPicture', null, '.wrkspace-page-header__info-row__image-row__image', result.data);
+		bus.emit('hideLoader', null, '.wrkspace-page-header__info-row__image-row');
+	};
 	const result = await setWrkspacePhoto(formData, data.getCurrentWrkspaceId());
+	console.log(result);
 	if (result) {
-		bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
-		setPhotoWrkspace(data.getCurrentWrkspaceId()).then(() => {
-			const leftColumn = componentsStorage.returnLeftColumn();
-			leftColumn.rerenderWrkspaces();
+		const leftColumn = componentsStorage.returnLeftColumn();
+		leftColumn.rerenderWrkspaces();
+	} else {
+		const parent = document.querySelector('.header');
+		const form = new AlertPhotoComponent({text:'Couldn\'t upload file'}, parent);
+		form.renderTo();
+		const button = document.querySelector('.alert-photo__button-row_button');
+		button.addEventListener('click', () => {
+			form.deleteSelf();
 		});
 	}
 }

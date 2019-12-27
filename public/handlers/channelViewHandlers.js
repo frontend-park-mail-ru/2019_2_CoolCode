@@ -14,6 +14,7 @@ import {
 import {alterChannel} from "../backendDataFetchers/alterEntities";
 import MyWorker from "../workers/profile.worker";
 import {getRandomInt} from "../modules/random";
+import {Type} from "../modules/getType";
 const infoTemplate = require('../components/ChannelBlock/info.pug');
 
 async function menuClickEvent() {
@@ -154,6 +155,7 @@ async function sendRecordEventChannel() {
 async function sendPhotosChannelEvent() {
 	const channelBlock = componentsStorage.getChatBlock();
 	const chosenFiles = data.getChosenFiles();
+	const fileCheck = new Type();
 	for (let i = 0; i < chosenFiles.length; i++) {
 		if (chosenFiles[i]) {
 			const currentFile = chosenFiles[i].file;
@@ -177,6 +179,8 @@ async function sendPhotosChannelEvent() {
 					} else {
 						messageBlock.querySelector('.primary-row__file-ref').download = currentFile.name;
 						messageBlock.querySelector('.primary-row__file-ref').href = result.data;
+						const fileNameParts = currentFile.name.split('.');
+						messageBlock.querySelector('.file-ref__image-container__image').src = fileCheck.getImage(fileNameParts[fileNameParts.length - 1]);
 						showFileContent(messageBlock);
 					}
 				};

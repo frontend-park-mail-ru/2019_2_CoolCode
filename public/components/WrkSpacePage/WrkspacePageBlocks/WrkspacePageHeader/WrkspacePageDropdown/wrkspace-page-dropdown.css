@@ -7,7 +7,7 @@
     height: auto;
     align-self: flex-end;
     justify-content: flex-start;
-    z-index: var(--global-z-index-form);
+    z-index: 2;
 
     overflow: hidden;
     max-height: 0;

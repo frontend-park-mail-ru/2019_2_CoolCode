@@ -29,9 +29,8 @@ class AddMemberComponent extends BaseComponent {
 			if (user.id != this._data.user.id) {
 				const userComponent = new UserFoundChannelComponent(user, contentListRoot);
 				const userBlock = document.createElement('div');
-				userBlock.className = 'member';
+				userBlock.className = 'channel-add-form__member channel-add-form__member_style';
 				userBlock.id = "member-" + user.id;
-				userBlock.style.borderBottom = "solid slategrey";
 				userBlock.innerHTML = userComponent.render();
 				contentListRoot.appendChild(userBlock);
 			}

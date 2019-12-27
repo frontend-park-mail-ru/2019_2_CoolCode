@@ -1,6 +1,7 @@
 .alert-photo {
   position: fixed; /*make it centered and overlay*/
   left: 40%;
+  top: 40%;
 
   align-self: center;
   display: flex;
@@ -27,7 +28,7 @@
 }
 
 .alert-photo_style {
-  border: 2px solid var(--global-light-grey-color);
+  border: 2px solid var(--global-error-color);
   background: #FFFFFF;
   border-radius: 5px;
 }
@@ -45,7 +46,7 @@
     font-weight: 400;
     font-size: 18px;
     font-family: var(--global-font-family-Roboto);
-    color: var(--global-green-color);
+    color: var(--global-error-color);
     text-decoration: none;
 }
 
@@ -75,7 +76,7 @@
 
 .alert-photo__button-row_button_style {
     outline: 0;
-    background: var(--global-green-color);
+    background: var(--global-error-color);
     font-weight: 300;
     font-size: 18px;
     font-family: var(--global-font-family-Roboto);
