@@ -9,6 +9,7 @@ async function login(email, password) {
 					password: password},
 				contentType : 'application/json;charset=utf-8'}
 		);
+		console.log(response);
 		switch (response.status) {
 		case 400:
 			return new Error(
@@ -20,7 +21,7 @@ async function login(email, password) {
 			return null;
 		default:
 			return new Error(
-				`Couldn't login: ${responseStatuses[response.status]}`
+				`Couldn't login `
 			);
 		}
 

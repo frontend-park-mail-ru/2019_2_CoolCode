@@ -240,11 +240,11 @@ class Data {
 
 	setCurrentChatMessages(currentChatMessages) {
 		this.currentChatMessages = currentChatMessages;
-		this.createLogMessage('set', 'currentChatMessages', currentChatMessages);
+		//this.createLogMessage('set', 'currentChatMessages', currentChatMessages);
 	}
 
 	getCurrentChatMessages() {
-		this.createLogMessage('get', 'currentChatMessages', this.currentChatMessages);
+		//this.createLogMessage('get', 'currentChatMessages', this.currentChatMessages);
 		return this.currentChatMessages;
 	}
 

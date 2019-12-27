@@ -32,7 +32,7 @@ class wrkspaceView extends BaseView {
 		createWorkspaceSettingsButtonHndlr();
 		createWrkspaceDropdownHandler();
 		createWrkspaceInfoColumnHandler();
-		bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
+		//bus.emit('showLoader', null, '.wrkspace-page-header__info-row__image-row');
 		setPhotoWrkspace(data.getCurrentWrkspaceId());
 	}
 
