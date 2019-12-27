@@ -77,7 +77,7 @@ function addMemberClickEvent(params = {memberId:null, contentListRoot:null}) {
 
 function createAddChannelMemberHndlr() {
 	const contentListRoot = document.querySelector('.channel-add-form__form');
-	const persons = contentListRoot.querySelectorAll(".member");
+	const persons = contentListRoot.querySelectorAll(".channel-add-form__member");
 	persons.forEach((person)=> {
 		person.addEventListener('click', addMemberClickEvent.bind(null, {memberId:person.id, contentListRoot : contentListRoot}));
 	});
