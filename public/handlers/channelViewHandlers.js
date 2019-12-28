@@ -105,7 +105,7 @@ function chooseSendMessageChannelEvent() {
 function createMessageInputChannelHndlr() {
 	const messageInput = document.querySelector(".input__text");
 	messageInput.addEventListener('keypress', function (event) {
-		if (event.which === keys.ENTER) {
+		if (event.which === keys.ENTER && !event.shiftKey) {
 			chooseSendMessageChannelEvent(event);
 		}
 	});

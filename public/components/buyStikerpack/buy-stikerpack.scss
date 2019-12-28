@@ -56,7 +56,9 @@
 }
 
 .buy-stickerpack__text {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   padding: 5px 0 0 0;
 
@@ -97,7 +99,9 @@
 }
 
 .buy-stickerpack__text_style {
+  color:#FFFFFF;
   font-family: var(--global-font-family-Montserrat);
+  font-size: 20px;
 }
 
 .buy-stickerpack__button-row {
@@ -139,4 +143,31 @@
     width: 350px;
     height: 100px;
   }
+}
+
+
+/*button element */
+
+.buy-stickerpack__button-row__button {
+  flex: 0 0 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  align-self: center;
+  width: auto;
+  padding: 5px;
+}
+
+.buy-stickerpack__button-row__button_style {
+  outline: 0;
+  font-family: var(--global-font-family-Roboto);
+  background-color: #FFFFFF;
+  color: var(--global-green-color);
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid var(--global-green-color);
 }

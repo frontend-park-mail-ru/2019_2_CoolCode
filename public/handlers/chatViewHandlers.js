@@ -135,7 +135,7 @@ function createSendMessageBtnHndlr() {
 function createMessageInputHndlr() {
 	const messageInput = document.querySelector(".input__text.input__text_style");
 	messageInput.addEventListener('keypress', function (event) {
-		if (event.which === keys.ENTER) {
+		if (event.which === keys.ENTER && !event.shiftKey) {
 			chooseSendMessageEvent(event);
 		}
 	});

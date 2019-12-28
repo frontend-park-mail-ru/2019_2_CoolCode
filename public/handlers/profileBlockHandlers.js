@@ -99,7 +99,7 @@ function createBlurInputHndlr(block, textSelector, inputSelector, errorSelector)
 function createProfileInputs() {
 	const phoneBlock = document.querySelector('#phone-setting');
 	const emailBlock = document.querySelector('#email-setting');
-	const statusBlock = document.querySelector('#status-setting');
+	const statusBlock = document.querySelector('#fstatus-setting');
 	const usernameBlock = document.querySelector('#username-setting');
 	const fullnameBlock = document.querySelector('#fullname-setting');
 	createDblClickInputHndlr(phoneBlock, 'profile-info__field__info',

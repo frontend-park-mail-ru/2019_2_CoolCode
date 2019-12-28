@@ -13,12 +13,12 @@ div.wrkspace-page-header.wrkspace-page-header_size
             div.wrkspace-page-header__info-row__info-column__info.wrkspace-page-header__info-row__info-column__info_style.fluid-font-size_3= `CREATOR    ${currentWrkspaceCreator.username}`
         div.wrkspace-page-header__info-row__settings-column
             div.wrkspace-page-header__info-row__settings-column__container
-                div.wrkspace-page-header__info-row__settings-column__container__button
-                    img.wrkspace-page-header__info-row__settings-column__container__button__icon.wrkspace-page-header__info-row__settings-column__container__button__icon_style.wrkspace-page-header__info-row__settings-column__container__button__icon_size(src='/images/dots.png')
-                div.wrkspace-page-dropdown
-                    //div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='seeMembers') see members
-                    //div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='watchStatistics')  watch statistics
-                    if user.id == currentWrkspaceCreator.id
+                if user.id == currentWrkspaceCreator.id
+                    div.wrkspace-page-header__info-row__settings-column__container__button
+                        img.wrkspace-page-header__info-row__settings-column__container__button__icon.wrkspace-page-header__info-row__settings-column__container__button__icon_style.wrkspace-page-header__info-row__settings-column__container__button__icon_size(src='/images/dots.png')
+                    div.wrkspace-page-dropdown
+                        //div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='seeMembers') see members
+                        //div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='watchStatistics')  watch statistics
                         //div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='changePicture') change picture
                             input.wrkspace-page-dropdown__input(type='file' accept='image/*')
                         div.wrkspace-page-dropdown__option.wrkspace-page-dropdown__option_style(data-section='inviteUser')  invite user
